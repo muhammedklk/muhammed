@@ -1,0 +1,264 @@
+/* ==========================================================================
+   MUHAMMED PORTFOLIO RESPONSIVE STYLES
+   ========================================================================== */
+
+/* --- Large Desktops / Laptops (max-width: 1199.98px) --- */
+@media (max-width: 1199.98px) {
+    .hero-heading {
+        font-size: 60px;
+    }
+    
+    .hero-card-art {
+        height: 320px;
+    }
+
+    .footer-email-large {
+        font-size: 30px;
+    }
+
+    .showcase-card {
+        height: 360px;
+    }
+}
+
+/* --- Tablets & Medium Screens (max-width: 991.98px) --- */
+@media (max-width: 991.98px) {
+    .site-header {
+        padding: 18px 0;
+    }
+
+    .nav-pill-menu {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .hero-section {
+        padding: 20px 0 40px;
+    }
+
+    .hero-section::before {
+        width: 100%;
+        height: 450px;
+        top: -100px;
+        right: 0;
+        filter: blur(40px);
+    }
+
+    .hero-content {
+        max-width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .hero-heading {
+        font-size: 54px;
+        margin-bottom: 30px;
+    }
+
+    .hero-description {
+        max-width: 100%;
+    }
+
+    .hero-card-container {
+        justify-content: center;
+    }
+
+    .hero-card-art {
+        max-width: 100%;
+        height: 340px;
+    }
+
+    /* About & Services Section Responsive */
+    .about-services-section {
+        padding: 60px 0;
+    }
+
+    .about-main-headline {
+        font-size: 34px;
+        margin-bottom: 24px;
+    }
+
+    .companies-logos-flex {
+        gap: 30px;
+    }
+
+    .tp-gallery-area {
+        height: auto;
+    }
+
+    .tp-gallery-box {
+        padding: 20px;
+        border-radius: 24px;
+        height: auto;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .showcase-columns-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .showcase-track {
+        transform: none !important;
+    }
+
+    /* Pre-built Demos Section Responsive */
+    .demos-section {
+        padding: 60px 0;
+    }
+
+    .outlined-stat-num {
+        font-size: 100px;
+        margin-bottom: -32px;
+    }
+
+    .demos-main-title {
+        font-size: 34px;
+        margin-bottom: 20px;
+    }
+
+    .demos-badges-group {
+        gap: 16px;
+    }
+
+    .demo-mockup-frame {
+        height: 350px;
+    }
+
+    .features-section {
+        padding-top: 30px;
+    }
+
+    .features-row {
+        row-gap: 20px;
+    }
+
+    .site-footer {
+        padding: 60px 0 30px;
+    }
+
+    .footer-email-large {
+        font-size: 26px;
+    }
+}
+
+/* --- Mobile Devices (max-width: 767.98px) --- */
+@media (max-width: 767.98px) {
+    .hero-heading {
+        font-size: 44px;
+        line-height: 1.12;
+    }
+
+    .hero-description {
+        font-size: 14px;
+        margin-bottom: 28px;
+    }
+
+    .hero-card-art {
+        height: 280px;
+        border-radius: 20px;
+    }
+
+    .showcase-card {
+        height: auto;
+        min-height: 340px;
+    }
+
+    .feature-item {
+        gap: 14px;
+    }
+
+    .feature-title {
+        font-size: 14px;
+    }
+
+    .footer-top-row {
+        margin-bottom: 40px;
+    }
+
+    .footer-giant-brand {
+        margin: 30px 0 20px;
+    }
+}
+
+/* --- Small Mobile Phones (max-width: 575.98px) --- */
+@media (max-width: 575.98px) {
+    .header-actions .btn-lets-talk {
+        display: none;
+    }
+
+    .hero-heading {
+        font-size: 38px;
+    }
+
+    .hero-cta-group {
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .btn-primary-pill, .btn-secondary-pill {
+        padding: 11px 20px;
+        font-size: 13px;
+    }
+
+    .hero-card-art {
+        height: 240px;
+    }
+
+    .showcase-frame-card {
+        padding: 14px;
+        border-radius: 20px;
+    }
+
+    .footer-email-large {
+        font-size: 22px;
+    }
+
+    .footer-bottom-bar {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .scroll-top-btn {
+        position: relative;
+        right: auto;
+        bottom: auto;
+    }
+
+    /* Bold Minimalist FAQ Section Responsive */
+    .bold-faq-section {
+        padding: 70px 0;
+    }
+
+    .bold-faq-sidebar {
+        position: static;
+        top: auto;
+    }
+
+    .bold-faq-title {
+        font-size: 72px;
+        margin-bottom: 16px;
+    }
+
+    .bold-faq-subtitle {
+        font-size: 12px;
+        max-width: 100%;
+    }
+
+    .bold-faq-btn {
+        padding: 20px 0;
+    }
+
+    .bold-faq-question {
+        font-size: 16px;
+    }
+
+    .bold-faq-body {
+        padding: 0 0 20px 0;
+        font-size: 14px;
+        max-width: 100%;
+    }
+}
