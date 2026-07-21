@@ -262,64 +262,25 @@
         max-width: 100%;
     }
 
-    /* About Page Responsive */
-    .about-page-hero {
-        padding: 120px 0 60px;
+    /* Inner Pages Responsive */
+    .page-title {
+        font-size: 36px;
     }
 
-    .about-hero-title {
-        font-size: 38px;
+    .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 
-    .about-hero-lead {
-        font-size: 16px;
-    }
-
-    .stat-number {
-        font-size: 32px;
-    }
-
-    .story-heading {
-        font-size: 28px;
-    }
-
-    .section-title-large {
-        font-size: 32px;
-    }
-
-    .timeline-sticky-title {
-        position: static;
-        top: auto;
-        margin-bottom: 40px;
-    }
-
-    .cta-banner-box {
-        padding: 36px 20px;
-        border-radius: 20px;
+    .cta-banner-card {
+        padding: 36px 28px;
     }
 
     .cta-banner-title {
         font-size: 26px;
     }
 
-    /* Portfolio Page Responsive */
-    .portfolio-hero-section {
-        padding: 120px 0 40px;
-    }
-
-    .portfolio-hero-title {
-        font-size: 38px;
-    }
-
-    .portfolio-hero-lead {
-        font-size: 16px;
-    }
-
-    .project-thumb-wrapper {
-        height: 220px;
-    }
-
-    .project-card-title {
-        font-size: 18px;
+    .contact-form-card {
+        padding: 28px 24px;
     }
 }

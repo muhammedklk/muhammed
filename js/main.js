@@ -187,37 +187,53 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 8. PORTFOLIO PAGE CATEGORY FILTERING ---
-    const filterBtns = document.querySelectorAll('.portfolio-filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    // --- 8. WORKS PORTFOLIO CATEGORY FILTERING ---
+    const filterPills = document.querySelectorAll('.filter-pill');
+    const workItems = document.querySelectorAll('.work-grid-item');
 
-    if (filterBtns.length > 0 && portfolioItems.length > 0) {
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const filter = btn.getAttribute('data-filter');
+    filterPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            filterPills.forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
 
-                // Toggle active button class
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+            const filterValue = pill.getAttribute('data-filter');
 
-                // Filter items
-                portfolioItems.forEach(item => {
-                    const categories = item.getAttribute('data-category');
-                    if (filter === 'all' || (categories && categories.includes(filter))) {
-                        item.style.display = 'block';
-                        setTimeout(() => {
-                            item.style.opacity = '1';
-                            item.style.transform = 'scale(1)';
-                        }, 50);
-                    } else {
-                        item.style.opacity = '0';
-                        item.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            item.style.display = 'none';
-                        }, 300);
-                    }
-                });
+            workItems.forEach(item => {
+                const category = item.getAttribute('data-category') || '';
+                if (filterValue === 'all' || category.includes(filterValue)) {
+                    item.style.display = 'block';
+                    item.style.opacity = '1';
+                } else {
+                    item.style.display = 'none';
+                    item.style.opacity = '0';
+                }
             });
+        });
+    });
+
+    // --- 9. CONTACT FORM HANDLER ---
+    const contactForm = id('contact-form');
+    const feedbackToast = id('form-feedback-message');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const submitBtn = contactForm.querySelector('.btn-submit-inquiry');
+            if (submitBtn) {
+                submitBtn.style.opacity = '0.7';
+                submitBtn.disabled = true;
+            }
+
+            setTimeout(() => {
+                if (feedbackToast) {
+                    feedbackToast.style.display = 'block';
+                }
+                contactForm.reset();
+                if (submitBtn) {
+                    submitBtn.style.opacity = '1';
+                    submitBtn.disabled = false;
+                }
+            }, 800);
         });
     }
 });
