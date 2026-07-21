@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Works | Muhammed</title>
+    <title>Portfolio & Works | Muhammed - UI/UX Designer & Developer</title>
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/favicom-img.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap-grid.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,7 +14,7 @@
 </head>
 
 <body>
-    <!-- Fixed Global Ambient Background Glows (Visible Across All Sections on Scroll) -->
+    <!-- Fixed Global Ambient Background Glows -->
     <div class="global-ambient-wrapper" aria-hidden="true">
         <div class="global-glow-tr"></div>
         <div class="global-glow-bl"></div>
@@ -37,7 +38,7 @@
                     <ul class="nav-pill-list">
                         <li><a href="index.html" class="nav-pill-link">Home</a></li>
                         <li><a href="about.html" class="nav-pill-link">About</a></li>
-                        <li><a href="works.html" class="nav-pill-link active">Pages</a></li>
+                        <li><a href="works.html" class="nav-pill-link active">Portfolio</a></li>
                         <li><a href="contact.html" class="nav-pill-link">Contact</a></li>
                     </ul>
                 </nav>
@@ -79,12 +80,168 @@
     </header>
 
     <main class="main-content">
-        <section class="hero-section">
-            <div class="hero-ambient-glow"></div>
-            <div class="hero-mesh-texture"></div>
+        <!-- Portfolio Hero Section -->
+        <section class="portfolio-hero-section">
             <div class="container">
-                <h1 class="hero-heading">Selected <span class="heading-highlight">Works</span></h1>
-                <p class="hero-description">A curated selection of UI/UX designs and front-end development projects.</p>
+                <div class="row align-items-center">
+                    <div class="col-lg-9 col-md-12">
+                        <span class="portfolio-hero-tag">FEATURED PORTFOLIO</span>
+                        <h1 class="portfolio-hero-title">Selected Works & Digital <span class="heading-highlight">Products.</span></h1>
+                        <p class="portfolio-hero-lead">A curated collection of web applications, UI/UX design systems, and digital product experiences crafted for global brands and startups.</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Filter Tabs -->
+                <div class="portfolio-filter-bar">
+                    <button type="button" class="filter-pill-btn active" data-filter="all">All Projects <span class="filter-count">6</span></button>
+                    <button type="button" class="filter-pill-btn" data-filter="ui-ux">UI/UX Design</button>
+                    <button type="button" class="filter-pill-btn" data-filter="web-dev">Web Development</button>
+                    <button type="button" class="filter-pill-btn" data-filter="mobile">Mobile Apps</button>
+                    <button type="button" class="filter-pill-btn" data-filter="branding">Branding</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Showcase Grid -->
+        <section class="portfolio-grid-section">
+            <div class="container">
+                <div class="row g-4" id="portfolio-projects-grid">
+                    
+                    <!-- Project 1 -->
+                    <div class="col-lg-6 col-md-12 portfolio-item-col" data-category="mobile ui-ux">
+                        <div class="portfolio-card" data-project-id="1">
+                            <div class="portfolio-card-media">
+                                <img src="assets/work (1).jpg" alt="Fintech Mobile Dashboard" class="portfolio-card-img">
+                                <div class="portfolio-hover-overlay">
+                                    <span class="portfolio-view-btn">View Project Details ↗</span>
+                                </div>
+                            </div>
+                            <div class="portfolio-card-content">
+                                <div class="portfolio-card-tags">
+                                    <span class="project-tag">UI/UX Design</span>
+                                    <span class="project-tag">Mobile App</span>
+                                </div>
+                                <h2 class="portfolio-card-title">Fintech Mobile Intelligence Dashboard</h2>
+                                <p class="portfolio-card-desc">Next-gen mobile banking interface with real-time crypto analytics and AI expense tracking.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="col-lg-6 col-md-12 portfolio-item-col" data-category="web-dev branding">
+                        <div class="portfolio-card" data-project-id="2">
+                            <div class="portfolio-card-media">
+                                <img src="assets/work (2).jpg" alt="Creative Agency Website" class="portfolio-card-img">
+                                <div class="portfolio-hover-overlay">
+                                    <span class="portfolio-view-btn">View Project Details ↗</span>
+                                </div>
+                            </div>
+                            <div class="portfolio-card-content">
+                                <div class="portfolio-card-tags">
+                                    <span class="project-tag">Web Development</span>
+                                    <span class="project-tag">Three.js</span>
+                                </div>
+                                <h2 class="portfolio-card-title">Creative Agency Studio Platform</h2>
+                                <p class="portfolio-card-desc">Interactive 3D agency portfolio featuring fluid WebGL transitions and custom cursor animations.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="col-lg-6 col-md-12 portfolio-item-col" data-category="ui-ux web-dev">
+                        <div class="portfolio-card" data-project-id="3">
+                            <div class="portfolio-card-media">
+                                <img src="assets/work (3).jpg" alt="AI SaaS Workspace Interface" class="portfolio-card-img">
+                                <div class="portfolio-hover-overlay">
+                                    <span class="portfolio-view-btn">View Project Details ↗</span>
+                                </div>
+                            </div>
+                            <div class="portfolio-card-content">
+                                <div class="portfolio-card-tags">
+                                    <span class="project-tag">Product Design</span>
+                                    <span class="project-tag">AI Platform</span>
+                                </div>
+                                <h2 class="portfolio-card-title">Generative AI SaaS Workspace</h2>
+                                <p class="portfolio-card-desc">Enterprise workflow automation platform for AI design teams with collaborative prompt management.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="col-lg-6 col-md-12 portfolio-item-col" data-category="web-dev mobile">
+                        <div class="portfolio-card" data-project-id="4">
+                            <div class="portfolio-card-media">
+                                <img src="assets/work (4).jpg" alt="E-Commerce Fashion Marketplace" class="portfolio-card-img">
+                                <div class="portfolio-hover-overlay">
+                                    <span class="portfolio-view-btn">View Project Details ↗</span>
+                                </div>
+                            </div>
+                            <div class="portfolio-card-content">
+                                <div class="portfolio-card-tags">
+                                    <span class="project-tag">Web Development</span>
+                                    <span class="project-tag">E-Commerce</span>
+                                </div>
+                                <h2 class="portfolio-card-title">Luxury Fashion Marketplace</h2>
+                                <p class="portfolio-card-desc">Headless e-commerce web application with sub-second page loads and AR product preview integration.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 5 -->
+                    <div class="col-lg-6 col-md-12 portfolio-item-col" data-category="ui-ux mobile">
+                        <div class="portfolio-card" data-project-id="5">
+                            <div class="portfolio-card-media">
+                                <img src="assets/work (5).png" alt="Healthcare Telemedicine Web App" class="portfolio-card-img">
+                                <div class="portfolio-hover-overlay">
+                                    <span class="portfolio-view-btn">View Project Details ↗</span>
+                                </div>
+                            </div>
+                            <div class="portfolio-card-content">
+                                <div class="portfolio-card-tags">
+                                    <span class="project-tag">UI/UX Design</span>
+                                    <span class="project-tag">Healthcare</span>
+                                </div>
+                                <h2 class="portfolio-card-title">Telemedicine Virtual Clinic Portal</h2>
+                                <p class="portfolio-card-desc">HIPAA-compliant digital health platform designed for seamless doctor-patient video consultations.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 6 -->
+                    <div class="col-lg-6 col-md-12 portfolio-item-col" data-category="branding web-dev">
+                        <div class="portfolio-card" data-project-id="6">
+                            <div class="portfolio-card-media">
+                                <img src="assets/showcase-1.jpg" alt="Minimalist Portfolio Design System" class="portfolio-card-img">
+                                <div class="portfolio-hover-overlay">
+                                    <span class="portfolio-view-btn">View Project Details ↗</span>
+                                </div>
+                            </div>
+                            <div class="portfolio-card-content">
+                                <div class="portfolio-card-tags">
+                                    <span class="project-tag">Branding</span>
+                                    <span class="project-tag">Design System</span>
+                                </div>
+                                <h2 class="portfolio-card-title">Awwwards Portfolio Design System</h2>
+                                <p class="portfolio-card-desc">A dark-mode first design system with custom micro-animations and typography hierarchy.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Banner -->
+        <section class="about-cta-banner">
+            <div class="container">
+                <div class="cta-banner-box">
+                    <span class="cta-small-tag">WANT TO BUILD SOMETHING GREAT?</span>
+                    <h2 class="cta-banner-title">Let's discuss your next digital project.</h2>
+                    <div class="cta-banner-buttons">
+                        <a href="contact.html" class="btn-primary-pill">Start a Project</a>
+                        <a href="mailto:muhammedklkm@gmail.com" class="btn-secondary-pill">muhammedklkm@gmail.com</a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -92,32 +249,32 @@
     <!-- Site Footer Section -->
     <footer class="site-footer">
         <div class="container">
-            <!-- Top Info 4 Columns Row -->
             <div class="row footer-top-row">
-                <!-- Column 1: Stay Connected & Large Email -->
                 <div class="col-lg-4 col-md-6 col-sm-12 footer-col mb-4 mb-lg-0">
                     <span class="footer-label">Stay connected</span>
-                    <a href="mailto:help@gmail.com" class="footer-email-large">help@gmail.com</a>
+                    <a href="mailto:muhammedklkm@gmail.com" class="footer-email-large">muhammedklkm@gmail.com</a>
                 </div>
 
-                <!-- Column 2: Location -->
                 <div class="col-lg-2 col-md-6 col-sm-6 footer-col mb-4 mb-lg-0">
-                    <h4 class="footer-col-heading">London</h4>
-                    <p class="footer-text">Germany 785 15h Street</p>
-                    <p class="footer-text">Office 478 Berlin</p>
+                    <h4 class="footer-col-heading">Location</h4>
+                    <p class="footer-text">Kerala, India</p>
+                    <p class="footer-text">Remote Worldwide</p>
                 </div>
 
-                <!-- Column 3: Contact Info -->
                 <div class="col-lg-3 col-md-6 col-sm-6 footer-col mb-4 mb-lg-0">
                     <h4 class="footer-col-heading">Contact</h4>
-                    <p class="footer-text"><a href="tel:+999236542654">+999 23654 2654</a></p>
-                    <p class="footer-text"><a href="mailto:bfolio@help.com">bfolio@help.com</a></p>
+                    <p class="footer-text"><a href="mailto:muhammedklkm@gmail.com">muhammedklkm@gmail.com</a></p>
+                    <p class="footer-text"><a href="https://github.com/muhammedklk" target="_blank">github.com/muhammedklk</a></p>
                 </div>
 
-                <!-- Column 4: Social Media Icons -->
                 <div class="col-lg-3 col-md-6 col-sm-12 footer-col">
                     <h4 class="footer-col-heading">Social media</h4>
                     <div class="footer-social-icons">
+                        <a href="https://github.com/muhammedklk" target="_blank" class="social-icon-btn" aria-label="GitHub">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                        </a>
                         <a href="https://instagram.com" target="_blank" class="social-icon-btn" aria-label="Instagram">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -133,25 +290,21 @@
                                 <path d="M8.56 2.75c4.37 6 6 9.42 8 17.72"></path>
                             </svg>
                         </a>
-                        <a href="https://behance.net" target="_blank" class="social-icon-btn" aria-label="Behance">
-                            <span class="behance-text">Bē</span>
-                        </a>
-                        <a href="https://youtube.com" target="_blank" class="social-icon-btn" aria-label="YouTube">
+                        <a href="https://linkedin.com" target="_blank" class="social-icon-btn" aria-label="LinkedIn">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
-                                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
                             </svg>
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Giant Brand Logo Typography -->
             <div class="footer-giant-brand">
                 <span class="giant-brand-text">Muhammed<span class="giant-brand-at">@</span></span>
             </div>
 
-            <!-- Bottom Copyright & Scroll To Top Bar -->
             <div class="footer-bottom-bar">
                 <p class="footer-copyright">&copy; 2026 <strong>Muhammed</strong>. All rights reserved.</p>
                 <button type="button" class="scroll-top-btn" id="scroll-to-top" aria-label="Scroll to top">

@@ -186,5 +186,39 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
+
+    // --- 8. PORTFOLIO SHOWCASE CATEGORY FILTER ---
+    const filterBtns = document.querySelectorAll('.filter-pill-btn');
+    const portfolioCols = document.querySelectorAll('.portfolio-item-col');
+
+    if (filterBtns.length > 0 && portfolioCols.length > 0) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filterValue = btn.getAttribute('data-filter');
+
+                // Toggle active class on filter buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Filter cards with smooth opacity transition
+                portfolioCols.forEach(col => {
+                    const categories = col.getAttribute('data-category');
+                    if (filterValue === 'all' || (categories && categories.includes(filterValue))) {
+                        col.style.display = 'block';
+                        setTimeout(() => {
+                            col.style.opacity = '1';
+                            col.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        col.style.opacity = '0';
+                        col.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            col.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+    }
 });
 
