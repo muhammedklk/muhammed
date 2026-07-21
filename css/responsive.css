@@ -24,7 +24,7 @@
 /* --- Tablets & Medium Screens (max-width: 991.98px) --- */
 @media (max-width: 991.98px) {
     .site-header {
-        padding: 18px 0;
+        padding: 16px 0;
     }
 
     .site-header:not(.scrolled) {
@@ -38,7 +38,7 @@
 
     .site-header.scrolled {
         position: fixed !important;
-        padding: 14px 0 !important;
+        padding: 12px 0 !important;
         background-color: rgba(6, 6, 6, 0.85) !important;
         backdrop-filter: blur(20px) !important;
         -webkit-backdrop-filter: blur(20px) !important;
@@ -61,7 +61,8 @@
     }
 
     .hero-section {
-        padding: 20px 0 40px;
+        padding: 100px 0 40px;
+        margin-top: 0;
     }
 
     .hero-section::before {
@@ -74,12 +75,13 @@
 
     .hero-content {
         max-width: 100%;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
     }
 
     .hero-heading {
-        font-size: 54px;
-        margin-bottom: 30px;
+        font-size: 48px;
+        margin-bottom: 24px;
+        line-height: 1.12;
     }
 
     .hero-line-1,
@@ -90,29 +92,32 @@
 
     .hero-description {
         max-width: 100%;
+        margin-bottom: 28px;
     }
 
     .hero-card-container {
         justify-content: center;
+        margin-top: 20px;
     }
 
-    .hero-card-art {
-        max-width: 100%;
-        height: 340px;
+    .webdev-anim-card {
+        width: 100%;
+        max-width: 500px;
+        height: 300px;
     }
 
     /* About & Services Section Responsive */
     .about-services-section {
-        padding: 60px 0;
+        padding: 50px 0;
     }
 
     .about-main-headline {
-        font-size: 34px;
-        margin-bottom: 24px;
+        font-size: 30px;
+        margin-bottom: 20px;
     }
 
     .companies-logos-flex {
-        gap: 30px;
+        gap: 24px;
     }
 
     .tp-gallery-area {
@@ -138,68 +143,72 @@
 
     /* Pre-built Demos Section Responsive */
     .demos-section {
-        padding: 60px 0;
+        padding: 50px 0;
     }
 
     .outlined-stat-num {
-        font-size: 100px;
-        margin-bottom: -32px;
+        font-size: 80px;
+        margin-bottom: -24px;
     }
 
     .demos-main-title {
-        font-size: 34px;
-        margin-bottom: 20px;
+        font-size: 30px;
+        margin-bottom: 16px;
     }
 
     .demos-badges-group {
-        gap: 16px;
+        gap: 12px;
     }
 
     .demo-mockup-frame {
-        height: 350px;
+        height: 320px;
     }
 
     .features-section {
-        padding-top: 30px;
+        padding-top: 20px;
     }
 
     .features-row {
-        row-gap: 20px;
+        row-gap: 16px;
     }
 
     .site-footer {
-        padding: 60px 0 30px;
+        padding: 50px 0 30px;
     }
 
     .footer-email-large {
-        font-size: 26px;
+        font-size: 24px;
     }
 }
 
 /* --- Mobile Devices (max-width: 767.98px) --- */
 @media (max-width: 767.98px) {
     .hero-heading {
-        font-size: 44px;
-        line-height: 1.12;
+        font-size: 40px;
+        line-height: 1.14;
+        margin-bottom: 20px;
     }
 
     .hero-description {
         font-size: 14px;
-        margin-bottom: 28px;
+        margin-bottom: 24px;
     }
 
-    .hero-card-art {
+    .webdev-anim-card {
         height: 280px;
-        border-radius: 20px;
     }
 
     .showcase-card {
         height: auto;
-        min-height: 340px;
+        min-height: 320px;
     }
 
     .feature-item {
-        gap: 14px;
+        gap: 12px;
+        padding: 14px 16px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
     }
 
     .feature-title {
@@ -207,11 +216,11 @@
     }
 
     .footer-top-row {
-        margin-bottom: 40px;
+        margin-bottom: 30px;
     }
 
     .footer-giant-brand {
-        margin: 30px 0 20px;
+        margin: 24px 0 16px;
     }
 }
 
@@ -221,26 +230,84 @@
         display: none;
     }
 
-    .hero-section{
-        margin-top: 100px;
+    .hero-section {
+        padding-top: 95px;
+        margin-top: 0;
     }
 
     .hero-heading {
-        font-size: 38px;
+        font-size: 34px;
+        line-height: 1.18;
+        margin-bottom: 16px;
+        letter-spacing: -0.02em;
+    }
+
+    .hero-heading .hero-line-1,
+    .hero-heading .hero-line-2,
+    .hero-heading .hero-line-3 {
+        display: block !important;
+        margin-bottom: 2px;
+    }
+
+    .hero-subcontent {
+        max-width: 100%;
+    }
+
+    .hero-description {
+        font-size: 13.5px;
+        line-height: 1.6;
+        margin-bottom: 20px;
     }
 
     .hero-cta-group {
         flex-direction: row;
         width: 100%;
+        gap: 10px;
+        margin-bottom: 28px;
     }
 
     .btn-primary-pill, .btn-secondary-pill {
         padding: 11px 20px;
         font-size: 13px;
+        border-radius: 30px;
+        text-align: center;
+        flex: 1;
+        justify-content: center;
     }
 
-    .hero-card-art {
-        height: 240px;
+    .hero-card-container {
+        margin-top: 10px;
+    }
+
+    .webdev-anim-card {
+        height: 270px;
+        border-radius: 18px;
+    }
+
+    .studio-header {
+        padding: 8px 12px;
+    }
+
+    .studio-tabs {
+        display: none;
+    }
+
+    .studio-workspace {
+        grid-template-columns: 46% 54%;
+    }
+
+    .studio-editor {
+        padding: 10px;
+        font-size: 9.5px;
+        line-height: 1.6;
+    }
+
+    .studio-preview {
+        padding: 10px;
+    }
+
+    .preview-floating-tag {
+        display: none;
     }
 
     .showcase-frame-card {
@@ -249,7 +316,7 @@
     }
 
     .footer-email-large {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     .footer-bottom-bar {
@@ -265,17 +332,18 @@
 
     /* Bold Minimalist FAQ Section Responsive */
     .bold-faq-section {
-        padding: 70px 0;
+        padding: 50px 0;
     }
 
     .bold-faq-sidebar {
         position: static;
         top: auto;
+        margin-bottom: 24px;
     }
 
     .bold-faq-title {
-        font-size: 72px;
-        margin-bottom: 16px;
+        font-size: 56px;
+        margin-bottom: 12px;
     }
 
     .bold-faq-subtitle {
@@ -284,38 +352,62 @@
     }
 
     .bold-faq-btn {
-        padding: 20px 0;
+        padding: 16px 0;
     }
 
     .bold-faq-question {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .bold-faq-body {
-        padding: 0 0 20px 0;
-        font-size: 14px;
+        padding: 0 0 16px 0;
+        font-size: 13.5px;
         max-width: 100%;
     }
 
     /* Inner Pages Responsive */
+    .page-inner-hero {
+        padding: 100px 0 40px;
+    }
+
     .page-title {
-        font-size: 36px;
+        font-size: 32px;
+        line-height: 1.15;
+    }
+
+    .about-portrait-section {
+        padding: 20px 0 50px;
+    }
+
+    .portrait-image-wrapper {
+        height: 320px;
+    }
+
+    .portrait-intro-name {
+        font-size: 30px;
+    }
+
+    .portrait-intro-role {
+        font-size: 18px;
     }
 
     .timeline-item {
         grid-template-columns: 1fr;
         gap: 12px;
+        padding: 20px;
     }
 
     .cta-banner-card {
-        padding: 36px 28px;
+        padding: 30px 20px;
+        border-radius: 24px;
     }
 
     .cta-banner-title {
-        font-size: 26px;
+        font-size: 24px;
     }
 
     .contact-form-card {
-        padding: 28px 24px;
+        padding: 24px 18px;
+        border-radius: 24px;
     }
 }
