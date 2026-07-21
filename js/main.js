@@ -124,27 +124,30 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
             gsap.registerPlugin(ScrollTrigger);
 
+            const isMobile = window.innerWidth <= 767;
+            const moveDistance = isMobile ? 320 : 540;
+
             const galleryTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: galleryArea,
-                    start: "top top",
-                    end: "+=1800",
-                    pin: true,
+                    start: isMobile ? "top 15%" : "top top",
+                    end: isMobile ? "+=1000" : "+=1800",
+                    pin: !isMobile,
                     scrub: 1.2,
                     anticipatePin: 1,
                     invalidateOnRefresh: true
                 }
             });
 
-            // Left & Right columns: start at y:0 and move UP to y: -540px (thazhe ninn mukalilekk)
+            // Left & Right columns: start at y:0 and move UP
             galleryTl.to([trackLeft, trackRight], {
-                y: -540,
+                y: -moveDistance,
                 ease: "none"
             }, 0);
 
-            // Center column: starts shifted UP at y: -540px and moves DOWN to y: 0px (mukalil ninn thazhekk)
+            // Center column: starts shifted UP and moves DOWN to y: 0
             galleryTl.fromTo(trackCenter, {
-                y: -540
+                y: -moveDistance
             }, {
                 y: 0,
                 ease: "none"

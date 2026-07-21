@@ -1318,68 +1318,54 @@ button {
     padding: 20px 0;
 }
 
-.tp-gallery-box {
-    background: #111114;
-    border-radius: 32px;
-    padding: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    height: 84vh;
-    max-height: 820px;
-    width: 100%;
-    overflow: hidden;
+/* ==========================================================================
+   WORK SHOWCASE STICKY PIN GALLERY SECTION (EXACT BFOLIO TP-GALLERY-AREA)
+   ========================================================================== */
+.tp-gallery-area {
     position: relative;
-    transition: background-color 0.3s ease;
-}
-
-[data-theme="light"] .tp-gallery-box {
-    background: #141417;
-    border-color: rgba(255, 255, 255, 0.06);
-}
-
-.showcase-columns-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    height: 100%;
-}
-
-.showcase-column {
-    height: 100%;
     overflow: hidden;
-    position: relative;
-    border-radius: 20px;
 }
 
-.showcase-track {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.container-1830 {
+    max-width: 1830px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.tp-gallery-wrapper {
+    background: #000000;
+    padding-left: 140px;
+    padding-right: 140px;
+    height: 880px;
+    overflow: hidden;
+    border-radius: 30px;
+    position: relative;
+}
+
+[data-theme="light"] .tp-gallery-wrapper {
+    background: #0d0d10;
+}
+
+.tp-gallery-item-wrapper {
     will-change: transform;
-    transition: transform 0.05s ease-out;
 }
 
-.showcase-card {
-    border-radius: 20px;
-    height: 380px;
-    flex-shrink: 0;
+.tp-gallery-item {
     overflow: hidden;
-    position: relative;
-    background: #18181b;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border-radius: 20px;
+    margin-bottom: 20px;
 }
 
-.showcase-card:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
-}
-
-.showcase-mockup-img {
+.tp-gallery-item img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
+    height: auto;
     display: block;
+    border-radius: 20px;
+    transition: transform 0.6s ease;
+}
+
+.tp-gallery-item:hover img {
+    transform: scale(1.08);
 }
 
 /* ==========================================================================

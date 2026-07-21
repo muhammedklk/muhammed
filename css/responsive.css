@@ -124,24 +124,20 @@
         height: auto;
     }
 
-    .tp-gallery-box {
-        padding: 12px;
-        border-radius: 20px;
-        height: 60vh;
-        max-height: 460px;
-        overflow: hidden;
+    .tp-gallery-wrapper {
+        padding-left: 20px;
+        padding-right: 20px;
+        height: 600px;
+        border-radius: 24px;
     }
 
-    .showcase-columns-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 10px;
-        height: 100%;
+    .tp-gallery-item {
+        border-radius: 16px;
+        margin-bottom: 14px;
     }
 
-    .showcase-card {
-        height: 220px;
-        border-radius: 12px;
+    .tp-gallery-item img {
+        border-radius: 16px;
     }
 
     /* Pre-built Demos Section Responsive */
@@ -318,24 +314,19 @@
         border-radius: 20px;
     }
 
-    .tp-gallery-box {
-        padding: 8px;
-        border-radius: 16px;
-        height: 52vh;
-        max-height: 380px;
+    .tp-gallery-wrapper {
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 430px;
+        border-radius: 18px;
     }
 
-    .showcase-columns-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 6px !important;
+    .tp-gallery-item {
+        border-radius: 10px;
+        margin-bottom: 8px;
     }
 
-    .showcase-card {
-        height: 160px !important;
-        border-radius: 10px !important;
-    }
-
-    .showcase-column {
+    .tp-gallery-item img {
         border-radius: 10px;
     }
 
