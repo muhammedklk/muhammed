@@ -125,20 +125,23 @@
     }
 
     .tp-gallery-box {
-        padding: 20px;
-        border-radius: 24px;
-        height: auto;
-        max-height: none;
-        overflow: visible;
+        padding: 12px;
+        border-radius: 20px;
+        height: 60vh;
+        max-height: 460px;
+        overflow: hidden;
     }
 
     .showcase-columns-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 10px;
+        height: 100%;
     }
 
-    .showcase-track {
-        transform: none !important;
+    .showcase-card {
+        height: 220px;
+        border-radius: 12px;
     }
 
     /* Pre-built Demos Section Responsive */
@@ -313,6 +316,27 @@
     .showcase-frame-card {
         padding: 14px;
         border-radius: 20px;
+    }
+
+    .tp-gallery-box {
+        padding: 8px;
+        border-radius: 16px;
+        height: 52vh;
+        max-height: 380px;
+    }
+
+    .showcase-columns-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 6px !important;
+    }
+
+    .showcase-card {
+        height: 160px !important;
+        border-radius: 10px !important;
+    }
+
+    .showcase-column {
+        border-radius: 10px;
     }
 
     .footer-email-large {
