@@ -187,27 +187,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 8. PORTFOLIO CATEGORY FILTER ---
-    const filterBtns = document.querySelectorAll('.filter-pill-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item-col');
+    // --- 8. PORTFOLIO PAGE CATEGORY FILTERING ---
+    const filterBtns = document.querySelectorAll('.portfolio-filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
 
     if (filterBtns.length > 0 && portfolioItems.length > 0) {
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Update active tab
+                const filter = btn.getAttribute('data-filter');
+
+                // Toggle active button class
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
-                const filterValue = btn.getAttribute('data-filter');
-
+                // Filter items
                 portfolioItems.forEach(item => {
                     const categories = item.getAttribute('data-category');
-                    if (filterValue === 'all' || (categories && categories.includes(filterValue))) {
+                    if (filter === 'all' || (categories && categories.includes(filter))) {
                         item.style.display = 'block';
-                        item.style.opacity = '1';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 50);
                     } else {
-                        item.style.display = 'none';
                         item.style.opacity = '0';
+                        item.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
                     }
                 });
             });

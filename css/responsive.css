@@ -301,4 +301,25 @@
     .cta-banner-title {
         font-size: 26px;
     }
+
+    /* Portfolio Page Responsive */
+    .portfolio-hero-section {
+        padding: 120px 0 40px;
+    }
+
+    .portfolio-hero-title {
+        font-size: 38px;
+    }
+
+    .portfolio-hero-lead {
+        font-size: 16px;
+    }
+
+    .project-thumb-wrapper {
+        height: 220px;
+    }
+
+    .project-card-title {
+        font-size: 18px;
+    }
 }
