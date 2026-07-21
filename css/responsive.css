@@ -261,4 +261,44 @@
         font-size: 14px;
         max-width: 100%;
     }
+
+    /* About Page Responsive */
+    .about-page-hero {
+        padding: 120px 0 60px;
+    }
+
+    .about-hero-title {
+        font-size: 38px;
+    }
+
+    .about-hero-lead {
+        font-size: 16px;
+    }
+
+    .stat-number {
+        font-size: 32px;
+    }
+
+    .story-heading {
+        font-size: 28px;
+    }
+
+    .section-title-large {
+        font-size: 32px;
+    }
+
+    .timeline-sticky-title {
+        position: static;
+        top: auto;
+        margin-bottom: 40px;
+    }
+
+    .cta-banner-box {
+        padding: 36px 20px;
+        border-radius: 20px;
+    }
+
+    .cta-banner-title {
+        font-size: 26px;
+    }
 }

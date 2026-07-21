@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Muhammed</title>
+    <title>About | Muhammed - UI/UX Designer & Developer</title>
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/favicom-img.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap-grid.min.css">
@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <!-- Fixed Global Ambient Background Glows (Visible Across All Sections on Scroll) -->
+    <!-- Fixed Global Ambient Background Glows -->
     <div class="global-ambient-wrapper" aria-hidden="true">
         <div class="global-glow-tr"></div>
         <div class="global-glow-bl"></div>
@@ -80,15 +80,221 @@
     </header>
 
     <main class="main-content">
-        <section class="hero-section">
-            <div class="hero-ambient-glow"></div>
-            <div class="hero-mesh-texture"></div>
+        <!-- About Hero Section -->
+        <section class="about-page-hero">
             <div class="container">
-                <h1 class="hero-heading">About <span class="heading-highlight">Muhammed</span></h1>
-                <p class="hero-description">UI/UX Designer & Front-End Developer crafting pixel-perfect interfaces and modern digital experiences.</p>
-                <div class="hero-cta-group">
-                    <a href="contact.html" class="btn-primary-pill">Get in touch</a>
-                    <a href="works.html" class="btn-secondary-pill">View Work</a>
+                <div class="row align-items-center">
+                    <div class="col-lg-9 col-md-12">
+                        <span class="about-hero-tag">ABOUT MUHAMMED</span>
+                        <h1 class="about-hero-title">Architecting Digital Experiences Through <span class="heading-highlight">Design & Code.</span></h1>
+                        <p class="about-hero-lead">I am a Senior UI/UX Designer & Front-End Developer with 8+ years of experience bridging human-centered design strategy with cutting-edge front-end engineering.</p>
+                    </div>
+                </div>
+
+                <!-- Stat Cards Bar -->
+                <div class="row about-stats-grid g-4">
+                    <div class="col-lg-3 col-md-6 col-6">
+                        <div class="stat-card">
+                            <span class="stat-number">08<span class="stat-plus">+</span></span>
+                            <span class="stat-label">Years of Experience</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-6">
+                        <div class="stat-card">
+                            <span class="stat-number">120<span class="stat-plus">+</span></span>
+                            <span class="stat-label">Projects Completed</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-6">
+                        <div class="stat-card">
+                            <span class="stat-number">99<span class="stat-plus">%</span></span>
+                            <span class="stat-label">Client Satisfaction</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-6">
+                        <div class="stat-card">
+                            <span class="stat-number">15<span class="stat-plus">+</span></span>
+                            <span class="stat-label">Awards & Recognitions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Story & Philosophy Section -->
+        <section class="about-story-section">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <!-- Left: Studio Visual Graphic -->
+                    <div class="col-lg-5 col-md-12">
+                        <div class="about-profile-card">
+                            <div class="profile-card-badge">
+                                <span class="badge-dot"></span>
+                                AVAILABLE FOR FREELANCE & FULL-TIME
+                            </div>
+                            <div class="profile-avatar-wrapper">
+                                <img src="assets/work (3).jpg" alt="Muhammed - UI/UX Designer & Developer" class="profile-avatar-img">
+                            </div>
+                            <div class="profile-card-footer">
+                                <h3>Muhammed</h3>
+                                <p>Lead Product Designer & Developer</p>
+                                <div class="profile-skills-tags">
+                                    <span>Figma</span>
+                                    <span>React</span>
+                                    <span>Next.js</span>
+                                    <span>UI Strategy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Philosophy & Story Text -->
+                    <div class="col-lg-7 col-md-12">
+                        <div class="story-content-wrapper">
+                            <span class="story-sublabel">MY PHILOSOPHY</span>
+                            <h2 class="story-heading">Driven by Curiosity, Defined by Precision.</h2>
+                            <p class="story-paragraph">Over the past decade, digital products have evolved from simple interfaces to complex ecosystems. My approach combines strategic design thinking with robust front-end code to turn complex problems into intuitive, joyful user experiences.</p>
+                            <p class="story-paragraph">Whether leading design systems for high-growth startups or engineering responsive web platforms, I focus on micro-interactions, accessibility, performance, and aesthetic elegance that drives real business results.</p>
+                            
+                            <blockquote class="story-quote-card">
+                                <p>"Design is not just what it looks like and feels like. Design is how it works."</p>
+                                <cite>— Steve Jobs</cite>
+                            </blockquote>
+
+                            <div class="story-actions">
+                                <a href="contact.html" class="btn-primary-pill">Let's Work Together</a>
+                                <a href="assets/work (1).jpg" download class="btn-secondary-pill">Download Resume</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Skills & Capabilities Grid -->
+        <section class="about-skills-section">
+            <div class="container">
+                <div class="section-header-center text-center">
+                    <span class="section-tag-label">CAPABILITIES</span>
+                    <h2 class="section-title-large">Skills & Specialized Expertise</h2>
+                </div>
+
+                <div class="row g-4 mt-2">
+                    <!-- Skill Card 1: UI/UX Design -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="capability-card">
+                            <div class="capability-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                            </div>
+                            <h3>UI/UX & Product Design</h3>
+                            <p>Creating scalable design systems, wireframes, high-fidelity prototypes, and user flows aligned with business goals.</p>
+                            <ul class="capability-list">
+                                <li>Figma & Design Systems</li>
+                                <li>User Research & Persona Mapping</li>
+                                <li>Interactive Prototyping</li>
+                                <li>Information Architecture</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 2: Front-End Development -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="capability-card">
+                            <div class="capability-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                            </div>
+                            <h3>Front-End Engineering</h3>
+                            <p>Translating pixel-perfect designs into fast, responsive, and accessible code using modern web frameworks.</p>
+                            <ul class="capability-list">
+                                <li>HTML5 / CSS3 / SCSS</li>
+                                <li>JavaScript (ES6+) & TypeScript</li>
+                                <li>React.js & Next.js</li>
+                                <li>Bootstrap & Tailwind CSS</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Skill Card 3: Interactive & Motion -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="capability-card">
+                            <div class="capability-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            </div>
+                            <h3>Motion & Brand Identity</h3>
+                            <p>Crafting micro-animations, interactive transitions, and brand collateral that elevate digital identities.</p>
+                            <ul class="capability-list">
+                                <li>CSS & GSAP Animations</li>
+                                <li>Brand Guidelines & Systems</li>
+                                <li>Performance Optimization</li>
+                                <li>Cross-Browser Compatibility</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Career Experience Timeline Section -->
+        <section class="about-timeline-section">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-5 col-md-12">
+                        <div class="timeline-sticky-title">
+                            <span class="section-tag-label">CAREER JOURNEY</span>
+                            <h2 class="section-title-large">Work Experience & Milestones</h2>
+                            <p class="timeline-intro-text">A timeline of key roles and achievements across design agencies, tech labs, and global startups.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7 col-md-12">
+                        <div class="timeline-list">
+                            <!-- Item 1 -->
+                            <div class="timeline-item">
+                                <span class="timeline-year">2024 — PRESENT</span>
+                                <h3 class="timeline-role">Senior Lead Designer & Frontend Architect</h3>
+                                <span class="timeline-company">Creative Studio Inc.</span>
+                                <p class="timeline-desc">Leading end-to-end design systems and frontend development for enterprise clients. Directing product strategy and motion design execution.</p>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="timeline-item">
+                                <span class="timeline-year">2022 — 2023</span>
+                                <h3 class="timeline-role">Art Director & Product Designer</h3>
+                                <span class="timeline-company">Global Tech Labs</span>
+                                <p class="timeline-desc">Designed mobile apps and web platforms serving 500k+ active users. Managed design team workflows and user testing sprints.</p>
+                            </div>
+
+                            <!-- Item 3 -->
+                            <div class="timeline-item">
+                                <span class="timeline-year">2020 — 2022</span>
+                                <h3 class="timeline-role">UI/UX & Web Developer</h3>
+                                <span class="timeline-company">Digital Interactive Agency</span>
+                                <p class="timeline-desc">Built custom responsive websites, client dashboards, and interactive landing pages with custom micro-animations.</p>
+                            </div>
+
+                            <!-- Item 4 -->
+                            <div class="timeline-item">
+                                <span class="timeline-year">2018 — 2020</span>
+                                <h3 class="timeline-role">Junior Web Designer</h3>
+                                <span class="timeline-company">Innovation Hub</span>
+                                <p class="timeline-desc">Collaborated with senior designers on wireframing, branding, HTML/CSS layout development, and quality assurance.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Banner Section -->
+        <section class="about-cta-banner">
+            <div class="container">
+                <div class="cta-banner-box">
+                    <span class="cta-small-tag">HAVE A PROJECT IN MIND?</span>
+                    <h2 class="cta-banner-title">Let's create something extraordinary together.</h2>
+                    <div class="cta-banner-buttons">
+                        <a href="contact.html" class="btn-primary-pill">Start a Project</a>
+                        <a href="mailto:muhammedklkm@gmail.com" class="btn-secondary-pill">muhammedklkm@gmail.com</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -102,27 +308,32 @@
                 <!-- Column 1: Stay Connected & Large Email -->
                 <div class="col-lg-4 col-md-6 col-sm-12 footer-col mb-4 mb-lg-0">
                     <span class="footer-label">Stay connected</span>
-                    <a href="mailto:help@gmail.com" class="footer-email-large">help@gmail.com</a>
+                    <a href="mailto:muhammedklkm@gmail.com" class="footer-email-large">muhammedklkm@gmail.com</a>
                 </div>
 
                 <!-- Column 2: Location -->
                 <div class="col-lg-2 col-md-6 col-sm-6 footer-col mb-4 mb-lg-0">
-                    <h4 class="footer-col-heading">London</h4>
-                    <p class="footer-text">Germany 785 15h Street</p>
-                    <p class="footer-text">Office 478 Berlin</p>
+                    <h4 class="footer-col-heading">Location</h4>
+                    <p class="footer-text">Kerala, India</p>
+                    <p class="footer-text">Remote Worldwide</p>
                 </div>
 
                 <!-- Column 3: Contact Info -->
                 <div class="col-lg-3 col-md-6 col-sm-6 footer-col mb-4 mb-lg-0">
                     <h4 class="footer-col-heading">Contact</h4>
-                    <p class="footer-text"><a href="tel:+999236542654">+999 23654 2654</a></p>
-                    <p class="footer-text"><a href="mailto:bfolio@help.com">bfolio@help.com</a></p>
+                    <p class="footer-text"><a href="mailto:muhammedklkm@gmail.com">muhammedklkm@gmail.com</a></p>
+                    <p class="footer-text"><a href="https://github.com/muhammedklk" target="_blank">github.com/muhammedklk</a></p>
                 </div>
 
                 <!-- Column 4: Social Media Icons -->
                 <div class="col-lg-3 col-md-6 col-sm-12 footer-col">
                     <h4 class="footer-col-heading">Social media</h4>
                     <div class="footer-social-icons">
+                        <a href="https://github.com/muhammedklk" target="_blank" class="social-icon-btn" aria-label="GitHub">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                        </a>
                         <a href="https://instagram.com" target="_blank" class="social-icon-btn" aria-label="Instagram">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -138,13 +349,11 @@
                                 <path d="M8.56 2.75c4.37 6 6 9.42 8 17.72"></path>
                             </svg>
                         </a>
-                        <a href="https://behance.net" target="_blank" class="social-icon-btn" aria-label="Behance">
-                            <span class="behance-text">Bē</span>
-                        </a>
-                        <a href="https://youtube.com" target="_blank" class="social-icon-btn" aria-label="YouTube">
+                        <a href="https://linkedin.com" target="_blank" class="social-icon-btn" aria-label="LinkedIn">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
-                                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
                             </svg>
                         </a>
                     </div>
