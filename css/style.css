@@ -2100,11 +2100,14 @@ button {
 }
 
 .footer-email-large {
-    font-size: 36px;
+    font-size: clamp(18px, 2vw, 28px);
     font-weight: 700;
     color: var(--text-primary);
     letter-spacing: -0.03em;
     display: inline-block;
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: anywhere;
     transition: color 0.25s ease;
 }
 

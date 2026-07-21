@@ -190,6 +190,10 @@
         display: none;
     }
 
+    .hero-section{
+        margin-top: 100px;
+    }
+
     .hero-heading {
         font-size: 38px;
     }
