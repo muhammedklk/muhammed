@@ -27,6 +27,31 @@
         padding: 18px 0;
     }
 
+    .site-header:not(.scrolled) {
+        background: transparent !important;
+        background-color: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: 1px solid transparent !important;
+        box-shadow: none !important;
+    }
+
+    .site-header.scrolled {
+        position: fixed !important;
+        padding: 14px 0 !important;
+        background-color: rgba(6, 6, 6, 0.85) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    [data-theme="light"] .site-header.scrolled {
+        background-color: rgba(255, 255, 255, 0.85) !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
+    }
+
     .nav-pill-menu {
         display: none;
     }
@@ -55,6 +80,12 @@
     .hero-heading {
         font-size: 54px;
         margin-bottom: 30px;
+    }
+
+    .hero-line-1,
+    .hero-line-2,
+    .hero-line-3 {
+        display: block !important;
     }
 
     .hero-description {
