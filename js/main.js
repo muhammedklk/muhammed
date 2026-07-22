@@ -48,28 +48,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const trackRight = document.getElementById('track-right');
 
     if (galleryArea && trackLeft && trackCenter && trackRight) {
-        // Smooth hardware-accelerated transition
-        trackLeft.style.transition = 'transform 0.15s cubic-bezier(0.1, 1, 0.1, 1)';
-        trackCenter.style.transition = 'transform 0.15s cubic-bezier(0.1, 1, 0.1, 1)';
-        trackRight.style.transition = 'transform 0.15s cubic-bezier(0.1, 1, 0.1, 1)';
+        let galleryTicking = false;
 
-        const handleGalleryScroll = () => {
+        const updateGalleryParallax = () => {
             const rect = galleryArea.getBoundingClientRect();
             const windowHeight = window.innerHeight;
 
-            // Animate only when gallery section is in viewport
             if (rect.top <= windowHeight && rect.bottom >= 0) {
-                const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
-                const offset = (scrollProgress - 0.5) * 320;
+                const totalHeight = windowHeight + rect.height;
+                const currentScroll = windowHeight - rect.top;
+                const progress = currentScroll / totalHeight; // Range 0 to 1
 
-                trackLeft.style.transform = `translate3d(0, ${-offset}px, 0)`;
-                trackCenter.style.transform = `translate3d(0, ${offset * 1.25}px, 0)`;
-                trackRight.style.transform = `translate3d(0, ${-offset}px, 0)`;
+                // Parallax translation offset range (Exact Bfolio 3D reverse scroll speed)
+                const moveAmount = (progress - 0.5) * 550;
+
+                // Column 1 & 3 scroll UP, Column 2 scrolls DOWN
+                trackLeft.style.transform = `translate3d(0, ${-moveAmount * 1.25}px, 0)`;
+                trackCenter.style.transform = `translate3d(0, ${moveAmount * 1.25 - 80}px, 0)`;
+                trackRight.style.transform = `translate3d(0, ${-moveAmount * 1.25}px, 0)`;
+            }
+            galleryTicking = false;
+        };
+
+        const onGalleryScroll = () => {
+            if (!galleryTicking) {
+                requestAnimationFrame(updateGalleryParallax);
+                galleryTicking = true;
             }
         };
 
-        window.addEventListener('scroll', handleGalleryScroll, { passive: true });
-        handleGalleryScroll();
+        window.addEventListener('scroll', onGalleryScroll, { passive: true });
+        updateGalleryParallax();
     }
 
     // --- 2. SEARCH OVERLAY TOGGLE ---
