@@ -3947,3 +3947,191 @@ button {
     transform: translateY(-2px);
     box-shadow: 0 12px 25px rgba(255, 107, 53, 0.45);
 }
+
+/* ==========================================================================
+   SIMPLE MINIMALIST PORTFOLIO PAGE STYLES (NEW DESIGN)
+   ========================================================================== */
+.minimal-works-hero {
+    padding: 100px 0 40px;
+}
+
+.minimal-badge {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: #ef4444;
+    display: inline-block;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+}
+
+.minimal-hero-title {
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.minimal-hero-subtitle {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    font-weight: 400;
+    max-width: 680px;
+}
+
+.minimal-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 24px;
+}
+
+[data-theme="light"] .minimal-filter-bar {
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+.minimal-filter-bar .filter-pill {
+    padding: 10px 22px;
+    border-radius: 30px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-muted);
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+[data-theme="light"] .minimal-filter-bar .filter-pill {
+    border-color: rgba(0, 0, 0, 0.12);
+}
+
+.minimal-filter-bar .filter-pill:hover,
+.minimal-filter-bar .filter-pill.active {
+    background: var(--text-primary);
+    color: var(--bg-color);
+    border-color: var(--text-primary);
+}
+
+/* Minimal Work Card Grid */
+.minimal-work-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.minimal-card-media {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #141416;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 20px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+[data-theme="light"] .minimal-card-media {
+    background: #f4f4f5;
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+.minimal-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.minimal-work-card:hover .minimal-card-img {
+    transform: scale(1.05);
+}
+
+.minimal-hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.minimal-work-card:hover .minimal-hover-overlay {
+    opacity: 1;
+}
+
+.minimal-view-btn {
+    padding: 12px 24px;
+    border-radius: 30px;
+    background: #ffffff;
+    color: #000000;
+    font-size: 13.5px;
+    font-weight: 700;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    transform: translateY(8px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.minimal-work-card:hover .minimal-view-btn {
+    transform: translateY(0);
+}
+
+.minimal-card-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.minimal-card-num {
+    font-size: 13px;
+    font-weight: 800;
+    color: #ef4444;
+    letter-spacing: 0.05em;
+    padding-top: 4px;
+}
+
+.minimal-card-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+    transition: color 0.3s ease;
+}
+
+.minimal-work-card:hover .minimal-card-title {
+    color: #ef4444;
+}
+
+.minimal-card-tags {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Minimal CTA Section */
+.minimal-cta-title {
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.minimal-cta-subtitle {
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 550px;
+    margin: 0 auto;
+}
