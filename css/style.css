@@ -186,23 +186,22 @@ button {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
     z-index: 1000;
     background: transparent;
     border-bottom: 1px solid transparent;
     backdrop-filter: blur(0px);
     -webkit-backdrop-filter: blur(0px);
-    transition: padding 0.35s ease, background-color 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
+    transition: padding 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
 }
 
 /* Glassmorphic Blur Background Only When Scrolled */
 .site-header.scrolled {
     padding: 14px 0;
-    background-color: rgba(6, 6, 6, 0.82);
+    background-color: rgba(6, 6, 6, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 [data-theme="light"] .site-header.scrolled {
