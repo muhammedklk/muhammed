@@ -215,8 +215,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 9. CONTACT FORM HANDLER ---
-    const contactForm = id('contact-form');
-    const feedbackToast = id('form-feedback-message');
+    const contactForm = document.getElementById('contact-form');
+    const feedbackToast = document.getElementById('form-feedback-message');
 
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
@@ -241,11 +241,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 10. WHATSAPP INTEGRATED CHATBOT LOGIC ---
-    const waTriggerBtn = id('wa-trigger-btn');
-    const waChatBox = id('wa-chat-box');
-    const waCloseBtn = id('wa-close-btn');
-    const waChatForm = id('wa-chat-form');
-    const waInputField = id('wa-input-field');
+    const waTriggerBtn = document.getElementById('wa-trigger-btn');
+    const waChatBox = document.getElementById('wa-chat-box');
+    const waCloseBtn = document.getElementById('wa-close-btn');
+    const waChatForm = document.getElementById('wa-chat-form');
+    const waInputField = document.getElementById('wa-input-field');
     const waChipBtns = document.querySelectorAll('.wa-chip-btn');
     const whatsappPhone = '919656216086';
 
