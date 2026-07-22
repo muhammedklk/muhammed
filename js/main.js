@@ -272,30 +272,35 @@ document.addEventListener('DOMContentLoaded', () => {
             chatbotClose.addEventListener('click', () => toggleChat(false));
         }
 
-        // Smart Knowledge Base Responses
+        // Smart Minimalist Knowledge Base Responses with WhatsApp Direct Sharing
         const getAIResponse = (userText) => {
             const q = userText.toLowerCase().trim();
+            let baseMsg = "";
 
-            if (q.includes('service') || q.includes('offer') || q.includes('work') || q.includes('do')) {
-                return "I offer high-end **UI/UX Design**, **Front-End Development** (HTML/CSS/JS/React/Next.js), **Mobile App UI**, and **Brand Identity** systems. All tailored for maximum speed and conversion! 🚀";
-            }
-            if (q.includes('contact') || q.includes('email') || q.includes('phone') || q.includes('number') || q.includes('whatsapp') || q.includes('reach')) {
-                return "You can reach Muhammed directly via:<br>📧 Email: <a href='mailto:muhammedklkm@gmail.com' style='color:#ff6b35;'>muhammedklkm@gmail.com</a><br>📱 WhatsApp: <a href='https://wa.me/919656216086' target='_blank' style='color:#ff6b35;'>+91 9656216086</a><br>Or use our <a href='contact.html' style='color:#ff6b35;'>Contact Form</a>!";
-            }
-            if (q.includes('price') || q.includes('cost') || q.includes('rate') || q.includes('quote') || q.includes('budget')) {
-                return "Project pricing varies based on scope & complexity. We offer flexible packages for startups, agencies, and enterprise brands. <a href='contact.html' style='color:#ff6b35;'>Get an instant quote here</a>!";
-            }
-            if (q.includes('tech') || q.includes('stack') || q.includes('tool') || q.includes('code')) {
-                return "Muhammed's core Tech Stack includes:<br>• **Design**: Figma, Adobe Creative Cloud<br>• **Front-End**: HTML5, SCSS/CSS3, JavaScript ES6+, React, Next.js<br>• **Animation**: GSAP ScrollTrigger, SwiperJS";
-            }
-            if (q.includes('experience') || q.includes('year') || q.includes('about') || q.includes('who')) {
-                return "Muhammed is a passionate Senior UI/UX Designer & Front-End Developer with **5+ years of craft experience** and over **14+ launched projects** worldwide! ⚡";
-            }
-            if (q.includes('hi') || q.includes('hello') || q.includes('hey') || q.includes('namaste')) {
-                return "Hello there! 👋 How can I help you elevate your web product or brand today?";
+            if (q.includes('whatsapp') || q.includes('chat') || q.includes('message') || q.includes('talk')) {
+                baseMsg = "Let's connect directly on WhatsApp! You can chat with Muhammed right now:";
+            } else if (q.includes('service') || q.includes('offer') || q.includes('work') || q.includes('do')) {
+                baseMsg = "I specialize in **UI/UX Design**, **Front-End Dev** (HTML/CSS/JS/React), **Mobile App Systems**, and **Brand Identity**.";
+            } else if (q.includes('price') || q.includes('cost') || q.includes('rate') || q.includes('estimate') || q.includes('quote')) {
+                baseMsg = "Project rates depend on scope & deliverables. Flexible packages available for startups and businesses.";
+            } else if (q.includes('tech') || q.includes('stack') || q.includes('code') || q.includes('tool')) {
+                baseMsg = "Core Stack: **Figma, HTML5, SCSS/CSS3, JavaScript ES6+, React, Next.js, GSAP ScrollTrigger**.";
+            } else if (q.includes('experience') || q.includes('about') || q.includes('who')) {
+                baseMsg = "Muhammed has **5+ years of design & dev craft** with over **14+ completed digital products** worldwide.";
+            } else {
+                baseMsg = "Thanks for reaching out! For instant project discussions, quotes, or custom solutions, reach out on WhatsApp:";
             }
 
-            return "Thanks for your query! For detailed project inquiries or custom quotes, feel free to drop an email at **muhammedklkm@gmail.com** or send a WhatsApp message to **+91 9656216086**! 💬";
+            // Append WhatsApp Direct Link Banner to every bot response
+            const whatsappBannerHTML = `
+                ${baseMsg}
+                <a href="https://wa.me/919656216086" target="_blank" class="chat-whatsapp-banner">
+                    <span>💬 Direct WhatsApp (+91 9656216086)</span>
+                    <span style="font-size: 14px;">↗</span>
+                </a>
+            `;
+
+            return whatsappBannerHTML;
         };
 
         const appendMessage = (sender, text) => {

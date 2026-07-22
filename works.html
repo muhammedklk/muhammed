@@ -509,30 +509,30 @@
         </div>
     </footer>
 
-    <!-- Custom AI Chatbot Floating Widget -->
+    <!-- Ultra-Minimalist AI Chatbot Widget -->
     <div class="chatbot-widget-container" id="chatbot-widget">
-        <!-- Floating Tooltip Hint Bubble -->
-        <div class="chatbot-tooltip-hint" id="chatbot-tooltip">Chat with Muhammed's AI 💬</div>
-
-        <!-- Floating Trigger Button -->
-        <button type="button" class="chatbot-trigger-btn" id="chatbot-trigger" aria-label="Open Chatbot Assistant">
-            <span class="chatbot-badge-pulse"></span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
+        <!-- Minimal Floating Pill Trigger Button -->
+        <button type="button" class="chatbot-trigger-btn" id="chatbot-trigger" aria-label="Chat with Muhammed">
+            <div class="chatbot-trigger-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+            </div>
+            <span>Chat Assistant</span>
+            <span class="chatbot-pulse-dot"></span>
         </button>
 
-        <!-- Chatbot Window -->
+        <!-- Minimalist Chat Window -->
         <div class="chatbot-window" id="chatbot-window">
             <!-- Header -->
             <div class="chatbot-header">
                 <div class="chatbot-profile-info">
                     <div class="chatbot-avatar-circle">
-                        <img src="assets/profile_photo.jpg" alt="Muhammed AI" onerror="this.outerHTML='M';">
+                        <img src="assets/profile_photo.jpg" alt="Muhammed" onerror="this.outerHTML='M';">
                     </div>
                     <div class="chatbot-user-details">
-                        <span class="chatbot-name">Muhammed AI Assistant</span>
-                        <span class="chatbot-status"><span style="width: 7px; height: 7px; background: #10b981; border-radius: 50%; display: inline-block;"></span> Online • Instant Answers</span>
+                        <h4 class="chatbot-name">Muhammed</h4>
+                        <span class="chatbot-status">UI/UX Designer & Dev • Online</span>
                     </div>
                 </div>
                 <button type="button" class="chatbot-close-btn" id="chatbot-close" aria-label="Close Chat">✕</button>
@@ -542,12 +542,16 @@
             <div class="chatbot-messages-body" id="chatbot-messages">
                 <div class="chat-msg-row bot">
                     <div class="msg-bubble">
-                        👋 Hi! I'm Muhammed's AI Assistant. How can I help you today?
+                        Hi there! 👋 How can I help you today? You can ask about services, tech stack, pricing, or connect directly on WhatsApp:
+                        <a href="https://wa.me/919656216086" target="_blank" class="chat-whatsapp-banner">
+                            <span>💬 Chat on WhatsApp (+91 9656216086)</span>
+                            <span style="font-size: 14px;">↗</span>
+                        </a>
                     </div>
                 </div>
                 <div class="chat-suggestions-wrap">
+                    <button type="button" class="chat-suggest-chip" data-query="Connect on WhatsApp">💬 Chat on WhatsApp</button>
                     <button type="button" class="chat-suggest-chip" data-query="What services do you offer?">💼 Services</button>
-                    <button type="button" class="chat-suggest-chip" data-query="How can I contact via WhatsApp or email?">📱 Contact</button>
                     <button type="button" class="chat-suggest-chip" data-query="What is your Tech Stack?">⚡ Tech Stack</button>
                     <button type="button" class="chat-suggest-chip" data-query="What is your project pricing & estimate?">💰 Pricing</button>
                 </div>
@@ -555,9 +559,9 @@
 
             <!-- Input Footer -->
             <form class="chatbot-input-footer" id="chatbot-form">
-                <input type="text" class="chatbot-input-field" id="chatbot-input" placeholder="Ask a question..." autocomplete="off">
+                <input type="text" class="chatbot-input-field" id="chatbot-input" placeholder="Type a message..." autocomplete="off">
                 <button type="submit" class="chatbot-send-btn" aria-label="Send Message">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="22" y1="2" x2="11" y2="13"></line>
                         <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
                     </svg>
