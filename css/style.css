@@ -3729,6 +3729,7 @@ button {
     overflow: hidden;
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
     transform: translateY(20px) scale(0.95);
     transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -3742,6 +3743,7 @@ button {
 .chatbot-window.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
     transform: translateY(0) scale(1);
 }
 

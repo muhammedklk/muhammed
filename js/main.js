@@ -4,9 +4,11 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Helper function to safely get element by ID
+    const id = (elementId) => document.getElementById(elementId);
 
     // --- 1. LIGHT / DARK THEME TOGGLE WITH LOCALSTORAGE ---
-    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeToggleBtn = id('theme-toggle');
     const htmlElement = document.documentElement;
 
     // Load saved theme or default to 'dark'
