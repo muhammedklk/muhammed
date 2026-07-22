@@ -183,9 +183,10 @@ button {
 .site-header {
     width: 100%;
     padding: 24px 0;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
+    right: 0;
     z-index: 1000;
     background: transparent;
     border-bottom: 1px solid transparent;
@@ -196,12 +197,11 @@ button {
 
 /* Glassmorphic Blur Background Only When Scrolled */
 .site-header.scrolled {
-    position: fixed;
     padding: 14px 0;
-    background-color: rgba(6, 6, 6, 0.8);
+    background-color: rgba(6, 6, 6, 0.82);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 

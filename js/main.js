@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const handleHeaderScroll = () => {
         if (siteHeader) {
-            if (window.scrollY > 20) {
+            if (window.scrollY > 15) {
                 siteHeader.classList.add('scrolled');
             } else {
                 siteHeader.classList.remove('scrolled');
@@ -117,45 +117,55 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 6. EXACT BFOLIO GSAP SCROLLTRIGGER TP-GALLERY-AREA ANIMATION ---
-    const galleryArea = document.querySelector('.tp-gallery-area');
-    const trackLeft = document.getElementById('track-left');
-    const trackCenter = document.getElementById('track-center');
-    const trackRight = document.getElementById('track-right');
+    const initGalleryAnimation = () => {
+        const galleryArea = document.querySelector('.tp-gallery-area');
+        const trackLeft = document.getElementById('track-left');
+        const trackCenter = document.getElementById('track-center');
+        const trackRight = document.getElementById('track-right');
 
-    if (galleryArea && trackLeft && trackCenter && trackRight) {
-        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-            gsap.registerPlugin(ScrollTrigger);
+        if (galleryArea && trackLeft && trackCenter && trackRight) {
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
 
-            const isMobile = window.innerWidth <= 767;
-            const moveDistance = isMobile ? 320 : 540;
+                const isMobile = window.innerWidth <= 767;
+                const moveDistance = isMobile ? 380 : 650;
 
-            const galleryTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: galleryArea,
-                    start: isMobile ? "top 15%" : "top top",
-                    end: isMobile ? "+=1000" : "+=1800",
-                    pin: !isMobile,
-                    scrub: 1.2,
-                    anticipatePin: 1,
-                    invalidateOnRefresh: true
-                }
-            });
+                const galleryTl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: galleryArea,
+                        start: "top top",
+                        end: "+=1600",
+                        pin: true,
+                        scrub: 1,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true
+                    }
+                });
 
-            // Left & Right columns: start at y:0 and move UP
-            galleryTl.to([trackLeft, trackRight], {
-                y: -moveDistance,
-                ease: "none"
-            }, 0);
+                // Left & Right columns: move UP
+                galleryTl.to([trackLeft, trackRight], {
+                    y: -moveDistance,
+                    ease: "none"
+                }, 0);
 
-            // Center column: starts shifted UP and moves DOWN to y: 0
-            galleryTl.fromTo(trackCenter, {
-                y: -moveDistance
-            }, {
-                y: 0,
-                ease: "none"
-            }, 0);
+                // Center column: starts shifted UP and moves DOWN to y: 0
+                galleryTl.fromTo(trackCenter, {
+                    y: -moveDistance
+                }, {
+                    y: 0,
+                    ease: "none"
+                }, 0);
+            }
         }
-    }
+    };
+
+    initGalleryAnimation();
+
+    window.addEventListener('load', () => {
+        if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+        }
+    });
 
     // --- 7. BOLD MINIMALIST FAQ ACCORDION ---
     const boldFaqItems = document.querySelectorAll('.bold-faq-item');
