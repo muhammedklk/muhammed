@@ -215,8 +215,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 9. CONTACT FORM HANDLER ---
-    const contactForm = document.getElementById('contact-form');
-    const feedbackToast = document.getElementById('form-feedback-message');
+    const contactForm = id('contact-form');
+    const feedbackToast = id('form-feedback-message');
 
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
@@ -240,58 +240,100 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 10. WHATSAPP INTEGRATED CHATBOT LOGIC ---
-    const waTriggerBtn = document.getElementById('wa-trigger-btn');
-    const waChatBox = document.getElementById('wa-chat-box');
-    const waCloseBtn = document.getElementById('wa-close-btn');
-    const waChatForm = document.getElementById('wa-chat-form');
-    const waInputField = document.getElementById('wa-input-field');
-    const waChipBtns = document.querySelectorAll('.wa-chip-btn');
-    const whatsappPhone = '919656216086';
+    // --- 10. CUSTOM AI CHATBOT CONTROLLER & KNOWLEDGE BASE ---
+    const chatbotTrigger = id('chatbot-trigger');
+    const chatbotWindow = id('chatbot-window');
+    const chatbotClose = id('chatbot-close');
+    const chatbotBody = id('chatbot-messages');
+    const chatbotForm = id('chatbot-form');
+    const chatbotInput = id('chatbot-input');
+    const chatbotTooltip = id('chatbot-tooltip');
 
-    if (waTriggerBtn && waChatBox) {
-        waTriggerBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            waChatBox.classList.toggle('active');
+    if (chatbotTrigger && chatbotWindow) {
+        // Toggle chat window visibility
+        const toggleChat = (show) => {
+            if (show) {
+                chatbotWindow.classList.add('active');
+                if (chatbotTooltip) chatbotTooltip.style.display = 'none';
+                if (chatbotInput) chatbotInput.focus();
+            } else {
+                chatbotWindow.classList.remove('active');
+            }
+        };
+
+        chatbotTrigger.addEventListener('click', () => {
+            const isActive = chatbotWindow.classList.contains('active');
+            toggleChat(!isActive);
         });
 
-        if (waCloseBtn) {
-            waCloseBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                waChatBox.classList.remove('active');
+        if (chatbotClose) {
+            chatbotClose.addEventListener('click', () => toggleChat(false));
+        }
+
+        // Smart Knowledge Base Responses
+        const getAIResponse = (userText) => {
+            const q = userText.toLowerCase().trim();
+
+            if (q.includes('service') || q.includes('offer') || q.includes('work') || q.includes('do')) {
+                return "I offer high-end **UI/UX Design**, **Front-End Development** (HTML/CSS/JS/React/Next.js), **Mobile App UI**, and **Brand Identity** systems. All tailored for maximum speed and conversion! 🚀";
+            }
+            if (q.includes('contact') || q.includes('email') || q.includes('phone') || q.includes('number') || q.includes('whatsapp') || q.includes('reach')) {
+                return "You can reach Muhammed directly via:<br>📧 Email: <a href='mailto:muhammedklkm@gmail.com' style='color:#ff6b35;'>muhammedklkm@gmail.com</a><br>📱 WhatsApp: <a href='https://wa.me/919656216086' target='_blank' style='color:#ff6b35;'>+91 9656216086</a><br>Or use our <a href='contact.html' style='color:#ff6b35;'>Contact Form</a>!";
+            }
+            if (q.includes('price') || q.includes('cost') || q.includes('rate') || q.includes('quote') || q.includes('budget')) {
+                return "Project pricing varies based on scope & complexity. We offer flexible packages for startups, agencies, and enterprise brands. <a href='contact.html' style='color:#ff6b35;'>Get an instant quote here</a>!";
+            }
+            if (q.includes('tech') || q.includes('stack') || q.includes('tool') || q.includes('code')) {
+                return "Muhammed's core Tech Stack includes:<br>• **Design**: Figma, Adobe Creative Cloud<br>• **Front-End**: HTML5, SCSS/CSS3, JavaScript ES6+, React, Next.js<br>• **Animation**: GSAP ScrollTrigger, SwiperJS";
+            }
+            if (q.includes('experience') || q.includes('year') || q.includes('about') || q.includes('who')) {
+                return "Muhammed is a passionate Senior UI/UX Designer & Front-End Developer with **5+ years of craft experience** and over **14+ launched projects** worldwide! ⚡";
+            }
+            if (q.includes('hi') || q.includes('hello') || q.includes('hey') || q.includes('namaste')) {
+                return "Hello there! 👋 How can I help you elevate your web product or brand today?";
+            }
+
+            return "Thanks for your query! For detailed project inquiries or custom quotes, feel free to drop an email at **muhammedklkm@gmail.com** or send a WhatsApp message to **+91 9656216086**! 💬";
+        };
+
+        const appendMessage = (sender, text) => {
+            if (!chatbotBody) return;
+            const msgRow = document.createElement('div');
+            msgRow.className = `chat-msg-row ${sender}`;
+            msgRow.innerHTML = `<div class="msg-bubble">${text}</div>`;
+            chatbotBody.appendChild(msgRow);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+        };
+
+        // Form Submit Handler
+        if (chatbotForm && chatbotInput) {
+            chatbotForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const text = chatbotInput.value.trim();
+                if (!text) return;
+
+                appendMessage('user', text);
+                chatbotInput.value = '';
+
+                // Typing indicator delay simulation
+                setTimeout(() => {
+                    const reply = getAIResponse(text);
+                    appendMessage('bot', reply);
+                }, 400);
             });
         }
 
-        // Close on clicking outside
+        // Delegate Suggestion Chip Clicks
         document.addEventListener('click', (e) => {
-            if (!waChatBox.contains(e.target) && !waTriggerBtn.contains(e.target)) {
-                waChatBox.classList.remove('active');
+            if (e.target && e.target.classList.contains('chat-suggest-chip')) {
+                const questionText = e.target.getAttribute('data-query') || e.target.textContent;
+                appendMessage('user', questionText);
+                setTimeout(() => {
+                    const reply = getAIResponse(questionText);
+                    appendMessage('bot', reply);
+                }, 400);
             }
         });
-
-        // Quick action chips click handler
-        waChipBtns.forEach(chip => {
-            chip.addEventListener('click', () => {
-                const textMsg = chip.getAttribute('data-msg');
-                if (textMsg) {
-                    const encodedMsg = encodeURIComponent(textMsg);
-                    window.open(`https://wa.me/${whatsappPhone}?text=${encodedMsg}`, '_blank');
-                }
-            });
-        });
-
-        // Form submit handler
-        if (waChatForm && waInputField) {
-            waChatForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const userMsg = waInputField.value.trim();
-                if (userMsg) {
-                    const encodedMsg = encodeURIComponent(userMsg);
-                    window.open(`https://wa.me/${whatsappPhone}?text=${encodedMsg}`, '_blank');
-                    waInputField.value = '';
-                }
-            });
-        }
     }
 });
 
