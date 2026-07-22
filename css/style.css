@@ -3397,3 +3397,241 @@ button {
     color: #ff6b35;
     text-decoration: none;
 }
+
+/* ==========================================================================
+   PORTFOLIO PAGE REDESIGN STYLES
+   ========================================================================== */
+.works-hero-stats-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.hero-stat-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    backdrop-filter: blur(10px);
+}
+
+[data-theme="light"] .hero-stat-chip {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.spotlight-project-section {
+    padding: 30px 0 60px;
+}
+
+.spotlight-card {
+    border-radius: 32px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    transition: border-color 0.3s ease;
+}
+
+[data-theme="light"] .spotlight-card {
+    background: linear-gradient(145deg, #ffffff, #f7f8fb);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+}
+
+.spotlight-media-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    overflow: hidden;
+    background: #000000;
+}
+
+.spotlight-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.spotlight-card:hover .spotlight-img {
+    transform: scale(1.04);
+}
+
+.spotlight-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 2;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: rgba(255, 107, 53, 0.95);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+}
+
+.spotlight-content-wrap {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.spotlight-meta-tags {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.spotlight-title {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+}
+
+.spotlight-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-subtle);
+    margin-bottom: 28px;
+}
+
+.spotlight-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .spotlight-metrics-grid {
+    border-top-color: rgba(0, 0, 0, 0.06);
+}
+
+.metric-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.metric-num {
+    font-size: 22px;
+    font-weight: 800;
+    color: #ff6b35;
+}
+
+.metric-lbl {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.btn-spotlight-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 40px;
+    background: linear-gradient(135deg, #ff6b35, #ef4444);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.35);
+}
+
+.btn-spotlight-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(255, 107, 53, 0.5);
+    color: #ffffff;
+}
+
+.pill-count {
+    display: inline-block;
+    margin-left: 4px;
+    padding: 2px 7px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.12);
+    font-size: 11px;
+}
+
+.filter-pill.active .pill-count {
+    background: rgba(0, 0, 0, 0.2);
+    color: inherit;
+}
+
+.work-media-hover-actions {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+.work-showcase-card:hover .work-media-hover-actions {
+    opacity: 1;
+}
+
+.work-hover-btn {
+    padding: 12px 24px;
+    border-radius: 30px;
+    background: #ffffff;
+    color: #000000;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.work-showcase-card:hover .work-hover-btn {
+    transform: translateY(0);
+}
+
+.work-tech-stack {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.tech-chip {
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .tech-chip {
+    background: #f0f2f5;
+    border-color: rgba(0, 0, 0, 0.05);
+    color: #666666;
+}
