@@ -239,5 +239,59 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 800);
         });
     }
+
+    // --- 10. WHATSAPP INTEGRATED CHATBOT LOGIC ---
+    const waTriggerBtn = id('wa-trigger-btn');
+    const waChatBox = id('wa-chat-box');
+    const waCloseBtn = id('wa-close-btn');
+    const waChatForm = id('wa-chat-form');
+    const waInputField = id('wa-input-field');
+    const waChipBtns = document.querySelectorAll('.wa-chip-btn');
+    const whatsappPhone = '919656216086';
+
+    if (waTriggerBtn && waChatBox) {
+        waTriggerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            waChatBox.classList.toggle('active');
+        });
+
+        if (waCloseBtn) {
+            waCloseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                waChatBox.classList.remove('active');
+            });
+        }
+
+        // Close on clicking outside
+        document.addEventListener('click', (e) => {
+            if (!waChatBox.contains(e.target) && !waTriggerBtn.contains(e.target)) {
+                waChatBox.classList.remove('active');
+            }
+        });
+
+        // Quick action chips click handler
+        waChipBtns.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const textMsg = chip.getAttribute('data-msg');
+                if (textMsg) {
+                    const encodedMsg = encodeURIComponent(textMsg);
+                    window.open(`https://wa.me/${whatsappPhone}?text=${encodedMsg}`, '_blank');
+                }
+            });
+        });
+
+        // Form submit handler
+        if (waChatForm && waInputField) {
+            waChatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const userMsg = waInputField.value.trim();
+                if (userMsg) {
+                    const encodedMsg = encodeURIComponent(userMsg);
+                    window.open(`https://wa.me/${whatsappPhone}?text=${encodedMsg}`, '_blank');
+                    waInputField.value = '';
+                }
+            });
+        }
+    }
 });
 
