@@ -273,5 +273,38 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // --- 11. PORTFOLIO PAGE INTERACTIVE FILTER SYSTEM ---
+    const filterPills = document.querySelectorAll('.works-filter-bar .filter-pill');
+    const workItems = document.querySelectorAll('.work-grid-item');
+
+    if (filterPills.length > 0 && workItems.length > 0) {
+        filterPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                // Update active state on filter pills
+                filterPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+
+                const filterValue = pill.getAttribute('data-filter');
+
+                workItems.forEach(item => {
+                    const categories = item.getAttribute('data-category') || '';
+                    if (filterValue === 'all' || categories.includes(filterValue)) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0) scale(1)';
+                        }, 30);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(16px) scale(0.96)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+    }
 });
 
