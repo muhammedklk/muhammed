@@ -242,22 +242,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 10. CUSTOM AI CHATBOT CONTROLLER & KNOWLEDGE BASE ---
+    // --- 10. USER-FRIENDLY QUICK CHAT WIDGET CONTROLLER ---
     const chatbotTrigger = id('chatbot-trigger');
     const chatbotWindow = id('chatbot-window');
     const chatbotClose = id('chatbot-close');
-    const chatbotBody = id('chatbot-messages');
-    const chatbotForm = id('chatbot-form');
-    const chatbotInput = id('chatbot-input');
-    const chatbotTooltip = id('chatbot-tooltip');
 
     if (chatbotTrigger && chatbotWindow) {
-        // Toggle chat window visibility
         const toggleChat = (show) => {
             if (show) {
                 chatbotWindow.classList.add('active');
-                if (chatbotTooltip) chatbotTooltip.style.display = 'none';
-                if (chatbotInput) chatbotInput.focus();
             } else {
                 chatbotWindow.classList.remove('active');
             }
@@ -272,73 +265,11 @@ document.addEventListener('DOMContentLoaded', () => {
             chatbotClose.addEventListener('click', () => toggleChat(false));
         }
 
-        // Smart Minimalist Knowledge Base Responses with WhatsApp Direct Sharing
-        const getAIResponse = (userText) => {
-            const q = userText.toLowerCase().trim();
-            let baseMsg = "";
-
-            if (q.includes('whatsapp') || q.includes('chat') || q.includes('message') || q.includes('talk')) {
-                baseMsg = "Let's connect directly on WhatsApp! You can chat with Muhammed right now:";
-            } else if (q.includes('service') || q.includes('offer') || q.includes('work') || q.includes('do')) {
-                baseMsg = "I specialize in **UI/UX Design**, **Front-End Dev** (HTML/CSS/JS/React), **Mobile App Systems**, and **Brand Identity**.";
-            } else if (q.includes('price') || q.includes('cost') || q.includes('rate') || q.includes('estimate') || q.includes('quote')) {
-                baseMsg = "Project rates depend on scope & deliverables. Flexible packages available for startups and businesses.";
-            } else if (q.includes('tech') || q.includes('stack') || q.includes('code') || q.includes('tool')) {
-                baseMsg = "Core Stack: **Figma, HTML5, SCSS/CSS3, JavaScript ES6+, React, Next.js, GSAP ScrollTrigger**.";
-            } else if (q.includes('experience') || q.includes('about') || q.includes('who')) {
-                baseMsg = "Muhammed has **5+ years of design & dev craft** with over **14+ completed digital products** worldwide.";
-            } else {
-                baseMsg = "Thanks for reaching out! For instant project discussions, quotes, or custom solutions, reach out on WhatsApp:";
-            }
-
-            // Append WhatsApp Direct Link Banner to every bot response
-            const whatsappBannerHTML = `
-                ${baseMsg}
-                <a href="https://wa.me/919656216086" target="_blank" class="chat-whatsapp-banner">
-                    <span>💬 Direct WhatsApp (+91 9656216086)</span>
-                    <span style="font-size: 14px;">↗</span>
-                </a>
-            `;
-
-            return whatsappBannerHTML;
-        };
-
-        const appendMessage = (sender, text) => {
-            if (!chatbotBody) return;
-            const msgRow = document.createElement('div');
-            msgRow.className = `chat-msg-row ${sender}`;
-            msgRow.innerHTML = `<div class="msg-bubble">${text}</div>`;
-            chatbotBody.appendChild(msgRow);
-            chatbotBody.scrollTop = chatbotBody.scrollHeight;
-        };
-
-        // Form Submit Handler
-        if (chatbotForm && chatbotInput) {
-            chatbotForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const text = chatbotInput.value.trim();
-                if (!text) return;
-
-                appendMessage('user', text);
-                chatbotInput.value = '';
-
-                // Typing indicator delay simulation
-                setTimeout(() => {
-                    const reply = getAIResponse(text);
-                    appendMessage('bot', reply);
-                }, 400);
-            });
-        }
-
-        // Delegate Suggestion Chip Clicks
+        // Close when clicking outside widget
         document.addEventListener('click', (e) => {
-            if (e.target && e.target.classList.contains('chat-suggest-chip')) {
-                const questionText = e.target.getAttribute('data-query') || e.target.textContent;
-                appendMessage('user', questionText);
-                setTimeout(() => {
-                    const reply = getAIResponse(questionText);
-                    appendMessage('bot', reply);
-                }, 400);
+            const widgetContainer = id('chatbot-widget');
+            if (widgetContainer && !widgetContainer.contains(e.target) && chatbotWindow.classList.contains('active')) {
+                toggleChat(false);
             }
         });
     }
