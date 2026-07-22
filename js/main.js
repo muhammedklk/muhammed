@@ -41,44 +41,49 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', handleHeaderScroll, { passive: true });
     handleHeaderScroll();
 
-    // --- 3D / PARALLAX SHOWCASE GALLERY SCROLL ANIMATION (EXACT BFOLIO TP-GALLERY) ---
+    // --- GSAP STICKY PIN GALLERY SCROLL ANIMATION (EXACT BFOLIO TP-GALLERY-AREA) ---
     const galleryArea = document.getElementById('tp-gallery-area');
     const trackLeft = document.getElementById('track-left');
     const trackCenter = document.getElementById('track-center');
     const trackRight = document.getElementById('track-right');
 
-    if (galleryArea && trackLeft && trackCenter && trackRight) {
-        let galleryTicking = false;
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
 
-        const updateGalleryParallax = () => {
-            const rect = galleryArea.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
+        if (galleryArea && trackLeft && trackCenter && trackRight) {
+            // Set initial position offsets for columns
+            gsap.set(trackLeft, { y: 120 });
+            gsap.set(trackCenter, { y: -180 });
+            gsap.set(trackRight, { y: 120 });
 
-            if (rect.top <= windowHeight && rect.bottom >= 0) {
-                const totalHeight = windowHeight + rect.height;
-                const currentScroll = windowHeight - rect.top;
-                const progress = currentScroll / totalHeight; // Range 0 to 1
+            // Create Sticky Pin Timeline for Bfolio Gallery Area
+            const galleryTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: galleryArea,
+                    start: "top top",
+                    end: "+=1200",
+                    pin: true,
+                    scrub: 1,
+                    anticipatePin: 1
+                }
+            });
 
-                // Parallax translation offset range (Exact Bfolio 3D reverse scroll speed)
-                const moveAmount = (progress - 0.5) * 550;
+            // Animate tracks in opposite directions while section is pinned
+            galleryTl.to(trackLeft, {
+                y: -320,
+                ease: "none"
+            }, 0);
 
-                // Column 1 & 3 scroll UP, Column 2 scrolls DOWN
-                trackLeft.style.transform = `translate3d(0, ${-moveAmount * 1.25}px, 0)`;
-                trackCenter.style.transform = `translate3d(0, ${moveAmount * 1.25 - 80}px, 0)`;
-                trackRight.style.transform = `translate3d(0, ${-moveAmount * 1.25}px, 0)`;
-            }
-            galleryTicking = false;
-        };
+            galleryTl.to(trackCenter, {
+                y: 320,
+                ease: "none"
+            }, 0);
 
-        const onGalleryScroll = () => {
-            if (!galleryTicking) {
-                requestAnimationFrame(updateGalleryParallax);
-                galleryTicking = true;
-            }
-        };
-
-        window.addEventListener('scroll', onGalleryScroll, { passive: true });
-        updateGalleryParallax();
+            galleryTl.to(trackRight, {
+                y: -320,
+                ease: "none"
+            }, 0);
+        }
     }
 
     // --- 2. SEARCH OVERLAY TOGGLE ---
