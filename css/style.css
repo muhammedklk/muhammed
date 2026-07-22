@@ -4132,6 +4132,11 @@ button {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 [data-theme="light"] .minimal-cta-card {
@@ -4140,12 +4145,20 @@ button {
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.05);
 }
 
+.minimal-cta-card .minimal-badge {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .minimal-cta-title {
     font-size: 44px;
     font-weight: 800;
     color: var(--text-primary);
     letter-spacing: -0.03em;
     line-height: 1.2;
+    text-align: center;
+    width: 100%;
 }
 
 .minimal-cta-subtitle {
@@ -4153,5 +4166,7 @@ button {
     line-height: 1.6;
     color: var(--text-muted);
     max-width: 580px;
-    margin: 0 auto 28px;
+    margin: 0 auto 28px auto;
+    text-align: center;
+    width: 100%;
 }
