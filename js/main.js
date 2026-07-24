@@ -395,6 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const PHASE_DURATION = 4200; // ms per phase
     let currentPhase = 0;
+    let timer = null;
 
     function goToPhase(index) {
         // Hide all scenes & deactivate all steps
@@ -413,9 +414,19 @@ document.addEventListener('DOMContentLoaded', () => {
         goToPhase((currentPhase + 1) % scenes.length);
     }
 
+    // Allow user to click any step tab interactively
+    steps.forEach((step, idx) => {
+        step.style.cursor = 'pointer';
+        step.addEventListener('click', () => {
+            goToPhase(idx);
+            if (timer) clearInterval(timer);
+            timer = setInterval(nextPhase, PHASE_DURATION);
+        });
+    });
+
     // Start loop
     goToPhase(0);
-    setInterval(nextPhase, PHASE_DURATION);
+    timer = setInterval(nextPhase, PHASE_DURATION);
 })();
 
 /* ==========================================================================
