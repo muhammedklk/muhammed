@@ -319,6 +319,11 @@ button {
 }
 
 /* Theme Toggle Icons */
+.theme-toggle-btn,
+.search-btn {
+    display: none !important;
+}
+
 [data-theme="dark"] .sun-icon {
     display: block;
 }
