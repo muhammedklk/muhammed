@@ -3899,12 +3899,11 @@ button {
     border: none;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.35);
 }
 
 .btn-submit-inquiry:hover {
     transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(255, 107, 53, 0.5);
+    box-shadow: 0 8px 26px rgba(255, 107, 53, 0.315);
 }
 
 .form-feedback-toast {
