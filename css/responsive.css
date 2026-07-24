@@ -39,24 +39,17 @@
     .site-header.scrolled {
         position: fixed !important;
         padding: 12px 0 !important;
-        background-color: rgba(255, 255, 255, 0.95) !important;
+                background-color: rgb(6 6 6 / 27%) !important;
         backdrop-filter: blur(20px) !important;
         -webkit-backdrop-filter: blur(20px) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    [data-theme="light"] .site-header.scrolled {
+        background-color: rgba(255, 255, 255, 0.85) !important;
         border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
-    }
-
-    .site-header.scrolled .logo-text {
-        color: #000000 !important;
-    }
-
-    .site-header.scrolled .hamburger-line {
-        background-color: #000000 !important;
-    }
-
-    .site-header.scrolled .mobile-menu-btn {
-        background: #f3f3f5 !important;
-        border-color: rgba(0, 0, 0, 0.1) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
     }
 
     /* Mobile Drawer Overlay Always White */
