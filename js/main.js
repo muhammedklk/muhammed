@@ -192,6 +192,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 5. SCROLL TO TOP BUTTON ---
     const scrollTopBtn = document.getElementById('scroll-to-top');
     if (scrollTopBtn) {
+        const toggleScrollTopVisibility = () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        };
+
+        window.addEventListener('scroll', toggleScrollTopVisibility, { passive: true });
+        toggleScrollTopVisibility();
+
         scrollTopBtn.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -511,6 +522,96 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', () => {
         customWrappers.forEach(w => w.classList.remove('open'));
     });
+})();
+
+/* ==========================================================================
+   REDESIGNED MAC BROWSER CASE STUDY LIGHTBOX PREVIEW CONTROLLER
+   ========================================================================== */
+(function initCaseStudyLightbox() {
+    const lightbox = document.getElementById('project-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const macDotClose = document.getElementById('mac-dot-close');
+    const lightboxUrlDisplay = document.getElementById('lightbox-url-display');
+    const macBrowserBody = lightbox ? lightbox.querySelector('.mac-browser-body') : null;
+    const triggers = document.querySelectorAll('.case-study-trigger');
+
+    if (!lightbox || !triggers.length) return;
+
+    let savedScrollY = 0;
+
+    const openLightbox = (imgSrc, titleText) => {
+        savedScrollY = window.scrollY;
+        
+        if (lightboxImg) lightboxImg.src = imgSrc;
+        if (lightboxTitle) lightboxTitle.textContent = titleText;
+        if (lightboxUrlDisplay) {
+            const cleanTitle = titleText.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+            lightboxUrlDisplay.textContent = `muhammed.design/works/${cleanTitle}`;
+        }
+
+        lightbox.classList.add('active');
+        
+        // Strict Body Scroll Lock via position fixed
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${savedScrollY}px`;
+        document.body.style.left = '0';
+        document.body.style.right = '0';
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+
+        if (macBrowserBody) {
+            macBrowserBody.scrollTop = 0;
+        }
+    };
+
+    const closeLightbox = () => {
+        lightbox.classList.remove('active');
+        
+        // Restore Body Scroll Position seamlessly
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+
+        window.scrollTo(0, savedScrollY);
+    };
+
+    triggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const imgSrc = trigger.getAttribute('href');
+            const titleText = trigger.getAttribute('data-title') || 'Project Case Study';
+            openLightbox(imgSrc, titleText);
+        });
+    });
+
+    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    if (macDotClose) macDotClose.addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+
+    // Smooth mouse wheel scrolling forwarded directly to macBrowserBody
+    lightbox.addEventListener('wheel', (e) => {
+        if (macBrowserBody) {
+            macBrowserBody.scrollTop += e.deltaY;
+        }
+    }, { passive: true });
 })();
 
 

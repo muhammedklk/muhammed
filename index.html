@@ -785,46 +785,46 @@
 
                     <!-- Selected Work Card 1 -->
                     <div class="col-md-6 col-sm-12">
-                        <div class="demo-card-item">
+                        <a href="https://stylora-1.onrender.com/" target="_blank" rel="noopener noreferrer" class="demo-card-item style-link-card" style="text-decoration: none; color: inherit; display: block;">
                             <div class="demo-mockup-frame">
                                 <img src="assets/workimg-1.jpg" alt="style-ora UI/UX Project" class="demo-mockup-img">
                             </div>
-                            <h3 class="demo-card-caption">Styleora</h3>
+                            <h3 class="demo-card-caption">Styleora ↗</h3>
                             <span class="demo-card-subtext">E-Commerce, UI/UX Design & Development</span>
-                        </div>
+                        </a>
                     </div>
 
                     <!-- Selected Work Card 2 -->
                     <div class="col-md-6 col-sm-12">
-                        <div class="demo-card-item">
+                        <a href="https://elve.vercel.app/" target="_blank" rel="noopener noreferrer" class="demo-card-item style-link-card" style="text-decoration: none; color: inherit; display: block;">
                             <div class="demo-mockup-frame">
                                 <img src="assets/workimg-2.jpg" alt="elve Rental" class="demo-mockup-img">
                             </div>
-                            <h3 class="demo-card-caption">Elve</h3>
+                            <h3 class="demo-card-caption">Elve ↗</h3>
                             <span class="demo-card-subtext">Rental, UI/UX Design & Development</span>
-                        </div>
+                        </a>
                     </div>
 
                     <!-- Selected Work Card 3 -->
                     <div class="col-md-6 col-sm-12">
-                        <div class="demo-card-item">
+                        <a href="https://greentrack-ten.vercel.app/" target="_blank" rel="noopener noreferrer" class="demo-card-item style-link-card" style="text-decoration: none; color: inherit; display: block;">
                             <div class="demo-mockup-frame">
                                 <img src="assets/workimg-3.jpg" alt="Green Track" class="demo-mockup-img">
                             </div>
-                            <h3 class="demo-card-caption">Green Track</h3>
+                            <h3 class="demo-card-caption">Green Track ↗</h3>
                             <span class="demo-card-subtext">UI/UX Design & Development</span>
-                        </div>
+                        </a>
                     </div>
 
                     <!-- Selected Work Card 4 -->
                     <div class="col-md-6 col-sm-12">
-                        <div class="demo-card-item">
+                        <a href="assets/portfolio/case-study/travel-gallery.jpg" class="demo-card-item case-study-trigger" data-title="Travel Gallery — Case Study Preview" style="text-decoration: none; color: inherit; display: block; cursor: pointer;">
                             <div class="demo-mockup-frame">
                                 <img src="assets/workimg-4.jpg" alt="Travel Gallery" class="demo-mockup-img">
                             </div>
-                            <h3 class="demo-card-caption">Travel Gallery</h3>
+                            <h3 class="demo-card-caption">Travel Gallery 🔍</h3>
                             <span class="demo-card-subtext">UI/UX Design & Development</span>
-                        </div>
+                        </a>
                     </div>
 
                 </div>
@@ -1051,6 +1051,45 @@
             </div>
         </div>
     </footer>
+
+    <!-- Ultra-Modern Case Study Mac Browser Lightbox Modal -->
+    <div class="project-lightbox-overlay" id="project-lightbox" aria-hidden="true">
+        <div class="lightbox-mac-window">
+            <!-- Mac Browser Header Bar -->
+            <div class="mac-browser-bar">
+                <div class="mac-window-dots">
+                    <span class="mac-dot dot-close" id="mac-dot-close"></span>
+                    <span class="mac-dot dot-min"></span>
+                    <span class="mac-dot dot-max"></span>
+                </div>
+                <div class="mac-url-bar">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    <span class="mac-url-text" id="lightbox-url-display">muhammed.design/works/case-study</span>
+                </div>
+                <button type="button" class="lightbox-close-icon" id="lightbox-close" aria-label="Close Preview">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+
+            <!-- Case Study Sub Header Info -->
+            <div class="mac-case-info-bar">
+                <div class="mac-info-left">
+                    <span class="mac-badge">CASE STUDY</span>
+                    <h3 class="mac-project-title" id="lightbox-title">Travell Gallery</h3>
+                </div>
+                <div class="mac-info-right">
+                    <span class="mac-hint">Scroll down to view full design ↓</span>
+                </div>
+            </div>
+
+            <!-- Scrollable Case Study Image Container -->
+            <div class="mac-browser-body" id="lightbox-body-scroll">
+                <div class="mac-img-canvas">
+                    <img src="" alt="Project Case Study Preview" id="lightbox-img" class="mac-preview-img">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Super User-Friendly Direct WhatsApp & Quick Help Widget -->
     <div class="user-friendly-chat-widget" id="chatbot-widget">

@@ -414,9 +414,10 @@
     }
 
     .scroll-top-btn {
-        position: relative;
-        right: auto;
-        bottom: auto;
+        bottom: 85px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
     }
 
     /* Bold Minimalist FAQ Section Responsive */

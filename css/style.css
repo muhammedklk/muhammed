@@ -2176,12 +2176,11 @@ button {
 [data-theme="light"] .demo-mockup-frame {
     background: #ffffff;
     border-color: rgba(0, 0, 0, 0.08);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
 }
 
 .demo-mockup-frame:hover {
     transform: translateY(-6px);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55);
+    box-shadow: 0px 10px 60px rgb(0 0 0 / 17%);
 }
 
 /* NEW Tag */
@@ -2911,23 +2910,36 @@ button {
 }
 
 .scroll-top-btn {
-    position: absolute;
-    right: 0;
-    bottom: -5px;
-    width: 44px;
-    height: 44px;
+    position: fixed;
+    bottom: 95px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: var(--btn-talk-bg);
     color: var(--btn-talk-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    transition: all 0.25s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    z-index: 9998;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    cursor: pointer;
+    border: none;
+}
+
+.scroll-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 .scroll-top-btn:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
 }
 
 /* ==========================================================================
@@ -2961,11 +2973,10 @@ button {
 }
 
 .bold-faq-subtitle {
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 400;
     letter-spacing: 0.08em;
     color: var(--text-muted);
-    text-transform: uppercase;
     line-height: 1.75;
     max-width: 320px;
     margin: 0;
@@ -5217,7 +5228,6 @@ body.preloader-active {
 
 .preloader-site-logo .logo-icon {
     color: #ff3b40;
-    filter: drop-shadow(0 0 12px rgba(255, 59, 64, 0.6));
     animation: logoGlowPulse 1.8s infinite ease-in-out;
 }
 
@@ -5449,4 +5459,233 @@ body.preloader-active {
 .opt-icon {
     font-size: 13px;
     opacity: 0.8;
+}
+
+/* ==========================================================================
+   REDESIGNED MAC BROWSER CASE STUDY LIGHTBOX MODAL
+   ========================================================================== */
+.project-lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background: rgba(8, 9, 12, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-lightbox-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-mac-window {
+    background: #14151c;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 1200px;
+    height: 92vh;
+    max-height: 920px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 35px 90px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    transform: scale(0.94) translateY(24px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] .lightbox-mac-window {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.14);
+    box-shadow: 0 35px 90px rgba(0, 0, 0, 0.25);
+}
+
+.project-lightbox-overlay.active .lightbox-mac-window {
+    transform: scale(1) translateY(0);
+}
+
+/* Mac Browser Top Bar */
+.mac-browser-bar {
+    height: 48px;
+    padding: 0 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+[data-theme="light"] .mac-browser-bar {
+    background: rgba(0, 0, 0, 0.03);
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+.mac-window-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 60px;
+}
+
+.mac-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.dot-close { background: #ff5f56; cursor: pointer; }
+.dot-min { background: #ffbd2e; }
+.dot-max { background: #27c93f; }
+
+.dot-close:hover {
+    filter: brightness(0.85);
+    transform: scale(1.1);
+}
+
+.mac-url-bar {
+    flex: 1;
+    max-width: 480px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    font-family: monospace;
+}
+
+[data-theme="light"] .mac-url-bar {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.08);
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close-icon {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.lightbox-close-icon:hover {
+    background: rgba(255, 59, 64, 0.15);
+    color: #ff3b40;
+}
+
+/* Case Info Bar */
+.mac-case-info-bar {
+    padding: 14px 24px;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+[data-theme="light"] .mac-case-info-bar {
+    background: rgba(0, 0, 0, 0.02);
+    border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+.mac-badge {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: #ff3b40;
+    background: rgba(255, 59, 64, 0.12);
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.mac-project-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: inline-block;
+    margin: 0;
+}
+
+.mac-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Body Container & Custom Scrollbar */
+.mac-browser-body {
+    flex: 1;
+    overflow-y: auto;
+    background: #090a0d;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    scroll-behavior: smooth;
+}
+
+[data-theme="light"] .mac-browser-body {
+    background: #f4f5f8;
+}
+
+.mac-img-canvas {
+    width: 100%;
+    max-width: 1100px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+}
+
+.mac-preview-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Sleek Scrollbar */
+.mac-browser-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.mac-browser-body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.mac-browser-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.mac-browser-body::-webkit-scrollbar-thumb:hover {
+    background: #ff3b40;
 }
