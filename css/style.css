@@ -1719,8 +1719,7 @@ button {
 }
 
 .headline-dot {
-    color: var(--text-primary);
-    display: inline-block;
+    display: none !important;
 }
 
 /* CTA Buttons */

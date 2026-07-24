@@ -39,7 +39,7 @@
     .site-header.scrolled {
         position: fixed !important;
         padding: 12px 0 !important;
-                background-color: rgb(6 6 6 / 27%) !important;
+        background-color: rgb(6 6 6 / 27%) !important;
         backdrop-filter: blur(20px) !important;
         -webkit-backdrop-filter: blur(20px) !important;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -52,33 +52,6 @@
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
     }
 
-    /* Mobile Drawer Overlay Always White */
-    .mobile-drawer {
-        background: #ffffff !important;
-        color: #000000 !important;
-    }
-
-    .mobile-drawer .logo-text,
-    .mobile-drawer-close {
-        color: #000000 !important;
-    }
-
-    .mobile-drawer-header {
-        border-bottom-color: rgba(0, 0, 0, 0.08) !important;
-    }
-
-    .mobile-drawer-actions {
-        border-top-color: rgba(0, 0, 0, 0.08) !important;
-    }
-
-    .mobile-nav-link {
-        color: #555555 !important;
-    }
-
-    .mobile-nav-link.active,
-    .mobile-nav-link:hover {
-        color: #ff3b40 !important;
-    }
 
     .nav-pill-menu {
         display: none;
@@ -365,6 +338,10 @@
     .studio-tabs {
         display: none;
     }
+
+    .services-cards-row {
+    margin-bottom: 0px;
+}
 
     .studio-workspace {
         grid-template-columns: 46% 54%;

@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cleanText = textContent.replace(/\.\s*$/, '').trim();
         const words = cleanText.split(/\s+/);
 
-        aboutHeadline.innerHTML = words.map(w => `<span class="reveal-word">${w}</span>`).join(' ') + '<span class="headline-dot">.</span>';
+        aboutHeadline.innerHTML = words.map(w => `<span class="reveal-word">${w}</span>`).join(' ');
 
         const revealWords = aboutHeadline.querySelectorAll('.reveal-word');
 
