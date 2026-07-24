@@ -424,19 +424,21 @@ button {
     color: var(--text-primary);
 }
 
-/* --- Mobile Drawer --- */
+/* --- Mobile Drawer (Full Screen) --- */
 .mobile-drawer {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 100%;
-    max-width: 320px;
+    width: 100vw;
+    max-width: 100%;
     height: 100vh;
-    background: var(--drawer-bg);
-    z-index: 999;
-    padding: 30px;
-    transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+    height: 100dvh;
+    background: var(--bg-color);
+    z-index: 999999;
+    padding: 30px 24px;
+    transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    display: flex;
+    flex-direction: column;
 }
 
 .mobile-drawer.active {
@@ -447,38 +449,64 @@ button {
     display: flex;
     flex-direction: column;
     height: 100%;
+    justify-content: space-between;
+}
+
+.mobile-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--divider-color);
 }
 
 .mobile-drawer-close {
-    align-self: flex-end;
-    font-size: 32px;
+    font-size: 36px;
     color: var(--text-primary);
-    margin-bottom: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .mobile-nav-list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 22px;
+    margin: 40px 0;
 }
 
 .mobile-nav-link {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text-subtle);
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: -0.03em;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
 }
 
 .mobile-nav-link.active, .mobile-nav-link:hover {
-    color: var(--text-primary);
+    color: #ff3b40;
+    transform: translateX(8px);
 }
 
 .mobile-drawer-actions {
     margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--divider-color);
 }
 
 .mobile-talk-btn {
     width: 100%;
     text-align: center;
+    justify-content: center;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 700;
 }
 
 /* --- Main Content Area --- */
