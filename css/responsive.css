@@ -441,4 +441,10 @@
     .metric-num {
         font-size: 18px;
     }
+
+    .about-main-headline {
+        font-size: 26px !important;
+        line-height: 1.35 !important;
+        margin-bottom: 24px !important;
+    }
 }

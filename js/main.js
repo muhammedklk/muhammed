@@ -4,6 +4,33 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // --- LENIS ULTRA-SMOOTH SCROLLING INTEGRATION ---
+    if (typeof Lenis !== 'undefined') {
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+            touchMultiplier: 1.8
+        });
+
+        // Sync Lenis scroll updates with GSAP ScrollTrigger
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            lenis.on('scroll', ScrollTrigger.update);
+
+            gsap.ticker.add((time) => {
+                lenis.raf(time * 1000);
+            });
+
+            gsap.ticker.lagSmoothing(0);
+        } else {
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+        }
+    }
+
     // Helper function to safely get element by ID
     const id = (elementId) => document.getElementById(elementId);
 
@@ -41,45 +68,61 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', handleHeaderScroll, { passive: true });
     handleHeaderScroll();
 
-    // --- WORK SHOWCASE GALLERY SCROLL ANIMATION (EXACT BFOLIO TP-GALLERY) ---
+    // --- GSAP SCROLLTRIGGER STICKY PIN & PARALLAX ANIMATION (EXACT BFOLIO TP-GALLERY-AREA) ---
     const galleryArea = document.getElementById('tp-gallery-area');
     const trackLeft = document.getElementById('track-left');
     const trackCenter = document.getElementById('track-center');
     const trackRight = document.getElementById('track-right');
 
     if (galleryArea && trackLeft && trackCenter && trackRight) {
-        let isGalleryTicking = false;
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
 
-        const updateGalleryMotion = () => {
-            const rect = galleryArea.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
+            // Initial column off-sets matching bfolio demo design
+            gsap.set(trackLeft, { y: 100 });
+            gsap.set(trackCenter, { y: -450 });
+            gsap.set(trackRight, { y: 100 });
 
-            // Animate whenever gallery section is in viewport
-            if (rect.top < windowHeight && rect.bottom > 0) {
-                const totalRange = windowHeight + rect.height;
-                const scrollProgress = (windowHeight - rect.top) / totalRange;
+            // Create pinned GSAP ScrollTrigger timeline
+            let galleryTL = gsap.timeline({
+                scrollTrigger: {
+                    trigger: galleryArea,
+                    start: 'top top',
+                    end: '+=1400',
+                    pin: true,
+                    scrub: 1,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true
+                }
+            });
 
-                // Range of translation for 3D parallax scroll
-                const moveDist = (scrollProgress - 0.5) * 550;
+            galleryTL
+                .to(trackLeft, { y: -550, ease: 'none' }, 0)
+                .to(trackCenter, { y: 300, ease: 'none' }, 0)
+                .to(trackRight, { y: -550, ease: 'none' }, 0);
+        } else {
+            // High-performance smooth fallback
+            trackLeft.style.transition = 'transform 0.1s linear';
+            trackCenter.style.transition = 'transform 0.1s linear';
+            trackRight.style.transition = 'transform 0.1s linear';
 
-                // Column 1 & 3 move UP (-Y), Column 2 moves DOWN (+Y)
-                trackLeft.style.transform = `translate3d(0, ${-moveDist * 1.25}px, 0)`;
-                trackCenter.style.transform = `translate3d(0, ${moveDist * 1.25 - 60}px, 0)`;
-                trackRight.style.transform = `translate3d(0, ${-moveDist * 1.25}px, 0)`;
-            }
-            isGalleryTicking = false;
-        };
+            const handleGalleryScroll = () => {
+                const rect = galleryArea.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
 
-        const onScrollGallery = () => {
-            if (!isGalleryTicking) {
-                requestAnimationFrame(updateGalleryMotion);
-                isGalleryTicking = true;
-            }
-        };
+                if (rect.top <= windowHeight && rect.bottom >= 0) {
+                    const scrollProgress = (windowHeight - rect.top) / (windowHeight + rect.height);
+                    const offset = (scrollProgress - 0.5) * 400;
 
-        window.addEventListener('scroll', onScrollGallery, { passive: true });
-        window.addEventListener('resize', updateGalleryMotion, { passive: true });
-        updateGalleryMotion();
+                    trackLeft.style.transform = `translate3d(0, ${-offset}px, 0)`;
+                    trackCenter.style.transform = `translate3d(0, ${offset * 1.3}px, 0)`;
+                    trackRight.style.transform = `translate3d(0, ${-offset}px, 0)`;
+                }
+            };
+
+            window.addEventListener('scroll', handleGalleryScroll, { passive: true });
+            handleGalleryScroll();
+        }
     }
 
     // --- 2. SEARCH OVERLAY TOGGLE ---
@@ -157,47 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 6. EXACT BFOLIO GSAP SCROLLTRIGGER TP-GALLERY-AREA ANIMATION ---
-    const galleryArea = document.querySelector('.tp-gallery-area');
-    const trackLeft = document.getElementById('track-left');
-    const trackCenter = document.getElementById('track-center');
-    const trackRight = document.getElementById('track-right');
-
-    if (galleryArea && trackLeft && trackCenter && trackRight) {
-        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-            gsap.registerPlugin(ScrollTrigger);
-
-            const isMobile = window.innerWidth <= 767;
-            const moveDistance = isMobile ? 320 : 540;
-
-            const galleryTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: galleryArea,
-                    start: isMobile ? "top 15%" : "top top",
-                    end: isMobile ? "+=1000" : "+=1800",
-                    pin: !isMobile,
-                    scrub: 1.2,
-                    anticipatePin: 1,
-                    invalidateOnRefresh: true
-                }
-            });
-
-            // Left & Right columns: start at y:0 and move UP
-            galleryTl.to([trackLeft, trackRight], {
-                y: -moveDistance,
-                ease: "none"
-            }, 0);
-
-            // Center column: starts shifted UP and moves DOWN to y: 0
-            galleryTl.fromTo(trackCenter, {
-                y: -moveDistance
-            }, {
-                y: 0,
-                ease: "none"
-            }, 0);
-        }
-    }
-
     // --- 7. BOLD MINIMALIST FAQ ACCORDION ---
     const boldFaqItems = document.querySelectorAll('.bold-faq-item');
 
@@ -231,30 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
-    });
-
-    // --- 8. WORKS PORTFOLIO CATEGORY FILTERING ---
-    const filterPills = document.querySelectorAll('.filter-pill');
-    const workItems = document.querySelectorAll('.work-grid-item');
-
-    filterPills.forEach(pill => {
-        pill.addEventListener('click', () => {
-            filterPills.forEach(p => p.classList.remove('active'));
-            pill.classList.add('active');
-
-            const filterValue = pill.getAttribute('data-filter');
-
-            workItems.forEach(item => {
-                const category = item.getAttribute('data-category') || '';
-                if (filterValue === 'all' || category.includes(filterValue)) {
-                    item.style.display = 'block';
-                    item.style.opacity = '1';
-                } else {
-                    item.style.display = 'none';
-                    item.style.opacity = '0';
-                }
-            });
-        });
     });
 
     // --- 9. CONTACT FORM HANDLER ---
@@ -347,5 +325,86 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // --- 12. ABOUT SECTION HEADLINE WORD-BY-WORD SCROLL REVEAL ---
+    const aboutHeadline = document.querySelector('.about-main-headline');
+    if (aboutHeadline) {
+        const textContent = aboutHeadline.innerText || aboutHeadline.textContent;
+        const cleanText = textContent.replace(/\.\s*$/, '').trim();
+        const words = cleanText.split(/\s+/);
+
+        aboutHeadline.innerHTML = words.map(w => `<span class="reveal-word">${w}</span>`).join(' ') + '<span class="headline-dot">.</span>';
+
+        const revealWords = aboutHeadline.querySelectorAll('.reveal-word');
+
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && revealWords.length > 0) {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const getColors = () => {
+                const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+                return {
+                    activeColor: isLight ? '#0f1015' : '#ffffff',
+                    dimColor: isLight ? 'rgba(15, 16, 21, 0.2)' : 'rgba(255, 255, 255, 0.22)'
+                };
+            };
+
+            const colors = getColors();
+
+            gsap.fromTo(revealWords,
+                {
+                    color: colors.dimColor,
+                    opacity: 0.25
+                },
+                {
+                    color: colors.activeColor,
+                    opacity: 1,
+                    stagger: 0.15,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: aboutHeadline,
+                        start: 'top 85%',
+                        end: 'bottom 45%',
+                        scrub: 0.8
+                    }
+                }
+            );
+        }
+    }
 });
+
+/* ==========================================================================
+   WORKFLOW LOOP CARD — PHASE SWITCHER
+   Cycles: Figma Design (4s) → Code Editor (4s) → Deploy/Live (4s) → repeat
+   ========================================================================== */
+(function initWorkflowLoop() {
+    const scenes = document.querySelectorAll('.wf-scene');
+    const steps  = document.querySelectorAll('.wf-phase-step');
+
+    if (!scenes.length || !steps.length) return;
+
+    const PHASE_DURATION = 4200; // ms per phase
+    let currentPhase = 0;
+
+    function goToPhase(index) {
+        // Hide all scenes & deactivate all steps
+        scenes.forEach(s => {
+            s.classList.remove('active');
+        });
+        steps.forEach(s => s.classList.remove('active'));
+
+        // Activate target
+        scenes[index].classList.add('active');
+        steps[index].classList.add('active');
+        currentPhase = index;
+    }
+
+    function nextPhase() {
+        goToPhase((currentPhase + 1) % scenes.length);
+    }
+
+    // Start loop
+    goToPhase(0);
+    setInterval(nextPhase, PHASE_DURATION);
+})();
+
 

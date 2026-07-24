@@ -12,7 +12,11 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Lenis Smooth Scroll CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
@@ -33,11 +37,12 @@
                 <a href="index.html" class="site-logo">
                     <span class="logo-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="2" y="2" width="12" height="12" rx="3.5" stroke="currentColor" stroke-width="2.5" />
+                            <rect x="2" y="2" width="12" height="12" rx="3.5" stroke="currentColor"
+                                stroke-width="2.5" />
                             <rect x="10" y="10" width="12" height="12" rx="3.5" fill="currentColor" />
                         </svg>
                     </span>
-                    <span class="logo-text">Muhammed</span>
+                    <span class="logo-text">Muhammed<span class="logo-dot">.</span></span>
                 </a>
 
                 <!-- Centered Floating Navbar -->
@@ -54,15 +59,18 @@
                 <div class="header-actions">
                     <!-- Search Toggle -->
                     <button type="button" class="header-action-btn search-btn" id="search-toggle" aria-label="Search">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="11" cy="11" r="8"></circle>
                             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                         </svg>
                     </button>
 
                     <!-- Dark/Light Theme Toggle -->
-                    <button type="button" class="header-action-btn theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
-                        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <button type="button" class="header-action-btn theme-toggle-btn" id="theme-toggle"
+                        aria-label="Toggle theme">
+                        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="5"></circle>
                             <line x1="12" y1="1" x2="12" y2="3"></line>
                             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -73,7 +81,8 @@
                             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
                             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                         </svg>
-                        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                         </svg>
                     </button>
@@ -82,7 +91,8 @@
                     <a href="contact.html" class="btn-lets-talk">Let's Talk</a>
 
                     <!-- Mobile Hamburger Menu Button -->
-                    <button type="button" class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+                    <button type="button" class="mobile-menu-btn" id="mobile-menu-toggle"
+                        aria-label="Toggle Navigation Menu">
                         <span class="hamburger-line"></span>
                         <span class="hamburger-line"></span>
                     </button>
@@ -136,7 +146,8 @@
                     <div class="col-lg-6 col-md-12">
                         <div class="hero-subcontent">
                             <p class="hero-description">
-                                Two Hands exists to make small teams look like big deals, without the bloated agency fees.
+                                Two Hands exists to make small teams look like big deals, without the bloated agency
+                                fees.
                             </p>
 
                             <div class="hero-cta-group">
@@ -146,13 +157,135 @@
                         </div>
                     </div>
 
-                    <!-- Right Column: Animated Web Development Studio Card -->
+                    <!-- Right Column: Figma Design → Code → Deploy Animated Loop Card -->
                     <div class="col-lg-6 col-md-12">
                         <div class="hero-card-container">
-                            <div class="webdev-anim-card">
-                                <!-- Live Interactive Web Development Studio Animation Canvas -->
-                                <div class="webdev-studio-wrapper">
-                                    <!-- Studio Window Header -->
+                            <div class="webdev-anim-card workflow-loop-card">
+
+                                <!-- === PHASE INDICATOR BAR === -->
+                                <div class="wf-phase-bar">
+                                    <div class="wf-phase-step step-figma active" data-phase="0">
+                                        <span class="wf-step-dot"></span>
+                                        <span class="wf-step-label">Design</span>
+                                    </div>
+                                    <div class="wf-phase-arrow">→</div>
+                                    <div class="wf-phase-step step-code" data-phase="1">
+                                        <span class="wf-step-dot"></span>
+                                        <span class="wf-step-label">Code</span>
+                                    </div>
+                                    <div class="wf-phase-arrow">→</div>
+                                    <div class="wf-phase-step step-deploy" data-phase="2">
+                                        <span class="wf-step-dot"></span>
+                                        <span class="wf-step-label">Deploy</span>
+                                    </div>
+                                    <div class="wf-live-badge">
+                                        <span class="wf-live-dot"></span>
+                                        LIVE
+                                    </div>
+                                </div>
+
+                                <!-- === PHASE 0: FIGMA DESIGN === -->
+                                <div class="wf-scene figma-scene active" id="wf-figma">
+                                    <div class="figma-header">
+                                        <div class="figma-dots">
+                                            <span class="dot dot-red"></span>
+                                            <span class="dot dot-yellow"></span>
+                                            <span class="dot dot-green"></span>
+                                        </div>
+                                        <div class="figma-title-bar">
+                                            <svg width="13" height="13" viewBox="0 0 38 57" fill="none">
+                                                <path
+                                                    d="M19 28.5C19 24.91 21.91 22 25.5 22H32V35H25.5C21.91 35 19 32.09 19 28.5Z"
+                                                    fill="#1ABCFE" />
+                                                <path
+                                                    d="M6 41.5C6 37.91 8.91 35 12.5 35H19V48.5C19 52.09 16.09 55 12.5 55C8.91 55 6 52.09 6 48.5V41.5Z"
+                                                    fill="#0ACF83" />
+                                                <path
+                                                    d="M19 2V15H25.5C29.09 15 32 12.09 32 8.5C32 4.91 29.09 2 25.5 2H19Z"
+                                                    fill="#FF7262" />
+                                                <path d="M6 8.5C6 12.09 8.91 15 12.5 15H19V2H12.5C8.91 2 6 4.91 6 8.5Z"
+                                                    fill="#F24E1E" />
+                                                <path
+                                                    d="M6 28.5C6 32.09 8.91 35 12.5 35H19V22H12.5C8.91 22 6 24.91 6 28.5Z"
+                                                    fill="#A259FF" />
+                                            </svg>
+                                            <span>Portfolio Design — Figma</span>
+                                        </div>
+                                        <div class="figma-tools">
+                                            <span class="figma-tool-btn active">V</span>
+                                            <span class="figma-tool-btn">R</span>
+                                            <span class="figma-tool-btn">T</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="figma-workspace">
+                                        <!-- Layers panel -->
+                                        <div class="figma-layers">
+                                            <div class="layer-title">Layers</div>
+                                            <div class="figma-layer selected">
+                                                <span class="layer-icon">▣</span> Hero Section
+                                            </div>
+                                            <div class="figma-layer sub">
+                                                <span class="layer-icon">T</span> Heading
+                                            </div>
+                                            <div class="figma-layer sub">
+                                                <span class="layer-icon">▣</span> CTA Group
+                                            </div>
+                                            <div class="figma-layer">
+                                                <span class="layer-icon">▣</span> Nav Bar
+                                            </div>
+                                            <div class="figma-layer">
+                                                <span class="layer-icon">▣</span> Footer
+                                            </div>
+                                        </div>
+
+                                        <!-- Canvas area -->
+                                        <div class="figma-canvas">
+                                            <!-- Artboard frame -->
+                                            <div class="figma-artboard">
+                                                <div class="figma-art-nav"></div>
+                                                <div class="figma-art-hero">
+                                                    <div class="figma-art-heading fig-typing"></div>
+                                                    <div class="figma-art-subtext"></div>
+                                                    <div class="figma-art-btn"></div>
+                                                </div>
+                                                <!-- Selection handles -->
+                                                <div class="figma-selection-box">
+                                                    <span class="sel-handle tl"></span>
+                                                    <span class="sel-handle tr"></span>
+                                                    <span class="sel-handle bl"></span>
+                                                    <span class="sel-handle br"></span>
+                                                </div>
+                                            </div>
+                                            <!-- Floating measurement -->
+                                            <div class="figma-measure-label">W: 1440 H: 900</div>
+                                        </div>
+
+                                        <!-- Properties panel -->
+                                        <div class="figma-props">
+                                            <div class="prop-title">Design</div>
+                                            <div class="prop-row">
+                                                <span class="prop-label">X</span>
+                                                <span class="prop-val">0</span>
+                                            </div>
+                                            <div class="prop-row">
+                                                <span class="prop-label">Y</span>
+                                                <span class="prop-val">0</span>
+                                            </div>
+                                            <div class="prop-row">
+                                                <span class="prop-label">Fill</span>
+                                                <span class="prop-swatch" style="background:#0d0d0f;"></span>
+                                            </div>
+                                            <div class="prop-row">
+                                                <span class="prop-label">Radius</span>
+                                                <span class="prop-val">24</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- === PHASE 1: CODE EDITOR === -->
+                                <div class="wf-scene code-scene" id="wf-code">
                                     <div class="studio-header">
                                         <div class="studio-dots">
                                             <span class="dot dot-red"></span>
@@ -161,7 +294,11 @@
                                         </div>
                                         <div class="studio-tabs">
                                             <span class="studio-tab active">
-                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                                </svg>
                                                 index.html
                                             </span>
                                             <span class="studio-tab">style.css</span>
@@ -169,22 +306,49 @@
                                         </div>
                                         <div class="studio-status">
                                             <span class="status-pulse"></span>
-                                            <span>WEB DEV LIVE</span>
+                                            <span>VS CODE</span>
                                         </div>
                                     </div>
 
-                                    <!-- Studio Workspace Split View -->
                                     <div class="studio-workspace">
-                                        <!-- Left Pane: Animated Code Editor -->
-                                        <div class="studio-editor">
-                                            <div class="code-line line-1"><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"app"</span>&gt;</div>
-                                            <div class="code-line line-2">&nbsp;&nbsp;<span class="c-tag">&lt;header</span> <span class="c-attr">class</span>=<span class="c-str">"nav"</span>/&gt;</div>
-                                            <div class="code-line line-3">&nbsp;&nbsp;<span class="c-tag">&lt;h1&gt;</span><span class="c-txt">Build Ideas</span><span class="c-tag">&lt;/h1&gt;</span></div>
-                                            <div class="code-line line-4">&nbsp;&nbsp;<span class="c-tag">&lt;button&gt;</span>Launch<span class="c-tag">&lt;/button&gt;</span></div>
-                                            <div class="code-line line-5"><span class="c-tag">&lt;/div&gt;</span><span class="code-cursor"></span></div>
+                                        <div class="studio-editor code-editor-full">
+                                            <div class="code-gutter">
+                                                <span>1</span><span>2</span><span>3</span>
+                                                <span>4</span><span>5</span><span>6</span>
+                                                <span>7</span><span>8</span><span>9</span>
+                                            </div>
+                                            <div class="code-content">
+                                                <div class="code-line line-1"><span class="c-comment">/* Hero Section
+                                                        */</span></div>
+                                                <div class="code-line line-2"><span class="c-tag">&lt;section</span>
+                                                    <span class="c-attr">class</span>=<span
+                                                        class="c-str">"hero"</span><span class="c-tag">&gt;</span></div>
+                                                <div class="code-line line-3">&nbsp;&nbsp;<span
+                                                        class="c-tag">&lt;div</span> <span
+                                                        class="c-attr">class</span>=<span
+                                                        class="c-str">"container"</span><span class="c-tag">&gt;</span>
+                                                </div>
+                                                <div class="code-line line-4">&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                        class="c-tag">&lt;h1&gt;</span><span class="c-txt">Bringing
+                                                        ideas</span><span class="c-tag">&lt;/h1&gt;</span></div>
+                                                <div class="code-line line-5">&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                        class="c-tag">&lt;p&gt;</span><span class="c-txt">to life
+                                                        through design</span><span class="c-tag">&lt;/p&gt;</span></div>
+                                                <div class="code-line line-6">&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                        class="c-tag">&lt;button</span> <span
+                                                        class="c-attr">class</span>=<span
+                                                        class="c-str">"btn-primary"</span><span
+                                                        class="c-tag">&gt;</span></div>
+                                                <div class="code-line line-7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                        class="c-txt">Discover Work</span></div>
+                                                <div class="code-line line-8">&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                                        class="c-tag">&lt;/button&gt;</span></div>
+                                                <div class="code-line line-9"><span
+                                                        class="c-tag">&lt;/section&gt;</span><span
+                                                        class="code-cursor"></span></div>
+                                            </div>
                                         </div>
 
-                                        <!-- Right Pane: Realtime Assembling UI Preview -->
                                         <div class="studio-preview">
                                             <div class="preview-mock-header">
                                                 <div class="preview-logo"></div>
@@ -192,7 +356,6 @@
                                                     <span></span><span></span><span></span>
                                                 </div>
                                             </div>
-
                                             <div class="preview-hero-content">
                                                 <div class="preview-badge-pill">
                                                     <span class="badge-sparkle"></span>
@@ -200,14 +363,15 @@
                                                 </div>
                                                 <div class="preview-title-bar bar-1"></div>
                                                 <div class="preview-title-bar bar-2"></div>
-                                                
                                                 <div class="preview-btn-cta">
                                                     <span>Deploy Project</span>
-                                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                                        stroke="currentColor" stroke-width="3">
+                                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                                    </svg>
                                                 </div>
                                             </div>
-
-                                            <!-- Floating Tech Tags -->
                                             <div class="preview-floating-tag tag-react">
                                                 <span class="tag-icon">⚡</span>
                                                 <span>React + HTML5</span>
@@ -219,6 +383,69 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- === PHASE 2: DEPLOY / LIVE === -->
+                                <div class="wf-scene deploy-scene" id="wf-deploy">
+                                    <div class="deploy-header">
+                                        <div class="studio-dots">
+                                            <span class="dot dot-red"></span>
+                                            <span class="dot dot-yellow"></span>
+                                            <span class="dot dot-green"></span>
+                                        </div>
+                                        <div class="deploy-url-bar">
+                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4ade80"
+                                                stroke-width="2">
+                                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                            </svg>
+                                            <span class="deploy-url">https://muhammed.dev</span>
+                                        </div>
+                                        <div class="deploy-live-badge">
+                                            <span class="wf-live-dot"></span> DEPLOYED
+                                        </div>
+                                    </div>
+
+                                    <div class="deploy-browser-content">
+                                        <!-- Browser preview of the final site -->
+                                        <div class="browser-preview-nav">
+                                            <div class="bp-logo-area">
+                                                <div class="bp-logo-icon"></div>
+                                                <span class="bp-logo-text">MK.</span>
+                                            </div>
+                                            <div class="bp-nav-links">
+                                                <span>Work</span>
+                                                <span>About</span>
+                                                <span class="bp-nav-cta">Hire Me</span>
+                                            </div>
+                                        </div>
+                                        <div class="browser-preview-hero">
+                                            <div class="bp-badge">✦ Available for Work</div>
+                                            <div class="bp-title-1">Bringing <span class="bp-red">ideas</span></div>
+                                            <div class="bp-title-2">to life through</div>
+                                            <div class="bp-title-3">design</div>
+                                            <div class="bp-cta-row">
+                                                <div class="bp-btn-primary">About me</div>
+                                                <div class="bp-btn-outline">Discover Work</div>
+                                            </div>
+                                        </div>
+                                        <!-- Deploy success toast -->
+                                        <div class="deploy-toast">
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80"
+                                                stroke-width="3">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                            <span>Deployed successfully!</span>
+                                        </div>
+                                        <!-- Performance score -->
+                                        <div class="deploy-score-badge">
+                                            <div class="score-ring" style="--score:98"></div>
+                                            <div class="score-info">
+                                                <span class="score-num">98</span>
+                                                <span class="score-label">Performance</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -235,7 +462,8 @@
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <div class="feature-item">
                             <div class="feature-icon-box">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <circle cx="12" cy="12" r="10"></circle>
                                     <path d="M12 6v12M6 12h12"></path>
                                     <circle cx="12" cy="12" r="3"></circle>
@@ -249,7 +477,8 @@
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <div class="feature-item">
                             <div class="feature-icon-box">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"></path>
                                 </svg>
                             </div>
@@ -261,9 +490,14 @@
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <div class="feature-item">
                             <div class="feature-icon-box">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
-                                    <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z">
+                                    </path>
+                                    <path
+                                        d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z">
+                                    </path>
                                 </svg>
                             </div>
                             <span class="feature-title">Problem solving mindset</span>
@@ -275,11 +509,10 @@
         </section>
 
         <!-- Work Showcase Sticky Pin Gallery Section (Exact Bfolio tp-gallery-area) -->
-        <section class="tp-gallery-area fix" id="tp-gallery-area">
+        <!-- <section class="tp-gallery-area fix" id="tp-gallery-area">
             <div class="container-fluid container-1830">
                 <div class="tp-gallery-wrapper">
                     <div class="row gx-20">
-                        <!-- Column 1 (Scrolls UP: data-speed="-0.1") -->
                         <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <div class="tp-gallery-item-wrapper" id="track-left" data-speed="-0.1">
                                 <div class="tp-gallery-item mb-20">
@@ -300,7 +533,6 @@
                             </div>
                         </div>
 
-                        <!-- Column 2 (Scrolls DOWN: data-speed="0.8") -->
                         <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <div class="tp-gallery-item-wrapper" id="track-center" data-speed="0.8">
                                 <div class="tp-gallery-item mb-20">
@@ -321,7 +553,6 @@
                             </div>
                         </div>
 
-                        <!-- Column 3 (Scrolls UP: data-speed="-0.1") -->
                         <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <div class="tp-gallery-item-wrapper" id="track-right" data-speed="-0.1">
                                 <div class="tp-gallery-item mb-20">
@@ -344,7 +575,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
 
         <!-- About & Services Section (Reference Image Design) -->
@@ -356,7 +587,8 @@
                     <div class="col-lg-3 col-md-4 col-sm-12 text-center text-md-start mb-4 mb-md-0">
                         <div class="award-stamp-wrapper">
                             <svg class="award-stamp-svg" viewBox="0 0 160 160" width="140" height="140">
-                                <path id="awardCirclePath" d="M 80, 80 m -60, 0 a 60,60 0 1,1 120,0 a 60,60 0 1,1 -120,0" fill="none" />
+                                <path id="awardCirclePath"
+                                    d="M 80, 80 m -60, 0 a 60,60 0 1,1 120,0 a 60,60 0 1,1 -120,0" fill="none" />
                                 <text class="stamp-text">
                                     <textPath href="#awardCirclePath" startOffset="0%">
                                         AWARD WINNING DESIGNER - SINCE 2020 -
@@ -373,7 +605,7 @@
                     <!-- Right Column: Big Display Headline & CTA Buttons -->
                     <div class="col-lg-9 col-md-8 col-sm-12">
                         <h2 class="about-main-headline">
-                            Helping brand achieve digital mastery of creative innovation and strategic planning<span class="headline-dot">.</span>
+                            Helping brand achieve digital mastery of creative innovation and strategic planning.
                         </h2>
 
                         <div class="about-cta-group">
@@ -390,7 +622,8 @@
                         <div class="service-card">
                             <div class="service-card-top">
                                 <div class="service-3d-icon-box icon-uiux">
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
                                         <path d="M2 17l10 5 10-5"></path>
                                         <path d="M2 12l10 5 10-5"></path>
@@ -417,7 +650,8 @@
                         <div class="service-card">
                             <div class="service-card-top">
                                 <div class="service-3d-icon-box icon-web">
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <polyline points="16 18 22 12 16 6"></polyline>
                                         <polyline points="8 6 2 12 8 18"></polyline>
                                         <line x1="14" y1="4" x2="10" y2="20"></line>
@@ -444,7 +678,8 @@
                         <div class="service-card">
                             <div class="service-card-top">
                                 <div class="service-3d-icon-box icon-mobile">
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect>
                                         <line x1="12" y1="18" x2="12.01" y2="18" stroke-width="2.5"></line>
                                     </svg>
@@ -488,11 +723,11 @@
             </div>
         </section>
 
-        
+
         <!-- Selected Works Showcase Section -->
         <section class="demos-section" id="selected-work">
             <div class="container">
-                
+
                 <!-- Section Header -->
                 <div class="demos-header text-center">
                     <div class="outlined-stat-num">14+</div>
@@ -515,16 +750,15 @@
 
                 <!-- Selected Works Grid (2x2 Grid) -->
                 <div class="row g-4 demos-grid-row">
-                    
+
                     <!-- Selected Work Card 1 -->
                     <div class="col-md-6 col-sm-12">
                         <div class="demo-card-item">
                             <div class="demo-mockup-frame">
-                                <span class="demo-tag-new">FEATURED</span>
-                                <img src="assets/work (1).jpg" alt="Nexus AI Workspace Platform" class="demo-mockup-img">
+                                <img src="assets/workimg-1.jpg" alt="style-ora UI/UX Project" class="demo-mockup-img">
                             </div>
-                            <h3 class="demo-card-caption">Nexus AI Workspace Platform</h3>
-                            <span class="demo-card-subtext">UI/UX Design & React Development</span>
+                            <h3 class="demo-card-caption">Styleora</h3>
+                            <span class="demo-card-subtext">E-Commerce, UI/UX Design & Development</span>
                         </div>
                     </div>
 
@@ -532,11 +766,10 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="demo-card-item">
                             <div class="demo-mockup-frame">
-                                <span class="demo-tag-new">FEATURED</span>
-                                <img src="assets/work (2).jpg" alt="Aura Luxe E-Commerce Suite" class="demo-mockup-img">
+                                <img src="assets/workimg-2.jpg" alt="elve Rental" class="demo-mockup-img">
                             </div>
-                            <h3 class="demo-card-caption">Aura Luxe E-Commerce Suite</h3>
-                            <span class="demo-card-subtext">Brand Identity & Mobile UX</span>
+                            <h3 class="demo-card-caption">Elve</h3>
+                            <span class="demo-card-subtext">Rental, UI/UX Design & Development</span>
                         </div>
                     </div>
 
@@ -544,11 +777,10 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="demo-card-item">
                             <div class="demo-mockup-frame">
-                                <span class="demo-tag-new">FEATURED</span>
-                                <img src="assets/work (3).jpg" alt="Vanguard Fintech Banking Dashboard" class="demo-mockup-img">
+                                <img src="assets/workimg-3.jpg" alt="Green Track" class="demo-mockup-img">
                             </div>
-                            <h3 class="demo-card-caption">Vanguard Fintech Banking Dashboard</h3>
-                            <span class="demo-card-subtext">Financial UI & Web App</span>
+                            <h3 class="demo-card-caption">Green Track</h3>
+                            <span class="demo-card-subtext">UI/UX Design & Development</span>
                         </div>
                     </div>
 
@@ -556,11 +788,10 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="demo-card-item">
                             <div class="demo-mockup-frame">
-                                <span class="demo-tag-new">FEATURED</span>
-                                <img src="assets/work (4).jpg" alt="Horizon Creative Studio Portal" class="demo-mockup-img">
+                                <img src="assets/workimg-4.jpg" alt="Travell Gallery" class="demo-mockup-img">
                             </div>
-                            <h3 class="demo-card-caption">Horizon Creative Studio Portal</h3>
-                            <span class="demo-card-subtext">3D Web Animation & Design</span>
+                            <h3 class="demo-card-caption">Travell Gallery</h3>
+                            <span class="demo-card-subtext">UI/UX Design & Development</span>
                         </div>
                     </div>
 
@@ -568,7 +799,8 @@
 
                 <!-- View All Works CTA Button -->
                 <div class="d-flex justify-content-center align-items-center text-center mt-5 w-100">
-                    <a href="works.html" class="btn-discover-outline" style="padding: 14px 36px; font-weight: 700;">View All Works ↗</a>
+                    <a href="works.html" class="btn-discover-outline" style="padding: 14px 36px; font-weight: 700;">View
+                        All Works </a>
                 </div>
             </div>
         </section>
@@ -576,12 +808,13 @@
         <section class="bold-faq-section" id="faq-section">
             <div class="container">
                 <div class="row g-5">
-                    
+
                     <!-- Left Column: Big Typographic Title & Subtitle -->
                     <div class="col-lg-5 col-md-12">
                         <div class="bold-faq-sidebar">
-                            <h2 class="bold-faq-title">FAQ</h2>
-                            <p class="bold-faq-subtitle">FIND ANSWERS TO COMMON QUESTIONS ABOUT SERVICES, WORKFLOW, AND OPERATIONS.</p>
+                            <h2 class="bold-faq-title">Faq</h2>
+                            <p class="bold-faq-subtitle">Find answers to common questions about services, workflow, and
+                                operations.</p>
                         </div>
                     </div>
 
@@ -594,7 +827,9 @@
                                 <button type="button" class="bold-faq-btn" aria-expanded="true">
                                     <span class="bold-faq-question">What services do you offer?</span>
                                     <span class="bold-faq-icon">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
                                             <line x1="12" y1="5" x2="12" y2="19"></line>
                                             <line x1="5" y1="12" x2="19" y2="12"></line>
                                         </svg>
@@ -602,7 +837,9 @@
                                 </button>
                                 <div class="bold-faq-collapse">
                                     <div class="bold-faq-body">
-                                        <p>We provide full-suite digital solutions including UI/UX design, custom web & mobile app development, brand identity, and interactive prototyping tailored to scale your product.</p>
+                                        <p>We provide full-suite digital solutions including UI/UX design, custom web &
+                                            mobile app development, brand identity, and interactive prototyping tailored
+                                            to scale your product.</p>
                                     </div>
                                 </div>
                             </div>
@@ -612,7 +849,9 @@
                                 <button type="button" class="bold-faq-btn" aria-expanded="false">
                                     <span class="bold-faq-question">What is your typical project workflow?</span>
                                     <span class="bold-faq-icon">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
                                             <line x1="12" y1="5" x2="12" y2="19"></line>
                                             <line x1="5" y1="12" x2="19" y2="12"></line>
                                         </svg>
@@ -620,7 +859,9 @@
                                 </button>
                                 <div class="bold-faq-collapse">
                                     <div class="bold-faq-body">
-                                        <p>Our process follows four key steps: Discovery & Research, Wireframing & Prototyping, High-Fidelity UI/UX & Development, followed by Testing, Launch & Support.</p>
+                                        <p>Our process follows four key steps: Discovery & Research, Wireframing &
+                                            Prototyping, High-Fidelity UI/UX & Development, followed by Testing, Launch
+                                            & Support.</p>
                                     </div>
                                 </div>
                             </div>
@@ -630,7 +871,9 @@
                                 <button type="button" class="bold-faq-btn" aria-expanded="false">
                                     <span class="bold-faq-question">How long does a standard project take?</span>
                                     <span class="bold-faq-icon">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
                                             <line x1="12" y1="5" x2="12" y2="19"></line>
                                             <line x1="5" y1="12" x2="19" y2="12"></line>
                                         </svg>
@@ -638,7 +881,9 @@
                                 </button>
                                 <div class="bold-faq-collapse">
                                     <div class="bold-faq-body">
-                                        <p>Timelines depend on scope. Typical UI/UX design projects take 2 to 4 weeks, while complete end-to-end web applications take 4 to 8 weeks from start to finish.</p>
+                                        <p>Timelines depend on scope. Typical UI/UX design projects take 2 to 4 weeks,
+                                            while complete end-to-end web applications take 4 to 8 weeks from start to
+                                            finish.</p>
                                     </div>
                                 </div>
                             </div>
@@ -648,7 +893,9 @@
                                 <button type="button" class="bold-faq-btn" aria-expanded="false">
                                     <span class="bold-faq-question">Are revision rounds included in the scope?</span>
                                     <span class="bold-faq-icon">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
                                             <line x1="12" y1="5" x2="12" y2="19"></line>
                                             <line x1="5" y1="12" x2="19" y2="12"></line>
                                         </svg>
@@ -656,7 +903,8 @@
                                 </button>
                                 <div class="bold-faq-collapse">
                                     <div class="bold-faq-body">
-                                        <p>Yes, all projects include 2 to 3 structured revision rounds per phase to ensure full alignment with your vision and goals before final sign-off.</p>
+                                        <p>Yes, all projects include 2 to 3 structured revision rounds per phase to
+                                            ensure full alignment with your vision and goals before final sign-off.</p>
                                     </div>
                                 </div>
                             </div>
@@ -666,7 +914,9 @@
                                 <button type="button" class="bold-faq-btn" aria-expanded="false">
                                     <span class="bold-faq-question">How can we get in touch and start?</span>
                                     <span class="bold-faq-icon">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
                                             <line x1="12" y1="5" x2="12" y2="19"></line>
                                             <line x1="5" y1="12" x2="19" y2="12"></line>
                                         </svg>
@@ -674,7 +924,9 @@
                                 </button>
                                 <div class="bold-faq-collapse">
                                     <div class="bold-faq-body">
-                                        <p>You can reach out directly via our contact page or email. We'll schedule a discovery call within 24 hours to discuss your project requirements and timeline.</p>
+                                        <p>You can reach out directly via our contact page or email. We'll schedule a
+                                            discovery call within 24 hours to discuss your project requirements and
+                                            timeline.</p>
                                     </div>
                                 </div>
                             </div>
@@ -718,14 +970,16 @@
                     <h4 class="footer-col-heading">Social media</h4>
                     <div class="footer-social-icons">
                         <a href="https://instagram.com" target="_blank" class="social-icon-btn" aria-label="Instagram">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                             </svg>
                         </a>
                         <a href="https://dribbble.com" target="_blank" class="social-icon-btn" aria-label="Dribbble">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10"></circle>
                                 <path d="M19.13 5.09C15.22 9.14 10 10.44 2.25 10.94"></path>
                                 <path d="M21.75 12.84c-6.62-1.41-12.14 1-16.38 6.32"></path>
@@ -736,8 +990,11 @@
                             <span class="behance-text">Bē</span>
                         </a>
                         <a href="https://youtube.com" target="_blank" class="social-icon-btn" aria-label="YouTube">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z">
+                                </path>
                                 <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
                             </svg>
                         </a>
@@ -754,7 +1011,8 @@
             <div class="footer-bottom-bar">
                 <p class="footer-copyright">&copy; 2026 <strong>Muhammed</strong>. All rights reserved.</p>
                 <button type="button" class="scroll-top-btn" id="scroll-to-top" aria-label="Scroll to top">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="18 15 12 9 6 15"></polyline>
                     </svg>
                 </button>
@@ -768,7 +1026,8 @@
         <button type="button" class="uf-trigger-btn" id="chatbot-trigger" aria-label="Quick Chat">
             <span class="uf-whatsapp-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.196 1.624zm6.097-3.967l.367.218c1.554.922 3.328 1.409 5.132 1.41h.005c5.347 0 9.698-4.351 9.7-9.7.001-2.592-1.009-5.027-2.84-6.858-1.83-1.83-4.264-2.84-6.857-2.84-5.347 0-9.697 4.351-9.699 9.7-.001 1.88.541 3.715 1.567 5.305l.239.372-1.03 3.762 3.866-1.013zm12.351-5.908c-.287-.144-1.696-.837-1.958-.933-.262-.096-.453-.144-.644.144-.191.287-.741.933-.908 1.125-.167.191-.334.215-.621.072-1.838-.919-3.044-1.633-4.261-3.719-.324-.556.324-.516.927-1.723.102-.204.051-.383-.025-.527-.077-.144-.644-1.556-.882-2.128-.232-.557-.468-.48-.644-.489-.167-.008-.359-.008-.55-.008-.191 0-.502.072-.765.359-.263.287-1.004.982-1.004 2.397 0 1.415 1.03 2.784 1.173 2.976.143.191 2.027 3.096 4.911 4.341 2.884 1.245 2.884.83 3.41.772.526-.057 1.696-.693 1.935-1.364.239-.67.239-1.244.167-1.364-.072-.121-.263-.193-.55-.337z"/>
+                    <path
+                        d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.196 1.624zm6.097-3.967l.367.218c1.554.922 3.328 1.409 5.132 1.41h.005c5.347 0 9.698-4.351 9.7-9.7.001-2.592-1.009-5.027-2.84-6.858-1.83-1.83-4.264-2.84-6.857-2.84-5.347 0-9.697 4.351-9.699 9.7-.001 1.88.541 3.715 1.567 5.305l.239.372-1.03 3.762 3.866-1.013zm12.351-5.908c-.287-.144-1.696-.837-1.958-.933-.262-.096-.453-.144-.644.144-.191.287-.741.933-.908 1.125-.167.191-.334.215-.621.072-1.838-.919-3.044-1.633-4.261-3.719-.324-.556.324-.516.927-1.723.102-.204.051-.383-.025-.527-.077-.144-.644-1.556-.882-2.128-.232-.557-.468-.48-.644-.489-.167-.008-.359-.008-.55-.008-.191 0-.502.072-.765.359-.263.287-1.004.982-1.004 2.397 0 1.415 1.03 2.784 1.173 2.976.143.191 2.027 3.096 4.911 4.341 2.884 1.245 2.884.83 3.41.772.526-.057 1.696-.693 1.935-1.364.239-.67.239-1.244.167-1.364-.072-.121-.263-.193-.55-.337z" />
                 </svg>
             </span>
             <span>Quick Chat</span>
@@ -794,25 +1053,37 @@
             <!-- Body Content -->
             <div class="uf-card-body">
                 <div class="uf-welcome-bubble">
-                    👋 Hi there! Want to discuss a project, ask about pricing, or hire me? Choose an instant option below:
+                    👋 Hi there! Want to discuss a project, ask about pricing, or hire me? Choose an instant option
+                    below:
                 </div>
 
                 <!-- Instant 1-Click Action Buttons -->
                 <div class="uf-action-buttons">
-                    <a href="https://wa.me/919656216086?text=Hi%20Muhammed,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project!" target="_blank" class="uf-btn-action uf-whatsapp">
+                    <a href="https://wa.me/919656216086?text=Hi%20Muhammed,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project!"
+                        target="_blank" class="uf-btn-action uf-whatsapp">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.196 1.624zm6.097-3.967l.367.218c1.554.922 3.328 1.409 5.132 1.41h.005c5.347 0 9.698-4.351 9.7-9.7.001-2.592-1.009-5.027-2.84-6.858-1.83-1.83-4.264-2.84-6.857-2.84-5.347 0-9.697 4.351-9.699 9.7-.001 1.88.541 3.715 1.567 5.305l.239.372-1.03 3.762 3.866-1.013zm12.351-5.908c-.287-.144-1.696-.837-1.958-.933-.262-.096-.453-.144-.644.144-.191.287-.741.933-.908 1.125-.167.191-.334.215-.621.072-1.838-.919-3.044-1.633-4.261-3.719-.324-.556.324-.516.927-1.723.102-.204.051-.383-.025-.527-.077-.144-.644-1.556-.882-2.128-.232-.557-.468-.48-.644-.489-.167-.008-.359-.008-.55-.008-.191 0-.502.072-.765.359-.263.287-1.004.982-1.004 2.397 0 1.415 1.03 2.784 1.173 2.976.143.191 2.027 3.096 4.911 4.341 2.884 1.245 2.884.83 3.41.772.526-.057 1.696-.693 1.935-1.364.239-.67.239-1.244.167-1.364-.072-.121-.263-.193-.55-.337z"/>
+                            <path
+                                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.196 1.624zm6.097-3.967l.367.218c1.554.922 3.328 1.409 5.132 1.41h.005c5.347 0 9.698-4.351 9.7-9.7.001-2.592-1.009-5.027-2.84-6.858-1.83-1.83-4.264-2.84-6.857-2.84-5.347 0-9.697 4.351-9.699 9.7-.001 1.88.541 3.715 1.567 5.305l.239.372-1.03 3.762 3.866-1.013zm12.351-5.908c-.287-.144-1.696-.837-1.958-.933-.262-.096-.453-.144-.644.144-.191.287-.741.933-.908 1.125-.167.191-.334.215-.621.072-1.838-.919-3.044-1.633-4.261-3.719-.324-.556.324-.516.927-1.723.102-.204.051-.383-.025-.527-.077-.144-.644-1.556-.882-2.128-.232-.557-.468-.48-.644-.489-.167-.008-.359-.008-.55-.008-.191 0-.502.072-.765.359-.263.287-1.004.982-1.004 2.397 0 1.415 1.03 2.784 1.173 2.976.143.191 2.027 3.096 4.911 4.341 2.884 1.245 2.884.83 3.41.772.526-.057 1.696-.693 1.935-1.364.239-.67.239-1.244.167-1.364-.072-.121-.263-.193-.55-.337z" />
                         </svg>
                         <span>Chat on WhatsApp</span>
                     </a>
 
                     <a href="mailto:muhammedklkm@gmail.com" class="uf-btn-action uf-email">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
                         <span>Send Email Direct</span>
                     </a>
 
                     <a href="contact.html" class="uf-btn-action uf-form">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                        </svg>
                         <span>Fill Project Form</span>
                     </a>
                 </div>
@@ -823,6 +1094,9 @@
     <!-- GSAP & ScrollTrigger Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Lenis Smooth Scroll Library -->
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 
     <!-- Custom JavaScript -->
     <script src="js/main.js"></script>
