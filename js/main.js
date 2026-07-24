@@ -407,4 +407,60 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(nextPhase, PHASE_DURATION);
 })();
 
+/* ==========================================================================
+   SLEEK PRELOADER COUNTER & CURTAIN SLIDE ANIMATION
+   ========================================================================== */
+(function initPreloader() {
+    const preloader = document.getElementById('preloader');
+    const preloaderBar = document.getElementById('preloader-bar');
+    const preloaderNumber = document.getElementById('preloader-number');
+
+    if (!preloader) return;
+
+    document.body.classList.add('preloader-active');
+    let currentProgress = 0;
+
+    const updateProgress = (target, duration, onComplete) => {
+        const startTime = performance.now();
+        const startProgress = currentProgress;
+
+        const animate = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progressRatio = Math.min(elapsed / duration, 1);
+            const easeOutRatio = 1 - Math.pow(1 - progressRatio, 3);
+            currentProgress = Math.round(startProgress + (target - startProgress) * easeOutRatio);
+
+            if (preloaderBar) preloaderBar.style.width = currentProgress + '%';
+            if (preloaderNumber) preloaderNumber.textContent = currentProgress;
+
+            if (progressRatio < 1) {
+                requestAnimationFrame(animate);
+            } else if (onComplete) {
+                onComplete();
+            }
+        };
+
+        requestAnimationFrame(animate);
+    };
+
+    // Smooth rapid initial bar build to 80%
+    updateProgress(85, 450, () => {
+        const finishPreloader = () => {
+            updateProgress(100, 250, () => {
+                setTimeout(() => {
+                    preloader.classList.add('loaded');
+                    document.body.classList.remove('preloader-active');
+                }, 180);
+            });
+        };
+
+        if (document.readyState === 'complete') {
+            finishPreloader();
+        } else {
+            window.addEventListener('load', finishPreloader);
+            setTimeout(finishPreloader, 1200);
+        }
+    });
+})();
+
 

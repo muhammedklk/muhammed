@@ -233,7 +233,6 @@ button {
     align-items: center;
     justify-content: center;
     color: #ff3b40;
-    filter: drop-shadow(0 0 12px rgba(255, 59, 64, 0.65));
     transition: transform 0.35s ease, filter 0.35s ease;
 }
 
@@ -4232,12 +4231,10 @@ button {
     font-weight: 700;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.35);
 }
 
 .btn-spotlight-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 15px 35px rgba(255, 107, 53, 0.5);
     color: #ffffff;
 }
 
@@ -5133,4 +5130,158 @@ button {
 .btn-discover-outline:hover {
     background: var(--btn-action-bg);
     transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   ABOUT PORTRAIT SECTION TOP SPACING (BELOW FIXED HEADER)
+   ========================================================================== */
+.about-portrait-section {
+    padding-top: 140px;
+    padding-bottom: 90px;
+}
+
+/* ==========================================================================
+   ULTRA-SLEEK MINIMALIST PRELOADER
+   ========================================================================== */
+body.preloader-active {
+    overflow: hidden !important;
+}
+
+.site-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #060606;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.6s ease;
+    will-change: transform, opacity;
+}
+
+[data-theme="light"] .site-preloader {
+    background-color: #ffffff;
+}
+
+.site-preloader.loaded {
+    transform: translateY(-100%);
+    opacity: 0.95;
+    pointer-events: none;
+}
+
+.preloader-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    position: relative;
+}
+
+.preloader-site-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    pointer-events: none;
+}
+
+.preloader-site-logo .logo-icon {
+    color: #ff3b40;
+    filter: drop-shadow(0 0 12px rgba(255, 59, 64, 0.6));
+    animation: logoGlowPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes logoGlowPulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px rgba(255, 59, 64, 0.5));
+    }
+    50% {
+        transform: scale(1.08);
+        filter: drop-shadow(0 0 20px rgba(255, 59, 64, 0.95));
+    }
+}
+
+.preloader-brand-name {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+[data-theme="light"] .preloader-brand-name {
+    color: #0f1015;
+}
+
+.preloader-dot {
+    color: #ff3b40;
+}
+
+.preloader-progress-track {
+    width: 180px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+[data-theme="light"] .preloader-progress-track {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.preloader-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ff4d52, #ff8c00);
+    border-radius: 10px;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 10px rgba(255, 77, 82, 0.6);
+}
+
+.preloader-counter {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.08em;
+    font-family: monospace;
+}
+
+[data-theme="light"] .preloader-counter {
+    color: rgba(15, 16, 21, 0.5);
+}
+
+/* ==========================================================================
+   FORM SELECT & DROPDOWN OPTION VISIBILITY FIX
+   ========================================================================== */
+.form-select-field, select {
+    background-color: #141416 !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-radius: 14px;
+    padding: 12px 18px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.form-select-field option, select option {
+    background-color: #181920 !important;
+    color: #ffffff !important;
+    padding: 12px !important;
+    font-size: 14px !important;
+}
+
+[data-theme="light"] .form-select-field, [data-theme="light"] select {
+    background-color: #f8f9fa !important;
+    color: #111111 !important;
+    border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+[data-theme="light"] .form-select-field option, [data-theme="light"] select option {
+    background-color: #ffffff !important;
+    color: #111111 !important;
 }
