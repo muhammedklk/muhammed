@@ -4571,13 +4571,12 @@ button {
 .uf-btn-action.uf-whatsapp {
     background: #25d366;
     color: #ffffff;
-    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
 }
 
 .uf-btn-action.uf-whatsapp:hover {
     background: #20bd5a;
     transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(37, 211, 102, 0.45);
+    box-shadow: 0px 1px 15px rgb(37 211 102 / 11%);
 }
 
 .uf-btn-action.uf-email {
@@ -4600,12 +4599,11 @@ button {
 .uf-btn-action.uf-form {
     background: linear-gradient(135deg, #ff6b35, #ef4444);
     color: #ffffff;
-    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.35);
 }
 
 .uf-btn-action.uf-form:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(255, 107, 53, 0.45);
+    box-shadow: 0px 6px 25px rgb(255 107 53 / 21%);
 }
 
 /* ==========================================================================
