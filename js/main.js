@@ -463,4 +463,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 })();
 
+/* ==========================================================================
+   CUSTOM INTERACTIVE SELECT DROPDOWN CONTROLLER
+   ========================================================================== */
+(function initCustomSelects() {
+    const customWrappers = document.querySelectorAll('.custom-select-wrapper');
+
+    if (!customWrappers.length) return;
+
+    customWrappers.forEach(wrapper => {
+        const trigger = wrapper.querySelector('.custom-select-trigger');
+        const label = wrapper.querySelector('.custom-select-label');
+        const hiddenInput = wrapper.querySelector('input[type="hidden"]');
+        const options = wrapper.querySelectorAll('.custom-option');
+
+        if (!trigger || !options.length) return;
+
+        // Toggle open state
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Close all other dropdowns
+            customWrappers.forEach(w => {
+                if (w !== wrapper) w.classList.remove('open');
+            });
+            wrapper.classList.toggle('open');
+        });
+
+        // Option selection
+        options.forEach(opt => {
+            opt.addEventListener('click', (e) => {
+                e.stopPropagation();
+                options.forEach(o => o.classList.remove('selected'));
+                opt.classList.add('selected');
+
+                const val = opt.getAttribute('data-value');
+                const text = opt.textContent.trim();
+
+                if (hiddenInput) hiddenInput.value = val;
+                if (label) label.textContent = text;
+
+                wrapper.classList.remove('open');
+            });
+        });
+    });
+
+    // Close on click outside
+    document.addEventListener('click', () => {
+        customWrappers.forEach(w => w.classList.remove('open'));
+    });
+})();
+
 
