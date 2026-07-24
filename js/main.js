@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 9. CONTACT FORM HANDLER ---
+    // --- 9. CONTACT FORM HANDLER (DELIVERS TO MUHAMMEDKLKM@GMAIL.COM) ---
     const contactForm = id('contact-form');
     const feedbackToast = id('form-feedback-message');
 
@@ -254,21 +254,47 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const submitBtn = contactForm.querySelector('.btn-submit-inquiry');
+            const submitBtnSpan = submitBtn ? submitBtn.querySelector('span') : null;
+            const originalText = submitBtnSpan ? submitBtnSpan.textContent : 'Send Message';
+
             if (submitBtn) {
                 submitBtn.style.opacity = '0.7';
                 submitBtn.disabled = true;
+                if (submitBtnSpan) submitBtnSpan.textContent = 'Sending Message...';
             }
 
-            setTimeout(() => {
+            const formData = new FormData(contactForm);
+
+            fetch('https://formsubmit.co/ajax/muhammedklkm@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
                 if (feedbackToast) {
+                    feedbackToast.textContent = "Message sent successfully! Form details delivered to muhammedklkm@gmail.com.";
                     feedbackToast.style.display = 'block';
+                    feedbackToast.style.color = '#4ade80';
                 }
                 contactForm.reset();
+            })
+            .catch(err => {
+                if (feedbackToast) {
+                    feedbackToast.textContent = "Sending message via mail server...";
+                    feedbackToast.style.display = 'block';
+                }
+                contactForm.submit();
+            })
+            .finally(() => {
                 if (submitBtn) {
                     submitBtn.style.opacity = '1';
                     submitBtn.disabled = false;
+                    if (submitBtnSpan) submitBtnSpan.textContent = originalText;
                 }
-            }, 800);
+            });
         });
     }
 

@@ -337,7 +337,7 @@
                                     </div>
                                 </div>
 
-                                <!-- === PHASE 1: CODE EDITOR (VS CODE) === -->
+                                <!-- === PHASE 1: CODE EDITOR (VS CODE — HTML / CSS / JS) === -->
                                 <div class="wf-scene code-scene" id="wf-code">
                                     <div class="studio-header">
                                         <div class="studio-dots">
@@ -347,16 +347,24 @@
                                         </div>
                                         <div class="studio-tabs">
                                             <span class="studio-tab active">
-                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#61dafb" stroke-width="2">
-                                                    <circle cx="12" cy="12" r="2"></circle>
-                                                    <ellipse cx="12" cy="12" rx="10" ry="4.5"></ellipse>
-                                                    <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"></ellipse>
-                                                    <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)"></ellipse>
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#e34f26" stroke-width="2">
+                                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                                                 </svg>
-                                                Hero.jsx
+                                                index.html
                                             </span>
-                                            <span class="studio-tab">hero.css</span>
-                                            <span class="studio-tab">App.jsx</span>
+                                            <span class="studio-tab">
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1572b6" stroke-width="2">
+                                                    <path d="M16.5 9.4 7.55 4.24a1 1 0 0 0-1.05.04l-3 2A1 1 0 0 0 3 7.12v9.76a1 1 0 0 0 .5 1l3 2a1 1 0 0 0 1.05.04l8.95-5.16a1 1 0 0 0 .5-.88V10.28a1 1 0 0 0-.5-.88z"/>
+                                                </svg>
+                                                style.css
+                                            </span>
+                                            <span class="studio-tab">
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f7df1e" stroke-width="2">
+                                                    <rect x="3" y="3" width="18" height="18" rx="2" stroke="none" fill="#f7df1e"/>
+                                                    <text x="7" y="17" font-size="10" font-weight="bold" fill="#000">JS</text>
+                                                </svg>
+                                                main.js
+                                            </span>
                                         </div>
                                         <div class="studio-status">
                                             <span class="status-pulse"></span>
@@ -365,51 +373,51 @@
                                     </div>
 
                                     <div class="studio-workspace code-workspace-only">
-                                        <!-- Code Editor Main Area -->
+                                        <!-- Pure HTML5 & CSS Code Editor Area -->
                                         <div class="studio-editor code-editor-full">
                                             <div class="code-gutter">
                                                 <span>1</span><span>2</span><span>3</span>
                                                 <span>4</span><span>5</span><span>6</span>
                                                 <span>7</span><span>8</span><span>9</span>
-                                                <span>10</span><span>11</span>
+                                                <span>10</span><span>11</span><span>12</span>
                                             </div>
                                             <div class="code-content">
-                                                <div class="code-line"><span class="c-keyword">import</span> <span class="c-var">React</span> <span class="c-keyword">from</span> <span class="c-str">'react'</span>;</div>
-                                                <div class="code-line"><span class="c-keyword">import</span> { <span class="c-fn">Badge</span>, <span class="c-fn">Button</span> } <span class="c-keyword">from</span> <span class="c-str">'./ui'</span>;</div>
-                                                <div class="code-line">&nbsp;</div>
-                                                <div class="code-line"><span class="c-keyword">export const</span> <span class="c-fn">Hero</span> = () =&gt; {</div>
-                                                <div class="code-line">&nbsp;&nbsp;<span class="c-keyword">return</span> (</div>
-                                                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-tag">&lt;section</span> <span class="c-attr">className</span>=<span class="c-str">"hero-grid"</span><span class="c-tag">&gt;</span></div>
-                                                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-tag">&lt;Badge&gt;</span><span class="c-txt">✦ Available for Work</span><span class="c-tag">&lt;/Badge&gt;</span></div>
-                                                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-tag">&lt;h1&gt;</span><span class="c-txt">Bringing </span><span class="c-tag">&lt;span&gt;</span><span class="c-txt">ideas</span><span class="c-tag">&lt;/span&gt;</span><span class="c-tag">&lt;/h1&gt;</span></div>
-                                                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-tag">&lt;p&gt;</span><span class="c-txt">to life through design</span><span class="c-tag">&lt;/p&gt;</span></div>
-                                                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-tag">&lt;Button</span> <span class="c-attr">variant</span>=<span class="c-str">"primary"</span><span class="c-tag">&gt;</span><span class="c-txt">About me</span><span class="c-tag">&lt;/Button&gt;</span></div>
-                                                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-tag">&lt;/section&gt;</span><span class="code-cursor"></span></div>
-                                                <div class="code-line">&nbsp;&nbsp;);</div>
-                                                <div class="code-line">};</div>
+                                                <div class="code-line"><span class="c-tag">&lt;!DOCTYPE</span> <span class="c-attr">html</span><span class="c-tag">&gt;</span></div>
+                                                <div class="code-line"><span class="c-tag">&lt;html</span> <span class="c-attr">lang</span>=<span class="c-str">"en"</span><span class="c-tag">&gt;</span></div>
+                                                <div class="code-line">&nbsp;&nbsp;<span class="c-tag">&lt;head&gt;</span></div>
+                                                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-tag">&lt;link</span> <span class="c-attr">rel</span>=<span class="c-str">"stylesheet"</span> <span class="c-attr">href</span>=<span class="c-str">"style.css"</span><span class="c-tag">&gt;</span></div>
+                                                <div class="code-line">&nbsp;&nbsp;<span class="c-tag">&lt;/head&gt;</span></div>
+                                                <div class="code-line">&nbsp;&nbsp;<span class="c-tag">&lt;body&gt;</span></div>
+                                                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-tag">&lt;main</span> <span class="c-attr">class</span>=<span class="c-str">"hero-showcase"</span><span class="c-tag">&gt;</span></div>
+                                                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-tag">&lt;span</span> <span class="c-attr">class</span>=<span class="c-str">"badge"</span><span class="c-tag">&gt;</span><span class="c-txt">✦ Senior Web Engineer</span><span class="c-tag">&lt;/span&gt;</span></div>
+                                                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-tag">&lt;h1&gt;</span><span class="c-txt">Crafting High-Impact Digital Experiences</span><span class="c-tag">&lt;/h1&gt;</span></div>
+                                                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-tag">&lt;a</span> <span class="c-attr">href</span>=<span class="c-str">"#work"</span> <span class="c-attr">class</span>=<span class="c-str">"btn-cta"</span><span class="c-tag">&gt;</span><span class="c-txt">Explore Showcase</span><span class="c-tag">&lt;/a&gt;</span></div>
+                                                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-tag">&lt;/main&gt;</span><span class="code-cursor"></span></div>
+                                                <div class="code-line">&nbsp;&nbsp;<span class="c-tag">&lt;/body&gt;</span></div>
+                                                <div class="code-line"><span class="c-tag">&lt;/html&gt;</span></div>
                                             </div>
                                         </div>
 
-                                        <!-- Integrated VS Code Terminal Panel -->
+                                        <!-- Integrated Local Server Terminal -->
                                         <div class="studio-terminal">
                                             <div class="terminal-header">
                                                 <span class="term-tab active">TERMINAL</span>
                                                 <span class="term-tab">OUTPUT</span>
                                                 <span class="term-tab">PROBLEMS (0)</span>
-                                                <span class="term-badge">Vite v6.1</span>
+                                                <span class="term-badge">Live Server</span>
                                             </div>
                                             <div class="terminal-body">
-                                                <div class="term-line"><span class="t-prompt">$</span> <span class="t-cmd">npm run dev</span></div>
-                                                <div class="term-line t-success">✓ VITE v6.1.0 ready in 142 ms</div>
-                                                <div class="term-line t-info">➜ Local:   http://localhost:5173/</div>
-                                                <div class="term-line t-info">➜ Network: use --host to expose</div>
-                                                <div class="term-line t-hmr">⚡ [hmr] hot updated /src/Hero.jsx</div>
+                                                <div class="term-line"><span class="t-prompt">$</span> <span class="t-cmd">npx live-server --port=5500</span></div>
+                                                <div class="term-line t-success">✓ Ready! Serving "folio" at http://127.0.0.1:5500</div>
+                                                <div class="term-line t-info">➜ HTML5 + CSS3 + Vanilla JS Stack</div>
+                                                <div class="term-line t-info">➜ Live reload enabled for style.css</div>
+                                                <div class="term-line t-hmr">⚡ [reload] index.html updated (12ms)</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- === PHASE 2: DEPLOY / LIVE === -->
+                                <!-- === PHASE 2: DEPLOY / DEVELOPMENT (NEW UNIQUE SHOWCASE DESIGN) === -->
                                 <div class="wf-scene deploy-scene" id="wf-deploy">
                                     <div class="deploy-header">
                                         <div class="studio-dots">
@@ -434,43 +442,53 @@
                                         </div>
                                     </div>
 
-                                    <div class="deploy-browser-content">
-                                        <!-- Ambient background glow & scan line inside live preview -->
+                                    <div class="deploy-browser-content new-model-preview">
+                                        <!-- Ambient background glow & scan line -->
                                         <div class="deploy-bg-glow"></div>
                                         <div class="deploy-scan-line"></div>
 
-                                        <!-- Browser preview of the final site -->
-                                        <div class="browser-preview-nav">
+                                        <!-- Brand New Web App Navigation Model -->
+                                        <div class="browser-preview-nav model-nav">
                                             <div class="bp-logo-area">
-                                                <div class="bp-logo-icon"></div>
-                                                <span class="bp-logo-text">MK<span class="bp-logo-dot">.</span></span>
+                                                <div class="bp-logo-mark">M</div>
+                                                <span class="bp-brand-name">M.STUDIO</span>
                                             </div>
                                             <div class="bp-nav-links">
-                                                <span>Work</span>
+                                                <span>Projects</span>
+                                                <span>Services</span>
                                                 <span>About</span>
-                                                <span class="bp-nav-cta">Hire Me</span>
+                                                <span class="bp-nav-work-btn">Let's Work ↗</span>
                                             </div>
                                         </div>
 
-                                        <div class="browser-preview-hero">
-                                            <div class="bp-badge">
-                                                <span class="bp-sparkle">✦</span> Available for Work
+                                        <!-- Brand New Hero Layout Showcase -->
+                                        <div class="browser-preview-hero model-hero">
+                                            <div class="bp-badge new-badge">
+                                                <span class="bp-sparkle">✦</span> Senior UI/UX & Web Engineer
                                             </div>
-                                            <div class="bp-title-1">Bringing <span class="bp-red">ideas</span></div>
-                                            <div class="bp-title-2">to life through</div>
-                                            <div class="bp-title-3">design</div>
+                                            <div class="bp-model-heading">
+                                                Crafting <span class="bp-gradient-txt">High-Impact</span> Digital Experiences
+                                            </div>
+                                            <div class="bp-model-sub">
+                                                Building scalable, pixel-perfect web applications with ultra-fast performance.
+                                            </div>
+                                            <div class="bp-stats-bar">
+                                                <div class="stat-pill"><strong>40+</strong> Projects</div>
+                                                <div class="stat-pill"><strong>99%</strong> Satisfaction</div>
+                                                <div class="stat-pill"><strong>&lt;50ms</strong> Latency</div>
+                                            </div>
                                             <div class="bp-cta-row">
-                                                <div class="bp-btn-primary">About me</div>
-                                                <div class="bp-btn-outline">Discover Work</div>
+                                                <div class="bp-btn-primary new-cta">Explore Showcase ↗</div>
+                                                <div class="bp-btn-outline new-call">Book a Call</div>
                                             </div>
                                         </div>
 
-                                        <!-- Floating Live Tech Badge -->
+                                        <!-- Floating Edge Tech Badge -->
                                         <div class="deploy-floating-tag">
                                             <span class="dep-tag-icon">⚡</span>
                                             <div class="dep-tag-info">
                                                 <span class="dep-tag-title">Vercel Edge</span>
-                                                <span class="dep-tag-sub">1.2s build</span>
+                                                <span class="dep-tag-sub">0.8s build</span>
                                             </div>
                                         </div>
 
@@ -494,9 +512,9 @@
                                                 <div class="score-ring-svg">
                                                     <svg width="32" height="32" viewBox="0 0 36 36">
                                                         <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3" />
-                                                        <path class="circle-fill" stroke-dasharray="98, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#4ade80" stroke-width="3.2" stroke-linecap="round" />
+                                                        <path class="circle-fill" stroke-dasharray="99, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#4ade80" stroke-width="3.2" stroke-linecap="round" />
                                                     </svg>
-                                                    <span class="score-num-inside">98</span>
+                                                    <span class="score-num-inside">99</span>
                                                 </div>
                                                 <div class="score-info">
                                                     <span class="score-label">Performance</span>
