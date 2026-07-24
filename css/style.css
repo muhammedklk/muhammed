@@ -517,7 +517,7 @@ button {
 /* --- Main Content Area --- */
 .main-content {
     padding-top: 0;
-    padding-bottom: 60px;
+    padding-bottom: 20px;
 }
 
 /* --- Hero Section --- */
@@ -2069,7 +2069,7 @@ button {
    PRE-BUILT DEMOS SECTION (EXACT REFERENCE DESIGN MATCH)
    ========================================================================== */
 .demos-section {
-    padding: 100px 0 80px;
+    padding: 100px 0 20px;
     width: 100%;
     position: relative;
     transition: background-color 0.3s ease;
@@ -5077,7 +5077,7 @@ button {
    ABOUT SECTION DISPLAY HEADLINE SCROLL REVEAL (GSAP SCRUB REVEAL)
    ========================================================================== */
 .about-services-section {
-    padding: 120px 0 90px;
+        padding: 120px 0 50px;
     position: relative;
 }
 
