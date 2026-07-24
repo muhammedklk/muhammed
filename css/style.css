@@ -197,7 +197,7 @@ button {
 /* Glassmorphic Blur Background Only When Scrolled */
 .site-header.scrolled {
     padding: 14px 0;
-    background-color: rgba(6, 6, 6, 0.85);
+        background-color: rgb(6 6 6 / 32%);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);

@@ -39,17 +39,52 @@
     .site-header.scrolled {
         position: fixed !important;
         padding: 12px 0 !important;
-        background-color: rgba(6, 6, 6, 0.85) !important;
+        background-color: rgba(255, 255, 255, 0.95) !important;
         backdrop-filter: blur(20px) !important;
         -webkit-backdrop-filter: blur(20px) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
     }
 
-    [data-theme="light"] .site-header.scrolled {
-        background-color: rgba(255, 255, 255, 0.85) !important;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
+    .site-header.scrolled .logo-text {
+        color: #000000 !important;
+    }
+
+    .site-header.scrolled .hamburger-line {
+        background-color: #000000 !important;
+    }
+
+    .site-header.scrolled .mobile-menu-btn {
+        background: #f3f3f5 !important;
+        border-color: rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Mobile Drawer Overlay Always White */
+    .mobile-drawer {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    .mobile-drawer .logo-text,
+    .mobile-drawer-close {
+        color: #000000 !important;
+    }
+
+    .mobile-drawer-header {
+        border-bottom-color: rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .mobile-drawer-actions {
+        border-top-color: rgba(0, 0, 0, 0.08) !important;
+    }
+
+    .mobile-nav-link {
+        color: #555555 !important;
+    }
+
+    .mobile-nav-link.active,
+    .mobile-nav-link:hover {
+        color: #ff3b40 !important;
     }
 
     .nav-pill-menu {
