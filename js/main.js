@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 11. PORTFOLIO PAGE INTERACTIVE FILTER SYSTEM ---
-    const filterPills = document.querySelectorAll('.works-filter-bar .filter-pill');
+    const filterPills = document.querySelectorAll('.filter-pill');
     const workItems = document.querySelectorAll('.work-grid-item');
 
     if (filterPills.length > 0 && workItems.length > 0) {
