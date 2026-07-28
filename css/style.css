@@ -1534,10 +1534,20 @@ button {
 .styleora-info-banner {
     position: relative;
     z-index: 3;
-    padding: 14px 16px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: linear-gradient(180deg, rgba(9, 10, 15, 0.4) 0%, rgba(9, 10, 15, 0.95) 100%);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.styleora-meta-left {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
 }
 
 .styleora-tag-pill {
@@ -1547,21 +1557,16 @@ button {
     background: rgba(74, 222, 128, 0.12);
     border: 1px solid rgba(74, 222, 128, 0.25);
     width: fit-content;
-    padding: 2px 8px;
+    padding: 2px 7px;
     border-radius: 12px;
-    backdrop-filter: blur(8px);
 }
 
 .styleora-project-title {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 800;
     color: #fff;
     letter-spacing: -0.02em;
-    margin: 2px 0;
-}
-
-.styleora-cta-group {
-    margin-top: 2px;
+    margin: 0;
 }
 
 .styleora-btn-primary {
@@ -1572,11 +1577,12 @@ button {
     font-weight: 700;
     background: #ff4d52;
     color: #fff !important;
-    padding: 4px 12px;
+    padding: 5px 12px;
     border-radius: 14px;
     box-shadow: 0 4px 12px rgba(255, 77, 82, 0.4);
     text-decoration: none;
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .styleora-btn-primary:hover {
@@ -1752,8 +1758,8 @@ button {
 /* Floating Live Tech Badge */
 .deploy-floating-tag {
     position: absolute;
-    top: 52px;
-    right: 14px;
+    top: 48px;
+    left: 14px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1874,7 +1880,7 @@ button {
 /* Performance Score Group */
 .deploy-metrics-group {
     position: absolute;
-    bottom: 12px;
+    top: 48px;
     right: 14px;
     z-index: 4;
 }
