@@ -63,9 +63,14 @@ const Layout = ({ children }) => {
     setIsSearchOpen(false);
   }, [location.pathname]);
 
-  // Show Maintenance Overlay ONLY for unauthenticated visitors when maintenance mode is ON
+  // Admin Preview active check (only when clicking "View Public Website" in Admin Panel)
+  const isPreviewParam = location.search.includes('preview=admin');
+  const isSessionPreview = sessionStorage.getItem('admin_preview_active') === 'true';
+  const isExplicitAdminPreview = isAuthenticated && (isPreviewParam || isSessionPreview || adminPreview);
+
+  // Show Maintenance Overlay on all public portfolio pages when maintenance mode is ON
   const isPublicRoute = !location.pathname.startsWith('/admin');
-  if (isMaintenanceMode && isPublicRoute && !isAuthenticated && !adminPreview) {
+  if (isMaintenanceMode && isPublicRoute && !isExplicitAdminPreview) {
     return (
       <MaintenanceOverlay message={maintenanceMessage} />
     );

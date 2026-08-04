@@ -260,7 +260,8 @@ const AdminLayout = () => {
         {/* Footer Actions */}
         <div style={{ padding: '20px 16px', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
           <a
-            href="/"
+            href="/?preview=admin"
+            onClick={() => sessionStorage.setItem('admin_preview_active', 'true')}
             target="_blank"
             rel="noopener noreferrer"
             style={{

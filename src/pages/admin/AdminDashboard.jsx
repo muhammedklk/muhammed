@@ -33,13 +33,17 @@ const AdminDashboard = () => {
         });
 
         if (profileRes.data && profileRes.data.isMaintenanceMode !== undefined) {
-          const status = !!profileRes.data.isMaintenanceMode;
-          setIsMaintenanceMode(status);
-          localStorage.setItem('portfolio_maintenance_status', status ? 'true' : 'false');
+          const localStatus = localStorage.getItem('portfolio_maintenance_status');
+          const finalStatus = localStatus !== null ? localStatus === 'true' : !!profileRes.data.isMaintenanceMode;
+          setIsMaintenanceMode(finalStatus);
+          localStorage.setItem('portfolio_maintenance_status', finalStatus ? 'true' : 'false');
           setMaintenanceMessage(profileRes.data.maintenanceMessage || '');
+        } else {
+          setIsMaintenanceMode(getMaintenanceMode());
         }
       } catch (err) {
         console.error('Error loading dashboard stats:', err);
+        setIsMaintenanceMode(getMaintenanceMode());
       } finally {
         setLoading(false);
       }
@@ -48,10 +52,11 @@ const AdminDashboard = () => {
     fetchDashboardData();
   }, []);
 
-  const handleToggleMaintenance = () => {
+  const handleToggleMaintenance = async () => {
     const newStatus = !isMaintenanceMode;
     setIsMaintenanceMode(newStatus);
-    setMaintenanceMode(newStatus, maintenanceMessage);
+    localStorage.setItem('portfolio_maintenance_status', newStatus ? 'true' : 'false');
+    await setMaintenanceMode(newStatus, maintenanceMessage);
   };
 
   return (

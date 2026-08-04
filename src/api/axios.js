@@ -278,6 +278,24 @@ const request = async (method, endpoint, body = null, config = {}) => {
     }
   }
 
+  if (endpoint === '/upload' && method === 'POST') {
+    if (body instanceof FormData && body.get('image')) {
+      const file = body.get('image');
+      if (file && file instanceof File) {
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            resolve({ data: { url: reader.result }, status: 200 });
+          };
+          reader.onerror = () => {
+            resolve({ data: { url: '' }, status: 400 });
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+    }
+  }
+
   if (endpoint === '/profile') {
     if (method === 'GET') {
       const profile = getStorage('admin_profile_data', initialProfile);

@@ -99,22 +99,41 @@ const AdminProjectsManager = () => {
     const file = e.target.files[0];
     if (!file) return;
 
-    const uploadData = new FormData();
-    uploadData.append('image', file);
-
     setUploading(true);
+
+    // Helper: read file as Base64 data URL
+    const readAsBase64 = (f) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (reader.result) {
+          setFormData((prev) => ({ ...prev, [fieldName]: reader.result }));
+        }
+        setUploading(false);
+      };
+      reader.onerror = () => {
+        alert('Failed to read local image file.');
+        setUploading(false);
+      };
+      reader.readAsDataURL(f);
+    };
+
     try {
+      const uploadData = new FormData();
+      uploadData.append('image', file);
+
       const res = await api.post('/upload', uploadData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
       if (res.data && res.data.url) {
         setFormData((prev) => ({ ...prev, [fieldName]: formatImgUrl(res.data.url) }));
+        setUploading(false);
+        return;
       }
+      readAsBase64(file);
     } catch (err) {
-      alert('Image upload failed: ' + (err.response?.data?.message || err.message));
-    } finally {
-      setUploading(false);
+      console.warn('Backend image upload endpoint fallback triggered:', err);
+      readAsBase64(file);
     }
   };
 
