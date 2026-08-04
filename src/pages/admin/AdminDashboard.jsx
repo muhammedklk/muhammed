@@ -1,0 +1,234 @@
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import api from '../../api/axios';
+
+const AdminDashboard = () => {
+  const [stats, setStats] = useState({
+    projectsCount: 0,
+    faqsCount: 0,
+    inquiriesCount: 0,
+    profileLoaded: false
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const [projectsRes, faqsRes, inquiriesRes] = await Promise.all([
+          api.get('/projects').catch(() => ({ data: [] })),
+          api.get('/faqs').catch(() => ({ data: [] })),
+          api.get('/inquiries').catch(() => ({ data: [] }))
+        ]);
+
+        setStats({
+          projectsCount: projectsRes.data.length || 0,
+          faqsCount: faqsRes.data.length || 0,
+          inquiriesCount: inquiriesRes.data.length || 0,
+          profileLoaded: true
+        });
+      } catch (err) {
+        console.error('Error loading dashboard stats:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
+
+  return (
+    <div>
+      <div style={{ marginBottom: '32px' }}>
+        <h1 style={{ fontSize: '28px', fontWeight: 800, margin: '0 0 8px 0', letterSpacing: '-0.5px', color: '#fff' }}>
+          Welcome to Portfolio Admin Panel 👋
+        </h1>
+        <p style={{ color: '#94a3b8', margin: 0 }}>
+          Manage all content, case studies, profile details, and client inquiries from one central hub.
+        </p>
+      </div>
+
+      {/* Overview Stat Cards Grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '36px' }}>
+        {/* Stat Card 1: Projects */}
+        <div style={{
+          background: '#12141a',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: '16px',
+          padding: '24px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '20px'
+        }}>
+          <div style={{
+            width: '48px',
+            height: '48px',
+            borderRadius: '14px',
+            background: 'rgba(59, 130, 246, 0.15)',
+            color: '#3b82f6',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <div>
+            <span style={{ fontSize: '13px', color: '#94a3b8', display: 'block', marginBottom: '4px' }}>Total Case Studies</span>
+            <h2 style={{ fontSize: '28px', fontWeight: 800, margin: 0, color: '#fff' }}>
+              {loading ? '...' : stats.projectsCount}
+            </h2>
+          </div>
+        </div>
+
+        {/* Stat Card 2: Inquiries */}
+        <div style={{
+          background: '#12141a',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: '16px',
+          padding: '24px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '20px'
+        }}>
+          <div style={{
+            width: '48px',
+            height: '48px',
+            borderRadius: '14px',
+            background: 'rgba(234, 179, 8, 0.15)',
+            color: '#eab308',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </div>
+          <div>
+            <span style={{ fontSize: '13px', color: '#94a3b8', display: 'block', marginBottom: '4px' }}>Client Inquiries</span>
+            <h2 style={{ fontSize: '28px', fontWeight: 800, margin: 0, color: '#fff' }}>
+              {loading ? '...' : stats.inquiriesCount}
+            </h2>
+          </div>
+        </div>
+
+        {/* Stat Card 3: FAQs */}
+        <div style={{
+          background: '#12141a',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: '16px',
+          padding: '24px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '20px'
+        }}>
+          <div style={{
+            width: '48px',
+            height: '48px',
+            borderRadius: '14px',
+            background: 'rgba(168, 85, 247, 0.15)',
+            color: '#a855f7',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          </div>
+          <div>
+            <span style={{ fontSize: '13px', color: '#94a3b8', display: 'block', marginBottom: '4px' }}>Active FAQs</span>
+            <h2 style={{ fontSize: '28px', fontWeight: 800, margin: 0, color: '#fff' }}>
+              {loading ? '...' : stats.faqsCount}
+            </h2>
+          </div>
+        </div>
+
+        {/* Stat Card 4: System Status */}
+        <div style={{
+          background: '#12141a',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: '16px',
+          padding: '24px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '20px'
+        }}>
+          <div style={{
+            width: '48px',
+            height: '48px',
+            borderRadius: '14px',
+            background: 'rgba(16, 185, 129, 0.15)',
+            color: '#10b981',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div>
+            <span style={{ fontSize: '13px', color: '#94a3b8', display: 'block', marginBottom: '4px' }}>Auth Status</span>
+            <h4 style={{ fontSize: '16px', fontWeight: 700, margin: 0, color: '#10b981' }}>
+              Authenticated
+            </h4>
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Action Shortcuts */}
+      <h3 style={{ fontSize: '18px', fontWeight: 700, marginBottom: '16px', color: '#fff' }}>Quick Management Actions</h3>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+        <Link to="/admin/projects" style={{
+          background: '#12141a',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: '16px',
+          padding: '20px',
+          textDecoration: 'none',
+          color: '#fff',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}>
+          <div>
+            <h4 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 4px 0' }}>Manage Case Studies</h4>
+            <p style={{ fontSize: '13px', color: '#94a3b8', margin: 0 }}>Add, edit, or upload project images</p>
+          </div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d2ea26" strokeWidth="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </Link>
+
+        <Link to="/admin/profile" style={{
+          background: '#12141a',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: '16px',
+          padding: '20px',
+          textDecoration: 'none',
+          color: '#fff',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}>
+          <div>
+            <h4 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 4px 0' }}>Edit Profile & Bio</h4>
+            <p style={{ fontSize: '13px', color: '#94a3b8', margin: 0 }}>Update Hero title, resume link, contact details</p>
+          </div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d2ea26" strokeWidth="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </Link>
+
+        <Link to="/admin/inquiries" style={{
+          background: '#12141a',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          borderRadius: '16px',
+          padding: '20px',
+          textDecoration: 'none',
+          color: '#fff',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}>
+          <div>
+            <h4 style={{ fontSize: '16px', fontWeight: 700, margin: '0 0 4px 0' }}>View Client Inquiries</h4>
+            <p style={{ fontSize: '13px', color: '#94a3b8', margin: 0 }}>Read messages sent from contact form</p>
+          </div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d2ea26" strokeWidth="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default AdminDashboard;

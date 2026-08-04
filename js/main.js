@@ -38,9 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = id('theme-toggle');
     const htmlElement = document.documentElement;
 
-    // Load saved theme or default to 'dark'
-    const savedTheme = localStorage.getItem('portfolio_theme') || 'dark';
-    htmlElement.setAttribute('data-theme', savedTheme);
+    // Default theme set to pure white light mode
+    htmlElement.setAttribute('data-theme', 'light');
+    localStorage.setItem('portfolio_theme', 'light');
 
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuToggleBtn = document.getElementById('mobile-menu-toggle');
     const mobileDrawer = document.getElementById('mobile-drawer');
     const mobileDrawerCloseBtn = document.getElementById('mobile-drawer-close');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link, .overlay-nav-link');
 
     if (mobileMenuToggleBtn && mobileDrawer) {
         mobileMenuToggleBtn.addEventListener('click', () => {
@@ -164,7 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const closeMobileDrawer = () => {
             mobileDrawer.classList.remove('active');
-            document.body.style.overflow = '';
+            setTimeout(() => {
+                document.body.style.overflow = '';
+            }, 500);
         };
 
         if (mobileDrawerCloseBtn) {
@@ -650,5 +652,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, { passive: true });
 })();
+
+// --- HERO 3D PARALLAX TILT CONTROLLER ---
+(() => {
+    const tiltStage = document.getElementById('hero-tilt-stage');
+    if (!tiltStage) return;
+
+    const mainCard = tiltStage.querySelector('.main-glass-card');
+    const backCard = tiltStage.querySelector('.back-depth-card');
+    const floatTop = tiltStage.querySelector('.float-top-badge');
+    const floatBottom = tiltStage.querySelector('.float-bottom-badge');
+
+    document.addEventListener('mousemove', (e) => {
+        if (window.innerWidth <= 991) return;
+        const rect = tiltStage.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const rotateX = ((e.clientY - centerY) / rect.height) * -12;
+            const rotateY = ((e.clientX - centerX) / rect.width) * 12;
+
+            if (mainCard) mainCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            if (backCard) backCard.style.transform = `perspective(1000px) rotateX(${rotateX * 0.7}deg) rotateY(${rotateY * 0.7}deg) translateZ(-20px) rotate(-3deg)`;
+            if (floatTop) floatTop.style.transform = `perspective(1000px) rotateX(${rotateX * 1.3}deg) rotateY(${rotateY * 1.3}deg) translateZ(30px)`;
+            if (floatBottom) floatBottom.style.transform = `perspective(1000px) rotateX(${rotateX * 1.2}deg) rotateY(${rotateY * 1.2}deg) translateZ(25px)`;
+        }
+    });
+
+    tiltStage.addEventListener('mouseleave', () => {
+        if (mainCard) mainCard.style.transform = '';
+        if (backCard) backCard.style.transform = '';
+        if (floatTop) floatTop.style.transform = '';
+        if (floatBottom) floatBottom.style.transform = '';
+    });
+})();
+
 
 
