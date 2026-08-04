@@ -107,60 +107,67 @@ app.get('/api/auth/me', authMiddleware, async (req, res) => {
 
 // ----------------------------------------------------
 // 2. PROFILE ROUTES
-// Global serverless maintenance state store fallback
-let globalMaintenanceState = {
-  isMaintenanceMode: false,
-  maintenanceMessage: 'We are currently updating our portfolio with fresh projects & case studies. Please check back shortly!'
-};
+// ✅ MongoDB is the ONLY source of truth — no in-memory state
+// (in-memory state caused flashing: different Vercel instances had different values)
+// ----------------------------------------------------
+
+const DEFAULT_MAINTENANCE_MSG = 'We are currently updating our portfolio with fresh projects & case studies. Please check back shortly!';
 
 app.get('/api/profile', async (req, res) => {
   try {
-    let profile = await Profile.findOne();
+    const profile = await Profile.findOne();
     if (!profile) {
-      profile = new Profile(globalMaintenanceState);
-      await profile.save().catch(() => {});
+      // No profile yet — default to live (maintenance OFF)
+      return res.json({
+        name: 'Muhammed',
+        role: 'UI/UX Designer & Front-End Developer',
+        isMaintenanceMode: false,
+        maintenanceMessage: DEFAULT_MAINTENANCE_MSG
+      });
     }
     const data = profile.toObject ? profile.toObject() : profile;
     res.json({
       ...data,
-      isMaintenanceMode: profile.isMaintenanceMode !== undefined ? !!profile.isMaintenanceMode : globalMaintenanceState.isMaintenanceMode,
-      maintenanceMessage: profile.maintenanceMessage || globalMaintenanceState.maintenanceMessage
+      isMaintenanceMode: !!profile.isMaintenanceMode,
+      maintenanceMessage: profile.maintenanceMessage || DEFAULT_MAINTENANCE_MSG
     });
   } catch (err) {
+    // MongoDB unavailable — omit isMaintenanceMode, client keeps localStorage value
     res.json({
       name: 'Muhammed',
       role: 'UI/UX Designer & Front-End Developer',
-      isMaintenanceMode: globalMaintenanceState.isMaintenanceMode,
-      maintenanceMessage: globalMaintenanceState.maintenanceMessage
+      maintenanceMessage: DEFAULT_MAINTENANCE_MSG
+      // isMaintenanceMode omitted intentionally — client uses localStorage cache
     });
   }
 });
 
 app.put('/api/profile', authMiddleware, async (req, res) => {
   try {
-    if (req.body.isMaintenanceMode !== undefined) {
-      globalMaintenanceState.isMaintenanceMode = !!req.body.isMaintenanceMode;
-      if (req.body.maintenanceMessage) {
-        globalMaintenanceState.maintenanceMessage = req.body.maintenanceMessage;
-      }
-    }
     const updatedData = { ...req.body, updatedAt: new Date() };
-    const profile = await Profile.findOneAndUpdate({}, { $set: updatedData }, { new: true, upsert: true, setDefaultsOnInsert: true }).catch(() => null);
-    
+    const profile = await Profile.findOneAndUpdate(
+      {},
+      { $set: updatedData },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    );
+
+    const saved = profile ? (profile.toObject ? profile.toObject() : profile) : updatedData;
     res.json({
-      ...(profile ? (profile.toObject ? profile.toObject() : profile) : updatedData),
-      isMaintenanceMode: globalMaintenanceState.isMaintenanceMode,
-      maintenanceMessage: globalMaintenanceState.maintenanceMessage
+      ...saved,
+      isMaintenanceMode: !!saved.isMaintenanceMode,
+      maintenanceMessage: saved.maintenanceMessage || DEFAULT_MAINTENANCE_MSG
     });
   } catch (err) {
+    // MongoDB failed — still return the intended value so client localStorage is correct
     res.json({
       name: 'Muhammed',
       ...req.body,
-      isMaintenanceMode: globalMaintenanceState.isMaintenanceMode,
-      maintenanceMessage: globalMaintenanceState.maintenanceMessage
+      isMaintenanceMode: !!req.body.isMaintenanceMode,
+      maintenanceMessage: req.body.maintenanceMessage || DEFAULT_MAINTENANCE_MSG
     });
   }
 });
+
 
 // ----------------------------------------------------
 // 3. PROJECTS / CASE STUDIES ROUTES

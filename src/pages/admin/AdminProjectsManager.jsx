@@ -40,21 +40,28 @@ const AdminProjectsManager = () => {
   };
 
   const fetchProjects = async () => {
+    // ⚡ Show localStorage cache IMMEDIATELY (zero wait)
+    try {
+      const cached = JSON.parse(localStorage.getItem('admin_projects_cached') || '[]');
+      if (cached.length > 0) {
+        setProjects(cached);
+        setLoading(false);
+      }
+    } catch (_) {}
+
+    // Then fetch fresh data from API in background
     try {
       const res = await api.get('/projects');
       const apiProjects = res.data || [];
-
-      // Merge localStorage image store — restores uploaded images that aren't saved to MongoDB
-      try {
-        const imgStore = JSON.parse(localStorage.getItem('project_images_store') || '{}');
-        const merged = apiProjects.map((p) => ({
-          ...p,
-          ...(imgStore[p._id] || {})
-        }));
-        setProjects(merged);
-      } catch (_) {
-        setProjects(apiProjects);
-      }
+      // Merge with locally saved images
+      const imgStore = JSON.parse(localStorage.getItem('project_images_store') || '{}');
+      const merged = apiProjects.map((p) => ({
+        ...p,
+        ...(imgStore[p._id] || {})
+      }));
+      setProjects(merged);
+      // Cache for next instant load
+      try { localStorage.setItem('admin_projects_cached', JSON.stringify(merged)); } catch (_) {}
     } catch (err) {
       console.error('Error loading projects:', err);
     } finally {
@@ -65,6 +72,7 @@ const AdminProjectsManager = () => {
   useEffect(() => {
     fetchProjects();
   }, []);
+
 
   const openCreateModal = () => {
     setEditingProject(null);
@@ -108,27 +116,57 @@ const AdminProjectsManager = () => {
     }
   };
 
-  const handleImageUpload = (e, fieldName) => {
+
+  // Compress image using Canvas — reduces to ~100-200KB per image (safe for MongoDB via Vercel)
+  const compressImage = (file, maxWidth = 1200, quality = 0.75) => {
+    return new Promise((resolve) => {
+      const canvas = document.createElement('canvas');
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        let w = img.width;
+        let h = img.height;
+        if (w > maxWidth) {
+          h = Math.round((h * maxWidth) / w);
+          w = maxWidth;
+        }
+        canvas.width = w;
+        canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        // Fallback: direct FileReader without compression
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result || '');
+        reader.readAsDataURL(file);
+      };
+
+      img.src = url;
+    });
+  };
+
+  const handleImageUpload = async (e, fieldName) => {
     const file = e.target.files[0];
     if (!file) return;
 
     setUploading(true);
-
-    // Always read as base64 locally — fast, reliable, works without Cloudinary
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      if (reader.result) {
-        setFormData((prev) => ({ ...prev, [fieldName]: reader.result }));
-        setToast('✅ Image loaded successfully!');
-        setTimeout(() => setToast(''), 2500);
-      }
+    try {
+      const compressed = await compressImage(file);
+      setFormData((prev) => ({ ...prev, [fieldName]: compressed }));
+      setToast('✅ Image ready! Click Save to apply.');
+      setTimeout(() => setToast(''), 3000);
+    } catch (err) {
+      console.error('Image processing failed:', err);
+      setToast('❌ Image failed. Try a smaller file.');
+      setTimeout(() => setToast(''), 3000);
+    } finally {
       setUploading(false);
-    };
-    reader.onerror = () => {
-      console.error('Failed to read image file');
-      setUploading(false);
-    };
-    reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -142,40 +180,59 @@ const AdminProjectsManager = () => {
     };
 
     try {
+      let savedProject;
       if (editingProject) {
-        await api.put(`/projects/${editingProject._id}`, payload);
-        // Update local React state directly — don't re-fetch (API might return old data without images)
-        setProjects((prev) => prev.map((p) => p._id === editingProject._id ? { ...p, ...payload } : p));
+        const res = await api.put(`/projects/${editingProject._id}`, payload);
+        savedProject = { ...payload, _id: editingProject._id, ...(res.data && res.data._id ? res.data : {}) };
+        setProjects((prev) => prev.map((p) => p._id === editingProject._id ? savedProject : p));
       } else {
         const res = await api.post('/projects', payload);
-        const newProj = (res.data && res.data._id) ? res.data : { ...payload, _id: Date.now().toString() };
-        setProjects((prev) => [...prev, newProj]);
+        savedProject = (res.data && res.data._id) ? res.data : { ...payload, _id: Date.now().toString() };
+        setProjects((prev) => [...prev, savedProject]);
       }
 
-      // Persist images to localStorage separately for cross-session reliability
+      // Persist images to localStorage (cross-session reliability)
       try {
         const imgStore = JSON.parse(localStorage.getItem('project_images_store') || '{}');
-        const pid = editingProject ? editingProject._id : payload._id;
-        if (pid) {
-          imgStore[pid] = {
-            heroImg: payload.heroImg,
-            showcaseImg: payload.showcaseImg,
-            mobileImg1: payload.mobileImg1,
-            mobileImg2: payload.mobileImg2,
-            bannerImg: payload.bannerImg,
-          };
-          localStorage.setItem('project_images_store', JSON.stringify(imgStore));
-        }
+        imgStore[savedProject._id] = {
+          heroImg: payload.heroImg,
+          showcaseImg: payload.showcaseImg,
+          mobileImg1: payload.mobileImg1,
+          mobileImg2: payload.mobileImg2,
+          bannerImg: payload.bannerImg,
+        };
+        localStorage.setItem('project_images_store', JSON.stringify(imgStore));
+      } catch (_) {}
+
+      // Update full project cache for instant admin load
+      try {
+        const cached = JSON.parse(localStorage.getItem('admin_projects_cached') || '[]');
+        const updated = editingProject
+          ? cached.map((p) => p._id === editingProject._id ? savedProject : p)
+          : [...cached, savedProject];
+        localStorage.setItem('admin_projects_cached', JSON.stringify(updated));
       } catch (_) {}
 
       setModalOpen(false);
+      setToast('✅ Case study saved successfully!');
+      setTimeout(() => setToast(''), 3000);
     } catch (err) {
       alert('Error saving project: ' + (err.response?.data?.message || err.message));
     }
   };
 
+
+
   return (
     <div style={{ width: '100%' }}>
+
+      {/* Page-level toast (visible even after modal closes) */}
+      {toast && (
+        <div style={{ position: 'fixed', top: '20px', right: '24px', zIndex: 9999, background: toast.startsWith('✅') ? 'rgba(34,197,94,0.15)' : 'rgba(239,68,68,0.15)', border: `1px solid ${toast.startsWith('✅') ? '#22c55e' : '#ef4444'}`, borderRadius: '12px', padding: '12px 20px', color: toast.startsWith('✅') ? '#22c55e' : '#ef4444', fontWeight: 700, fontSize: '14px', boxShadow: '0 8px 32px rgba(0,0,0,0.4)', backdropFilter: 'blur(10px)' }}>
+          {toast}
+        </div>
+      )}
+
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px' }}>
         <div>
           <h1 style={{ fontSize: '26px', fontWeight: 800, margin: '0 0 4px 0', color: '#fff' }}>📁 Case Studies Manager</h1>
@@ -290,9 +347,9 @@ const AdminProjectsManager = () => {
               <button onClick={() => setModalOpen(false)} style={{ background: 'transparent', border: 'none', color: '#94a3b8', fontSize: '20px', cursor: 'pointer' }}>✕</button>
             </div>
 
-            {/* Toast notification for image upload success */}
-            {toast && (
-              <div style={{ background: 'rgba(210, 234, 38, 0.15)', border: '1px solid #d2ea26', borderRadius: '10px', padding: '10px 16px', color: '#d2ea26', fontSize: '14px', fontWeight: 600, marginBottom: '16px', textAlign: 'center' }}>
+            {/* In-modal toast — for image upload feedback */}
+            {toast && !toast.includes('saved') && (
+              <div style={{ background: toast.startsWith('✅') ? 'rgba(34,197,94,0.12)' : 'rgba(239,68,68,0.12)', border: `1px solid ${toast.startsWith('✅') ? '#22c55e' : '#ef4444'}`, borderRadius: '10px', padding: '10px 16px', color: toast.startsWith('✅') ? '#22c55e' : '#ef4444', fontSize: '14px', fontWeight: 600, marginBottom: '16px', textAlign: 'center' }}>
                 {toast}
               </div>
             )}

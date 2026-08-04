@@ -32,17 +32,15 @@ const AdminDashboard = () => {
           profileLoaded: true
         });
 
-        if (profileRes.data && profileRes.data.isMaintenanceMode !== undefined) {
-          const modeStatus = !!profileRes.data.isMaintenanceMode;
-          setIsMaintenanceMode(modeStatus);
-          localStorage.setItem('portfolio_maintenance_status', modeStatus ? 'true' : 'false');
-          setMaintenanceMessage(profileRes.data.maintenanceMessage || '');
-        } else {
-          setIsMaintenanceMode(getMaintenanceMode());
+        // ✅ NEVER override admin's localStorage with API response
+        // Admin explicitly sets the toggle → saves to localStorage → that IS the truth
+        // Only read the maintenance message from API (not the ON/OFF state)
+        if (profileRes.data && profileRes.data.maintenanceMessage) {
+          setMaintenanceMessage(profileRes.data.maintenanceMessage);
         }
+        // Keep isMaintenanceMode from localStorage (already initialized with getMaintenanceMode())
       } catch (err) {
         console.error('Error loading dashboard stats:', err);
-        setIsMaintenanceMode(getMaintenanceMode());
       } finally {
         setLoading(false);
       }
@@ -50,6 +48,7 @@ const AdminDashboard = () => {
 
     fetchDashboardData();
   }, []);
+
 
   const handleToggleMaintenance = async () => {
     const newStatus = !isMaintenanceMode;

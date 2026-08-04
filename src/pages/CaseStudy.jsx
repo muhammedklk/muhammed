@@ -103,6 +103,13 @@ const CaseStudy = () => {
         if (res.data && res.data.length > 0) {
           const found = res.data.find((p) => p.slug === id || p._id === id);
           if (found) {
+            // Merge with localStorage image store for reliability
+            let imgOverride = {};
+            try {
+              const imgStore = JSON.parse(localStorage.getItem('project_images_store') || '{}');
+              imgOverride = imgStore[found._id] || {};
+            } catch (_) {}
+
             setProject({
               title: found.title || 'Project Case Study',
               tagline: found.tagline || 'UI/UX Design & Web Development',
@@ -111,11 +118,11 @@ const CaseStudy = () => {
               services: found.services || 'UI/UX & Web Development',
               client: found.client || 'Client Studio',
               year: found.year || '2026',
-              heroImg: found.heroImg || 'assets/portfolio/gyogrea.png',
-              showcaseImg: found.showcaseImg || found.heroImg || 'assets/portfolio/gyogrea.png',
-              mobileImg1: found.mobileImg1 || 'assets/portfolio/3-greentrack.jpg',
-              mobileImg2: found.mobileImg2 || 'assets/portfolio/2-elve.jpg',
-              bannerImg: found.bannerImg || found.heroImg || 'assets/portfolio/gyogrea.png',
+              heroImg: imgOverride.heroImg || found.heroImg || 'assets/portfolio/gyogrea.png',
+              showcaseImg: imgOverride.showcaseImg || found.showcaseImg || found.heroImg || 'assets/portfolio/gyogrea.png',
+              mobileImg1: imgOverride.mobileImg1 || found.mobileImg1 || 'assets/portfolio/3-greentrack.jpg',
+              mobileImg2: imgOverride.mobileImg2 || found.mobileImg2 || 'assets/portfolio/2-elve.jpg',
+              bannerImg: imgOverride.bannerImg || found.bannerImg || found.heroImg || 'assets/portfolio/gyogrea.png',
               nextId: 'styleora',
               description: found.description && found.description.length > 0 ? found.description : [found.tagline],
               outcome: found.outcome || 'Delivered a high-conversion digital experience.',
@@ -144,6 +151,7 @@ const CaseStudy = () => {
       document.body.classList.remove('case-study-page');
     };
   }, [id]);
+
 
   return (
     <main className="case-study-main grid-lines-bg">

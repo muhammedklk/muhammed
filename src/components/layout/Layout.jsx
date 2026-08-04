@@ -16,42 +16,48 @@ import api from '../../api/axios';
 const Layout = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  // Start null = "unknown" so we show a blank screen until API confirms status
-  const [isMaintenanceMode, setIsMaintenanceMode] = useState(null);
+  // Initialize IMMEDIATELY from localStorage — no blocking, instant render
+  const [isMaintenanceMode, setIsMaintenanceMode] = useState(() => getMaintenanceMode());
   const [maintenanceMessage, setMaintenanceMessage] = useState('');
   const [adminPreview, setAdminPreview] = useState(false);
-  const [statusChecked, setStatusChecked] = useState(false);
   const location = useLocation();
   const { isAuthenticated } = useAuth();
 
   // Initialize Lenis smooth scroll
   useLenis();
 
-  // Fetch maintenance mode status from API (single source of truth)
+  // Smart background poll — corrects status silently, max 2s timeout
   const fetchProfileStatus = async () => {
     try {
-      const res = await api.get('/profile');
-      if (res.data && res.data.isMaintenanceMode !== undefined) {
-        const modeStatus = !!res.data.isMaintenanceMode;
-        setIsMaintenanceMode(modeStatus);
-        localStorage.setItem('portfolio_maintenance_status', modeStatus ? 'true' : 'false');
-        setMaintenanceMessage(res.data.maintenanceMessage || '');
-      } else {
-        // Fallback to localStorage if API returns no data
-        setIsMaintenanceMode(getMaintenanceMode());
+      const timeout = new Promise((_, rej) => setTimeout(() => rej('timeout'), 2000));
+      const res = await Promise.race([api.get('/profile'), timeout]);
+
+      if (res && res.data && res.data.isMaintenanceMode !== undefined) {
+        const apiMode = !!res.data.isMaintenanceMode;
+        const localMode = getMaintenanceMode(); // localStorage value
+
+        if (apiMode === true) {
+          // API says maintenance ON → always trust (enables cross-device sync)
+          setIsMaintenanceMode(true);
+          localStorage.setItem('portfolio_maintenance_status', 'true');
+          setMaintenanceMessage(res.data.maintenanceMessage || '');
+        } else if (apiMode === false && localMode === false) {
+          // Both API AND localStorage say OFF → confirmed off, show website
+          setIsMaintenanceMode(false);
+        }
+        // If API says false but localStorage says true → DON'T change
+        // This prevents Vercel/DB timing issues from randomly killing the maintenance screen
       }
-    } catch (err) {
-      console.error('Error checking portfolio maintenance status:', err);
-      setIsMaintenanceMode(getMaintenanceMode());
-    } finally {
-      setStatusChecked(true);
+    } catch (_) {
+      // Timeout or API error — keep existing state, no change
     }
   };
+
 
   useEffect(() => {
     fetchProfileStatus();
 
-    // Live background polling every 6s — all devices sync in real-time
+    // Background poll every 6s — all devices sync maintenance state
     const interval = setInterval(fetchProfileStatus, 6000);
 
     const handleStatusUpdate = () => {
@@ -75,23 +81,19 @@ const Layout = ({ children }) => {
     setIsSearchOpen(false);
   }, [location.pathname]);
 
-  // Admin Preview active check (only when clicking "View Public Website" in Admin Panel)
+  // Admin Preview active check
   const isPreviewParam = location.search.includes('preview=admin');
   const isSessionPreview = sessionStorage.getItem('admin_preview_active') === 'true';
   const isExplicitAdminPreview = isAuthenticated && (isPreviewParam || isSessionPreview || adminPreview);
   const isPublicRoute = !location.pathname.startsWith('/admin');
 
-  // ⏳ Block ALL rendering until API status is confirmed — prevents flash of website before overlay
-  if (!statusChecked) {
-    return <div style={{ position: 'fixed', inset: 0, background: '#ffffff', zIndex: 99999 }} />;
-  }
-
-  // ✅ Show Maintenance Overlay when mode is ON (for visitors only)
+  // Show Maintenance Overlay for visitors when mode is ON
   if (isMaintenanceMode && isPublicRoute && !isExplicitAdminPreview) {
     return (
       <MaintenanceOverlay message={maintenanceMessage} />
     );
   }
+
 
   return (
     <>
