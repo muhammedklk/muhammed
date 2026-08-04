@@ -237,8 +237,8 @@ const request = async (method, endpoint, body = null, config = {}) => {
 
   try {
     const controller = new AbortController();
-    // GET: 3s timeout (fast display, falls to cache). PUT/POST/DELETE: 25s (must reach MongoDB)
-    const timeoutMs = method === 'GET' ? 3000 : 25000;
+    // GET: 8s timeout (gives Vercel cold start enough time to query MongoDB). PUT/POST/DELETE: 25s
+    const timeoutMs = method === 'GET' ? 8000 : 25000;
     const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
     const response = await fetch(`${baseURL}${endpoint}`, {

@@ -26,39 +26,32 @@ const Layout = ({ children }) => {
   // Initialize Lenis smooth scroll
   useLenis();
 
-  // Smart background poll — corrects status silently, max 2s timeout
+  // Real-time background sync with MongoDB database for maintenance state
   const fetchProfileStatus = async () => {
     try {
-      const timeout = new Promise((_, rej) => setTimeout(() => rej('timeout'), 2000));
-      const res = await Promise.race([api.get('/profile'), timeout]);
+      const res = await api.get('/profile');
 
       if (res && res.data && res.data.isMaintenanceMode !== undefined) {
-        const apiMode = !!res.data.isMaintenanceMode;
-        const localMode = getMaintenanceMode(); // localStorage value
-
-        if (apiMode === true) {
-          // API says maintenance ON → always trust (enables cross-device sync)
-          setIsMaintenanceMode(true);
-          localStorage.setItem('portfolio_maintenance_status', 'true');
-          setMaintenanceMessage(res.data.maintenanceMessage || '');
-        } else if (apiMode === false && localMode === false) {
-          // Both API AND localStorage say OFF → confirmed off, show website
-          setIsMaintenanceMode(false);
+        // ✅ Only sync when receiving a REAL response from MongoDB (not offline fallback)
+        if (!res._fromFallback) {
+          const modeStatus = !!res.data.isMaintenanceMode;
+          setIsMaintenanceMode(modeStatus);
+          localStorage.setItem('portfolio_maintenance_status', modeStatus ? 'true' : 'false');
+          if (res.data.maintenanceMessage) {
+            setMaintenanceMessage(res.data.maintenanceMessage);
+          }
         }
-        // If API says false but localStorage says true → DON'T change
-        // This prevents Vercel/DB timing issues from randomly killing the maintenance screen
       }
     } catch (_) {
-      // Timeout or API error — keep existing state, no change
+      // Network error — keep current local state
     }
   };
-
 
   useEffect(() => {
     fetchProfileStatus();
 
-    // Background poll every 6s — all devices sync maintenance state
-    const interval = setInterval(fetchProfileStatus, 6000);
+    // Poll every 3 seconds — all devices across the world sync maintenance state in real-time
+    const interval = setInterval(fetchProfileStatus, 3000);
 
     const handleStatusUpdate = () => {
       setIsMaintenanceMode(getMaintenanceMode());
@@ -73,6 +66,7 @@ const Layout = ({ children }) => {
       window.removeEventListener('storage', handleStatusUpdate);
     };
   }, []);
+
 
   // Scroll to top on route change & persist admin preview in sessionStorage
   useEffect(() => {
