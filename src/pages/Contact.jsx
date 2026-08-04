@@ -35,40 +35,50 @@ const Contact = () => {
     setSubmitting(true);
     setFeedback(null);
 
-    try {
-      // 1. Submit to MongoDB API
-      await api.post('/inquiries', formData).catch(() => {});
+    const submissionTime = new Date().toISOString();
+    const newInquiryData = {
+      ...formData,
+      _id: Date.now().toString(),
+      createdAt: submissionTime
+    };
 
-      // 2. Also submit to FormSubmit for direct email delivery
+    // Save to localStorage immediately so admin panel sees it instantly
+    try {
+      const existingInquiries = JSON.parse(localStorage.getItem('admin_inquiries_data') || '[]');
+      existingInquiries.unshift(newInquiryData);
+      localStorage.setItem('admin_inquiries_data', JSON.stringify(existingInquiries));
+    } catch (_) {}
+
+    // Send to MongoDB API fast
+    api.post('/inquiries', formData).catch(() => {});
+
+    // Send email asynchronously in background without blocking UI
+    try {
       const bodyData = new FormData();
       bodyData.append('name', formData.name);
       bodyData.append('email', formData.email);
       bodyData.append('service', formData.service);
       bodyData.append('budget', formData.budget);
       bodyData.append('message', formData.message);
-      bodyData.append('_subject', 'New Portfolio Message from Website');
+      bodyData.append('_subject', `New Message from ${formData.name}`);
       bodyData.append('_captcha', 'false');
 
-      await fetch('https://formsubmit.co/ajax/muhammedklkm@gmail.com', {
+      fetch('https://formsubmit.co/ajax/muhammedklkm@gmail.com', {
         method: 'POST',
         headers: { Accept: 'application/json' },
         body: bodyData
       }).catch(() => {});
+    } catch (_) {}
 
-      setFeedback({
-        text: "Message sent successfully! Details saved to database and delivered to email.",
-        color: '#4ade80'
-      });
-      setFormData({ name: '', email: '', service: 'uiux', budget: '1k-3k', message: '' });
-    } catch (err) {
-      setFeedback({
-        text: "Message sent! Thank you for reaching out.",
-        color: '#4ade80'
-      });
-    } finally {
-      setSubmitting(false);
-    }
+    // Instant user feedback
+    setFeedback({
+      text: "✅ Message sent successfully! I will respond within 24 hours.",
+      color: '#4ade80'
+    });
+    setFormData({ name: '', email: '', service: 'uiux', budget: '1k-3k', message: '' });
+    setSubmitting(false);
   };
+
 
   return (
     <>

@@ -25,10 +25,15 @@ const AdminDashboard = () => {
           api.get('/profile').catch(() => ({ data: null }))
         ]);
 
+        let localInquiries = [];
+        try { localInquiries = JSON.parse(localStorage.getItem('admin_inquiries_data') || '[]'); } catch (_) {}
+        const apiInquiries = inquiriesRes.data || [];
+        const mergedInquiriesCount = Math.max(localInquiries.length, apiInquiries.length);
+
         setStats({
           projectsCount: projectsRes.data.length || 0,
           faqsCount: faqsRes.data.length || 0,
-          inquiriesCount: inquiriesRes.data.length || 0,
+          inquiriesCount: mergedInquiriesCount,
           profileLoaded: true
         });
 

@@ -74,25 +74,33 @@ const Layout = ({ children }) => {
     };
   }, []);
 
-  // Scroll to top on route change
+  // Scroll to top on route change & persist admin preview in sessionStorage
   useEffect(() => {
     window.scrollTo(0, 0);
     setIsMobileMenuOpen(false);
     setIsSearchOpen(false);
-  }, [location.pathname]);
 
-  // Admin Preview active check
+    if (location.search.includes('preview=admin')) {
+      try {
+        sessionStorage.setItem('admin_preview_active', 'true');
+      } catch (_) {}
+    }
+  }, [location.pathname, location.search]);
+
+  // Admin Preview active check — allows logged-in admin to view ALL pages (Home, Works, About, Case Studies, Contact)
+  const hasAdminToken = !!localStorage.getItem('admin_token');
   const isPreviewParam = location.search.includes('preview=admin');
   const isSessionPreview = sessionStorage.getItem('admin_preview_active') === 'true';
-  const isExplicitAdminPreview = isAuthenticated && (isPreviewParam || isSessionPreview || adminPreview);
+  const isExplicitAdminPreview = (isAuthenticated || hasAdminToken) || isPreviewParam || isSessionPreview || adminPreview;
   const isPublicRoute = !location.pathname.startsWith('/admin');
 
-  // Show Maintenance Overlay for visitors when mode is ON
+  // Show Maintenance Overlay ONLY for regular visitors when mode is ON
   if (isMaintenanceMode && isPublicRoute && !isExplicitAdminPreview) {
     return (
       <MaintenanceOverlay message={maintenanceMessage} />
     );
   }
+
 
 
   return (

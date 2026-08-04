@@ -327,6 +327,14 @@ const AdminProjectsManager = () => {
                     )}
                   </td>
                   <td style={{ padding: '16px 20px', textAlign: 'right' }}>
+                    <a
+                      href={`/casestudy?id=${p.slug || p._id}&preview=admin`}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{ background: 'rgba(255, 255, 255, 0.08)', color: '#fff', textDecoration: 'none', borderRadius: '8px', padding: '6px 12px', marginRight: '8px', fontSize: '12px', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '4px' }}
+                    >
+                      👁️ View Public Page
+                    </a>
                     <Link
                       to={`/admin/case-study/${p.slug || p._id}`}
                       style={{ background: 'rgba(210, 234, 38, 0.15)', color: '#d2ea26', textDecoration: 'none', borderRadius: '8px', padding: '6px 12px', marginRight: '8px', fontSize: '12px', fontWeight: 700 }}
