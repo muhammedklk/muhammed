@@ -91,7 +91,7 @@ const Works = () => {
                 A curated collection of digital products, web experiences, and UI systems designed and built with focus, clarity, and precision.
               </p>
 
-              <div className="demo-badges-row my-4 justify-content-center text-center">
+              <div className="demos-badges-group my-4">
                 <span className="demo-badge badge-blue">
                   <span className="badge-dot dot-blue"></span>
                   UI/UX & Web Dev

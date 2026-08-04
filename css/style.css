@@ -2108,7 +2108,8 @@ button {
 }
 
 /* Badges Group */
-.demos-badges-group {
+.demos-badges-group,
+.demo-badges-row {
     display: flex;
     align-items: center;
     justify-content: center;
