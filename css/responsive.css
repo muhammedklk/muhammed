@@ -651,16 +651,16 @@
         overflow: hidden !important;
         width: 100% !important;
         margin: 20px 0 16px !important;
+        text-align: center !important;
     }
 
     .giant-brand-text {
-        font-size: clamp(42px, 18vw, 100px) !important;
+        font-size: clamp(24px, 11vw, 54px) !important;
+        letter-spacing: -0.04em !important;
         white-space: nowrap !important;
-        display: block !important;
+        display: inline-block !important;
         text-align: center !important;
-        width: 100% !important;
-        overflow: hidden !important;
-        text-overflow: clip !important;
+        max-width: 100% !important;
     }
 
     /* ========================================
