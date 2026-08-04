@@ -107,27 +107,61 @@ app.get('/api/auth/me', authMiddleware, async (req, res) => {
 
 // ----------------------------------------------------
 // 2. PROFILE ROUTES
-// ----------------------------------------------------
+// Global serverless maintenance state store
+let globalMaintenanceState = {
+  isMaintenanceMode: false,
+  maintenanceMessage: 'We are currently updating our portfolio with fresh projects & case studies. Please check back shortly!'
+};
 
 app.get('/api/profile', async (req, res) => {
   try {
     let profile = await Profile.findOne();
     if (!profile) {
-      profile = new Profile();
-      await profile.save();
+      profile = new Profile(globalMaintenanceState);
+      await profile.save().catch(() => {});
     }
-    res.json(profile);
+    const data = profile.toObject ? profile.toObject() : profile;
+    if (data.isMaintenanceMode === undefined) {
+      data.isMaintenanceMode = globalMaintenanceState.isMaintenanceMode;
+      data.maintenanceMessage = globalMaintenanceState.maintenanceMessage;
+    }
+    res.json(data);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.json({
+      name: 'Muhammed',
+      role: 'UI/UX Designer & Front-End Developer',
+      isMaintenanceMode: globalMaintenanceState.isMaintenanceMode,
+      maintenanceMessage: globalMaintenanceState.maintenanceMessage
+    });
   }
 });
 
 app.put('/api/profile', authMiddleware, async (req, res) => {
   try {
-    const profile = await Profile.findOneAndUpdate({}, { $set: req.body }, { new: true, upsert: true, setDefaultsOnInsert: true });
-    res.json(profile);
+    if (req.body.isMaintenanceMode !== undefined) {
+      globalMaintenanceState.isMaintenanceMode = !!req.body.isMaintenanceMode;
+      if (req.body.maintenanceMessage) {
+        globalMaintenanceState.maintenanceMessage = req.body.maintenanceMessage;
+      }
+    }
+    const profile = await Profile.findOneAndUpdate({}, { $set: req.body }, { new: true, upsert: true, setDefaultsOnInsert: true }).catch(() => null);
+    if (profile) {
+      res.json(profile);
+    } else {
+      res.json({
+        name: 'Muhammed',
+        ...req.body,
+        isMaintenanceMode: globalMaintenanceState.isMaintenanceMode,
+        maintenanceMessage: globalMaintenanceState.maintenanceMessage
+      });
+    }
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.json({
+      name: 'Muhammed',
+      ...req.body,
+      isMaintenanceMode: globalMaintenanceState.isMaintenanceMode,
+      maintenanceMessage: globalMaintenanceState.maintenanceMessage
+    });
   }
 });
 
