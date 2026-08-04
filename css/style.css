@@ -42,6 +42,11 @@
     --drawer-bg: #ffffff;
 }
 
+/* Force light theme always — prevent device/browser dark mode override */
+:root {
+    color-scheme: light only;
+}
+
 /* --- Base Reset & Typography --- */
 *, *::before, *::after {
     box-sizing: border-box;

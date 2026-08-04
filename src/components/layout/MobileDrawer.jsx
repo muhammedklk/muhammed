@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { useTheme } from '../../context/ThemeContext';
 
 const MobileDrawer = ({ isOpen, onClose }) => {
-  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     if (isOpen) {
@@ -40,28 +38,6 @@ const MobileDrawer = ({ isOpen, onClose }) => {
         </Link>
         
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          {/* Theme Toggle Button */}
-          <button
-            type="button"
-            className="theme-toggle-btn"
-            id="theme-toggle"
-            aria-label="Toggle Light/Dark Theme"
-            onClick={toggleTheme}
-            style={{
-              background: 'rgba(255,255,255,0.08)',
-              border: '1px solid rgba(255,255,255,0.15)',
-              color: '#fff',
-              borderRadius: '50px',
-              padding: '8px 16px',
-              cursor: 'pointer',
-              fontSize: '13px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px'
-            }}
-          >
-            <span>{theme === 'dark' ? '☀️ Light' : '🌙 Dark'}</span>
-          </button>
 
           <button
             type="button"

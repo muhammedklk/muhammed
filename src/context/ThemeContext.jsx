@@ -3,18 +3,19 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('portfolio_theme') || 'light';
-  });
+  // Always force light theme — ignore device/browser dark mode preference
+  const [theme] = useState('light');
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('portfolio_theme', theme);
-  }, [theme]);
+    // Force light theme on document always
+    document.documentElement.setAttribute('data-theme', 'light');
+    document.documentElement.removeAttribute('dark');
+    document.documentElement.style.colorScheme = 'light';
+    localStorage.setItem('portfolio_theme', 'light');
+  }, []);
 
-  const toggleTheme = () => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
-  };
+  // toggleTheme kept for API compatibility but does nothing (light is always forced)
+  const toggleTheme = () => {};
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
