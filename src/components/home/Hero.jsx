@@ -107,15 +107,6 @@ const Hero = () => {
                   </div>
                 </div>
               </div>
-
-              {/* FLOATING EXTRA STAT BADGE (BOTTOM RIGHT) */}
-              <div className="orbit-floating-stat">
-                <span className="stat-star">★</span>
-                <div className="stat-info">
-                  <span className="stat-val">100% Custom Code</span>
-                  <span className="stat-sub">High Performance Web Apps</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>

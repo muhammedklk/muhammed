@@ -63,9 +63,9 @@ const Layout = ({ children }) => {
     setIsSearchOpen(false);
   }, [location.pathname]);
 
-  // Show Maintenance Overlay on all public portfolio pages when maintenance mode is ON
+  // Show Maintenance Overlay ONLY for unauthenticated visitors when maintenance mode is ON
   const isPublicRoute = !location.pathname.startsWith('/admin');
-  if (isMaintenanceMode && isPublicRoute && !adminPreview) {
+  if (isMaintenanceMode && isPublicRoute && !isAuthenticated && !adminPreview) {
     return (
       <MaintenanceOverlay message={maintenanceMessage} />
     );

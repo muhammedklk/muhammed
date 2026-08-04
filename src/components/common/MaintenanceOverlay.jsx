@@ -1,6 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
+import api from '../../api/axios';
 
 const MaintenanceOverlay = ({ message }) => {
+  const [notified, setNotified] = useState(() => {
+    try {
+      return !!localStorage.getItem('visitor_notify_enabled');
+    } catch (e) {
+      return false;
+    }
+  });
+  const [submitting, setSubmitting] = useState(false);
+
+  const handle1ClickNotify = async () => {
+    setSubmitting(true);
+    try {
+      await api.post('/inquiries', {
+        name: 'Website Visitor (1-Click Notification)',
+        email: '1-click-visitor@portfolio.com',
+        service: '1-Click Notify When Live',
+        budget: 'N/A',
+        message: '1-Click Visitor requested notification when portfolio updating is complete.'
+      }).catch(() => {});
+      localStorage.setItem('visitor_notify_enabled', 'true');
+      setNotified(true);
+    } catch (err) {
+      localStorage.setItem('visitor_notify_enabled', 'true');
+      setNotified(true);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div className="maintenance-overlay-screen" style={{
       position: 'fixed',
@@ -37,7 +67,7 @@ const MaintenanceOverlay = ({ message }) => {
         backgroundColor: '#ffffff',
         border: '1px solid #e5e7eb',
         borderRadius: '24px',
-        padding: '48px 32px',
+        padding: '44px 30px',
         textAlign: 'center',
         boxShadow: '0 20px 45px rgba(0, 0, 0, 0.05)'
       }}>
@@ -114,6 +144,59 @@ const MaintenanceOverlay = ({ message }) => {
         }}>
           {message || 'We are currently making updates to our website. Please check back shortly.'}
         </p>
+
+        {/* 1-Click Notify Me Button Section */}
+        <div style={{
+          marginTop: '28px',
+          paddingTop: '20px',
+          borderTop: '1px solid #f3f4f6'
+        }}>
+          {notified ? (
+            <div style={{
+              backgroundColor: '#ecfdf5',
+              border: '1px solid #a7f3d0',
+              color: '#047857',
+              borderRadius: '30px',
+              padding: '12px 20px',
+              fontSize: '13px',
+              fontWeight: 700,
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              width: '100%'
+            }}>
+              <span>✨</span>
+              <span>Notification Enabled! You will be updated when live.</span>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={handle1ClickNotify}
+              disabled={submitting}
+              style={{
+                width: '100%',
+                padding: '13px 24px',
+                borderRadius: '30px',
+                border: 'none',
+                backgroundColor: '#111827',
+                color: '#ffffff',
+                fontSize: '14px',
+                fontWeight: 700,
+                cursor: submitting ? 'wait' : 'pointer',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.12)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              <span>🔔</span>
+              <span>{submitting ? 'Setting Notification...' : 'Notify Me When Live'}</span>
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
