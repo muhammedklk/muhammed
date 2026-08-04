@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../api/axios';
+import { getMaintenanceMode, setMaintenanceMode } from '../../utils/maintenanceStatus';
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
@@ -9,7 +10,7 @@ const AdminDashboard = () => {
     inquiriesCount: 0,
     profileLoaded: false
   });
-  const [isMaintenanceMode, setIsMaintenanceMode] = useState(false);
+  const [isMaintenanceMode, setIsMaintenanceMode] = useState(() => getMaintenanceMode());
   const [maintenanceMessage, setMaintenanceMessage] = useState('');
   const [updatingMaintenance, setUpdatingMaintenance] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -31,8 +32,10 @@ const AdminDashboard = () => {
           profileLoaded: true
         });
 
-        if (profileRes.data) {
-          setIsMaintenanceMode(!!profileRes.data.isMaintenanceMode);
+        if (profileRes.data && profileRes.data.isMaintenanceMode !== undefined) {
+          const status = !!profileRes.data.isMaintenanceMode;
+          setIsMaintenanceMode(status);
+          localStorage.setItem('portfolio_maintenance_status', status ? 'true' : 'false');
           setMaintenanceMessage(profileRes.data.maintenanceMessage || '');
         }
       } catch (err) {
@@ -49,13 +52,8 @@ const AdminDashboard = () => {
     const newStatus = !isMaintenanceMode;
     setUpdatingMaintenance(true);
     try {
-      const currentProfileRes = await api.get('/profile').catch(() => ({ data: {} }));
-      const updated = {
-        ...(currentProfileRes.data || {}),
-        isMaintenanceMode: newStatus
-      };
-      await api.put('/profile', updated);
       setIsMaintenanceMode(newStatus);
+      await setMaintenanceMode(newStatus, maintenanceMessage);
     } catch (err) {
       alert('Failed to update maintenance status: ' + (err.response?.data?.message || err.message));
     } finally {

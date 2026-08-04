@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../api/axios';
+import { setMaintenanceMode } from '../../utils/maintenanceStatus';
 
 const AdminProfileEditor = () => {
   const [profile, setProfile] = useState({
@@ -49,6 +50,7 @@ const AdminProfileEditor = () => {
 
     try {
       await api.put('/profile', profile);
+      await setMaintenanceMode(!!profile.isMaintenanceMode, profile.maintenanceMessage);
       setFeedback('Profile updated successfully!');
       setTimeout(() => setFeedback(''), 4000);
     } catch (err) {

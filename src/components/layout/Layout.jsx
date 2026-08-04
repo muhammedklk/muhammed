@@ -10,12 +10,13 @@ import ScrollToTop from './ScrollToTop';
 import MaintenanceOverlay from '../common/MaintenanceOverlay';
 import { useLenis } from '../../hooks/useLenis';
 import { useAuth } from '../../context/AuthContext';
+import { getMaintenanceMode } from '../../utils/maintenanceStatus';
 import api from '../../api/axios';
 
 const Layout = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isMaintenanceMode, setIsMaintenanceMode] = useState(false);
+  const [isMaintenanceMode, setIsMaintenanceMode] = useState(() => getMaintenanceMode());
   const [maintenanceMessage, setMaintenanceMessage] = useState('');
   const [adminPreview, setAdminPreview] = useState(false);
   const location = useLocation();
@@ -24,12 +25,14 @@ const Layout = ({ children }) => {
   // Initialize Lenis smooth scroll
   useLenis();
 
-  // Fetch maintenance mode status from profile
+  // Fetch maintenance mode status from profile & sync state
   const fetchProfileStatus = async () => {
     try {
       const res = await api.get('/profile');
-      if (res.data) {
-        setIsMaintenanceMode(!!res.data.isMaintenanceMode);
+      if (res.data && res.data.isMaintenanceMode !== undefined) {
+        const modeStatus = !!res.data.isMaintenanceMode;
+        setIsMaintenanceMode(modeStatus);
+        localStorage.setItem('portfolio_maintenance_status', modeStatus ? 'true' : 'false');
         setMaintenanceMessage(res.data.maintenanceMessage || '');
       }
     } catch (err) {
@@ -39,6 +42,18 @@ const Layout = ({ children }) => {
 
   useEffect(() => {
     fetchProfileStatus();
+
+    const handleStatusUpdate = () => {
+      setIsMaintenanceMode(getMaintenanceMode());
+    };
+
+    window.addEventListener('maintenance_updated', handleStatusUpdate);
+    window.addEventListener('storage', handleStatusUpdate);
+
+    return () => {
+      window.removeEventListener('maintenance_updated', handleStatusUpdate);
+      window.removeEventListener('storage', handleStatusUpdate);
+    };
   }, []);
 
   // Scroll to top on route change
@@ -54,7 +69,6 @@ const Layout = ({ children }) => {
     return (
       <MaintenanceOverlay
         message={maintenanceMessage}
-        onCheckAgain={fetchProfileStatus}
         isAdmin={isAuthenticated}
         onPreviewSite={() => setAdminPreview(true)}
       />
