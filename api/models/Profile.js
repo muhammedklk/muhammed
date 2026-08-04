@@ -34,6 +34,11 @@ const profileSchema = new mongoose.Schema({
     github: { type: String, default: 'https://github.com/muhammedklk' },
     instagram: { type: String, default: 'https://www.instagram.com/___muhammedk/' }
   },
+  isMaintenanceMode: { type: Boolean, default: false },
+  maintenanceMessage: {
+    type: String,
+    default: 'We are currently updating our portfolio with fresh projects & case studies. Please check back shortly!'
+  },
   updatedAt: { type: Date, default: Date.now }
 });
 

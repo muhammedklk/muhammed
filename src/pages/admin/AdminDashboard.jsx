@@ -9,15 +9,19 @@ const AdminDashboard = () => {
     inquiriesCount: 0,
     profileLoaded: false
   });
+  const [isMaintenanceMode, setIsMaintenanceMode] = useState(false);
+  const [maintenanceMessage, setMaintenanceMessage] = useState('');
+  const [updatingMaintenance, setUpdatingMaintenance] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const [projectsRes, faqsRes, inquiriesRes] = await Promise.all([
+        const [projectsRes, faqsRes, inquiriesRes, profileRes] = await Promise.all([
           api.get('/projects').catch(() => ({ data: [] })),
           api.get('/faqs').catch(() => ({ data: [] })),
-          api.get('/inquiries').catch(() => ({ data: [] }))
+          api.get('/inquiries').catch(() => ({ data: [] })),
+          api.get('/profile').catch(() => ({ data: null }))
         ]);
 
         setStats({
@@ -26,6 +30,11 @@ const AdminDashboard = () => {
           inquiriesCount: inquiriesRes.data.length || 0,
           profileLoaded: true
         });
+
+        if (profileRes.data) {
+          setIsMaintenanceMode(!!profileRes.data.isMaintenanceMode);
+          setMaintenanceMessage(profileRes.data.maintenanceMessage || '');
+        }
       } catch (err) {
         console.error('Error loading dashboard stats:', err);
       } finally {
@@ -36,15 +45,94 @@ const AdminDashboard = () => {
     fetchDashboardData();
   }, []);
 
+  const handleToggleMaintenance = async () => {
+    const newStatus = !isMaintenanceMode;
+    setUpdatingMaintenance(true);
+    try {
+      await api.put('/profile', { isMaintenanceMode: newStatus });
+      setIsMaintenanceMode(newStatus);
+    } catch (err) {
+      alert('Failed to update maintenance status: ' + (err.response?.data?.message || err.message));
+    } finally {
+      setUpdatingMaintenance(false);
+    }
+  };
+
   return (
     <div>
-      <div style={{ marginBottom: '32px' }}>
+      <div style={{ marginBottom: '24px' }}>
         <h1 style={{ fontSize: '28px', fontWeight: 800, margin: '0 0 8px 0', letterSpacing: '-0.5px', color: '#fff' }}>
           Welcome to Portfolio Admin Panel 👋
         </h1>
         <p style={{ color: '#94a3b8', margin: 0 }}>
           Manage all content, case studies, profile details, and client inquiries from one central hub.
         </p>
+      </div>
+
+      {/* Portfolio Updating / Maintenance Mode Quick Control Banner */}
+      <div style={{
+        background: isMaintenanceMode
+          ? 'linear-gradient(135deg, rgba(234, 179, 8, 0.15) 0%, rgba(20, 20, 25, 0.95) 100%)'
+          : 'linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(20, 20, 25, 0.95) 100%)',
+        border: isMaintenanceMode ? '1px solid rgba(234, 179, 8, 0.4)' : '1px solid rgba(34, 197, 94, 0.3)',
+        borderRadius: '20px',
+        padding: '20px 24px',
+        marginBottom: '32px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '16px'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{
+            width: '44px',
+            height: '44px',
+            borderRadius: '12px',
+            background: isMaintenanceMode ? 'rgba(234, 179, 8, 0.2)' : 'rgba(34, 197, 94, 0.2)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '22px'
+          }}>
+            {isMaintenanceMode ? '🚧' : '🟢'}
+          </div>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: '#fff' }}>
+                Portfolio Status: {isMaintenanceMode ? 'Updating Mode Active 🚧' : 'Live & Publicly Visible 🟢'}
+              </h3>
+            </div>
+            <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: '#94a3b8' }}>
+              {isMaintenanceMode
+                ? 'Visitors see a "Portfolio Updating in Progress" screen while you edit projects & content.'
+                : 'Your portfolio is live and visible to all visitors normally.'}
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={handleToggleMaintenance}
+          disabled={updatingMaintenance}
+          style={{
+            padding: '10px 24px',
+            borderRadius: '30px',
+            border: 'none',
+            background: isMaintenanceMode ? '#eab308' : '#22c55e',
+            color: '#000',
+            fontWeight: 800,
+            fontSize: '13px',
+            cursor: updatingMaintenance ? 'wait' : 'pointer',
+            boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+            transition: 'all 0.2s ease'
+          }}
+        >
+          {updatingMaintenance
+            ? 'Updating...'
+            : isMaintenanceMode
+            ? 'Turn OFF Maintenance (Make Live)'
+            : 'Turn ON Maintenance (Show Updating Screen)'}
+        </button>
       </div>
 
       {/* Overview Stat Cards Grid */}

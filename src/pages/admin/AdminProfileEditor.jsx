@@ -19,7 +19,9 @@ const AdminProfileEditor = () => {
       linkedin: 'https://www.linkedin.com/in/muhammed-klkm/',
       github: 'https://github.com/muhammedklk',
       instagram: 'https://www.instagram.com/___muhammedk/'
-    }
+    },
+    isMaintenanceMode: false,
+    maintenanceMessage: 'We are currently updating our portfolio with fresh projects & case studies. Please check back shortly!'
   });
 
   const [saving, setSaving] = useState(false);
@@ -255,6 +257,37 @@ const AdminProfileEditor = () => {
                 style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px 14px', color: '#fff', fontSize: '14px' }}
               />
             </div>
+          </div>
+        </div>
+
+        {/* Section 5: Maintenance / Updating Screen Settings */}
+        <div style={{ background: '#12141a', border: '1px solid rgba(234, 179, 8, 0.3)', borderRadius: '16px', padding: '24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: 700, margin: 0, color: '#eab308', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span>🚧</span> Maintenance / Updating Mode Screen
+            </h3>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '14px', fontWeight: 600, color: '#fff' }}>
+              <input
+                type="checkbox"
+                checked={!!profile.isMaintenanceMode}
+                onChange={(e) => setProfile({ ...profile, isMaintenanceMode: e.target.checked })}
+                style={{ width: '18px', height: '18px', accentColor: '#eab308', cursor: 'pointer' }}
+              />
+              {profile.isMaintenanceMode ? 'ON (Visitors see Updating Screen)' : 'OFF (Portfolio is Live)'}
+            </label>
+          </div>
+
+          <div>
+            <label style={{ display: 'block', fontSize: '13px', color: '#94a3b8', marginBottom: '6px' }}>
+              Custom Maintenance Message (Shown to visitors when Updating Screen is ON)
+            </label>
+            <textarea
+              rows="2"
+              value={profile.maintenanceMessage || ''}
+              onChange={(e) => setProfile({ ...profile, maintenanceMessage: e.target.value })}
+              placeholder="We are currently updating our portfolio with fresh projects & case studies..."
+              style={{ width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', padding: '10px 14px', color: '#fff', fontSize: '14px' }}
+            />
           </div>
         </div>
       </form>
