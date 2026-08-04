@@ -157,17 +157,17 @@ const MaintenanceOverlay = ({ message }) => {
               border: '1px solid #a7f3d0',
               color: '#047857',
               borderRadius: '30px',
-              padding: '12px 20px',
-              fontSize: '13px',
+              padding: '10px 16px',
+              fontSize: '12px',
               fontWeight: 700,
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '8px',
+              gap: '6px',
               width: '100%'
             }}>
               <span>✨</span>
-              <span>Notification Enabled! You will be updated when live.</span>
+              <span>We will notify you when live!</span>
             </div>
           ) : (
             <button
