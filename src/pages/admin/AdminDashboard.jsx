@@ -111,29 +111,57 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        <button
-          onClick={handleToggleMaintenance}
-          style={{
-            padding: '12px 26px',
-            borderRadius: '30px',
-            border: 'none',
-            background: isMaintenanceMode ? '#ef4444' : '#22c55e',
-            color: '#ffffff',
-            fontWeight: 800,
-            fontSize: '13px',
-            cursor: 'pointer',
-            boxShadow: isMaintenanceMode ? '0 4px 20px rgba(239, 68, 68, 0.4)' : '0 4px 20px rgba(34, 197, 94, 0.3)',
-            transition: 'all 0.2s ease',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px'
-          }}
-        >
-          {isMaintenanceMode
-            ? '🔴 Updating Screen ON (Click to turn OFF)'
-            : '🟢 Live (Click to turn ON Updating Screen)'}
-        </button>
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
+          {/* View Live button — only when maintenance is ON, bypasses maintenance screen */}
+          {isMaintenanceMode && (
+            <button
+              onClick={() => window.open('/?preview=admin', '_blank')}
+              style={{
+                padding: '12px 22px',
+                borderRadius: '30px',
+                border: '1px solid rgba(255,255,255,0.2)',
+                background: 'rgba(255,255,255,0.08)',
+                color: '#ffffff',
+                fontWeight: 700,
+                fontSize: '13px',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.15)'}
+              onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
+            >
+              👁️ View Live Site
+            </button>
+          )}
+
+          <button
+            onClick={handleToggleMaintenance}
+            style={{
+              padding: '12px 26px',
+              borderRadius: '30px',
+              border: 'none',
+              background: isMaintenanceMode ? '#ef4444' : '#22c55e',
+              color: '#ffffff',
+              fontWeight: 800,
+              fontSize: '13px',
+              cursor: 'pointer',
+              boxShadow: isMaintenanceMode ? '0 4px 20px rgba(239, 68, 68, 0.4)' : '0 4px 20px rgba(34, 197, 94, 0.3)',
+              transition: 'all 0.2s ease',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}
+          >
+            {isMaintenanceMode
+              ? '🔴 Updating Screen ON (Click to turn OFF)'
+              : '🟢 Live (Click to turn ON Updating Screen)'}
+          </button>
+        </div>
       </div>
+
 
       {/* Overview Stat Cards Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '36px' }}>
