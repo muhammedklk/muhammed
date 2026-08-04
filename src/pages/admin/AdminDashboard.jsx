@@ -48,17 +48,10 @@ const AdminDashboard = () => {
     fetchDashboardData();
   }, []);
 
-  const handleToggleMaintenance = async () => {
+  const handleToggleMaintenance = () => {
     const newStatus = !isMaintenanceMode;
-    setUpdatingMaintenance(true);
-    try {
-      setIsMaintenanceMode(newStatus);
-      await setMaintenanceMode(newStatus, maintenanceMessage);
-    } catch (err) {
-      alert('Failed to update maintenance status: ' + (err.response?.data?.message || err.message));
-    } finally {
-      setUpdatingMaintenance(false);
-    }
+    setIsMaintenanceMode(newStatus);
+    setMaintenanceMode(newStatus, maintenanceMessage);
   };
 
   return (
@@ -75,9 +68,9 @@ const AdminDashboard = () => {
       {/* Portfolio Updating / Maintenance Mode Quick Control Banner */}
       <div style={{
         background: isMaintenanceMode
-          ? 'linear-gradient(135deg, rgba(234, 179, 8, 0.15) 0%, rgba(20, 20, 25, 0.95) 100%)'
+          ? 'linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(20, 20, 25, 0.95) 100%)'
           : 'linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(20, 20, 25, 0.95) 100%)',
-        border: isMaintenanceMode ? '1px solid rgba(234, 179, 8, 0.4)' : '1px solid rgba(34, 197, 94, 0.3)',
+        border: isMaintenanceMode ? '1px solid rgba(239, 68, 68, 0.4)' : '1px solid rgba(34, 197, 94, 0.3)',
         borderRadius: '20px',
         padding: '20px 24px',
         marginBottom: '32px',
@@ -85,14 +78,15 @@ const AdminDashboard = () => {
         alignItems: 'center',
         justifyContent: 'space-between',
         flexWrap: 'wrap',
-        gap: '16px'
+        gap: '16px',
+        transition: 'all 0.3s ease'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{
             width: '44px',
             height: '44px',
             borderRadius: '12px',
-            background: isMaintenanceMode ? 'rgba(234, 179, 8, 0.2)' : 'rgba(34, 197, 94, 0.2)',
+            background: isMaintenanceMode ? 'rgba(239, 68, 68, 0.2)' : 'rgba(34, 197, 94, 0.2)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -108,7 +102,7 @@ const AdminDashboard = () => {
             </div>
             <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: '#94a3b8' }}>
               {isMaintenanceMode
-                ? 'Visitors see a "Portfolio Updating in Progress" screen while you edit projects & content.'
+                ? 'Visitors see a clean "Website Updating in Progress" screen while you edit.'
                 : 'Your portfolio is live and visible to all visitors normally.'}
             </p>
           </div>
@@ -116,25 +110,25 @@ const AdminDashboard = () => {
 
         <button
           onClick={handleToggleMaintenance}
-          disabled={updatingMaintenance}
           style={{
-            padding: '10px 24px',
+            padding: '12px 26px',
             borderRadius: '30px',
             border: 'none',
-            background: isMaintenanceMode ? '#eab308' : '#22c55e',
-            color: '#000',
+            background: isMaintenanceMode ? '#ef4444' : '#22c55e',
+            color: '#ffffff',
             fontWeight: 800,
             fontSize: '13px',
-            cursor: updatingMaintenance ? 'wait' : 'pointer',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
-            transition: 'all 0.2s ease'
+            cursor: 'pointer',
+            boxShadow: isMaintenanceMode ? '0 4px 20px rgba(239, 68, 68, 0.4)' : '0 4px 20px rgba(34, 197, 94, 0.3)',
+            transition: 'all 0.2s ease',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px'
           }}
         >
-          {updatingMaintenance
-            ? 'Updating...'
-            : isMaintenanceMode
-            ? 'Turn OFF Maintenance (Make Live)'
-            : 'Turn ON Maintenance (Show Updating Screen)'}
+          {isMaintenanceMode
+            ? '🔴 Updating Screen ON (Click to turn OFF)'
+            : '🟢 Live (Click to turn ON Updating Screen)'}
         </button>
       </div>
 
