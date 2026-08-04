@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const MaintenanceOverlay = ({ message, onCheckAgain, isAdmin, onPreviewSite }) => {
+const MaintenanceOverlay = ({ message, isAdmin, onPreviewSite }) => {
   return (
     <div className="maintenance-overlay-screen" style={{
       position: 'fixed',
@@ -9,197 +9,152 @@ const MaintenanceOverlay = ({ message, onCheckAgain, isAdmin, onPreviewSite }) =
       left: 0,
       width: '100vw',
       height: '100vh',
-      backgroundColor: '#0a0b0e',
-      color: '#ffffff',
+      backgroundColor: '#ffffff',
+      color: '#111827',
       zIndex: 99999,
       display: 'flex',
+      flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
       padding: '24px',
-      overflowY: 'auto'
+      fontFamily: "'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif"
     }}>
-      {/* Background Glow Orbs */}
-      <div style={{
-        position: 'absolute',
-        top: '20%',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        width: '500px',
-        height: '500px',
-        background: 'radial-gradient(circle, rgba(210, 234, 38, 0.12) 0%, rgba(0, 0, 0, 0) 70%)',
-        pointerEvents: 'none',
-        borderRadius: '50%'
-      }}></div>
+      {/* Inline Animation CSS */}
+      <style>{`
+        @keyframes spinGear {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        @keyframes pulseDot {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(1.2); }
+        }
+      `}</style>
 
+      {/* Main Minimalist Container */}
       <div style={{
-        maxWidth: '640px',
+        maxWidth: '480px',
         width: '100%',
-        background: 'rgba(18, 20, 26, 0.95)',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
-        borderRadius: '28px',
-        padding: '48px 36px',
+        backgroundColor: '#ffffff',
+        border: '1px solid #e5e7eb',
+        borderRadius: '24px',
+        padding: '44px 32px',
         textAlign: 'center',
-        boxShadow: '0 30px 80px rgba(0, 0, 0, 0.6)',
-        backdropFilter: 'blur(20px)',
-        position: 'relative',
-        zIndex: 2
+        boxShadow: '0 20px 45px rgba(0, 0, 0, 0.05)'
       }}>
-        {/* Animated Tool/Pulsing Icon */}
+        {/* Animated Spin Icon Wrapper */}
         <div style={{
-          width: '80px',
-          height: '80px',
+          width: '64px',
+          height: '64px',
           borderRadius: '50%',
-          background: 'rgba(210, 234, 38, 0.12)',
-          border: '1px solid rgba(210, 234, 38, 0.3)',
+          backgroundColor: '#f3f4f6',
+          border: '1px solid #e5e7eb',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          margin: '0 auto 24px auto',
-          fontSize: '36px',
-          boxShadow: '0 0 30px rgba(210, 234, 38, 0.2)'
+          margin: '0 auto 20px auto'
         }}>
-          🛠️
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#111827"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ animation: 'spinGear 6s linear infinite' }}
+          >
+            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+          </svg>
         </div>
 
-        {/* Live Status Badge */}
+        {/* Minimal Updating Status Badge */}
         <div style={{
           display: 'inline-flex',
           alignItems: 'center',
-          gap: '8px',
-          padding: '6px 16px',
-          borderRadius: '30px',
-          background: 'rgba(234, 179, 8, 0.15)',
-          border: '1px solid rgba(234, 179, 8, 0.3)',
-          color: '#eab308',
-          fontSize: '12px',
+          gap: '6px',
+          padding: '4px 12px',
+          borderRadius: '20px',
+          backgroundColor: '#fef3c7',
+          color: '#b45309',
+          fontSize: '11px',
           fontWeight: 700,
-          letterSpacing: '0.05em',
+          letterSpacing: '0.04em',
           textTransform: 'uppercase',
-          marginBottom: '20px'
+          marginBottom: '16px'
         }}>
           <span style={{
-            width: '8px',
-            height: '8px',
+            width: '6px',
+            height: '6px',
             borderRadius: '50%',
-            backgroundColor: '#eab308',
-            boxShadow: '0 0 10px #eab308'
+            backgroundColor: '#d97706',
+            animation: 'pulseDot 1.5s infinite ease-in-out'
           }}></span>
-          Portfolio Updating in Progress
+          Updating in Progress
         </div>
 
+        {/* Main Clean Heading */}
         <h1 style={{
-          fontSize: '32px',
+          fontSize: '22px',
           fontWeight: 800,
-          letterSpacing: '-0.02em',
-          marginBottom: '16px',
-          lineHeight: 1.2
+          color: '#111827',
+          margin: '0 0 10px 0',
+          letterSpacing: '-0.02em'
         }}>
-          Portfolio is Currently Being Updated ✨
+          Website is Currently Updating
         </h1>
 
+        {/* Short Text */}
         <p style={{
-          fontSize: '16px',
-          color: '#94a3b8',
-          lineHeight: 1.6,
-          marginBottom: '32px'
+          fontSize: '14px',
+          color: '#6b7280',
+          margin: 0,
+          lineHeight: 1.55
         }}>
-          {message || 'We are currently adding fresh case studies, polishing projects, and making content updates. Please check back in a few minutes!'}
+          {message || 'We are currently making updates to our website. Please check back shortly.'}
         </p>
 
-        {/* Action Buttons */}
-        <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button
-            onClick={onCheckAgain || (() => window.location.reload())}
-            className="btn-primary-glow"
-            style={{
-              padding: '12px 28px',
-              borderRadius: '50px',
-              border: 'none',
-              background: '#d2ea26',
-              color: '#000',
-              fontWeight: 700,
-              fontSize: '14px',
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px'
-            }}
-          >
-            🔄 Check Status Again
-          </button>
-
-          {isAdmin ? (
-            <>
-              {onPreviewSite && (
-                <button
-                  onClick={onPreviewSite}
-                  style={{
-                    padding: '12px 24px',
-                    borderRadius: '50px',
-                    border: '1px solid rgba(210, 234, 38, 0.4)',
-                    background: 'rgba(210, 234, 38, 0.1)',
-                    color: '#d2ea26',
-                    fontWeight: 700,
-                    fontSize: '14px',
-                    cursor: 'pointer',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '8px'
-                  }}
-                >
-                  👁️ Preview Site (Admin Mode)
-                </button>
-              )}
-              <Link
-                to="/admin"
+        {/* Admin Secret Bar (Only visible if Admin is logged in) */}
+        {isAdmin && (
+          <div style={{
+            marginTop: '28px',
+            paddingTop: '16px',
+            borderTop: '1px solid #f3f4f6',
+            display: 'flex',
+            gap: '12px',
+            justifyContent: 'center'
+          }}>
+            {onPreviewSite && (
+              <button
+                onClick={onPreviewSite}
                 style={{
-                  padding: '12px 24px',
-                  borderRadius: '50px',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  background: 'transparent',
-                  color: '#fff',
+                  background: 'none',
+                  border: 'none',
+                  color: '#4b5563',
+                  fontSize: '12px',
                   fontWeight: 600,
-                  fontSize: '14px',
-                  textDecoration: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px'
+                  cursor: 'pointer',
+                  textDecoration: 'underline'
                 }}
               >
-                ⚙️ Go to Admin Dashboard
-              </Link>
-            </>
-          ) : (
+                👁️ Admin Preview
+              </button>
+            )}
             <Link
-              to="/admin/login"
+              to="/admin"
               style={{
-                padding: '12px 24px',
-                borderRadius: '50px',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                background: 'transparent',
-                color: '#fff',
+                color: '#4b5563',
+                fontSize: '12px',
                 fontWeight: 600,
-                fontSize: '14px',
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px'
+                textDecoration: 'underline'
               }}
             >
-              🔐 Owner / Admin Login
+              ⚙️ Admin Dashboard
             </Link>
-          )}
-        </div>
-
-        <div style={{
-          marginTop: '36px',
-          paddingTop: '24px',
-          borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-          fontSize: '13px',
-          color: '#64748b'
-        }}>
-          Need urgent inquiry? Email: <a href="mailto:muhammedklkm@gmail.com" style={{ color: '#d2ea26', textDecoration: 'none' }}>muhammedklkm@gmail.com</a>
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

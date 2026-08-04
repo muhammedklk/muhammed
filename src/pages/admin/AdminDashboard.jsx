@@ -49,7 +49,12 @@ const AdminDashboard = () => {
     const newStatus = !isMaintenanceMode;
     setUpdatingMaintenance(true);
     try {
-      await api.put('/profile', { isMaintenanceMode: newStatus });
+      const currentProfileRes = await api.get('/profile').catch(() => ({ data: {} }));
+      const updated = {
+        ...(currentProfileRes.data || {}),
+        isMaintenanceMode: newStatus
+      };
+      await api.put('/profile', updated);
       setIsMaintenanceMode(newStatus);
     } catch (err) {
       alert('Failed to update maintenance status: ' + (err.response?.data?.message || err.message));

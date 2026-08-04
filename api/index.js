@@ -124,14 +124,7 @@ app.get('/api/profile', async (req, res) => {
 
 app.put('/api/profile', authMiddleware, async (req, res) => {
   try {
-    let profile = await Profile.findOne();
-    if (!profile) {
-      profile = new Profile(req.body);
-    } else {
-      Object.assign(profile, req.body);
-      profile.updatedAt = Date.now();
-    }
-    await profile.save();
+    const profile = await Profile.findOneAndUpdate({}, { $set: req.body }, { new: true, upsert: true, setDefaultsOnInsert: true });
     res.json(profile);
   } catch (err) {
     res.status(500).json({ error: err.message });

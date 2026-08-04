@@ -198,7 +198,9 @@ const initialProfile = {
     linkedin: 'https://www.linkedin.com/in/muhammed-klkm/',
     github: 'https://github.com/muhammedklk',
     instagram: 'https://www.instagram.com/___muhammedk/'
-  }
+  },
+  isMaintenanceMode: false,
+  maintenanceMessage: 'We are currently updating our portfolio with fresh projects & case studies. Please check back shortly!'
 };
 
 const getStorage = (key, fallback) => {
@@ -282,8 +284,10 @@ const request = async (method, endpoint, body = null, config = {}) => {
       return { data: profile, status: 200 };
     }
     if (method === 'PUT') {
-      setStorage('admin_profile_data', body);
-      return { data: body, status: 200 };
+      const existing = getStorage('admin_profile_data', initialProfile);
+      const updatedProfile = { ...existing, ...body };
+      setStorage('admin_profile_data', updatedProfile);
+      return { data: updatedProfile, status: 200 };
     }
   }
 
