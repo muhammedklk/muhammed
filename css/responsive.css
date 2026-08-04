@@ -624,4 +624,88 @@
         text-align: center !important;
         margin-top: 6px !important;
     }
+
+    /* ========================================
+       FIX 1: Works Page Card Hover Buttons Gap
+       ======================================== */
+    .minimal-hover-overlay {
+        gap: 10px !important;
+        padding: 16px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .minimal-btn-hover {
+        width: 80% !important;
+        max-width: 200px !important;
+        justify-content: center !important;
+        padding: 11px 18px !important;
+        font-size: 13px !important;
+    }
+
+    /* ========================================
+       FIX 2: Footer Giant Brand Text Overflow
+       ======================================== */
+    .footer-giant-brand {
+        overflow: hidden !important;
+        width: 100% !important;
+        margin: 20px 0 16px !important;
+    }
+
+    .giant-brand-text {
+        font-size: clamp(42px, 18vw, 100px) !important;
+        white-space: nowrap !important;
+        display: block !important;
+        text-align: center !important;
+        width: 100% !important;
+        overflow: hidden !important;
+        text-overflow: clip !important;
+    }
+
+    /* ========================================
+       FIX 3: Contact Page Mobile Alignment
+       ======================================== */
+    .contact-info-wrapper {
+        padding: 24px 20px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .contact-info-title {
+        font-size: 24px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .contact-info-sub {
+        font-size: 13px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .availability-status-card {
+        padding: 12px 16px !important;
+        margin-bottom: 16px !important;
+    }
+
+    .direct-contact-cards {
+        gap: 10px !important;
+    }
+
+    .contact-card-item {
+        padding: 14px 16px !important;
+        gap: 12px !important;
+    }
+
+    .card-value {
+        font-size: 13px !important;
+        word-break: break-all !important;
+    }
+
+    .contact-form-card {
+        padding: 24px 18px !important;
+        border-radius: 20px !important;
+    }
+
+    .contact-main-section .row {
+        row-gap: 16px !important;
+    }
 }
