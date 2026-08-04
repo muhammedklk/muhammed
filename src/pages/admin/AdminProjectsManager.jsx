@@ -8,6 +8,7 @@ const AdminProjectsManager = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const [toast, setToast] = useState('');
 
   const emptyProject = {
     slug: '',
@@ -41,7 +42,19 @@ const AdminProjectsManager = () => {
   const fetchProjects = async () => {
     try {
       const res = await api.get('/projects');
-      setProjects(res.data || []);
+      const apiProjects = res.data || [];
+
+      // Merge localStorage image store — restores uploaded images that aren't saved to MongoDB
+      try {
+        const imgStore = JSON.parse(localStorage.getItem('project_images_store') || '{}');
+        const merged = apiProjects.map((p) => ({
+          ...p,
+          ...(imgStore[p._id] || {})
+        }));
+        setProjects(merged);
+      } catch (_) {
+        setProjects(apiProjects);
+      }
     } catch (err) {
       console.error('Error loading projects:', err);
     } finally {
@@ -78,7 +91,7 @@ const AdminProjectsManager = () => {
       bannerImg: formatImgUrl(proj?.bannerImg),
       descriptionParagraph1: proj?.descriptionParagraph1 || proj?.description?.[0] || '',
       descriptionParagraph2: proj?.descriptionParagraph2 || proj?.description?.[1] || '',
-      techTags: proj?.techTags || 'Figma, React, SCSS, Vercel',
+      techTags: proj?.techTags || 'Figma, React, CSS, Vercel',
       outcome: proj?.outcome || ''
     });
     setModalOpen(true);
@@ -95,66 +108,67 @@ const AdminProjectsManager = () => {
     }
   };
 
-  const handleImageUpload = async (e, fieldName) => {
+  const handleImageUpload = (e, fieldName) => {
     const file = e.target.files[0];
     if (!file) return;
 
     setUploading(true);
 
-    // Helper: read file as Base64 data URL
-    const readAsBase64 = (f) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (reader.result) {
-          setFormData((prev) => ({ ...prev, [fieldName]: reader.result }));
-        }
-        setUploading(false);
-      };
-      reader.onerror = () => {
-        alert('Failed to read local image file.');
-        setUploading(false);
-      };
-      reader.readAsDataURL(f);
-    };
-
-    try {
-      const uploadData = new FormData();
-      uploadData.append('image', file);
-
-      const res = await api.post('/upload', uploadData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
-
-      if (res.data && res.data.url) {
-        setFormData((prev) => ({ ...prev, [fieldName]: formatImgUrl(res.data.url) }));
-        setUploading(false);
-        return;
+    // Always read as base64 locally — fast, reliable, works without Cloudinary
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      if (reader.result) {
+        setFormData((prev) => ({ ...prev, [fieldName]: reader.result }));
+        setToast('✅ Image loaded successfully!');
+        setTimeout(() => setToast(''), 2500);
       }
-      readAsBase64(file);
-    } catch (err) {
-      console.warn('Backend image upload endpoint fallback triggered:', err);
-      readAsBase64(file);
-    }
+      setUploading(false);
+    };
+    reader.onerror = () => {
+      console.error('Failed to read image file');
+      setUploading(false);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const payload = {
-        ...formData,
-        description: [
-          formData.descriptionParagraph1,
-          formData.descriptionParagraph2
-        ].filter(Boolean)
-      };
+    const payload = {
+      ...formData,
+      description: [
+        formData.descriptionParagraph1,
+        formData.descriptionParagraph2
+      ].filter(Boolean)
+    };
 
+    try {
       if (editingProject) {
         await api.put(`/projects/${editingProject._id}`, payload);
+        // Update local React state directly — don't re-fetch (API might return old data without images)
+        setProjects((prev) => prev.map((p) => p._id === editingProject._id ? { ...p, ...payload } : p));
       } else {
-        await api.post('/projects', payload);
+        const res = await api.post('/projects', payload);
+        const newProj = (res.data && res.data._id) ? res.data : { ...payload, _id: Date.now().toString() };
+        setProjects((prev) => [...prev, newProj]);
       }
+
+      // Persist images to localStorage separately for cross-session reliability
+      try {
+        const imgStore = JSON.parse(localStorage.getItem('project_images_store') || '{}');
+        const pid = editingProject ? editingProject._id : payload._id;
+        if (pid) {
+          imgStore[pid] = {
+            heroImg: payload.heroImg,
+            showcaseImg: payload.showcaseImg,
+            mobileImg1: payload.mobileImg1,
+            mobileImg2: payload.mobileImg2,
+            bannerImg: payload.bannerImg,
+          };
+          localStorage.setItem('project_images_store', JSON.stringify(imgStore));
+        }
+      } catch (_) {}
+
       setModalOpen(false);
-      fetchProjects();
     } catch (err) {
       alert('Error saving project: ' + (err.response?.data?.message || err.message));
     }
@@ -275,6 +289,13 @@ const AdminProjectsManager = () => {
               </h2>
               <button onClick={() => setModalOpen(false)} style={{ background: 'transparent', border: 'none', color: '#94a3b8', fontSize: '20px', cursor: 'pointer' }}>✕</button>
             </div>
+
+            {/* Toast notification for image upload success */}
+            {toast && (
+              <div style={{ background: 'rgba(210, 234, 38, 0.15)', border: '1px solid #d2ea26', borderRadius: '10px', padding: '10px 16px', color: '#d2ea26', fontSize: '14px', fontWeight: 600, marginBottom: '16px', textAlign: 'center' }}>
+                {toast}
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               

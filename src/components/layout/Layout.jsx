@@ -16,16 +16,18 @@ import api from '../../api/axios';
 const Layout = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isMaintenanceMode, setIsMaintenanceMode] = useState(() => getMaintenanceMode());
+  // Start null = "unknown" so we show a blank screen until API confirms status
+  const [isMaintenanceMode, setIsMaintenanceMode] = useState(null);
   const [maintenanceMessage, setMaintenanceMessage] = useState('');
   const [adminPreview, setAdminPreview] = useState(false);
+  const [statusChecked, setStatusChecked] = useState(false);
   const location = useLocation();
   const { isAuthenticated } = useAuth();
 
   // Initialize Lenis smooth scroll
   useLenis();
 
-  // Fetch maintenance mode status from profile & sync state
+  // Fetch maintenance mode status from API (single source of truth)
   const fetchProfileStatus = async () => {
     try {
       const res = await api.get('/profile');
@@ -34,17 +36,23 @@ const Layout = ({ children }) => {
         setIsMaintenanceMode(modeStatus);
         localStorage.setItem('portfolio_maintenance_status', modeStatus ? 'true' : 'false');
         setMaintenanceMessage(res.data.maintenanceMessage || '');
+      } else {
+        // Fallback to localStorage if API returns no data
+        setIsMaintenanceMode(getMaintenanceMode());
       }
     } catch (err) {
       console.error('Error checking portfolio maintenance status:', err);
+      setIsMaintenanceMode(getMaintenanceMode());
+    } finally {
+      setStatusChecked(true);
     }
   };
 
   useEffect(() => {
     fetchProfileStatus();
 
-    // Live background polling (8s) so visitors on all devices see updating screen in real-time
-    const interval = setInterval(fetchProfileStatus, 8000);
+    // Live background polling every 6s — all devices sync in real-time
+    const interval = setInterval(fetchProfileStatus, 6000);
 
     const handleStatusUpdate = () => {
       setIsMaintenanceMode(getMaintenanceMode());
@@ -71,9 +79,14 @@ const Layout = ({ children }) => {
   const isPreviewParam = location.search.includes('preview=admin');
   const isSessionPreview = sessionStorage.getItem('admin_preview_active') === 'true';
   const isExplicitAdminPreview = isAuthenticated && (isPreviewParam || isSessionPreview || adminPreview);
-
-  // Show Maintenance Overlay on all public portfolio pages when maintenance mode is ON
   const isPublicRoute = !location.pathname.startsWith('/admin');
+
+  // ⏳ Block ALL rendering until API status is confirmed — prevents flash of website before overlay
+  if (!statusChecked) {
+    return <div style={{ position: 'fixed', inset: 0, background: '#ffffff', zIndex: 99999 }} />;
+  }
+
+  // ✅ Show Maintenance Overlay when mode is ON (for visitors only)
   if (isMaintenanceMode && isPublicRoute && !isExplicitAdminPreview) {
     return (
       <MaintenanceOverlay message={maintenanceMessage} />
