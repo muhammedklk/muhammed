@@ -1,3 +1,19 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment & Secret files
+.env
+.env.local
+.env.development
+.env.production
+*.env
+
+# Build output
+dist/
+build/
+.output/
+
 # Operating System Files
 .DS_Store
 Thumbs.db
@@ -8,3 +24,4 @@ desktop.ini
 .idea/
 *.swp
 *.tmp
+
