@@ -3331,8 +3331,8 @@ button {
 .section-subtext {
     font-size: 16px;
     color: var(--text-subtle);
-    max-width: 550px;
-    margin: 0 auto;
+    max-width: 600px;
+    margin-top: 8px;
 }
 
 .process-card {

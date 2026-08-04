@@ -165,7 +165,7 @@ const About = () => {
       {/* 4-Step Design Process */}
       <section className="process-section">
         <div className="container">
-          <div className="text-center mb-5">
+          <div className="mb-5">
             <span className="page-badge">WORKFLOW</span>
             <h2 className="section-headline">My Proven Design Process</h2>
             <p className="section-subtext">
