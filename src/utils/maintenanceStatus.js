@@ -18,15 +18,12 @@ export const setMaintenanceMode = async (status, customMessage = '') => {
     window.dispatchEvent(new Event('maintenance_updated'));
 
     // 3. Sync to API & Database
-    const profileRes = await api.get('/profile').catch(() => ({ data: {} }));
-    const currentProfile = profileRes.data || {};
-    const updated = {
-      ...currentProfile,
+    const payload = {
       isMaintenanceMode: isON,
       ...(customMessage ? { maintenanceMessage: customMessage } : {})
     };
 
-    await api.put('/profile', updated);
+    await api.put('/profile', payload);
   } catch (err) {
     console.error('Error persisting maintenance mode:', err);
   }

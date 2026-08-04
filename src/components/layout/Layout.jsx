@@ -43,6 +43,9 @@ const Layout = ({ children }) => {
   useEffect(() => {
     fetchProfileStatus();
 
+    // Live background polling (8s) so visitors on all devices see updating screen in real-time
+    const interval = setInterval(fetchProfileStatus, 8000);
+
     const handleStatusUpdate = () => {
       setIsMaintenanceMode(getMaintenanceMode());
     };
@@ -51,6 +54,7 @@ const Layout = ({ children }) => {
     window.addEventListener('storage', handleStatusUpdate);
 
     return () => {
+      clearInterval(interval);
       window.removeEventListener('maintenance_updated', handleStatusUpdate);
       window.removeEventListener('storage', handleStatusUpdate);
     };

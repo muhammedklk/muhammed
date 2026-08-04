@@ -107,7 +107,7 @@ app.get('/api/auth/me', authMiddleware, async (req, res) => {
 
 // ----------------------------------------------------
 // 2. PROFILE ROUTES
-// Global serverless maintenance state store
+// Global serverless maintenance state store fallback
 let globalMaintenanceState = {
   isMaintenanceMode: false,
   maintenanceMessage: 'We are currently updating our portfolio with fresh projects & case studies. Please check back shortly!'
@@ -121,11 +121,11 @@ app.get('/api/profile', async (req, res) => {
       await profile.save().catch(() => {});
     }
     const data = profile.toObject ? profile.toObject() : profile;
-    if (data.isMaintenanceMode === undefined) {
-      data.isMaintenanceMode = globalMaintenanceState.isMaintenanceMode;
-      data.maintenanceMessage = globalMaintenanceState.maintenanceMessage;
-    }
-    res.json(data);
+    res.json({
+      ...data,
+      isMaintenanceMode: profile.isMaintenanceMode !== undefined ? !!profile.isMaintenanceMode : globalMaintenanceState.isMaintenanceMode,
+      maintenanceMessage: profile.maintenanceMessage || globalMaintenanceState.maintenanceMessage
+    });
   } catch (err) {
     res.json({
       name: 'Muhammed',
@@ -144,17 +144,14 @@ app.put('/api/profile', authMiddleware, async (req, res) => {
         globalMaintenanceState.maintenanceMessage = req.body.maintenanceMessage;
       }
     }
-    const profile = await Profile.findOneAndUpdate({}, { $set: req.body }, { new: true, upsert: true, setDefaultsOnInsert: true }).catch(() => null);
-    if (profile) {
-      res.json(profile);
-    } else {
-      res.json({
-        name: 'Muhammed',
-        ...req.body,
-        isMaintenanceMode: globalMaintenanceState.isMaintenanceMode,
-        maintenanceMessage: globalMaintenanceState.maintenanceMessage
-      });
-    }
+    const updatedData = { ...req.body, updatedAt: new Date() };
+    const profile = await Profile.findOneAndUpdate({}, { $set: updatedData }, { new: true, upsert: true, setDefaultsOnInsert: true }).catch(() => null);
+    
+    res.json({
+      ...(profile ? (profile.toObject ? profile.toObject() : profile) : updatedData),
+      isMaintenanceMode: globalMaintenanceState.isMaintenanceMode,
+      maintenanceMessage: globalMaintenanceState.maintenanceMessage
+    });
   } catch (err) {
     res.json({
       name: 'Muhammed',

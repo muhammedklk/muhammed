@@ -33,10 +33,9 @@ const AdminDashboard = () => {
         });
 
         if (profileRes.data && profileRes.data.isMaintenanceMode !== undefined) {
-          const localStatus = localStorage.getItem('portfolio_maintenance_status');
-          const finalStatus = localStatus !== null ? localStatus === 'true' : !!profileRes.data.isMaintenanceMode;
-          setIsMaintenanceMode(finalStatus);
-          localStorage.setItem('portfolio_maintenance_status', finalStatus ? 'true' : 'false');
+          const modeStatus = !!profileRes.data.isMaintenanceMode;
+          setIsMaintenanceMode(modeStatus);
+          localStorage.setItem('portfolio_maintenance_status', modeStatus ? 'true' : 'false');
           setMaintenanceMessage(profileRes.data.maintenanceMessage || '');
         } else {
           setIsMaintenanceMode(getMaintenanceMode());

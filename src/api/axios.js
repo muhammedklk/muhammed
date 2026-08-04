@@ -244,6 +244,13 @@ const request = async (method, endpoint, body = null, config = {}) => {
 
     if (response.ok) {
       const data = await response.json();
+      if (endpoint === '/profile' && data) {
+        const existing = getStorage('admin_profile_data', initialProfile);
+        setStorage('admin_profile_data', { ...existing, ...data });
+        if (data.isMaintenanceMode !== undefined) {
+          localStorage.setItem('portfolio_maintenance_status', data.isMaintenanceMode ? 'true' : 'false');
+        }
+      }
       return { data, status: response.status };
     }
   } catch (err) {}
