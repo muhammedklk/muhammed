@@ -17,6 +17,7 @@ const Layout = ({ children }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMaintenanceMode, setIsMaintenanceMode] = useState(false);
   const [maintenanceMessage, setMaintenanceMessage] = useState('');
+  const [adminPreview, setAdminPreview] = useState(false);
   const location = useLocation();
   const { isAuthenticated } = useAuth();
 
@@ -47,13 +48,15 @@ const Layout = ({ children }) => {
     setIsSearchOpen(false);
   }, [location.pathname]);
 
-  // Show Maintenance Overlay for visitors when maintenance mode is turned ON in Admin Panel
+  // Show Maintenance Overlay on all public portfolio pages when maintenance mode is ON
   const isPublicRoute = !location.pathname.startsWith('/admin');
-  if (isMaintenanceMode && !isAuthenticated && isPublicRoute) {
+  if (isMaintenanceMode && isPublicRoute && !adminPreview) {
     return (
       <MaintenanceOverlay
         message={maintenanceMessage}
         onCheckAgain={fetchProfileStatus}
+        isAdmin={isAuthenticated}
+        onPreviewSite={() => setAdminPreview(true)}
       />
     );
   }
@@ -62,8 +65,8 @@ const Layout = ({ children }) => {
     <>
       <Preloader />
 
-      {/* Admin Floating Banner when Maintenance Mode is ON */}
-      {isMaintenanceMode && isAuthenticated && (
+      {/* Admin Preview Mode Floating Banner when Maintenance Mode is ON */}
+      {isMaintenanceMode && (
         <div style={{
           backgroundColor: '#eab308',
           color: '#000',
@@ -77,9 +80,27 @@ const Layout = ({ children }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '12px'
+          gap: '12px',
+          flexWrap: 'wrap'
         }}>
-          <span>🚧 Maintenance / Updating Screen is currently ACTIVE for visitors.</span>
+          <span>🚧 Maintenance Mode is ACTIVE (Visitors see "Updating Screen").</span>
+          {adminPreview && (
+            <button
+              onClick={() => setAdminPreview(false)}
+              style={{
+                background: '#000',
+                color: '#fff',
+                border: 'none',
+                padding: '4px 12px',
+                borderRadius: '20px',
+                cursor: 'pointer',
+                fontSize: '12px',
+                fontWeight: 600
+              }}
+            >
+              🔒 Lock & View Updating Screen
+            </button>
+          )}
           <Link
             to="/admin"
             style={{

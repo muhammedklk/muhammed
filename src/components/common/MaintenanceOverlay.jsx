@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const MaintenanceOverlay = ({ message, onCheckAgain }) => {
+const MaintenanceOverlay = ({ message, onCheckAgain, isAdmin, onPreviewSite }) => {
   return (
     <div className="maintenance-overlay-screen" style={{
       position: 'fixed',
@@ -128,24 +128,67 @@ const MaintenanceOverlay = ({ message, onCheckAgain }) => {
             🔄 Check Status Again
           </button>
 
-          <Link
-            to="/admin/login"
-            style={{
-              padding: '12px 24px',
-              borderRadius: '50px',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              background: 'transparent',
-              color: '#fff',
-              fontWeight: 600,
-              fontSize: '14px',
-              textDecoration: 'none',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px'
-            }}
-          >
-            🔐 Owner / Admin Login
-          </Link>
+          {isAdmin ? (
+            <>
+              {onPreviewSite && (
+                <button
+                  onClick={onPreviewSite}
+                  style={{
+                    padding: '12px 24px',
+                    borderRadius: '50px',
+                    border: '1px solid rgba(210, 234, 38, 0.4)',
+                    background: 'rgba(210, 234, 38, 0.1)',
+                    color: '#d2ea26',
+                    fontWeight: 700,
+                    fontSize: '14px',
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px'
+                  }}
+                >
+                  👁️ Preview Site (Admin Mode)
+                </button>
+              )}
+              <Link
+                to="/admin"
+                style={{
+                  padding: '12px 24px',
+                  borderRadius: '50px',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  background: 'transparent',
+                  color: '#fff',
+                  fontWeight: 600,
+                  fontSize: '14px',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}
+              >
+                ⚙️ Go to Admin Dashboard
+              </Link>
+            </>
+          ) : (
+            <Link
+              to="/admin/login"
+              style={{
+                padding: '12px 24px',
+                borderRadius: '50px',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                background: 'transparent',
+                color: '#fff',
+                fontWeight: 600,
+                fontSize: '14px',
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+            >
+              🔐 Owner / Admin Login
+            </Link>
+          )}
         </div>
 
         <div style={{
