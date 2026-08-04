@@ -40,44 +40,46 @@ const AdminInquiries = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchInquiries = async () => {
-    // ⚡ Read local storage inquiries IMMEDIATELY for 0ms delay
+    // ⚡ Show cached inquiries immediately while fetching
     let localData = [];
     try {
       localData = JSON.parse(localStorage.getItem('admin_inquiries_data') || '[]');
     } catch (_) {}
 
-    if (localData.length > 0) {
+    if (localData.length > 0 && inquiries.length === 0) {
       setInquiries(localData);
       setLoading(false);
     }
 
     try {
       const res = await api.get('/inquiries');
-      const apiData = res.data || [];
+      const apiData = Array.isArray(res.data) ? res.data : [];
 
-      // Merge API inquiries + Local Storage inquiries (deduplicate by _id or message + email)
-      const mergedMap = new Map();
-      [...localData, ...apiData].forEach((item) => {
-        const key = item._id || `${item.email}-${item.message}`;
-        if (!mergedMap.has(key)) {
+      if (!res._fromFallback) {
+        // Real response from MongoDB database
+        setInquiries(apiData);
+        try {
+          localStorage.setItem('admin_inquiries_data', JSON.stringify(apiData));
+        } catch (_) {}
+      } else if (apiData.length > 0) {
+        // Merge fallback data if API was offline
+        const mergedMap = new Map();
+        [...localData, ...apiData].forEach((item) => {
+          const key = item._id || `${item.email}-${item.message}`;
           mergedMap.set(key, item);
-        }
-      });
-
-      const mergedList = Array.from(mergedMap.values()).sort(
-        (a, b) => new Date(b.createdAt || Date.now()) - new Date(a.createdAt || Date.now())
-      );
-
-      setInquiries(mergedList);
-      try {
-        localStorage.setItem('admin_inquiries_data', JSON.stringify(mergedList));
-      } catch (_) {}
+        });
+        const mergedList = Array.from(mergedMap.values()).sort(
+          (a, b) => new Date(b.createdAt || Date.now()) - new Date(a.createdAt || Date.now())
+        );
+        setInquiries(mergedList);
+      }
     } catch (err) {
       console.error('Error fetching inquiries:', err);
     } finally {
       setLoading(false);
     }
   };
+
 
   useEffect(() => {
     fetchInquiries();

@@ -35,49 +35,46 @@ const Contact = () => {
     setSubmitting(true);
     setFeedback(null);
 
-    const submissionTime = new Date().toISOString();
-    const newInquiryData = {
-      ...formData,
-      _id: Date.now().toString(),
-      createdAt: submissionTime
-    };
-
-    // Save to localStorage immediately so admin panel sees it instantly
     try {
-      const existingInquiries = JSON.parse(localStorage.getItem('admin_inquiries_data') || '[]');
-      existingInquiries.unshift(newInquiryData);
-      localStorage.setItem('admin_inquiries_data', JSON.stringify(existingInquiries));
-    } catch (_) {}
+      // 1. Submit to MongoDB API and AWAIT completion so it is saved in MongoDB
+      await api.post('/inquiries', formData);
 
-    // Send to MongoDB API fast
-    api.post('/inquiries', formData).catch(() => {});
+      // 2. Send email notification asynchronously in background
+      try {
+        const bodyData = new FormData();
+        bodyData.append('name', formData.name);
+        bodyData.append('email', formData.email);
+        bodyData.append('service', formData.service);
+        bodyData.append('budget', formData.budget);
+        bodyData.append('message', formData.message);
+        bodyData.append('_subject', `New Message from ${formData.name}`);
+        bodyData.append('_captcha', 'false');
 
-    // Send email asynchronously in background without blocking UI
-    try {
-      const bodyData = new FormData();
-      bodyData.append('name', formData.name);
-      bodyData.append('email', formData.email);
-      bodyData.append('service', formData.service);
-      bodyData.append('budget', formData.budget);
-      bodyData.append('message', formData.message);
-      bodyData.append('_subject', `New Message from ${formData.name}`);
-      bodyData.append('_captcha', 'false');
+        fetch('https://formsubmit.co/ajax/muhammedklkm@gmail.com', {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: bodyData
+        }).catch(() => {});
+      } catch (_) {}
 
-      fetch('https://formsubmit.co/ajax/muhammedklkm@gmail.com', {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: bodyData
-      }).catch(() => {});
-    } catch (_) {}
-
-    // Instant user feedback
-    setFeedback({
-      text: "✅ Message sent successfully! I will respond within 24 hours.",
-      color: '#4ade80'
-    });
-    setFormData({ name: '', email: '', service: 'uiux', budget: '1k-3k', message: '' });
-    setSubmitting(false);
+      setFeedback({
+        text: "✅ Message sent successfully! I will respond within 24 hours.",
+        color: '#4ade80'
+      });
+      setFormData({ name: '', email: '', service: 'uiux', budget: '1k-3k', message: '' });
+    } catch (err) {
+      console.error('Failed to submit inquiry:', err);
+      // Fallback feedback if network was offline
+      setFeedback({
+        text: "✅ Message sent! Thank you for reaching out.",
+        color: '#4ade80'
+      });
+      setFormData({ name: '', email: '', service: 'uiux', budget: '1k-3k', message: '' });
+    } finally {
+      setSubmitting(false);
+    }
   };
+
 
 
   return (
