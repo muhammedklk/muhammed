@@ -33,16 +33,16 @@ const About = () => {
                       Add your photo: <code>assets/profile_photo.jpg</code>
                     </span>
                   </div>
-                </div>
 
-                <div className="portrait-badges-layer">
-                  <div className="portrait-floating-badge badge-role">
-                    <span className="badge-icon">⚡</span>
-                    <span>UI/UX & Web Dev</span>
-                  </div>
-                  <div className="portrait-floating-badge badge-avail">
-                    <span className="badge-pulse"></span>
-                    <span>Available for Hire</span>
+                  <div className="portrait-badges-layer">
+                    <div className="portrait-floating-badge badge-role">
+                      <span className="badge-icon">⚡</span>
+                      <span>UI/UX & Web Dev</span>
+                    </div>
+                    <div className="portrait-floating-badge badge-avail">
+                      <span className="badge-pulse"></span>
+                      <span>Available for Hire</span>
+                    </div>
                   </div>
                 </div>
               </div>
