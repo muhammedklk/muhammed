@@ -236,11 +236,19 @@ const request = async (method, endpoint, body = null, config = {}) => {
   }
 
   try {
+    const controller = new AbortController();
+    // GET: 3s timeout (fast display, falls to cache). PUT/POST/DELETE: 25s (must reach MongoDB)
+    const timeoutMs = method === 'GET' ? 3000 : 25000;
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
     const response = await fetch(`${baseURL}${endpoint}`, {
       method,
       headers,
+      signal: controller.signal,
       ...(body ? { body: body instanceof FormData ? body : JSON.stringify(body) } : {})
     });
+
+    clearTimeout(timeoutId);
 
     if (response.ok) {
       const data = await response.json();
@@ -251,9 +259,11 @@ const request = async (method, endpoint, body = null, config = {}) => {
           localStorage.setItem('portfolio_maintenance_status', data.isMaintenanceMode ? 'true' : 'false');
         }
       }
-      return { data, status: response.status };
+      return { data, status: response.status, _fromFallback: false };
     }
-  } catch (err) {}
+  } catch (err) {
+    // Timeout (AbortError) or network error — fall through to localStorage fallback below
+  }
 
   // --- LOCAL DEV FALLBACK HANDLERS ---
   if (endpoint === '/auth/login' && method === 'POST') {
@@ -319,25 +329,25 @@ const request = async (method, endpoint, body = null, config = {}) => {
   if (endpoint.startsWith('/projects')) {
     let projects = getStorage('admin_projects_data', initialProjects);
     if (method === 'GET') {
-      return { data: projects, status: 200 };
+      return { data: projects, status: 200, _fromFallback: true };
     }
     if (method === 'POST') {
       const newProj = { ...body, _id: Date.now().toString() };
       projects.push(newProj);
       setStorage('admin_projects_data', projects);
-      return { data: newProj, status: 201 };
+      return { data: newProj, status: 201, _fromFallback: true };
     }
     if (method === 'PUT') {
       const id = endpoint.split('/')[2];
       projects = projects.map((p) => (p._id === id ? { ...p, ...body } : p));
       setStorage('admin_projects_data', projects);
-      return { data: body, status: 200 };
+      return { data: body, status: 200, _fromFallback: true };
     }
     if (method === 'DELETE') {
       const id = endpoint.split('/')[2];
       projects = projects.filter((p) => p._id !== id);
       setStorage('admin_projects_data', projects);
-      return { data: { message: 'Deleted' }, status: 200 };
+      return { data: { message: 'Deleted' }, status: 200, _fromFallback: true };
     }
   }
 

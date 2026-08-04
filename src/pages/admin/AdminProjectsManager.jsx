@@ -40,34 +40,39 @@ const AdminProjectsManager = () => {
   };
 
   const fetchProjects = async () => {
-    // ⚡ Show localStorage cache IMMEDIATELY (zero wait)
+    // ⚡ Show data INSTANTLY — from localStorage cache or fallback
     try {
       const cached = JSON.parse(localStorage.getItem('admin_projects_cached') || '[]');
-      if (cached.length > 0) {
-        setProjects(cached);
+      const fallback = JSON.parse(localStorage.getItem('admin_projects_data') || '[]');
+      const immediate = cached.length > 0 ? cached : fallback;
+      if (immediate.length > 0) {
+        setProjects(immediate);
         setLoading(false);
       }
     } catch (_) {}
 
-    // Then fetch fresh data from API in background
+    // Fetch fresh data from API in background
     try {
       const res = await api.get('/projects');
-      const apiProjects = res.data || [];
-      // Merge with locally saved images
-      const imgStore = JSON.parse(localStorage.getItem('project_images_store') || '{}');
-      const merged = apiProjects.map((p) => ({
-        ...p,
-        ...(imgStore[p._id] || {})
-      }));
-      setProjects(merged);
-      // Cache for next instant load
-      try { localStorage.setItem('admin_projects_cached', JSON.stringify(merged)); } catch (_) {}
+      // ✅ Only update state+cache from REAL MongoDB response — skip localStorage fallback data
+      // (fallback returns initialProjects with IDs "1"-"8" which would overwrite real project data)
+      if (!res._fromFallback && res.data && res.data.length > 0) {
+        const imgStore = JSON.parse(localStorage.getItem('project_images_store') || '{}');
+        const merged = res.data.map((p) => ({
+          ...p,
+          ...(imgStore[p._id] || {})
+        }));
+        setProjects(merged);
+        try { localStorage.setItem('admin_projects_cached', JSON.stringify(merged)); } catch (_) {}
+      }
     } catch (err) {
       console.error('Error loading projects:', err);
     } finally {
       setLoading(false);
     }
   };
+
+
 
   useEffect(() => {
     fetchProjects();
@@ -181,17 +186,21 @@ const AdminProjectsManager = () => {
 
     try {
       let savedProject;
+      let savedToMongoDB = false;
+
       if (editingProject) {
         const res = await api.put(`/projects/${editingProject._id}`, payload);
+        savedToMongoDB = !res._fromFallback;
         savedProject = { ...payload, _id: editingProject._id, ...(res.data && res.data._id ? res.data : {}) };
         setProjects((prev) => prev.map((p) => p._id === editingProject._id ? savedProject : p));
       } else {
         const res = await api.post('/projects', payload);
+        savedToMongoDB = !res._fromFallback;
         savedProject = (res.data && res.data._id) ? res.data : { ...payload, _id: Date.now().toString() };
         setProjects((prev) => [...prev, savedProject]);
       }
 
-      // Persist images to localStorage (cross-session reliability)
+      // Always persist images to localStorage (cross-session reliability)
       try {
         const imgStore = JSON.parse(localStorage.getItem('project_images_store') || '{}');
         imgStore[savedProject._id] = {
@@ -214,12 +223,20 @@ const AdminProjectsManager = () => {
       } catch (_) {}
 
       setModalOpen(false);
-      setToast('✅ Case study saved successfully!');
-      setTimeout(() => setToast(''), 3000);
+
+      if (savedToMongoDB) {
+        // ✅ Saved to MongoDB — website will show updated images on next load
+        setToast('✅ Saved! Website will update shortly.');
+      } else {
+        // ⚠️ Only saved locally — server was slow, try saving again
+        setToast('⚠️ Saved locally. Server was busy — please save again in 30s for website to update.');
+      }
+      setTimeout(() => setToast(''), 5000);
     } catch (err) {
       alert('Error saving project: ' + (err.response?.data?.message || err.message));
     }
   };
+
 
 
 
