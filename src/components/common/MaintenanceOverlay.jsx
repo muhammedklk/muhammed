@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-const MaintenanceOverlay = ({ message, isAdmin, onPreviewSite }) => {
+const MaintenanceOverlay = ({ message }) => {
   return (
     <div className="maintenance-overlay-screen" style={{
       position: 'fixed',
@@ -33,12 +32,12 @@ const MaintenanceOverlay = ({ message, isAdmin, onPreviewSite }) => {
 
       {/* Main Minimalist Container */}
       <div style={{
-        maxWidth: '480px',
+        maxWidth: '440px',
         width: '100%',
         backgroundColor: '#ffffff',
         border: '1px solid #e5e7eb',
         borderRadius: '24px',
-        padding: '44px 32px',
+        padding: '48px 32px',
         textAlign: 'center',
         boxShadow: '0 20px 45px rgba(0, 0, 0, 0.05)'
       }}>
@@ -115,46 +114,6 @@ const MaintenanceOverlay = ({ message, isAdmin, onPreviewSite }) => {
         }}>
           {message || 'We are currently making updates to our website. Please check back shortly.'}
         </p>
-
-        {/* Admin Secret Bar (Only visible if Admin is logged in) */}
-        {isAdmin && (
-          <div style={{
-            marginTop: '28px',
-            paddingTop: '16px',
-            borderTop: '1px solid #f3f4f6',
-            display: 'flex',
-            gap: '12px',
-            justifyContent: 'center'
-          }}>
-            {onPreviewSite && (
-              <button
-                onClick={onPreviewSite}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: '#4b5563',
-                  fontSize: '12px',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  textDecoration: 'underline'
-                }}
-              >
-                👁️ Admin Preview
-              </button>
-            )}
-            <Link
-              to="/admin"
-              style={{
-                color: '#4b5563',
-                fontSize: '12px',
-                fontWeight: 600,
-                textDecoration: 'underline'
-              }}
-            >
-              ⚙️ Admin Dashboard
-            </Link>
-          </div>
-        )}
       </div>
     </div>
   );

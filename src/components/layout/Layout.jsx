@@ -67,11 +67,7 @@ const Layout = ({ children }) => {
   const isPublicRoute = !location.pathname.startsWith('/admin');
   if (isMaintenanceMode && isPublicRoute && !adminPreview) {
     return (
-      <MaintenanceOverlay
-        message={maintenanceMessage}
-        isAdmin={isAuthenticated}
-        onPreviewSite={() => setAdminPreview(true)}
-      />
+      <MaintenanceOverlay message={maintenanceMessage} />
     );
   }
 
