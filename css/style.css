@@ -4643,27 +4643,50 @@ button {
     transition: all 0.25s ease;
 }
 
+.uf-btn-action span,
+.uf-btn-action svg {
+    transition: color 0.2s ease, stroke 0.2s ease;
+}
+
 .uf-btn-action.uf-whatsapp {
-    background: #25d366;
-    color: #ffffff;
+    background: #25d366 !important;
+    color: #ffffff !important;
+}
+
+.uf-btn-action.uf-whatsapp span,
+.uf-btn-action.uf-whatsapp svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
 }
 
 .uf-btn-action.uf-whatsapp:hover {
-    background: #20bd5a;
+    background: #20bd5a !important;
     transform: translateY(-2px);
     box-shadow: 0px 4px 20px rgba(37, 211, 102, 0.3);
 }
 
 .uf-btn-action.uf-email {
-    background: rgba(255, 255, 255, 0.07);
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #1e293b !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.uf-btn-action.uf-email span,
+.uf-btn-action.uf-email svg {
+    color: #ffffff !important;
+    stroke: #ffffff !important;
 }
 
 [data-theme="light"] .uf-btn-action.uf-email {
-    background: #0f172a;
-    border-color: transparent;
-    color: #ffffff;
+    background: #f1f5f9 !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #0f172a !important;
+}
+
+[data-theme="light"] .uf-btn-action.uf-email span,
+[data-theme="light"] .uf-btn-action.uf-email svg {
+    color: #0f172a !important;
+    stroke: #0f172a !important;
 }
 
 .uf-btn-action.uf-email:hover {
@@ -4672,14 +4695,21 @@ button {
 }
 
 .uf-btn-action.uf-form {
-    background: #d2ea26;
-    color: #0f172a;
-    border: 1px solid #849a00;
+    background: #d2ea26 !important;
+    color: #0f172a !important;
+    border: 1.5px solid #849a00 !important;
+}
+
+.uf-btn-action.uf-form span,
+.uf-btn-action.uf-form svg {
+    color: #0f172a !important;
+    stroke: #0f172a !important;
 }
 
 .uf-btn-action.uf-form:hover {
+    background: #c3dc1e !important;
     transform: translateY(-2px);
-    box-shadow: 0px 6px 20px rgba(210, 234, 38, 0.35);
+    box-shadow: 0px 6px 20px rgba(210, 234, 38, 0.4);
 }
 
 .uf-btn-action.uf-form:hover {
@@ -6239,16 +6269,16 @@ body.preloader-active {
     position: fixed;
     bottom: 24px;
     left: 24px;
+    width: 44px;
     height: 44px;
-    padding: 0 16px;
-    border-radius: 40px;
+    padding: 0;
+    border-radius: 50%;
     background: #0f172a;
     border: 1px solid rgba(255, 255, 255, 0.15);
     color: #ffffff;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
     cursor: pointer;
     z-index: 99998;
     opacity: 0;
@@ -6256,9 +6286,6 @@ body.preloader-active {
     transform: translateY(16px) scale(0.95);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
-    font-size: 11.5px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
 }
 
 .scroll-to-top.visible {
@@ -6271,7 +6298,7 @@ body.preloader-active {
     background: #1e293b;
     color: #d2ea26;
     border-color: #d2ea26;
-    transform: translateY(-3px) scale(1.03);
+    transform: translateY(-3px) scale(1.05);
     box-shadow: 0 14px 35px rgba(15, 23, 42, 0.35);
 }
 
