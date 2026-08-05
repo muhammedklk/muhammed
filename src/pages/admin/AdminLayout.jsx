@@ -20,7 +20,7 @@ const AdminLayout = () => {
   }, []);
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', width: '100%', background: '#0b0c10', color: '#e2e8f0', fontFamily: "'Inter', sans-serif", overflowX: 'hidden' }}>
+    <div style={{ display: 'flex', height: '100vh', width: '100%', background: '#0b0c10', color: '#e2e8f0', fontFamily: "'Inter', sans-serif", overflow: 'hidden' }}>
       {/* Sidebar */}
       <aside style={{
         width: '270px',
@@ -326,7 +326,7 @@ const AdminLayout = () => {
       </aside>
 
       {/* Main Admin Content Wrapper */}
-      <div style={{ flex: 1, marginLeft: '270px', width: 'calc(100vw - 270px)', minHeight: '100vh', display: 'flex', flexDirection: 'column', overflowX: 'hidden' }}>
+      <div style={{ flex: 1, marginLeft: '270px', width: 'calc(100vw - 270px)', height: '100vh', display: 'flex', flexDirection: 'column', overflowY: 'auto', overflowX: 'hidden' }}>
         {/* Topbar */}
         <header style={{
           height: '64px',

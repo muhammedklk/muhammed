@@ -446,7 +446,118 @@ app.delete('/api/inquiries/:id', authMiddleware, async (req, res) => {
 });
 
 // ----------------------------------------------------
-// 6. CLOUDINARY IMAGE UPLOAD ROUTE
+// 6. SITE SETTINGS (MAINTENANCE MODE)
+// ----------------------------------------------------
+
+// Helper: get or create the single settings document
+async function getOrCreateSettings() {
+  let setting = await Setting.findOne();
+  if (!setting) {
+    setting = new Setting();
+    await setting.save();
+  }
+  return setting;
+}
+
+// GET /api/settings — Public: returns current maintenance status
+app.get('/api/settings', async (req, res) => {
+  try {
+    const setting = await getOrCreateSettings();
+    res.json({
+      maintenanceMode: setting.maintenanceMode,
+      maintenanceMessage: setting.maintenanceMessage,
+      updatedAt: setting.updatedAt,
+      updatedBy: setting.updatedBy
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT /api/settings/maintenance — Admin: toggle maintenance mode
+app.put('/api/settings/maintenance', authMiddleware, async (req, res) => {
+  try {
+    const { maintenanceMode, maintenanceMessage } = req.body;
+    const update = {
+      maintenanceMode: !!maintenanceMode,
+      updatedAt: new Date(),
+      updatedBy: req.user?.username || 'Admin'
+    };
+    if (maintenanceMessage !== undefined) {
+      update.maintenanceMessage = maintenanceMessage;
+    }
+    let setting = await Setting.findOne();
+    if (!setting) {
+      setting = new Setting(update);
+      await setting.save();
+    } else {
+      Object.assign(setting, update);
+      await setting.save();
+    }
+    res.json({ success: true, setting });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/settings/preview-token — Admin: get current preview token + URL
+app.get('/api/settings/preview-token', authMiddleware, async (req, res) => {
+  try {
+    const setting = await getOrCreateSettings();
+    const baseUrl = process.env.FRONTEND_URL || 'https://muhammedfolio.vercel.app';
+    res.json({
+      previewToken: setting.previewToken,
+      fullPreviewUrl: `${baseUrl}/?preview=${setting.previewToken}`,
+      updatedAt: setting.updatedAt,
+      updatedBy: setting.updatedBy
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/settings/regenerate-preview — Admin: generate new preview token
+app.post('/api/settings/regenerate-preview', authMiddleware, async (req, res) => {
+  try {
+    const crypto = await import('crypto');
+    const newToken = crypto.default.randomBytes(32).toString('hex');
+    let setting = await Setting.findOne();
+    if (!setting) {
+      setting = new Setting({ previewToken: newToken });
+    } else {
+      setting.previewToken = newToken;
+      setting.updatedAt = new Date();
+      setting.updatedBy = req.user?.username || 'Admin';
+    }
+    await setting.save();
+    const baseUrl = process.env.FRONTEND_URL || 'https://muhammedfolio.vercel.app';
+    res.json({
+      previewToken: setting.previewToken,
+      fullPreviewUrl: `${baseUrl}/?preview=${setting.previewToken}`,
+      updatedAt: setting.updatedAt,
+      updatedBy: setting.updatedBy
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/settings/validate-preview — Public: validate a preview token
+app.get('/api/settings/validate-preview', async (req, res) => {
+  try {
+    const { token } = req.query;
+    if (!token) return res.json({ valid: false });
+    const setting = await Setting.findOne();
+    if (!setting) return res.json({ valid: false });
+    const valid = setting.previewToken === token;
+    res.json({ valid });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ----------------------------------------------------
+// 7. CLOUDINARY IMAGE UPLOAD ROUTE
 // ----------------------------------------------------
 
 app.post('/api/upload', authMiddleware, upload.single('image'), (req, res) => {
