@@ -1,7 +1,52 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const AboutTeaser = () => {
+  const headlineRef = useRef(null);
+  const headlineText = "Helping brand achieve digital mastery of creative innovation and strategic planning";
+
+  useEffect(() => {
+    if (!headlineRef.current) return;
+
+    const chars = headlineRef.current.querySelectorAll('.reveal-char');
+    if (!chars.length) return;
+
+    const ctx = gsap.context(() => {
+      gsap.to(chars, {
+        color: 'var(--text-primary)',
+        opacity: 1,
+        stagger: 0.03,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: headlineRef.current,
+          start: 'top 82%',
+          end: 'bottom 45%',
+          scrub: 0.6,
+        }
+      });
+    }, headlineRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const renderAnimatedText = () => {
+    const words = headlineText.split(' ');
+    return words.map((word, wordIndex) => (
+      <span key={wordIndex} className="reveal-word">
+        {word.split('').map((char, charIndex) => (
+          <span key={charIndex} className="reveal-char">
+            {char}
+          </span>
+        ))}
+        {wordIndex < words.length - 1 && <span className="reveal-space">&nbsp;</span>}
+      </span>
+    ));
+  };
+
   return (
     <>
       {/* Bottom Features Bar Section */}
@@ -77,8 +122,8 @@ const AboutTeaser = () => {
 
             {/* Right Column: Big Display Headline & CTA Buttons */}
             <div className="col-lg-9 col-md-8 col-sm-12">
-              <h2 className="about-main-headline">
-                Helping brand achieve digital mastery of creative innovation and strategic planning
+              <h2 className="about-main-headline" ref={headlineRef}>
+                {renderAnimatedText()}
               </h2>
 
               <div className="about-cta-group">

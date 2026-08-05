@@ -386,7 +386,7 @@ const CaseStudy = () => {
                   id="cs-live-btn"
                   className="btn-purple-glow"
                 >
-                  <span>Visit Live Website ↗</span>
+                  <span>Visit Live Website </span>
                 </a>
               </div>
             )}

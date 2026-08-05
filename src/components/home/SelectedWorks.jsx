@@ -85,7 +85,7 @@ const SelectedWorks = () => {
                           rel="noopener noreferrer"
                           className="minimal-btn-hover btn-hover-live"
                         >
-                          Live Site ↗
+                          Live Site
                         </a>
                       )}
                     </div>
