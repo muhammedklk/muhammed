@@ -225,6 +225,95 @@ const request = async (method, endpoint, body = null, config = {}) => {
     }
   }
 
+  if (endpoint.startsWith('/settings')) {
+    const defaultSettings = getStorage('admin_site_settings', {
+      maintenanceMode: false,
+      maintenanceMessage: 'We are improving the experience for you. Please check back shortly.',
+      previewToken: '8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c0d9e8f7a',
+      updatedAt: new Date().toISOString(),
+      updatedBy: 'Admin'
+    });
+
+    if (endpoint === '/settings') {
+      return {
+        data: {
+          maintenanceMode: !!defaultSettings.maintenanceMode,
+          maintenanceMessage: defaultSettings.maintenanceMessage,
+          updatedAt: defaultSettings.updatedAt,
+          updatedBy: defaultSettings.updatedBy
+        },
+        status: 200,
+        _fromFallback: true
+      };
+    }
+
+    if (endpoint === '/settings/maintenance') {
+      const updated = {
+        ...defaultSettings,
+        ...(body?.maintenanceMode !== undefined ? { maintenanceMode: !!body.maintenanceMode } : {}),
+        ...(body?.maintenanceMessage !== undefined ? { maintenanceMessage: body.maintenanceMessage } : {}),
+        updatedAt: new Date().toISOString(),
+        updatedBy: 'Admin'
+      };
+      setStorage('admin_site_settings', updated);
+      return {
+        data: {
+          message: `Maintenance Mode turned ${updated.maintenanceMode ? 'ON' : 'OFF'} successfully!`,
+          setting: updated
+        },
+        status: 200
+      };
+    }
+
+    if (endpoint === '/settings/preview-token') {
+      const host = window.location.host || 'localhost:5173';
+      const protocol = window.location.protocol || 'http:';
+      return {
+        data: {
+          previewToken: defaultSettings.previewToken,
+          fullPreviewUrl: `${protocol}//${host}/?preview=${defaultSettings.previewToken}`,
+          updatedAt: defaultSettings.updatedAt,
+          updatedBy: defaultSettings.updatedBy
+        },
+        status: 200
+      };
+    }
+
+    if (endpoint === '/settings/regenerate-preview') {
+      const newToken = Array.from(crypto.getRandomValues(new Uint8Array(32)))
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join('');
+      const host = window.location.host || 'localhost:5173';
+      const protocol = window.location.protocol || 'http:';
+      const updated = {
+        ...defaultSettings,
+        previewToken: newToken,
+        updatedAt: new Date().toISOString(),
+        updatedBy: 'Admin'
+      };
+      setStorage('admin_site_settings', updated);
+      return {
+        data: {
+          message: 'Preview token regenerated successfully!',
+          previewToken: newToken,
+          fullPreviewUrl: `${protocol}//${host}/?preview=${newToken}`,
+          updatedAt: updated.updatedAt,
+          updatedBy: updated.updatedBy
+        },
+        status: 200
+      };
+    }
+
+    if (endpoint.startsWith('/settings/validate-preview')) {
+      const urlParams = new URLSearchParams(endpoint.split('?')[1] || '');
+      const queryToken = urlParams.get('token');
+      return {
+        data: { valid: queryToken === defaultSettings.previewToken },
+        status: 200
+      };
+    }
+  }
+
   return { data: {}, status: 200 };
 };
 

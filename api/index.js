@@ -3,12 +3,14 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 import { connectDB } from './config/db.js';
 import User from './models/User.js';
 import Profile from './models/Profile.js';
 import Project from './models/Project.js';
 import Faq from './models/Faq.js';
 import Inquiry from './models/Inquiry.js';
+import Setting from './models/Setting.js';
 import { authMiddleware } from './middleware/auth.js';
 import { upload } from './middleware/upload.js';
 
@@ -103,6 +105,154 @@ app.post('/api/auth/login', async (req, res) => {
 // Token Verification
 app.get('/api/auth/me', authMiddleware, async (req, res) => {
   res.json({ user: req.user });
+});
+
+// ----------------------------------------------------
+// 1.5 SITE CONTROLS & MAINTENANCE MODE ROUTES
+// ----------------------------------------------------
+
+const getOrCreateSetting = async () => {
+  let setting = await Setting.findOne();
+  if (!setting) {
+    setting = new Setting({
+      maintenanceMode: false,
+      maintenanceMessage: 'We are improving the experience for you. Please check back shortly.',
+      previewToken: crypto.randomBytes(32).toString('hex'),
+      updatedAt: new Date(),
+      updatedBy: 'Admin'
+    });
+    await setting.save();
+  }
+  return setting;
+};
+
+// GET /api/settings - Public settings fetch (NEVER exposes previewToken)
+app.get('/api/settings', async (req, res) => {
+  try {
+    const setting = await getOrCreateSetting();
+    res.json({
+      maintenanceMode: !!setting.maintenanceMode,
+      maintenanceMessage: setting.maintenanceMessage,
+      updatedAt: setting.updatedAt,
+      updatedBy: setting.updatedBy
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT /api/settings/maintenance - Toggle Maintenance Mode (Protected)
+app.put('/api/settings/maintenance', authMiddleware, async (req, res) => {
+  try {
+    const { maintenanceMode, maintenanceMessage } = req.body;
+    const username = req.user?.username || 'Admin';
+
+    let setting = await Setting.findOne();
+    if (!setting) {
+      setting = new Setting({
+        maintenanceMode: !!maintenanceMode,
+        maintenanceMessage: maintenanceMessage || 'We are improving the experience for you. Please check back shortly.',
+        previewToken: crypto.randomBytes(32).toString('hex'),
+        updatedAt: new Date(),
+        updatedBy: username
+      });
+    } else {
+      if (typeof maintenanceMode === 'boolean') {
+        setting.maintenanceMode = maintenanceMode;
+      }
+      if (maintenanceMessage !== undefined) {
+        setting.maintenanceMessage = maintenanceMessage;
+      }
+      setting.updatedAt = new Date();
+      setting.updatedBy = username;
+    }
+
+    await setting.save();
+
+    res.json({
+      message: `Maintenance Mode turned ${setting.maintenanceMode ? 'ON' : 'OFF'} successfully!`,
+      setting: {
+        maintenanceMode: setting.maintenanceMode,
+        maintenanceMessage: setting.maintenanceMessage,
+        updatedAt: setting.updatedAt,
+        updatedBy: setting.updatedBy
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/settings/preview-token - Get Preview Token & Full URL (Protected)
+app.get('/api/settings/preview-token', authMiddleware, async (req, res) => {
+  try {
+    const setting = await getOrCreateSetting();
+    const host = req.get('host') || 'localhost:5173';
+    const protocol = req.protocol === 'https' || req.get('x-forwarded-proto') === 'https' ? 'https' : 'http';
+    const fullPreviewUrl = `${protocol}://${host}/?preview=${setting.previewToken}`;
+
+    res.json({
+      previewToken: setting.previewToken,
+      fullPreviewUrl,
+      updatedAt: setting.updatedAt,
+      updatedBy: setting.updatedBy
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// POST /api/settings/regenerate-preview - Regenerate Cryptographic Token (Protected)
+app.post('/api/settings/regenerate-preview', authMiddleware, async (req, res) => {
+  try {
+    const username = req.user?.username || 'Admin';
+    const newToken = crypto.randomBytes(32).toString('hex');
+
+    let setting = await Setting.findOne();
+    if (!setting) {
+      setting = new Setting({
+        maintenanceMode: false,
+        maintenanceMessage: 'We are improving the experience for you. Please check back shortly.',
+        previewToken: newToken,
+        updatedAt: new Date(),
+        updatedBy: username
+      });
+    } else {
+      setting.previewToken = newToken;
+      setting.updatedAt = new Date();
+      setting.updatedBy = username;
+    }
+
+    await setting.save();
+
+    const host = req.get('host') || 'localhost:5173';
+    const protocol = req.protocol === 'https' || req.get('x-forwarded-proto') === 'https' ? 'https' : 'http';
+    const fullPreviewUrl = `${protocol}://${host}/?preview=${newToken}`;
+
+    res.json({
+      message: 'Preview token regenerated successfully!',
+      previewToken: newToken,
+      fullPreviewUrl,
+      updatedAt: setting.updatedAt,
+      updatedBy: setting.updatedBy
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/settings/validate-preview - Validate Preview Token (Public)
+app.get('/api/settings/validate-preview', async (req, res) => {
+  try {
+    const { token } = req.query;
+    if (!token) return res.json({ valid: false });
+
+    const setting = await getOrCreateSetting();
+    const isValid = setting.previewToken === token;
+    res.json({ valid: isValid });
+  } catch (err) {
+    res.json({ valid: false });
+  }
 });
 
 // ----------------------------------------------------

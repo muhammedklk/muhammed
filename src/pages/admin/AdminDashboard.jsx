@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../api/axios';
+import { useMaintenance } from '../../context/MaintenanceContext';
 
 const AdminDashboard = () => {
+  const { isMaintenanceMode } = useMaintenance();
   const [stats, setStats] = useState({
     projectsCount: 0,
     faqsCount: 0,
@@ -50,6 +52,70 @@ const AdminDashboard = () => {
         <p style={{ color: '#94a3b8', margin: 0 }}>
           Manage all content, case studies, profile details, and client inquiries from one central hub.
         </p>
+      </div>
+
+      {/* Realtime Site Controls Banner */}
+      <div
+        style={{
+          background: isMaintenanceMode
+            ? 'linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(18, 20, 26, 0.95) 100%)'
+            : 'linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(18, 20, 26, 0.95) 100%)',
+          border: isMaintenanceMode ? '1px solid rgba(239, 68, 68, 0.4)' : '1px solid rgba(34, 197, 94, 0.3)',
+          borderRadius: '20px',
+          padding: '20px 24px',
+          marginBottom: '32px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '16px'
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div
+            style={{
+              width: '44px',
+              height: '44px',
+              borderRadius: '12px',
+              background: isMaintenanceMode ? 'rgba(239, 68, 68, 0.2)' : 'rgba(34, 197, 94, 0.2)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '22px'
+            }}
+          >
+            {isMaintenanceMode ? '🔴' : '🟢'}
+          </div>
+          <div>
+            <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: '#fff' }}>
+              Website Status: {isMaintenanceMode ? 'Maintenance Mode Active 🔴' : 'Live & Publicly Visible 🟢'}
+            </h3>
+            <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: '#94a3b8' }}>
+              {isMaintenanceMode
+                ? 'Visitors worldwide see the Maintenance Screen in realtime.'
+                : 'Your portfolio is live and visible to all visitors normally.'}
+            </p>
+          </div>
+        </div>
+
+        <Link
+          to="/admin/site-controls"
+          style={{
+            padding: '10px 20px',
+            borderRadius: '12px',
+            border: 'none',
+            background: isMaintenanceMode ? '#ef4444' : '#22c55e',
+            color: '#ffffff',
+            fontWeight: 800,
+            fontSize: '13px',
+            textDecoration: 'none',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px'
+          }}
+        >
+          <span>⚙️ Open Site Controls →</span>
+        </Link>
       </div>
 
 
