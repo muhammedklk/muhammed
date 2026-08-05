@@ -56,7 +56,7 @@ const AdminProjectsManager = () => {
       const res = await api.get('/projects');
       // ✅ Only update state+cache from REAL MongoDB response — skip localStorage fallback data
       // (fallback returns initialProjects with IDs "1"-"8" which would overwrite real project data)
-      if (!res._fromFallback && res.data && res.data.length > 0) {
+      if (res && res.data) {
         const imgStore = JSON.parse(localStorage.getItem('project_images_store') || '{}');
         const merged = res.data.map((p) => ({
           ...p,

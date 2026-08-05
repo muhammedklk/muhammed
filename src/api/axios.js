@@ -1,4 +1,4 @@
-// Smart Native HTTP Client
+// Pure Client-Side HTTP Client & Storage Engine
 const baseURL = import.meta.env.VITE_API_URL || '/api';
 
 const initialProfile = {
@@ -23,6 +23,156 @@ const initialProfile = {
   maintenanceMessage: 'We are currently updating our portfolio with fresh projects & case studies. Please check back shortly!'
 };
 
+const defaultProjects = [
+  {
+    _id: '1',
+    slug: 'styleora-fashion-e-commerce',
+    title: 'StyleOra — Fashion E-Commerce',
+    tagline: 'Modern, high-converting digital shopping experience for fashion brands',
+    category: 'ui-ux-design',
+    services: 'UI/UX Design & Development',
+    client: 'StyleOra Apparel',
+    year: '2026',
+    liveUrl: 'https://styleora.vercel.app',
+    heroImg: '/assets/portfolio/1-styleora.jpg',
+    showcaseImg: '/assets/portfolio/1-styleora.jpg',
+    mobileImg1: '/assets/portfolio/1-styleora.jpg',
+    mobileImg2: '/assets/portfolio/1-styleora.jpg',
+    bannerImg: '/assets/portfolio/1-styleora.jpg',
+    descriptionParagraph1: 'StyleOra is an end-to-end luxury fashion e-commerce web platform designed with high aesthetics and smooth user interactions.',
+    descriptionParagraph2: 'Built with pixel-perfect attention to typography, micro-animations, and fluid layout navigation.',
+    techTags: 'Figma, React, SCSS, Motion',
+    outcome: 'Boosted visual engagement and cart conversion rates by 35%.',
+    featured: true
+  },
+  {
+    _id: '2',
+    slug: 'elve-creative-agency-portfolio',
+    title: 'Elve — Creative Agency Portfolio',
+    tagline: 'Bold, minimal agency website designed for high-impact creative storytelling',
+    category: 'web-design',
+    services: 'Web Design & Brand Systems',
+    client: 'Elve Studio',
+    year: '2026',
+    liveUrl: 'https://elve-studio.vercel.app',
+    heroImg: '/assets/portfolio/2-elve.jpg',
+    showcaseImg: '/assets/portfolio/2-elve.jpg',
+    mobileImg1: '/assets/portfolio/2-elve.jpg',
+    mobileImg2: '/assets/portfolio/2-elve.jpg',
+    bannerImg: '/assets/portfolio/2-elve.jpg',
+    descriptionParagraph1: 'Elve Studio is a digital creative agency portfolio showcasing modern visual designs, dark themes, and smooth interactive web motion.',
+    descriptionParagraph2: 'Designed to elevate brand positioning and capture international client leads.',
+    techTags: 'React, GSAP, Lenis, SCSS',
+    outcome: 'Increased client inquiry conversion by 40%.',
+    featured: true
+  },
+  {
+    _id: '3',
+    slug: 'greentrack-sustainability-dashboard',
+    title: 'GreenTrack — Sustainability Dashboard',
+    tagline: 'Real-time carbon footprint analytics & ESG reporting dashboard for enterprises',
+    category: 'dashboard-ui',
+    services: 'Product Design & UI/UX',
+    client: 'GreenTrack Global',
+    year: '2025',
+    liveUrl: 'https://greentrack.vercel.app',
+    heroImg: '/assets/portfolio/3-greentrack.jpg',
+    showcaseImg: '/assets/portfolio/3-greentrack.jpg',
+    mobileImg1: '/assets/portfolio/3-greentrack.jpg',
+    mobileImg2: '/assets/portfolio/3-greentrack.jpg',
+    bannerImg: '/assets/portfolio/3-greentrack.jpg',
+    descriptionParagraph1: 'GreenTrack is an intuitive SaaS data visualization platform monitoring carbon emission data across enterprise supply chains.',
+    descriptionParagraph2: 'Clean data hierarchy, charts, and dark-mode aesthetic for high usability.',
+    techTags: 'React, Chart.js, Tailwind CSS',
+    outcome: 'Streamlined ESG data reporting for over 50 enterprise accounts.',
+    featured: true
+  },
+  {
+    _id: '4',
+    slug: 'travelgallery-curated-destinations',
+    title: 'TravelGallery — Curated Destinations',
+    tagline: 'Immersive travel discovery portal featuring interactive maps and booking flows',
+    category: 'web-design',
+    services: 'UI/UX & Mobile Design',
+    client: 'TravelGallery Inc',
+    year: '2025',
+    liveUrl: 'https://travelgallery.vercel.app',
+    heroImg: '/assets/portfolio/4-travellgallery.jpg',
+    showcaseImg: '/assets/portfolio/case-study/travel-gallery.jpg',
+    mobileImg1: '/assets/portfolio/4-travellgallery.jpg',
+    mobileImg2: '/assets/portfolio/4-travellgallery.jpg',
+    bannerImg: '/assets/portfolio/4-travellgallery.jpg',
+    descriptionParagraph1: 'TravelGallery provides visual discovery of world-class travel destinations with seamless trip planning workflows.',
+    descriptionParagraph2: 'Optimized performance and mobile-first responsive design.',
+    techTags: 'Figma, React, Vite',
+    outcome: 'Achieved 98+ Google Lighthouse performance score.',
+    featured: true
+  },
+  {
+    _id: '5',
+    slug: 'icone-luxury-hotel-booking',
+    title: 'Icone — Luxury Hotel Booking',
+    tagline: 'Premium boutique hotel reservation system with interactive suite visualizers',
+    category: 'web-design',
+    services: 'UI/UX & Frontend Development',
+    client: 'Icone Hospitality',
+    year: '2025',
+    liveUrl: 'https://icone-hotel.vercel.app',
+    heroImg: '/assets/portfolio/5-icone-hotel-booking.jpg',
+    showcaseImg: '/assets/portfolio/case-study/icon-hotel.jpg',
+    mobileImg1: '/assets/portfolio/5-icone-hotel-booking.jpg',
+    mobileImg2: '/assets/portfolio/5-icone-hotel-booking.jpg',
+    bannerImg: '/assets/portfolio/5-icone-hotel-booking.jpg',
+    descriptionParagraph1: 'Icone Hotel offers high-end hospitality booking with fluid transitions, room customization, and instant reservation confirmation.',
+    descriptionParagraph2: 'Elegantly crafted dark glassmorphic design system.',
+    techTags: 'React, CSS Modules, Framer Motion',
+    outcome: 'Elevated direct guest bookings by 50%.',
+    featured: false
+  },
+  {
+    _id: '6',
+    slug: 'chrona-ai-time-management-app',
+    title: 'Chrona — AI Time Management App',
+    tagline: 'Smart schedule optimizer and focus productivity assistant for professionals',
+    category: 'dashboard-ui',
+    services: 'Mobile UI/UX & Web App Design',
+    client: 'Chrona Labs',
+    year: '2025',
+    liveUrl: 'https://chrona.vercel.app',
+    heroImg: '/assets/portfolio/6-chrona.jpg',
+    showcaseImg: '/assets/portfolio/6-chrona.jpg',
+    mobileImg1: '/assets/portfolio/6-chrona.jpg',
+    mobileImg2: '/assets/portfolio/6-chrona.jpg',
+    bannerImg: '/assets/portfolio/6-chrona.jpg',
+    descriptionParagraph1: 'Chrona helps remote teams and creators manage deep work sessions using AI workload prediction.',
+    descriptionParagraph2: 'Modern, minimalist mobile UI layout with intuitive micro-interactions.',
+    techTags: 'Figma, React Native, React',
+    outcome: 'Featured on Product Hunt Top 5 Apps of the week.',
+    featured: false
+  },
+  {
+    _id: '7',
+    slug: 'modernbrand-identity-system',
+    title: 'ModernBrand — Design System',
+    tagline: 'Comprehensive visual identity and component library for tech startups',
+    category: 'branding',
+    services: 'Branding & Design System',
+    client: 'ModernBrand Co',
+    year: '2025',
+    liveUrl: 'https://modernbrand.vercel.app',
+    heroImg: '/assets/portfolio/7-modernbrand.jpg',
+    showcaseImg: '/assets/portfolio/case-study/modernbrand.jpg',
+    mobileImg1: '/assets/portfolio/7-modernbrand.jpg',
+    mobileImg2: '/assets/portfolio/7-modernbrand.jpg',
+    bannerImg: '/assets/portfolio/7-modernbrand.jpg',
+    descriptionParagraph1: 'ModernBrand design system unifies digital brand identity across web, mobile, and marketing touchpoints.',
+    descriptionParagraph2: 'Includes accessible color palettes, custom iconography, and scalable UI guidelines.',
+    techTags: 'Figma, Design Tokens, React',
+    outcome: 'Adopted across 12 digital product teams.',
+    featured: false
+  }
+];
+
 const getStorage = (key, fallback) => {
   try {
     const saved = localStorage.getItem(key);
@@ -43,70 +193,37 @@ const setStorage = (key, data) => {
   } catch (e) {}
 };
 
+// Pure static client request handler (instant responses from localStorage)
 const request = async (method, endpoint, body = null, config = {}) => {
   const token = localStorage.getItem('admin_token');
-  const headers = {
-    'Content-Type': 'application/json',
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    ...(config.headers || {})
-  };
 
-  if (body instanceof FormData) {
-    delete headers['Content-Type'];
+  // Attempt rapid fetch only if an external custom API URL is configured
+  if (import.meta.env.VITE_API_URL) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 1000);
+      const headers = {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(config.headers || {})
+      };
+      if (body instanceof FormData) delete headers['Content-Type'];
+
+      const response = await fetch(`${baseURL}${endpoint}`, {
+        method,
+        headers,
+        signal: controller.signal,
+        ...(body ? { body: body instanceof FormData ? body : JSON.stringify(body) } : {})
+      });
+      clearTimeout(timeoutId);
+      if (response.ok) {
+        const data = await response.json();
+        return { data, status: response.status, _fromFallback: false };
+      }
+    } catch (_) {}
   }
 
-  try {
-    const controller = new AbortController();
-    // GET: 15s timeout (gives Vercel cold start enough time to query MongoDB). PUT/POST/DELETE: 25s
-    const timeoutMs = method === 'GET' ? 15000 : 25000;
-    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
-
-    const response = await fetch(`${baseURL}${endpoint}`, {
-      method,
-      headers,
-      signal: controller.signal,
-      ...(body ? { body: body instanceof FormData ? body : JSON.stringify(body) } : {})
-    });
-
-    clearTimeout(timeoutId);
-
-    if (response.ok) {
-      const data = await response.json();
-
-      // Profile: cache profile data
-      if (endpoint === '/profile' && data) {
-        const existing = getStorage('admin_profile_data', initialProfile);
-        setStorage('admin_profile_data', { ...existing, ...data });
-      }
-
-      // Projects GET: update all public caches immediately with fresh MongoDB data
-      if (endpoint === '/projects' && method === 'GET' && Array.isArray(data)) {
-        try {
-          // Admin cache
-          localStorage.setItem('admin_projects_cached', JSON.stringify(data));
-          // Public caches (Works page + Home SelectedWorks)
-          const mappedPublic = data.map((p) => ({
-            id: p.slug || p._id,
-            title: p.title || '',
-            subtitle: p.tagline || p.category || '',
-            imgSrc: p.heroImg || '',
-            liveUrl: p.liveUrl || '#',
-            hideLiveLink: !p.liveUrl,
-            hideCaseStudy: false,
-            category: (p.category || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').trim(),
-          }));
-          localStorage.setItem('public_works_cache', JSON.stringify(mappedPublic));
-          localStorage.setItem('public_home_works_cache', JSON.stringify(mappedPublic.slice(0, 4)));
-        } catch (_) {}
-      }
-
-      return { data, status: response.status, _fromFallback: false };
-    }
-  } catch (err) {
-    // Timeout (AbortError) or network error — fall through to localStorage fallback below
-  }
-
-  // --- FALLBACK HANDLERS (API timeout / network error) ---
+  // --- INSTANT CLIENT-SIDE LOCAL STORAGE HANDLERS ---
 
   if (endpoint === '/auth/login' && method === 'POST') {
     const username = body?.username;
@@ -150,9 +267,7 @@ const request = async (method, endpoint, body = null, config = {}) => {
   if (endpoint === '/profile') {
     if (method === 'GET') {
       const profile = getStorage('admin_profile_data', initialProfile);
-      // CRITICAL: When API times out, always return isMaintenanceMode: false
-      // Real maintenance status ONLY comes from a successful MongoDB response.
-      return { data: { ...profile, isMaintenanceMode: false }, status: 200, _fromFallback: true };
+      return { data: { ...profile, isMaintenanceMode: false }, status: 200, _fromFallback: false };
     }
     if (method === 'PUT') {
       const existing = getStorage('admin_profile_data', initialProfile);
@@ -163,27 +278,32 @@ const request = async (method, endpoint, body = null, config = {}) => {
   }
 
   if (endpoint.startsWith('/projects')) {
-    // API timed out — return EMPTY array. Public pages use their own cache.
-    // Never return hardcoded/stale data so deleted projects don't reappear.
+    let projectsList = getStorage('admin_projects_data', defaultProjects);
     if (method === 'GET') {
-      return { data: [], status: 200, _fromFallback: true };
+      return { data: projectsList, status: 200, _fromFallback: false };
     }
     if (method === 'POST') {
       const newProj = { ...body, _id: Date.now().toString() };
-      return { data: newProj, status: 201, _fromFallback: true };
+      projectsList.unshift(newProj);
+      setStorage('admin_projects_data', projectsList);
+      return { data: newProj, status: 201, _fromFallback: false };
     }
     if (method === 'PUT') {
-      return { data: body, status: 200, _fromFallback: true };
+      const id = body._id || endpoint.split('/')[2];
+      projectsList = projectsList.map((p) => (p._id === id ? { ...p, ...body } : p));
+      setStorage('admin_projects_data', projectsList);
+      return { data: body, status: 200, _fromFallback: false };
     }
     if (method === 'DELETE') {
-      // Clear all public & admin caches so deleted project vanishes everywhere instantly
+      const id = endpoint.split('/')[2];
+      projectsList = projectsList.filter((p) => p._id !== id);
+      setStorage('admin_projects_data', projectsList);
       try {
         localStorage.removeItem('public_works_cache');
         localStorage.removeItem('public_home_works_cache');
         localStorage.removeItem('admin_projects_cached');
-        localStorage.removeItem('project_images_store');
       } catch (_) {}
-      return { data: { message: 'Deleted' }, status: 200, _fromFallback: true };
+      return { data: { message: 'Deleted' }, status: 200, _fromFallback: false };
     }
   }
 
@@ -243,7 +363,7 @@ const request = async (method, endpoint, body = null, config = {}) => {
           updatedBy: defaultSettings.updatedBy
         },
         status: 200,
-        _fromFallback: true
+        _fromFallback: false
       };
     }
 

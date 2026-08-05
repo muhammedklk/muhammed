@@ -11,8 +11,7 @@ const Works = () => {
     const fetchWorks = async () => {
       try {
         const res = await api.get('/projects');
-        if (!res._fromFallback && res.data && res.data.length > 0) {
-          // Real MongoDB data — map to works format
+        if (res && res.data && res.data.length > 0) {
           const mapped = res.data.map((p) => ({
             id: p.slug || p._id,
             title: p.title || '',
@@ -24,14 +23,6 @@ const Works = () => {
             hideCaseStudy: false,
           }));
           setWorks(mapped);
-          // Cache for instant reload
-          try { localStorage.setItem('public_works_cache', JSON.stringify(mapped)); } catch (_) {}
-        } else if (res._fromFallback) {
-          // API timed out — try localStorage cache first
-          const cached = localStorage.getItem('public_works_cache');
-          if (cached) {
-            setWorks(JSON.parse(cached));
-          }
         }
       } catch (err) {
         // Network error — use localStorage cache

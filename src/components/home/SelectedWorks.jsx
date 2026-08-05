@@ -11,8 +11,7 @@ const SelectedWorks = () => {
     const fetchProjects = async () => {
       try {
         const res = await api.get('/projects');
-        if (!res._fromFallback && res.data && res.data.length > 0) {
-          // Real MongoDB data — map and take first 4
+        if (res && res.data && res.data.length > 0) {
           const mapped = res.data.slice(0, 4).map((p) => ({
             id: p.slug || p._id,
             title: p.title || '',
@@ -23,14 +22,6 @@ const SelectedWorks = () => {
             hideCaseStudy: false,
           }));
           setProjects(mapped);
-          // Cache for next load (but NOT as initial state — always fresh from API)
-          try { localStorage.setItem('public_home_works_cache', JSON.stringify(mapped)); } catch (_) {}
-        } else if (res._fromFallback) {
-          // API timed out — use localStorage cache (not hardcoded defaults)
-          try {
-            const cached = localStorage.getItem('public_home_works_cache');
-            if (cached) setProjects(JSON.parse(cached));
-          } catch (_) {}
         }
       } catch (err) {
         // Network error — use localStorage cache
