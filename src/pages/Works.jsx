@@ -8,7 +8,7 @@ const defaultWorks = [
     subtitle: 'UI/UX Design & Development',
     category: 'ui-ux-design',
     imgSrc: '/assets/portfolio/1-styleora.jpg',
-    liveUrl: 'https://styleora.vercel.app',
+    liveUrl: 'https://styleorashop.vercel.app',
     hideLiveLink: false,
     hideCaseStudy: false
   },
@@ -18,7 +18,7 @@ const defaultWorks = [
     subtitle: 'Web Design & Brand Systems',
     category: 'web-design',
     imgSrc: '/assets/portfolio/2-elve.jpg',
-    liveUrl: 'https://elve-studio.vercel.app',
+    liveUrl: 'https://elve.vercel.app',
     hideLiveLink: false,
     hideCaseStudy: false
   },
