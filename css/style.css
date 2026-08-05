@@ -1719,14 +1719,15 @@ button {
 }
 
 .reveal-char {
-    color: rgba(15, 23, 42, 0.16);
+    color: #cbd5e1;
+    opacity: 0.3;
     display: inline-block;
-    transition: color 0.1s ease;
-    will-change: color;
+    will-change: color, opacity;
 }
 
 [data-theme="dark"] .reveal-char {
-    color: rgba(255, 255, 255, 0.16);
+    color: #475569;
+    opacity: 0.3;
 }
 
 /* CTA Buttons */

@@ -15,19 +15,30 @@ const AboutTeaser = () => {
     const chars = headlineRef.current.querySelectorAll('.reveal-char');
     if (!chars.length) return;
 
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const startColor = isDark ? '#475569' : '#cbd5e1';
+    const endColor = isDark ? '#ffffff' : '#000000';
+
     const ctx = gsap.context(() => {
-      gsap.to(chars, {
-        color: 'var(--text-primary)',
-        opacity: 1,
-        stagger: 0.03,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: headlineRef.current,
-          start: 'top 82%',
-          end: 'bottom 45%',
-          scrub: 0.6,
+      gsap.fromTo(
+        chars,
+        {
+          color: startColor,
+          opacity: 0.3
+        },
+        {
+          color: endColor,
+          opacity: 1,
+          stagger: 0.02,
+          ease: 'power1.inOut',
+          scrollTrigger: {
+            trigger: headlineRef.current,
+            start: 'top 85%',
+            end: 'bottom 45%',
+            scrub: 0.5,
+          }
         }
-      });
+      );
     }, headlineRef);
 
     return () => ctx.revert();
