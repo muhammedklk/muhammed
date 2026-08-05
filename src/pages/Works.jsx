@@ -1,99 +1,94 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const defaultWorks = [
   {
+    id: 'voyagera',
+    title: 'Voyagera',
+    subtitle: 'World Expeditions, UI/UX Design & Development',
+    imgSrc: '/assets/portfolio/gyogrea.png',
+    liveUrl: 'https://voyageratravel.vercel.app/',
+    hideLiveLink: false,
+    hideCaseStudy: false
+  },
+  {
     id: 'styleora-fashion-e-commerce',
-    title: 'StyleOra — Fashion E-Commerce',
-    subtitle: 'UI/UX Design & Development',
-    category: 'ui-ux-design',
+    title: 'Styleora',
+    subtitle: 'E-Commerce, UI/UX Design & Development',
     imgSrc: '/assets/portfolio/1-styleora.jpg',
-    liveUrl: 'https://styleorashop.vercel.app',
+    liveUrl: 'https://styleorashop.vercel.app/',
     hideLiveLink: false,
     hideCaseStudy: false
   },
   {
     id: 'elve-creative-agency-portfolio',
-    title: 'Elve — Creative Agency Portfolio',
-    subtitle: 'Web Design & Brand Systems',
-    category: 'web-design',
+    title: 'Elve',
+    subtitle: 'Rental, UI/UX Design & Development',
     imgSrc: '/assets/portfolio/2-elve.jpg',
-    liveUrl: 'https://elve.vercel.app',
+    liveUrl: 'https://elve.vercel.app/',
     hideLiveLink: false,
     hideCaseStudy: false
   },
   {
     id: 'greentrack-sustainability-dashboard',
-    title: 'GreenTrack — Sustainability Dashboard',
-    subtitle: 'Product Design & UI/UX',
-    category: 'dashboard-ui',
+    title: 'Green Track',
+    subtitle: 'Sustainability, UI/UX Design & Development',
     imgSrc: '/assets/portfolio/3-greentrack.jpg',
-    liveUrl: 'https://greentrack.vercel.app',
+    liveUrl: 'https://greentrack-ten.vercel.app/',
     hideLiveLink: false,
     hideCaseStudy: false
   },
   {
     id: 'travelgallery-curated-destinations',
-    title: 'TravelGallery — Curated Destinations',
-    subtitle: 'UI/UX & Mobile Design',
-    category: 'web-design',
+    title: 'Travel Gallery',
+    subtitle: 'Travel Gallery, UI/UX Design & Development',
     imgSrc: '/assets/portfolio/4-travellgallery.jpg',
-    liveUrl: 'https://travelgallery.vercel.app',
+    liveUrl: 'https://travelgallery.vercel.app/',
     hideLiveLink: false,
     hideCaseStudy: false
   },
   {
     id: 'icone-luxury-hotel-booking',
-    title: 'Icone — Luxury Hotel Booking',
-    subtitle: 'UI/UX & Frontend Development',
-    category: 'web-design',
+    title: 'Icone Hotel Booking',
+    subtitle: 'Hotel Booking, UI/UX, Apps Design',
     imgSrc: '/assets/portfolio/5-icone-hotel-booking.jpg',
-    liveUrl: 'https://icone-hotel.vercel.app',
-    hideLiveLink: false,
-    hideCaseStudy: false
-  },
-  {
-    id: 'chrona-ai-time-management-app',
-    title: 'Chrona — AI Time Management App',
-    subtitle: 'Mobile UI/UX & Web App Design',
-    category: 'dashboard-ui',
-    imgSrc: '/assets/portfolio/6-chrona.jpg',
-    liveUrl: 'https://chrona.vercel.app',
+    liveUrl: 'https://icone-hotel.vercel.app/',
     hideLiveLink: false,
     hideCaseStudy: false
   },
   {
     id: 'modernbrand-identity-system',
-    title: 'ModernBrand — Design System',
-    subtitle: 'Branding & Design System',
-    category: 'branding',
+    title: 'Modern Brand',
+    subtitle: 'Brand Identity & Apps Design',
     imgSrc: '/assets/portfolio/7-modernbrand.jpg',
-    liveUrl: 'https://modernbrand.vercel.app',
+    liveUrl: 'https://modernbrand.vercel.app/',
+    hideLiveLink: false,
+    hideCaseStudy: false
+  },
+  {
+    id: 'chrona-ai-time-management-app',
+    title: 'Chrona',
+    subtitle: 'Interface, 2 Commerce App',
+    imgSrc: '/assets/portfolio/6-chrona.jpg',
+    liveUrl: 'https://chrona.vercel.app/',
     hideLiveLink: false,
     hideCaseStudy: false
   }
 ];
 
 const Works = () => {
-  const [selectedFilter, setSelectedFilter] = useState('all');
-
-  const filteredWorks = defaultWorks.filter((item) => {
-    if (selectedFilter === 'all') return true;
-    return item.category.includes(selectedFilter);
-  });
-
   return (
     <>
-      {/* Hero Inner Header */}
+      {/* Inner Page Hero Section */}
       <section className="page-inner-hero minimal-works-hero text-center">
         <div className="container">
           <div className="row justify-content-center text-center">
-            <div className="col-lg-8">
-              <span className="hero-top-badge">FEATURED PROJECTS</span>
-              <h1 className="hero-main-title">
-                Crafting <span className="highlight-lime">Digital Experiences</span> That Drive Impact.
+            <div className="col-lg-9 col-md-11 col-sm-12 text-center d-flex flex-column align-items-center mx-auto">
+              <span className="minimal-badge mb-3">FEATURED PROJECTS</span>
+              <h1 className="minimal-hero-title text-center mb-3">
+                Crafting <span className="text-highlight">Digital Experiences</span><br className="d-none d-md-block" /> That Drive Impact.
               </h1>
-              <p className="hero-sub-text text-center mx-auto">
+              <p className="minimal-hero-subtitle text-center mx-auto mb-5">
                 Explore a collection of UI/UX design, custom web development, and digital product case studies built for modern brands.
               </p>
             </div>
@@ -101,78 +96,60 @@ const Works = () => {
         </div>
       </section>
 
-      {/* Filter & Gallery Grid Section */}
+      {/* Works Grid Section */}
       <section className="works-gallery-section section-padding-bottom">
         <div className="container">
-          {/* Category Filter Pills */}
-          <div className="filter-pills-wrapper text-center mb-5">
-            <button
-              className={`filter-btn ${selectedFilter === 'all' ? 'active' : ''}`}
-              onClick={() => setSelectedFilter('all')}
-            >
-              All Projects
-            </button>
-            <button
-              className={`filter-btn ${selectedFilter === 'ui-ux-design' ? 'active' : ''}`}
-              onClick={() => setSelectedFilter('ui-ux-design')}
-            >
-              UI/UX Design
-            </button>
-            <button
-              className={`filter-btn ${selectedFilter === 'web-design' ? 'active' : ''}`}
-              onClick={() => setSelectedFilter('web-design')}
-            >
-              Web Design
-            </button>
-            <button
-              className={`filter-btn ${selectedFilter === 'dashboard-ui' ? 'active' : ''}`}
-              onClick={() => setSelectedFilter('dashboard-ui')}
-            >
-              Dashboard & SaaS
-            </button>
-            <button
-              className={`filter-btn ${selectedFilter === 'branding' ? 'active' : ''}`}
-              onClick={() => setSelectedFilter('branding')}
-            >
-              Branding
-            </button>
-          </div>
 
-          {/* Works Grid */}
+          {/* Works Grid — 2 Columns */}
           <div className="row g-4">
-            {filteredWorks.map((item) => (
-              <div className="col-md-6 col-lg-4" key={item.id}>
-                <div className="work-card-minimal">
-                  <div className="work-img-box">
-                    <img src={item.imgSrc} alt={item.title} className="img-fluid work-thumbnail" />
-                    <div className="work-overlay-actions">
-                      {!item.hideCaseStudy && (
-                        <Link to={`/case-study/${item.id}`} className="btn-action btn-case-study">
-                          View Case Study
-                        </Link>
-                      )}
-                      {!item.hideLiveLink && item.liveUrl && item.liveUrl !== '#' && (
-                        <a
-                          href={item.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-action btn-live-demo"
-                        >
-                          Live Site ↗
-                        </a>
-                      )}
+            {defaultWorks.map((item) => (
+              <div className="col-md-6 col-lg-6" key={item.id}>
+                <div className="demo-card-item">
+                  <div className="demo-mockup-frame">
+                    <div className="demo-img-wrapper">
+                      <img src={item.imgSrc} alt={item.title} className="demo-mockup-img" />
+                      <div className="minimal-hover-overlay">
+                        {!item.hideLiveLink && item.liveUrl && item.liveUrl !== '#' && (
+                          <a
+                            href={item.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="minimal-btn-hover btn-hover-live"
+                          >
+                            Live Website
+                          </a>
+                        )}
+                        {!item.hideCaseStudy && (
+                          <Link to={`/case-study/${item.id}`} className="minimal-btn-hover btn-hover-case">
+                            Case Study
+                          </Link>
+                        )}
+                      </div>
                     </div>
                   </div>
-                  <div className="work-card-info mt-3">
-                    <span className="work-cat-tag">{item.subtitle}</span>
-                    <h3 className="work-item-title">
-                      <Link to={`/case-study/${item.id}`}>{item.title}</Link>
-                    </h3>
-                  </div>
+                  <h3 className="demo-card-caption">
+                    <Link to={`/case-study/${item.id}`}>{item.title}</Link>
+                  </h3>
+                  <span className="demo-card-subtext">{item.subtitle}</span>
                 </div>
               </div>
             ))}
           </div>
+
+          {/* Bottom CTA Section */}
+          <div className="minimal-cta-section mt-5">
+            <div className="minimal-cta-card">
+              <span className="minimal-badge">GET IN TOUCH TODAY</span>
+              <h2 className="minimal-cta-title">Have a project in mind?</h2>
+              <p className="minimal-cta-subtitle">
+                Let's build something truly functional and visually innovative together.
+              </p>
+              <Link to="/contact" className="btn-primary-pill">
+                Start a Conversation
+              </Link>
+            </div>
+          </div>
+
         </div>
       </section>
     </>

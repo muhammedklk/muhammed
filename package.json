@@ -4,14 +4,13 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "predev": "node clean_backend.js && node copy_assets.js",
+    "predev": "node copy_assets.js",
     "dev": "vite",
-    "prebuild": "node clean_backend.js && node copy_assets.js",
+    "prebuild": "node copy_assets.js",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.7.4",
     "gsap": "^3.12.5",
     "lenis": "^1.1.18",
     "lucide-react": "^0.428.0",
