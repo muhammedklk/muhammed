@@ -237,8 +237,8 @@ const request = async (method, endpoint, body = null, config = {}) => {
 
   try {
     const controller = new AbortController();
-    // GET: 8s timeout (gives Vercel cold start enough time to query MongoDB). PUT/POST/DELETE: 25s
-    const timeoutMs = method === 'GET' ? 8000 : 25000;
+    // GET: 15s timeout (gives Vercel cold start enough time to query MongoDB). PUT/POST/DELETE: 25s
+    const timeoutMs = method === 'GET' ? 15000 : 25000;
     const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
     const response = await fetch(`${baseURL}${endpoint}`, {
@@ -316,7 +316,10 @@ const request = async (method, endpoint, body = null, config = {}) => {
   if (endpoint === '/profile') {
     if (method === 'GET') {
       const profile = getStorage('admin_profile_data', initialProfile);
-      return { data: profile, status: 200 };
+      // CRITICAL: When API times out (fallback), always return isMaintenanceMode: false
+      // This prevents stale localStorage from permanently blocking the site.
+      // Real maintenance status ONLY comes from a successful MongoDB response (not _fromFallback).
+      return { data: { ...profile, isMaintenanceMode: false }, status: 200, _fromFallback: true };
     }
     if (method === 'PUT') {
       const existing = getStorage('admin_profile_data', initialProfile);

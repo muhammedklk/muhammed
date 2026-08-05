@@ -16,8 +16,10 @@ import api from '../../api/axios';
 const Layout = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  // Initialize IMMEDIATELY from localStorage — no blocking, instant render
-  const [isMaintenanceMode, setIsMaintenanceMode] = useState(() => getMaintenanceMode());
+  // Always start as NOT in maintenance — let MongoDB API confirm real status
+  // This prevents stale localStorage from blocking the site on initial page load
+  const [isMaintenanceMode, setIsMaintenanceMode] = useState(false);
+  const [maintenanceFetched, setMaintenanceFetched] = useState(false);
   const [maintenanceMessage, setMaintenanceMessage] = useState('');
   const [adminPreview, setAdminPreview] = useState(false);
   const location = useLocation();
@@ -31,9 +33,9 @@ const Layout = ({ children }) => {
     try {
       const res = await api.get('/profile');
 
-      if (res && res.data && res.data.isMaintenanceMode !== undefined) {
-        // ✅ Only sync when receiving a REAL response from MongoDB (not offline fallback)
-        if (!res._fromFallback) {
+      if (res && res.data) {
+        if (!res._fromFallback && res.data.isMaintenanceMode !== undefined) {
+          // ✅ Real MongoDB response — apply actual maintenance status
           const modeStatus = !!res.data.isMaintenanceMode;
           setIsMaintenanceMode(modeStatus);
           localStorage.setItem('portfolio_maintenance_status', modeStatus ? 'true' : 'false');
@@ -41,9 +43,12 @@ const Layout = ({ children }) => {
             setMaintenanceMessage(res.data.maintenanceMessage);
           }
         }
+        // If _fromFallback: true — API timed out, keep isMaintenanceMode as false (site stays visible)
+        setMaintenanceFetched(true);
       }
     } catch (_) {
-      // Network error — keep current local state
+      // Network error — keep isMaintenanceMode as false (site stays visible)
+      setMaintenanceFetched(true);
     }
   };
 
@@ -91,7 +96,10 @@ const Layout = ({ children }) => {
   // Show Maintenance Overlay ONLY for regular visitors when mode is ON
   if (isMaintenanceMode && isPublicRoute && !isExplicitAdminPreview) {
     return (
-      <MaintenanceOverlay message={maintenanceMessage} />
+      <>
+        <Preloader />
+        <MaintenanceOverlay message={maintenanceMessage} />
+      </>
     );
   }
 
