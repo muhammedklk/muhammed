@@ -73,13 +73,10 @@ const request = async (method, endpoint, body = null, config = {}) => {
     if (response.ok) {
       const data = await response.json();
 
-      // Profile: cache maintenance status
+      // Profile: cache profile data
       if (endpoint === '/profile' && data) {
         const existing = getStorage('admin_profile_data', initialProfile);
         setStorage('admin_profile_data', { ...existing, ...data });
-        if (data.isMaintenanceMode !== undefined) {
-          localStorage.setItem('portfolio_maintenance_status', data.isMaintenanceMode ? 'true' : 'false');
-        }
       }
 
       // Projects GET: update all public caches immediately with fresh MongoDB data

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../api/axios';
-import { getMaintenanceMode, setMaintenanceMode } from '../../utils/maintenanceStatus';
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
@@ -10,19 +9,15 @@ const AdminDashboard = () => {
     inquiriesCount: 0,
     profileLoaded: false
   });
-  const [isMaintenanceMode, setIsMaintenanceMode] = useState(() => getMaintenanceMode());
-  const [maintenanceMessage, setMaintenanceMessage] = useState('');
-  const [updatingMaintenance, setUpdatingMaintenance] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const [projectsRes, faqsRes, inquiriesRes, profileRes] = await Promise.all([
+        const [projectsRes, faqsRes, inquiriesRes] = await Promise.all([
           api.get('/projects').catch(() => ({ data: [] })),
           api.get('/faqs').catch(() => ({ data: [] })),
-          api.get('/inquiries').catch(() => ({ data: [] })),
-          api.get('/profile').catch(() => ({ data: null }))
+          api.get('/inquiries').catch(() => ({ data: [] }))
         ]);
 
         let localInquiries = [];
@@ -36,15 +31,6 @@ const AdminDashboard = () => {
           inquiriesCount: mergedInquiriesCount,
           profileLoaded: true
         });
-
-        if (profileRes && profileRes.data && !profileRes._fromFallback && profileRes.data.isMaintenanceMode !== undefined) {
-          const modeStatus = !!profileRes.data.isMaintenanceMode;
-          setIsMaintenanceMode(modeStatus);
-          localStorage.setItem('portfolio_maintenance_status', modeStatus ? 'true' : 'false');
-          if (profileRes.data.maintenanceMessage) {
-            setMaintenanceMessage(profileRes.data.maintenanceMessage);
-          }
-        }
       } catch (err) {
         console.error('Error loading dashboard stats:', err);
       } finally {
@@ -55,14 +41,6 @@ const AdminDashboard = () => {
     fetchDashboardData();
   }, []);
 
-
-  const handleToggleMaintenance = async () => {
-    const newStatus = !isMaintenanceMode;
-    setIsMaintenanceMode(newStatus);
-    localStorage.setItem('portfolio_maintenance_status', newStatus ? 'true' : 'false');
-    await setMaintenanceMode(newStatus, maintenanceMessage);
-  };
-
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
@@ -72,100 +50,6 @@ const AdminDashboard = () => {
         <p style={{ color: '#94a3b8', margin: 0 }}>
           Manage all content, case studies, profile details, and client inquiries from one central hub.
         </p>
-      </div>
-
-      {/* Portfolio Updating / Maintenance Mode Quick Control Banner */}
-      <div style={{
-        background: isMaintenanceMode
-          ? 'linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(20, 20, 25, 0.95) 100%)'
-          : 'linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(20, 20, 25, 0.95) 100%)',
-        border: isMaintenanceMode ? '1px solid rgba(239, 68, 68, 0.4)' : '1px solid rgba(34, 197, 94, 0.3)',
-        borderRadius: '20px',
-        padding: '20px 24px',
-        marginBottom: '32px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: '16px',
-        transition: 'all 0.3s ease'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{
-            width: '44px',
-            height: '44px',
-            borderRadius: '12px',
-            background: isMaintenanceMode ? 'rgba(239, 68, 68, 0.2)' : 'rgba(34, 197, 94, 0.2)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '22px'
-          }}>
-            {isMaintenanceMode ? '🚧' : '🟢'}
-          </div>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: '#fff' }}>
-                Portfolio Status: {isMaintenanceMode ? 'Updating Mode Active 🚧' : 'Live & Publicly Visible 🟢'}
-              </h3>
-            </div>
-            <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: '#94a3b8' }}>
-              {isMaintenanceMode
-                ? 'Visitors see a clean "Website Updating in Progress" screen while you edit.'
-                : 'Your portfolio is live and visible to all visitors normally.'}
-            </p>
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
-          {/* View Live button — only when maintenance is ON, bypasses maintenance screen */}
-          {isMaintenanceMode && (
-            <button
-              onClick={() => window.open('/?preview=admin', '_blank')}
-              style={{
-                padding: '12px 22px',
-                borderRadius: '30px',
-                border: '1px solid rgba(255,255,255,0.2)',
-                background: 'rgba(255,255,255,0.08)',
-                color: '#ffffff',
-                fontWeight: 700,
-                fontSize: '13px',
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                transition: 'all 0.2s ease'
-              }}
-              onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.15)'}
-              onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
-            >
-              👁️ View Live Site
-            </button>
-          )}
-
-          <button
-            onClick={handleToggleMaintenance}
-            style={{
-              padding: '12px 26px',
-              borderRadius: '30px',
-              border: 'none',
-              background: isMaintenanceMode ? '#ef4444' : '#22c55e',
-              color: '#ffffff',
-              fontWeight: 800,
-              fontSize: '13px',
-              cursor: 'pointer',
-              boxShadow: isMaintenanceMode ? '0 4px 20px rgba(239, 68, 68, 0.4)' : '0 4px 20px rgba(34, 197, 94, 0.3)',
-              transition: 'all 0.2s ease',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px'
-            }}
-          >
-            {isMaintenanceMode
-              ? '🔴 Updating Screen ON (Click to turn OFF)'
-              : '🟢 Live (Click to turn ON Updating Screen)'}
-          </button>
-        </div>
       </div>
 
 
