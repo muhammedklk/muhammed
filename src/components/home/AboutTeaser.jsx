@@ -16,32 +16,32 @@ const AboutTeaser = () => {
     if (!chars.length) return;
 
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const startColor = isDark ? '#475569' : '#cbd5e1';
-    const endColor = isDark ? '#ffffff' : '#000000';
+    const targetColor = isDark ? '#ffffff' : '#000000';
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        chars,
-        {
-          color: startColor,
-          opacity: 0.3
-        },
-        {
-          color: endColor,
-          opacity: 1,
-          stagger: 0.02,
-          ease: 'power1.inOut',
-          scrollTrigger: {
-            trigger: headlineRef.current,
-            start: 'top 85%',
-            end: 'bottom 45%',
-            scrub: 0.5,
-          }
+      gsap.to(chars, {
+        color: targetColor,
+        opacity: 1,
+        stagger: 0.02,
+        ease: 'power1.out',
+        scrollTrigger: {
+          trigger: headlineRef.current,
+          start: 'top 88%',
+          end: 'bottom 40%',
+          scrub: 0.4,
+          invalidateOnRefresh: true,
         }
-      );
+      });
     }, headlineRef);
 
-    return () => ctx.revert();
+    const refreshTimer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+
+    return () => {
+      clearTimeout(refreshTimer);
+      ctx.revert();
+    };
   }, []);
 
   const renderAnimatedText = () => {
