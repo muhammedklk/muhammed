@@ -1,11 +1,7 @@
 import api from '../api/axios';
 
 export const getMaintenanceMode = () => {
-  try {
-    return localStorage.getItem('portfolio_maintenance_status') === 'true';
-  } catch (e) {
-    return false;
-  }
+  return false;
 };
 
 export const setMaintenanceMode = async (status, customMessage = '') => {

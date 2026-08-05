@@ -11,11 +11,10 @@ import '../css/responsive.css';
 // all stale localStorage caches are cleared so visitors get fresh data.
 const APP_VERSION = '2.2.0';
 try {
+  localStorage.removeItem('portfolio_maintenance_status');
   const storedVersion = localStorage.getItem('app_version');
   if (storedVersion !== APP_VERSION) {
     localStorage.setItem('app_version', APP_VERSION);
-    // Clear stale maintenance flag
-    localStorage.removeItem('portfolio_maintenance_status');
     // Clear all stale project caches — ensures fresh data from MongoDB
     localStorage.removeItem('public_works_cache');
     localStorage.removeItem('public_home_works_cache');
