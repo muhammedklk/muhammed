@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
 import Layout from './components/layout/Layout';
@@ -61,6 +61,10 @@ function App() {
               <Route path="inquiries" element={<AdminInquiries />} />
               <Route path="profile" element={<AdminProfileEditor />} />
             </Route>
+
+            {/* Catch-All & Fallback Routes (Fixes blank screen on /index.html and unknown paths) */}
+            <Route path="/index.html" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Router>
       </AuthProvider>
