@@ -1,42 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import api from '../../api/axios';
+
+const selectedWorksList = [
+  {
+    id: 'styleora-fashion-e-commerce',
+    title: 'StyleOra — Fashion E-Commerce',
+    subtitle: 'UI/UX Design & Development',
+    imgSrc: '/assets/portfolio/1-styleora.jpg',
+    liveUrl: 'https://styleora.vercel.app',
+    hideLiveLink: false,
+    hideCaseStudy: false
+  },
+  {
+    id: 'elve-creative-agency-portfolio',
+    title: 'Elve — Creative Agency Portfolio',
+    subtitle: 'Web Design & Brand Systems',
+    imgSrc: '/assets/portfolio/2-elve.jpg',
+    liveUrl: 'https://elve-studio.vercel.app',
+    hideLiveLink: false,
+    hideCaseStudy: false
+  },
+  {
+    id: 'greentrack-sustainability-dashboard',
+    title: 'GreenTrack — Sustainability Dashboard',
+    subtitle: 'Product Design & UI/UX',
+    imgSrc: '/assets/portfolio/3-greentrack.jpg',
+    liveUrl: 'https://greentrack.vercel.app',
+    hideLiveLink: false,
+    hideCaseStudy: false
+  },
+  {
+    id: 'travelgallery-curated-destinations',
+    title: 'TravelGallery — Curated Destinations',
+    subtitle: 'UI/UX & Mobile Design',
+    imgSrc: '/assets/portfolio/4-travellgallery.jpg',
+    liveUrl: 'https://travelgallery.vercel.app',
+    hideLiveLink: false,
+    hideCaseStudy: false
+  }
+];
 
 const SelectedWorks = () => {
-  // Start with empty array — no hardcoded defaults, no stale images flash
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const res = await api.get('/projects');
-        if (res && res.data && res.data.length > 0) {
-          const mapped = res.data.slice(0, 4).map((p) => ({
-            id: p.slug || p._id,
-            title: p.title || '',
-            subtitle: p.tagline || p.category || '',
-            imgSrc: p.heroImg || '',
-            liveUrl: p.liveUrl || '#',
-            hideLiveLink: !p.liveUrl,
-            hideCaseStudy: false,
-          }));
-          setProjects(mapped);
-        }
-      } catch (err) {
-        // Network error — use localStorage cache
-        try {
-          const cached = localStorage.getItem('public_home_works_cache');
-          if (cached) setProjects(JSON.parse(cached));
-        } catch (_) {}
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProjects();
-  }, []);
-
   return (
     <section className="demos-section grid-lines-bg" id="selected-work">
       <div className="container">
@@ -49,83 +53,53 @@ const SelectedWorks = () => {
               <span className="badge-dot dot-blue"></span>
               UI/UX &amp; Web Dev
             </span>
-            <span className="demo-badge badge-yellow">
-              <span className="badge-dot dot-yellow"></span>
-              Sub-second Speed
-            </span>
-            <span className="demo-badge badge-green">
-              <span className="badge-dot dot-green"></span>
-              High Conversion
+            <span className="demo-badge badge-lime">
+              <span className="badge-dot dot-lime"></span>
+              Interactive Prototypes
             </span>
           </div>
         </div>
 
-        {/* Selected Works Dynamic Grid (2x2 Grid) */}
-        <div className="row g-4 demos-grid-row">
-          {loading ? (
-            /* Skeleton — no old images flash while waiting for API */
-            [1, 2, 3, 4].map((i) => (
-              <div key={i} className="col-md-6 col-sm-12">
-                <div className="demo-card-item style-link-card">
-                  <div
-                    className="demo-mockup-frame"
-                    style={{
-                      background: '#f1f5f9',
-                      minHeight: '220px',
-                      borderRadius: '12px',
-                      animation: 'pulse 1.5s ease-in-out infinite',
-                    }}
-                  />
-                  <div style={{ height: '18px', background: '#f1f5f9', borderRadius: '8px', margin: '14px 0 8px', width: '55%', animation: 'pulse 1.5s ease-in-out infinite' }} />
-                  <div style={{ height: '13px', background: '#f1f5f9', borderRadius: '6px', width: '38%', animation: 'pulse 1.5s ease-in-out infinite' }} />
-                </div>
-              </div>
-            ))
-          ) : projects.length === 0 ? (
-            <div className="col-12" style={{ textAlign: 'center', padding: '40px', color: '#64748b' }}>
-              <p>Projects coming soon.</p>
-            </div>
-          ) : (
-            projects.map((work) => (
-              <div key={work.id} className="col-md-6 col-sm-12">
-                <div className="demo-card-item style-link-card">
-                  <div className="demo-mockup-frame">
-                    <div className="demo-img-wrapper">
-                      {work.imgSrc ? (
-                        <img src={work.imgSrc} alt={work.title} className="demo-mockup-img" />
-                      ) : (
-                        <div style={{ width: '100%', minHeight: '220px', background: '#f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px' }}>
-                          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                        </div>
-                      )}
-                      <div className="minimal-hover-overlay">
-                        {!work.hideLiveLink && (
-                          <a href={work.liveUrl} target="_blank" rel="noopener noreferrer" className="minimal-btn-hover btn-hover-live">
-                            Live Website
-                          </a>
-                        )}
-                        {!work.hideCaseStudy && (
-                          <Link to={`/case-study?id=${work.id}`} className="minimal-btn-hover btn-hover-case">
-                            Case Study
-                          </Link>
-                        )}
-                      </div>
-                    </div>
+        {/* Works Grid */}
+        <div className="row g-4 justify-content-center">
+          {selectedWorksList.map((item) => (
+            <div className="col-md-6 col-lg-6" key={item.id}>
+              <div className="work-card-minimal">
+                <div className="work-img-box">
+                  <img src={item.imgSrc} alt={item.title} className="img-fluid work-thumbnail" />
+                  <div className="work-overlay-actions">
+                    {!item.hideCaseStudy && (
+                      <Link to={`/case-study/${item.id}`} className="btn-action btn-case-study">
+                        View Case Study
+                      </Link>
+                    )}
+                    {!item.hideLiveLink && item.liveUrl && item.liveUrl !== '#' && (
+                      <a
+                        href={item.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-action btn-live-demo"
+                      >
+                        Live Site ↗
+                      </a>
+                    )}
                   </div>
-                  <Link to={`/case-study?id=${work.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <h3 className="demo-card-caption">{work.title}</h3>
-                    <span className="demo-card-subtext">{work.subtitle}</span>
-                  </Link>
+                </div>
+                <div className="work-card-info mt-3">
+                  <span className="work-cat-tag">{item.subtitle}</span>
+                  <h3 className="work-item-title">
+                    <Link to={`/case-study/${item.id}`}>{item.title}</Link>
+                  </h3>
                 </div>
               </div>
-            ))
-          )}
+            </div>
+          ))}
         </div>
 
-        {/* View All Works CTA Button */}
-        <div className="d-flex justify-content-center align-items-center text-center mt-5 w-100">
-          <Link to="/works" className="btn-discover-outline" style={{ padding: '14px 36px', fontWeight: 700 }}>
-            View All Works
+        {/* View All Works CTA */}
+        <div className="text-center mt-5">
+          <Link to="/works" className="btn btn-outline-lime btn-lg rounded-pill px-4">
+            View All Projects ({selectedWorksList.length}+) →
           </Link>
         </div>
       </div>

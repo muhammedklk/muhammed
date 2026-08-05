@@ -1,23 +1,36 @@
 import fs from 'fs';
 import path from 'path';
 
-function removeDirSync(dirPath) {
-  if (fs.existsSync(dirPath)) {
-    fs.readdirSync(dirPath).forEach((file) => {
-      const curPath = path.join(dirPath, file);
-      if (fs.lstatSync(curPath).isDirectory()) {
-        removeDirSync(curPath);
-      } else {
-        fs.unlinkSync(curPath);
-      }
+function removePathSync(itemPath) {
+  if (!fs.existsSync(itemPath)) return;
+  const stat = fs.lstatSync(itemPath);
+  if (stat.isDirectory()) {
+    fs.readdirSync(itemPath).forEach((file) => {
+      removePathSync(path.join(itemPath, file));
     });
-    fs.rmdirSync(dirPath);
+    fs.rmdirSync(itemPath);
+  } else {
+    fs.unlinkSync(itemPath);
   }
 }
 
-try {
-  removeDirSync('api');
-  console.log('SUCCESS: api folder completely deleted!');
-} catch (err) {
-  console.error('Error removing api folder:', err.message);
-}
+const targetPaths = [
+  'api',
+  'src/api',
+  'src/pages/admin',
+  'src/components/admin',
+  'src/components/common/MaintenanceOverlay.jsx',
+  'src/components/common/MaintenanceScreen.jsx',
+  'src/context/AuthContext.jsx',
+  'src/context/MaintenanceContext.jsx',
+  'src/utils/maintenanceStatus.js'
+];
+
+targetPaths.forEach((p) => {
+  try {
+    removePathSync(p);
+    console.log(`DELETED: ${p}`);
+  } catch (err) {
+    console.error(`Error deleting ${p}:`, err.message);
+  }
+});

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import api from '../api/axios';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +23,7 @@ const Contact = () => {
   ];
 
   const budgetOptions = [
+    { value: 'sub1k', label: 'Under $1,000' },
     { value: '1k-3k', label: '$1,000 – $3,000' },
     { value: '3k-5k', label: '$3,000 – $5,000' },
     { value: '5k-10k', label: '$5,000 – $10,000' },
@@ -36,26 +36,21 @@ const Contact = () => {
     setFeedback(null);
 
     try {
-      // 1. Submit to MongoDB API and AWAIT completion so it is saved in MongoDB
-      await api.post('/inquiries', formData);
+      // Send email notification via FormSubmit
+      const bodyData = new FormData();
+      bodyData.append('name', formData.name);
+      bodyData.append('email', formData.email);
+      bodyData.append('service', formData.service);
+      bodyData.append('budget', formData.budget);
+      bodyData.append('message', formData.message);
+      bodyData.append('_subject', `New Portfolio Message from ${formData.name}`);
+      bodyData.append('_captcha', 'false');
 
-      // 2. Send email notification asynchronously in background
-      try {
-        const bodyData = new FormData();
-        bodyData.append('name', formData.name);
-        bodyData.append('email', formData.email);
-        bodyData.append('service', formData.service);
-        bodyData.append('budget', formData.budget);
-        bodyData.append('message', formData.message);
-        bodyData.append('_subject', `New Message from ${formData.name}`);
-        bodyData.append('_captcha', 'false');
-
-        fetch('https://formsubmit.co/ajax/muhammedklkm@gmail.com', {
-          method: 'POST',
-          headers: { Accept: 'application/json' },
-          body: bodyData
-        }).catch(() => {});
-      } catch (_) {}
+      await fetch('https://formsubmit.co/ajax/muhammedklkm@gmail.com', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: bodyData
+      });
 
       setFeedback({
         text: "✅ Message sent successfully! I will respond within 24 hours.",

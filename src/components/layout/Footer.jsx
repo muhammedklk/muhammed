@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import api from '../../api/axios';
+import React from 'react';
 
-const initialFooterData = {
+const data = {
   footerEmail: 'muhammedklkm@gmail.com',
   footerPhone: '+91 9656216086',
   footerLocation: 'Kerala, India',
@@ -13,23 +12,6 @@ const initialFooterData = {
 };
 
 const Footer = () => {
-  const [data, setData] = useState(initialFooterData);
-
-  useEffect(() => {
-    const fetchFooterConfig = async () => {
-      try {
-        const res = await api.get('/profile');
-        if (res.data) {
-          setData((prev) => ({ ...prev, ...res.data }));
-        }
-      } catch (err) {
-        console.error('Error loading footer config:', err);
-      }
-    };
-
-    fetchFooterConfig();
-  }, []);
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

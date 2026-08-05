@@ -1,44 +1,83 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../api/axios';
+
+const defaultWorks = [
+  {
+    id: 'styleora-fashion-e-commerce',
+    title: 'StyleOra — Fashion E-Commerce',
+    subtitle: 'UI/UX Design & Development',
+    category: 'ui-ux-design',
+    imgSrc: '/assets/portfolio/1-styleora.jpg',
+    liveUrl: 'https://styleora.vercel.app',
+    hideLiveLink: false,
+    hideCaseStudy: false
+  },
+  {
+    id: 'elve-creative-agency-portfolio',
+    title: 'Elve — Creative Agency Portfolio',
+    subtitle: 'Web Design & Brand Systems',
+    category: 'web-design',
+    imgSrc: '/assets/portfolio/2-elve.jpg',
+    liveUrl: 'https://elve-studio.vercel.app',
+    hideLiveLink: false,
+    hideCaseStudy: false
+  },
+  {
+    id: 'greentrack-sustainability-dashboard',
+    title: 'GreenTrack — Sustainability Dashboard',
+    subtitle: 'Product Design & UI/UX',
+    category: 'dashboard-ui',
+    imgSrc: '/assets/portfolio/3-greentrack.jpg',
+    liveUrl: 'https://greentrack.vercel.app',
+    hideLiveLink: false,
+    hideCaseStudy: false
+  },
+  {
+    id: 'travelgallery-curated-destinations',
+    title: 'TravelGallery — Curated Destinations',
+    subtitle: 'UI/UX & Mobile Design',
+    category: 'web-design',
+    imgSrc: '/assets/portfolio/4-travellgallery.jpg',
+    liveUrl: 'https://travelgallery.vercel.app',
+    hideLiveLink: false,
+    hideCaseStudy: false
+  },
+  {
+    id: 'icone-luxury-hotel-booking',
+    title: 'Icone — Luxury Hotel Booking',
+    subtitle: 'UI/UX & Frontend Development',
+    category: 'web-design',
+    imgSrc: '/assets/portfolio/5-icone-hotel-booking.jpg',
+    liveUrl: 'https://icone-hotel.vercel.app',
+    hideLiveLink: false,
+    hideCaseStudy: false
+  },
+  {
+    id: 'chrona-ai-time-management-app',
+    title: 'Chrona — AI Time Management App',
+    subtitle: 'Mobile UI/UX & Web App Design',
+    category: 'dashboard-ui',
+    imgSrc: '/assets/portfolio/6-chrona.jpg',
+    liveUrl: 'https://chrona.vercel.app',
+    hideLiveLink: false,
+    hideCaseStudy: false
+  },
+  {
+    id: 'modernbrand-identity-system',
+    title: 'ModernBrand — Design System',
+    subtitle: 'Branding & Design System',
+    category: 'branding',
+    imgSrc: '/assets/portfolio/7-modernbrand.jpg',
+    liveUrl: 'https://modernbrand.vercel.app',
+    hideLiveLink: false,
+    hideCaseStudy: false
+  }
+];
 
 const Works = () => {
-  const [works, setWorks] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [selectedFilter, setSelectedFilter] = useState('all');
 
-  useEffect(() => {
-    const fetchWorks = async () => {
-      try {
-        const res = await api.get('/projects');
-        if (res && res.data && res.data.length > 0) {
-          const mapped = res.data.map((p) => ({
-            id: p.slug || p._id,
-            title: p.title || '',
-            subtitle: p.tagline || p.category || '',
-            category: (p.category || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').trim(),
-            imgSrc: p.heroImg || '',
-            liveUrl: p.liveUrl || '#',
-            hideLiveLink: !p.liveUrl,
-            hideCaseStudy: false,
-          }));
-          setWorks(mapped);
-        }
-      } catch (err) {
-        // Network error — use localStorage cache
-        try {
-          const cached = localStorage.getItem('public_works_cache');
-          if (cached) setWorks(JSON.parse(cached));
-        } catch (_) {}
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchWorks();
-  }, []);
-
-  const filteredWorks = works.filter((item) => {
+  const filteredWorks = defaultWorks.filter((item) => {
     if (selectedFilter === 'all') return true;
     return item.category.includes(selectedFilter);
   });
@@ -49,110 +88,90 @@ const Works = () => {
       <section className="page-inner-hero minimal-works-hero text-center">
         <div className="container">
           <div className="row justify-content-center text-center">
-            <div className="col-lg-8 col-md-10 col-sm-12 text-center d-flex flex-column align-items-center">
-              <span className="page-badge">PORTFOLIO</span>
-              <h1 className="page-title text-center">
-                Selected <span className="text-highlight">Works</span>
+            <div className="col-lg-8">
+              <span className="hero-top-badge">FEATURED PROJECTS</span>
+              <h1 className="hero-main-title">
+                Crafting <span className="highlight-lime">Digital Experiences</span> That Drive Impact.
               </h1>
-              <p className="page-subtitle text-center mx-auto">
-                A curated collection of digital products, web experiences, and UI systems designed and built with focus, clarity, and precision.
+              <p className="hero-sub-text text-center mx-auto">
+                Explore a collection of UI/UX design, custom web development, and digital product case studies built for modern brands.
               </p>
-
-              <div className="demos-badges-group my-4">
-                <span className="demo-badge badge-blue">
-                  <span className="badge-dot dot-blue"></span>
-                  UI/UX &amp; Web Dev
-                </span>
-                <span className="demo-badge badge-yellow">
-                  <span className="badge-dot dot-yellow"></span>
-                  Sub-second Speed
-                </span>
-                <span className="demo-badge badge-green">
-                  <span className="badge-dot dot-green"></span>
-                  High Conversion
-                </span>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Projects Grid Section */}
-      <section className="minimal-projects-section grid-lines-bg py-4">
+      {/* Filter & Gallery Grid Section */}
+      <section className="works-gallery-section section-padding-bottom">
         <div className="container">
-          {loading ? (
-            /* Skeleton loader — no old images flash */
-            <div className="row g-4 works-showcase-grid">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="col-md-6 col-sm-12">
-                  <div className="demo-card-item style-link-card">
-                    <div className="demo-mockup-frame" style={{ background: '#f1f5f9', minHeight: '220px', borderRadius: '12px', animation: 'pulse 1.5s ease-in-out infinite' }} />
-                    <div style={{ height: '16px', background: '#f1f5f9', borderRadius: '8px', margin: '12px 0 6px', width: '60%', animation: 'pulse 1.5s ease-in-out infinite' }} />
-                    <div style={{ height: '12px', background: '#f1f5f9', borderRadius: '6px', width: '40%', animation: 'pulse 1.5s ease-in-out infinite' }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : filteredWorks.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '60px 20px', color: '#64748b' }}>
-              <p style={{ fontSize: '16px' }}>No projects found.</p>
-            </div>
-          ) : (
-            <div className="row g-4 works-showcase-grid" id="works-grid">
-              {filteredWorks.map((work) => (
-                <div key={work.id} className="col-md-6 col-sm-12 work-grid-item" data-category={work.category}>
-                  <div className="demo-card-item style-link-card">
-                    <div className="demo-mockup-frame">
-                      <div className="demo-img-wrapper">
-                        {work.imgSrc ? (
-                          <img src={work.imgSrc} alt={work.title} className="demo-mockup-img" />
-                        ) : (
-                          <div style={{ width: '100%', minHeight: '220px', background: '#f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '12px' }}>
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                          </div>
-                        )}
-                        {(!work.hideLiveLink || !work.hideCaseStudy) && (
-                          <div className="minimal-hover-overlay">
-                            {!work.hideLiveLink && (
-                              <a href={work.liveUrl} target="_blank" rel="noopener noreferrer" className="minimal-btn-hover btn-hover-live">
-                                Live Website
-                              </a>
-                            )}
-                            {!work.hideCaseStudy && (
-                              <Link to={`/case-study?id=${work.id}`} className="minimal-btn-hover btn-hover-case">
-                                Case Study
-                              </Link>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div style={{ textDecoration: 'none', color: 'inherit' }}>
-                      <h3 className="demo-card-caption">{work.title}</h3>
-                      <span className="demo-card-subtext">{work.subtitle}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
+          {/* Category Filter Pills */}
+          <div className="filter-pills-wrapper text-center mb-5">
+            <button
+              className={`filter-btn ${selectedFilter === 'all' ? 'active' : ''}`}
+              onClick={() => setSelectedFilter('all')}
+            >
+              All Projects
+            </button>
+            <button
+              className={`filter-btn ${selectedFilter === 'ui-ux-design' ? 'active' : ''}`}
+              onClick={() => setSelectedFilter('ui-ux-design')}
+            >
+              UI/UX Design
+            </button>
+            <button
+              className={`filter-btn ${selectedFilter === 'web-design' ? 'active' : ''}`}
+              onClick={() => setSelectedFilter('web-design')}
+            >
+              Web Design
+            </button>
+            <button
+              className={`filter-btn ${selectedFilter === 'dashboard-ui' ? 'active' : ''}`}
+              onClick={() => setSelectedFilter('dashboard-ui')}
+            >
+              Dashboard & SaaS
+            </button>
+            <button
+              className={`filter-btn ${selectedFilter === 'branding' ? 'active' : ''}`}
+              onClick={() => setSelectedFilter('branding')}
+            >
+              Branding
+            </button>
+          </div>
 
-      {/* Simple Minimal Centered CTA Section */}
-      <section className="minimal-cta-section">
-        <div className="container">
-          <div className="minimal-cta-card text-center d-flex flex-column align-items-center justify-content-center">
-            <span className="minimal-badge mb-2 text-center">LET'S COLLABORATE</span>
-            <h2 className="minimal-cta-title mb-3 text-center">Have a project in mind?</h2>
-            <p className="minimal-cta-subtitle mb-4 text-center">
-              Let's build something clean, functional, and visually memorable together.
-            </p>
-            <div className="d-flex justify-content-center align-items-center w-100">
-              <Link to="/contact" className="btn-spotlight-primary" style={{ padding: '16px 40px', fontWeight: 700, fontSize: '15px' }}>
-                Start a Conversation
-              </Link>
-            </div>
+          {/* Works Grid */}
+          <div className="row g-4">
+            {filteredWorks.map((item) => (
+              <div className="col-md-6 col-lg-4" key={item.id}>
+                <div className="work-card-minimal">
+                  <div className="work-img-box">
+                    <img src={item.imgSrc} alt={item.title} className="img-fluid work-thumbnail" />
+                    <div className="work-overlay-actions">
+                      {!item.hideCaseStudy && (
+                        <Link to={`/case-study/${item.id}`} className="btn-action btn-case-study">
+                          View Case Study
+                        </Link>
+                      )}
+                      {!item.hideLiveLink && item.liveUrl && item.liveUrl !== '#' && (
+                        <a
+                          href={item.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-action btn-live-demo"
+                        >
+                          Live Site ↗
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                  <div className="work-card-info mt-3">
+                    <span className="work-cat-tag">{item.subtitle}</span>
+                    <h3 className="work-item-title">
+                      <Link to={`/case-study/${item.id}`}>{item.title}</Link>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import api from '../../api/axios';
+import React, { useState } from 'react';
 
-const initialFaqs = [
+const faqs = [
   {
     id: 1,
     question: "What services do you offer?",
@@ -30,23 +29,7 @@ const initialFaqs = [
 ];
 
 const FaqAccordion = () => {
-  const [faqs, setFaqs] = useState(initialFaqs);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const fetchFaqs = async () => {
-      try {
-        const res = await api.get('/faqs');
-        if (res.data && res.data.length > 0) {
-          setFaqs(res.data.map((f, i) => ({ id: f._id || i + 1, question: f.question, answer: f.answer })));
-        }
-      } catch (err) {
-        console.error('Error fetching FAQs:', err);
-      }
-    };
-
-    fetchFaqs();
-  }, []);
 
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
