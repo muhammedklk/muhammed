@@ -7,57 +7,43 @@ gsap.registerPlugin(ScrollTrigger);
 
 const AboutTeaser = () => {
   const headlineRef = useRef(null);
-  const headlineText = "Helping brand achieve digital mastery of creative innovation and strategic planning";
 
   useEffect(() => {
-    if (!headlineRef.current) return;
+    const el = headlineRef.current;
+    if (!el) return;
 
-    const chars = headlineRef.current.querySelectorAll('.reveal-char');
-    if (!chars.length) return;
+    const rawText = "Helping brand achieve digital mastery of creative innovation and strategic planning";
+    const words = rawText.split(' ');
 
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const targetColor = isDark ? '#ffffff' : '#000000';
+    el.innerHTML = words.map(w => `<span class="reveal-word">${w}</span>`).join(' ');
+    const spans = el.querySelectorAll('.reveal-word');
 
     const ctx = gsap.context(() => {
-      gsap.to(chars, {
-        color: targetColor,
-        opacity: 1,
-        stagger: 0.02,
-        ease: 'power1.out',
-        scrollTrigger: {
-          trigger: headlineRef.current,
-          start: 'top 88%',
-          end: 'bottom 40%',
-          scrub: 0.4,
-          invalidateOnRefresh: true,
+      gsap.fromTo(
+        spans,
+        {
+          color: 'rgba(0, 0, 0, 0.15)',
+          opacity: 0.25
+        },
+        {
+          color: '#000000',
+          opacity: 1,
+          stagger: 0.08,
+          ease: 'power1.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            end: 'bottom 45%',
+            scrub: 0.8
+          }
         }
-      });
-    }, headlineRef);
-
-    const refreshTimer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 150);
+      );
+    }, el);
 
     return () => {
-      clearTimeout(refreshTimer);
       ctx.revert();
     };
   }, []);
-
-  const renderAnimatedText = () => {
-    const words = headlineText.split(' ');
-    return words.map((word, wordIndex) => (
-      <span key={wordIndex} className="reveal-word">
-        {word.split('').map((char, charIndex) => (
-          <span key={charIndex} className="reveal-char">
-            {char}
-          </span>
-        ))}
-        {wordIndex < words.length - 1 && <span className="reveal-space">&nbsp;</span>}
-      </span>
-    ));
-  };
-
   return (
     <>
       {/* Bottom Features Bar Section */}
@@ -134,7 +120,7 @@ const AboutTeaser = () => {
             {/* Right Column: Big Display Headline & CTA Buttons */}
             <div className="col-lg-9 col-md-8 col-sm-12">
               <h2 className="about-main-headline" ref={headlineRef}>
-                {renderAnimatedText()}
+                Helping brand achieve digital mastery of creative innovation and strategic planning
               </h2>
 
               <div className="about-cta-group">

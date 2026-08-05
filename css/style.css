@@ -1713,21 +1713,8 @@ button {
     max-width: 900px;
 }
 
-.reveal-word {
-    display: inline-block;
-    white-space: nowrap;
-}
-
-.reveal-char {
-    color: #94a3b8;
-    opacity: 0.25;
-    display: inline-block;
-    transition: color 0.15s ease, opacity 0.15s ease;
-}
-
-[data-theme="dark"] .reveal-char {
-    color: #475569;
-    opacity: 0.25;
+.headline-dot {
+    display: none !important;
 }
 
 /* CTA Buttons */
@@ -5215,21 +5202,21 @@ button {
     line-height: 1.3;
     letter-spacing: -0.025em;
     margin-bottom: 32px;
-    color: var(--text-primary);
-    max-width: 640px;
+    color: #000000;
+    max-width: 680px;
 }
 
 .about-main-headline .reveal-word {
     display: inline-block;
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(0, 0, 0, 0.18);
     opacity: 0.25;
     margin-right: 0.22em;
     will-change: color, opacity;
-    transition: color 0.15s ease, opacity 0.15s ease;
+    transition: color 0.1s ease, opacity 0.1s ease;
 }
 
 [data-theme="light"] .about-main-headline .reveal-word {
-    color: rgba(15, 16, 21, 0.2);
+    color: rgba(0, 0, 0, 0.18);
     opacity: 0.25;
 }
 

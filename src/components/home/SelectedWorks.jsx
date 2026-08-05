@@ -75,7 +75,7 @@ const SelectedWorks = () => {
                     <div className="minimal-hover-overlay">
                       {!item.hideCaseStudy && (
                         <Link to={`/case-study/${item.id}`} className="minimal-btn-hover btn-hover-case">
-                          View Case Study
+                          Case Study
                         </Link>
                       )}
                       {!item.hideLiveLink && item.liveUrl && item.liveUrl !== '#' && (
