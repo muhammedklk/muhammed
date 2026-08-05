@@ -32,7 +32,9 @@ const worksData = [
     subtitle: 'Sustainability Tracker, UI/UX Design & Development',
     category: 'uiux frontend',
     imgSrc: 'assets/portfolio/3-greentrack.jpg',
-    liveUrl: 'https://greentrack-ten.vercel.app/'
+    liveUrl: 'https://greentrack-ten.vercel.app/',
+    hideLiveLink: true,
+    hideCaseStudy: true
   },
   {
     id: 'travelgallery',
@@ -40,7 +42,9 @@ const worksData = [
     subtitle: 'Travel Gallery, UI/UX Design & Development',
     category: 'uiux mobile',
     imgSrc: 'assets/portfolio/4-travellgallery.jpg',
-    liveUrl: 'https://voyageratravel.vercel.app/'
+    liveUrl: 'https://voyageratravel.vercel.app/',
+    hideLiveLink: true,
+    hideCaseStudy: true
   },
   {
     id: 'iconehotel',
@@ -48,7 +52,9 @@ const worksData = [
     subtitle: 'Boutique Hotel Booking, Mobile App UI/UX Design',
     category: 'frontend mobile',
     imgSrc: 'assets/portfolio/5-icone-hotel-booking.jpg',
-    liveUrl: 'https://styleorashop.vercel.app/'
+    liveUrl: 'https://styleorashop.vercel.app/',
+    hideLiveLink: true,
+    hideCaseStudy: true
   },
   {
     id: 'modernbrand',
@@ -64,7 +70,9 @@ const worksData = [
     subtitle: 'Workflow & Time Optimization SaaS',
     category: 'uiux frontend',
     imgSrc: 'assets/portfolio/6-chrona.jpg',
-    liveUrl: 'https://greentrack-ten.vercel.app/'
+    liveUrl: 'https://greentrack-ten.vercel.app/',
+    hideLiveLink: true,
+    hideCaseStudy: true
   }
 ];
 
@@ -120,20 +128,26 @@ const Works = () => {
                   <div className="demo-mockup-frame">
                     <div className="demo-img-wrapper">
                       <img src={work.imgSrc} alt={work.title} className="demo-mockup-img" />
-                      <div className="minimal-hover-overlay">
-                        <a href={work.liveUrl} target="_blank" rel="noopener noreferrer" className="minimal-btn-hover btn-hover-live">
-                          Live Website
-                        </a>
-                        <Link to={`/case-study?id=${work.id}`} className="minimal-btn-hover btn-hover-case">
-                          Case Study
-                        </Link>
-                      </div>
+                      {(!work.hideLiveLink || !work.hideCaseStudy) && (
+                        <div className="minimal-hover-overlay">
+                          {!work.hideLiveLink && (
+                            <a href={work.liveUrl} target="_blank" rel="noopener noreferrer" className="minimal-btn-hover btn-hover-live">
+                              Live Website
+                            </a>
+                          )}
+                          {!work.hideCaseStudy && (
+                            <Link to={`/case-study?id=${work.id}`} className="minimal-btn-hover btn-hover-case">
+                              Case Study
+                            </Link>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
-                  <Link to={`/case-study?id=${work.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <div style={{ textDecoration: 'none', color: 'inherit' }}>
                     <h3 className="demo-card-caption">{work.title}</h3>
                     <span className="demo-card-subtext">{work.subtitle}</span>
-                  </Link>
+                  </div>
                 </div>
               </div>
             ))}

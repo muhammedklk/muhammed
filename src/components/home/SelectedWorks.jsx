@@ -22,7 +22,9 @@ const defaultProjects = [
     title: 'Green Track',
     subtitle: 'UI/UX Design & Development',
     imgSrc: 'assets/workimg-3.jpg',
-    liveUrl: 'https://greentrack-ten.vercel.app/'
+    liveUrl: 'https://greentrack-ten.vercel.app/',
+    hideLiveLink: true,
+    hideCaseStudy: true
   },
   {
     id: 'voyagera',
@@ -90,12 +92,16 @@ const SelectedWorks = () => {
                   <div className="demo-img-wrapper">
                     <img src={work.imgSrc} alt={work.title} className="demo-mockup-img" />
                     <div className="minimal-hover-overlay">
-                      <a href={work.liveUrl} target="_blank" rel="noopener noreferrer" className="minimal-btn-hover btn-hover-live">
-                        Live Website
-                      </a>
-                      <Link to={`/case-study?id=${work.id}`} className="minimal-btn-hover btn-hover-case">
-                        Case Study
-                      </Link>
+                      {!work.hideLiveLink && (
+                        <a href={work.liveUrl} target="_blank" rel="noopener noreferrer" className="minimal-btn-hover btn-hover-live">
+                          Live Website
+                        </a>
+                      )}
+                      {!work.hideCaseStudy && (
+                        <Link to={`/case-study?id=${work.id}`} className="minimal-btn-hover btn-hover-case">
+                          Case Study
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>
