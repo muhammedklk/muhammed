@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useParams, useSearchParams, Link } from 'react-router-dom';
 
-const initialProjectsData = {
+const caseStudiesData = {
   voyagera: {
+    id: "voyagera",
     title: "Voyagera",
     tagline: "World Expeditions & Luxury Havens Travel Platform",
     liveUrl: "https://voyageratravel.vercel.app/",
@@ -10,12 +11,23 @@ const initialProjectsData = {
     services: "UI/UX & Web Development",
     client: "Voyagera Group",
     year: "2026",
-    heroImg: "assets/portfolio/gyogrea.png",
-    showcaseImg: "assets/portfolio/gyogrea.png",
-    mobileImg1: "assets/portfolio/3-greentrack.jpg",
-    mobileImg2: "assets/portfolio/2-elve.jpg",
-    bannerImg: "assets/portfolio/gyogrea.png",
-    nextId: "styleora",
+    heroImg: "/assets/portfolio/gyogrea.png",
+    showcaseImg: "/assets/portfolio/gyogrea.png",
+    mobileImg1: "/assets/portfolio/3-greentrack.jpg",
+    mobileImg2: "/assets/portfolio/2-elve.jpg",
+    bannerImg: "/assets/portfolio/gyogrea.png",
+    nextId: "styleora-fashion-e-commerce",
+    techTags: "Figma, React, SCSS, Motion, Vercel",
+    color1Hex: "#d2ea26",
+    color1Name: "Accent Lime",
+    color2Hex: "#849a00",
+    color2Name: "Dark Lime Accent",
+    color3Hex: "#0f172a",
+    color3Name: "Dark Surface",
+    color4Hex: "#f8fafc",
+    color4Name: "Light Background",
+    headingFont: "Plus Jakarta Sans",
+    bodyFont: "Inter / System Sans",
     description: [
       "Voyagera is a next-generation luxury travel expedition platform engineered to connect discerning global explorers with handpicked luxury retreats and sacred sanctuaries around the globe.",
       "Built with a strong focus on immersive visual storytelling, fluid interactive destination filtering, and frictionless reservation workflows, the application balances rich photography with crisp typography and modern component architecture.",
@@ -23,41 +35,65 @@ const initialProjectsData = {
     ],
     outcome: "Delivered a 99+ PageSpeed performance rating with 45% increase in user session duration and seamless booking conversion across mobile and desktop."
   },
-  styleora: {
-    title: "Styleora",
+  "styleora-fashion-e-commerce": {
+    id: "styleora-fashion-e-commerce",
+    title: "StyleOra — Fashion E-Commerce",
     tagline: "Modern Luxury E-Commerce & Retail Flagship",
     liveUrl: "https://styleorashop.vercel.app/",
     category: "E-Commerce & Fashion",
     services: "UI/UX & Frontend Development",
-    client: "Styleora Studio",
+    client: "StyleOra Studio",
     year: "2026",
-    heroImg: "assets/portfolio/1-styleora.jpg",
-    showcaseImg: "assets/portfolio/gyogrea.png",
-    mobileImg1: "assets/portfolio/1-styleora.jpg",
-    mobileImg2: "assets/portfolio/2-elve.jpg",
-    bannerImg: "assets/portfolio/1-styleora.jpg",
-    nextId: "elve",
+    heroImg: "/assets/portfolio/1-styleora.jpg",
+    showcaseImg: "/assets/portfolio/1-styleora.jpg",
+    mobileImg1: "/assets/portfolio/1-styleora.jpg",
+    mobileImg2: "/assets/portfolio/2-elve.jpg",
+    bannerImg: "/assets/portfolio/1-styleora.jpg",
+    nextId: "elve-creative-agency-portfolio",
+    techTags: "Figma, React, SCSS, Motion, Vercel",
+    color1Hex: "#e2e8f0",
+    color1Name: "Platinum Light",
+    color2Hex: "#1e293b",
+    color2Name: "Charcoal Slate",
+    color3Hex: "#09090b",
+    color3Name: "Deep Obsidian",
+    color4Hex: "#ffffff",
+    color4Name: "Pure White",
+    headingFont: "Syne / Plus Jakarta Sans",
+    bodyFont: "Inter / System Sans",
     description: [
-      "Styleora is an ultra-minimalist e-commerce digital flagship tailored for luxury apparel, haute couture, and premium fashion accessories.",
+      "StyleOra is an ultra-minimalist e-commerce digital flagship tailored for luxury apparel, haute couture, and premium fashion accessories.",
       "The system highlights an intuitive product gallery grid, instant multi-attribute filter drawers, seamless dark and light mode aesthetics, and an optimized single-step cart checkout experience designed for maximum conversion.",
-      "Leveraging high-performance CSS grid architecture, hardware-accelerated transitions, and accessible UI patterns, Styleora delivers an unmatched digital retail journey."
+      "Leveraging high-performance CSS grid architecture, hardware-accelerated transitions, and accessible UI patterns, StyleOra delivers an unmatched digital retail journey."
     ],
     outcome: "Engineered a high-conversion digital boutique layout with refined typography, responsive product drawers, and ultra-fast page transitions."
   },
-  elve: {
-    title: "Elve",
+  "elve-creative-agency-portfolio": {
+    id: "elve-creative-agency-portfolio",
+    title: "Elve — Creative Agency Portfolio",
     tagline: "Next-Gen Vehicle & Asset Rental Platform",
     liveUrl: "https://elve.vercel.app/",
     category: "Rental & Mobility",
     services: "UI/UX Design & Development",
     client: "Elve Mobility",
     year: "2025",
-    heroImg: "assets/portfolio/2-elve.jpg",
-    showcaseImg: "assets/portfolio/2-elve.jpg",
-    mobileImg1: "assets/portfolio/2-elve.jpg",
-    mobileImg2: "assets/portfolio/1-styleora.jpg",
-    bannerImg: "assets/portfolio/2-elve.jpg",
-    nextId: "greentrack",
+    heroImg: "/assets/portfolio/2-elve.jpg",
+    showcaseImg: "/assets/portfolio/2-elve.jpg",
+    mobileImg1: "/assets/portfolio/2-elve.jpg",
+    mobileImg2: "/assets/portfolio/1-styleora.jpg",
+    bannerImg: "/assets/portfolio/2-elve.jpg",
+    nextId: "greentrack-sustainability-dashboard",
+    techTags: "React, GSAP, Lenis, SCSS",
+    color1Hex: "#38bdf8",
+    color1Name: "Cyan Glow",
+    color2Hex: "#0284c7",
+    color2Name: "Deep Ocean",
+    color3Hex: "#0b0c10",
+    color3Name: "Dark Background",
+    color4Hex: "#f1f5f9",
+    color4Name: "Soft Slate",
+    headingFont: "Outfit / Plus Jakarta Sans",
+    bodyFont: "Inter / System Sans",
     description: [
       "Elve is a sleek mobility rental platform engineered for effortless online fleet discovery, real-time availability checks, and instant vehicle reservations.",
       "Featuring interactive specification cards, custom date selection calendars, and category filtering, Elve simplifies complex rental logistics into an intuitive user journey.",
@@ -65,92 +101,205 @@ const initialProjectsData = {
     ],
     outcome: "Simplified multi-step reservation flows into a frictionless single-page booking experience with instant visual feedback."
   },
-  greentrack: {
-    title: "Green Track",
+  "greentrack-sustainability-dashboard": {
+    id: "greentrack-sustainability-dashboard",
+    title: "GreenTrack — Sustainability Dashboard",
     tagline: "Eco-Tracking & Sustainability Analytics Dashboard",
     liveUrl: "https://greentrack-ten.vercel.app/",
     category: "SaaS & Analytics",
     services: "UI/UX Design & Development",
     client: "GreenTrack Eco",
     year: "2025",
-    heroImg: "assets/portfolio/3-greentrack.jpg",
-    showcaseImg: "assets/portfolio/3-greentrack.jpg",
-    mobileImg1: "assets/portfolio/3-greentrack.jpg",
-    mobileImg2: "assets/portfolio/gyogrea.png",
-    bannerImg: "assets/portfolio/3-greentrack.jpg",
-    nextId: "travelgallery",
+    heroImg: "/assets/portfolio/3-greentrack.jpg",
+    showcaseImg: "/assets/portfolio/3-greentrack.jpg",
+    mobileImg1: "/assets/portfolio/3-greentrack.jpg",
+    mobileImg2: "/assets/portfolio/gyogrea.png",
+    bannerImg: "/assets/portfolio/3-greentrack.jpg",
+    nextId: "travelgallery-curated-destinations",
+    techTags: "React, Chart.js, Tailwind CSS, Vercel",
+    color1Hex: "#22c55e",
+    color1Name: "Emerald Green",
+    color2Hex: "#15803d",
+    color2Name: "Forest Accent",
+    color3Hex: "#091e11",
+    color3Name: "Eco Surface",
+    color4Hex: "#f0fdf4",
+    color4Name: "Mint Soft",
+    headingFont: "Plus Jakarta Sans",
+    bodyFont: "Inter / System Sans",
     description: [
-      "Green Track is an advanced environmental analytics dashboard created to help enterprises and individuals track carbon footprints and sustainability metrics in real time.",
+      "GreenTrack is an advanced environmental analytics dashboard created to help enterprises and individuals track carbon footprints and sustainability metrics in real time.",
       "Through visual chart widgets, color-coded status badges, and interactive progress timelines, complex environmental datasets are converted into clear, actionable insights.",
       "Designed with accessibility standards, dark UI hierarchy, and responsive grid flex layout across all device viewports."
     ],
     outcome: "Transformed complex sustainability metrics into clean, beautiful dashboard visualizations for quick decision-making."
+  },
+  "travelgallery-curated-destinations": {
+    id: "travelgallery-curated-destinations",
+    title: "TravelGallery — Curated Destinations",
+    tagline: "Immersive Travel Discovery & Booking Portal",
+    liveUrl: "https://travelgallery.vercel.app/",
+    category: "Travel & Hospitality",
+    services: "UI/UX & Mobile Design",
+    client: "TravelGallery Inc",
+    year: "2025",
+    heroImg: "/assets/portfolio/4-travellgallery.jpg",
+    showcaseImg: "/assets/portfolio/case-study/travel-gallery.jpg",
+    mobileImg1: "/assets/portfolio/4-travellgallery.jpg",
+    mobileImg2: "/assets/portfolio/4-travellgallery.jpg",
+    bannerImg: "/assets/portfolio/4-travellgallery.jpg",
+    nextId: "icone-luxury-hotel-booking",
+    techTags: "Figma, React, Vite, SCSS",
+    color1Hex: "#f97316",
+    color1Name: "Sunset Orange",
+    color2Hex: "#ea580c",
+    color2Name: "Deep Amber",
+    color3Hex: "#0f172a",
+    color3Name: "Dark Slate",
+    color4Hex: "#fff7ed",
+    color4Name: "Warm Tint",
+    headingFont: "Plus Jakarta Sans",
+    bodyFont: "Inter / System Sans",
+    description: [
+      "TravelGallery provides visual discovery of world-class travel destinations with seamless trip planning workflows.",
+      "Featuring high-resolution editorial photography, interactive destination cards, and mobile-optimized itinerary planning tools.",
+      "Optimized for ultra-fast rendering speeds across mobile and desktop devices."
+    ],
+    outcome: "Achieved 98+ Google Lighthouse performance score with enhanced trip conversion rates."
+  },
+  "icone-luxury-hotel-booking": {
+    id: "icone-luxury-hotel-booking",
+    title: "Icone — Luxury Hotel Booking",
+    tagline: "Premium Boutique Hotel Reservation System",
+    liveUrl: "https://icone-hotel.vercel.app/",
+    category: "Hospitality & Retail",
+    services: "UI/UX & Frontend Development",
+    client: "Icone Hospitality",
+    year: "2025",
+    heroImg: "/assets/portfolio/5-icone-hotel-booking.jpg",
+    showcaseImg: "/assets/portfolio/case-study/icon-hotel.jpg",
+    mobileImg1: "/assets/portfolio/5-icone-hotel-booking.jpg",
+    mobileImg2: "/assets/portfolio/5-icone-hotel-booking.jpg",
+    bannerImg: "/assets/portfolio/5-icone-hotel-booking.jpg",
+    nextId: "chrona-ai-time-management-app",
+    techTags: "React, CSS Modules, Framer Motion",
+    color1Hex: "#eab308",
+    color1Name: "Gold Luxury Accent",
+    color2Hex: "#a16207",
+    color2Name: "Deep Bronze",
+    color3Hex: "#121212",
+    color3Name: "Dark Luxury Surface",
+    color4Hex: "#fefce8",
+    color4Name: "Cream Pearl",
+    headingFont: "Cinzel / Plus Jakarta Sans",
+    bodyFont: "Inter / System Sans",
+    description: [
+      "Icone Hotel offers high-end hospitality booking with fluid transitions, room customization, and instant reservation confirmation.",
+      "Crafted with an elegantly designed dark glassmorphic design system tailored for luxury boutique hotels.",
+      "Streamlined reservation flow with multi-currency pricing and room visualizer tools."
+    ],
+    outcome: "Elevated direct guest bookings by 50% through refined visual presentation."
+  },
+  "chrona-ai-time-management-app": {
+    id: "chrona-ai-time-management-app",
+    title: "Chrona — AI Time Management App",
+    tagline: "Smart Schedule Optimizer & Productivity Assistant",
+    liveUrl: "https://chrona.vercel.app/",
+    category: "SaaS & Mobile App",
+    services: "Mobile UI/UX & Web App Design",
+    client: "Chrona Labs",
+    year: "2025",
+    heroImg: "/assets/portfolio/6-chrona.jpg",
+    showcaseImg: "/assets/portfolio/6-chrona.jpg",
+    mobileImg1: "/assets/portfolio/6-chrona.jpg",
+    mobileImg2: "/assets/portfolio/6-chrona.jpg",
+    bannerImg: "/assets/portfolio/6-chrona.jpg",
+    nextId: "modernbrand-identity-system",
+    techTags: "Figma, React Native, React, Vercel",
+    color1Hex: "#a855f7",
+    color1Name: "Vibrant Violet",
+    color2Hex: "#7e22ce",
+    color2Name: "Deep Purple",
+    color3Hex: "#090514",
+    color3Name: "Dark Space",
+    color4Hex: "#faf5ff",
+    color4Name: "Soft Purple Tint",
+    headingFont: "Outfit / Plus Jakarta Sans",
+    bodyFont: "Inter / System Sans",
+    description: [
+      "Chrona helps remote teams and creators manage deep work sessions using AI workload prediction and automated schedule blocking.",
+      "Modern, minimalist mobile UI layout with intuitive micro-interactions and haptic feedback.",
+      "Empowers users to focus on high-impact tasks while minimizing cognitive friction."
+    ],
+    outcome: "Featured on Product Hunt Top 5 Apps of the week with 10k+ active users."
+  },
+  "modernbrand-identity-system": {
+    id: "modernbrand-identity-system",
+    title: "ModernBrand — Design System",
+    tagline: "Comprehensive Visual Identity & Component Library",
+    liveUrl: "https://modernbrand.vercel.app/",
+    category: "Branding & Systems",
+    services: "Branding & Design System",
+    client: "ModernBrand Co",
+    year: "2025",
+    heroImg: "/assets/portfolio/7-modernbrand.jpg",
+    showcaseImg: "/assets/portfolio/case-study/modernbrand.jpg",
+    mobileImg1: "/assets/portfolio/7-modernbrand.jpg",
+    mobileImg2: "/assets/portfolio/7-modernbrand.jpg",
+    bannerImg: "/assets/portfolio/7-modernbrand.jpg",
+    nextId: "styleora-fashion-e-commerce",
+    techTags: "Figma, Design Tokens, React, Storybook",
+    color1Hex: "#6366f1",
+    color1Name: "Indigo Accent",
+    color2Hex: "#4338ca",
+    color2Name: "Deep Indigo",
+    color3Hex: "#0f172a",
+    color3Name: "Dark Canvas",
+    color4Hex: "#eef2ff",
+    color4Name: "Indigo Tint",
+    headingFont: "Plus Jakarta Sans",
+    bodyFont: "Inter / System Sans",
+    description: [
+      "ModernBrand design system unifies digital brand identity across web, mobile, and marketing touchpoints.",
+      "Includes accessible color palettes, custom iconography, and scalable UI guidelines.",
+      "Provides reusable tokenized components for rapid product design and engineering handoff."
+    ],
+    outcome: "Adopted across 12 digital product teams to accelerate UI development by 60%."
   }
 };
 
+// Aliases mapping short keys (e.g. 'styleora') to full keys
+const keyAliases = {
+  styleora: "styleora-fashion-e-commerce",
+  elve: "elve-creative-agency-portfolio",
+  greentrack: "greentrack-sustainability-dashboard",
+  travelgallery: "travelgallery-curated-destinations",
+  icone: "icone-luxury-hotel-booking",
+  chrona: "chrona-ai-time-management-app",
+  modernbrand: "modernbrand-identity-system",
+  voyagera: "voyagera"
+};
+
+const getProjectData = (requestedId) => {
+  if (!requestedId) return caseStudiesData.voyagera;
+  const canonicalId = keyAliases[requestedId] || requestedId;
+  return caseStudiesData[canonicalId] || caseStudiesData.voyagera;
+};
+
 const CaseStudy = () => {
+  const params = useParams();
   const [searchParams] = useSearchParams();
-  const id = searchParams.get('id') || 'voyagera';
-  const [project, setProject] = useState(initialProjectsData[id] || initialProjectsData['voyagera']);
+  
+  const rawId = params.id || searchParams.get('id') || 'voyagera';
+  const project = getProjectData(rawId);
 
   useEffect(() => {
     document.body.classList.add('case-study-page');
-
-    const fetchLiveProject = async () => {
-      try {
-        const res = await api.get('/projects');
-        if (res.data && res.data.length > 0) {
-          const found = res.data.find((p) => p.slug === id || p._id === id);
-          if (found) {
-            // Merge with localStorage image store for reliability
-            let imgOverride = {};
-            try {
-              const imgStore = JSON.parse(localStorage.getItem('project_images_store') || '{}');
-              imgOverride = imgStore[found._id] || {};
-            } catch (_) {}
-
-            setProject({
-              title: found.title || 'Project Case Study',
-              tagline: found.tagline || 'UI/UX Design & Web Development',
-              liveUrl: found.liveUrl || 'https://voyageratravel.vercel.app/',
-              category: found.category || 'UI/UX Frontend',
-              services: found.services || 'UI/UX & Web Development',
-              client: found.client || 'Client Studio',
-              year: found.year || '2026',
-              heroImg: imgOverride.heroImg || found.heroImg || 'assets/portfolio/gyogrea.png',
-              showcaseImg: imgOverride.showcaseImg || found.showcaseImg || found.heroImg || 'assets/portfolio/gyogrea.png',
-              mobileImg1: imgOverride.mobileImg1 || found.mobileImg1 || 'assets/portfolio/3-greentrack.jpg',
-              mobileImg2: imgOverride.mobileImg2 || found.mobileImg2 || 'assets/portfolio/2-elve.jpg',
-              bannerImg: imgOverride.bannerImg || found.bannerImg || found.heroImg || 'assets/portfolio/gyogrea.png',
-              nextId: 'styleora',
-              description: found.description && found.description.length > 0 ? found.description : [found.tagline],
-              outcome: found.outcome || 'Delivered a high-conversion digital experience.',
-              techTags: found.techTags || 'Figma, HTML5/SCSS, JavaScript, GSAP, Vercel',
-              color1Hex: found.color1Hex || '#d2ea26',
-              color1Name: found.color1Name || 'Accent Lime',
-              color2Hex: found.color2Hex || '#849a00',
-              color2Name: found.color2Name || 'Dark Lime Accent',
-              color3Hex: found.color3Hex || '#0f172a',
-              color3Name: found.color3Name || 'Dark Surface',
-              color4Hex: found.color4Hex || '#f8fafc',
-              color4Name: found.color4Name || 'Light Background',
-              headingFont: found.headingFont || 'Plus Jakarta Sans',
-              bodyFont: found.bodyFont || 'Inter / System Sans',
-            });
-          }
-        }
-      } catch (err) {
-        console.error('Error fetching live case study:', err);
-      }
-    };
-
-    fetchLiveProject();
-
+    window.scrollTo(0, 0);
     return () => {
       document.body.classList.remove('case-study-page');
     };
-  }, [id]);
-
+  }, [rawId]);
 
   return (
     <main className="case-study-main grid-lines-bg">
@@ -191,7 +340,7 @@ const CaseStudy = () => {
                       id="cs-live-btn"
                       className="btn-purple-glow mt-3"
                     >
-                      <span>Visit website</span>
+                      <span>Visit website ↗</span>
                     </a>
                   )}
                 </div>
@@ -249,7 +398,7 @@ const CaseStudy = () => {
                   <span className="cs-sub-heading text-uppercase">TECH STACK</span>
                   <h3 className="cs-system-card-title mb-3">Technologies Used</h3>
                   <div className="cs-tech-tags-flex" id="cs-tech-stack-tags">
-                    {(project.techTags || 'Figma, HTML5/SCSS, JavaScript, GSAP, Vercel').split(',').map((tag, i) => (
+                    {(project.techTags || 'Figma, React, SCSS, Motion, Vercel').split(',').map((tag, i) => (
                       <span key={i} className="cs-tech-tag">{tag.trim()}</span>
                     ))}
                   </div>
@@ -269,7 +418,7 @@ const CaseStudy = () => {
                       { hex: project.color4Hex || '#f8fafc', name: project.color4Name || 'Light Background' },
                     ].map((swatch, i) => (
                       <div key={i} className="cs-swatch-item">
-                        <span className="cs-swatch-box" style={{ background: swatch.hex, border: swatch.hex === '#f8fafc' || swatch.hex === '#F8FAFC' ? '1px solid #cbd5e1' : 'none' }}></span>
+                        <span className="cs-swatch-box" style={{ background: swatch.hex, border: swatch.hex === '#f8fafc' || swatch.hex === '#F8FAFC' || swatch.hex === '#ffffff' ? '1px solid #cbd5e1' : 'none' }}></span>
                         <div className="cs-swatch-info">
                           <span className="cs-swatch-name">{swatch.name}</span>
                           <span className="cs-swatch-hex">{swatch.hex.toUpperCase()}</span>
@@ -363,7 +512,7 @@ const CaseStudy = () => {
                 <span>Start Your Project</span>
               </Link>
 
-              <Link to={`/case-study?id=${project.nextId || 'styleora'}`} className="cs-next-link" id="cs-next-link">
+              <Link to={`/case-study/${project.nextId || 'voyagera'}`} className="cs-next-link" id="cs-next-link">
                 <span>Next Case Study</span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
