@@ -1,185 +1,5 @@
-// Smart Native HTTP Client with complete portfolio project images
+// Smart Native HTTP Client
 const baseURL = import.meta.env.VITE_API_URL || '/api';
-
-// Initial projects synced 100% with website projects & real assets images (with leading /)
-const initialProjects = [
-  {
-    _id: '1',
-    slug: 'styleora',
-    title: 'Styleora',
-    tagline: 'Modern Luxury E-Commerce & Retail Flagship',
-    category: 'E-Commerce & Fashion',
-    services: 'UI/UX & Frontend Development',
-    client: 'Styleora Studio',
-    year: '2026',
-    liveUrl: 'https://styleorashop.vercel.app/',
-    heroImg: '/assets/portfolio/1-styleora.jpg',
-    showcaseImg: '/assets/portfolio/gyogrea.png',
-    mobileImg1: '/assets/portfolio/1-styleora.jpg',
-    mobileImg2: '/assets/portfolio/2-elve.jpg',
-    bannerImg: '/assets/portfolio/1-styleora.jpg',
-    descriptionParagraph1: 'Styleora is an ultra-minimalist e-commerce digital flagship tailored for luxury apparel, haute couture, and premium fashion accessories.',
-    descriptionParagraph2: 'The system highlights an intuitive product gallery grid, instant multi-attribute filter drawers, seamless dark and light mode aesthetics, and an optimized single-step cart checkout experience.',
-    description: [
-      'Styleora is an ultra-minimalist e-commerce digital flagship tailored for luxury apparel, haute couture, and premium fashion accessories.',
-      'The system highlights an intuitive product gallery grid, instant multi-attribute filter drawers, seamless dark and light mode aesthetics, and an optimized single-step cart checkout experience.'
-    ],
-    techTags: 'Figma, React, SCSS, Tailwind, Vercel',
-    outcome: 'Engineered a high-conversion digital boutique layout with refined typography and responsive product drawers.'
-  },
-  {
-    _id: '2',
-    slug: 'elve',
-    title: 'Elve',
-    tagline: 'Next-Gen Vehicle & Asset Rental Platform',
-    category: 'Rental & Mobility',
-    services: 'UI/UX Design & Development',
-    client: 'Elve Mobility',
-    year: '2025',
-    liveUrl: 'https://elve.vercel.app/',
-    heroImg: '/assets/portfolio/2-elve.jpg',
-    showcaseImg: '/assets/portfolio/2-elve.jpg',
-    mobileImg1: '/assets/portfolio/2-elve.jpg',
-    mobileImg2: '/assets/portfolio/1-styleora.jpg',
-    bannerImg: '/assets/portfolio/2-elve.jpg',
-    descriptionParagraph1: 'Elve is a sleek mobility rental platform engineered for effortless online fleet discovery, real-time availability checks, and instant vehicle reservations.',
-    descriptionParagraph2: 'Featuring interactive specification cards, custom date selection calendars, and category filtering, Elve simplifies complex rental logistics into an intuitive user journey.',
-    description: [
-      'Elve is a sleek mobility rental platform engineered for effortless online fleet discovery, real-time availability checks, and instant vehicle reservations.',
-      'Featuring interactive specification cards, custom date selection calendars, and category filtering, Elve simplifies complex rental logistics into an intuitive user journey.'
-    ],
-    techTags: 'Figma, React, Node.js, Vercel',
-    outcome: 'Simplified multi-step reservation flows into a frictionless single-page booking experience.'
-  },
-  {
-    _id: '3',
-    slug: 'greentrack',
-    title: 'Green Track',
-    tagline: 'Eco-Tracking & Sustainability Analytics Dashboard',
-    category: 'SaaS & Analytics',
-    services: 'UI/UX Design & Development',
-    client: 'GreenTrack Eco',
-    year: '2025',
-    liveUrl: 'https://greentrack-ten.vercel.app/',
-    heroImg: '/assets/portfolio/3-greentrack.jpg',
-    showcaseImg: '/assets/portfolio/3-greentrack.jpg',
-    mobileImg1: '/assets/portfolio/3-greentrack.jpg',
-    mobileImg2: '/assets/portfolio/gyogrea.png',
-    bannerImg: '/assets/portfolio/3-greentrack.jpg',
-    descriptionParagraph1: 'Green Track is an advanced environmental analytics dashboard created to help enterprises and individuals track carbon footprints and sustainability metrics in real time.',
-    descriptionParagraph2: 'Through visual chart widgets, color-coded status badges, and interactive progress timelines, complex environmental datasets are converted into clear, actionable insights.',
-    description: [
-      'Green Track is an advanced environmental analytics dashboard created to help enterprises and individuals track carbon footprints and sustainability metrics in real time.',
-      'Through visual chart widgets, color-coded status badges, and interactive progress timelines, complex environmental datasets are converted into clear, actionable insights.'
-    ],
-    techTags: 'Figma, Chart.js, React, SCSS',
-    outcome: 'Transformed complex sustainability metrics into clean dashboard visualizations.'
-  },
-  {
-    _id: '4',
-    slug: 'voyagera',
-    title: 'Voyagera',
-    tagline: 'World Expeditions & Luxury Havens Travel Platform',
-    category: 'Travel & Hospitality',
-    services: 'UI/UX & Web Development',
-    client: 'Voyagera Group',
-    year: '2026',
-    liveUrl: 'https://voyageratravel.vercel.app/',
-    heroImg: '/assets/portfolio/gyogrea.png',
-    showcaseImg: '/assets/portfolio/gyogrea.png',
-    mobileImg1: '/assets/portfolio/3-greentrack.jpg',
-    mobileImg2: '/assets/portfolio/2-elve.jpg',
-    bannerImg: '/assets/portfolio/gyogrea.png',
-    descriptionParagraph1: 'Voyagera is a next-generation luxury travel expedition platform engineered to connect discerning global explorers with handpicked luxury retreats and sacred sanctuaries around the globe.',
-    descriptionParagraph2: 'Built with a strong focus on immersive visual storytelling, fluid interactive destination filtering, and frictionless reservation workflows, the application balances rich photography with crisp typography and modern component architecture.',
-    description: [
-      'Voyagera is a next-generation luxury travel expedition platform engineered to connect discerning global explorers with handpicked luxury retreats and sacred sanctuaries around the globe.',
-      'Built with a strong focus on immersive visual storytelling, fluid interactive destination filtering, and frictionless reservation workflows, the application balances rich photography with crisp typography and modern component architecture.'
-    ],
-    techTags: 'Figma, React, GSAP, Lenis Scroll',
-    outcome: 'Delivered a 99+ PageSpeed rating with 45% increase in session duration.'
-  },
-  {
-    _id: '5',
-    slug: 'travelgallery',
-    title: 'Travell Gallery',
-    tagline: 'Interactive Destination Showcase & Visual Stories',
-    category: 'Travel & Media',
-    services: 'UI/UX Design & Interactive Frontend',
-    client: 'Travell Media',
-    year: '2024',
-    liveUrl: 'https://voyageratravel.vercel.app/',
-    heroImg: '/assets/portfolio/4-travellgallery.jpg',
-    showcaseImg: '/assets/portfolio/4-travellgallery.jpg',
-    mobileImg1: '/assets/portfolio/4-travellgallery.jpg',
-    mobileImg2: '/assets/portfolio/1-styleora.jpg',
-    bannerImg: '/assets/portfolio/4-travellgallery.jpg',
-    descriptionParagraph1: 'Travell Gallery is an immersive visual showcase highlighting landscape photography and destination stories.',
-    description: ['Travell Gallery is an immersive visual showcase highlighting landscape photography and destination stories.'],
-    techTags: 'Figma, React, Lightbox API',
-    outcome: 'Achieved seamless high-resolution image loading with zero layout shift.'
-  },
-  {
-    _id: '6',
-    slug: 'iconehotel',
-    title: 'Icone Hotel Booking',
-    tagline: 'Luxury Boutique Hotel Mobile & Web Application',
-    category: 'Hospitality',
-    services: 'Mobile UI/UX & Web App',
-    client: 'Icone Hotels',
-    year: '2024',
-    liveUrl: 'https://styleorashop.vercel.app/',
-    heroImg: '/assets/portfolio/5-icone-hotel-booking.jpg',
-    showcaseImg: '/assets/portfolio/5-icone-hotel-booking.jpg',
-    mobileImg1: '/assets/portfolio/5-icone-hotel-booking.jpg',
-    mobileImg2: '/assets/portfolio/2-elve.jpg',
-    bannerImg: '/assets/portfolio/5-icone-hotel-booking.jpg',
-    descriptionParagraph1: 'Icone Hotel is a mobile-first suite booking app designed for luxury boutique stays.',
-    description: ['Icone Hotel is a mobile-first suite booking app designed for luxury boutique stays.'],
-    techTags: 'Figma, Mobile React, Node.js',
-    outcome: 'Created an award-worthy hospitality mobile UI.'
-  },
-  {
-    _id: '7',
-    slug: 'modernbrand',
-    title: 'Modern Brand',
-    tagline: 'Brand Identity & Digital Design System',
-    category: 'Branding & Systems',
-    services: 'Brand Strategy & UI System',
-    client: 'Modern Brand Co.',
-    year: '2024',
-    liveUrl: 'https://styleorashop.vercel.app/',
-    heroImg: '/assets/portfolio/7-modernbrand.jpg',
-    showcaseImg: '/assets/portfolio/7-modernbrand.jpg',
-    mobileImg1: '/assets/portfolio/7-modernbrand.jpg',
-    mobileImg2: '/assets/portfolio/3-greentrack.jpg',
-    bannerImg: '/assets/portfolio/7-modernbrand.jpg',
-    descriptionParagraph1: 'A comprehensive design system and visual identity guide created for modern tech agencies.',
-    description: ['A comprehensive design system and visual identity guide created for modern tech agencies.'],
-    techTags: 'Figma, Design Tokens, Storybook',
-    outcome: 'Provided a cohesive, scalable brand identity system.'
-  },
-  {
-    _id: '8',
-    slug: 'chrona',
-    title: 'Chrona',
-    tagline: 'Time Tracking & Workflow Optimization Platform',
-    category: 'SaaS Productivity',
-    services: 'UI/UX & Web Development',
-    client: 'Chrona Tech',
-    year: '2024',
-    liveUrl: 'https://greentrack-ten.vercel.app/',
-    heroImg: '/assets/portfolio/6-chrona.jpg',
-    showcaseImg: '/assets/portfolio/6-chrona.jpg',
-    mobileImg1: '/assets/portfolio/6-chrona.jpg',
-    mobileImg2: '/assets/portfolio/2-elve.jpg',
-    bannerImg: '/assets/portfolio/6-chrona.jpg',
-    descriptionParagraph1: 'Chrona is a productivity web application that enables remote teams to track project hours.',
-    description: ['Chrona is a productivity web application that enables remote teams to track project hours.'],
-    techTags: 'Figma, React, Redux, Node.js',
-    outcome: 'Streamlined daily workflow tracking into a simple, beautiful interface.'
-  }
-];
 
 const initialProfile = {
   name: 'Muhammed',
@@ -252,6 +72,8 @@ const request = async (method, endpoint, body = null, config = {}) => {
 
     if (response.ok) {
       const data = await response.json();
+
+      // Profile: cache maintenance status
       if (endpoint === '/profile' && data) {
         const existing = getStorage('admin_profile_data', initialProfile);
         setStorage('admin_profile_data', { ...existing, ...data });
@@ -259,23 +81,42 @@ const request = async (method, endpoint, body = null, config = {}) => {
           localStorage.setItem('portfolio_maintenance_status', data.isMaintenanceMode ? 'true' : 'false');
         }
       }
+
+      // Projects GET: update all public caches immediately with fresh MongoDB data
+      if (endpoint === '/projects' && method === 'GET' && Array.isArray(data)) {
+        try {
+          // Admin cache
+          localStorage.setItem('admin_projects_cached', JSON.stringify(data));
+          // Public caches (Works page + Home SelectedWorks)
+          const mappedPublic = data.map((p) => ({
+            id: p.slug || p._id,
+            title: p.title || '',
+            subtitle: p.tagline || p.category || '',
+            imgSrc: p.heroImg || '',
+            liveUrl: p.liveUrl || '#',
+            hideLiveLink: !p.liveUrl,
+            hideCaseStudy: false,
+            category: (p.category || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').trim(),
+          }));
+          localStorage.setItem('public_works_cache', JSON.stringify(mappedPublic));
+          localStorage.setItem('public_home_works_cache', JSON.stringify(mappedPublic.slice(0, 4)));
+        } catch (_) {}
+      }
+
       return { data, status: response.status, _fromFallback: false };
     }
   } catch (err) {
     // Timeout (AbortError) or network error — fall through to localStorage fallback below
   }
 
-  // --- LOCAL DEV FALLBACK HANDLERS ---
+  // --- FALLBACK HANDLERS (API timeout / network error) ---
+
   if (endpoint === '/auth/login' && method === 'POST') {
     const username = body?.username;
     const password = body?.password;
-
     if ((username === 'admin' && password === 'admin123') || (username === 'admin' && password === 'admin')) {
       return {
-        data: {
-          token: 'mock_jwt_admin_token_2026',
-          user: { username: 'admin', role: 'admin' }
-        },
+        data: { token: 'mock_jwt_admin_token_2026', user: { username: 'admin', role: 'admin' } },
         status: 200
       };
     } else {
@@ -301,12 +142,8 @@ const request = async (method, endpoint, body = null, config = {}) => {
       if (file && file instanceof File) {
         return new Promise((resolve) => {
           const reader = new FileReader();
-          reader.onloadend = () => {
-            resolve({ data: { url: reader.result }, status: 200 });
-          };
-          reader.onerror = () => {
-            resolve({ data: { url: '' }, status: 400 });
-          };
+          reader.onloadend = () => { resolve({ data: { url: reader.result }, status: 200 }); };
+          reader.onerror = () => { resolve({ data: { url: '' }, status: 400 }); };
           reader.readAsDataURL(file);
         });
       }
@@ -316,9 +153,8 @@ const request = async (method, endpoint, body = null, config = {}) => {
   if (endpoint === '/profile') {
     if (method === 'GET') {
       const profile = getStorage('admin_profile_data', initialProfile);
-      // CRITICAL: When API times out (fallback), always return isMaintenanceMode: false
-      // This prevents stale localStorage from permanently blocking the site.
-      // Real maintenance status ONLY comes from a successful MongoDB response (not _fromFallback).
+      // CRITICAL: When API times out, always return isMaintenanceMode: false
+      // Real maintenance status ONLY comes from a successful MongoDB response.
       return { data: { ...profile, isMaintenanceMode: false }, status: 200, _fromFallback: true };
     }
     if (method === 'PUT') {
@@ -330,26 +166,26 @@ const request = async (method, endpoint, body = null, config = {}) => {
   }
 
   if (endpoint.startsWith('/projects')) {
-    let projects = getStorage('admin_projects_data', initialProjects);
+    // API timed out — return EMPTY array. Public pages use their own cache.
+    // Never return hardcoded/stale data so deleted projects don't reappear.
     if (method === 'GET') {
-      return { data: projects, status: 200, _fromFallback: true };
+      return { data: [], status: 200, _fromFallback: true };
     }
     if (method === 'POST') {
       const newProj = { ...body, _id: Date.now().toString() };
-      projects.push(newProj);
-      setStorage('admin_projects_data', projects);
       return { data: newProj, status: 201, _fromFallback: true };
     }
     if (method === 'PUT') {
-      const id = endpoint.split('/')[2];
-      projects = projects.map((p) => (p._id === id ? { ...p, ...body } : p));
-      setStorage('admin_projects_data', projects);
       return { data: body, status: 200, _fromFallback: true };
     }
     if (method === 'DELETE') {
-      const id = endpoint.split('/')[2];
-      projects = projects.filter((p) => p._id !== id);
-      setStorage('admin_projects_data', projects);
+      // Clear all public & admin caches so deleted project vanishes everywhere instantly
+      try {
+        localStorage.removeItem('public_works_cache');
+        localStorage.removeItem('public_home_works_cache');
+        localStorage.removeItem('admin_projects_cached');
+        localStorage.removeItem('project_images_store');
+      } catch (_) {}
       return { data: { message: 'Deleted' }, status: 200, _fromFallback: true };
     }
   }
@@ -390,10 +226,6 @@ const request = async (method, endpoint, body = null, config = {}) => {
       setStorage('admin_inquiries_data', inquiries);
       return { data: { message: 'Deleted' }, status: 200 };
     }
-  }
-
-  if (endpoint === '/upload' && method === 'POST') {
-    return { data: { url: '/assets/portfolio/gyogrea.png' }, status: 200 };
   }
 
   return { data: {}, status: 200 };

@@ -112,11 +112,26 @@ const AdminProjectsManager = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this case study?')) {
+      // Optimistic UI — remove immediately from state
+      setProjects((prev) => prev.filter((p) => p._id !== id));
+
+      // Clear all caches so deleted project vanishes everywhere
+      try {
+        localStorage.removeItem('public_works_cache');
+        localStorage.removeItem('public_home_works_cache');
+        const cached = JSON.parse(localStorage.getItem('admin_projects_cached') || '[]');
+        localStorage.setItem('admin_projects_cached', JSON.stringify(cached.filter((p) => p._id !== id)));
+        const imgStore = JSON.parse(localStorage.getItem('project_images_store') || '{}');
+        delete imgStore[id];
+        localStorage.setItem('project_images_store', JSON.stringify(imgStore));
+      } catch (_) {}
+
       try {
         await api.delete(`/projects/${id}`);
-        fetchProjects();
       } catch (err) {
         alert('Failed to delete project: ' + (err.response?.data?.message || err.message));
+        // Re-fetch to restore state if API call failed
+        fetchProjects();
       }
     }
   };
@@ -224,11 +239,32 @@ const AdminProjectsManager = () => {
 
       setModalOpen(false);
 
+      // Update all public caches immediately with new/updated project
+      try {
+        const newCached = editingProject
+          ? projects.map((p) => p._id === editingProject._id ? savedProject : p)
+          : [...projects.filter((p) => p._id !== savedProject._id), savedProject];
+
+        localStorage.setItem('admin_projects_cached', JSON.stringify(newCached));
+
+        // Rebuild public Works & Home caches
+        const mappedPublic = newCached.map((p) => ({
+          id: p.slug || p._id,
+          title: p.title || '',
+          subtitle: p.tagline || p.category || '',
+          imgSrc: p.heroImg || '',
+          liveUrl: p.liveUrl || '#',
+          hideLiveLink: !p.liveUrl,
+          hideCaseStudy: false,
+          category: (p.category || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').trim(),
+        }));
+        localStorage.setItem('public_works_cache', JSON.stringify(mappedPublic));
+        localStorage.setItem('public_home_works_cache', JSON.stringify(mappedPublic.slice(0, 4)));
+      } catch (_) {}
+
       if (savedToMongoDB) {
-        // ✅ Saved to MongoDB — website will show updated images on next load
-        setToast('✅ Saved! Website will update shortly.');
+        setToast('✅ Saved! Images updated on website.');
       } else {
-        // ⚠️ Only saved locally — server was slow, try saving again
         setToast('⚠️ Saved locally. Server was busy — please save again in 30s for website to update.');
       }
       setTimeout(() => setToast(''), 5000);
