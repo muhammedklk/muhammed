@@ -235,11 +235,15 @@ const getSiteSettings = async (req, res, next) => {
 
 const updateSiteSettings = async (req, res, next) => {
   try {
-    let settings = await SiteSettings.findOneAndUpdate(
-      {},
-      { $set: req.body },
-      { upsert: true, new: true, runValidators: true }
-    );
+    let settings = await SiteSettings.findOne();
+    if (!settings) {
+      settings = new SiteSettings(req.body);
+    } else {
+      Object.assign(settings, req.body);
+    }
+
+    settings.markModified('maintenancePages');
+    await settings.save();
 
     await ActivityLog.create({
       user: req.user.id,

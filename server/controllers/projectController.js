@@ -86,6 +86,21 @@ const createProject = async (req, res, next) => {
   }
 };
 
+const findProjectByIdOrSlug = async (idOrSlug) => {
+  if (!idOrSlug) return null;
+  if (/^[0-9a-fA-F]{24}$/.test(idOrSlug)) {
+    const p = await Project.findById(idOrSlug);
+    if (p) return p;
+  }
+  return await Project.findOne({
+    $or: [
+      { slug: String(idOrSlug).toLowerCase() },
+      { id: String(idOrSlug).toLowerCase() },
+      { title: new RegExp('^' + idOrSlug + '$', 'i') }
+    ]
+  });
+};
+
 /**
  * @desc    Update Project (Admin)
  * @route   PUT /api/projects/:id
@@ -93,15 +108,17 @@ const createProject = async (req, res, next) => {
  */
 const updateProject = async (req, res, next) => {
   try {
-    let project = await Project.findById(req.params.id);
+    let project = await findProjectByIdOrSlug(req.params.id);
     if (!project) {
-      return errorResponse(res, 404, 'Project not found');
+      project = await Project.create({
+        ...req.body,
+        slug: req.params.id.toLowerCase()
+      });
+    } else {
+      Object.assign(project, req.body);
+      project.markModified('caseStudy');
+      await project.save();
     }
-
-    project = await Project.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
-    });
 
     await ActivityLog.create({
       user: req.user.id,
@@ -125,17 +142,26 @@ const updateProject = async (req, res, next) => {
  */
 const updateCaseStudy = async (req, res, next) => {
   try {
-    const project = await Project.findById(req.params.id);
+    let project = await findProjectByIdOrSlug(req.params.id);
     if (!project) {
-      return errorResponse(res, 404, 'Project not found');
+      project = await Project.create({
+        title: req.body.title || 'Case Study',
+        slug: req.params.id.toLowerCase(),
+        caseStudy: req.body
+      });
+    } else {
+      project.caseStudy = {
+        ...(project.caseStudy || {}),
+        ...req.body
+      };
+      if (req.body.heroImg) project.heroImg = req.body.heroImg;
+      if (req.body.mobileImg1) project.mobileImg1 = req.body.mobileImg1;
+      if (req.body.mobileImg2) project.mobileImg2 = req.body.mobileImg2;
+      if (req.body.bannerImg) project.bannerImg = req.body.bannerImg;
+
+      project.markModified('caseStudy');
+      await project.save();
     }
-
-    project.caseStudy = {
-      ...project.caseStudy,
-      ...req.body
-    };
-
-    await project.save();
 
     await ActivityLog.create({
       user: req.user.id,
