@@ -38,16 +38,17 @@ const request = async (endpoint, options = {}) => {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    let message = data.message;
+    let message = data.message || data.error;
     if (!message) {
       if (response.status === 500 || response.status === 502 || response.status === 504) {
-        message = 'Cannot connect to Backend API server. Please ensure the server is running (npm run server).';
+        message = `Backend API Server Error (${response.status}). Please check Vercel environment variables & MongoDB connection.`;
       } else {
         message = `API Request Failed with status ${response.status}`;
       }
     }
     const error = new Error(message);
-    error.response = { status: response.status, data };
+    error.response = response;
+    error.data = data;
     throw error;
   }
 

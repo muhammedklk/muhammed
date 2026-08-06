@@ -23,11 +23,16 @@ connectDB();
 configureCloudinary();
 
 const app = express();
+app.set('trust proxy', 1);
 
 // Ensure DB is connected on incoming API requests
 app.use(async (req, res, next) => {
   res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
-  await connectDB();
+  try {
+    await connectDB();
+  } catch (err) {
+    console.error('[DB Connection Middleware Error]', err.message);
+  }
   next();
 });
 
@@ -46,11 +51,7 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
-      callback(null, true);
-    } else {
-      callback(null, true); // Allow for Vercel preview deploys
-    }
+    callback(null, true); // Allow all origins for Vercel deploys
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
@@ -62,21 +63,24 @@ const mongoSanitize = require('./middleware/mongoSanitize');
 // Rate Limiters
 const globalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 300,
+  max: 500,
   standardHeaders: true,
   legacyHeaders: false,
+  validate: { xForwardedForHeader: false },
   message: { success: false, message: 'Too many requests, please try again in 15 minutes.' }
 });
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 15,
+  max: 30,
+  validate: { xForwardedForHeader: false },
   message: { success: false, message: 'Too many login attempts. Please try again after 15 minutes.' }
 });
 
 const contactLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 10,
+  max: 20,
+  validate: { xForwardedForHeader: false },
   message: { success: false, message: 'Too many messages sent. Please wait 15 minutes before trying again.' }
 });
 
