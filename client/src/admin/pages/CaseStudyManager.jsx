@@ -202,11 +202,11 @@ const CaseStudyManager = () => {
       } else {
         await projectsApi.create({
           ...updatedProjectPayload,
-          slug: selectedProject.id || selectedProject.slug || formData.title.toLowerCase().replace(/\s+/g, '-')
+          slug: selectedProject?.slug || selectedProject?.id || selectedId || formData.title.toLowerCase().replace(/\s+/g, '-')
         });
       }
       if (refreshPortfolio) {
-        await refreshPortfolio();
+        refreshPortfolio();
       }
       setMessage(`Case Study for "${formData.title}" saved & updated live on website!`);
       setTimeout(() => setMessage(''), 3500);

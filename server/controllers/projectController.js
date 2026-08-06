@@ -69,18 +69,23 @@ const getAllProjectsAdmin = async (req, res, next) => {
  */
 const createProject = async (req, res, next) => {
   try {
-    const project = await Project.create(req.body);
+    const slug = req.body.slug || (req.body.title ? req.body.title.toLowerCase().replace(/\s+/g, '-') : `project-${Date.now()}`);
+    const project = await Project.findOneAndUpdate(
+      { slug: slug.toLowerCase() },
+      { $set: { ...req.body, slug: slug.toLowerCase() } },
+      { upsert: true, new: true, runValidators: true }
+    );
 
     await ActivityLog.create({
       user: req.user.id,
       userName: req.user.name,
       action: 'CREATED_PROJECT',
       module: 'Projects',
-      details: `Created project: "${project.title}"`,
+      details: `Saved project: "${project.title}"`,
       ipAddress: req.ip
     });
 
-    return successResponse(res, 201, 'Project created successfully', { project });
+    return successResponse(res, 201, 'Project saved successfully', { project });
   } catch (error) {
     next(error);
   }
