@@ -11,28 +11,34 @@ const CaseStudy = () => {
   const dynamicProject = getProjectBySlug(rawId);
   const staticProject = caseStudiesData[rawId] || caseStudiesData.voyagera;
 
-  const project = dynamicProject
-    ? {
-        ...staticProject,
-        ...dynamicProject,
-        ...(dynamicProject.caseStudy || {}),
-        title: dynamicProject.title || staticProject.title,
-        tagline: dynamicProject.caseStudy?.tagline || staticProject.tagline,
-        liveUrl: dynamicProject.liveUrl || staticProject.liveUrl,
-        category: dynamicProject.category || staticProject.category,
-        services: dynamicProject.services || staticProject.services,
-        client: dynamicProject.client || staticProject.client,
-        year: dynamicProject.year || staticProject.year,
-        heroImg: dynamicProject.caseStudy?.heroImg || dynamicProject.heroImg || staticProject.heroImg,
-        showcaseImg: dynamicProject.caseStudy?.showcaseImg || dynamicProject.showcaseImg || staticProject.showcaseImg,
-        mobileImg1: dynamicProject.caseStudy?.mobileImg1 || dynamicProject.mobileImg1 || staticProject.mobileImg1,
-        mobileImg2: dynamicProject.caseStudy?.mobileImg2 || dynamicProject.mobileImg2 || staticProject.mobileImg2,
-        bannerImg: dynamicProject.caseStudy?.bannerImg || dynamicProject.bannerImg || staticProject.bannerImg,
-        description: dynamicProject.caseStudy?.description?.length ? dynamicProject.caseStudy.description : (dynamicProject.description ? [dynamicProject.description] : staticProject.description),
-        outcome: dynamicProject.caseStudy?.outcome || staticProject.outcome,
-        metrics: dynamicProject.caseStudy?.metrics?.length ? dynamicProject.caseStudy.metrics : staticProject.metrics,
-      }
-    : staticProject;
+  const pickImg = (...imgs) => imgs.find(img => img && typeof img === 'string' && img.trim() !== '') || '';
+
+  const heroImg = pickImg(dynamicProject?.heroImg, dynamicProject?.caseStudy?.heroImg, staticProject?.heroImg);
+  const showcaseImg = pickImg(dynamicProject?.showcaseImg, dynamicProject?.caseStudy?.showcaseImg, heroImg);
+  const mobileImg1 = pickImg(dynamicProject?.mobileImg1, dynamicProject?.caseStudy?.mobileImg1, staticProject?.mobileImg1);
+  const mobileImg2 = pickImg(dynamicProject?.mobileImg2, dynamicProject?.caseStudy?.mobileImg2, staticProject?.mobileImg2);
+  const bannerImg = pickImg(dynamicProject?.bannerImg, dynamicProject?.caseStudy?.bannerImg, showcaseImg, staticProject?.bannerImg);
+
+  const project = {
+    ...staticProject,
+    ...(dynamicProject || {}),
+    ...(dynamicProject?.caseStudy || {}),
+    title: dynamicProject?.title || staticProject?.title,
+    tagline: dynamicProject?.caseStudy?.tagline || staticProject?.tagline,
+    liveUrl: dynamicProject?.liveUrl || staticProject?.liveUrl,
+    category: dynamicProject?.category || staticProject?.category,
+    services: dynamicProject?.services || staticProject?.services,
+    client: dynamicProject?.client || staticProject?.client,
+    year: dynamicProject?.year || staticProject?.year,
+    heroImg,
+    showcaseImg,
+    mobileImg1,
+    mobileImg2,
+    bannerImg,
+    description: dynamicProject?.caseStudy?.description?.length ? dynamicProject.caseStudy.description : (dynamicProject?.description ? [dynamicProject.description] : staticProject?.description),
+    outcome: dynamicProject?.caseStudy?.outcome || staticProject?.outcome,
+    metrics: dynamicProject?.caseStudy?.metrics?.length ? dynamicProject.caseStudy.metrics : staticProject?.metrics,
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
