@@ -159,9 +159,10 @@ const AdminLayout = () => {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <a
-              href="/"
+              href="/?preview=admin"
               target="_blank"
               rel="noreferrer"
+              title="Preview live site with Admin bypass token"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -176,7 +177,7 @@ const AdminLayout = () => {
                 textDecoration: 'none'
               }}
             >
-              <span>Live Portfolio</span>
+              <span>Live Portfolio (Admin Preview)</span>
               <ExternalLink size={14} />
             </a>
           </div>
