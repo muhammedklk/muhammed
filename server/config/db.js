@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 
+// Disable command buffering so queries fail fast with clean errors if DB is disconnected
+mongoose.set('bufferCommands', false);
+
 let isConnected = false;
 
 const connectDB = async () => {

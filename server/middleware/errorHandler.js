@@ -33,9 +33,10 @@ const errorHandler = (err, req, res, next) => {
     statusCode = 401;
   }
 
-  if (err.name === 'TokenExpiredError') {
-    message = 'Authentication token expired. Please log in again.';
-    statusCode = 401;
+  // Mongoose Connection / Timeout Errors
+  if (err.message && (err.message.includes('buffering timed out') || err.message.includes('connect ECONNREFUSED') || err.message.includes('selection timed out') || err.message.includes('MONGODB_URI') || err.message.includes('querySrv'))) {
+    message = 'Database Connection Failed. Please verify MONGODB_URI in Vercel Environment Variables & allow 0.0.0.0/0 IP Network Access in MongoDB Atlas.';
+    statusCode = 503;
   }
 
   console.error(`[Error Handler] ${req.method} ${req.originalUrl} - Status: ${statusCode} - ${err.message}`);

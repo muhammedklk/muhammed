@@ -30,9 +30,9 @@ const Login = () => {
       navigate('/admin');
     } catch (err) {
       console.error('Login/Register error:', err);
-      let msg = err.response?.data?.message || err.message;
-      if (msg === 'Failed to fetch' || !err.response || msg === 'API Request Failed') {
-        msg = 'Cannot connect to Backend API. Please start the server (npm run server).';
+      let msg = err.response?.data?.message || err.data?.message || err.message;
+      if (msg === 'Failed to fetch') {
+        msg = 'Cannot connect to Backend API. Please check your network or Vercel server status.';
       }
       setError(msg);
       if (msg && msg.includes('Initial Admin already registered')) {
