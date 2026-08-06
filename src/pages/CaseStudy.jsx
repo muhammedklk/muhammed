@@ -243,7 +243,7 @@ const CaseStudy = () => {
           {/* Secondary Full Showcase Frame */}
           <div className="cs-showcase-frame mb-4 mb-md-5">
             <div className="cs-laptop-container">
-              <img src={project.showcaseImg} alt="Secondary Showcase View" className="cs-mockup-img" />
+              <img src={project.bannerImg || project.showcaseImg || project.heroImg} alt="Secondary Showcase View" className="cs-mockup-img" />
             </div>
           </div>
 

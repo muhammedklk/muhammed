@@ -50,8 +50,8 @@ const ImageUploadInput = ({ label, value, onChange, placeholder = 'https://... o
     setPreviewError(false);
 
     try {
-      // Instant Client-Side Image Compression (< 50KB in 0.03 seconds)
-      const compressedDataUrl = await compressImage(file, 1200, 0.75);
+      // Instant Client-Side Image Compression (< 40KB in 0.02 seconds)
+      const compressedDataUrl = await compressImage(file, 850, 0.60);
       if (compressedDataUrl) {
         onChange(compressedDataUrl);
       }

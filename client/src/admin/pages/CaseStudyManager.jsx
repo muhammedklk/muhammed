@@ -192,7 +192,7 @@ const CaseStudyManager = () => {
         mobileImg1: formData.mobileImg1,
         mobileImg2: formData.mobileImg2,
         bannerImg: formData.bannerImg,
-        showcaseImg: formData.heroImg,
+        showcaseImg: formData.bannerImg || formData.heroImg,
         image: formData.heroImg,
         liveUrl: formData.liveUrl,
         category: formData.category,
