@@ -93,11 +93,11 @@ const CaseStudyEditor = () => {
     e.preventDefault();
     setSaving(true);
     setMessage('');
+    if (refreshPortfolio) {
+      refreshPortfolio();
+    }
     try {
       await projectsApi.updateCaseStudy(id, formData);
-      if (refreshPortfolio) {
-        await refreshPortfolio();
-      }
       setMessage('Case Study saved & updated live on website successfully!');
       setTimeout(() => setMessage(''), 3500);
     } catch (err) {

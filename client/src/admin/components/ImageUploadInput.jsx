@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Check, Loader2 } from './Icons';
 
-const compressImage = (file, maxWidth = 1200, quality = 0.75) => {
+const compressImage = (file, maxWidth = 960, quality = 0.65) => {
   return new Promise((resolve) => {
     const reader = new FileReader();
     reader.onload = (e) => {

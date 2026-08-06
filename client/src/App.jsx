@@ -49,6 +49,25 @@ const ProtectedAdminRoute = ({ children }) => {
 const PublicRouteGuard = ({ children, pageKey }) => {
   const { settings } = usePortfolio();
 
+  // Check if Admin preview token or logged-in session exists
+  if (typeof window !== 'undefined') {
+    if (window.location.search.includes('preview=admin')) {
+      sessionStorage.setItem('admin_preview_active', 'true');
+    }
+  }
+
+  const isAdminSession = typeof window !== 'undefined' && (
+    sessionStorage.getItem('admin_preview_active') === 'true' ||
+    Boolean(localStorage.getItem('token')) ||
+    window.location.search.includes('preview=admin')
+  );
+
+  // Admin always sees live site pages
+  if (isAdminSession) {
+    return children;
+  }
+
+  // Public Visitors Guard
   const localSettingsStr = typeof window !== 'undefined' ? localStorage.getItem('portfolio_maintenance_settings') : null;
   let localSettings = null;
   try {
@@ -69,17 +88,14 @@ const PublicRouteGuard = ({ children, pageKey }) => {
   );
 
   if (isGlobalMaintenance || isPageMaintenance) {
-    const isBypass = typeof window !== 'undefined' && window.location.search.includes('preview=admin');
-    if (!isBypass) {
-      const pageNames = {
-        home: 'Home Page',
-        about: 'About Bio Page',
-        projects: 'Projects Gallery',
-        caseStudy: 'Case Study Showcase',
-        contact: 'Contact Page'
-      };
-      return <Maintenance pageName={pageNames[pageKey] || 'This Page'} message={activeSettings?.maintenanceMessage} />;
-    }
+    const pageNames = {
+      home: 'Home Page',
+      about: 'About Bio Page',
+      projects: 'Projects Gallery',
+      caseStudy: 'Case Study Showcase',
+      contact: 'Contact Page'
+    };
+    return <Maintenance pageName={pageNames[pageKey] || 'This Page'} message={activeSettings?.maintenanceMessage} />;
   }
 
   return children;
