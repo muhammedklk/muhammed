@@ -19,7 +19,8 @@ function copyDirSync(src, dest) {
 
 try {
   copyDirSync('assets', 'public/assets');
-  console.log('Successfully copied assets to public/assets!');
+  copyDirSync('assets', 'client/public/assets');
+  console.log('Successfully copied assets to public/assets and client/public/assets!');
 } catch (err) {
   console.error('Error copying assets:', err);
 }
