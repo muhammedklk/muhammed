@@ -145,10 +145,10 @@ const Works = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="demo-card-footer" style={{ textAlign: 'center', padding: '16px 4px 0 4px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                      <div className="demo-title-group" style={{ textAlign: 'center', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                        <h3 className="demo-item-title" style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: '0 0 4px 0', textAlign: 'center', width: '100%' }}>{item.title}</h3>
-                        <p className="demo-item-category" style={{ fontSize: '13.5px', color: '#64748b', margin: 0, textAlign: 'center', fontWeight: '500', width: '100%' }}>{projectCat}</p>
+                    <div className="demo-card-footer" style={{ textAlign: 'left', padding: '16px 4px 0 4px' }}>
+                      <div className="demo-title-group" style={{ textAlign: 'left' }}>
+                        <h3 className="demo-item-title" style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: '0 0 4px 0', textAlign: 'left' }}>{item.title}</h3>
+                        <p className="demo-item-category" style={{ fontSize: '13.5px', color: '#64748b', margin: 0, textAlign: 'left', fontWeight: '500' }}>{projectCat}</p>
                       </div>
                     </div>
                   </div>
