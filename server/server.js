@@ -28,14 +28,28 @@ app.set('trust proxy', 1);
 // Ensure DB is connected on incoming API requests
 app.use(async (req, res, next) => {
   res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  
+  if (req.path === '/api/health' || req.path === '/health') {
+    return next();
+  }
+
+  const dbUri = process.env.MONGODB_URI || process.env.MONGO_URI;
+  if (!dbUri) {
+    return res.status(503).json({
+      success: false,
+      message: 'MONGODB_URI environment variable is missing in Vercel. Please add MONGODB_URI in Vercel Project Settings -> Environment Variables and Redeploy.',
+      code: 'MISSING_ENV_VAR'
+    });
+  }
+
   try {
     await connectDB();
     next();
   } catch (err) {
-    console.error('[DB Connection Middleware Error]', err.message);
+    console.error('[DB Connection Error]', err.message);
     return res.status(503).json({
       success: false,
-      message: `Database Connection Error: ${err.message}. Please verify MONGODB_URI in Vercel Environment Variables and allow 0.0.0.0/0 Network Access in MongoDB Atlas.`,
+      message: `Database Connection Error: ${err.message}. Please verify MongoDB Atlas IP Network Access allows 0.0.0.0/0.`,
       error: err.message
     });
   }
@@ -48,12 +62,6 @@ app.use(helmet({
 }));
 
 // CORS Configuration
-const allowedOrigins = [
-  process.env.CLIENT_URL || 'http://localhost:5173',
-  'http://localhost:3000',
-  'http://127.0.0.1:5173'
-];
-
 app.use(cors({
   origin: function (origin, callback) {
     callback(null, true); // Allow all origins for Vercel deploys
@@ -107,10 +115,13 @@ app.use('/assets/uploads', express.static(path.join(__dirname, '../public/assets
 
 // Health Check API Endpoint
 app.get('/api/health', (req, res) => {
-  return successResponse(res, 200, 'Portfolio CMS API Server running cleanly', {
-    status: 'online',
+  const dbUri = process.env.MONGODB_URI || process.env.MONGO_URI;
+  return res.status(200).json({
+    success: true,
+    message: 'Portfolio CMS API Server running cleanly',
+    hasMongoUri: !!dbUri,
     timestamp: new Date().toISOString(),
-    env: process.env.NODE_ENV || 'development'
+    env: process.env.NODE_ENV || 'production'
   });
 });
 
