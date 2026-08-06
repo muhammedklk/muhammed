@@ -72,7 +72,26 @@ const defaultWorks = [
 
 const Works = () => {
   const { projects } = usePortfolio();
-  const displayWorks = Array.isArray(projects) && projects.length > 0 ? projects : defaultWorks;
+
+  // Always display ALL 8 core works, merged with dynamic CMS updates from MongoDB
+  const displayWorks = defaultWorks.map((defaultItem) => {
+    const apiMatch = (projects || []).find(
+      (p) =>
+        (p.slug && String(p.slug).toLowerCase() === String(defaultItem.slug).toLowerCase()) ||
+        (p.id && String(p.id).toLowerCase() === String(defaultItem.id).toLowerCase()) ||
+        (p.title && String(p.title).toLowerCase() === String(defaultItem.title).toLowerCase())
+    );
+    if (!apiMatch) return defaultItem;
+
+    return {
+      ...defaultItem,
+      ...apiMatch,
+      heroImg: apiMatch.heroImg || apiMatch.image || defaultItem.heroImg,
+      subtitle: apiMatch.category || apiMatch.subtitle || defaultItem.subtitle,
+      title: apiMatch.title || defaultItem.title,
+      liveUrl: apiMatch.liveUrl || defaultItem.liveUrl
+    };
+  });
 
   return (
     <>
@@ -96,7 +115,7 @@ const Works = () => {
       {/* Works Grid Section */}
       <section className="works-gallery-section section-padding-bottom">
         <div className="container">
-          {/* Works Grid — All Projects */}
+          {/* Works Grid — All 8 Projects */}
           <div className="row g-4">
             {displayWorks.map((item) => {
               const projectKey = item.slug || item._id || item.id;
@@ -126,10 +145,10 @@ const Works = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="demo-card-footer">
-                      <div className="demo-title-group">
-                        <h3 className="demo-item-title">{item.title}</h3>
-                        <p className="demo-item-category">{projectCat}</p>
+                    <div className="demo-card-footer" style={{ textAlign: 'left', padding: '16px 4px 0 4px' }}>
+                      <div className="demo-title-group" style={{ textAlign: 'left' }}>
+                        <h3 className="demo-item-title" style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: '0 0 4px 0', textAlign: 'left' }}>{item.title}</h3>
+                        <p className="demo-item-category" style={{ fontSize: '13.5px', color: '#64748b', margin: 0, textAlign: 'left', fontWeight: '500' }}>{projectCat}</p>
                       </div>
                     </div>
                   </div>
