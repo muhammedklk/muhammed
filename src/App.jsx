@@ -52,25 +52,24 @@ const ProtectedAdminRoute = ({ children }) => {
 const PublicRouteGuard = ({ children, pageKey }) => {
   const { settings } = usePortfolio();
 
-  // Check if Admin preview token or logged-in session exists
   if (typeof window !== 'undefined') {
     if (window.location.search.includes('preview=admin')) {
       sessionStorage.setItem('admin_preview_active', 'true');
     }
   }
 
-  const isAdminSession = typeof window !== 'undefined' && (
+  // Admin preview mode is ONLY active when explicitly requested via Live Portfolio (Admin Preview) link
+  const isAdminPreview = typeof window !== 'undefined' && (
     sessionStorage.getItem('admin_preview_active') === 'true' ||
-    Boolean(localStorage.getItem('token')) ||
     window.location.search.includes('preview=admin')
   );
 
-  // Admin always sees live site pages
-  if (isAdminSession) {
+  // Admin explicit preview sees live site pages
+  if (isAdminPreview) {
     return children;
   }
 
-  // Public Visitors Guard
+  // Public Visitors Guard (Locks all devices globally)
   const localSettingsStr = typeof window !== 'undefined' ? localStorage.getItem('portfolio_maintenance_settings') : null;
   let localSettings = null;
   try {
@@ -79,7 +78,14 @@ const PublicRouteGuard = ({ children, pageKey }) => {
     localSettings = null;
   }
 
-  const activeSettings = settings || localSettings;
+  const activeSettings = {
+    ...localSettings,
+    ...settings,
+    maintenancePages: {
+      ...(localSettings?.maintenancePages || {}),
+      ...(settings?.maintenancePages || {})
+    }
+  };
 
   const isGlobalMaintenance = Boolean(activeSettings?.maintenanceMode);
   const isPageMaintenance = Boolean(

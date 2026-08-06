@@ -235,7 +235,7 @@ const getSiteSettings = async (req, res, next) => {
 
 const updateSiteSettings = async (req, res, next) => {
   try {
-    let settings = await SiteSettings.findOne();
+    let settings = await SiteSettings.findOne().sort({ createdAt: -1 });
     if (!settings) {
       settings = new SiteSettings(req.body);
     } else {
@@ -244,6 +244,9 @@ const updateSiteSettings = async (req, res, next) => {
 
     settings.markModified('maintenancePages');
     await settings.save();
+
+    // Clean up any legacy duplicate settings documents to guarantee global consistency
+    await SiteSettings.deleteMany({ _id: { $ne: settings._id } });
 
     await ActivityLog.create({
       user: req.user.id,
