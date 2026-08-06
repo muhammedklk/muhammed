@@ -1,29 +1,35 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const root = path.join(__dirname, '..');
-const client = path.join(root, 'client');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-if (!fs.existsSync(client)) {
-  fs.mkdirSync(client, { recursive: true });
+const rootDir = path.resolve(__dirname, '..');
+const srcDir = path.join(rootDir, 'src');
+const clientSrcDir = path.join(rootDir, 'client/src');
+
+function copyDirRecursive(src, dest) {
+  if (!fs.existsSync(src)) return;
+  fs.mkdirSync(dest, { recursive: true });
+  const entries = fs.readdirSync(src, { withFileTypes: true });
+
+  for (const entry of entries) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+
+    if (entry.isDirectory()) {
+      copyDirRecursive(srcPath, destPath);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
+      console.log(`Synced: ${path.relative(rootDir, destPath)}`);
+    }
+  }
 }
 
-['src', 'public', 'css', 'assets', 'js'].forEach(folder => {
-  const srcPath = path.join(root, folder);
-  const destPath = path.join(client, folder);
-  if (fs.existsSync(srcPath)) {
-    fs.cpSync(srcPath, destPath, { recursive: true });
-    console.log(`Copied ${folder} -> client/${folder}`);
-  }
-});
-
-['index.html', 'vite.config.js'].forEach(file => {
-  const srcPath = path.join(root, file);
-  const destPath = path.join(client, file);
-  if (fs.existsSync(srcPath)) {
-    fs.copyFileSync(srcPath, destPath);
-    console.log(`Copied ${file} -> client/${file}`);
-  }
-});
-
-console.log('Client directory synchronization complete!');
+try {
+  copyDirRecursive(srcDir, clientSrcDir);
+  console.log('Successfully synced all src files to client/src!');
+} catch (err) {
+  console.error('Error syncing src to client/src:', err);
+}
