@@ -52,11 +52,27 @@ const ProtectedAdminRoute = ({ children }) => {
 const PublicRouteGuard = ({ children, pageKey }) => {
   const { settings } = usePortfolio();
 
-  const isGlobalMaintenance = Boolean(settings?.maintenanceMode);
-  const isPageMaintenance = Boolean(pageKey && settings?.maintenancePages?.[pageKey]);
+  const localSettingsStr = typeof window !== 'undefined' ? localStorage.getItem('portfolio_maintenance_settings') : null;
+  let localSettings = null;
+  try {
+    localSettings = localSettingsStr ? JSON.parse(localSettingsStr) : null;
+  } catch (e) {
+    localSettings = null;
+  }
+
+  const activeSettings = settings || localSettings;
+
+  const isGlobalMaintenance = Boolean(activeSettings?.maintenanceMode);
+  const isPageMaintenance = Boolean(
+    pageKey && (
+      activeSettings?.maintenancePages?.[pageKey] ||
+      activeSettings?.maintenancePages?.[pageKey.toLowerCase()] ||
+      (pageKey === 'caseStudy' && (activeSettings?.maintenancePages?.caseStudy || activeSettings?.maintenancePages?.casestudy))
+    )
+  );
 
   if (isGlobalMaintenance || isPageMaintenance) {
-    const isBypass = window.location.search.includes('preview=admin');
+    const isBypass = typeof window !== 'undefined' && window.location.search.includes('preview=admin');
     if (!isBypass) {
       const pageNames = {
         home: 'Home Page',
@@ -65,7 +81,7 @@ const PublicRouteGuard = ({ children, pageKey }) => {
         caseStudy: 'Case Study Showcase',
         contact: 'Contact Page'
       };
-      return <Maintenance pageName={pageNames[pageKey] || 'This Page'} message={settings?.maintenanceMessage} />;
+      return <Maintenance pageName={pageNames[pageKey] || 'This Page'} message={activeSettings?.maintenanceMessage} />;
     }
   }
 

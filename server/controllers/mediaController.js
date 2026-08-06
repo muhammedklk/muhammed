@@ -39,21 +39,12 @@ const uploadMedia = async (req, res, next) => {
         format = uploadResult.format;
         bytes = uploadResult.bytes;
       } else {
-        // Local Disk Fallback
-        const fs = require('fs');
-        const path = require('path');
-        const uploadsDir = path.join(__dirname, '../../public/assets/uploads');
-        if (!fs.existsSync(uploadsDir)) {
-          fs.mkdirSync(uploadsDir, { recursive: true });
-        }
-        const ext = path.extname(req.file.originalname) || '.png';
-        const filename = `upload_${Date.now()}${ext}`;
-        const filePath = path.join(uploadsDir, filename);
-        fs.writeFileSync(filePath, req.file.buffer);
-        
-        resultUrl = `/assets/uploads/${filename}`;
-        publicId = filename;
-        format = ext.replace('.', '');
+        // Base64 Data URL Fallback for Vercel Serverless (Read-only filesystem)
+        const mimeType = req.file.mimetype || 'image/png';
+        const base64Str = req.file.buffer.toString('base64');
+        resultUrl = `data:${mimeType};base64,${base64Str}`;
+        publicId = `base64_${Date.now()}`;
+        format = mimeType.split('/')[1] || 'png';
         bytes = req.file.size;
       }
     } else {

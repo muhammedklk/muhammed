@@ -61,6 +61,9 @@ const SettingsManager = () => {
       maintenanceMode: isChecked
     };
     setSettings(updated);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('portfolio_maintenance_settings', JSON.stringify(updated));
+    }
     try {
       await contentApi.updateSettings(updated);
       if (refreshPortfolio) {
@@ -82,6 +85,9 @@ const SettingsManager = () => {
       }
     };
     setSettings(updated);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('portfolio_maintenance_settings', JSON.stringify(updated));
+    }
     try {
       await contentApi.updateSettings(updated);
       if (refreshPortfolio) {
