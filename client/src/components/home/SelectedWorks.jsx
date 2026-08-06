@@ -96,10 +96,14 @@ const SelectedWorks = () => {
                       </div>
                     </div>
                   </div>
-                  <h3 className="demo-card-caption">
-                    <Link to={`/case-study/${projectKey}`}>{item.title}</Link>
-                  </h3>
-                  <span className="demo-card-subtext">{item.category || item.subtitle}</span>
+                  <div className="demo-card-footer" style={{ textAlign: 'left', padding: '16px 4px 0 4px', width: '100%' }}>
+                    <div className="demo-title-group" style={{ textAlign: 'left' }}>
+                      <h3 className="demo-card-caption" style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: '0 0 4px 0', textAlign: 'left', lineHeight: 1.3 }}>
+                        <Link to={`/case-study/${projectKey}`} style={{ color: 'inherit', textDecoration: 'none' }}>{item.title}</Link>
+                      </h3>
+                      <span className="demo-card-subtext" style={{ display: 'block', fontSize: '13.5px', color: '#64748b', margin: 0, textAlign: 'left', fontWeight: '500' }}>{item.category || item.subtitle || 'UI/UX Design & Development'}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             );

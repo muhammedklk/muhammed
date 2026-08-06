@@ -6495,3 +6495,25 @@ body.preloader-active {
     flex: none !important;
 }
 
+/* Project Cards Title & Subtitle Left Alignment */
+.demo-card-footer,
+.demo-title-group,
+.demo-card-caption,
+.demo-item-title,
+.demo-card-subtext,
+.demo-item-category {
+    text-align: left !important;
+    justify-content: flex-start !important;
+}
+
+.demo-card-caption a,
+.demo-item-title a {
+    color: #0f172a !important;
+    text-decoration: none !important;
+}
+
+[data-theme="dark"] .demo-card-caption a,
+[data-theme="dark"] .demo-item-title a {
+    color: #ffffff !important;
+}
+
