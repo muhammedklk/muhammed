@@ -158,7 +158,7 @@ const SeoManager = () => {
 
             <div className="col-12">
               <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>JSON-LD SCHEMA.ORG STRUCTURED DATA (JSON)</label>
-              <textarea rows={4} value={formData.jsonLdSchema} onChange={(e) => setFormData({ ...formData, jsonLdSchema: e.target.value })} placeholder='{"@context": "https://schema.org", "@type": "Person", "name": "Senior Software Architect"}' style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff', fontFamily: 'monospace', fontSize: '12.5px' }} />
+              <textarea rows={4} value={formData.jsonLdSchema} onChange={(e) => setFormData({ ...formData, jsonLdSchema: e.target.value })} placeholder='{"@context": "https://schema.org", "@type": "Person", "name": "UI/UX Designer & Front-End Developer"}' style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff', fontFamily: 'monospace', fontSize: '12.5px' }} />
             </div>
           </div>
         </div>

@@ -66,7 +66,7 @@ const seedData = async () => {
         titlePrefix: 'Creating Digital',
         highlightText: 'Experiences',
         titleSuffix: 'That Inspire.',
-        subtitle: 'Senior Full Stack Software Architect crafting high-performance web applications, scalable platforms, and pixel-perfect design systems.',
+        subtitle: 'Multidisciplinary UI/UX Designer & Front-End Developer crafting high-performance, pixel-perfect web products.',
         primaryBtnText: 'Explore Selected Works',
         primaryBtnLink: '/works',
         secondaryBtnText: 'Get In Touch',
@@ -79,15 +79,15 @@ const seedData = async () => {
     const aboutCount = await About.countDocuments();
     if (aboutCount === 0) {
       await About.create({
-        title: 'Architecting Digital Products & Scalable Web Ecosystems',
-        subtitle: 'Over 6+ years of engineering high-impact web platforms, design systems, and cloud architectures for global brands.',
+        title: 'Designing Digital Products & Pixel-Perfect Web Interfaces',
+        subtitle: 'Creating intuitive user interfaces, design systems, and responsive web applications for modern digital products.',
         bioParagraphs: [
-          "I am a Senior Software Architect and Lead Developer specialized in high-performance web applications, micro-frontends, and cloud-native solutions.",
-          "My methodology blends aesthetic minimalism with robust modular software architecture, delivering ultra-fast user experiences tuned for conversion and scalability."
+          "I am a UI/UX Designer & Front-End Developer specialized in intuitive user experiences, design systems, and modern web applications.",
+          "My methodology blends aesthetic minimalism with smooth interactive design, delivering ultra-fast user experiences tuned for conversion and engagement."
         ],
-        experienceYears: 6,
-        completedProjects: 40,
-        satisfiedClients: 35,
+        experienceYears: 4,
+        completedProjects: 25,
+        satisfiedClients: 20,
         avatarUrl: '/assets/profile_photo.jpg',
         resumeUrl: '#'
       });
@@ -99,15 +99,15 @@ const seedData = async () => {
     if (expCount === 0) {
       await Experience.insertMany([
         {
-          title: 'Lead Software Architect & Lead Developer',
+          title: 'UI/UX Designer & Lead Front-End Developer',
           company: 'Nexus Digital Tech',
           period: '2023 - PRESENT',
           location: 'Kochi, India',
-          description: 'Leading architectural design for enterprise SaaS applications and high-conversion client web apps.',
+          description: 'Designing intuitive web interfaces, mobile product mockups, and high-conversion client web apps.',
           order: 1
         },
         {
-          title: 'Senior Frontend Developer',
+          title: 'UI/UX & Frontend Specialist',
           company: 'Apex Digital Solutions',
           period: '2021 - 2023',
           location: 'Remote',

@@ -11,11 +11,11 @@ const SeoSchema = new mongoose.Schema(
     },
     metaTitle: {
       type: String,
-      default: 'Developer Portfolio — Senior Full Stack Architect'
+      default: 'Muhammed | UI/UX Designer & Front-End Developer'
     },
     metaDescription: {
       type: String,
-      default: 'Senior Full Stack Software Architect specializing in React, Node.js, Express, and high-performance Web Apps.'
+      default: 'Multidisciplinary UI/UX Designer & Front-End Developer crafting high-performance, pixel-perfect web products.'
     },
     keywords: [
       {

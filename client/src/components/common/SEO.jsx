@@ -6,9 +6,9 @@ const SEO = ({ page = 'home', title, description, keywords, ogImage }) => {
 
   const pageSeo = (seo || []).find((s) => s.page === page) || (seo || []).find((s) => s.page === 'global') || {};
 
-  const finalTitle = title || pageSeo.metaTitle || 'Senior Full Stack Software Architect | Portfolio';
-  const finalDescription = description || pageSeo.metaDescription || 'Senior Full Stack Software Architect crafting high-performance web applications, scalable platforms, and pixel-perfect design systems.';
-  const finalKeywords = keywords || (pageSeo.keywords ? pageSeo.keywords.join(', ') : 'Software Architect, Full Stack Developer, React, Node.js, Express, MongoDB');
+  const finalTitle = title || pageSeo.metaTitle || 'Muhammed | UI/UX Designer & Front-End Developer';
+  const finalDescription = description || pageSeo.metaDescription || 'Multidisciplinary UI/UX Designer & Front-End Developer crafting high-performance, pixel-perfect web products.';
+  const finalKeywords = keywords || (pageSeo.keywords ? pageSeo.keywords.join(', ') : 'UI/UX Designer, Front-End Developer, React, Web Design, Figma, Portfolio');
   const finalOgImage = ogImage || pageSeo.ogImage || '/assets/portfolio/gyogrea.png';
   const finalRobots = pageSeo.robots || 'index, follow';
 
