@@ -37,10 +37,24 @@ const getPublicPortfolioContent = async (req, res, next) => {
       Service.find().sort({ order: 1, createdAt: -1 }),
       Skill.find().sort({ order: 1, createdAt: -1 }),
       Testimonial.find().sort({ order: 1, createdAt: -1 }),
-      Faq.find().sort({ order: 1, createdAt: -1 }),
       SiteSettings.findOne().sort({ createdAt: -1 }),
       Seo.find()
     ]);
+
+    let finalSettings = settings;
+    if (!finalSettings) {
+      finalSettings = await SiteSettings.create({
+        maintenanceMode: false,
+        maintenancePages: {
+          home: false,
+          about: false,
+          projects: false,
+          caseStudy: false,
+          services: false,
+          contact: false
+        }
+      });
+    }
 
     const data = {
       hero: hero || {},
@@ -51,7 +65,7 @@ const getPublicPortfolioContent = async (req, res, next) => {
       skills: skills || [],
       testimonials: testimonials || [],
       faqs: faqs || [],
-      settings: settings || {},
+      settings: finalSettings || {},
       seo: seo || []
     };
 

@@ -48,13 +48,22 @@ const ProtectedAdminRoute = ({ children }) => {
 
 const PublicRouteGuard = ({ children, pageKey }) => {
   const { settings } = usePortfolio();
-  const { isAuthenticated } = useAuth();
 
-  const isGlobalMaintenance = settings?.maintenanceMode;
-  const isPageMaintenance = pageKey && settings?.maintenancePages?.[pageKey];
+  const isGlobalMaintenance = Boolean(settings?.maintenanceMode);
+  const isPageMaintenance = Boolean(pageKey && settings?.maintenancePages?.[pageKey]);
 
-  if ((isGlobalMaintenance || isPageMaintenance) && !isAuthenticated) {
-    return <Maintenance message={settings?.maintenanceMessage} />;
+  if (isGlobalMaintenance || isPageMaintenance) {
+    const isBypass = window.location.search.includes('preview=admin');
+    if (!isBypass) {
+      const pageNames = {
+        home: 'Home Page',
+        about: 'About Bio Page',
+        projects: 'Projects Gallery',
+        caseStudy: 'Case Study Showcase',
+        contact: 'Contact Page'
+      };
+      return <Maintenance pageName={pageNames[pageKey] || 'This Page'} message={settings?.maintenanceMessage} />;
+    }
   }
 
   return children;
