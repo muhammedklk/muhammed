@@ -19,7 +19,9 @@ const errorHandler = require('./middleware/errorHandler');
 const { successResponse } = require('./utils/apiResponse');
 
 // Initialize Database & Cloudinary Connection
-connectDB();
+connectDB().catch((err) => {
+  console.error('[Top-level DB Connect Warning]', err.message);
+});
 configureCloudinary();
 
 const app = express();
