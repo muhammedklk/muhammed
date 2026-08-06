@@ -25,21 +25,14 @@ function copyDirSync(src, dest) {
 }
 
 try {
-  // 1. Copy static assets to public & client/public
   const assetsDir = path.join(rootDir, 'assets');
   if (fs.existsSync(assetsDir)) {
     copyDirSync(assetsDir, path.join(rootDir, 'public/assets'));
-    copyDirSync(assetsDir, path.join(rootDir, 'client/public/assets'));
-    console.log('Successfully copied assets with absolute paths!');
-  }
-
-  // 2. Sync src -> client/src to prevent missing file build errors on Vercel
-  const srcDir = path.join(rootDir, 'src');
-  const clientSrcDir = path.join(rootDir, 'client/src');
-  if (fs.existsSync(srcDir)) {
-    copyDirSync(srcDir, clientSrcDir);
-    console.log('Successfully synced src to client/src!');
+    if (fs.existsSync(path.join(rootDir, 'client'))) {
+      copyDirSync(assetsDir, path.join(rootDir, 'client/public/assets'));
+    }
+    console.log('Successfully copied assets!');
   }
 } catch (err) {
-  console.error('Error copying assets/syncing src:', err);
+  console.error('Error copying assets:', err);
 }
