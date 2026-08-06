@@ -7,10 +7,10 @@ const connectDB = async () => {
     return;
   }
 
-  const dbUri = process.env.MONGODB_URI;
+  const dbUri = process.env.MONGODB_URI || process.env.MONGO_URI;
 
   if (!dbUri) {
-    console.warn('[MongoDB Warning] MONGODB_URI is missing in environment variables.');
+    console.warn('[MongoDB Warning] MONGODB_URI / MONGO_URI is missing in environment variables.');
     return;
   }
 
