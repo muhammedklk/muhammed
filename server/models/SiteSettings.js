@@ -61,6 +61,17 @@ const SiteSettingsSchema = new mongoose.Schema(
       type: String,
       default: 'We are currently upgrading the portfolio. Please check back soon!'
     },
+    maintenancePages: {
+      type: mongoose.Schema.Types.Mixed,
+      default: {
+        home: false,
+        about: false,
+        projects: false,
+        caseStudy: false,
+        services: false,
+        contact: false
+      }
+    },
     previewToken: {
       type: String,
       default: 'preview-secret-token-12345'

@@ -55,14 +55,43 @@ const SettingsManager = () => {
     fetchSettings();
   }, []);
 
-  const handleTogglePageMaintenance = (pageKey, isChecked) => {
-    setSettings(prev => ({
-      ...prev,
+  const handleToggleGlobalMaintenance = async (isChecked) => {
+    const updated = {
+      ...settings,
+      maintenanceMode: isChecked
+    };
+    setSettings(updated);
+    try {
+      await contentApi.updateSettings(updated);
+      if (refreshPortfolio) {
+        await refreshPortfolio();
+      }
+      setMessage(isChecked ? 'Entire Website Maintenance Mode ENABLED live!' : 'Website Maintenance Mode DISABLED (Public Live)');
+      setTimeout(() => setMessage(''), 3000);
+    } catch (err) {
+      console.error('Failed to auto-save global maintenance mode:', err);
+    }
+  };
+
+  const handleTogglePageMaintenance = async (pageKey, isChecked) => {
+    const updated = {
+      ...settings,
       maintenancePages: {
-        ...(prev.maintenancePages || {}),
+        ...(settings.maintenancePages || {}),
         [pageKey]: isChecked
       }
-    }));
+    };
+    setSettings(updated);
+    try {
+      await contentApi.updateSettings(updated);
+      if (refreshPortfolio) {
+        await refreshPortfolio();
+      }
+      setMessage(`Updated ${pageKey} maintenance lock live!`);
+      setTimeout(() => setMessage(''), 3000);
+    } catch (err) {
+      console.error('Failed to auto-save page maintenance mode:', err);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -121,7 +150,7 @@ const SettingsManager = () => {
               <input
                 type="checkbox"
                 checked={settings.maintenanceMode}
-                onChange={(e) => setSettings({ ...settings, maintenanceMode: e.target.checked })}
+                onChange={(e) => handleToggleGlobalMaintenance(e.target.checked)}
                 style={{ width: '22px', height: '22px', accentColor: '#ef4444' }}
               />
               <span style={{ fontSize: '14px', fontWeight: '800', color: settings.maintenanceMode ? '#ef4444' : '#22c55e' }}>

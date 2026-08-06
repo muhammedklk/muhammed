@@ -46,12 +46,15 @@ const ProtectedAdminRoute = ({ children }) => {
   return children;
 };
 
-const PublicRouteGuard = ({ children }) => {
+const PublicRouteGuard = ({ children, pageKey }) => {
   const { settings } = usePortfolio();
   const { isAuthenticated } = useAuth();
 
-  if (settings?.maintenanceMode && !isAuthenticated) {
-    return <Maintenance message={settings.maintenanceMessage} />;
+  const isGlobalMaintenance = settings?.maintenanceMode;
+  const isPageMaintenance = pageKey && settings?.maintenancePages?.[pageKey];
+
+  if ((isGlobalMaintenance || isPageMaintenance) && !isAuthenticated) {
+    return <Maintenance message={settings?.maintenanceMessage} />;
   }
 
   return children;
@@ -64,12 +67,12 @@ function App() {
         <PortfolioProvider>
           <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <Routes>
-              <Route path="/" element={<PublicRouteGuard><Layout><SEO page="home" /><Home /></Layout></PublicRouteGuard>} />
-              <Route path="/about" element={<PublicRouteGuard><Layout><SEO page="about" /><About /></Layout></PublicRouteGuard>} />
-              <Route path="/works" element={<PublicRouteGuard><Layout><SEO page="works" /><Works /></Layout></PublicRouteGuard>} />
-              <Route path="/contact" element={<PublicRouteGuard><Layout><SEO page="contact" /><Contact /></Layout></PublicRouteGuard>} />
-              <Route path="/case-study" element={<PublicRouteGuard><Layout><SEO page="casestudy" /><CaseStudy /></Layout></PublicRouteGuard>} />
-              <Route path="/case-study/:id" element={<PublicRouteGuard><Layout><SEO page="casestudy" /><CaseStudy /></Layout></PublicRouteGuard>} />
+              <Route path="/" element={<PublicRouteGuard pageKey="home"><Layout><SEO page="home" /><Home /></Layout></PublicRouteGuard>} />
+              <Route path="/about" element={<PublicRouteGuard pageKey="about"><Layout><SEO page="about" /><About /></Layout></PublicRouteGuard>} />
+              <Route path="/works" element={<PublicRouteGuard pageKey="projects"><Layout><SEO page="works" /><Works /></Layout></PublicRouteGuard>} />
+              <Route path="/contact" element={<PublicRouteGuard pageKey="contact"><Layout><SEO page="contact" /><Contact /></Layout></PublicRouteGuard>} />
+              <Route path="/case-study" element={<PublicRouteGuard pageKey="caseStudy"><Layout><SEO page="casestudy" /><CaseStudy /></Layout></PublicRouteGuard>} />
+              <Route path="/case-study/:id" element={<PublicRouteGuard pageKey="caseStudy"><Layout><SEO page="casestudy" /><CaseStudy /></Layout></PublicRouteGuard>} />
 
               <Route path="/admin/login" element={<Login />} />
 
