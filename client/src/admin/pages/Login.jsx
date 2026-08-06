@@ -30,7 +30,7 @@ const Login = () => {
       navigate('/admin');
     } catch (err) {
       console.error('Login/Register error:', err);
-      let msg = err.response?.data?.message || err.data?.message || err.message;
+      let msg = err.data?.message || err.response?.data?.message || err.message;
       if (msg === 'Failed to fetch') {
         msg = 'Cannot connect to Backend API. Please check your network or Vercel server status.';
       }

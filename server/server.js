@@ -30,10 +30,15 @@ app.use(async (req, res, next) => {
   res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
   try {
     await connectDB();
+    next();
   } catch (err) {
     console.error('[DB Connection Middleware Error]', err.message);
+    return res.status(503).json({
+      success: false,
+      message: `Database Connection Error: ${err.message}. Please verify MONGODB_URI in Vercel Environment Variables and allow 0.0.0.0/0 Network Access in MongoDB Atlas.`,
+      error: err.message
+    });
   }
-  next();
 });
 
 // Security Middlewares
