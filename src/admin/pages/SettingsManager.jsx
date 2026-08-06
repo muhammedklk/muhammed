@@ -104,11 +104,16 @@ const SettingsManager = () => {
     e.preventDefault();
     setSaving(true);
     setMessage('');
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('portfolio_maintenance_settings', JSON.stringify(settings));
+    }
+    if (refreshPortfolio) {
+      refreshPortfolio();
+    }
+
     try {
       await contentApi.updateSettings(settings);
-      if (refreshPortfolio) {
-        await refreshPortfolio();
-      }
       setMessage('Site settings & per-page maintenance modes saved successfully!');
       setTimeout(() => setMessage(''), 3500);
     } catch (err) {
