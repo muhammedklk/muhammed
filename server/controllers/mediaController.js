@@ -69,7 +69,7 @@ const uploadMedia = async (req, res, next) => {
       ipAddress: req.ip
     });
 
-    return successResponse(res, 201, 'Media uploaded successfully', { media });
+    return successResponse(res, 201, 'Media uploaded successfully', { media, url: resultUrl });
   } catch (error) {
     next(error);
   }

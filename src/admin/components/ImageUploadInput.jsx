@@ -19,7 +19,7 @@ const ImageUploadInput = ({ label, value, onChange, placeholder = 'https://... o
       formData.append('file', file);
 
       const res = await mediaApi.upload(formData);
-      const uploadedUrl = res.data?.url || res.data?.data?.url;
+      const uploadedUrl = res.data?.data?.media?.url || res.data?.data?.url || res.data?.url || res.data?.media?.url;
 
       if (uploadedUrl) {
         onChange(uploadedUrl);
