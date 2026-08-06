@@ -42,7 +42,7 @@ const defaultWorks = [
     title: 'Travel Gallery',
     subtitle: 'Travel Gallery, UI/UX Design & Development',
     heroImg: '/assets/portfolio/4-travellgallery.jpg',
-    liveUrl: 'https://travelgallery.vercel.app/',
+    liveUrl: '',
   },
   {
     id: 'icone-luxury-hotel-booking',
@@ -50,7 +50,7 @@ const defaultWorks = [
     title: 'Icone Hotel Booking',
     subtitle: 'Hotel Booking, UI/UX, Apps Design',
     heroImg: '/assets/portfolio/5-icone-hotel-booking.jpg',
-    liveUrl: 'https://icone-hotel.vercel.app/',
+    liveUrl: '',
   },
   {
     id: 'modernbrand-identity-system',
@@ -58,7 +58,7 @@ const defaultWorks = [
     title: 'Modern Brand',
     subtitle: 'Brand Identity & Apps Design',
     heroImg: '/assets/portfolio/7-modernbrand.jpg',
-    liveUrl: 'https://modernbrand.vercel.app/',
+    liveUrl: '',
   },
   {
     id: 'chrona-ai-time-management-app',
@@ -66,7 +66,7 @@ const defaultWorks = [
     title: 'Chrona',
     subtitle: 'Interface, 2 Commerce App',
     heroImg: '/assets/portfolio/6-chrona.jpg',
-    liveUrl: 'https://chrona.vercel.app/',
+    liveUrl: '',
   }
 ];
 
