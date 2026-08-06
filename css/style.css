@@ -6495,15 +6495,15 @@ body.preloader-active {
     flex: none !important;
 }
 
-/* Project Cards Title & Subtitle Left Alignment */
+/* Project Cards Title & Subtitle Center Alignment */
 .demo-card-footer,
 .demo-title-group,
 .demo-card-caption,
 .demo-item-title,
 .demo-card-subtext,
 .demo-item-category {
-    text-align: left !important;
-    justify-content: flex-start !important;
+    text-align: center !important;
+    justify-content: center !important;
 }
 
 .demo-card-caption a,
