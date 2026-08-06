@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { projectsApi } from '../services/api';
 import { Plus, Edit, Trash2, ExternalLink, Sparkles } from '../components/Icons';
 import { usePortfolio } from '../../context/PortfolioContext';
+import { caseStudiesData } from '../../data/caseStudiesData';
 import ImageUploadInput from '../components/ImageUploadInput';
 
 const ProjectsManager = () => {
@@ -30,8 +31,37 @@ const ProjectsManager = () => {
     try {
       const res = await projectsApi.getAllAdmin();
       const rawData = res.data?.data;
-      const list = Array.isArray(rawData) ? rawData : (rawData?.projects || []);
-      setProjects(list);
+      const dbList = Array.isArray(rawData) ? rawData : (rawData?.projects || []);
+
+      const combined = [...dbList];
+      if (Array.isArray(caseStudiesData)) {
+        caseStudiesData.forEach(staticProj => {
+          const exists = combined.some(p => 
+            (p.slug && p.slug.toLowerCase() === (staticProj.id || staticProj.slug || '').toLowerCase()) ||
+            (p.title && p.title.toLowerCase() === staticProj.title.toLowerCase())
+          );
+          if (!exists) {
+            combined.push({
+              _id: staticProj.id,
+              id: staticProj.id,
+              title: staticProj.title,
+              category: staticProj.category,
+              client: staticProj.client,
+              year: staticProj.year,
+              services: staticProj.services,
+              liveUrl: staticProj.liveUrl,
+              heroImg: staticProj.heroImg,
+              showcaseImg: staticProj.showcaseImg,
+              shortDescription: staticProj.tagline || staticProj.overview || '',
+              technologies: typeof staticProj.techTags === 'string' ? staticProj.techTags.split(',').map(s => s.trim()) : (staticProj.techTags || []),
+              tags: typeof staticProj.techTags === 'string' ? staticProj.techTags.split(',').map(s => s.trim()) : (staticProj.techTags || []),
+              caseStudy: staticProj
+            });
+          }
+        });
+      }
+
+      setProjects(combined);
     } catch (err) {
       console.error('Failed to load projects:', err);
     }
@@ -89,10 +119,14 @@ const ProjectsManager = () => {
           : formData.technologies
       };
 
-      if (editingId) {
+      const isMongoId = editingId && /^[0-9a-fA-F]{24}$/.test(editingId);
+      if (isMongoId) {
         await projectsApi.update(editingId, payload);
       } else {
-        await projectsApi.create(payload);
+        await projectsApi.create({
+          ...payload,
+          slug: editingId || payload.title.toLowerCase().replace(/\s+/g, '-')
+        });
       }
       
       if (refreshPortfolio) {

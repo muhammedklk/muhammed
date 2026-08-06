@@ -6445,11 +6445,23 @@ body.preloader-active {
 }
 
 .cs-nav-grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: space-between;
     width: 100%;
     gap: 20px;
+}
+
+.cs-nav-grid .cs-back-link {
+    justify-self: start;
+}
+
+.cs-nav-grid .cs-cta-btn {
+    justify-self: center;
+}
+
+.cs-nav-grid .cs-next-link {
+    justify-self: end;
 }
 
 .cs-back-link,

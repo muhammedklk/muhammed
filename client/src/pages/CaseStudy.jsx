@@ -258,16 +258,16 @@ const CaseStudy = () => {
                 <span>All Projects</span>
               </Link>
 
+              <Link to="/contact" className="btn-primary-pill cs-cta-btn">
+                <span>Start Your Project</span>
+              </Link>
+
               <Link to={`/case-study/${project.nextId || 'voyagera'}`} className="cs-next-link" id="cs-next-link">
                 <span>Next Case Study</span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
-              </Link>
-
-              <Link to="/contact" className="btn-primary-pill cs-cta-btn">
-                <span>Start Your Project</span>
               </Link>
             </div>
           </div>

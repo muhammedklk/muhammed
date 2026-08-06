@@ -26,17 +26,41 @@ const HomeSelectedWorksManager = () => {
   }, []);
 
   const handleUpdateProject = async (proj) => {
-    setSavingId(proj._id);
+    const targetId = proj._id || proj.id;
+    setSavingId(targetId);
     setMessage('');
     try {
-      await projectsApi.update(proj._id, {
+      const categoryValue = proj.category || proj.subtitle || proj.shortDescription || 'UI/UX Design & Development';
+      
+      const payload = {
         ...proj,
-        featured: true
-      });
+        category: categoryValue,
+        subtitle: categoryValue,
+        shortDescription: categoryValue,
+        heroImg: proj.heroImg || proj.image,
+        image: proj.heroImg || proj.image,
+        featured: true,
+        caseStudy: {
+          ...(proj.caseStudy || {}),
+          category: categoryValue,
+          subtitle: categoryValue
+        }
+      };
+
+      const isMongoId = targetId && /^[0-9a-fA-F]{24}$/.test(targetId);
+      if (isMongoId) {
+        await projectsApi.update(targetId, payload);
+      } else {
+        await projectsApi.create({
+          ...payload,
+          slug: targetId || proj.title.toLowerCase().replace(/\s+/g, '-')
+        });
+      }
+
       if (refreshPortfolio) {
         await refreshPortfolio();
       }
-      setMessage(`Successfully updated "${proj.title}" mockup & live link on Home Page!`);
+      setMessage(`Successfully updated "${proj.title}" mockup & subtitle live on Home Page!`);
       setTimeout(() => setMessage(''), 3500);
       fetchProjects();
     } catch (err) {
@@ -49,109 +73,121 @@ const HomeSelectedWorksManager = () => {
   const featuredProjects = projects.slice(0, 4);
 
   return (
-    <div style={{ maxWidth: '950px', margin: '0 auto' }}>
+    <div style={{ width: '100%' }}>
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
         <div>
-          <h1 style={{ fontSize: '24px', fontWeight: '800', margin: '0 0 6px 0', color: '#ffffff' }}>Home Page Selected Works Mockups</h1>
-          <p style={{ fontSize: '13.5px', color: '#94a3b8', margin: 0 }}>Exclusively edit the top 4 mockup screenshots, titles, and live website links displayed on your public Home Page.</p>
+          <h1 style={{ fontSize: '22px', fontWeight: '800', margin: '0 0 4px 0', color: '#ffffff' }}>Home Page Selected Works (2x2 Screen Layout)</h1>
+          <p style={{ fontSize: '13px', color: '#94a3b8', margin: 0 }}>Exclusively edit the top 4 mockup screenshots, titles, categories, and live links displayed on your public Home Page.</p>
         </div>
       </div>
 
       {message && (
-        <div style={{ padding: '14px 18px', background: 'rgba(210, 234, 38, 0.15)', border: '1px solid rgba(210, 234, 38, 0.3)', color: '#d2ea26', borderRadius: '12px', marginBottom: '24px', fontWeight: '700', fontSize: '13.5px' }}>
+        <div style={{ padding: '10px 16px', background: 'rgba(210, 234, 38, 0.15)', border: '1px solid rgba(210, 234, 38, 0.3)', color: '#d2ea26', borderRadius: '10px', marginBottom: '16px', fontWeight: '700', fontSize: '13px' }}>
           {message}
         </div>
       )}
 
-      {/* 4 Home Selected Works Grid */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      {/* 2x2 Grid of 4 Home Selected Works */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(540px, 1fr))', gap: '16px' }}>
         {featuredProjects.length === 0 ? (
-          <div style={{ background: '#0f172a', padding: '40px', borderRadius: '20px', textAlign: 'center', color: '#64748b' }}>
+          <div style={{ background: '#0f172a', padding: '30px', gridColumn: '1 / -1', borderRadius: '16px', textAlign: 'center', color: '#64748b' }}>
             No projects found. Add projects from the Projects Manager first.
           </div>
         ) : (
           featuredProjects.map((proj, index) => (
-            <div key={proj._id} style={{ background: '#0f172a', border: '1px solid rgba(210, 234, 38, 0.25)', borderRadius: '24px', padding: '28px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '14px' }}>
-                <span style={{ fontSize: '12px', fontWeight: '800', padding: '4px 12px', background: '#d2ea26', color: '#0f172a', borderRadius: '20px' }}>
+            <div key={proj._id || proj.id || index} style={{ background: '#0f172a', border: '1px solid rgba(210, 234, 38, 0.25)', borderRadius: '18px', padding: '18px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              
+              {/* Header Badge */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '10px' }}>
+                <span style={{ fontSize: '11px', fontWeight: '800', padding: '3px 10px', background: '#d2ea26', color: '#0f172a', borderRadius: '20px' }}>
                   HOME SLOT #{index + 1}
                 </span>
-                <span style={{ fontSize: '13px', color: '#94a3b8' }}>ID: {proj._id}</span>
+                <span style={{ fontSize: '13px', fontWeight: '700', color: '#ffffff' }}>{proj.title}</span>
               </div>
 
-              <div className="row g-3 align-items-center">
+              {/* Card Body Flex */}
+              <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
                 {/* Mockup Preview Column */}
-                <div className="col-12 col-md-4">
-                  <div style={{ height: '210px', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', background: '#090d16', position: 'relative' }}>
+                <div style={{ width: '150px', flexShrink: 0 }}>
+                  <div style={{ height: '145px', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', background: '#090d16', position: 'relative' }}>
                     <img src={proj.heroImg || proj.image || '/assets/portfolio/gyogrea.png'} alt={proj.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                 </div>
 
                 {/* Form Fields Column */}
-                <div className="col-12 col-md-8" style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>PROJECT TITLE</label>
-                    <input
-                      type="text"
-                      value={proj.title || ''}
-                      onChange={(e) => {
-                        const newTitle = e.target.value;
-                        setProjects(prev => prev.map(p => p._id === proj._id ? { ...p, title: newTitle } : p));
-                      }}
-                      style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }}
-                    />
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  
+                  {/* Title & Subtitle side-by-side */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '10.5px', color: '#94a3b8', fontWeight: '700', marginBottom: '3px' }}>TITLE</label>
+                      <input
+                        type="text"
+                        value={proj.title || ''}
+                        onChange={(e) => {
+                          const newTitle = e.target.value;
+                          setProjects(prev => prev.map(p => (p._id || p.id) === (proj._id || proj.id) ? { ...p, title: newTitle } : p));
+                        }}
+                        style={{ width: '100%', padding: '6px 10px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff', fontSize: '13px' }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: '10.5px', color: '#94a3b8', fontWeight: '700', marginBottom: '3px' }}>CATEGORY</label>
+                      <input
+                        type="text"
+                        value={proj.category || proj.subtitle || proj.shortDescription || ''}
+                        onChange={(e) => {
+                          const newCat = e.target.value;
+                          setProjects(prev => prev.map(p => (p._id || p.id) === (proj._id || proj.id) ? { ...p, category: newCat, subtitle: newCat, shortDescription: newCat } : p));
+                        }}
+                        style={{ width: '100%', padding: '6px 10px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff', fontSize: '13px' }}
+                      />
+                    </div>
                   </div>
 
+                  {/* Live Website Demo URL */}
                   <div>
-                    <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>CATEGORY / SUBTITLE</label>
-                    <input
-                      type="text"
-                      value={proj.category || ''}
-                      onChange={(e) => {
-                        const newCat = e.target.value;
-                        setProjects(prev => prev.map(p => p._id === proj._id ? { ...p, category: newCat } : p));
-                      }}
-                      style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }}
-                    />
-                  </div>
-
-                  <div>
-                    <label style={{ display: 'block', fontSize: '12px', color: '#d2ea26', fontWeight: '700', marginBottom: '6px' }}>LIVE WEBSITE DEMO URL (https://...)</label>
+                    <label style={{ display: 'block', fontSize: '10.5px', color: '#d2ea26', fontWeight: '700', marginBottom: '3px' }}>LIVE DEMO URL</label>
                     <input
                       type="text"
                       value={proj.liveUrl || ''}
-                      placeholder="https://yourdomain.com or https://..."
+                      placeholder="https://..."
                       onChange={(e) => {
                         const newUrl = e.target.value;
-                        setProjects(prev => prev.map(p => p._id === proj._id ? { ...p, liveUrl: newUrl } : p));
+                        setProjects(prev => prev.map(p => (p._id || p.id) === (proj._id || proj.id) ? { ...p, liveUrl: newUrl } : p));
                       }}
-                      style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(210, 234, 38, 0.4)', borderRadius: '10px', color: '#ffffff' }}
+                      style={{ width: '100%', padding: '6px 10px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(210, 234, 38, 0.4)', borderRadius: '8px', color: '#ffffff', fontSize: '12.5px' }}
                     />
                   </div>
 
+                  {/* Screenshot Image Upload */}
                   <ImageUploadInput
-                    label="HOME MOCKUP SCREENSHOT IMAGE (UPLOAD FROM PC)"
+                    label="MOCKUP IMAGE"
                     value={proj.heroImg || proj.image || ''}
                     onChange={(uploadedUrl) => {
-                      setProjects(prev => prev.map(p => p._id === proj._id ? { ...p, heroImg: uploadedUrl, image: uploadedUrl } : p));
+                      setProjects(prev => prev.map(p => (p._id || p.id) === (proj._id || proj.id) ? { ...p, heroImg: uploadedUrl, image: uploadedUrl } : p));
                     }}
-                    placeholder="/assets/portfolio/... or choose file"
+                    placeholder="/assets/portfolio/... or upload file"
                   />
 
-                  <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '6px' }}>
+                  {/* Submit Button */}
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '2px' }}>
                     <button
                       type="button"
                       onClick={() => handleUpdateProject(proj)}
-                      disabled={savingId === proj._id}
-                      style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', background: '#d2ea26', color: '#0f172a', borderRadius: '10px', fontWeight: '800', border: 'none', cursor: savingId === proj._id ? 'not-allowed' : 'pointer' }}
+                      disabled={savingId === (proj._id || proj.id)}
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 16px', background: '#d2ea26', color: '#0f172a', borderRadius: '8px', fontWeight: '800', fontSize: '12px', border: 'none', cursor: savingId === (proj._id || proj.id) ? 'not-allowed' : 'pointer' }}
                     >
-                      <Save size={16} />
-                      <span>{savingId === proj._id ? 'Updating Live...' : 'Update Mockup & Live Link'}</span>
+                      <Save size={14} />
+                      <span>{savingId === (proj._id || proj.id) ? 'Saving...' : 'Update Card'}</span>
                     </button>
                   </div>
+
                 </div>
               </div>
+
             </div>
           ))
         )}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { projectsApi } from '../services/api';
 import { Save, Sparkles, ArrowLeft, Image as ImageIcon } from '../components/Icons';
 import { usePortfolio } from '../../context/PortfolioContext';
+import { caseStudiesData } from '../../data/caseStudiesData';
 import ImageUploadInput from '../components/ImageUploadInput';
 
 const CaseStudyManager = () => {
@@ -50,10 +51,35 @@ const CaseStudyManager = () => {
     try {
       const res = await projectsApi.getAllAdmin();
       const rawData = res.data?.data;
-      const list = Array.isArray(rawData) ? rawData : (rawData?.projects || []);
-      setProjects(list);
-      if (list.length > 0 && !selectedId) {
-        loadProjectIntoForm(list[0]);
+      const dbList = Array.isArray(rawData) ? rawData : (rawData?.projects || []);
+
+      const combined = [...dbList];
+      if (Array.isArray(caseStudiesData)) {
+        caseStudiesData.forEach(staticProj => {
+          const exists = combined.some(p => 
+            (p.slug && p.slug.toLowerCase() === (staticProj.id || staticProj.slug || '').toLowerCase()) ||
+            (p.title && p.title.toLowerCase() === staticProj.title.toLowerCase())
+          );
+          if (!exists) {
+            combined.push({
+              _id: staticProj.id,
+              id: staticProj.id,
+              title: staticProj.title,
+              category: staticProj.category,
+              client: staticProj.client,
+              year: staticProj.year,
+              services: staticProj.services,
+              liveUrl: staticProj.liveUrl,
+              heroImg: staticProj.heroImg,
+              caseStudy: staticProj
+            });
+          }
+        });
+      }
+
+      setProjects(combined);
+      if (combined.length > 0 && !selectedId) {
+        loadProjectIntoForm(combined[0]);
       }
     } catch (err) {
       console.error('Failed to load projects:', err);
@@ -170,7 +196,15 @@ const CaseStudyManager = () => {
         caseStudy: caseStudyData
       };
 
-      await projectsApi.update(selectedId, updatedProjectPayload);
+      const isMongoId = /^[0-9a-fA-F]{24}$/.test(selectedId);
+      if (isMongoId) {
+        await projectsApi.update(selectedId, updatedProjectPayload);
+      } else {
+        await projectsApi.create({
+          ...updatedProjectPayload,
+          slug: selectedProject.id || selectedProject.slug || formData.title.toLowerCase().replace(/\s+/g, '-')
+        });
+      }
       if (refreshPortfolio) {
         await refreshPortfolio();
       }
@@ -185,7 +219,7 @@ const CaseStudyManager = () => {
   };
 
   return (
-    <div style={{ maxWidth: '950px', margin: '0 auto' }}>
+    <div style={{ width: '100%' }}>
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
         <div>

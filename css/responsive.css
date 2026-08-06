@@ -593,34 +593,37 @@
     .cs-nav-grid {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
-        gap: 20px 12px !important;
+        gap: 16px 12px !important;
         align-items: center !important;
         width: 100% !important;
     }
 
+    .cs-nav-grid .cs-cta-btn {
+        grid-column: 1 / span 2 !important;
+        grid-row: 1 !important;
+        justify-self: center !important;
+        margin: 0 auto 4px auto !important;
+        width: 100% !important;
+        max-width: 280px !important;
+        text-align: center !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
     .cs-nav-grid .cs-back-link {
         grid-column: 1 !important;
-        grid-row: 1 !important;
+        grid-row: 2 !important;
         justify-self: start !important;
         margin: 0 !important;
     }
 
     .cs-nav-grid .cs-next-link {
         grid-column: 2 !important;
-        grid-row: 1 !important;
+        grid-row: 2 !important;
         justify-self: end !important;
         text-align: right !important;
         margin: 0 !important;
-    }
-
-    .cs-nav-grid .cs-cta-btn {
-        grid-column: 1 / span 2 !important;
-        grid-row: 2 !important;
-        justify-self: center !important;
-        margin: 4px auto 0 auto !important;
-        width: 100% !important;
-        max-width: 280px !important;
-        text-align: center !important;
     }
 
     /* Fixed Floating Buttons & Footer Text Overlap Prevention */

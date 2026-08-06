@@ -165,7 +165,7 @@ const seedData = async () => {
 
     // 8. Initial Projects Data
     const projectCount = await Project.countDocuments();
-    if (projectCount === 0) {
+    if (projectCount < 8) {
       const initialProjects = [
         {
           title: "Voyagera",
@@ -234,7 +234,12 @@ const seedData = async () => {
           year: "2025",
           liveUrl: "https://elve.vercel.app/",
           featured: true,
-          order: 3
+          order: 3,
+          caseStudy: {
+            tagline: "Next-Gen Vehicle & Asset Rental Platform",
+            overview: "Elve is a sleek, modern asset and luxury car rental platform built for fast digital reservations and effortless fleet management.",
+            outcome: "Redefined mobility booking experience with a futuristic UI design and rapid client conversion."
+          }
         },
         {
           title: "Green Track",
@@ -250,12 +255,106 @@ const seedData = async () => {
           year: "2025",
           liveUrl: "https://greentrack-ten.vercel.app/",
           featured: true,
-          order: 4
+          order: 4,
+          caseStudy: {
+            tagline: "ESG Analytics & Enterprise Carbon Accounting Platform",
+            overview: "Green Track is an enterprise-grade sustainability intelligence platform enabling corporations to track Scope 1, 2, and 3 emissions in real-time.",
+            outcome: "Streamlined ESG compliance reporting for international clients with intuitive visual analytics."
+          }
+        },
+        {
+          title: "Travel Gallery",
+          slug: "travelgallery-curated-destinations",
+          category: "Travel & Photography",
+          heroImg: "/assets/portfolio/4-travellgallery.jpg",
+          showcaseImg: "/assets/portfolio/4-travellgallery.jpg",
+          mobileImg1: "/assets/portfolio/4-travellgallery.jpg",
+          mobileImg2: "/assets/portfolio/5-icone-hotel-booking.jpg",
+          technologies: ["HTML5", "SCSS", "JavaScript", "Masonry"],
+          client: "Travel Gallery Co",
+          services: "UI/UX & Web Development",
+          year: "2025",
+          liveUrl: "",
+          featured: false,
+          order: 5,
+          caseStudy: {
+            tagline: "Curated Global Destination & Visual Experience Hub",
+            overview: "Travel Gallery showcases world-class destination photography and curated itinerary guides in a sleek responsive layout.",
+            outcome: "Increased user engagement through immersive full-bleed imagery and intuitive destination discovery."
+          }
+        },
+        {
+          title: "Icone Hotel Booking",
+          slug: "icone-luxury-hotel-booking",
+          category: "Hospitality & Mobile",
+          heroImg: "/assets/portfolio/5-icone-hotel-booking.jpg",
+          showcaseImg: "/assets/portfolio/5-icone-hotel-booking.jpg",
+          mobileImg1: "/assets/portfolio/5-icone-hotel-booking.jpg",
+          mobileImg2: "/assets/portfolio/6-chrona.jpg",
+          technologies: ["Figma", "React Native", "Tailwind", "Vercel"],
+          client: "Icone Hotels",
+          services: "UI/UX & App Prototyping",
+          year: "2025",
+          liveUrl: "",
+          featured: false,
+          order: 6,
+          caseStudy: {
+            tagline: "Boutique Hospitality & Suite Reservation Experience",
+            overview: "Icone Hotel Booking is a luxury boutique hotel booking interface designed for seamless suite selection.",
+            outcome: "Achieved highest direct booking conversion for luxury boutique stays."
+          }
+        },
+        {
+          title: "Chrona",
+          slug: "chrona-ai-time-management-app",
+          category: "Productivity & AI",
+          heroImg: "/assets/portfolio/6-chrona.jpg",
+          showcaseImg: "/assets/portfolio/6-chrona.jpg",
+          mobileImg1: "/assets/portfolio/6-chrona.jpg",
+          mobileImg2: "/assets/portfolio/7-modernbrand.jpg",
+          technologies: ["React", "AI APIs", "Node", "SCSS"],
+          client: "Chrona Labs",
+          services: "Interface & Product Design",
+          year: "2025",
+          liveUrl: "",
+          featured: false,
+          order: 7,
+          caseStudy: {
+            tagline: "Intelligent Productivity & Task Scheduling System",
+            overview: "Chrona harnesses AI algorithms to automate daily calendar scheduling, focus blocks, and team workload distribution.",
+            outcome: "Boosted user daily productivity ratings while reducing calendar fragmentation."
+          }
+        },
+        {
+          title: "Modern Brand",
+          slug: "modernbrand-identity-system",
+          category: "Branding & Systems",
+          heroImg: "/assets/portfolio/7-modernbrand.jpg",
+          showcaseImg: "/assets/portfolio/7-modernbrand.jpg",
+          mobileImg1: "/assets/portfolio/7-modernbrand.jpg",
+          mobileImg2: "/assets/portfolio/gyogrea.png",
+          technologies: ["Figma", "Illustrator", "SCSS", "Vercel"],
+          client: "Modern Brand Corp",
+          services: "Brand Strategy & UI/UX",
+          year: "2025",
+          liveUrl: "",
+          featured: false,
+          order: 8,
+          caseStudy: {
+            tagline: "Cohesive Visual Identity & Design Guidelines",
+            overview: "Modern Brand Identity System defines design token guidelines, typography rules, component libraries, and visual design assets.",
+            outcome: "Established a unified visual language adopted by cross-functional product and marketing teams."
+          }
         }
       ];
 
-      await Project.insertMany(initialProjects);
-      console.log(`[Seed] Inserted ${initialProjects.length} initial projects`);
+      for (const proj of initialProjects) {
+        const existing = await Project.findOne({ slug: proj.slug });
+        if (!existing) {
+          await Project.create(proj);
+        }
+      }
+      console.log(`[Seed] Inserted initial projects up to ${initialProjects.length}`);
     }
 
     // 9. Initial Skills Data

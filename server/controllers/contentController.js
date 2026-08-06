@@ -243,6 +243,41 @@ const updateSiteSettings = async (req, res, next) => {
   }
 };
 
+// --- SEO CONTROLLERS ---
+const getSeo = async (req, res, next) => {
+  try {
+    const seoList = await Seo.find();
+    return successResponse(res, 200, 'SEO settings fetched', { seo: seoList });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updateSeo = async (req, res, next) => {
+  try {
+    const { page } = req.params;
+    let seoItem = await Seo.findOne({ page: page.toLowerCase() });
+    if (!seoItem) {
+      seoItem = await Seo.create({ page: page.toLowerCase(), ...req.body });
+    } else {
+      seoItem = await Seo.findByIdAndUpdate(seoItem._id, req.body, { new: true, runValidators: true });
+    }
+
+    await ActivityLog.create({
+      user: req.user.id,
+      userName: req.user.name,
+      action: 'UPDATED_SEO',
+      module: 'SEO',
+      details: `Updated SEO settings for page: ${page}`,
+      ipAddress: req.ip
+    });
+
+    return successResponse(res, 200, `SEO settings updated for ${page}`, { seo: seoItem });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getPublicPortfolioContent,
   getHero,
@@ -257,5 +292,9 @@ module.exports = {
   faqHandlers,
   seoHandlers,
   getSiteSettings,
-  updateSiteSettings
+  updateSiteSettings,
+  getSettings: getSiteSettings,
+  updateSettings: updateSiteSettings,
+  getSeo,
+  updateSeo
 };
