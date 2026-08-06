@@ -181,15 +181,15 @@ const CaseStudy = () => {
                   <h3 className="cs-system-card-title mb-3">Color Palette</h3>
                   <div className="cs-color-swatches-grid">
                     {[
-                      { hex: project.color1Hex || '#d2ea26', name: project.color1Name || 'Accent Lime' },
-                      { hex: project.color2Hex || '#849a00', name: project.color2Name || 'Dark Lime Accent' },
-                      { hex: project.color3Hex || '#0f172a', name: project.color3Name || 'Dark Surface' },
-                      { hex: project.color4Hex || '#f8fafc', name: project.color4Name || 'Light Background' },
-                    ].map((swatch, i) => (
+                      { hex: project.color1Hex, name: project.color1Name },
+                      { hex: project.color2Hex, name: project.color2Name },
+                      { hex: project.color3Hex, name: project.color3Name },
+                      { hex: project.color4Hex, name: project.color4Name },
+                    ].filter(swatch => swatch.hex && typeof swatch.hex === 'string' && swatch.hex.trim() !== '').map((swatch, i) => (
                       <div key={i} className="cs-swatch-item">
                         <span className="cs-swatch-box" style={{ background: swatch.hex, border: swatch.hex === '#f8fafc' || swatch.hex === '#ffffff' ? '1px solid #cbd5e1' : 'none' }}></span>
                         <div className="cs-swatch-info">
-                          <span className="cs-swatch-name">{swatch.name}</span>
+                          <span className="cs-swatch-name">{swatch.name || swatch.hex}</span>
                           <span className="cs-swatch-hex">{swatch.hex.toUpperCase()}</span>
                         </div>
                       </div>

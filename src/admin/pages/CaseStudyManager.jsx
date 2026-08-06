@@ -368,14 +368,52 @@ const CaseStudyManager = () => {
               <input type="text" value={formData.techTags} onChange={(e) => setFormData({ ...formData, techTags: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
             </div>
 
-            <div className="col-12 col-md-6">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>PRIMARY ACCENT COLOR HEX</label>
-              <input type="text" value={formData.color1Hex} onChange={(e) => setFormData({ ...formData, color1Hex: e.target.value })} style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+            {/* COLOR PALETTE THEME (Colors 3 & 4 Optional) */}
+            <div className="col-12 mt-3">
+              <div style={{ fontSize: '13px', fontWeight: '800', color: '#60a5fa', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Color Palette Theme (Colors 3 & 4 are Optional)</div>
             </div>
 
-            <div className="col-12 col-md-6">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>DARK ACCENT COLOR HEX</label>
-              <input type="text" value={formData.color2Hex} onChange={(e) => setFormData({ ...formData, color2Hex: e.target.value })} style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+            {/* Color 1 */}
+            <div className="col-6 col-md-3">
+              <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', marginBottom: '4px' }}>COLOR 1 HEX</label>
+              <input type="text" value={formData.color1Hex} onChange={(e) => setFormData({ ...formData, color1Hex: e.target.value })} placeholder="#8b5cf6" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', margin: '6px 0 4px 0' }}>NAME</label>
+              <input type="text" value={formData.color1Name} onChange={(e) => setFormData({ ...formData, color1Name: e.target.value })} placeholder="Royal Violet" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+            </div>
+
+            {/* Color 2 */}
+            <div className="col-6 col-md-3">
+              <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', marginBottom: '4px' }}>COLOR 2 HEX</label>
+              <input type="text" value={formData.color2Hex} onChange={(e) => setFormData({ ...formData, color2Hex: e.target.value })} placeholder="#6d28d9" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', margin: '6px 0 4px 0' }}>NAME</label>
+              <input type="text" value={formData.color2Name} onChange={(e) => setFormData({ ...formData, color2Name: e.target.value })} placeholder="Deep Plum" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+            </div>
+
+            {/* Color 3 (Optional) */}
+            <div className="col-6 col-md-3">
+              <label style={{ display: 'block', fontSize: '11px', color: '#38bdf8', fontWeight: '700', marginBottom: '4px' }}>COLOR 3 HEX (OPTIONAL)</label>
+              <input type="text" value={formData.color3Hex} onChange={(e) => setFormData({ ...formData, color3Hex: e.target.value })} placeholder="Leave empty to omit" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '11px', color: '#38bdf8', fontWeight: '700', margin: '6px 0 4px 0' }}>NAME (OPTIONAL)</label>
+              <input type="text" value={formData.color3Name} onChange={(e) => setFormData({ ...formData, color3Name: e.target.value })} placeholder="Night Sky" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+            </div>
+
+            {/* Color 4 (Optional) */}
+            <div className="col-6 col-md-3">
+              <label style={{ display: 'block', fontSize: '11px', color: '#38bdf8', fontWeight: '700', marginBottom: '4px' }}>COLOR 4 HEX (OPTIONAL)</label>
+              <input type="text" value={formData.color4Hex} onChange={(e) => setFormData({ ...formData, color4Hex: e.target.value })} placeholder="Leave empty to omit" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '11px', color: '#38bdf8', fontWeight: '700', margin: '6px 0 4px 0' }}>NAME (OPTIONAL)</label>
+              <input type="text" value={formData.color4Name} onChange={(e) => setFormData({ ...formData, color4Name: e.target.value })} placeholder="Soft Lavender" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+            </div>
+
+            {/* TYPOGRAPHY HIERARCHY */}
+            <div className="col-12 col-md-6 mt-3">
+              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>HEADING FONT FAMILY</label>
+              <input type="text" value={formData.headerFont} onChange={(e) => setFormData({ ...formData, headerFont: e.target.value })} placeholder="Plus Jakarta Sans" style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+            </div>
+
+            <div className="col-12 col-md-6 mt-3">
+              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>BODY FONT FAMILY</label>
+              <input type="text" value={formData.bodyFont} onChange={(e) => setFormData({ ...formData, bodyFont: e.target.value })} placeholder="Inter / System Sans" style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
             </div>
           </div>
         </div>
