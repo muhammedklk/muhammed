@@ -96,10 +96,12 @@ const SelectedWorks = () => {
                       </div>
                     </div>
                   </div>
-                  <h3 className="demo-card-caption">
-                    <Link to={`/case-study/${projectKey}`}>{item.title}</Link>
-                  </h3>
-                  <span className="demo-card-subtext">{item.category || item.subtitle}</span>
+                  <div className="demo-card-footer" style={{ textAlign: 'center', padding: '16px 4px 0 4px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    <h3 className="demo-card-caption" style={{ textAlign: 'center', margin: '0 0 4px 0', width: '100%' }}>
+                      <Link to={`/case-study/${projectKey}`} style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', textDecoration: 'none', textAlign: 'center' }}>{item.title}</Link>
+                    </h3>
+                    <span className="demo-card-subtext" style={{ fontSize: '13.5px', color: '#64748b', textAlign: 'center', fontWeight: '500', display: 'block', width: '100%' }}>{item.category || item.subtitle}</span>
+                  </div>
                 </div>
               </div>
             );
