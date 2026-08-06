@@ -290,7 +290,7 @@
         margin-bottom: 28px;
     }
 
-    .btn-primary-pill, .btn-secondary-pill {
+    .hero-cta-group .btn-primary-pill, .hero-cta-group .btn-secondary-pill {
         padding: 11px 20px;
         font-size: 13px;
         border-radius: 30px;
@@ -565,8 +565,62 @@
     }
 
     .cs-bottom-nav {
-        padding-top: 28px !important;
-        padding-bottom: 28px !important;
+        padding-top: 24px !important;
+        padding-bottom: 24px !important;
+    }
+
+    .case-study-main {
+        padding-top: 90px !important;
+        padding-bottom: 40px !important;
+    }
+
+    .cs-specs-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        padding: 16px !important;
+        border-radius: 16px !important;
+    }
+
+    .cs-laptop-container {
+        border-radius: 14px !important;
+    }
+
+    .cs-banner-frame {
+        height: 220px !important;
+        border-radius: 16px !important;
+    }
+
+    .cs-nav-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 20px 12px !important;
+        align-items: center !important;
+        width: 100% !important;
+    }
+
+    .cs-nav-grid .cs-back-link {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        justify-self: start !important;
+        margin: 0 !important;
+    }
+
+    .cs-nav-grid .cs-next-link {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+        justify-self: end !important;
+        text-align: right !important;
+        margin: 0 !important;
+    }
+
+    .cs-nav-grid .cs-cta-btn {
+        grid-column: 1 / span 2 !important;
+        grid-row: 2 !important;
+        justify-self: center !important;
+        margin: 4px auto 0 auto !important;
+        width: 100% !important;
+        max-width: 280px !important;
+        text-align: center !important;
     }
 
     /* Fixed Floating Buttons & Footer Text Overlap Prevention */

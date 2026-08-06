@@ -2,19 +2,39 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { usePortfolio } from '../../context/PortfolioContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const defaultServicesList = [
+  {
+    title: 'UI/UX Design',
+    badge: 'Specialized Service',
+    tags: ['Figma', 'Design Systems', 'Wireframing']
+  },
+  {
+    title: 'Web Development',
+    badge: 'High Performance',
+    tags: ['HTML / SCSS', 'React', 'GSAP']
+  },
+  {
+    title: 'Mobile App Design',
+    badge: 'iOS & Android',
+    tags: ['iOS UI', 'Android', 'Prototyping']
+  }
+];
+
 const AboutTeaser = () => {
   const headlineRef = useRef(null);
+  const { about, services } = usePortfolio();
+
+  const titleText = about?.title || "Helping brands achieve digital mastery of creative innovation and strategic planning";
 
   useEffect(() => {
     const el = headlineRef.current;
     if (!el) return;
 
-    const rawText = "Helping brand achieve digital mastery of creative innovation and strategic planning";
-    const words = rawText.split(' ');
-
+    const words = titleText.split(' ');
     el.innerHTML = words.map(w => `<span class="reveal-word">${w}</span>`).join(' ');
     const spans = el.querySelectorAll('.reveal-word');
 
@@ -43,7 +63,14 @@ const AboutTeaser = () => {
     return () => {
       ctx.revert();
     };
-  }, []);
+  }, [titleText]);
+
+  let displayServices = Array.isArray(services) && services.length > 0 ? [...services] : defaultServicesList;
+  if (displayServices.length < 3) {
+    displayServices = [...displayServices, ...defaultServicesList.slice(displayServices.length, 3)];
+  }
+  displayServices = displayServices.slice(0, 3);
+
   return (
     <>
       {/* Bottom Features Bar Section */}
@@ -109,7 +136,6 @@ const AboutTeaser = () => {
                       UI/UX Designer & Web Developer - SINCE 2026 -
                     </textPath>
                   </text>
-                  {/* Center Logo Icon inside Stamp */}
                   <g transform="translate(68, 64) scale(1.1)">
                     <path d="M4 0 L18 0 L18 10 L8 10 L8 16 L16 16 L16 26 L4 26 Z" fill="currentColor" />
                   </g>
@@ -120,7 +146,7 @@ const AboutTeaser = () => {
             {/* Right Column: Big Display Headline & CTA Buttons */}
             <div className="col-lg-9 col-md-8 col-sm-12">
               <h2 className="about-main-headline" ref={headlineRef}>
-                Helping brand achieve digital mastery of creative innovation and strategic planning
+                {titleText}
               </h2>
 
               <div className="about-cta-group">
@@ -134,87 +160,52 @@ const AboutTeaser = () => {
             </div>
           </div>
 
-          {/* Middle Row: 3 Services Cards Grid */}
+          {/* Middle Row: Services Cards Grid (3 Cards Always) */}
           <div className="row g-4 services-cards-row">
-            {/* Service Card 1: UI/UX Design */}
-            <div className="col-lg-4 col-md-6 col-sm-12">
-              <div className="service-card">
-                <div className="service-card-top">
-                  <div className="service-3d-icon-box icon-uiux">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                      <path d="M2 17l10 5 10-5"></path>
-                      <path d="M2 12l10 5 10-5"></path>
-                    </svg>
+            {displayServices.map((service, idx) => (
+              <div key={service._id || idx} className="col-lg-4 col-md-6 col-sm-12">
+                <div className="service-card">
+                  <div className="service-card-top">
+                    <div className={`service-3d-icon-box icon-${idx === 0 ? 'uiux' : idx === 1 ? 'web' : 'mobile'}`}>
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        {idx === 0 && (
+                          <>
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5"></path>
+                            <path d="M2 12l10 5 10-5"></path>
+                          </>
+                        )}
+                        {idx === 1 && (
+                          <>
+                            <path d="M16 18l6-6-6-6"></path>
+                            <path d="M8 6l-6 6 6 6"></path>
+                            <path d="M14 4l-4 16"></path>
+                          </>
+                        )}
+                        {idx >= 2 && (
+                          <>
+                            <rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect>
+                            <line x1="12" y1="18" x2="12.01" y2="18" strokeWidth="2.5"></line>
+                          </>
+                        )}
+                      </svg>
+                    </div>
+                    <span className="service-card-tag">Specialized Service</span>
                   </div>
-                  <span className="service-card-tag">Specialized Service</span>
-                </div>
 
-                <h3 className="service-card-title">UI/UX Design</h3>
+                  <h3 className="service-card-title">{service.title}</h3>
 
-                <div className="service-card-footer">
-                  <div className="service-card-pills">
-                    <span className="service-pill">Figma</span>
-                    <span className="service-pill">Design Systems</span>
-                    <span className="service-pill">Wireframing</span>
+                  <div className="service-card-footer">
+                    <div className="service-card-pills">
+                      {(service.tags || []).slice(0, 3).map((tag, tIdx) => (
+                        <span key={tIdx} className="service-pill">{tag}</span>
+                      ))}
+                    </div>
+                    <span className="service-card-num">0{idx + 1}</span>
                   </div>
-                  <span className="service-card-num">01</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Service Card 2: Web Development */}
-            <div className="col-lg-4 col-md-6 col-sm-12">
-              <div className="service-card">
-                <div className="service-card-top">
-                  <div className="service-3d-icon-box icon-web">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="16 18 22 12 16 6"></polyline>
-                      <polyline points="8 6 2 12 8 18"></polyline>
-                      <line x1="14" y1="4" x2="10" y2="20"></line>
-                    </svg>
-                  </div>
-                  <span className="service-card-tag">High Performance</span>
-                </div>
-
-                <h3 className="service-card-title">Web Development</h3>
-
-                <div className="service-card-footer">
-                  <div className="service-card-pills">
-                    <span className="service-pill">HTML / SCSS</span>
-                    <span className="service-pill">React</span>
-                    <span className="service-pill">GSAP</span>
-                  </div>
-                  <span className="service-card-num">02</span>
                 </div>
               </div>
-            </div>
-
-            {/* Service Card 3: Mobile App Design */}
-            <div className="col-lg-4 col-md-6 col-sm-12">
-              <div className="service-card">
-                <div className="service-card-top">
-                  <div className="service-3d-icon-box icon-mobile">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect>
-                      <line x1="12" y1="18" x2="12.01" y2="18" strokeWidth="2.5"></line>
-                    </svg>
-                  </div>
-                  <span className="service-card-tag">iOS & Android</span>
-                </div>
-
-                <h3 className="service-card-title">Mobile App Design</h3>
-
-                <div className="service-card-footer">
-                  <div className="service-card-pills">
-                    <span className="service-pill">iOS UI</span>
-                    <span className="service-pill">Android</span>
-                    <span className="service-pill">Prototyping</span>
-                  </div>
-                  <span className="service-card-num">03</span>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

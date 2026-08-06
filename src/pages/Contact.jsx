@@ -36,7 +36,19 @@ const Contact = () => {
     setFeedback(null);
 
     try {
-      // Send email notification via FormSubmit
+      // 1. Post to Portfolio CMS Backend Contact Inbox
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: `Inquiry: ${formData.service} (${formData.budget})`,
+          message: formData.message
+        })
+      }).catch(() => null);
+
+      // 2. Send email notification via FormSubmit
       const bodyData = new FormData();
       bodyData.append('name', formData.name);
       bodyData.append('email', formData.email);

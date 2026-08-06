@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Prevent Browser Caching of Old Projects on localhost -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <!-- Force Light Theme: Prevent browser/device dark mode from overriding site theme -->
     <meta name="color-scheme" content="light only" />
     <style>:root { color-scheme: light only; }</style>
@@ -22,6 +26,16 @@
 
 <body>
     <div id="root"></div>
+    <!-- Unregister lingering Service Workers from previous projects on localhost -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for(let registration of registrations) {
+            registration.unregister();
+          }
+        });
+      }
+    </script>
     <script type="module" src="/src/main.jsx"></script>
 </body>
 
