@@ -31,11 +31,11 @@ const Login = () => {
     } catch (err) {
       console.error('Login/Register error:', err);
       let msg = err.response?.data?.message || err.message;
-      if (msg === 'Failed to fetch' || !err.response) {
-        msg = 'Cannot connect to Backend API. Please start the server (cd server && npm start).';
+      if (msg === 'Failed to fetch' || !err.response || msg === 'API Request Failed') {
+        msg = 'Cannot connect to Backend API. Please start the server (npm run server).';
       }
       setError(msg);
-      if (msg.includes('Initial Admin already registered')) {
+      if (msg && msg.includes('Initial Admin already registered')) {
         setIsRegisteringInitial(false);
       }
     } finally {

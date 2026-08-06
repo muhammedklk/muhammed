@@ -18,7 +18,14 @@ const request = async (endpoint, options = {}) => {
     config.body = JSON.stringify(options.body);
   }
 
-  const response = await fetch(`${BASE_URL}${endpoint}`, config);
+  let response;
+  try {
+    response = await fetch(`${BASE_URL}${endpoint}`, config);
+  } catch (netErr) {
+    const error = new Error('Cannot connect to Backend API. Please ensure the backend server is running (npm run server).');
+    error.response = null;
+    throw error;
+  }
 
   if (response.status === 401) {
     localStorage.removeItem('cms_token');
@@ -31,7 +38,15 @@ const request = async (endpoint, options = {}) => {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    const error = new Error(data.message || 'API Request Failed');
+    let message = data.message;
+    if (!message) {
+      if (response.status === 500 || response.status === 502 || response.status === 504) {
+        message = 'Cannot connect to Backend API server. Please ensure the server is running (npm run server).';
+      } else {
+        message = `API Request Failed with status ${response.status}`;
+      }
+    }
+    const error = new Error(message);
     error.response = { status: response.status, data };
     throw error;
   }
