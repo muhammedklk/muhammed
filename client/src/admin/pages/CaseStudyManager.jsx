@@ -373,33 +373,69 @@ const CaseStudyManager = () => {
             {/* Color 1 */}
             <div className="col-6 col-md-3">
               <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', marginBottom: '4px' }}>COLOR 1 HEX</label>
-              <input type="text" value={formData.color1Hex} onChange={(e) => setFormData({ ...formData, color1Hex: e.target.value })} placeholder="#8b5cf6" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <input
+                  type="color"
+                  value={formData.color1Hex && formData.color1Hex.startsWith('#') ? formData.color1Hex : '#d2ea26'}
+                  onChange={(e) => setFormData({ ...formData, color1Hex: e.target.value })}
+                  style={{ width: '38px', height: '38px', padding: '0', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px', cursor: 'pointer', background: 'none' }}
+                  title="Pick Color 1"
+                />
+                <input type="text" value={formData.color1Hex} onChange={(e) => setFormData({ ...formData, color1Hex: e.target.value })} placeholder="#d2ea26" style={{ flex: 1, padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff', fontFamily: 'monospace' }} />
+              </div>
               <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', margin: '6px 0 4px 0' }}>NAME</label>
-              <input type="text" value={formData.color1Name} onChange={(e) => setFormData({ ...formData, color1Name: e.target.value })} placeholder="Royal Violet" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+              <input type="text" value={formData.color1Name} onChange={(e) => setFormData({ ...formData, color1Name: e.target.value })} placeholder="Accent Lime" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
             </div>
 
             {/* Color 2 */}
             <div className="col-6 col-md-3">
               <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', marginBottom: '4px' }}>COLOR 2 HEX</label>
-              <input type="text" value={formData.color2Hex} onChange={(e) => setFormData({ ...formData, color2Hex: e.target.value })} placeholder="#6d28d9" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <input
+                  type="color"
+                  value={formData.color2Hex && formData.color2Hex.startsWith('#') ? formData.color2Hex : '#849a00'}
+                  onChange={(e) => setFormData({ ...formData, color2Hex: e.target.value })}
+                  style={{ width: '38px', height: '38px', padding: '0', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px', cursor: 'pointer', background: 'none' }}
+                  title="Pick Color 2"
+                />
+                <input type="text" value={formData.color2Hex} onChange={(e) => setFormData({ ...formData, color2Hex: e.target.value })} placeholder="#849a00" style={{ flex: 1, padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff', fontFamily: 'monospace' }} />
+              </div>
               <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', margin: '6px 0 4px 0' }}>NAME</label>
-              <input type="text" value={formData.color2Name} onChange={(e) => setFormData({ ...formData, color2Name: e.target.value })} placeholder="Deep Plum" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+              <input type="text" value={formData.color2Name} onChange={(e) => setFormData({ ...formData, color2Name: e.target.value })} placeholder="Dark Lime Accent" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
             </div>
 
             {/* Color 3 (Optional) */}
             <div className="col-6 col-md-3">
               <label style={{ display: 'block', fontSize: '11px', color: '#38bdf8', fontWeight: '700', marginBottom: '4px' }}>COLOR 3 HEX (OPTIONAL)</label>
-              <input type="text" value={formData.color3Hex} onChange={(e) => setFormData({ ...formData, color3Hex: e.target.value })} placeholder="Leave empty to omit" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <input
+                  type="color"
+                  value={formData.color3Hex && formData.color3Hex.startsWith('#') ? formData.color3Hex : '#0f172a'}
+                  onChange={(e) => setFormData({ ...formData, color3Hex: e.target.value })}
+                  style={{ width: '38px', height: '38px', padding: '0', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px', cursor: 'pointer', background: 'none' }}
+                  title="Pick Color 3"
+                />
+                <input type="text" value={formData.color3Hex} onChange={(e) => setFormData({ ...formData, color3Hex: e.target.value })} placeholder="#0f172a" style={{ flex: 1, padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff', fontFamily: 'monospace' }} />
+              </div>
               <label style={{ display: 'block', fontSize: '11px', color: '#38bdf8', fontWeight: '700', margin: '6px 0 4px 0' }}>NAME (OPTIONAL)</label>
-              <input type="text" value={formData.color3Name} onChange={(e) => setFormData({ ...formData, color3Name: e.target.value })} placeholder="Night Sky" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+              <input type="text" value={formData.color3Name} onChange={(e) => setFormData({ ...formData, color3Name: e.target.value })} placeholder="Dark Surface" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
             </div>
 
             {/* Color 4 (Optional) */}
             <div className="col-6 col-md-3">
               <label style={{ display: 'block', fontSize: '11px', color: '#38bdf8', fontWeight: '700', marginBottom: '4px' }}>COLOR 4 HEX (OPTIONAL)</label>
-              <input type="text" value={formData.color4Hex} onChange={(e) => setFormData({ ...formData, color4Hex: e.target.value })} placeholder="Leave empty to omit" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <input
+                  type="color"
+                  value={formData.color4Hex && formData.color4Hex.startsWith('#') ? formData.color4Hex : '#f8fafc'}
+                  onChange={(e) => setFormData({ ...formData, color4Hex: e.target.value })}
+                  style={{ width: '38px', height: '38px', padding: '0', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '8px', cursor: 'pointer', background: 'none' }}
+                  title="Pick Color 4"
+                />
+                <input type="text" value={formData.color4Hex} onChange={(e) => setFormData({ ...formData, color4Hex: e.target.value })} placeholder="#f8fafc" style={{ flex: 1, padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff', fontFamily: 'monospace' }} />
+              </div>
               <label style={{ display: 'block', fontSize: '11px', color: '#38bdf8', fontWeight: '700', margin: '6px 0 4px 0' }}>NAME (OPTIONAL)</label>
-              <input type="text" value={formData.color4Name} onChange={(e) => setFormData({ ...formData, color4Name: e.target.value })} placeholder="Soft Lavender" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
+              <input type="text" value={formData.color4Name} onChange={(e) => setFormData({ ...formData, color4Name: e.target.value })} placeholder="Light Background" style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
             </div>
 
             {/* TYPOGRAPHY HIERARCHY */}
