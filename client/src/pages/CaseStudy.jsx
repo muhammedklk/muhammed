@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { caseStudiesDataMap as caseStudiesData } from '../data/caseStudiesData';
 import { usePortfolio } from '../context/PortfolioContext';
-
 import Maintenance from './Maintenance';
 
 const CaseStudy = () => {
@@ -76,7 +75,6 @@ const CaseStudy = () => {
     bannerImg,
     description: dynamicProject?.caseStudy?.description?.length ? dynamicProject.caseStudy.description : (dynamicProject?.description ? [dynamicProject.description] : staticProject?.description),
     outcome: dynamicProject?.caseStudy?.outcome || staticProject?.outcome,
-    metrics: dynamicProject?.caseStudy?.metrics?.length ? dynamicProject.caseStudy.metrics : staticProject?.metrics,
   };
 
   useEffect(() => {
@@ -85,132 +83,128 @@ const CaseStudy = () => {
 
   return (
     <main className="case-study-main grid-lines-bg">
-      <div className="container py-2 py-md-4">
-        <div className="cs-content-wrapper">
+      <div className="container py-3 py-md-5">
+        <div className="cs-content-wrapper" style={{ maxWidth: '1000px', margin: '0 auto' }}>
 
-          {/* Top Navigation & Category Badge */}
-          <div className="d-flex align-items-center justify-content-between w-100 gap-3 mb-3 mb-md-4">
+          {/* Top Back Nav & Category Pill */}
+          <div className="d-flex align-items-center justify-content-between w-100 mb-4 pb-2">
             <Link to="/works" className="cs-back-link">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="19" y1="12" x2="5" y2="12"></line>
                 <polyline points="12 19 5 12 12 5"></polyline>
               </svg>
               <span>Back to Projects</span>
             </Link>
 
-            <span className="minimal-badge mb-0 ms-auto d-none d-md-inline-flex" style={{ margin: '0 0 0 auto' }}>
+            <span className="service-pill mb-0" style={{ background: 'rgba(210, 234, 38, 0.15)', color: '#0f172a', fontWeight: '700', border: '1px solid rgba(210, 234, 38, 0.4)' }}>
               {project.category} • {project.year}
             </span>
           </div>
 
-          {/* Hero Header Section */}
-          <div className="cs-top-title-wrapper text-start mb-4 mb-md-5">
-            <h1 className="cs-brand-title mb-2 mb-md-3" id="cs-title">
+          {/* Clean Main Header Title Block */}
+          <div className="text-start mb-4 mb-md-5">
+            <h1 className="cs-brand-title mb-3" id="cs-title" style={{ fontSize: 'clamp(32px, 5vw, 54px)', fontWeight: '800', letterSpacing: '-0.03em' }}>
               {project.title}
             </h1>
-            <p className="cs-headline-text text-muted mb-3 mb-md-4" id="cs-tagline">
+            <p className="cs-headline-text text-muted mb-4" id="cs-tagline" style={{ maxWidth: '800px', fontSize: '20px', lineHeight: '1.5' }}>
               {project.tagline}
             </p>
             {project.liveUrl && (
-              <div className="d-flex flex-wrap align-items-center gap-3">
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  id="cs-live-btn"
-                  className="btn-primary-pill"
-                >
-                  <span>Visit Live Website</span>
-                </a>
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                id="cs-live-btn"
+                className="btn-primary-pill"
+              >
+                <span>Visit Live Website</span>
+              </a>
+            )}
+          </div>
+
+          {/* Ultra-Clean 4-Column Metadata Specs Row */}
+          <div className="row g-3 py-4 mb-4 mb-md-5" style={{ borderTop: '1px solid rgba(0,0,0,0.08)', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+            <div className="col-6 col-md-3">
+              <span className="cs-spec-label" style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.08em', color: '#94a3b8', display: 'block', marginBottom: '4px' }}>CLIENT</span>
+              <span className="cs-spec-value" id="cs-client" style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-primary)' }}>{project.client || 'Client Studio'}</span>
+            </div>
+            <div className="col-6 col-md-3">
+              <span className="cs-spec-label" style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.08em', color: '#94a3b8', display: 'block', marginBottom: '4px' }}>SERVICES</span>
+              <span className="cs-spec-value" id="cs-services" style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-primary)' }}>{project.services || 'UI/UX & Engineering'}</span>
+            </div>
+            <div className="col-6 col-md-3">
+              <span className="cs-spec-label" style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.08em', color: '#94a3b8', display: 'block', marginBottom: '4px' }}>CATEGORY</span>
+              <span className="cs-spec-value" id="cs-category" style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-primary)' }}>{project.category || 'Digital Experience'}</span>
+            </div>
+            <div className="col-6 col-md-3">
+              <span className="cs-spec-label" style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.08em', color: '#94a3b8', display: 'block', marginBottom: '4px' }}>YEAR</span>
+              <span className="cs-spec-value" id="cs-year" style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-primary)' }}>{project.year || '2026'}</span>
+            </div>
+          </div>
+
+          {/* Clean Edge Hero Showcase Mockup */}
+          <div className="mb-5">
+            <div className="cs-laptop-container" style={{ borderRadius: '24px', border: '1px solid rgba(0,0,0,0.08)', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.06)' }}>
+              <img src={project.heroImg} alt={project.title} id="cs-hero-img" className="w-100 d-block" style={{ maxHeight: '600px', objectFit: 'cover' }} />
+            </div>
+          </div>
+
+          {/* Story Narrative & Executive Overview */}
+          <div className="mb-5">
+            <h3 className="cs-section-label mb-3" style={{ fontSize: '12px', fontWeight: '800', letterSpacing: '0.12em', color: '#849a00' }}>OVERVIEW</h3>
+            <div className="cs-body-paragraphs mb-4" id="cs-description">
+              {project.description.map((paragraph, index) => (
+                <p key={index} className="cs-paragraph lead mb-3" style={{ fontSize: '17px', lineHeight: '1.75', color: 'var(--text-secondary)' }}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+
+            {/* Simple Left-Border Outcome Quote */}
+            {project.outcome && (
+              <div className="p-4 rounded-4" style={{ background: 'rgba(210, 234, 38, 0.08)', borderLeft: '4px solid #849a00', border: '1px solid rgba(0,0,0,0.06)', borderLeftWidth: '4px' }}>
+                <span className="cs-sub-heading text-uppercase" style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.1em', color: '#849a00', display: 'block', marginBottom: '6px' }}>PROJECT OUTCOME</span>
+                <p className="cs-outcome-text mb-0" id="cs-outcome-desc" style={{ fontSize: '16px', lineHeight: '1.6', fontWeight: '600', color: 'var(--text-primary)' }}>
+                  {project.outcome}
+                </p>
               </div>
             )}
           </div>
 
-
-
-          {/* Hero Showcase Container (Laptop Glassmorphic Mockup Frame) */}
-          <div className="cs-hero-frame mb-4 mb-md-5">
-            <div className="cs-laptop-container">
-              <img src={project.heroImg} alt={project.title} id="cs-hero-img" className="cs-mockup-img" />
-            </div>
-          </div>
-
-          {/* Project Meta Specifications Grid */}
-          <div className="cs-specs-grid mb-4 mb-md-5">
-            <div className="cs-spec-item">
-              <span className="cs-spec-label">Client</span>
-              <span className="cs-spec-value" id="cs-client">{project.client}</span>
-            </div>
-            <div className="cs-spec-item">
-              <span className="cs-spec-label">Services</span>
-              <span className="cs-spec-value" id="cs-services">{project.services}</span>
-            </div>
-            <div className="cs-spec-item">
-              <span className="cs-spec-label">Category</span>
-              <span className="cs-spec-value" id="cs-category">{project.category}</span>
-            </div>
-            <div className="cs-spec-item">
-              <span className="cs-spec-label">Year</span>
-              <span className="cs-spec-value" id="cs-year">{project.year}</span>
-            </div>
-          </div>
-
-          {/* Executive Overview Section */}
-          <div className="cs-story-block mb-4 mb-md-5">
-            <h3 className="cs-section-label mb-2 mb-md-3">
-              EXECUTIVE OVERVIEW
-            </h3>
-            <div className="cs-body-paragraphs mb-3 mb-md-4" id="cs-description">
-              {project.description.map((paragraph, index) => (
-                <p key={index} className="cs-paragraph lead mb-3">{paragraph}</p>
-              ))}
-            </div>
-
-            {/* Highlights & Outcome Box */}
-            <div className="cs-system-card p-3 p-md-4 rounded-4 mt-3 mt-md-4" style={{ borderLeft: '4px solid #849a00' }}>
-              <span className="cs-sub-heading text-uppercase" style={{ fontSize: '11px', fontWeight: '700', letterSpacing: '0.1em', color: '#849a00' }}>PROJECT OUTCOME</span>
-              <p className="cs-outcome-text mb-0 mt-2" id="cs-outcome-desc">
-                {project.outcome}
-              </p>
-            </div>
-          </div>
-
-          {/* Design System & Tech Specs Section */}
-          <div className="cs-design-system-section mb-4 mb-md-5">
-            <h3 className="cs-section-label mb-3 mb-md-4">
-              DESIGN SYSTEM & TECH ARCHITECTURE
-            </h3>
-            <div className="row g-3 g-md-4">
-              {/* Tech Stack Used */}
+          {/* Design System & Tech Specs */}
+          <div className="mb-5">
+            <h3 className="cs-section-label mb-3" style={{ fontSize: '12px', fontWeight: '800', letterSpacing: '0.12em', color: '#849a00' }}>DESIGN SYSTEM & TECH SPECS</h3>
+            <div className="row g-4">
+              {/* Tech Stack */}
               <div className="col-lg-4 col-md-12">
-                <div className="cs-system-card h-100">
-                  <span className="cs-sub-heading text-uppercase">TECH STACK</span>
-                  <h3 className="cs-system-card-title mb-3">Technologies Used</h3>
-                  <div className="cs-tech-tags-flex" id="cs-tech-stack-tags">
+                <div className="p-4 rounded-4 h-100" style={{ background: '#f8fafc', border: '1px solid rgba(0,0,0,0.06)' }}>
+                  <span className="cs-sub-heading text-uppercase" style={{ fontSize: '11px', fontWeight: '800', color: '#849a00', display: 'block', marginBottom: '6px' }}>TECH STACK</span>
+                  <h4 className="fw-extrabold mb-3" style={{ fontSize: '17px', color: '#0f172a' }}>Technologies Used</h4>
+                  <div className="d-flex flex-wrap gap-2">
                     {(project.techTags || 'Figma, React, SCSS, Motion, Vercel').split(',').map((tag, i) => (
-                      <span key={i} className="cs-tech-tag">{tag.trim()}</span>
+                      <span key={i} className="service-pill" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', fontWeight: '600', color: '#334155' }}>{tag.trim()}</span>
                     ))}
                   </div>
                 </div>
               </div>
 
-              {/* Color Palette Theme */}
+              {/* Color Palette */}
               <div className="col-lg-4 col-md-12">
-                <div className="cs-system-card h-100">
-                  <span className="cs-sub-heading text-uppercase">COLOR THEME</span>
-                  <h3 className="cs-system-card-title mb-3">Color Palette</h3>
-                  <div className="cs-color-swatches-grid">
+                <div className="p-4 rounded-4 h-100" style={{ background: '#f8fafc', border: '1px solid rgba(0,0,0,0.06)' }}>
+                  <span className="cs-sub-heading text-uppercase" style={{ fontSize: '11px', fontWeight: '800', color: '#849a00', display: 'block', marginBottom: '6px' }}>COLOR PALETTE</span>
+                  <h4 className="fw-extrabold mb-3" style={{ fontSize: '17px', color: '#0f172a' }}>Theme Swatches</h4>
+                  <div className="d-flex flex-wrap gap-3">
                     {[
                       { hex: project.color1Hex, name: project.color1Name },
                       { hex: project.color2Hex, name: project.color2Name },
                       { hex: project.color3Hex, name: project.color3Name },
                       { hex: project.color4Hex, name: project.color4Name },
                     ].filter(swatch => swatch.hex && typeof swatch.hex === 'string' && swatch.hex.trim() !== '').map((swatch, i) => (
-                      <div key={i} className="cs-swatch-item">
-                        <span className="cs-swatch-box" style={{ background: swatch.hex, border: swatch.hex === '#f8fafc' || swatch.hex === '#ffffff' ? '1px solid #cbd5e1' : 'none' }}></span>
-                        <div className="cs-swatch-info">
-                          <span className="cs-swatch-name">{swatch.name || swatch.hex}</span>
-                          <span className="cs-swatch-hex">{swatch.hex.toUpperCase()}</span>
+                      <div key={i} className="d-flex align-items-center gap-2">
+                        <span style={{ width: '28px', height: '28px', borderRadius: '50%', background: swatch.hex, display: 'inline-block', border: '1px solid rgba(0,0,0,0.1)' }}></span>
+                        <div>
+                          <span className="d-block fw-bold" style={{ fontSize: '12px', color: '#0f172a' }}>{swatch.name || swatch.hex}</span>
+                          <span className="d-block text-muted" style={{ fontSize: '11px' }}>{swatch.hex.toUpperCase()}</span>
                         </div>
                       </div>
                     ))}
@@ -218,19 +212,19 @@ const CaseStudy = () => {
                 </div>
               </div>
 
-              {/* Typography Hierarchy */}
+              {/* Typography */}
               <div className="col-lg-4 col-md-12">
-                <div className="cs-system-card h-100">
-                  <span className="cs-sub-heading text-uppercase">TYPOGRAPHY</span>
-                  <h3 className="cs-system-card-title mb-3">Font Hierarchy</h3>
-                  <div className="cs-typo-info-list">
-                    <div className="cs-typo-item">
-                      <span className="cs-typo-family">{project.headingFont || 'Plus Jakarta Sans'}</span>
-                      <span className="cs-typo-usage">Headings & Hero Brand Titles (Weights: 700, 800)</span>
+                <div className="p-4 rounded-4 h-100" style={{ background: '#f8fafc', border: '1px solid rgba(0,0,0,0.06)' }}>
+                  <span className="cs-sub-heading text-uppercase" style={{ fontSize: '11px', fontWeight: '800', color: '#849a00', display: 'block', marginBottom: '6px' }}>TYPOGRAPHY</span>
+                  <h4 className="fw-extrabold mb-3" style={{ fontSize: '17px', color: '#0f172a' }}>Font Families</h4>
+                  <div className="d-flex flex-column gap-2">
+                    <div>
+                      <span className="fw-bold d-block" style={{ fontSize: '14px', color: '#0f172a' }}>{project.headingFont || 'Plus Jakarta Sans'}</span>
+                      <span className="text-muted" style={{ fontSize: '12px' }}>Headings & Titles</span>
                     </div>
-                    <div className="cs-typo-item mt-2">
-                      <span className="cs-typo-family">{project.bodyFont || 'Inter / System Sans'}</span>
-                      <span className="cs-typo-usage">Body Text, Specs & Interface Labels (Weights: 400, 500, 600)</span>
+                    <div>
+                      <span className="fw-bold d-block" style={{ fontSize: '14px', color: '#0f172a' }}>{project.bodyFont || 'Inter / System Sans'}</span>
+                      <span className="text-muted" style={{ fontSize: '12px' }}>Body & Specifications</span>
                     </div>
                   </div>
                 </div>
@@ -238,62 +232,51 @@ const CaseStudy = () => {
             </div>
           </div>
 
-          {/* Mobile & Responsive Experience Showcase */}
-          <div className="cs-mobile-section mb-4 mb-md-5">
-            <h3 className="cs-section-label mb-2 mb-md-3">
-              MOBILE & RESPONSIVE EXPERIENCE
-            </h3>
-
-            <div className="row g-3 g-md-4 justify-content-center mt-1 mb-3 mb-md-4">
-              <div className="col-lg-6 col-md-6 col-sm-12">
-                <div className="cs-banner-frame">
-                  <img
-                    src={project.mobileImg1 || project.heroImg}
-                    alt={`${project.title} Mobile View 1`}
-                    className="cs-banner-img"
-                  />
-                </div>
-              </div>
-              <div className="col-lg-6 col-md-6 col-sm-12">
-                <div className="cs-banner-frame">
-                  <img
-                    src={project.mobileImg2 || project.showcaseImg || project.heroImg}
-                    alt={`${project.title} Mobile View 2`}
-                    className="cs-banner-img"
-                  />
-                </div>
+          {/* Mobile Showcase Cards */}
+          {(project.mobileImg1 || project.mobileImg2) && (
+            <div className="mb-5">
+              <h3 className="cs-section-label mb-3" style={{ fontSize: '12px', fontWeight: '800', letterSpacing: '0.12em', color: '#849a00' }}>MOBILE EXPERIENCE</h3>
+              <div className="row g-4">
+                {project.mobileImg1 && (
+                  <div className="col-md-6">
+                    <div className="rounded-4 overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.08)' }}>
+                      <img src={project.mobileImg1} alt="Mobile View 1" className="w-100 d-block" style={{ maxHeight: '450px', objectFit: 'cover' }} />
+                    </div>
+                  </div>
+                )}
+                {project.mobileImg2 && (
+                  <div className="col-md-6">
+                    <div className="rounded-4 overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.08)' }}>
+                      <img src={project.mobileImg2} alt="Mobile View 2" className="w-100 d-block" style={{ maxHeight: '450px', objectFit: 'cover' }} />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
-          </div>
+          )}
 
           {/* Secondary Full Showcase Frame */}
-          <div className="cs-showcase-frame mb-4 mb-md-5">
-            <div className="cs-laptop-container">
-              <img src={project.bannerImg || project.showcaseImg || project.heroImg} alt="Secondary Showcase View" className="cs-mockup-img" />
+          {project.bannerImg && (
+            <div className="mb-5">
+              <div className="rounded-4 overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.08)' }}>
+                <img src={project.bannerImg} alt="Secondary Showcase View" className="w-100 d-block" style={{ maxHeight: '550px', objectFit: 'cover' }} />
+              </div>
             </div>
-          </div>
+          )}
 
-          {/* Bottom Project Navigation & CTA Bar */}
-          <div className="cs-bottom-nav py-4 py-md-5">
-            <div className="cs-nav-grid">
+          {/* Simple Bottom Navigation */}
+          <div className="pt-4 border-top">
+            <div className="d-flex align-items-center justify-content-between flex-wrap gap-3">
               <Link to="/works" className="cs-back-link">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="19" y1="12" x2="5" y2="12"></line>
                   <polyline points="12 19 5 12 12 5"></polyline>
                 </svg>
                 <span>All Projects</span>
               </Link>
 
-              <Link to="/contact" className="btn-primary-pill cs-cta-btn">
+              <Link to="/contact" className="btn-primary-pill">
                 <span>Start Your Project</span>
-              </Link>
-
-              <Link to={`/case-study/${project.nextId || 'voyagera'}`} className="cs-next-link" id="cs-next-link">
-                <span>Next Case Study</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
               </Link>
             </div>
           </div>
