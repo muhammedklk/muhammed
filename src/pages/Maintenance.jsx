@@ -51,7 +51,7 @@ const Maintenance = ({ isGlobal = false, pageName = 'This Page', message }) => {
         }
       `}</style>
 
-      {/* Clean Minimalist Light Theme Card */}
+      {/* Clean Light Theme Card */}
       <div
         style={{
           width: '100%',
@@ -66,15 +66,15 @@ const Maintenance = ({ isGlobal = false, pageName = 'This Page', message }) => {
           margin: 'auto'
         }}
       >
-        {/* Sleek Dark Icon Container with Lime Gear */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '60px', height: '60px', borderRadius: '18px', background: '#0f172a', color: '#d2ea26', marginBottom: '20px', boxShadow: '0 10px 20px rgba(15, 23, 42, 0.15)' }}>
+        {/* Soft Light Lime Icon Container */}
+        <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '60px', height: '60px', borderRadius: '18px', background: '#f7fee7', color: '#65a30d', marginBottom: '20px', border: '1px solid #d9f99d', boxShadow: '0 8px 16px rgba(101, 163, 13, 0.1)' }}>
           <Settings size={28} style={{ animation: 'spinGear 8s linear infinite' }} />
         </div>
 
         {/* Status Pill Badge */}
         <div style={{ marginBottom: '14px' }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 14px', borderRadius: '20px', background: '#f1f5f9', border: '1px solid #e2e8f0', color: '#0f172a', fontSize: '11px', fontWeight: '800', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#849a00' }}></span>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#65a30d' }}></span>
             {badgeText}
           </span>
         </div>
@@ -99,16 +99,17 @@ const Maintenance = ({ isGlobal = false, pageName = 'This Page', message }) => {
                 alignItems: 'center',
                 gap: '8px',
                 padding: '12px 24px',
-                background: '#0f172a',
-                color: '#ffffff',
+                background: '#d2ea26',
+                color: '#0f172a',
                 borderRadius: '50px',
                 fontWeight: '800',
                 fontSize: '13.5px',
                 textDecoration: 'none',
-                transition: 'transform 0.2s ease'
+                boxShadow: '0 6px 16px rgba(210, 234, 38, 0.35)',
+                transition: 'all 0.2s ease'
               }}
             >
-              <ArrowLeft size={16} color="#d2ea26" />
+              <ArrowLeft size={16} color="#0f172a" />
               <span>Go Back to Home</span>
             </Link>
 
@@ -135,7 +136,7 @@ const Maintenance = ({ isGlobal = false, pageName = 'This Page', message }) => {
 
         {/* Contact Info */}
         <div style={{ padding: '12px 16px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '12px', color: '#475569' }}>
-          <Mail size={14} color="#0f172a" />
+          <Mail size={14} color="#65a30d" />
           <span>Contact: <a href={`mailto:${contactEmail}`} style={{ color: '#0f172a', fontWeight: '700', textDecoration: 'none' }}>{contactEmail}</a></span>
         </div>
       </div>
