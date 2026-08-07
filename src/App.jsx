@@ -99,12 +99,18 @@ const PublicRouteGuard = ({ children, pageKey }) => {
   if (isGlobalMaintenance || isPageMaintenance) {
     const pageNames = {
       home: 'Home Page',
-      about: 'About Bio Page',
-      projects: 'Projects Gallery',
-      caseStudy: 'Case Study Showcase',
+      about: 'About Page',
+      projects: 'Works Gallery Page',
+      caseStudy: 'Case Study Page',
       contact: 'Contact Page'
     };
-    return <Maintenance pageName={pageNames[pageKey] || 'This Page'} message={activeSettings?.maintenanceMessage} />;
+    return (
+      <Maintenance
+        isGlobal={isGlobalMaintenance}
+        pageName={pageNames[pageKey] || 'This Page'}
+        message={activeSettings?.maintenanceMessage}
+      />
+    );
   }
 
   return children;
