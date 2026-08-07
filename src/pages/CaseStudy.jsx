@@ -75,10 +75,9 @@ const CaseStudy = () => {
     bannerImg,
     description: dynamicProject?.caseStudy?.description?.length ? dynamicProject.caseStudy.description : (dynamicProject?.description ? [dynamicProject.description] : staticProject?.description),
     outcome: dynamicProject?.caseStudy?.outcome || staticProject?.outcome,
-    metrics: (dynamicProject?.caseStudy?.metrics?.length ? dynamicProject.caseStudy.metrics : staticProject?.metrics) || [],
   };
 
-  // Previous & Next Project Calculation
+  // Calculate Previous and Next Project Keys for bottom pagination
   const caseKeys = Object.keys(caseStudiesDataMap);
   const currentIndex = caseKeys.indexOf(rawId);
   const nextKey = currentIndex !== -1 && currentIndex < caseKeys.length - 1 ? caseKeys[currentIndex + 1] : caseKeys[0];
@@ -96,238 +95,170 @@ const CaseStudy = () => {
       <div className="container">
         <div className="nexo-cs-container">
 
-          {/* 1. Top Breadcrumb & Category Bar */}
-          <div className="cs-top-bar">
-            <Link to="/works" className="cs-back-link">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="19" y1="12" x2="5" y2="12"></line>
-                <polyline points="12 19 5 12 12 5"></polyline>
-              </svg>
-              <span>Back to Works</span>
-            </Link>
-
-            <span className="nexo-pill-tag">
-              {project.category} • {project.year}
-            </span>
-          </div>
-
-          {/* 2. Hero Header: Clean Title & Tagline */}
-          <header className="cs-hero-header">
-            <h1 className="cs-main-title" id="cs-title">
+          {/* 1. Top Centered Brand / Project Title */}
+          <div className="nexo-cs-header">
+            <h1 className="nexo-top-brand" id="cs-title">
               {project.title}
             </h1>
-            {project.tagline && (
-              <p className="cs-main-tagline" id="cs-tagline">
-                {project.tagline}
-              </p>
-            )}
-          </header>
+          </div>
 
-          {/* 3. Hairline Meta Strip (Client, Services, Year, Live Site Button) */}
-          <div className="cs-meta-strip">
-            <div className="cs-meta-col">
-              <span className="cs-meta-label">Client / Company</span>
-              <span className="cs-meta-value" id="cs-client">{project.client || 'Client Studio'}</span>
-            </div>
-            <div className="cs-meta-col">
-              <span className="cs-meta-label">Services Provided</span>
-              <span className="cs-meta-value" id="cs-services">{project.services || 'UI/UX & Web Dev'}</span>
-            </div>
-            <div className="cs-meta-col">
-              <span className="cs-meta-label">Category / Year</span>
-              <span className="cs-meta-value" id="cs-category">{project.category} ({project.year})</span>
-            </div>
-            <div className="cs-meta-col justify-content-end">
-              {project.liveUrl ? (
+          {/* 2. Top Hero Laptop Mockup Showcase Frame */}
+          <div className="nexo-hero-frame">
+            <img src={project.heroImg} alt={project.title} id="cs-hero-img" className="nexo-hero-img" />
+          </div>
+
+          {/* 3. Overview Split Row: Tagline + Purple CTA (Left) & 4-Column Meta (Right) */}
+          <div className="nexo-overview-row">
+            <div>
+              <p className="nexo-overview-desc" id="cs-tagline">
+                {project.tagline || (project.description && project.description[0])}
+              </p>
+              {project.liveUrl && (
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   id="cs-live-btn"
-                  className="cs-btn-live"
+                  className="nexo-purple-btn"
                 >
-                  <span>Visit Live Site ↗</span>
+                  <span>Visit Website</span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
                 </a>
+              )}
+            </div>
+
+            <div className="nexo-meta-4col">
+              <div className="nexo-meta-field">
+                <span className="nexo-meta-title">Company</span>
+                <span className="nexo-meta-val" id="cs-client">{project.client || "NEXO's Architect"}</span>
+              </div>
+              <div className="nexo-meta-field">
+                <span className="nexo-meta-title">Services</span>
+                <span className="nexo-meta-val" id="cs-services">{project.services || "UI/UX + Frontend"}</span>
+              </div>
+              <div className="nexo-meta-field">
+                <span className="nexo-meta-title">Place</span>
+                <span className="nexo-meta-val" id="cs-category">{project.category || "------"}</span>
+              </div>
+              <div className="nexo-meta-field">
+                <span className="nexo-meta-title">Year</span>
+                <span className="nexo-meta-val" id="cs-year">{project.year || "2026"}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* 4. Narrative Section: THE CHALLENGE */}
+          <div className="nexo-story-row">
+            <div className="nexo-story-tag">
+              THE CHALLENGE
+            </div>
+            <div className="nexo-story-body" id="cs-description">
+              {project.description && project.description.length > 0 ? (
+                <>
+                  <p>{project.description[0]}</p>
+                  {project.description.length > 1 && (
+                    <ul className="nexo-bullet-list">
+                      {project.description.slice(1).map((item, idx) => (
+                        <li key={idx}>{item}</li>
+                      ))}
+                    </ul>
+                  )}
+                </>
               ) : (
-                <span className="cs-meta-value text-muted">Internal Concept</span>
-              )}
-            </div>
-          </div>
-
-          {/* 4. Minimal Hero Showcase Frame */}
-          <div className="nexo-hero-frame">
-            <img src={project.heroImg} alt={project.title} id="cs-hero-img" className="nexo-hero-img" />
-          </div>
-
-          {/* 5. Stat Metrics Row (If Metrics Exist) */}
-          {project.metrics && project.metrics.length > 0 && (
-            <div className="cs-metrics-grid">
-              {project.metrics.map((metric, idx) => (
-                <div key={idx} className="cs-metric-item">
-                  <div className="cs-metric-num">{metric.value}</div>
-                  <div className="cs-metric-label">{metric.label}</div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* 6. Section 01 / OVERVIEW */}
-          <div className="cs-section-row">
-            <div className="cs-section-tag">
-              01 / OVERVIEW
-            </div>
-            <div className="cs-section-body" id="cs-description">
-              {project.description && project.description.map((paragraph, index) => (
-                <p key={index} className={index === 0 ? "cs-lead-p" : ""}>
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          </div>
-
-          {/* 7. Section 02 / DESIGN SYSTEM & SPECS */}
-          <div className="cs-section-row">
-            <div className="cs-section-tag">
-              02 / SPECS & TECH
-            </div>
-            <div className="cs-section-body">
-              <div className="nexo-specs-cards-grid">
-                {/* Tech Stack */}
-                <div className="nexo-spec-card">
-                  <div>
-                    <span className="cs-meta-label d-block mb-2">TECH STACK</span>
-                    <h3 className="fw-extrabold mb-3" style={{ fontSize: '17px', color: 'var(--text-primary)' }}>Tools & Frameworks</h3>
-                  </div>
-                  <div className="d-flex flex-wrap gap-2 mt-2">
-                    {(project.techTags || 'Figma, React, SCSS, Motion, Vercel').split(',').map((tag, i) => (
-                      <span key={i} className="nexo-pill-tag">{tag.trim()}</span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Color Palette */}
-                <div className="nexo-spec-card">
-                  <div>
-                    <span className="cs-meta-label d-block mb-2">COLOR PALETTE</span>
-                    <h3 className="fw-extrabold mb-3" style={{ fontSize: '17px', color: 'var(--text-primary)' }}>Theme Colors</h3>
-                  </div>
-                  <div className="d-flex flex-column gap-2 mt-2">
-                    {[
-                      { hex: project.color1Hex, name: project.color1Name },
-                      { hex: project.color2Hex, name: project.color2Name },
-                      { hex: project.color3Hex, name: project.color3Name },
-                      { hex: project.color4Hex, name: project.color4Name },
-                    ].filter(swatch => swatch.hex && typeof swatch.hex === 'string' && swatch.hex.trim() !== '').slice(0, 3).map((swatch, i) => (
-                      <div key={i} className="d-flex align-items-center gap-2">
-                        <span className="nexo-swatch-circle" style={{ background: swatch.hex }}></span>
-                        <div>
-                          <span className="d-block fw-bold" style={{ fontSize: '12px', color: 'var(--text-primary)' }}>{swatch.name || swatch.hex}</span>
-                          <span className="d-block text-muted" style={{ fontSize: '11px' }}>{swatch.hex.toUpperCase()}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Typography */}
-                <div className="nexo-spec-card">
-                  <div>
-                    <span className="cs-meta-label d-block mb-2">TYPOGRAPHY</span>
-                    <h3 className="fw-extrabold mb-3" style={{ fontSize: '17px', color: 'var(--text-primary)' }}>Font Families</h3>
-                  </div>
-                  <div className="d-flex flex-column gap-2 mt-2">
-                    <div>
-                      <span className="fw-bold d-block" style={{ fontSize: '13.5px', color: 'var(--text-primary)' }}>{project.headingFont || 'Plus Jakarta Sans'}</span>
-                      <span className="text-muted" style={{ fontSize: '11.5px' }}>Headings & Titles</span>
-                    </div>
-                    <div>
-                      <span className="fw-bold d-block" style={{ fontSize: '13.5px', color: 'var(--text-primary)' }}>{project.bodyFont || 'Inter / System Sans'}</span>
-                      <span className="text-muted" style={{ fontSize: '11.5px' }}>Body & Descriptions</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* 8. Section 03 / VISUAL SHOWCASE */}
-          <div className="cs-section-row">
-            <div className="cs-section-tag">
-              03 / VISUAL SHOWCASE
-            </div>
-            <div className="cs-section-body">
-              {/* Secondary Desktop Showcase */}
-              {project.showcaseImg && (
-                <div className="nexo-showcase-frame mb-4">
-                  <img src={project.showcaseImg} alt="Desktop Showcase" className="nexo-showcase-img" />
-                </div>
-              )}
-
-              {/* Mobile Showcase Grid */}
-              {(project.mobileImg1 || project.mobileImg2) && (
-                <div className="nexo-mobile-grid">
-                  {project.mobileImg1 && (
-                    <div className="nexo-mobile-card">
-                      <img src={project.mobileImg1} alt="Mobile View 1" className="nexo-mobile-img" />
-                    </div>
-                  )}
-                  {project.mobileImg2 && (
-                    <div className="nexo-mobile-card">
-                      <img src={project.mobileImg2} alt="Mobile View 2" className="nexo-mobile-img" />
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* 9. Section 04 / KEY OUTCOME */}
-          {project.outcome && (
-            <div className="cs-section-row">
-              <div className="cs-section-tag">
-                04 / IMPACT & RESULTS
-              </div>
-              <div className="cs-section-body">
-                <div className="cs-outcome-box">
-                  <p className="cs-outcome-text" id="cs-outcome-desc">
-                    {project.outcome}
+                <>
+                  <p>
+                    The primary challenge for the {project.title} project was designing a premium digital experience that reflects the quality and craftsmanship of modern design visuality.
                   </p>
-                </div>
+                  <ul className="nexo-bullet-list">
+                    <li>Presenting projects through a clean and immersive visual experience.</li>
+                    <li>Building a clear user journey from exploration to consultation.</li>
+                    <li>Creating a responsive, high-performance interface while maintaining luxury brand identity.</li>
+                    <li>Balancing aesthetics, usability, and fast loading performance across all devices.</li>
+                  </ul>
+                  <p>
+                    We focused on a minimal, project-first experience with strong visual hierarchy, intuitive navigation, and carefully crafted interactions.
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* 5. Secondary Desktop Showcase Image Frame */}
+          <div className="nexo-showcase-frame">
+            <img src={project.showcaseImg || project.heroImg} alt="Secondary Desktop Showcase" className="nexo-showcase-img" />
+          </div>
+
+          {/* 6. Mobile Experience Section */}
+          {(project.mobileImg1 || project.mobileImg2) && (
+            <div className="nexo-mobile-section">
+              <div className="nexo-mobile-head-block">
+                <span className="nexo-mobile-subtag">RESPONSIVE DESIGN FOR</span>
+                <h2 className="nexo-mobile-heading">MOBILE EXPERIENCE</h2>
+              </div>
+
+              <div className="nexo-mobile-grid">
+                {project.mobileImg1 && (
+                  <div className="nexo-mobile-card">
+                    <img src={project.mobileImg1} alt="Mobile Experience 1" className="nexo-mobile-img" />
+                  </div>
+                )}
+                {project.mobileImg2 && (
+                  <div className="nexo-mobile-card">
+                    <img src={project.mobileImg2} alt="Mobile Experience 2" className="nexo-mobile-img" />
+                  </div>
+                )}
               </div>
             </div>
           )}
 
-          {/* 10. Final Showcase Banner Frame if Available */}
-          {project.bannerImg && project.bannerImg !== project.showcaseImg && project.bannerImg !== project.heroImg && (
+          {/* 7. Narrative Section: THE SOLUTION */}
+          <div className="nexo-story-row">
+            <div className="nexo-story-tag">
+              THE SOLUTION
+            </div>
+            <div className="nexo-story-body">
+              <p id="cs-outcome-desc">
+                {project.outcome || `The final result was a guarantee responsive website that strongly increased the studio's online presence, showcased their portfolio with elegance, and delivered a fast, seamless user experience across all devices.`}
+              </p>
+            </div>
+          </div>
+
+          {/* 8. Final Full-Width Laptop Banner Frame */}
+          {project.bannerImg && (
             <div className="nexo-showcase-frame">
               <img src={project.bannerImg} alt="Final Showcase Banner" className="nexo-showcase-img" />
             </div>
           )}
 
-          {/* 11. Previous & Next Project Navigation */}
-          <div className="cs-pager-bar">
+          {/* 9. Bottom Navigation Bar / Pager */}
+          <div className="nexo-bottom-pager">
             {prevProj ? (
-              <Link to={`/case-study/${prevProj.id}`} className="cs-pager-link">
-                <span className="cs-pager-label">← Previous Project</span>
-                <span className="cs-pager-title">{prevProj.title}</span>
+              <Link to={`/case-study/${prevProj.id}`} className="nexo-pager-btn">
+                <span className="nexo-pager-sub">← Previous Project</span>
+                <span className="nexo-pager-main">{prevProj.title}</span>
               </Link>
-            ) : <div />}
+            ) : (
+              <Link to="/works" className="nexo-pager-btn">
+                <span className="nexo-pager-sub">← Back</span>
+                <span className="nexo-pager-main">All Works</span>
+              </Link>
+            )}
 
             {nextProj ? (
-              <Link to={`/case-study/${nextProj.id}`} className="cs-pager-link align-items-end text-end">
-                <span className="cs-pager-label">Next Project →</span>
-                <span className="cs-pager-title">{nextProj.title}</span>
+              <Link to={`/case-study/${nextProj.id}`} className="nexo-pager-btn align-items-end text-end">
+                <span className="nexo-pager-sub">Next Project →</span>
+                <span className="nexo-pager-main">{nextProj.title}</span>
               </Link>
-            ) : <div />}
-          </div>
-
-          {/* 12. Bottom CTA Banner */}
-          <div className="cs-cta-banner">
-            <h3 className="cs-cta-title">Have a project in mind?</h3>
-            <p className="cs-cta-sub">Let's collaborate to build memorable digital products and intuitive user experiences.</p>
-            <Link to="/contact" className="cs-btn-live">
-              <span>Start A Project ↗</span>
-            </Link>
+            ) : (
+              <Link to="/contact" className="nexo-pager-btn align-items-end text-end">
+                <span className="nexo-pager-sub">Contact →</span>
+                <span className="nexo-pager-main">Let's Talk</span>
+              </Link>
+            )}
           </div>
 
         </div>
