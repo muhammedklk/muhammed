@@ -51,11 +51,39 @@ const CaseStudy = () => {
 
   const pickImg = (...imgs) => imgs.find(img => img && typeof img === 'string' && img.trim() !== '') || '';
 
-  const heroImg = pickImg(dynamicProject?.caseStudy?.heroImg, dynamicProject?.caseStudy?.showcaseImg, staticProject?.heroImg, dynamicProject?.heroImg);
-  const showcaseImg = pickImg(dynamicProject?.caseStudy?.showcaseImg, dynamicProject?.caseStudy?.heroImg, staticProject?.showcaseImg, heroImg);
-  const mobileImg1 = pickImg(dynamicProject?.caseStudy?.mobileImg1, staticProject?.mobileImg1, dynamicProject?.mobileImg1);
-  const mobileImg2 = pickImg(dynamicProject?.caseStudy?.mobileImg2, staticProject?.mobileImg2, dynamicProject?.mobileImg2);
-  const bannerImg = pickImg(dynamicProject?.caseStudy?.bannerImg, staticProject?.bannerImg, showcaseImg);
+  const heroImg = pickImg(
+    dynamicProject?.caseStudy?.heroImg,
+    dynamicProject?.heroImg,
+    dynamicProject?.image,
+    dynamicProject?.caseStudy?.showcaseImg,
+    dynamicProject?.showcaseImg,
+    staticProject?.heroImg
+  );
+  const showcaseImg = pickImg(
+    dynamicProject?.caseStudy?.showcaseImg,
+    dynamicProject?.showcaseImg,
+    dynamicProject?.caseStudy?.heroImg,
+    dynamicProject?.heroImg,
+    dynamicProject?.image,
+    staticProject?.showcaseImg,
+    heroImg
+  );
+  const mobileImg1 = pickImg(
+    dynamicProject?.caseStudy?.mobileImg1,
+    dynamicProject?.mobileImg1,
+    staticProject?.mobileImg1
+  );
+  const mobileImg2 = pickImg(
+    dynamicProject?.caseStudy?.mobileImg2,
+    dynamicProject?.mobileImg2,
+    staticProject?.mobileImg2
+  );
+  const bannerImg = pickImg(
+    dynamicProject?.caseStudy?.bannerImg,
+    dynamicProject?.bannerImg,
+    staticProject?.bannerImg,
+    showcaseImg
+  );
 
   const project = {
     ...staticProject,
