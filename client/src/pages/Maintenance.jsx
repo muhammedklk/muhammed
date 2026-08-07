@@ -32,8 +32,8 @@ const Maintenance = ({ isGlobal = false, pageName = 'This Page', message }) => {
         width: '100vw',
         height: '100vh',
         zIndex: 999999,
-        background: '#090d16',
-        color: '#f8fafc',
+        background: '#f8fafc',
+        color: '#0f172a',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -48,68 +48,67 @@ const Maintenance = ({ isGlobal = false, pageName = 'This Page', message }) => {
         }
       `}</style>
 
-      {/* Clean Minimalist Card */}
+      {/* Clean Minimalist Light Theme Card */}
       <div
         style={{
           width: '100%',
           maxWidth: '460px',
-          background: 'rgba(15, 23, 42, 0.85)',
-          backdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
+          background: '#ffffff',
+          border: '1px solid #e2e8f0',
           borderRadius: '24px',
           padding: '36px 28px',
           textAlign: 'center',
-          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)',
+          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03)',
           position: 'relative',
           margin: 'auto'
         }}
       >
-        {/* Sleek Gear Icon */}
-        <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '60px', height: '60px', borderRadius: '18px', background: 'rgba(210, 234, 38, 0.1)', color: '#d2ea26', marginBottom: '20px', border: '1px solid rgba(210, 234, 38, 0.2)' }}>
+        {/* Sleek Dark Icon Container with Lime Gear */}
+        <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '60px', height: '60px', borderRadius: '18px', background: '#0f172a', color: '#d2ea26', marginBottom: '20px', boxShadow: '0 10px 20px rgba(15, 23, 42, 0.15)' }}>
           <Settings size={28} style={{ animation: 'spinGear 8s linear infinite' }} />
         </div>
 
         {/* Status Pill Badge */}
         <div style={{ marginBottom: '14px' }}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 14px', borderRadius: '20px', background: 'rgba(210, 234, 38, 0.12)', color: '#d2ea26', fontSize: '11px', fontWeight: '800', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#d2ea26' }}></span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 14px', borderRadius: '20px', background: '#f1f5f9', border: '1px solid #e2e8f0', color: '#0f172a', fontSize: '11px', fontWeight: '800', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#849a00' }}></span>
             {badgeText}
           </span>
         </div>
 
         {/* Title */}
-        <h1 style={{ fontSize: '24px', fontWeight: '800', color: '#ffffff', margin: '0 0 12px 0', letterSpacing: '-0.02em' }}>
+        <h1 style={{ fontSize: '24px', fontWeight: '800', color: '#0f172a', margin: '0 0 12px 0', letterSpacing: '-0.02em' }}>
           {titleText}
         </h1>
 
         {/* Message */}
-        <p style={{ fontSize: '14px', color: '#94a3b8', margin: '0 0 28px 0', lineHeight: 1.6 }}>
+        <p style={{ fontSize: '14px', color: '#475569', margin: '0 0 28px 0', lineHeight: 1.6 }}>
           {displayMessage}
         </p>
 
-        {/* Action Buttons */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center', marginBottom: '24px' }}>
-          <Link
-            to="/"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '12px 24px',
-              background: '#d2ea26',
-              color: '#0f172a',
-              borderRadius: '50px',
-              fontWeight: '800',
-              fontSize: '13.5px',
-              textDecoration: 'none',
-              transition: 'transform 0.2s ease'
-            }}
-          >
-            <ArrowLeft size={16} color="#0f172a" />
-            <span>Go Back to Home</span>
-          </Link>
+        {/* Action Buttons ONLY when NOT global website maintenance */}
+        {!isWebsiteGlobal && (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'center', marginBottom: '24px' }}>
+            <Link
+              to="/"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '12px 24px',
+                background: '#0f172a',
+                color: '#ffffff',
+                borderRadius: '50px',
+                fontWeight: '800',
+                fontSize: '13.5px',
+                textDecoration: 'none',
+                transition: 'transform 0.2s ease'
+              }}
+            >
+              <ArrowLeft size={16} color="#d2ea26" />
+              <span>Go Back to Home</span>
+            </Link>
 
-          {!isWebsiteGlobal && (
             <button
               onClick={() => navigate(-1)}
               style={{
@@ -117,28 +116,28 @@ const Maintenance = ({ isGlobal = false, pageName = 'This Page', message }) => {
                 alignItems: 'center',
                 gap: '6px',
                 padding: '12px 20px',
-                background: 'rgba(255, 255, 255, 0.05)',
-                color: '#e2e8f0',
+                background: '#f1f5f9',
+                color: '#334155',
                 borderRadius: '50px',
                 fontWeight: '700',
                 fontSize: '13.5px',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
+                border: '1px solid #cbd5e1',
                 cursor: 'pointer'
               }}
             >
               <span>Previous Page</span>
             </button>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Contact Info */}
-        <div style={{ padding: '12px 16px', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '12px', color: '#94a3b8', marginBottom: '20px' }}>
-          <Mail size={14} color="#d2ea26" />
-          <span>Contact: <a href={`mailto:${contactEmail}`} style={{ color: '#ffffff', fontWeight: '700', textDecoration: 'none' }}>{contactEmail}</a></span>
+        <div style={{ padding: '12px 16px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '12px', color: '#475569', marginBottom: '20px' }}>
+          <Mail size={14} color="#0f172a" />
+          <span>Contact: <a href={`mailto:${contactEmail}`} style={{ color: '#0f172a', fontWeight: '700', textDecoration: 'none' }}>{contactEmail}</a></span>
         </div>
 
         {/* Admin Link */}
-        <div style={{ paddingTop: '12px', borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
+        <div style={{ paddingTop: '12px', borderTop: '1px solid #f1f5f9' }}>
           <a href="/admin/login" style={{ fontSize: '11.5px', color: '#64748b', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
             <Lock size={12} />
             <span>Administrator Access</span>
