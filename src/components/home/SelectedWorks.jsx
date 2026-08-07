@@ -95,35 +95,45 @@ const SelectedWorks = () => {
             const projectKey = item.slug || item._id || item.id;
             const projectImg = item.heroImg || item.image || '/assets/portfolio/gyogrea.png';
 
+            const hasCaseStudyBtn = item.showCaseStudyBtn !== false;
+            const hasLiveUrlBtn = item.showLiveUrlBtn !== false && Boolean(item.liveUrl && item.liveUrl !== '#');
+            const hasAnyButton = hasCaseStudyBtn || hasLiveUrlBtn;
+
             return (
               <div className="col-md-6 col-lg-6" key={projectKey}>
                 <div className="demo-card-item">
                   <div className="demo-mockup-frame">
                     <div className="demo-img-wrapper">
                       <img src={projectImg} alt={item.title} className="demo-mockup-img" />
-                      <div className="minimal-hover-overlay">
-                        {item.showCaseStudyBtn !== false && (
-                          <Link to={`/case-study/${projectKey}`} className="minimal-btn-hover btn-hover-case">
-                            Case Study
-                          </Link>
-                        )}
-                        {item.showLiveUrlBtn !== false && item.liveUrl && item.liveUrl !== '#' && (
-                          <a
-                            href={item.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="minimal-btn-hover btn-hover-live"
-                          >
-                            Live Site
-                          </a>
-                        )}
-                      </div>
+                      {hasAnyButton && (
+                        <div className="minimal-hover-overlay">
+                          {hasCaseStudyBtn && (
+                            <Link to={`/case-study/${projectKey}`} className="minimal-btn-hover btn-hover-case">
+                              Case Study
+                            </Link>
+                          )}
+                          {hasLiveUrlBtn && (
+                            <a
+                              href={item.liveUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="minimal-btn-hover btn-hover-live"
+                            >
+                              Live Site
+                            </a>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="demo-card-footer" style={{ textAlign: 'center', padding: '16px 4px 0 4px', width: '100%' }}>
                     <div className="demo-title-group" style={{ textAlign: 'center' }}>
                       <h3 className="demo-card-caption" style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: '0 0 4px 0', textAlign: 'center', lineHeight: 1.3 }}>
-                        <Link to={`/case-study/${projectKey}`} style={{ color: 'inherit', textDecoration: 'none' }}>{item.title}</Link>
+                        {hasCaseStudyBtn ? (
+                          <Link to={`/case-study/${projectKey}`} style={{ color: 'inherit', textDecoration: 'none' }}>{item.title}</Link>
+                        ) : (
+                          <span>{item.title}</span>
+                        )}
                       </h3>
                       <span className="demo-card-subtext" style={{ display: 'block', fontSize: '13.5px', color: '#64748b', margin: 0, textAlign: 'center', fontWeight: '500' }}>{item.subtitle || item.category || 'UI/UX Design & Development'}</span>
                     </div>
