@@ -41,6 +41,25 @@ const getPublicPortfolioContent = async (req, res, next) => {
       Seo.find()
     ]);
 
+    // Auto-migrate legacy services in MongoDB Atlas to new design titles
+    if (Array.isArray(services)) {
+      for (const s of services) {
+        if (s.title === 'Full Stack Web Engineering') {
+          s.title = 'UI/UX Design';
+          s.category = 'Specialized Service';
+          s.badge = 'Specialized Service';
+          s.tags = ['Figma', 'Design Systems', 'Wireframing'];
+          await s.save().catch(() => null);
+        } else if (s.title === 'UI/UX & Design Systems') {
+          s.title = 'Web Development';
+          s.category = 'High Performance';
+          s.badge = 'High Performance';
+          s.tags = ['HTML / SCSS', 'React', 'GSAP'];
+          await s.save().catch(() => null);
+        }
+      }
+    }
+
     let finalSettings = settings;
     if (!finalSettings) {
       finalSettings = await SiteSettings.create({

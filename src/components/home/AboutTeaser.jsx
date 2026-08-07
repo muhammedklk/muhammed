@@ -65,11 +65,27 @@ const AboutTeaser = () => {
     };
   }, [titleText]);
 
-  let displayServices = Array.isArray(services) && services.length > 0 ? [...services] : defaultServicesList;
-  if (displayServices.length < 3) {
-    displayServices = [...displayServices, ...defaultServicesList.slice(displayServices.length, 3)];
-  }
-  displayServices = displayServices.slice(0, 3);
+  const displayServices = defaultServicesList.map((defaultCard, idx) => {
+    const mongoService = Array.isArray(services) ? services[idx] : null;
+
+    const isLegacyTitle = !mongoService?.title || 
+      mongoService.title === 'Full Stack Web Engineering' || 
+      mongoService.title === 'UI/UX & Design Systems';
+
+    const title = !isLegacyTitle ? mongoService.title : defaultCard.title;
+    const badgeText = mongoService?.badge || mongoService?.category || defaultCard.badge;
+    const tags = !isLegacyTitle && Array.isArray(mongoService?.tags) && mongoService.tags.length > 0
+      ? mongoService.tags
+      : defaultCard.tags;
+
+    return {
+      ...defaultCard,
+      ...mongoService,
+      title,
+      badgeText,
+      tags
+    };
+  });
 
   return (
     <>
