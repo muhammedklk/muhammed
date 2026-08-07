@@ -215,19 +215,11 @@ const CaseStudy = () => {
                 {project.mobileImg1 && (
                   <div className="nexo-phone-card">
                     <img src={project.mobileImg1} alt="Mobile Screen 1" className="nexo-phone-img" />
-                    <div className="nexo-phone-caption">
-                      <span className="nexo-phone-tag">01 / EXPLORE</span>
-                      <h4 className="nexo-phone-title">Luxury Every Detail</h4>
-                    </div>
                   </div>
                 )}
                 {project.mobileImg2 && (
                   <div className="nexo-phone-card">
                     <img src={project.mobileImg2} alt="Mobile Screen 2" className="nexo-phone-img" />
-                    <div className="nexo-phone-caption">
-                      <span className="nexo-phone-tag">02 / LIVING</span>
-                      <h4 className="nexo-phone-title">A quieter way to live</h4>
-                    </div>
                   </div>
                 )}
               </div>
