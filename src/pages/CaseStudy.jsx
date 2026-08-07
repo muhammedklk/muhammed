@@ -83,11 +83,11 @@ const CaseStudy = () => {
 
   return (
     <main className="case-study-main grid-lines-bg">
-      <div className="container py-3 py-md-5">
-        <div className="cs-content-wrapper" style={{ maxWidth: '1000px', margin: '0 auto' }}>
+      <div className="container py-4 py-md-5">
+        <div className="new-cs-wrapper">
 
-          {/* Top Back Nav & Category Badge */}
-          <div className="d-flex align-items-center justify-content-between w-100 mb-4 pb-2">
+          {/* Top Bar: Back to Projects Link & Category Badge */}
+          <div className="d-flex align-items-center justify-content-between w-100 mb-4">
             <Link to="/works" className="cs-back-link">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="19" y1="12" x2="5" y2="12"></line>
@@ -96,17 +96,17 @@ const CaseStudy = () => {
               <span>Back to Projects</span>
             </Link>
 
-            <span className="service-pill mb-0" style={{ background: 'rgba(210, 234, 38, 0.15)', color: '#0f172a', fontWeight: '700', border: '1px solid rgba(210, 234, 38, 0.4)' }}>
+            <span className="service-pill" style={{ background: 'rgba(210, 234, 38, 0.15)', color: '#0f172a', fontWeight: '700', border: '1px solid rgba(210, 234, 38, 0.4)' }}>
               {project.category} • {project.year}
             </span>
           </div>
 
-          {/* Clean Main Header Title Block */}
-          <div className="text-start mb-4 mb-md-5">
-            <h1 className="cs-brand-title mb-3" id="cs-title" style={{ fontSize: 'clamp(32px, 5vw, 54px)', fontWeight: '800', letterSpacing: '-0.03em' }}>
+          {/* New Clean Header Title & Subtitle */}
+          <div className="new-cs-header">
+            <h1 className="new-cs-title" id="cs-title">
               {project.title}
             </h1>
-            <p className="cs-headline-text text-muted mb-4" id="cs-tagline" style={{ maxWidth: '800px', fontSize: '20px', lineHeight: '1.5' }}>
+            <p className="new-cs-tagline" id="cs-tagline">
               {project.tagline}
             </p>
             {project.liveUrl && (
@@ -117,82 +117,79 @@ const CaseStudy = () => {
                 id="cs-live-btn"
                 className="btn-primary-pill"
               >
-                <span>Visit Live Website</span>
+                <span>Visit Live Website ↗</span>
               </a>
             )}
           </div>
 
-          {/* Ultra-Clean 4-Column Metadata Specs Row */}
-          <div className="row g-3 py-4 mb-4 mb-md-5" style={{ borderTop: '1px solid rgba(0,0,0,0.08)', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
-            <div className="col-6 col-md-3">
-              <span className="cs-spec-label" style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.08em', color: '#94a3b8', display: 'block', marginBottom: '4px' }}>CLIENT</span>
-              <span className="cs-spec-value" id="cs-client" style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-primary)' }}>{project.client || 'Client Studio'}</span>
+          {/* 4-Column Minimal Metadata Strip */}
+          <div className="new-cs-meta-strip">
+            <div>
+              <span className="new-cs-meta-label">CLIENT</span>
+              <span className="new-cs-meta-value" id="cs-client">{project.client || 'Client Studio'}</span>
             </div>
-            <div className="col-6 col-md-3">
-              <span className="cs-spec-label" style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.08em', color: '#94a3b8', display: 'block', marginBottom: '4px' }}>SERVICES</span>
-              <span className="cs-spec-value" id="cs-services" style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-primary)' }}>{project.services || 'UI/UX & Engineering'}</span>
+            <div>
+              <span className="new-cs-meta-label">SERVICES</span>
+              <span className="new-cs-meta-value" id="cs-services">{project.services || 'UI/UX & Engineering'}</span>
             </div>
-            <div className="col-6 col-md-3">
-              <span className="cs-spec-label" style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.08em', color: '#94a3b8', display: 'block', marginBottom: '4px' }}>CATEGORY</span>
-              <span className="cs-spec-value" id="cs-category" style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-primary)' }}>{project.category || 'Digital Experience'}</span>
+            <div>
+              <span className="new-cs-meta-label">CATEGORY</span>
+              <span className="new-cs-meta-value" id="cs-category">{project.category || 'Digital Experience'}</span>
             </div>
-            <div className="col-6 col-md-3">
-              <span className="cs-spec-label" style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.08em', color: '#94a3b8', display: 'block', marginBottom: '4px' }}>YEAR</span>
-              <span className="cs-spec-value" id="cs-year" style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-primary)' }}>{project.year || '2026'}</span>
-            </div>
-          </div>
-
-          {/* Clean Edge Hero Showcase Mockup */}
-          <div className="mb-5">
-            <div className="cs-laptop-container" style={{ borderRadius: '24px', border: '1px solid rgba(0,0,0,0.08)', overflow: 'hidden', boxShadow: '0 20px 40px rgba(0,0,0,0.06)' }}>
-              <img src={project.heroImg} alt={project.title} id="cs-hero-img" className="w-100 d-block" style={{ maxHeight: '600px', objectFit: 'cover' }} />
+            <div>
+              <span className="new-cs-meta-label">YEAR</span>
+              <span className="new-cs-meta-value" id="cs-year">{project.year || '2026'}</span>
             </div>
           </div>
 
-          {/* Story Narrative & Executive Overview */}
-          <div className="mb-5">
-            <h3 className="cs-section-label mb-3" style={{ fontSize: '12px', fontWeight: '800', letterSpacing: '0.12em', color: '#849a00' }}>OVERVIEW</h3>
-            <div className="cs-body-paragraphs mb-4" id="cs-description">
-              {project.description.map((paragraph, index) => (
-                <p key={index} className="cs-paragraph lead mb-3" style={{ fontSize: '17px', lineHeight: '1.75', color: 'var(--text-secondary)' }}>
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+          {/* Clean Main Desktop Mockup Image Container */}
+          <div className="new-cs-hero-container">
+            <img src={project.heroImg} alt={project.title} id="cs-hero-img" className="new-cs-hero-img" />
+          </div>
 
-            {/* Simple Left-Border Outcome Quote */}
-            {project.outcome && (
-              <div className="p-4 rounded-4" style={{ background: 'rgba(210, 234, 38, 0.08)', borderLeft: '4px solid #849a00', border: '1px solid rgba(0,0,0,0.06)', borderLeftWidth: '4px' }}>
-                <span className="cs-sub-heading text-uppercase" style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.1em', color: '#849a00', display: 'block', marginBottom: '6px' }}>PROJECT OUTCOME</span>
-                <p className="cs-outcome-text mb-0" id="cs-outcome-desc" style={{ fontSize: '16px', lineHeight: '1.6', fontWeight: '600', color: 'var(--text-primary)' }}>
-                  {project.outcome}
-                </p>
+          {/* 2-Column Split: Story Overview (Left) & Design Specs (Right) */}
+          <div className="row g-4 mb-5">
+            {/* Left Column: Narrative Overview & Outcome */}
+            <div className="col-lg-7 col-md-12">
+              <div className="new-cs-story-card h-100">
+                <span className="cs-section-label" style={{ color: '#849a00', fontSize: '11px', fontWeight: '800', letterSpacing: '0.12em', display: 'block', marginBottom: '12px' }}>PROJECT OVERVIEW</span>
+                <div id="cs-description">
+                  {project.description.map((paragraph, index) => (
+                    <p key={index} style={{ fontSize: '16.5px', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '16px' }}>
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+
+                {project.outcome && (
+                  <div className="new-cs-outcome-box">
+                    <span style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.1em', color: '#849a00', display: 'block', marginBottom: '6px' }}>KEY OUTCOME</span>
+                    <p id="cs-outcome-desc" style={{ fontSize: '15.5px', lineHeight: '1.6', fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
+                      {project.outcome}
+                    </p>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+            </div>
 
-          {/* Design System & Tech Specs */}
-          <div className="mb-5">
-            <h3 className="cs-section-label mb-3" style={{ fontSize: '12px', fontWeight: '800', letterSpacing: '0.12em', color: '#849a00' }}>DESIGN SYSTEM & TECH SPECS</h3>
-            <div className="row g-4">
-              {/* Tech Stack */}
-              <div className="col-lg-4 col-md-12">
-                <div className="p-4 rounded-4 h-100" style={{ background: '#f8fafc', border: '1px solid rgba(0,0,0,0.06)' }}>
-                  <span className="cs-sub-heading text-uppercase" style={{ fontSize: '11px', fontWeight: '800', color: '#849a00', display: 'block', marginBottom: '6px' }}>TECH STACK</span>
-                  <h4 className="fw-extrabold mb-3" style={{ fontSize: '17px', color: '#0f172a' }}>Technologies Used</h4>
+            {/* Right Column: Design System & Tech Stack */}
+            <div className="col-lg-5 col-md-12">
+              <div className="d-flex flex-column gap-3 h-100">
+                {/* Tech Stack Box */}
+                <div className="new-cs-story-card">
+                  <span style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.1em', color: '#849a00', display: 'block', marginBottom: '8px' }}>TECH STACK</span>
+                  <h4 className="fw-extrabold mb-3" style={{ fontSize: '16px' }}>Technologies Used</h4>
                   <div className="d-flex flex-wrap gap-2">
                     {(project.techTags || 'Figma, React, SCSS, Motion, Vercel').split(',').map((tag, i) => (
                       <span key={i} className="service-pill" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', fontWeight: '600', color: '#334155' }}>{tag.trim()}</span>
                     ))}
                   </div>
                 </div>
-              </div>
 
-              {/* Color Palette */}
-              <div className="col-lg-4 col-md-12">
-                <div className="p-4 rounded-4 h-100" style={{ background: '#f8fafc', border: '1px solid rgba(0,0,0,0.06)' }}>
-                  <span className="cs-sub-heading text-uppercase" style={{ fontSize: '11px', fontWeight: '800', color: '#849a00', display: 'block', marginBottom: '6px' }}>COLOR PALETTE</span>
-                  <h4 className="fw-extrabold mb-3" style={{ fontSize: '17px', color: '#0f172a' }}>Theme Swatches</h4>
+                {/* Color Palette Box */}
+                <div className="new-cs-story-card">
+                  <span style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.1em', color: '#849a00', display: 'block', marginBottom: '8px' }}>COLOR PALETTE</span>
+                  <h4 className="fw-extrabold mb-3" style={{ fontSize: '16px' }}>Color Swatches</h4>
                   <div className="d-flex flex-wrap gap-3">
                     {[
                       { hex: project.color1Hex, name: project.color1Name },
@@ -201,30 +198,27 @@ const CaseStudy = () => {
                       { hex: project.color4Hex, name: project.color4Name },
                     ].filter(swatch => swatch.hex && typeof swatch.hex === 'string' && swatch.hex.trim() !== '').map((swatch, i) => (
                       <div key={i} className="d-flex align-items-center gap-2">
-                        <span style={{ width: '28px', height: '28px', borderRadius: '50%', background: swatch.hex, display: 'inline-block', border: '1px solid rgba(0,0,0,0.1)' }}></span>
+                        <span style={{ width: '26px', height: '26px', borderRadius: '50%', background: swatch.hex, display: 'inline-block', border: '1px solid rgba(0,0,0,0.15)' }}></span>
                         <div>
-                          <span className="d-block fw-bold" style={{ fontSize: '12px', color: '#0f172a' }}>{swatch.name || swatch.hex}</span>
+                          <span className="d-block fw-bold" style={{ fontSize: '12px' }}>{swatch.name || swatch.hex}</span>
                           <span className="d-block text-muted" style={{ fontSize: '11px' }}>{swatch.hex.toUpperCase()}</span>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
-              </div>
 
-              {/* Typography */}
-              <div className="col-lg-4 col-md-12">
-                <div className="p-4 rounded-4 h-100" style={{ background: '#f8fafc', border: '1px solid rgba(0,0,0,0.06)' }}>
-                  <span className="cs-sub-heading text-uppercase" style={{ fontSize: '11px', fontWeight: '800', color: '#849a00', display: 'block', marginBottom: '6px' }}>TYPOGRAPHY</span>
-                  <h4 className="fw-extrabold mb-3" style={{ fontSize: '17px', color: '#0f172a' }}>Font Families</h4>
+                {/* Typography Box */}
+                <div className="new-cs-story-card">
+                  <span style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.1em', color: '#849a00', display: 'block', marginBottom: '8px' }}>TYPOGRAPHY</span>
                   <div className="d-flex flex-column gap-2">
                     <div>
-                      <span className="fw-bold d-block" style={{ fontSize: '14px', color: '#0f172a' }}>{project.headingFont || 'Plus Jakarta Sans'}</span>
-                      <span className="text-muted" style={{ fontSize: '12px' }}>Headings & Titles</span>
+                      <span className="fw-bold d-block" style={{ fontSize: '13.5px' }}>{project.headingFont || 'Plus Jakarta Sans'}</span>
+                      <span className="text-muted" style={{ fontSize: '11.5px' }}>Headings & Display Titles</span>
                     </div>
                     <div>
-                      <span className="fw-bold d-block" style={{ fontSize: '14px', color: '#0f172a' }}>{project.bodyFont || 'Inter / System Sans'}</span>
-                      <span className="text-muted" style={{ fontSize: '12px' }}>Body & Specifications</span>
+                      <span className="fw-bold d-block" style={{ fontSize: '13.5px' }}>{project.bodyFont || 'Inter / System Sans'}</span>
+                      <span className="text-muted" style={{ fontSize: '11.5px' }}>Body Text & Specifications</span>
                     </div>
                   </div>
                 </div>
@@ -235,19 +229,19 @@ const CaseStudy = () => {
           {/* Mobile Showcase Cards */}
           {(project.mobileImg1 || project.mobileImg2) && (
             <div className="mb-5">
-              <h3 className="cs-section-label mb-3" style={{ fontSize: '12px', fontWeight: '800', letterSpacing: '0.12em', color: '#849a00' }}>MOBILE EXPERIENCE</h3>
+              <span className="cs-section-label" style={{ color: '#849a00', fontSize: '11px', fontWeight: '800', letterSpacing: '0.12em', display: 'block', marginBottom: '16px' }}>MOBILE SHOWCASE</span>
               <div className="row g-4">
                 {project.mobileImg1 && (
                   <div className="col-md-6">
-                    <div className="rounded-4 overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.08)' }}>
-                      <img src={project.mobileImg1} alt="Mobile View 1" className="w-100 d-block" style={{ maxHeight: '450px', objectFit: 'cover' }} />
+                    <div className="new-cs-hero-container mb-0">
+                      <img src={project.mobileImg1} alt="Mobile View 1" className="w-100 d-block" style={{ maxHeight: '480px', objectFit: 'cover' }} />
                     </div>
                   </div>
                 )}
                 {project.mobileImg2 && (
                   <div className="col-md-6">
-                    <div className="rounded-4 overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.08)' }}>
-                      <img src={project.mobileImg2} alt="Mobile View 2" className="w-100 d-block" style={{ maxHeight: '450px', objectFit: 'cover' }} />
+                    <div className="new-cs-hero-container mb-0">
+                      <img src={project.mobileImg2} alt="Mobile View 2" className="w-100 d-block" style={{ maxHeight: '480px', objectFit: 'cover' }} />
                     </div>
                   </div>
                 )}
@@ -258,17 +252,17 @@ const CaseStudy = () => {
           {/* Secondary Full Showcase Frame */}
           {project.bannerImg && (
             <div className="mb-5">
-              <div className="rounded-4 overflow-hidden" style={{ border: '1px solid rgba(0,0,0,0.08)' }}>
-                <img src={project.bannerImg} alt="Secondary Showcase View" className="w-100 d-block" style={{ maxHeight: '550px', objectFit: 'cover' }} />
+              <div className="new-cs-hero-container mb-0">
+                <img src={project.bannerImg} alt="Secondary Showcase View" className="w-100 d-block" style={{ maxHeight: '580px', objectFit: 'cover' }} />
               </div>
             </div>
           )}
 
-          {/* Simple Bottom Navigation */}
-          <div className="pt-4 border-top">
+          {/* Bottom Footer Navigation Bar */}
+          <div className="pt-4 mt-5 border-top">
             <div className="d-flex align-items-center justify-content-between flex-wrap gap-3">
               <Link to="/works" className="cs-back-link">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <line x1="19" y1="12" x2="5" y2="12"></line>
                   <polyline points="12 19 5 12 12 5"></polyline>
                 </svg>

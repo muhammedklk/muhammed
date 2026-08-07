@@ -6517,3 +6517,111 @@ body.preloader-active {
     color: #ffffff !important;
 }
 
+/* ==========================================================================
+   NEW ULTRA-CLEAN SIMPLE CASE STUDY DESIGN SYSTEM
+   ========================================================================== */
+.new-cs-wrapper {
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.new-cs-header {
+    margin-bottom: 40px;
+}
+
+.new-cs-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(34px, 5.5vw, 58px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    line-height: 1.12;
+    margin-bottom: 16px;
+}
+
+.new-cs-tagline {
+    font-size: clamp(17px, 2vw, 22px);
+    line-height: 1.5;
+    color: var(--text-muted);
+    font-weight: 500;
+    max-width: 840px;
+    margin-bottom: 28px;
+}
+
+.new-cs-meta-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding: 24px 0;
+    margin-bottom: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .new-cs-meta-strip {
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 768px) {
+    .new-cs-meta-strip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.new-cs-meta-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.new-cs-meta-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: block;
+}
+
+.new-cs-hero-container {
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    margin-bottom: 50px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .new-cs-hero-container {
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.new-cs-hero-img {
+    width: 100%;
+    max-height: 620px;
+    object-fit: cover;
+    display: block;
+}
+
+.new-cs-story-card {
+    background: #f8fafc;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    padding: 32px;
+}
+
+[data-theme="dark"] .new-cs-story-card {
+    background: #121318;
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+.new-cs-outcome-box {
+    background: rgba(210, 234, 38, 0.1);
+    border-left: 4px solid #849a00;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-top: 24px;
+}
+
+
