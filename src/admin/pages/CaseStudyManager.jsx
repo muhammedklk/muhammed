@@ -151,17 +151,6 @@ const CaseStudyManager = () => {
     try {
       const selectedProject = projects.find(p => p._id === selectedId || p.id === selectedId);
       if (!selectedProject) return;
-
-      const caseStudyData = {
-        title: formData.title,
-        tagline: formData.tagline,
-        category: formData.category,
-        year: formData.year,
-        client: formData.client,
-        services: formData.services,
-        liveUrl: formData.liveUrl,
-        heroImg: formData.heroImg,
-        outcome: formData.outcome,
       const caseStudyData = {
         heroImg: formData.heroImg,
         showcaseImg: formData.bannerImg || formData.heroImg,
