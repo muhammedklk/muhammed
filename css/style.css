@@ -6518,7 +6518,7 @@ body.preloader-active {
 }
 
 /* ==========================================================================
-   NEXO CASE STUDY DESIGN SYSTEM (MATCHING REFERENCE LAYOUT 1:1)
+   NEXO EDITORIAL LUXURY CASE STUDY DESIGN SYSTEM (1:1 REFERENCE MATCH)
    ========================================================================== */
 .nexo-cs-container {
     max-width: 1040px;
@@ -6527,35 +6527,68 @@ body.preloader-active {
     padding-bottom: 100px;
 }
 
-/* 1. Top Centered Brand / Title Header */
+/* 1. Top Centered Display Brand Header */
 .nexo-cs-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 36px;
 }
 
 .nexo-top-brand {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(36px, 5.5vw, 68px);
-    font-weight: 800;
-    letter-spacing: -0.04em;
+    font-family: 'Playfair Display', 'Plus Jakarta Sans', serif;
+    font-size: clamp(38px, 6vw, 72px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
     color: var(--text-primary);
     margin-bottom: 0;
 }
 
-/* 2. Top Hero Laptop Showcase Frame */
-.nexo-hero-frame {
+/* 2. Top Desktop Browser Window Frame */
+.nexo-browser-window {
     width: 100%;
-    border-radius: 24px;
+    border-radius: 20px;
     overflow: hidden;
     background: #0d111a;
     border: none;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.06);
-    margin-bottom: 56px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
 }
 
-[data-theme="dark"] .nexo-hero-frame {
-    border: none;
+[data-theme="dark"] .nexo-browser-window {
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+}
+
+.nexo-browser-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.nexo-browser-dots {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nexo-browser-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.nexo-browser-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .nexo-hero-img {
@@ -6565,160 +6598,131 @@ body.preloader-active {
     display: block;
 }
 
-/* 3. Overview Split Row: Description + Purple Button (Left) & Meta Grid (Right) */
-.nexo-overview-row {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 48px;
-    align-items: flex-start;
-    padding-bottom: 56px;
-    margin-bottom: 64px;
+/* 3. Metadata Strip & Indigo Pill Button */
+.nexo-meta-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 40px;
+    margin-bottom: 56px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.07);
 }
 
-[data-theme="dark"] .nexo-overview-row {
+[data-theme="dark"] .nexo-meta-strip {
     border-color: rgba(255, 255, 255, 0.08);
 }
 
-@media (max-width: 991px) {
-    .nexo-overview-row {
+@media (max-width: 768px) {
+    .nexo-meta-strip {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+    }
+}
+
+.nexo-indigo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+}
+
+.nexo-indigo-btn:hover {
+    background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5);
+    color: #ffffff !important;
+}
+
+.nexo-meta-group {
+    display: flex;
+    align-items: center;
+    gap: 44px;
+}
+
+@media (max-width: 576px) {
+    .nexo-meta-group {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        width: 100%;
+    }
+}
+
+.nexo-meta-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.nexo-meta-lbl {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.nexo-meta-txt {
+    font-size: 14.5px;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+/* 4. Side-by-Side Story Columns (THE BRIEF & THE APPROACH) */
+.nexo-story-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 64px;
+}
+
+@media (max-width: 768px) {
+    .nexo-story-split {
         grid-template-columns: 1fr;
         gap: 36px;
     }
 }
 
-.nexo-overview-desc {
-    font-size: clamp(16px, 1.8vw, 20px);
-    line-height: 1.55;
-    font-weight: 500;
-    color: var(--text-primary);
-    letter-spacing: -0.015em;
-    margin-bottom: 24px;
-}
-
-/* Purple Pill Button matching reference image */
-.nexo-purple-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 26px;
-    border-radius: 30px;
-    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-    color: #ffffff !important;
-    font-weight: 700;
-    font-size: 13.5px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.3);
-}
-
-.nexo-purple-btn:hover {
-    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(124, 58, 237, 0.45);
-    color: #ffffff !important;
-}
-
-/* Meta 4-Column Grid */
-.nexo-meta-4col {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-}
-
-@media (max-width: 600px) {
-    .nexo-meta-4col {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-}
-
-.nexo-meta-field {
-    display: flex;
-    flex-direction: column;
-}
-
-.nexo-meta-title {
+.nexo-column-tag {
     font-size: 11px;
-    font-weight: 700;
-    color: var(--text-muted);
-    letter-spacing: 0.05em;
-    margin-bottom: 8px;
-}
-
-.nexo-meta-val {
-    font-size: 14.5px;
     font-weight: 800;
-    color: var(--text-primary);
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-}
-
-/* 4. Narrative 2-Column Section (THE CHALLENGE / THE SOLUTION) */
-.nexo-story-row {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 40px;
-    margin-bottom: 64px;
-}
-
-@media (max-width: 850px) {
-    .nexo-story-row {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        margin-bottom: 48px;
-    }
-}
-
-.nexo-story-tag {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--text-muted);
-    padding-top: 4px;
-}
-
-.nexo-story-body p {
-    font-size: 16px;
-    line-height: 1.75;
-    color: var(--text-secondary);
-    margin-bottom: 20px;
-    font-weight: 450;
-}
-
-.nexo-story-body p:last-child {
-    margin-bottom: 0;
-}
-
-.nexo-bullet-list {
-    list-style: none;
-    padding-left: 0;
-    margin: 20px 0 24px 0;
-}
-
-.nexo-bullet-list li {
-    position: relative;
-    padding-left: 20px;
-    font-size: 15.5px;
-    line-height: 1.7;
-    color: var(--text-secondary);
+    color: #c25e40;
     margin-bottom: 12px;
 }
 
-.nexo-bullet-list li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    top: -2px;
-    font-size: 18px;
-    color: var(--text-primary);
+[data-theme="dark"] .nexo-column-tag {
+    color: #e27d5f;
 }
 
-/* 5. Secondary Desktop Frame */
-.nexo-showcase-frame {
+.nexo-story-split p {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-bottom: 18px;
+    font-weight: 450;
+}
+
+.nexo-story-split p:last-child {
+    margin-bottom: 0;
+}
+
+/* 5. Secondary Full-Width Showcase Card */
+.nexo-showcase-card {
     width: 100%;
-    border-radius: 24px;
+    border-radius: 20px;
     overflow: hidden;
     background: #0d111a;
     border: none;
@@ -6726,30 +6730,29 @@ body.preloader-active {
     margin-bottom: 72px;
 }
 
-[data-theme="dark"] .nexo-showcase-frame {
-    border: none;
+[data-theme="dark"] .nexo-showcase-card {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
 }
 
 .nexo-showcase-img {
     width: 100%;
-    max-height: 620px;
+    max-height: 600px;
     object-fit: cover;
     display: block;
 }
 
-/* 6. Mobile Experience Section */
+/* 6. Mobile Experience Section ("Designed for every screen") */
 .nexo-mobile-section {
     margin-bottom: 72px;
 }
 
-.nexo-mobile-head-block {
+.nexo-mobile-header {
     text-align: center;
-    margin-bottom: 44px;
+    margin-bottom: 40px;
 }
 
-.nexo-mobile-subtag {
-    font-size: 11px;
+.nexo-mobile-tag {
+    font-size: 10.5px;
     font-weight: 800;
     letter-spacing: 0.18em;
     color: var(--text-muted);
@@ -6758,11 +6761,11 @@ body.preloader-active {
     margin-bottom: 8px;
 }
 
-.nexo-mobile-heading {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(26px, 4vw, 42px);
-    font-weight: 800;
-    letter-spacing: -0.03em;
+.nexo-serif-title {
+    font-family: 'Playfair Display', 'Plus Jakarta Sans', serif;
+    font-size: clamp(28px, 4.5vw, 44px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
     color: var(--text-primary);
     margin: 0;
 }
@@ -6780,33 +6783,78 @@ body.preloader-active {
     }
 }
 
-.nexo-mobile-card {
-    border-radius: 24px;
+.nexo-phone-card {
+    border-radius: 28px;
     overflow: hidden;
-    border: none;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.06);
     background: #0d111a;
-}
-
-[data-theme="dark"] .nexo-mobile-card {
     border: none;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
 }
 
-.nexo-mobile-img {
+[data-theme="dark"] .nexo-phone-card {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.nexo-phone-img {
     width: 100%;
-    height: 540px;
+    height: 520px;
     object-fit: cover;
     display: block;
 }
 
-/* 7. Bottom Navigation Pager */
+.nexo-phone-caption {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    color: #ffffff;
+    z-index: 2;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
+    padding: 20px 16px 12px 16px;
+    border-radius: 16px;
+}
+
+.nexo-phone-tag {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.nexo-phone-title {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: #ffffff;
+}
+
+/* 7. Bottom Showcase Banner Label & Card */
+.nexo-banner-block {
+    margin-bottom: 64px;
+}
+
+.nexo-banner-tag {
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: center;
+    display: block;
+    margin-bottom: 16px;
+}
+
+/* 8. Bottom Navigation Pager */
 .nexo-bottom-pager {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-top: 48px;
-    margin-top: 64px;
     border-top: 1px solid rgba(0, 0, 0, 0.07);
 }
 
@@ -6842,6 +6890,7 @@ body.preloader-active {
     align-items: center;
     gap: 8px;
 }
+
 
 
 

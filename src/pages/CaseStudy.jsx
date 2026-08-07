@@ -104,27 +104,34 @@ const CaseStudy = () => {
             </h1>
           </div>
 
-          {/* 2. Top Hero Laptop Mockup Showcase Frame */}
-          <div className="nexo-hero-frame">
+          {/* 2. Top Desktop Browser Window Frame */}
+          <div className="nexo-browser-window">
+            <div className="nexo-browser-bar">
+              <div className="nexo-browser-dots">
+                <span className="nexo-browser-dot"></span>
+                <span className="nexo-browser-dot"></span>
+                <span className="nexo-browser-dot"></span>
+              </div>
+              <div className="nexo-browser-tab">
+                <span>{project.title ? project.title.toLowerCase().replace(/[^a-z0-9]/g, '') : 'project'}.com</span>
+              </div>
+            </div>
             <img src={project.heroImg} alt={project.title} id="cs-hero-img" className="nexo-hero-img" />
           </div>
 
-          {/* 3. Overview Split Row: Tagline + Purple CTA (Left) & 4-Column Meta (Right) */}
-          <div className="nexo-overview-row">
+          {/* 3. Metadata Strip with Indigo/Purple Pill Button (Left) & Meta Items (Right) */}
+          <div className="nexo-meta-strip">
             <div>
-              <p className="nexo-overview-desc" id="cs-tagline">
-                {project.tagline || (project.description && project.description[0])}
-              </p>
               {project.showLiveUrlBtn !== false && project.liveUrl && (
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   id="cs-live-btn"
-                  className="nexo-purple-btn"
+                  className="nexo-indigo-btn"
                 >
-                  <span>Visit Website</span>
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <span>Read Case Study</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                     <polyline points="15 3 21 3 21 9"></polyline>
                     <line x1="10" y1="14" x2="21" y2="3"></line>
@@ -133,105 +140,93 @@ const CaseStudy = () => {
               )}
             </div>
 
-            <div className="nexo-meta-4col">
-              <div className="nexo-meta-field">
-                <span className="nexo-meta-title">Company</span>
-                <span className="nexo-meta-val" id="cs-client">{project.client || "NEXO's Architect"}</span>
+            <div className="nexo-meta-group">
+              <div className="nexo-meta-item">
+                <span className="nexo-meta-lbl">Services</span>
+                <span className="nexo-meta-txt" id="cs-services">{project.services || "Web Design"}</span>
               </div>
-              <div className="nexo-meta-field">
-                <span className="nexo-meta-title">Services</span>
-                <span className="nexo-meta-val" id="cs-services">{project.services || "UI/UX + Frontend"}</span>
+              <div className="nexo-meta-item">
+                <span className="nexo-meta-lbl">Industry</span>
+                <span className="nexo-meta-txt" id="cs-category">{project.category || "Interior Studio"}</span>
               </div>
-              <div className="nexo-meta-field">
-                <span className="nexo-meta-title">Place</span>
-                <span className="nexo-meta-val" id="cs-category">{project.category || "------"}</span>
-              </div>
-              <div className="nexo-meta-field">
-                <span className="nexo-meta-title">Year</span>
-                <span className="nexo-meta-val" id="cs-year">{project.year || "2026"}</span>
+              <div className="nexo-meta-item">
+                <span className="nexo-meta-lbl">Year</span>
+                <span className="nexo-meta-txt" id="cs-year">{project.year || "2026"}</span>
               </div>
             </div>
           </div>
 
-          {/* 4. Narrative Section: THE CHALLENGE */}
-          <div className="nexo-story-row">
-            <div className="nexo-story-tag">
-              THE CHALLENGE
+          {/* 4. Side-by-Side Story Columns: THE BRIEF & THE APPROACH */}
+          <div className="nexo-story-split">
+            <div>
+              <div className="nexo-column-tag">THE BRIEF</div>
+              <p>
+                {project.tagline || (project.description && project.description[0]) || `${project.title} approached us to redesign the way their brand presents itself online — a site that could carry the same warmth and precision as the experiences they create.`}
+              </p>
+              <p>
+                {(project.description && project.description[1]) || "The result is a calm, image-led experience that lets each project breathe, with layouts that quietly get out of the way of the work."}
+              </p>
             </div>
-            <div className="nexo-story-body" id="cs-description">
-              {project.description && project.description.length > 0 ? (
-                <>
-                  <p>{project.description[0]}</p>
-                  {project.description.length > 1 && (
-                    <ul className="nexo-bullet-list">
-                      {project.description.slice(1).map((item, idx) => (
-                        <li key={idx}>{item}</li>
-                      ))}
-                    </ul>
-                  )}
-                </>
-              ) : (
-                <>
-                  <p>
-                    The primary challenge for the {project.title} project was designing a premium digital experience that reflects the quality and craftsmanship of modern design visuality.
-                  </p>
-                  <ul className="nexo-bullet-list">
-                    <li>Presenting projects through a clean and immersive visual experience.</li>
-                    <li>Building a clear user journey from exploration to consultation.</li>
-                    <li>Creating a responsive, high-performance interface while maintaining luxury brand identity.</li>
-                    <li>Balancing aesthetics, usability, and fast loading performance across all devices.</li>
-                  </ul>
-                  <p>
-                    We focused on a minimal, project-first experience with strong visual hierarchy, intuitive navigation, and carefully crafted interactions.
-                  </p>
-                </>
-              )}
-            </div>
-          </div>
-
-          {/* 5. Mobile Experience Section */}
-          {(project.mobileImg1 || project.mobileImg2) && (
-            <div className="nexo-mobile-section">
-              <div className="nexo-mobile-head-block">
-                <span className="nexo-mobile-subtag">RESPONSIVE DESIGN FOR</span>
-                <h2 className="nexo-mobile-heading">MOBILE EXPERIENCE</h2>
-              </div>
-
-              <div className="nexo-mobile-grid">
-                {project.mobileImg1 && (
-                  <div className="nexo-mobile-card">
-                    <img src={project.mobileImg1} alt="Mobile Experience 1" className="nexo-mobile-img" />
-                  </div>
-                )}
-                {project.mobileImg2 && (
-                  <div className="nexo-mobile-card">
-                    <img src={project.mobileImg2} alt="Mobile Experience 2" className="nexo-mobile-img" />
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* 7. Narrative Section: THE SOLUTION */}
-          <div className="nexo-story-row">
-            <div className="nexo-story-tag">
-              THE SOLUTION
-            </div>
-            <div className="nexo-story-body">
+            <div>
+              <div className="nexo-column-tag">THE APPROACH</div>
+              <p>
+                {(project.description && project.description[2]) || "We built the whole system around restraint: a single display type, one accent, and generous space around every photograph. Nothing competes with the work itself."}
+              </p>
               <p id="cs-outcome-desc">
-                {project.outcome || `The final result was a guarantee responsive website that strongly increased the studio's online presence, showcased their portfolio with elegance, and delivered a fast, seamless user experience across all devices.`}
+                {project.outcome || "From the homepage grid to individual project pages, the same rhythm of full-bleed imagery and short, considered copy carries through — on desktop and on every phone in someone's pocket."}
               </p>
             </div>
           </div>
 
-          {/* 8. Final Full-Width Laptop Banner Frame */}
-          {project.bannerImg && (
-            <div className="nexo-showcase-frame">
-              <img src={project.bannerImg} alt="Final Showcase Banner" className="nexo-showcase-img" />
+          {/* 5. Secondary Full-Width Showcase Card */}
+          {project.showcaseImg && (
+            <div className="nexo-showcase-card">
+              <img src={project.showcaseImg} alt="Showcase Frame" className="nexo-showcase-img" />
             </div>
           )}
 
-          {/* 9. Bottom Navigation Bar / Pager */}
+          {/* 6. Mobile Experience Section ("Designed for every screen") */}
+          {(project.mobileImg1 || project.mobileImg2) && (
+            <div className="nexo-mobile-section">
+              <div className="nexo-mobile-header">
+                <span className="nexo-mobile-tag">MOBILE EXPERIENCE</span>
+                <h2 className="nexo-serif-title">Designed for every screen</h2>
+              </div>
+
+              <div className="nexo-mobile-grid">
+                {project.mobileImg1 && (
+                  <div className="nexo-phone-card">
+                    <img src={project.mobileImg1} alt="Mobile Screen 1" className="nexo-phone-img" />
+                    <div className="nexo-phone-caption">
+                      <span className="nexo-phone-tag">01 / EXPLORE</span>
+                      <h4 className="nexo-phone-title">Luxury Every Detail</h4>
+                    </div>
+                  </div>
+                )}
+                {project.mobileImg2 && (
+                  <div className="nexo-phone-card">
+                    <img src={project.mobileImg2} alt="Mobile Screen 2" className="nexo-phone-img" />
+                    <div className="nexo-phone-caption">
+                      <span className="nexo-phone-tag">02 / LIVING</span>
+                      <h4 className="nexo-phone-title">A quieter way to live</h4>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* 7. Bottom Showcase Banner Card */}
+          {project.bannerImg && (
+            <div className="nexo-banner-block">
+              <span className="nexo-banner-tag">EVERY DETAIL CRAFTED FOR {project.title.toUpperCase()}</span>
+              <div className="nexo-showcase-card" style={{ marginBottom: 0 }}>
+                <img src={project.bannerImg} alt="Final Showcase Banner" className="nexo-showcase-img" />
+              </div>
+            </div>
+          )}
+
+          {/* 8. Bottom Navigation Pager */}
           <div className="nexo-bottom-pager">
             {prevProj ? (
               <Link to={`/case-study/${prevProj.id}`} className="nexo-pager-btn">
