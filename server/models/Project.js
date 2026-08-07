@@ -122,9 +122,9 @@ const ProjectSchema = new mongoose.Schema(
   }
 );
 
-// Auto-generate slug before saving
+// Auto-generate slug before saving if not present
 ProjectSchema.pre('save', function (next) {
-  if (this.isModified('title') || !this.slug) {
+  if (!this.slug) {
     this.slug = this.title
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')

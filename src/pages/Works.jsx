@@ -79,7 +79,11 @@ const Works = () => {
       (p) =>
         (p.slug && String(p.slug).toLowerCase() === String(defaultItem.slug).toLowerCase()) ||
         (p.id && String(p.id).toLowerCase() === String(defaultItem.id).toLowerCase()) ||
-        (p.title && String(p.title).toLowerCase() === String(defaultItem.title).toLowerCase())
+        (p.title && String(p.title).toLowerCase() === String(defaultItem.title).toLowerCase()) ||
+        (p.slug && defaultItem.slug && (
+          String(defaultItem.slug).toLowerCase().includes(String(p.slug).toLowerCase()) ||
+          String(p.slug).toLowerCase().includes(String(defaultItem.slug).toLowerCase())
+        ))
     );
     if (!apiMatch) return defaultItem;
 

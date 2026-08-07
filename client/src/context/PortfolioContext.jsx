@@ -52,13 +52,24 @@ export const PortfolioProvider = ({ children }) => {
     if (!slugOrId) return null;
     const lower = String(slugOrId).toLowerCase();
     
+    // Check MongoDB dynamic projects array first with strict and flexible matching
     let match = projects.find(
-      (p) => String(p.slug).toLowerCase() === lower || String(p.id).toLowerCase() === lower || String(p._id) === lower
+      (p) =>
+        String(p.slug || '').toLowerCase() === lower ||
+        String(p.id || '').toLowerCase() === lower ||
+        String(p._id || '').toLowerCase() === lower ||
+        String(p.title || '').toLowerCase() === lower ||
+        (p.slug && lower.includes(String(p.slug).toLowerCase())) ||
+        (p.slug && String(p.slug).toLowerCase().includes(lower))
     );
 
     if (!match) {
       match = caseStudiesData.find(
-        (p) => String(p.id).toLowerCase() === lower || String(p.slug || '').toLowerCase() === lower
+        (p) =>
+          String(p.id || '').toLowerCase() === lower ||
+          String(p.slug || '').toLowerCase() === lower ||
+          String(p.title || '').toLowerCase() === lower ||
+          (p.id && lower.includes(String(p.id).toLowerCase()))
       );
     }
 

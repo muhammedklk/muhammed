@@ -187,6 +187,7 @@ const CaseStudyManager = () => {
 
       const updatedProjectPayload = {
         ...selectedProject,
+        slug: selectedProject?.slug || selectedProject?.id || selectedId,
         title: formData.title,
         heroImg: formData.heroImg,
         mobileImg1: formData.mobileImg1,
