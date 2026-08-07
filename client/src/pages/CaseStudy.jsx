@@ -187,12 +187,7 @@ const CaseStudy = () => {
             </div>
           </div>
 
-          {/* 5. Secondary Desktop Showcase Image Frame */}
-          <div className="nexo-showcase-frame">
-            <img src={project.showcaseImg || project.heroImg} alt="Secondary Desktop Showcase" className="nexo-showcase-img" />
-          </div>
-
-          {/* 6. Mobile Experience Section */}
+          {/* 5. Mobile Experience Section */}
           {(project.mobileImg1 || project.mobileImg2) && (
             <div className="nexo-mobile-section">
               <div className="nexo-mobile-head-block">
