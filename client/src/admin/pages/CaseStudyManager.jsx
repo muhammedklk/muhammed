@@ -162,7 +162,13 @@ const CaseStudyManager = () => {
         liveUrl: formData.liveUrl,
         heroImg: formData.heroImg,
         outcome: formData.outcome,
+      const caseStudyData = {
+        heroImg: formData.heroImg,
+        showcaseImg: formData.bannerImg || formData.heroImg,
+        tagline: formData.tagline,
+        overview: formData.overview,
         description: formData.descriptionText.split('\n\n').filter(Boolean),
+        outcome: formData.outcome,
         techTags: formData.techTags,
         color1Hex: formData.color1Hex,
         color1Name: formData.color1Name,
@@ -176,25 +182,15 @@ const CaseStudyManager = () => {
         bodyFont: formData.bodyFont,
         mobileImg1: formData.mobileImg1,
         mobileImg2: formData.mobileImg2,
-        bannerImg: formData.bannerImg,
-        metrics: [
-          { value: formData.metric1Val, label: formData.metric1Label },
-          { value: formData.metric2Val, label: formData.metric2Label },
-          { value: formData.metric3Val, label: formData.metric3Label },
-          { value: formData.metric4Val, label: formData.metric4Label },
-        ]
+        bannerImg: formData.bannerImg
       };
 
       const updatedProjectPayload = {
         ...selectedProject,
         slug: selectedProject?.slug || selectedProject?.id || selectedId,
         title: formData.title,
-        heroImg: formData.heroImg,
-        mobileImg1: formData.mobileImg1,
-        mobileImg2: formData.mobileImg2,
-        bannerImg: formData.bannerImg,
-        showcaseImg: formData.bannerImg || formData.heroImg,
-        image: formData.heroImg,
+        heroImg: selectedProject?.heroImg || formData.heroImg,
+        image: selectedProject?.image || selectedProject?.heroImg || formData.heroImg,
         liveUrl: formData.liveUrl,
         category: formData.category,
         client: formData.client,
