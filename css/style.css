@@ -6518,309 +6518,296 @@ body.preloader-active {
 }
 
 /* ==========================================================================
-   PREMIUM ULTRA-MINIMAL CASE STUDY DESIGN (VERSION 2 - NEXO INSPIRED)
+   NEXO-INSPIRED PREMIUM MINIMALIST CASE STUDY DESIGN SYSTEM
    ========================================================================== */
-.cs-v2-container {
-    max-width: 1040px;
+.nexo-cs-container {
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding-top: 140px;
+    padding-bottom: 90px;
 }
 
-.cs-v2-top-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 30px;
-}
-
-.cs-v2-main-title {
+.nexo-cs-top-title {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(42px, 7.5vw, 76px);
+    font-size: clamp(40px, 6vw, 72px);
     font-weight: 800;
     letter-spacing: -0.04em;
     color: var(--text-primary);
-    line-height: 1.05;
     text-align: center;
-    margin: 0 0 36px 0;
+    margin-bottom: 32px;
 }
 
-.cs-v2-hero-card {
+.nexo-hero-frame {
     width: 100%;
     border-radius: 32px;
     overflow: hidden;
-    background: #f1f5f9;
+    background: #0f172a;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.12);
     border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.06);
-    margin-bottom: 44px;
+    margin-bottom: 50px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-[data-theme="dark"] .cs-v2-hero-card {
-    background: #0f1117;
+[data-theme="dark"] .nexo-hero-frame {
     border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
 }
 
-.cs-v2-hero-img {
+.nexo-hero-img {
     width: 100%;
     max-height: 640px;
     object-fit: cover;
     display: block;
 }
 
-.cs-v2-header-info {
+.nexo-overview-row {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1fr 1.2fr;
     gap: 40px;
-    align-items: start;
-    padding-bottom: 40px;
-    margin-bottom: 50px;
+    align-items: center;
+    padding-bottom: 48px;
+    margin-bottom: 56px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-[data-theme="dark"] .cs-v2-header-info {
+[data-theme="dark"] .nexo-overview-row {
     border-color: rgba(255, 255, 255, 0.08);
 }
 
-@media (max-width: 868px) {
-    .cs-v2-header-info {
+@media (max-width: 991px) {
+    .nexo-overview-row {
         grid-template-columns: 1fr;
         gap: 30px;
     }
 }
 
-.cs-v2-tagline {
+.nexo-tagline-text {
     font-size: clamp(18px, 2.2vw, 24px);
-    line-height: 1.5;
-    font-weight: 500;
+    line-height: 1.45;
+    font-weight: 600;
     color: var(--text-primary);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
     margin-bottom: 24px;
 }
 
-.cs-v2-specs-grid {
+.nexo-btn-website {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    border-radius: 30px;
+    background: #d2ea26;
+    color: #0f172a;
+    font-weight: 800;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: none !important;
+}
+
+.nexo-btn-website:hover {
+    background: #c3dc1e;
+    color: #0f172a;
+    transform: translateY(-2px);
+}
+
+.nexo-meta-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    gap: 20px;
 }
 
 @media (max-width: 576px) {
-    .cs-v2-specs-grid {
+    .nexo-meta-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
     }
 }
 
-.cs-v2-spec-label {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    margin-bottom: 4px;
-    display: block;
+.nexo-meta-item {
+    display: flex;
+    flex-direction: column;
 }
 
-.cs-v2-spec-val {
-    font-size: 15px;
+.nexo-meta-label {
+    font-size: 11.5px;
     font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.nexo-meta-value {
+    font-size: 15px;
+    font-weight: 800;
     color: var(--text-primary);
-    display: block;
+    letter-spacing: -0.01em;
 }
 
-.cs-v2-narrative-section {
+.nexo-story-section {
     display: grid;
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: 240px 1fr;
     gap: 40px;
-    margin-bottom: 60px;
+    margin-bottom: 64px;
 }
 
-@media (max-width: 768px) {
-    .cs-v2-narrative-section {
+@media (max-width: 850px) {
+    .nexo-story-section {
         grid-template-columns: 1fr;
         gap: 16px;
     }
 }
 
-.cs-v2-section-tag {
-    font-size: 11px;
+.nexo-section-label {
+    font-size: 12px;
     font-weight: 800;
-    letter-spacing: 0.14em;
-    color: #849a00;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
+    color: var(--text-muted);
+    padding-top: 4px;
 }
 
-.cs-v2-body-text {
-    font-size: 17.5px;
-    line-height: 1.85;
+.nexo-story-content p {
+    font-size: 17px;
+    line-height: 1.8;
     color: var(--text-secondary);
-}
-
-.cs-v2-body-text p {
     margin-bottom: 20px;
+    font-weight: 450;
 }
 
-.cs-v2-outcome-banner {
-    background: rgba(210, 234, 38, 0.08);
-    border-left: 4px solid #849a00;
-    border-radius: 16px;
-    padding: 24px 28px;
-    margin-top: 32px;
+.nexo-showcase-frame {
+    width: 100%;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    margin-bottom: 72px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
 }
 
-.cs-v2-mobile-section {
+[data-theme="dark"] .nexo-showcase-frame {
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.nexo-showcase-img {
+    width: 100%;
+    max-height: 600px;
+    object-fit: cover;
+    display: block;
+}
+
+.nexo-mobile-title-block {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
-.cs-v2-mobile-grid {
+.nexo-mobile-sub {
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.nexo-mobile-head {
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+}
+
+.nexo-mobile-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 28px;
-    margin-top: 32px;
+    gap: 32px;
+    margin-bottom: 72px;
 }
 
-@media (max-width: 640px) {
-    .cs-v2-mobile-grid {
+@media (max-width: 768px) {
+    .nexo-mobile-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+.nexo-mobile-card {
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+    background: #0f172a;
+}
+
+.nexo-mobile-img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    display: block;
+}
+
+.nexo-specs-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 64px;
+}
+
+@media (max-width: 991px) {
+    .nexo-specs-cards-grid {
         grid-template-columns: 1fr;
     }
 }
 
-.cs-v2-mobile-card {
-    border-radius: 32px;
-    overflow: hidden;
-    background: #000000;
-    border: 6px solid #000000;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-.cs-v2-mobile-img {
-    width: 100%;
-    height: 520px;
-    object-fit: cover;
-    object-position: top center;
-    border-radius: 26px;
-    display: block;
-}
-
-.cs-v2-system-card {
+.nexo-spec-card {
     background: #f8fafc;
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 24px;
-    padding: 28px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-[data-theme="dark"] .cs-v2-system-card {
+[data-theme="dark"] .nexo-spec-card {
     background: #111319;
     border-color: rgba(255, 255, 255, 0.06);
 }
 
-.cs-v2-card-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-bottom: 50px;
-}
-
-@media (max-width: 992px) {
-    .cs-v2-card-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-.cs-v2-swatches-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px 12px;
-    margin-top: 16px;
-}
-
-.cs-v2-swatch-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-}
-
-.cs-v2-swatch-circle {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.cs-v2-swatch-info {
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-}
-
-.cs-v2-swatch-name {
-    display: block;
-    font-size: 12.5px;
-    font-weight: 700;
-    color: var(--text-primary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.2;
-}
-
-.cs-v2-swatch-hex {
-    display: block;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-muted);
-    font-family: monospace;
-    margin-top: 2px;
-}
-
-.cs-v2-tech-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 16px;
-}
-
-.cs-v2-tech-pill {
-    padding: 7px 16px;
+.nexo-pill-tag {
+    padding: 6px 16px;
     border-radius: 30px;
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.08);
-    font-size: 13px;
+    font-size: 12.5px;
     font-weight: 600;
     color: #334155;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    display: inline-block;
 }
 
-[data-theme="dark"] .cs-v2-tech-pill {
-    background: #1a1c23;
+[data-theme="dark"] .nexo-pill-tag {
+    background: #1e2430;
     border-color: rgba(255, 255, 255, 0.08);
-    color: #e2e8f0;
+    color: #cbd5e1;
 }
 
-.cs-v2-typo-block {
+.nexo-swatch-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    display: inline-block;
+}
+
+.nexo-bottom-nav {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 16px;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.cs-v2-typo-name {
-    font-size: 15px;
-    font-weight: 800;
-    color: var(--text-primary);
-    display: block;
-    line-height: 1.2;
+[data-theme="dark"] .nexo-bottom-nav {
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
-.cs-v2-typo-usage {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-muted);
-    display: block;
-    margin-top: 3px;
-}
 
 
