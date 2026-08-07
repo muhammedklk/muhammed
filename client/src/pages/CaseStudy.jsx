@@ -178,28 +178,7 @@ const CaseStudy = () => {
           </div>
         )}
 
-        {/* 7. Mobile Experience Showcase (2 Devices Side-by-Side) */}
-        {(project.mobileImg1 || project.mobileImg2) && (
-          <div className="cs-v2-mobile-section">
-            <span className="cs-v2-section-tag" style={{ letterSpacing: '0.15em' }}>IMMERSIVE EXPERIENCE</span>
-            <h3 className="fw-extrabold mt-2 mb-0" style={{ fontSize: 'clamp(24px, 4vw, 36px)', letterSpacing: '-0.02em' }}>MOBILE EXPERIENCE</h3>
-
-            <div className="cs-v2-mobile-grid">
-              {project.mobileImg1 && (
-                <div className="cs-v2-mobile-card">
-                  <img src={project.mobileImg1} alt="Mobile Screen 1" className="cs-v2-mobile-img" />
-                </div>
-              )}
-              {project.mobileImg2 && (
-                <div className="cs-v2-mobile-card">
-                  <img src={project.mobileImg2} alt="Mobile Screen 2" className="cs-v2-mobile-img" />
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* 8. Design System & Technical Specs */}
+        {/* 7. Design System & Technical Specs */}
         <div className="cs-v2-card-grid">
           {/* Tech Stack */}
           <div className="cs-v2-system-card">
@@ -250,6 +229,27 @@ const CaseStudy = () => {
             </div>
           </div>
         </div>
+
+        {/* 8. Mobile Experience Showcase (2 Devices Side-by-Side) */}
+        {(project.mobileImg1 || project.mobileImg2) && (
+          <div className="cs-v2-mobile-section">
+            <span className="cs-v2-section-tag" style={{ letterSpacing: '0.15em' }}>IMMERSIVE EXPERIENCE</span>
+            <h3 className="fw-extrabold mt-2 mb-0" style={{ fontSize: 'clamp(24px, 4vw, 36px)', letterSpacing: '-0.02em' }}>MOBILE EXPERIENCE</h3>
+
+            <div className="cs-v2-mobile-grid">
+              {project.mobileImg1 && (
+                <div className="cs-v2-mobile-card">
+                  <img src={project.mobileImg1} alt="Mobile Screen 1" className="cs-v2-mobile-img" />
+                </div>
+              )}
+              {project.mobileImg2 && (
+                <div className="cs-v2-mobile-card">
+                  <img src={project.mobileImg2} alt="Mobile Screen 2" className="cs-v2-mobile-img" />
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* 9. Bottom Navigation Bar */}
         <div className="pt-4 mt-5 border-top">
