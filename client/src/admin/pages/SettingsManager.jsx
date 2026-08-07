@@ -107,6 +107,9 @@ const SettingsManager = () => {
 
     if (typeof window !== 'undefined') {
       localStorage.setItem('portfolio_maintenance_settings', JSON.stringify(settings));
+      if (settings.contactEmail) {
+        localStorage.setItem('portfolio_contact_email', settings.contactEmail);
+      }
     }
     if (refreshPortfolio) {
       refreshPortfolio();

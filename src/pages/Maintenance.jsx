@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Settings, Mail, Lock, ArrowLeft } from '../admin/components/Icons';
+import { Settings, Mail, ArrowLeft } from '../admin/components/Icons';
 import { usePortfolio } from '../context/PortfolioContext';
 
 const Maintenance = ({ isGlobal = false, pageName = 'This Page', message }) => {
-  const { settings } = usePortfolio();
+  const { settings, about } = usePortfolio();
   const navigate = useNavigate();
 
   // If global maintenance switch is ON: title is "Website Under Update"
@@ -19,7 +19,10 @@ const Maintenance = ({ isGlobal = false, pageName = 'This Page', message }) => {
     : `${pageName} is currently undergoing scheduled updates and maintenance. Please check back shortly!`;
 
   const displayMessage = message || settings?.maintenanceMessage || defaultMessage;
-  const contactEmail = settings?.contactEmail || 'hello@developer.com';
+  
+  // Dynamic Email lookup from SiteSettings, About section, or LocalStorage
+  const localEmail = typeof window !== 'undefined' ? (localStorage.getItem('portfolio_contact_email') || localStorage.getItem('portfolio_email')) : null;
+  const contactEmail = settings?.contactEmail || about?.email || localEmail || 'kmuhammedklk@gmail.com';
 
   return (
     <div
@@ -56,7 +59,7 @@ const Maintenance = ({ isGlobal = false, pageName = 'This Page', message }) => {
           background: '#ffffff',
           border: '1px solid #e2e8f0',
           borderRadius: '24px',
-          padding: '36px 28px',
+          padding: '38px 28px',
           textAlign: 'center',
           boxShadow: '0 20px 40px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03)',
           position: 'relative',
@@ -131,17 +134,9 @@ const Maintenance = ({ isGlobal = false, pageName = 'This Page', message }) => {
         )}
 
         {/* Contact Info */}
-        <div style={{ padding: '12px 16px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '12px', color: '#475569', marginBottom: '20px' }}>
+        <div style={{ padding: '12px 16px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontSize: '12px', color: '#475569' }}>
           <Mail size={14} color="#0f172a" />
           <span>Contact: <a href={`mailto:${contactEmail}`} style={{ color: '#0f172a', fontWeight: '700', textDecoration: 'none' }}>{contactEmail}</a></span>
-        </div>
-
-        {/* Admin Link */}
-        <div style={{ paddingTop: '12px', borderTop: '1px solid #f1f5f9' }}>
-          <a href="/admin/login" style={{ fontSize: '11.5px', color: '#64748b', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-            <Lock size={12} />
-            <span>Administrator Access</span>
-          </a>
         </div>
       </div>
     </div>
