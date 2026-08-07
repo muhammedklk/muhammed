@@ -295,43 +295,9 @@ const CaseStudyManager = () => {
           </div>
         </div>
 
-        {/* 2. Key Metrics Cards */}
+        {/* 2. Hero Mockup Image */}
         <div style={{ paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>2. Key Performance Metrics (4 Cards)</h3>
-          <div className="row g-3">
-            <div className="col-6 col-md-3">
-              <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', marginBottom: '4px' }}>METRIC 1 VALUE</label>
-              <input type="text" value={formData.metric1Val} onChange={(e) => setFormData({ ...formData, metric1Val: e.target.value })} style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
-              <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', margin: '6px 0 4px 0' }}>LABEL</label>
-              <input type="text" value={formData.metric1Label} onChange={(e) => setFormData({ ...formData, metric1Label: e.target.value })} style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
-            </div>
-
-            <div className="col-6 col-md-3">
-              <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', marginBottom: '4px' }}>METRIC 2 VALUE</label>
-              <input type="text" value={formData.metric2Val} onChange={(e) => setFormData({ ...formData, metric2Val: e.target.value })} style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
-              <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', margin: '6px 0 4px 0' }}>LABEL</label>
-              <input type="text" value={formData.metric2Label} onChange={(e) => setFormData({ ...formData, metric2Label: e.target.value })} style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
-            </div>
-
-            <div className="col-6 col-md-3">
-              <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', marginBottom: '4px' }}>METRIC 3 VALUE</label>
-              <input type="text" value={formData.metric3Val} onChange={(e) => setFormData({ ...formData, metric3Val: e.target.value })} style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
-              <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', margin: '6px 0 4px 0' }}>LABEL</label>
-              <input type="text" value={formData.metric3Label} onChange={(e) => setFormData({ ...formData, metric3Label: e.target.value })} style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
-            </div>
-
-            <div className="col-6 col-md-3">
-              <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', marginBottom: '4px' }}>METRIC 4 VALUE</label>
-              <input type="text" value={formData.metric4Val} onChange={(e) => setFormData({ ...formData, metric4Val: e.target.value })} style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
-              <label style={{ display: 'block', fontSize: '11px', color: '#94a3b8', fontWeight: '700', margin: '6px 0 4px 0' }}>LABEL</label>
-              <input type="text" value={formData.metric4Label} onChange={(e) => setFormData({ ...formData, metric4Label: e.target.value })} style={{ width: '100%', padding: '8px 12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff' }} />
-            </div>
-          </div>
-        </div>
-
-        {/* 3. Hero Mockup Image */}
-        <div style={{ paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>3. Hero Featured Mockup Image</h3>
+          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>2. Hero Featured Mockup Image</h3>
           <ImageUploadInput
             label="FEATURED MOCKUP SCREENSHOT (UPLOAD FROM COMPUTER FOLDER)"
             value={formData.heroImg}
@@ -340,9 +306,9 @@ const CaseStudyManager = () => {
           />
         </div>
 
-        {/* 4. Executive Narrative Overview & Outcome */}
+        {/* 3. Executive Narrative Overview & Outcome */}
         <div style={{ paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>4. Narrative & Outcome Quote</h3>
+          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>3. Narrative & Outcome Quote</h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div>
               <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>EXECUTIVE OVERVIEW PARAGRAPHS (Separate paragraphs with double enter)</label>
@@ -356,9 +322,9 @@ const CaseStudyManager = () => {
           </div>
         </div>
 
-        {/* 5. Design System & Tech Architecture */}
+        {/* 4. Design System & Tech Architecture */}
         <div style={{ paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>5. Design System & Tech Specs</h3>
+          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>4. Design System & Tech Specs</h3>
           <div className="row g-3">
             <div className="col-12">
               <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>TECHNOLOGIES USED (Comma Separated)</label>
