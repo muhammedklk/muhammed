@@ -83,11 +83,11 @@ const CaseStudy = () => {
 
   return (
     <main className="case-study-main grid-lines-bg">
-      <div className="container py-4 py-md-5">
-        <div className="new-cs-wrapper">
+      <div className="container py-2 py-md-4">
+        <div className="nexo-cs-container">
 
-          {/* Top Bar: Back to Projects Link & Category Badge */}
-          <div className="d-flex align-items-center justify-content-between w-100 mb-4">
+          {/* Top Bar Navigation */}
+          <div className="nexo-cs-top-bar">
             <Link to="/works" className="cs-back-link">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="19" y1="12" x2="5" y2="12"></line>
@@ -96,183 +96,134 @@ const CaseStudy = () => {
               <span>Back to Projects</span>
             </Link>
 
-            <span className="service-pill" style={{ background: 'rgba(210, 234, 38, 0.15)', color: '#0f172a', fontWeight: '700', border: '1px solid rgba(210, 234, 38, 0.4)' }}>
+            <span className="service-pill mb-0" style={{ background: 'rgba(210, 234, 38, 0.15)', color: '#0f172a', fontWeight: '700', border: '1px solid rgba(210, 234, 38, 0.4)' }}>
               {project.category} • {project.year}
             </span>
           </div>
 
-          {/* New Clean Header Title & Subtitle */}
-          <div className="new-cs-header">
-            <h1 className="new-cs-title" id="cs-title">
-              {project.title}
-            </h1>
-            <p className="new-cs-tagline" id="cs-tagline">
-              {project.tagline}
-            </p>
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                id="cs-live-btn"
-                className="btn-primary-pill"
-              >
-                <span>Visit Live Website ↗</span>
-              </a>
-            )}
+          {/* 1. Giant Centered Brand Title */}
+          <h1 className="nexo-cs-brand-title" id="cs-title">
+            {project.title}
+          </h1>
+
+          {/* 2. Massive First Hero Image Card */}
+          <div className="nexo-cs-image-card">
+            <img src={project.heroImg} alt={project.title} id="cs-hero-img" />
           </div>
 
-          {/* 4-Column Minimal Metadata Strip */}
-          <div className="new-cs-meta-strip">
+          {/* 3. Info Row (Left: Tagline + Visit Website Button, Right: 4 Metadata Columns) */}
+          <div className="nexo-cs-info-row">
             <div>
-              <span className="new-cs-meta-label">CLIENT</span>
-              <span className="new-cs-meta-value" id="cs-client">{project.client || 'Client Studio'}</span>
+              <p className="nexo-cs-tagline" id="cs-tagline">
+                {project.tagline}
+              </p>
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  id="cs-live-btn"
+                  className="nexo-cs-visit-btn"
+                >
+                  <span>Visit Website</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
+              )}
             </div>
-            <div>
-              <span className="new-cs-meta-label">SERVICES</span>
-              <span className="new-cs-meta-value" id="cs-services">{project.services || 'UI/UX & Engineering'}</span>
-            </div>
-            <div>
-              <span className="new-cs-meta-label">CATEGORY</span>
-              <span className="new-cs-meta-value" id="cs-category">{project.category || 'Digital Experience'}</span>
-            </div>
-            <div>
-              <span className="new-cs-meta-label">YEAR</span>
-              <span className="new-cs-meta-value" id="cs-year">{project.year || '2026'}</span>
-            </div>
-          </div>
 
-          {/* Clean Main Desktop Mockup Image Container */}
-          <div className="new-cs-hero-container">
-            <img src={project.heroImg} alt={project.title} id="cs-hero-img" className="new-cs-hero-img" />
-          </div>
-
-          {/* 2-Column Split: Story Overview (Left) & Design Specs (Right) */}
-          <div className="row g-4 mb-5">
-            {/* Left Column: Narrative Overview & Outcome */}
-            <div className="col-lg-7 col-md-12">
-              <div className="new-cs-story-card h-100">
-                <span className="cs-section-label" style={{ color: '#849a00', fontSize: '11px', fontWeight: '800', letterSpacing: '0.12em', display: 'block', marginBottom: '12px' }}>PROJECT OVERVIEW</span>
-                <div id="cs-description">
-                  {project.description.map((paragraph, index) => (
-                    <p key={index} style={{ fontSize: '16.5px', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '16px' }}>
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-
-                {project.outcome && (
-                  <div className="new-cs-outcome-box">
-                    <span style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.1em', color: '#849a00', display: 'block', marginBottom: '6px' }}>KEY OUTCOME</span>
-                    <p id="cs-outcome-desc" style={{ fontSize: '15.5px', lineHeight: '1.6', fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
-                      {project.outcome}
-                    </p>
-                  </div>
-                )}
+            <div className="nexo-cs-meta-grid">
+              <div className="nexo-cs-meta-item">
+                <label>Company</label>
+                <span id="cs-client">{project.client || 'Studio'}</span>
               </div>
-            </div>
-
-            {/* Right Column: Design System & Tech Stack */}
-            <div className="col-lg-5 col-md-12">
-              <div className="d-flex flex-column gap-3 h-100">
-                {/* Tech Stack Box */}
-                <div className="new-cs-story-card">
-                  <span style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.1em', color: '#849a00', display: 'block', marginBottom: '8px' }}>TECH STACK</span>
-                  <h4 className="fw-extrabold mb-3" style={{ fontSize: '16px' }}>Technologies Used</h4>
-                  <div className="d-flex flex-wrap gap-2">
-                    {(project.techTags || 'Figma, React, SCSS, Motion, Vercel').split(',').map((tag, i) => (
-                      <span key={i} className="service-pill" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', fontWeight: '600', color: '#334155' }}>{tag.trim()}</span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Color Palette Box */}
-                <div className="new-cs-story-card">
-                  <span style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.1em', color: '#849a00', display: 'block', marginBottom: '8px' }}>COLOR PALETTE</span>
-                  <h4 className="fw-extrabold mb-3" style={{ fontSize: '16px' }}>Color Swatches</h4>
-                  <div className="d-flex flex-wrap gap-3">
-                    {[
-                      { hex: project.color1Hex, name: project.color1Name },
-                      { hex: project.color2Hex, name: project.color2Name },
-                      { hex: project.color3Hex, name: project.color3Name },
-                      { hex: project.color4Hex, name: project.color4Name },
-                    ].filter(swatch => swatch.hex && typeof swatch.hex === 'string' && swatch.hex.trim() !== '').map((swatch, i) => (
-                      <div key={i} className="d-flex align-items-center gap-2">
-                        <span style={{ width: '26px', height: '26px', borderRadius: '50%', background: swatch.hex, display: 'inline-block', border: '1px solid rgba(0,0,0,0.15)' }}></span>
-                        <div>
-                          <span className="d-block fw-bold" style={{ fontSize: '12px' }}>{swatch.name || swatch.hex}</span>
-                          <span className="d-block text-muted" style={{ fontSize: '11px' }}>{swatch.hex.toUpperCase()}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Typography Box */}
-                <div className="new-cs-story-card">
-                  <span style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.1em', color: '#849a00', display: 'block', marginBottom: '8px' }}>TYPOGRAPHY</span>
-                  <div className="d-flex flex-column gap-2">
-                    <div>
-                      <span className="fw-bold d-block" style={{ fontSize: '13.5px' }}>{project.headingFont || 'Plus Jakarta Sans'}</span>
-                      <span className="text-muted" style={{ fontSize: '11.5px' }}>Headings & Display Titles</span>
-                    </div>
-                    <div>
-                      <span className="fw-bold d-block" style={{ fontSize: '13.5px' }}>{project.bodyFont || 'Inter / System Sans'}</span>
-                      <span className="text-muted" style={{ fontSize: '11.5px' }}>Body Text & Specifications</span>
-                    </div>
-                  </div>
-                </div>
+              <div className="nexo-cs-meta-item">
+                <label>Services</label>
+                <span id="cs-services">{project.services || 'UI/UX'}</span>
+              </div>
+              <div className="nexo-cs-meta-item">
+                <label>Client</label>
+                <span>——</span>
+              </div>
+              <div className="nexo-cs-meta-item">
+                <label>Year</label>
+                <span id="cs-year">{project.year || '2026'}</span>
               </div>
             </div>
           </div>
 
-          {/* Mobile Showcase Cards */}
+          {/* 4. Story Narrative Section (Left: Label, Right: Spacious Paragraphs) */}
+          <div className="nexo-cs-section-row" style={{ borderTop: '1px solid rgba(0,0,0,0.08)' }}>
+            <div className="nexo-cs-label">
+              <span>THE CHALLENGE</span>
+            </div>
+            <div className="nexo-cs-body-text" id="cs-description">
+              {project.description.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+
+          {/* 5. Second Massive Showcase Laptop Image Card */}
+          <div className="nexo-cs-image-card">
+            <img src={project.showcaseImg || project.heroImg} alt={`${project.title} Showcase`} />
+          </div>
+
+          {/* 6. Centered Mobile Experience Section */}
           {(project.mobileImg1 || project.mobileImg2) && (
-            <div className="mb-5">
-              <span className="cs-section-label" style={{ color: '#849a00', fontSize: '11px', fontWeight: '800', letterSpacing: '0.12em', display: 'block', marginBottom: '16px' }}>MOBILE SHOWCASE</span>
-              <div className="row g-4">
+            <div className="nexo-cs-mobile-section">
+              <span className="nexo-cs-sub-label">HANDHELD DESIGN EXPERIENCE</span>
+              <h2 className="nexo-cs-main-heading">MOBILE EXPERIENCE</h2>
+
+              <div className="nexo-cs-mobile-grid">
                 {project.mobileImg1 && (
-                  <div className="col-md-6">
-                    <div className="new-cs-hero-container mb-0">
-                      <img src={project.mobileImg1} alt="Mobile View 1" className="w-100 d-block" style={{ maxHeight: '480px', objectFit: 'cover' }} />
-                    </div>
+                  <div className="nexo-cs-mobile-card">
+                    <img src={project.mobileImg1} alt={`${project.title} Mobile Screen 1`} />
                   </div>
                 )}
                 {project.mobileImg2 && (
-                  <div className="col-md-6">
-                    <div className="new-cs-hero-container mb-0">
-                      <img src={project.mobileImg2} alt="Mobile View 2" className="w-100 d-block" style={{ maxHeight: '480px', objectFit: 'cover' }} />
-                    </div>
+                  <div className="nexo-cs-mobile-card">
+                    <img src={project.mobileImg2} alt={`${project.title} Mobile Screen 2`} />
                   </div>
                 )}
               </div>
             </div>
           )}
 
-          {/* Secondary Full Showcase Frame */}
-          {project.bannerImg && (
-            <div className="mb-5">
-              <div className="new-cs-hero-container mb-0">
-                <img src={project.bannerImg} alt="Secondary Showcase View" className="w-100 d-block" style={{ maxHeight: '580px', objectFit: 'cover' }} />
+          {/* 7. Final Outcome Section (Left: Label, Right: Outcome Text) */}
+          {project.outcome && (
+            <div className="nexo-cs-section-row" style={{ borderTop: '1px solid rgba(0,0,0,0.08)' }}>
+              <div className="nexo-cs-label">
+                <span>FINAL OUTCOME</span>
+              </div>
+              <div className="nexo-cs-body-text" id="cs-outcome-desc">
+                <p style={{ fontWeight: '600', color: 'var(--text-primary)' }}>{project.outcome}</p>
               </div>
             </div>
           )}
 
-          {/* Bottom Footer Navigation Bar */}
-          <div className="pt-4 mt-5 border-top">
-            <div className="d-flex align-items-center justify-content-between flex-wrap gap-3">
-              <Link to="/works" className="cs-back-link">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <line x1="19" y1="12" x2="5" y2="12"></line>
-                  <polyline points="12 19 5 12 12 5"></polyline>
-                </svg>
-                <span>All Projects</span>
-              </Link>
-
-              <Link to="/contact" className="btn-primary-pill">
-                <span>Start Your Project</span>
-              </Link>
+          {/* 8. Third Massive Showcase Laptop Image Card */}
+          {project.bannerImg && (
+            <div className="nexo-cs-image-card">
+              <img src={project.bannerImg} alt={`${project.title} Full View`} />
             </div>
+          )}
+
+          {/* 9. Bottom Footer Navigation */}
+          <div className="pt-4 mt-5 border-top d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <Link to="/works" className="cs-back-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+              <span>All Projects</span>
+            </Link>
+
+            <Link to="/contact" className="btn-primary-pill">
+              <span>Start Your Project</span>
+            </Link>
           </div>
 
         </div>

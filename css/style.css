@@ -6624,4 +6624,218 @@ body.preloader-active {
     margin-top: 24px;
 }
 
+/* ==========================================================================
+   NEXO-STYLE ULTRA-PREMIUM MINIMALIST CASE STUDY SYSTEM
+   ========================================================================== */
+.nexo-cs-container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-top: 130px;
+    padding-bottom: 80px;
+}
+
+.nexo-cs-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.nexo-cs-brand-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(38px, 6vw, 68px);
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: -0.035em;
+    color: var(--text-primary);
+    margin-bottom: 36px;
+    line-height: 1.1;
+}
+
+.nexo-cs-image-card {
+    width: 100%;
+    border-radius: 28px;
+    overflow: hidden;
+    margin-bottom: 48px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] .nexo-cs-image-card {
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.nexo-cs-image-card img {
+    width: 100%;
+    height: auto;
+    max-height: 640px;
+    object-fit: cover;
+    display: block;
+}
+
+.nexo-cs-info-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    padding: 20px 0 48px 0;
+}
+
+@media (max-width: 991px) {
+    .nexo-cs-info-row {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+}
+
+.nexo-cs-tagline {
+    font-size: clamp(16px, 1.8vw, 20px);
+    line-height: 1.55;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 24px;
+}
+
+.nexo-cs-visit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: 30px;
+    background: #a855f7;
+    color: #ffffff !important;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none !important;
+    transition: transform 0.3s ease, background 0.3s ease;
+    box-shadow: none !important;
+}
+
+.nexo-cs-visit-btn:hover {
+    transform: translateY(-2px);
+    background: #9333ea;
+    color: #ffffff !important;
+}
+
+.nexo-cs-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .nexo-cs-meta-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.nexo-cs-meta-item label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.nexo-cs-meta-item span {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.nexo-cs-section-row {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 40px;
+    padding: 44px 0;
+}
+
+@media (max-width: 850px) {
+    .nexo-cs-section-row {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+}
+
+.nexo-cs-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.nexo-cs-body-text {
+    font-size: 16.5px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+.nexo-cs-body-text p {
+    margin-bottom: 20px;
+}
+
+.nexo-cs-body-text p:last-child {
+    margin-bottom: 0;
+}
+
+.nexo-cs-mobile-section {
+    text-align: center;
+    padding: 60px 0 40px 0;
+}
+
+.nexo-cs-sub-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.nexo-cs-main-heading {
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 40px;
+}
+
+.nexo-cs-mobile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+}
+
+@media (max-width: 768px) {
+    .nexo-cs-mobile-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.nexo-cs-mobile-card {
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: #000000;
+}
+
+[data-theme="dark"] .nexo-cs-mobile-card {
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.nexo-cs-mobile-card img {
+    width: 100%;
+    height: auto;
+    max-height: 580px;
+    object-fit: cover;
+    display: block;
+}
+
+
 
