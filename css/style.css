@@ -6518,7 +6518,7 @@ body.preloader-active {
 }
 
 /* ==========================================================================
-   NEXO EDITORIAL LUXURY CASE STUDY DESIGN SYSTEM (1:1 REFERENCE MATCH)
+   NEXO EDITORIAL LUXURY CASE STUDY DESIGN SYSTEM (SITE BRANDED MATCH)
    ========================================================================== */
 .nexo-cs-container {
     max-width: 1040px;
@@ -6534,10 +6534,10 @@ body.preloader-active {
 }
 
 .nexo-top-brand {
-    font-family: 'Playfair Display', 'Plus Jakarta Sans', serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: clamp(38px, 6vw, 72px);
-    font-weight: 700;
-    letter-spacing: -0.03em;
+    font-weight: 800;
+    letter-spacing: -0.04em;
     color: var(--text-primary);
     margin-bottom: 0;
 }
@@ -6564,7 +6564,7 @@ body.preloader-active {
     display: block;
 }
 
-/* 3. Metadata Strip & Indigo Pill Button */
+/* 3. Metadata Strip & Site Lime Accent Button */
 .nexo-meta-strip {
     display: flex;
     align-items: center;
@@ -6590,24 +6590,24 @@ body.preloader-active {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 22px;
+    padding: 12px 26px;
     border-radius: 30px;
-    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-    color: #ffffff !important;
-    font-weight: 700;
-    font-size: 11.5px;
-    letter-spacing: 0.08em;
+    background: #d2ea26;
+    color: #0f172a !important;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+    box-shadow: 0 6px 20px rgba(210, 234, 38, 0.25);
 }
 
 .nexo-indigo-btn:hover {
-    background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+    background: #bce015;
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.5);
-    color: #ffffff !important;
+    box-shadow: 0 10px 25px rgba(210, 234, 38, 0.4);
+    color: #0f172a !important;
 }
 
 .nexo-meta-group {
@@ -6663,14 +6663,14 @@ body.preloader-active {
 .nexo-column-tag {
     font-size: 11px;
     font-weight: 800;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #c25e40;
+    color: #d2ea26;
     margin-bottom: 12px;
 }
 
-[data-theme="dark"] .nexo-column-tag {
-    color: #e27d5f;
+[data-theme="light"] .nexo-column-tag {
+    color: #657e00;
 }
 
 .nexo-story-split p {
@@ -6728,10 +6728,10 @@ body.preloader-active {
 }
 
 .nexo-serif-title {
-    font-family: 'Playfair Display', 'Plus Jakarta Sans', serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: clamp(28px, 4.5vw, 44px);
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-weight: 800;
+    letter-spacing: -0.03em;
     color: var(--text-primary);
     margin: 0;
 }
