@@ -3,9 +3,48 @@ import { useParams, Link } from 'react-router-dom';
 import { caseStudiesDataMap as caseStudiesData } from '../data/caseStudiesData';
 import { usePortfolio } from '../context/PortfolioContext';
 
+import Maintenance from './Maintenance';
+
 const CaseStudy = () => {
   const { id: paramId } = useParams();
-  const { getProjectBySlug } = usePortfolio();
+  const { getProjectBySlug, settings } = usePortfolio();
+
+  // Public Visitors Maintenance Guard (Locks mobile phones, laptops, and all public browsers)
+  const localSettingsStr = typeof window !== 'undefined' ? localStorage.getItem('portfolio_maintenance_settings') : null;
+  let localSettings = null;
+  try { localSettings = localSettingsStr ? JSON.parse(localSettingsStr) : null; } catch (e) {}
+
+  const activeSettings = {
+    ...localSettings,
+    ...settings,
+    maintenancePages: {
+      ...(localSettings?.maintenancePages || {}),
+      ...(settings?.maintenancePages || {})
+    }
+  };
+
+  const isGlobalMaintenance = Boolean(activeSettings?.maintenanceMode);
+  const isCaseStudyMaintenance = Boolean(
+    activeSettings?.maintenancePages?.caseStudy ||
+    activeSettings?.maintenancePages?.casestudy ||
+    activeSettings?.maintenancePages?.['case-study'] ||
+    activeSettings?.maintenancePages?.casestudies
+  );
+
+  const isAdminPreview = typeof window !== 'undefined' && (
+    sessionStorage.getItem('admin_preview_active') === 'true' ||
+    window.location.search.includes('preview=admin')
+  );
+
+  if (!isAdminPreview && (isGlobalMaintenance || isCaseStudyMaintenance)) {
+    return (
+      <Maintenance
+        isGlobal={isGlobalMaintenance}
+        pageName="Case Study Page"
+        message={activeSettings?.maintenanceMessage}
+      />
+    );
+  }
 
   const rawId = paramId ? paramId.toLowerCase() : "voyagera";
   const dynamicProject = getProjectBySlug(rawId);

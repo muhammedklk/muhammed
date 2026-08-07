@@ -77,12 +77,18 @@ const SettingsManager = () => {
   };
 
   const handleTogglePageMaintenance = async (pageKey, isChecked) => {
+    const updatedPages = {
+      ...(settings.maintenancePages || {}),
+      [pageKey]: isChecked
+    };
+    if (pageKey === 'caseStudy') {
+      updatedPages.casestudy = isChecked;
+      updatedPages['case-study'] = isChecked;
+      updatedPages.casestudies = isChecked;
+    }
     const updated = {
       ...settings,
-      maintenancePages: {
-        ...(settings.maintenancePages || {}),
-        [pageKey]: isChecked
-      }
+      maintenancePages: updatedPages
     };
     setSettings(updated);
     if (typeof window !== 'undefined') {
