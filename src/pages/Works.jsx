@@ -133,10 +133,12 @@ const Works = () => {
                       <div className="demo-img-wrapper">
                         <img src={projectImg} alt={item.title} className="demo-mockup-img" />
                         <div className="minimal-hover-overlay">
-                          <Link to={`/case-study/${projectKey}`} className="minimal-btn-hover btn-hover-case">
-                            Case Study
-                          </Link>
-                          {item.liveUrl && item.liveUrl !== '#' && (
+                          {item.showCaseStudyBtn !== false && (
+                            <Link to={`/case-study/${projectKey}`} className="minimal-btn-hover btn-hover-case">
+                              Case Study
+                            </Link>
+                          )}
+                          {item.showLiveUrlBtn !== false && item.liveUrl && item.liveUrl !== '#' && (
                             <a
                               href={item.liveUrl}
                               target="_blank"

@@ -103,6 +103,14 @@ const ProjectSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
+    showCaseStudyBtn: {
+      type: Boolean,
+      default: true
+    },
+    showLiveUrlBtn: {
+      type: Boolean,
+      default: true
+    },
     order: {
       type: Number,
       default: 0

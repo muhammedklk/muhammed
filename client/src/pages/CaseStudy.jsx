@@ -64,6 +64,8 @@ const CaseStudy = () => {
     title: dynamicProject?.title || staticProject?.title,
     tagline: dynamicProject?.caseStudy?.tagline || staticProject?.tagline,
     liveUrl: dynamicProject?.liveUrl || staticProject?.liveUrl,
+    showCaseStudyBtn: dynamicProject?.showCaseStudyBtn !== undefined ? dynamicProject.showCaseStudyBtn : (staticProject?.showCaseStudyBtn !== undefined ? staticProject.showCaseStudyBtn : true),
+    showLiveUrlBtn: dynamicProject?.showLiveUrlBtn !== undefined ? dynamicProject.showLiveUrlBtn : (staticProject?.showLiveUrlBtn !== undefined ? staticProject.showLiveUrlBtn : true),
     category: dynamicProject?.category || staticProject?.category,
     services: dynamicProject?.services || staticProject?.services,
     client: dynamicProject?.client || staticProject?.client,
@@ -113,7 +115,7 @@ const CaseStudy = () => {
               <p className="nexo-overview-desc" id="cs-tagline">
                 {project.tagline || (project.description && project.description[0])}
               </p>
-              {project.liveUrl && (
+              {project.showLiveUrlBtn !== false && project.liveUrl && (
                 <a
                   href={project.liveUrl}
                   target="_blank"

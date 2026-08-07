@@ -20,6 +20,8 @@ const CaseStudyManager = () => {
     client: '',
     services: 'UI/UX & Web Development',
     liveUrl: '',
+    showCaseStudyBtn: true,
+    showLiveUrlBtn: true,
     heroImg: '',
     outcome: '',
     descriptionText: '',
@@ -105,6 +107,8 @@ const CaseStudyManager = () => {
       client: cs.client || proj.client || 'Client Name',
       services: cs.services || proj.services || 'UI/UX & Web Development',
       liveUrl: proj.liveUrl || cs.liveUrl || '',
+      showCaseStudyBtn: proj.showCaseStudyBtn !== undefined ? proj.showCaseStudyBtn : true,
+      showLiveUrlBtn: proj.showLiveUrlBtn !== undefined ? proj.showLiveUrlBtn : true,
       heroImg: proj.heroImg || cs.heroImg || proj.image || '',
       outcome: cs.outcome || 'Delivered high-performance responsive web experience.',
       descriptionText: desc,
@@ -181,6 +185,8 @@ const CaseStudyManager = () => {
         heroImg: selectedProject?.heroImg || formData.heroImg,
         image: selectedProject?.image || selectedProject?.heroImg || formData.heroImg,
         liveUrl: formData.liveUrl,
+        showCaseStudyBtn: formData.showCaseStudyBtn,
+        showLiveUrlBtn: formData.showLiveUrlBtn,
         category: formData.category,
         client: formData.client,
         caseStudy: caseStudyData
@@ -273,9 +279,31 @@ const CaseStudyManager = () => {
               <input type="text" value={formData.year} onChange={(e) => setFormData({ ...formData, year: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
             </div>
 
-            <div className="col-12">
+            <div className="col-12 col-md-6">
               <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>LIVE WEBSITE BUTTON URL</label>
               <input type="text" value={formData.liveUrl} onChange={(e) => setFormData({ ...formData, liveUrl: e.target.value })} placeholder="https://..." style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+            </div>
+
+            <div className="col-12 col-md-6 d-flex align-items-center gap-4 pt-4">
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '13px', color: '#ffffff', fontWeight: '600' }}>
+                <input
+                  type="checkbox"
+                  checked={formData.showCaseStudyBtn !== false}
+                  onChange={(e) => setFormData({ ...formData, showCaseStudyBtn: e.target.checked })}
+                  style={{ width: '18px', height: '18px', accentColor: '#d2ea26', cursor: 'pointer' }}
+                />
+                <span>Show Case Study Button</span>
+              </label>
+
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '13px', color: '#ffffff', fontWeight: '600' }}>
+                <input
+                  type="checkbox"
+                  checked={formData.showLiveUrlBtn !== false}
+                  onChange={(e) => setFormData({ ...formData, showLiveUrlBtn: e.target.checked })}
+                  style={{ width: '18px', height: '18px', accentColor: '#d2ea26', cursor: 'pointer' }}
+                />
+                <span>Show Live Link Button</span>
+              </label>
             </div>
           </div>
         </div>

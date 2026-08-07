@@ -25,6 +25,8 @@ const ProjectsManager = () => {
     technologies: 'React, Node.js, Tailwind',
     status: 'publish',
     featured: false,
+    showCaseStudyBtn: true,
+    showLiveUrlBtn: true,
   });
 
   const fetchProjects = async () => {
@@ -85,6 +87,8 @@ const ProjectsManager = () => {
         technologies: Array.isArray(project.tags) ? project.tags.join(', ') : project.technologies?.join(', ') || '',
         status: project.status || 'publish',
         featured: project.featured || false,
+        showCaseStudyBtn: project.showCaseStudyBtn !== undefined ? project.showCaseStudyBtn : true,
+        showLiveUrlBtn: project.showLiveUrlBtn !== undefined ? project.showLiveUrlBtn : true,
       });
     } else {
       setEditingId(null);
@@ -99,6 +103,8 @@ const ProjectsManager = () => {
         technologies: 'React, Node.js, Tailwind',
         status: 'publish',
         featured: false,
+        showCaseStudyBtn: true,
+        showLiveUrlBtn: true,
       });
     }
     setShowModal(true);
@@ -242,6 +248,29 @@ const ProjectsManager = () => {
               <div>
                 <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>TECHNOLOGIES (COMMA SEPARATED)</label>
                 <input type="text" value={formData.technologies} onChange={(e) => setFormData({ ...formData, technologies: e.target.value })} placeholder="React, SCSS, Node.js" style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              </div>
+
+              {/* Button Visibility Toggles */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', background: 'rgba(255,255,255,0.03)', padding: '14px 16px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '13px', color: '#ffffff', fontWeight: '600' }}>
+                  <input
+                    type="checkbox"
+                    checked={formData.showCaseStudyBtn !== false}
+                    onChange={(e) => setFormData({ ...formData, showCaseStudyBtn: e.target.checked })}
+                    style={{ width: '18px', height: '18px', accentColor: '#d2ea26', cursor: 'pointer' }}
+                  />
+                  <span>Show Case Study Button</span>
+                </label>
+
+                <label style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '13px', color: '#ffffff', fontWeight: '600' }}>
+                  <input
+                    type="checkbox"
+                    checked={formData.showLiveUrlBtn !== false}
+                    onChange={(e) => setFormData({ ...formData, showLiveUrlBtn: e.target.checked })}
+                    style={{ width: '18px', height: '18px', accentColor: '#d2ea26', cursor: 'pointer' }}
+                  />
+                  <span>Show Live Link Button</span>
+                </label>
               </div>
 
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '12px' }}>
