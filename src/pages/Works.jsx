@@ -139,7 +139,7 @@ const Works = () => {
                               rel="noopener noreferrer"
                               className="minimal-btn-hover btn-hover-live"
                             >
-                              Live Preview ↗
+                              Live Preview
                             </a>
                           )}
                         </div>
