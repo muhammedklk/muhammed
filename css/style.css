@@ -58,32 +58,13 @@
 html, body {
     width: 100%;
     min-height: 100vh;
+    background-color: #ffffff !important;
     color: #0a0a0c !important;
     font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: clip;
-}
-
-body:not(.admin-mode) {
-    background-color: #ffffff !important;
-    background-image: 
-        radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.12) 1.5px, transparent 0),
-        linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px) !important;
-    background-size: 28px 28px, 112px 112px, 112px 112px !important;
-    background-attachment: fixed !important;
-}
-
-[data-theme="dark"] body:not(.admin-mode) {
-    background-color: #0a0a0c !important;
-    background-image: 
-        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.15) 1.5px, transparent 0),
-        linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px) !important;
-    background-size: 28px 28px, 112px 112px, 112px 112px !important;
-    background-attachment: fixed !important;
 }
 
 /* ============================================================
@@ -6877,11 +6858,13 @@ body.preloader-active {
 }
 
 /* ==========================================================================
-   NEW MODERN ARCHITECTURAL GRID & DOT-MATRIX BACKGROUND SYSTEM
-   (Replaces harsh graph-paper lines with a sleek Vercel/Linear dot-grid)
+   NEW MODERN SECTION-BOUNDED DOT-MATRIX GRID BACKGROUND
+   (Applied to sections across all pages without full-page overflow)
    ========================================================================== */
 .grid-lines-bg {
     position: relative;
+    border-radius: 24px;
+    overflow: hidden;
 }
 
 .grid-lines-bg::before {
@@ -6891,17 +6874,19 @@ body.preloader-active {
     pointer-events: none;
     z-index: 0;
     background-image: 
-        radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.12) 1.5px, transparent 0),
-        linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+        radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.09) 1.5px, transparent 0),
+        linear-gradient(to right, rgba(15, 23, 42, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.025) 1px, transparent 1px);
     background-size: 28px 28px, 112px 112px, 112px 112px;
+    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 95%);
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 95%);
 }
 
 [data-theme="dark"] .grid-lines-bg::before {
     background-image: 
-        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.15) 1.5px, transparent 0),
-        linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.12) 1.5px, transparent 0),
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
 

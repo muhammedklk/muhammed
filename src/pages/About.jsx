@@ -24,7 +24,7 @@ const About = () => {
   return (
     <>
       {/* Personal Profile Photo & Identity Section */}
-      <section className="about-portrait-section">
+      <section className="about-portrait-section grid-lines-bg">
         <div className="container">
           <div className="row g-5 align-items-center">
             {/* Profile Photo Card (Left) */}

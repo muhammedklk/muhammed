@@ -100,7 +100,7 @@ const Works = () => {
   return (
     <>
       {/* Inner Page Hero Section */}
-      <section className="page-inner-hero minimal-works-hero text-center">
+      <section className="page-inner-hero minimal-works-hero text-center grid-lines-bg">
         <div className="container">
           <div className="row justify-content-center text-center">
             <div className="col-lg-9 col-md-11 col-sm-12 text-center d-flex flex-column align-items-center mx-auto">

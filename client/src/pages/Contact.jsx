@@ -81,7 +81,7 @@ const Contact = () => {
 
   return (
     <>
-      <section className="page-inner-hero text-center">
+      <section className="page-inner-hero text-center grid-lines-bg">
         <div className="container">
           <div className="row justify-content-center text-center">
             <div className="col-lg-8 col-md-10 col-sm-12 text-center d-flex flex-column align-items-center mx-auto">
