@@ -6113,7 +6113,7 @@ body.preloader-active {
 }
 
 /* ==========================================================================
-   TECHNICAL GRID LINE BACKGROUND OVERLAY SYSTEM
+   MODERN TECH DOT-MATRIX GRID BACKGROUND SYSTEM
    ========================================================================== */
 .grid-lines-bg {
     position: relative;
@@ -6126,18 +6126,16 @@ body.preloader-active {
     inset: 0;
     pointer-events: none;
     background-image: 
-        linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-    background-size: 36px 36px;
-    mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.85) 30%, rgba(0, 0, 0, 0) 85%);
-    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.85) 30%, rgba(0, 0, 0, 0) 85%);
+        radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.09) 1.2px, transparent 0);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse at 50% 40%, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 88%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 40%, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 88%);
     z-index: -1;
 }
 
 [data-theme="dark"] .grid-lines-bg::before {
     background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.12) 1.2px, transparent 0);
 }
 
 /* ==========================================================================
