@@ -139,21 +139,27 @@ const seedData = async () => {
     if (serviceCount === 0) {
       await Service.insertMany([
         {
-          title: 'Full Stack Web Engineering',
-          shortDesc: 'Custom React & Node.js web applications, APIs, database architecture, and cloud deployment.',
-          description: 'Custom React & Node.js web applications, APIs, database architecture, and cloud deployment.',
-          tags: ['React', 'Node.js', 'MongoDB'],
+          title: 'UI/UX Design',
+          category: 'Specialized Service',
+          badge: 'Specialized Service',
+          shortDesc: 'Pixel-perfect digital interfaces, wireframes, and scalable design systems.',
+          description: 'Pixel-perfect digital interfaces, wireframes, and scalable design systems.',
+          tags: ['Figma', 'Design Systems', 'Wireframing'],
           order: 1
         },
         {
-          title: 'UI/UX & Design Systems',
-          shortDesc: 'Pixel-perfect digital products, interactive Figma prototypes, and responsive design systems.',
-          description: 'Pixel-perfect digital products, interactive Figma prototypes, and responsive design systems.',
-          tags: ['Figma', 'UI/UX', 'SCSS'],
+          title: 'Web Development',
+          category: 'High Performance',
+          badge: 'High Performance',
+          shortDesc: 'High performance React & modern frontend web applications with sub-second speed.',
+          description: 'High performance React & modern frontend web applications with sub-second speed.',
+          tags: ['HTML / SCSS', 'React', 'GSAP'],
           order: 2
         },
         {
           title: 'Mobile App Design',
+          category: 'iOS & Android',
+          badge: 'iOS & Android',
           shortDesc: 'High performance native & hybrid mobile application design for iOS and Android.',
           description: 'High performance native & hybrid mobile application design for iOS and Android.',
           tags: ['iOS UI', 'Android', 'Prototyping'],

@@ -7,9 +7,21 @@ import { usePortfolio } from '../../context/PortfolioContext';
 gsap.registerPlugin(ScrollTrigger);
 
 const defaultServicesList = [
-  { title: 'Full Stack Web Engineering', tags: ['React', 'Node.js', 'MongoDB'] },
-  { title: 'UI/UX & Design Systems', tags: ['Figma', 'UI/UX', 'SCSS'] },
-  { title: 'Mobile App Design', tags: ['iOS UI', 'Android', 'Prototyping'] }
+  {
+    title: 'UI/UX Design',
+    badge: 'Specialized Service',
+    tags: ['Figma', 'Design Systems', 'Wireframing']
+  },
+  {
+    title: 'Web Development',
+    badge: 'High Performance',
+    tags: ['HTML / SCSS', 'React', 'GSAP']
+  },
+  {
+    title: 'Mobile App Design',
+    badge: 'iOS & Android',
+    tags: ['iOS UI', 'Android', 'Prototyping']
+  }
 ];
 
 const AboutTeaser = () => {
@@ -148,52 +160,58 @@ const AboutTeaser = () => {
             </div>
           </div>
 
-          {/* Middle Row: Services Cards Grid (3 Cards Always) */}
+          {/* Middle Row: Services Cards Grid (3 Cards Matching User Screenshot) */}
           <div className="row g-4 services-cards-row">
-            {displayServices.map((service, idx) => (
-              <div key={service._id || idx} className="col-lg-4 col-md-6 col-sm-12">
-                <div className="service-card">
-                  <div className="service-card-top">
-                    <div className={`service-3d-icon-box icon-${idx === 0 ? 'uiux' : idx === 1 ? 'web' : 'mobile'}`}>
-                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        {idx === 0 && (
-                          <>
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                            <path d="M2 17l10 5 10-5"></path>
-                            <path d="M2 12l10 5 10-5"></path>
-                          </>
-                        )}
-                        {idx === 1 && (
-                          <>
-                            <path d="M16 18l6-6-6-6"></path>
-                            <path d="M8 6l-6 6 6 6"></path>
-                            <path d="M14 4l-4 16"></path>
-                          </>
-                        )}
-                        {idx >= 2 && (
-                          <>
-                            <rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect>
-                            <line x1="12" y1="18" x2="12.01" y2="18" strokeWidth="2.5"></line>
-                          </>
-                        )}
-                      </svg>
-                    </div>
-                    <span className="service-card-tag">Specialized Service</span>
-                  </div>
+            {displayServices.map((service, idx) => {
+              const defaultCard = defaultServicesList[idx] || defaultServicesList[0];
+              const title = service.title || defaultCard.title;
+              const badgeText = service.badge || service.category || defaultCard.badge;
+              const tags = Array.isArray(service.tags) && service.tags.length > 0 ? service.tags : defaultCard.tags;
 
-                  <h3 className="service-card-title">{service.title}</h3>
-
-                  <div className="service-card-footer">
-                    <div className="service-card-pills">
-                      {(service.tags || []).slice(0, 3).map((tag, tIdx) => (
-                        <span key={tIdx} className="service-pill">{tag}</span>
-                      ))}
+              return (
+                <div key={service._id || idx} className="col-lg-4 col-md-6 col-sm-12">
+                  <div className="service-card">
+                    <div className="service-card-top">
+                      <div className={`service-3d-icon-box icon-${idx === 0 ? 'uiux' : idx === 1 ? 'web' : 'mobile'}`}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          {idx === 0 && (
+                            <>
+                              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                              <path d="M2 17l10 5 10-5"></path>
+                              <path d="M2 12l10 5 10-5"></path>
+                            </>
+                          )}
+                          {idx === 1 && (
+                            <>
+                              <polyline points="16 18 22 12 16 6"></polyline>
+                              <polyline points="8 6 2 12 8 18"></polyline>
+                            </>
+                          )}
+                          {idx >= 2 && (
+                            <>
+                              <rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect>
+                              <line x1="12" y1="18" x2="12.01" y2="18" strokeWidth="2.5"></line>
+                            </>
+                          )}
+                        </svg>
+                      </div>
+                      <span className="service-card-tag">{badgeText}</span>
                     </div>
-                    <span className="service-card-num">0{idx + 1}</span>
+
+                    <h3 className="service-card-title">{title}</h3>
+
+                    <div className="service-card-footer">
+                      <div className="service-card-pills">
+                        {tags.slice(0, 3).map((tag, tIdx) => (
+                          <span key={tIdx} className="service-pill">{tag}</span>
+                        ))}
+                      </div>
+                      <span className="service-card-num">0{idx + 1}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
