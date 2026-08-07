@@ -200,14 +200,10 @@ const CaseStudyManager = () => {
         caseStudy: caseStudyData
       };
 
-      const isMongoId = /^[0-9a-fA-F]{24}$/.test(selectedId);
-      if (isMongoId) {
-        await projectsApi.update(selectedId, updatedProjectPayload);
-      } else {
-        await projectsApi.create({
-          ...updatedProjectPayload,
-          slug: selectedProject?.slug || selectedProject?.id || selectedId || formData.title.toLowerCase().replace(/\s+/g, '-')
-        });
+      const res = await projectsApi.update(selectedId, updatedProjectPayload);
+      const savedProj = res?.data?.data?.project || res?.data?.project;
+      if (savedProj && savedProj._id) {
+        setSelectedId(savedProj._id);
       }
       if (refreshPortfolio) {
         refreshPortfolio();
