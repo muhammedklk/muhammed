@@ -6714,4 +6714,113 @@ body.preloader-active {
     border-color: rgba(255, 255, 255, 0.06);
 }
 
+.cs-v2-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 992px) {
+    .cs-v2-card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cs-v2-swatches-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 12px;
+    margin-top: 16px;
+}
+
+.cs-v2-swatch-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.cs-v2-swatch-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.cs-v2-swatch-info {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.cs-v2-swatch-name {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+}
+
+.cs-v2-swatch-hex {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-family: monospace;
+    margin-top: 2px;
+}
+
+.cs-v2-tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.cs-v2-tech-pill {
+    padding: 7px 16px;
+    border-radius: 30px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="dark"] .cs-v2-tech-pill {
+    background: #1a1c23;
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+}
+
+.cs-v2-typo-block {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.cs-v2-typo-name {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--text-primary);
+    display: block;
+    line-height: 1.2;
+}
+
+.cs-v2-typo-usage {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 3px;
+}
+
 

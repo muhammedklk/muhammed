@@ -200,58 +200,52 @@ const CaseStudy = () => {
         )}
 
         {/* 8. Design System & Technical Specs */}
-        <div className="row g-4 mb-5">
+        <div className="cs-v2-card-grid">
           {/* Tech Stack */}
-          <div className="col-lg-4 col-md-12">
-            <div className="cs-v2-system-card h-100">
-              <span className="cs-v2-section-tag d-block mb-2">TECH STACK</span>
-              <h4 className="fw-extrabold mb-3" style={{ fontSize: '17px' }}>Technologies Used</h4>
-              <div className="d-flex flex-wrap gap-2">
-                {(project.techTags || 'Figma, React, SCSS, Motion, Vercel').split(',').map((tag, i) => (
-                  <span key={i} className="service-pill" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', fontWeight: '600', color: '#334155' }}>{tag.trim()}</span>
-                ))}
-              </div>
+          <div className="cs-v2-system-card">
+            <span className="cs-v2-section-tag d-block mb-2">TECH STACK</span>
+            <h4 className="fw-extrabold mb-0" style={{ fontSize: '17px' }}>Technologies Used</h4>
+            <div className="cs-v2-tech-pills">
+              {(project.techTags || 'Figma, React, SCSS, Motion, Vercel').split(',').map((tag, i) => (
+                <span key={i} className="cs-v2-tech-pill">{tag.trim()}</span>
+              ))}
             </div>
           </div>
 
           {/* Color Palette */}
-          <div className="col-lg-4 col-md-12">
-            <div className="cs-v2-system-card h-100">
-              <span className="cs-v2-section-tag d-block mb-2">COLOR PALETTE</span>
-              <h4 className="fw-extrabold mb-3" style={{ fontSize: '17px' }}>Color Swatches</h4>
-              <div className="d-flex flex-wrap gap-3">
-                {[
-                  { hex: project.color1Hex, name: project.color1Name },
-                  { hex: project.color2Hex, name: project.color2Name },
-                  { hex: project.color3Hex, name: project.color3Name },
-                  { hex: project.color4Hex, name: project.color4Name },
-                ].filter(swatch => swatch.hex && typeof swatch.hex === 'string' && swatch.hex.trim() !== '').map((swatch, i) => (
-                  <div key={i} className="d-flex align-items-center gap-2">
-                    <span style={{ width: '26px', height: '26px', borderRadius: '50%', background: swatch.hex, display: 'inline-block', border: '1px solid rgba(0,0,0,0.15)' }}></span>
-                    <div>
-                      <span className="d-block fw-bold" style={{ fontSize: '12px' }}>{swatch.name || swatch.hex}</span>
-                      <span className="d-block text-muted" style={{ fontSize: '11px' }}>{swatch.hex.toUpperCase()}</span>
-                    </div>
+          <div className="cs-v2-system-card">
+            <span className="cs-v2-section-tag d-block mb-2">COLOR PALETTE</span>
+            <h4 className="fw-extrabold mb-0" style={{ fontSize: '17px' }}>Color Swatches</h4>
+            <div className="cs-v2-swatches-grid">
+              {[
+                { hex: project.color1Hex, name: project.color1Name },
+                { hex: project.color2Hex, name: project.color2Name },
+                { hex: project.color3Hex, name: project.color3Name },
+                { hex: project.color4Hex, name: project.color4Name },
+              ].filter(swatch => swatch.hex && typeof swatch.hex === 'string' && swatch.hex.trim() !== '').map((swatch, i) => (
+                <div key={i} className="cs-v2-swatch-item">
+                  <span className="cs-v2-swatch-circle" style={{ background: swatch.hex }}></span>
+                  <div className="cs-v2-swatch-info">
+                    <span className="cs-v2-swatch-name">{swatch.name || swatch.hex}</span>
+                    <span className="cs-v2-swatch-hex">{swatch.hex.toUpperCase()}</span>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
 
           {/* Typography */}
-          <div className="col-lg-4 col-md-12">
-            <div className="cs-v2-system-card h-100">
-              <span className="cs-v2-section-tag d-block mb-2">TYPOGRAPHY</span>
-              <h4 className="fw-extrabold mb-3" style={{ fontSize: '17px' }}>Font Hierarchy</h4>
-              <div className="d-flex flex-column gap-2">
-                <div>
-                  <span className="fw-bold d-block" style={{ fontSize: '13.5px' }}>{project.headingFont || 'Plus Jakarta Sans'}</span>
-                  <span className="text-muted" style={{ fontSize: '11.5px' }}>Headings & Titles</span>
-                </div>
-                <div>
-                  <span className="fw-bold d-block" style={{ fontSize: '13.5px' }}>{project.bodyFont || 'Inter / System Sans'}</span>
-                  <span className="text-muted" style={{ fontSize: '11.5px' }}>Body Text & Specifications</span>
-                </div>
+          <div className="cs-v2-system-card">
+            <span className="cs-v2-section-tag d-block mb-2">TYPOGRAPHY</span>
+            <h4 className="fw-extrabold mb-0" style={{ fontSize: '17px' }}>Font Hierarchy</h4>
+            <div className="cs-v2-typo-block">
+              <div>
+                <span className="cs-v2-typo-name">{project.headingFont || 'Plus Jakarta Sans'}</span>
+                <span className="cs-v2-typo-usage">Headings & Titles</span>
+              </div>
+              <div>
+                <span className="cs-v2-typo-name">{project.bodyFont || 'Inter / Outfit'}</span>
+                <span className="cs-v2-typo-usage">Body Text & Specifications</span>
               </div>
             </div>
           </div>
