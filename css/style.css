@@ -6542,8 +6542,8 @@ body.preloader-active {
     margin-bottom: 0;
 }
 
-/* 2. Top Desktop Browser Window Frame */
-.nexo-browser-window {
+/* 2. Top Hero Showcase Frame */
+.nexo-hero-frame {
     width: 100%;
     border-radius: 20px;
     overflow: hidden;
@@ -6553,42 +6553,8 @@ body.preloader-active {
     margin-bottom: 40px;
 }
 
-[data-theme="dark"] .nexo-browser-window {
+[data-theme="dark"] .nexo-hero-frame {
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
-}
-
-.nexo-browser-bar {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 18px;
-    background: rgba(255, 255, 255, 0.04);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.nexo-browser-dots {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.nexo-browser-dot {
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.25);
-}
-
-.nexo-browser-tab {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 3px 10px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
 }
 
 .nexo-hero-img {

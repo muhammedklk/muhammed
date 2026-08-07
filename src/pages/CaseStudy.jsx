@@ -104,18 +104,8 @@ const CaseStudy = () => {
             </h1>
           </div>
 
-          {/* 2. Top Desktop Browser Window Frame */}
-          <div className="nexo-browser-window">
-            <div className="nexo-browser-bar">
-              <div className="nexo-browser-dots">
-                <span className="nexo-browser-dot"></span>
-                <span className="nexo-browser-dot"></span>
-                <span className="nexo-browser-dot"></span>
-              </div>
-              <div className="nexo-browser-tab">
-                <span>{project.title ? project.title.toLowerCase().replace(/[^a-z0-9]/g, '') : 'project'}.com</span>
-              </div>
-            </div>
+          {/* 2. Top Hero Showcase Frame */}
+          <div className="nexo-hero-frame">
             <img src={project.heroImg} alt={project.title} id="cs-hero-img" className="nexo-hero-img" />
           </div>
 
@@ -130,7 +120,7 @@ const CaseStudy = () => {
                   id="cs-live-btn"
                   className="nexo-indigo-btn"
                 >
-                  <span>Read Case Study</span>
+                  <span>Visit Website</span>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                     <polyline points="15 3 21 3 21 9"></polyline>
