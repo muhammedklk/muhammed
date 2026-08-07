@@ -83,187 +83,197 @@ const CaseStudy = () => {
 
   return (
     <main className="case-study-main grid-lines-bg">
-      <div className="container py-3 py-md-5">
-        <div className="prem-cs-wrapper">
+      <div className="cs-v2-container py-4 py-md-5">
 
-          {/* Top Bar Nav */}
-          <div className="d-flex align-items-center justify-content-between w-100 mb-4">
+        {/* 1. Top Bar: Back to Projects Link & Category Badge */}
+        <div className="cs-v2-top-bar">
+          <Link to="/works" className="cs-back-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>Back to Projects</span>
+          </Link>
+
+          <span className="service-pill" style={{ background: 'rgba(210, 234, 38, 0.15)', color: '#0f172a', fontWeight: '700', border: '1px solid rgba(210, 234, 38, 0.4)' }}>
+            {project.category} • {project.year}
+          </span>
+        </div>
+
+        {/* 2. Giant Brand Title (Centered) */}
+        <h1 className="cs-v2-main-title" id="cs-title">
+          {project.title}
+        </h1>
+
+        {/* 3. Hero Showcase Card (Large Rounded Full-Bleed Mockup Frame) */}
+        <div className="cs-v2-hero-card">
+          <img src={project.heroImg} alt={project.title} id="cs-hero-img" className="cs-v2-hero-img" />
+        </div>
+
+        {/* 4. Sleek Tagline & 4-Column Metadata Grid (Directly Under Hero) */}
+        <div className="cs-v2-header-info">
+          <div>
+            <p className="cs-v2-tagline" id="cs-tagline">
+              {project.tagline}
+            </p>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                id="cs-live-btn"
+                className="btn-primary-pill"
+              >
+                <span>Visit Website ↗</span>
+              </a>
+            )}
+          </div>
+
+          <div className="cs-v2-specs-grid">
+            <div>
+              <span className="cs-v2-spec-label">CLIENT</span>
+              <span className="cs-v2-spec-val" id="cs-client">{project.client || 'Client Studio'}</span>
+            </div>
+            <div>
+              <span className="cs-v2-spec-label">SERVICES</span>
+              <span className="cs-v2-spec-val" id="cs-services">{project.services || 'UI/UX & Engineering'}</span>
+            </div>
+            <div>
+              <span className="cs-v2-spec-label">CATEGORY</span>
+              <span className="cs-v2-spec-val" id="cs-category">{project.category || 'Digital Experience'}</span>
+            </div>
+            <div>
+              <span className="cs-v2-spec-label">YEAR</span>
+              <span className="cs-v2-spec-val" id="cs-year">{project.year || '2026'}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 5. Executive Overview Narrative Section */}
+        <div className="cs-v2-narrative-section">
+          <div>
+            <span className="cs-v2-section-tag">OVERVIEW</span>
+          </div>
+
+          <div className="cs-v2-body-text" id="cs-description">
+            {project.description.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+
+            {project.outcome && (
+              <div className="cs-v2-outcome-banner">
+                <span style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.12em', color: '#849a00', display: 'block', marginBottom: '6px', textTransform: 'uppercase' }}>KEY OUTCOME</span>
+                <p id="cs-outcome-desc" style={{ fontSize: '16px', lineHeight: '1.6', fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
+                  {project.outcome}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* 6. Secondary Desktop Showcase Screen */}
+        {project.bannerImg && (
+          <div className="cs-v2-hero-card mb-5">
+            <img src={project.bannerImg} alt="Secondary Desktop View" className="cs-v2-hero-img" />
+          </div>
+        )}
+
+        {/* 7. Mobile Experience Showcase (2 Devices Side-by-Side) */}
+        {(project.mobileImg1 || project.mobileImg2) && (
+          <div className="cs-v2-mobile-section">
+            <span className="cs-v2-section-tag" style={{ letterSpacing: '0.15em' }}>IMMERSIVE EXPERIENCE</span>
+            <h3 className="fw-extrabold mt-2 mb-0" style={{ fontSize: 'clamp(24px, 4vw, 36px)', letterSpacing: '-0.02em' }}>MOBILE EXPERIENCE</h3>
+
+            <div className="cs-v2-mobile-grid">
+              {project.mobileImg1 && (
+                <div className="cs-v2-mobile-card">
+                  <img src={project.mobileImg1} alt="Mobile Screen 1" className="cs-v2-mobile-img" />
+                </div>
+              )}
+              {project.mobileImg2 && (
+                <div className="cs-v2-mobile-card">
+                  <img src={project.mobileImg2} alt="Mobile Screen 2" className="cs-v2-mobile-img" />
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* 8. Design System & Technical Specs */}
+        <div className="row g-4 mb-5">
+          {/* Tech Stack */}
+          <div className="col-lg-4 col-md-12">
+            <div className="cs-v2-system-card h-100">
+              <span className="cs-v2-section-tag d-block mb-2">TECH STACK</span>
+              <h4 className="fw-extrabold mb-3" style={{ fontSize: '17px' }}>Technologies Used</h4>
+              <div className="d-flex flex-wrap gap-2">
+                {(project.techTags || 'Figma, React, SCSS, Motion, Vercel').split(',').map((tag, i) => (
+                  <span key={i} className="service-pill" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', fontWeight: '600', color: '#334155' }}>{tag.trim()}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Color Palette */}
+          <div className="col-lg-4 col-md-12">
+            <div className="cs-v2-system-card h-100">
+              <span className="cs-v2-section-tag d-block mb-2">COLOR PALETTE</span>
+              <h4 className="fw-extrabold mb-3" style={{ fontSize: '17px' }}>Color Swatches</h4>
+              <div className="d-flex flex-wrap gap-3">
+                {[
+                  { hex: project.color1Hex, name: project.color1Name },
+                  { hex: project.color2Hex, name: project.color2Name },
+                  { hex: project.color3Hex, name: project.color3Name },
+                  { hex: project.color4Hex, name: project.color4Name },
+                ].filter(swatch => swatch.hex && typeof swatch.hex === 'string' && swatch.hex.trim() !== '').map((swatch, i) => (
+                  <div key={i} className="d-flex align-items-center gap-2">
+                    <span style={{ width: '26px', height: '26px', borderRadius: '50%', background: swatch.hex, display: 'inline-block', border: '1px solid rgba(0,0,0,0.15)' }}></span>
+                    <div>
+                      <span className="d-block fw-bold" style={{ fontSize: '12px' }}>{swatch.name || swatch.hex}</span>
+                      <span className="d-block text-muted" style={{ fontSize: '11px' }}>{swatch.hex.toUpperCase()}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Typography */}
+          <div className="col-lg-4 col-md-12">
+            <div className="cs-v2-system-card h-100">
+              <span className="cs-v2-section-tag d-block mb-2">TYPOGRAPHY</span>
+              <h4 className="fw-extrabold mb-3" style={{ fontSize: '17px' }}>Font Hierarchy</h4>
+              <div className="d-flex flex-column gap-2">
+                <div>
+                  <span className="fw-bold d-block" style={{ fontSize: '13.5px' }}>{project.headingFont || 'Plus Jakarta Sans'}</span>
+                  <span className="text-muted" style={{ fontSize: '11.5px' }}>Headings & Titles</span>
+                </div>
+                <div>
+                  <span className="fw-bold d-block" style={{ fontSize: '13.5px' }}>{project.bodyFont || 'Inter / System Sans'}</span>
+                  <span className="text-muted" style={{ fontSize: '11.5px' }}>Body Text & Specifications</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 9. Bottom Navigation Bar */}
+        <div className="pt-4 mt-5 border-top">
+          <div className="d-flex align-items-center justify-content-between flex-wrap gap-3">
             <Link to="/works" className="cs-back-link">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <line x1="19" y1="12" x2="5" y2="12"></line>
                 <polyline points="12 19 5 12 12 5"></polyline>
               </svg>
-              <span>Back to Projects</span>
+              <span>All Projects</span>
             </Link>
 
-            <span className="service-pill" style={{ background: 'rgba(210, 234, 38, 0.15)', color: '#0f172a', fontWeight: '700', border: '1px solid rgba(210, 234, 38, 0.4)' }}>
-              {project.category} • {project.year}
-            </span>
+            <Link to="/contact" className="btn-primary-pill">
+              <span>Start Your Project</span>
+            </Link>
           </div>
-
-          {/* Bold Clean Top Hero Title */}
-          <h1 className="prem-cs-hero-title" id="cs-title">
-            {project.title}
-          </h1>
-
-          {/* Main Desktop Hero Showcase Mockup */}
-          <div className="prem-cs-hero-frame">
-            <img src={project.heroImg} alt={project.title} id="cs-hero-img" className="prem-cs-hero-img" />
-          </div>
-
-          {/* Minimal 4-Item Horizontal Metadata Bar */}
-          <div className="prem-cs-meta-bar">
-            <div className="prem-cs-meta-item">
-              <span className="prem-cs-meta-lbl">COMPANY / CLIENT</span>
-              <span className="prem-cs-meta-val" id="cs-client">{project.client || 'Client Studio'}</span>
-            </div>
-            <div className="prem-cs-meta-item">
-              <span className="prem-cs-meta-lbl">SERVICES</span>
-              <span className="prem-cs-meta-val" id="cs-services">{project.services || 'UI/UX + Frontend'}</span>
-            </div>
-            <div className="prem-cs-meta-item">
-              <span className="prem-cs-meta-lbl">CATEGORY</span>
-              <span className="prem-cs-meta-val" id="cs-category">{project.category || 'Digital Platform'}</span>
-            </div>
-            <div className="prem-cs-meta-item">
-              <span className="prem-cs-meta-lbl">YEAR</span>
-              <span className="prem-cs-meta-val" id="cs-year">{project.year || '2026'}</span>
-            </div>
-          </div>
-
-          {/* Split Intro: Tagline & Live Button (Left) vs Project Overview Narrative (Right) */}
-          <div className="prem-cs-intro-grid">
-            {/* Left Box */}
-            <div>
-              <p className="prem-cs-tagline-text" id="cs-tagline">
-                {project.tagline}
-              </p>
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  id="cs-live-btn"
-                  className="btn-primary-pill"
-                >
-                  <span>Visit Website ↗</span>
-                </a>
-              )}
-            </div>
-
-            {/* Right Box */}
-            <div>
-              <span className="prem-cs-sublabel">PROJECT OVERVIEW</span>
-              <div id="cs-description">
-                {project.description.map((paragraph, index) => (
-                  <p key={index} className="prem-cs-body-text">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-
-              {project.outcome && (
-                <div className="prem-cs-quote-box">
-                  <span className="prem-cs-quote-title">KEY OUTCOME</span>
-                  <p className="prem-cs-quote-content" id="cs-outcome-desc">
-                    {project.outcome}
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Full Desktop Showcase Banner Image */}
-          {project.showcaseImg && (
-            <div className="prem-cs-showcase-img">
-              <img src={project.showcaseImg} alt={`${project.title} Full Showcase`} className="w-100 d-block" style={{ maxHeight: '600px', objectFit: 'cover' }} />
-            </div>
-          )}
-
-          {/* Minimal Mobile Experience Section */}
-          {(project.mobileImg1 || project.mobileImg2) && (
-            <div className="mb-5">
-              <div className="prem-cs-section-header">
-                <span className="prem-cs-sublabel">MINIMAL & HIGH-PERFORMING</span>
-                <h2 className="prem-cs-sectitle">MOBILE EXPERIENCE</h2>
-              </div>
-
-              <div className="prem-cs-mobile-grid">
-                {project.mobileImg1 && (
-                  <div className="prem-cs-mobile-frame">
-                    <img src={project.mobileImg1} alt="Mobile View 1" className="prem-cs-mobile-img" />
-                  </div>
-                )}
-                {project.mobileImg2 && (
-                  <div className="prem-cs-mobile-frame">
-                    <img src={project.mobileImg2} alt="Mobile View 2" className="prem-cs-mobile-img" />
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* Tech Stack & Design System Pills */}
-          <div className="p-4 rounded-4 mb-5" style={{ background: '#f8fafc', border: '1px solid rgba(0,0,0,0.06)' }}>
-            <div className="row g-4">
-              {/* Tech Stack */}
-              <div className="col-md-6">
-                <span className="prem-cs-sublabel">TECH STACK</span>
-                <div className="d-flex flex-wrap gap-2 mt-2">
-                  {(project.techTags || 'Figma, React, SCSS, Motion, Vercel').split(',').map((tag, i) => (
-                    <span key={i} className="service-pill" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', fontWeight: '600', color: '#334155' }}>{tag.trim()}</span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Color Palette Theme */}
-              <div className="col-md-6">
-                <span className="prem-cs-sublabel">COLOR PALETTE</span>
-                <div className="d-flex flex-wrap gap-3 mt-2">
-                  {[
-                    { hex: project.color1Hex, name: project.color1Name },
-                    { hex: project.color2Hex, name: project.color2Name },
-                    { hex: project.color3Hex, name: project.color3Name },
-                    { hex: project.color4Hex, name: project.color4Name },
-                  ].filter(swatch => swatch.hex && typeof swatch.hex === 'string' && swatch.hex.trim() !== '').map((swatch, i) => (
-                    <div key={i} className="d-flex align-items-center gap-2">
-                      <span style={{ width: '24px', height: '24px', borderRadius: '50%', background: swatch.hex, display: 'inline-block', border: '1px solid rgba(0,0,0,0.15)' }}></span>
-                      <div>
-                        <span className="d-block fw-bold" style={{ fontSize: '11.5px', color: '#0f172a' }}>{swatch.name || swatch.hex}</span>
-                        <span className="d-block text-muted" style={{ fontSize: '10.5px' }}>{swatch.hex.toUpperCase()}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Secondary Banner Showcase */}
-          {project.bannerImg && (
-            <div className="prem-cs-showcase-img">
-              <img src={project.bannerImg} alt="Secondary Desktop View" className="w-100 d-block" style={{ maxHeight: '600px', objectFit: 'cover' }} />
-            </div>
-          )}
-
-          {/* Bottom Footer Navigation Bar */}
-          <div className="pt-4 mt-5 border-top">
-            <div className="d-flex align-items-center justify-content-between flex-wrap gap-3">
-              <Link to="/works" className="cs-back-link">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <line x1="19" y1="12" x2="5" y2="12"></line>
-                  <polyline points="12 19 5 12 12 5"></polyline>
-                </svg>
-                <span>All Projects</span>
-              </Link>
-
-              <Link to="/contact" className="btn-primary-pill">
-                <span>Start Your Project</span>
-              </Link>
-            </div>
-          </div>
-
         </div>
+
       </div>
     </main>
   );
