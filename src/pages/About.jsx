@@ -16,73 +16,25 @@ const About = () => {
   const email = settings?.contactEmail || "muhammedklkm@gmail.com";
   const location = settings?.location || "Kerala, India (Remote Worldwide)";
 
-  // Skill categories
+  // Skill categories matching exact resume
   const designSkills = ['Figma', 'Adobe Photoshop', 'Wireframing & Prototyping', 'Design Systems', 'Mobile & Web Interface Design', 'UI Animation & Interaction'];
-  const frontendSkills = ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap', 'GSAP', 'Responsive Design', 'GitHub', 'React'];
-  const softSkills = ['Creative Thinking', 'Communication', 'Problem Solving', 'Collaboration', 'User Research'];
-
-  // Core Pillars of Craft
-  const pillars = [
-    {
-      number: '01',
-      title: 'Visual Excellence',
-      icon: '✨',
-      badge: 'Design & Aesthetics',
-      desc: 'Crafting pixel-perfect, modern UI layouts with harmonious color palettes, fluid micro-interactions, and strong typographic hierarchy.',
-      color: '#65a30d',
-      bgLight: '#f7fee7'
-    },
-    {
-      number: '02',
-      title: 'Technical Mastery',
-      icon: '⚡',
-      badge: 'Front-End Code',
-      desc: 'Building responsive, clean, and accessible code structure utilizing modern HTML5, CSS3, JavaScript, React, and performance best practices.',
-      color: '#2563eb',
-      bgLight: '#eff6ff'
-    },
-    {
-      number: '03',
-      title: 'User-Centric Empathy',
-      icon: '💡',
-      badge: 'Product Strategy',
-      desc: 'Designing intuitive user flows, clear navigation patterns, and seamless interactions that solve real human problems effortlessly.',
-      color: '#7c3aed',
-      bgLight: '#f5f3ff'
-    }
-  ];
+  const frontendSkills = ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap', 'GSAP', 'Responsive Design', 'GitHub'];
+  const softSkills = ['Creative Thinking', 'Communication', 'Problem Solving', 'Collaboration'];
 
   return (
-    <div style={{ backgroundColor: '#f8fafc', color: '#0f172a', minHeight: '100vh', paddingTop: '20px', paddingBottom: '80px' }}>
-      
-      {/* ========================================================================= */}
-      {/* 1. HERO IDENTITY & PORTRAIT SECTION (LIGHT THEME) */}
-      {/* ========================================================================= */}
-      <section className="about-portrait-section grid-lines-bg" style={{ padding: '50px 0 70px 0' }}>
+    <>
+      {/* Personal Profile Photo & Identity Section */}
+      <section className="about-portrait-section grid-lines-bg">
         <div className="container">
           <div className="row g-5 align-items-center">
-            
-            {/* Profile Photo Card (Left Column) */}
+            {/* Profile Photo Card (Left) */}
             <div className="col-lg-5 col-md-12">
-              <div className="about-portrait-card" style={{
-                background: '#ffffff',
-                border: '1px solid #e2e8f0',
-                borderRadius: '32px',
-                padding: '14px',
-                boxShadow: '0 20px 40px rgba(15, 23, 42, 0.06)'
-              }}>
-                <div className="portrait-image-wrapper" style={{
-                  height: '460px',
-                  borderRadius: '24px',
-                  overflow: 'hidden',
-                  position: 'relative',
-                  backgroundColor: '#f1f5f9'
-                }}>
+              <div className="about-portrait-card">
+                <div className="portrait-image-wrapper">
                   <img
                     src={avatar}
                     alt="Muhammed - UI/UX Designer & Developer"
                     className="about-portrait-img"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 20%' }}
                     onError={(e) => {
                       e.target.style.display = 'none';
                       if (e.target.nextElementSibling) {
@@ -91,74 +43,20 @@ const About = () => {
                     }}
                   />
 
-                  {/* Avatar Fallback */}
-                  <div className="portrait-avatar-fallback" style={{
-                    width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
-                    gap: '16px'
-                  }}>
-                    <div className="avatar-circle-inner" style={{
-                      width: '100px',
-                      height: '100px',
-                      borderRadius: '50%',
-                      background: 'linear-gradient(135deg, #d2ea26 0%, #84cc16 100%)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      boxShadow: '0 10px 25px rgba(132, 204, 22, 0.3)'
-                    }}>
-                      <span className="avatar-initials" style={{ fontSize: '36px', fontWeight: '800', color: '#0f172a' }}>M</span>
+                  {/* Styled Avatar Fallback Render */}
+                  <div className="portrait-avatar-fallback">
+                    <div className="avatar-circle-inner">
+                      <span className="avatar-initials">M</span>
                     </div>
                   </div>
 
-                  {/* Floating Badges */}
-                  <div className="portrait-badges-layer" style={{
-                    position: 'absolute',
-                    bottom: '16px',
-                    left: '16px',
-                    right: '16px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    gap: '10px'
-                  }}>
-                    <div style={{
-                      background: 'rgba(255, 255, 255, 0.92)',
-                      backdropFilter: 'blur(12px)',
-                      border: '1px solid #e2e8f0',
-                      padding: '8px 14px',
-                      borderRadius: '20px',
-                      fontSize: '12px',
-                      fontWeight: '700',
-                      color: '#0f172a',
-                      boxShadow: '0 4px 15px rgba(0,0,0,0.06)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px'
-                    }}>
-                      <span>⚡</span>
+                  <div className="portrait-badges-layer">
+                    <div className="portrait-floating-badge badge-role">
+                      <span className="badge-icon">⚡</span>
                       <span>UI/UX & Web Dev</span>
                     </div>
-
-                    <div style={{
-                      background: 'rgba(255, 255, 255, 0.92)',
-                      backdropFilter: 'blur(12px)',
-                      border: '1px solid #bbf7d0',
-                      padding: '8px 14px',
-                      borderRadius: '20px',
-                      fontSize: '12px',
-                      fontWeight: '700',
-                      color: '#15803d',
-                      boxShadow: '0 4px 15px rgba(0,0,0,0.06)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px'
-                    }}>
-                      <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }}></span>
+                    <div className="portrait-floating-badge badge-avail">
+                      <span className="badge-pulse"></span>
                       <span>Available for Hire</span>
                     </div>
                   </div>
@@ -166,211 +64,70 @@ const About = () => {
               </div>
             </div>
 
-            {/* Intro Details (Right Column) */}
+            {/* Intro Statement & Quick Info (Right) */}
             <div className="col-lg-7 col-md-12">
-              <div className="portrait-intro-block" style={{ paddingLeft: '10px' }}>
-                <span className="page-badge" style={{
-                  display: 'inline-block',
-                  padding: '6px 14px',
-                  background: '#f1f5f9',
-                  border: '1px solid #cbd5e1',
-                  borderRadius: '20px',
-                  fontSize: '11px',
-                  fontWeight: '800',
-                  letterSpacing: '1px',
-                  color: '#475569',
-                  marginBottom: '16px'
-                }}>
-                  ABOUT MY CRAFT & PHILOSOPHY
-                </span>
-
-                <h2 style={{ fontSize: '38px', fontWeight: '800', color: '#0f172a', marginBottom: '8px', letterSpacing: '-0.5px' }}>
-                  {title}
-                </h2>
-
-                <h3 style={{ fontSize: '18px', fontWeight: '600', color: '#475569', lineHeight: '1.5', marginBottom: '20px' }}>
+              <div className="portrait-intro-block">
+                <span className="page-badge">ABOUT MY CRAFT</span>
+                <h2 className="portrait-intro-name">{title}</h2>
+                <h3 className="portrait-intro-role">
                   {subtitle}
                 </h3>
                 
-                <p style={{ fontSize: '15px', color: '#64748b', lineHeight: '1.7', marginBottom: '28px' }}>
+                <p className="portrait-intro-text">
                   {singleParagraph}
                 </p>
 
-                {/* Quick Info Grid */}
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                  gap: '16px',
-                  padding: '20px',
-                  background: '#ffffff',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '20px',
-                  marginBottom: '28px',
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.02)'
-                }}>
-                  <div>
-                    <span style={{ display: 'block', fontSize: '11px', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>Location</span>
-                    <span style={{ fontSize: '13.5px', fontWeight: '700', color: '#0f172a' }}>{location}</span>
+                <div className="portrait-quick-details">
+                  <div className="quick-detail-item">
+                    <span className="detail-label">Location</span>
+                    <span className="detail-val">{location}</span>
                   </div>
-                  <div>
-                    <span style={{ display: 'block', fontSize: '11px', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>Focus</span>
-                    <span style={{ fontSize: '13.5px', fontWeight: '700', color: '#0f172a' }}>Web Design & Development</span>
+                  <div className="quick-detail-item">
+                    <span className="detail-label">Specialization</span>
+                    <span className="detail-val">Web Design, Development</span>
                   </div>
-                  <div>
-                    <span style={{ display: 'block', fontSize: '11px', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>Email</span>
-                    <a href={`mailto:${email}`} style={{ fontSize: '13.5px', fontWeight: '700', color: '#2563eb', textDecoration: 'none' }}>
+                  <div className="quick-detail-item">
+                    <span className="detail-label">Email</span>
+                    <a href={`mailto:${email}`} className="detail-val text-link">
                       {email}
                     </a>
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
+                {/* Download CV Prominent CTA Buttons */}
+                <div className="portrait-actions-row">
                   <a
                     href="assets/cv/Muhammed_K_Resume.pdf"
                     target="_blank"
                     download="Muhammed_K_Resume.pdf"
-                    style={{
-                      padding: '14px 28px',
-                      background: '#0f172a',
-                      color: '#ffffff',
-                      borderRadius: '30px',
-                      fontSize: '14px',
-                      fontWeight: '700',
-                      textDecoration: 'none',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      boxShadow: '0 10px 20px rgba(15, 23, 42, 0.15)',
-                      transition: 'all 0.2s ease'
-                    }}
+                    className="btn-download-cv-lg"
                   >
-                    <span>Download CV</span>
-                    <span>↓</span>
+                    <span>Download My CV</span>
                   </a>
-
-                  <Link
-                    to="/contact"
-                    style={{
-                      padding: '14px 28px',
-                      background: '#ffffff',
-                      color: '#0f172a',
-                      border: '1px solid #cbd5e1',
-                      borderRadius: '30px',
-                      fontSize: '14px',
-                      fontWeight: '700',
-                      textDecoration: 'none',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
-                      transition: 'all 0.2s ease'
-                    }}
-                  >
+                  <Link to="/contact" className="btn-contact-outline-lg">
                     <span>Get in Touch</span>
-                    <span>→</span>
                   </Link>
                 </div>
-
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* ========================================================================= */}
-      {/* 2. THE THREE PILLARS OF CRAFT (LIGHT THEME) */}
-      {/* ========================================================================= */}
-      <section style={{ padding: '40px 0 60px 0' }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 40px auto' }}>
-            <span style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', color: '#65a30d', display: 'block', marginBottom: '8px' }}>
-              DESIGN & ENGINEERING TRIAD
-            </span>
-            <h2 style={{ fontSize: '30px', fontWeight: '800', color: '#0f172a', margin: 0 }}>
-              The 3 Pillars of My Craft
-            </h2>
-          </div>
-
-          <div className="row g-4">
-            {pillars.map((pillar, idx) => (
-              <div key={idx} className="col-lg-4 col-md-6 col-sm-12">
-                <div style={{
-                  background: '#ffffff',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '24px',
-                  padding: '30px',
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justify: 'space-between',
-                  boxShadow: '0 10px 25px rgba(0, 0, 0, 0.03)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-                }}>
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
-                      <span style={{
-                        fontSize: '24px',
-                        width: '48px',
-                        height: '48px',
-                        borderRadius: '16px',
-                        background: pillar.bgLight,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}>
-                        {pillar.icon}
-                      </span>
-                      <span style={{ fontSize: '12px', fontWeight: '800', color: pillar.color, letterSpacing: '1px' }}>
-                        {pillar.number} / {pillar.badge.toUpperCase()}
-                      </span>
-                    </div>
-
-                    <h3 style={{ fontSize: '20px', fontWeight: '800', color: '#0f172a', marginBottom: '10px' }}>
-                      {pillar.title}
-                    </h3>
-
-                    <p style={{ fontSize: '13.5px', color: '#64748b', lineHeight: '1.6', margin: 0 }}>
-                      {pillar.desc}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 3. TECHNICAL SKILLS & EXPERTISE MATRIX (LIGHT THEME) */}
-      {/* ========================================================================= */}
-      <section style={{ padding: '20px 0 60px 0' }}>
+      {/* 3 Separate Cards for Skills - Light Theme Premium Styling */}
+      <section style={{ padding: '40px 0 90px 0' }}>
         <div className="container">
           <div style={{ marginBottom: '36px', textAlign: 'center' }}>
-            <span style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', color: '#2563eb', display: 'block', marginBottom: '8px' }}>
-              TECHNICAL CAPABILITIES
-            </span>
-            <h2 style={{ fontSize: '30px', fontWeight: '800', color: '#0f172a', margin: 0 }}>
-              Skills & Tools Matrix
+            <span className="page-badge" style={{ marginBottom: '8px', display: 'inline-block' }}>TECHNICAL CAPABILITIES</span>
+            <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#0f172a', margin: 0 }}>
+              Skills & Expertise Matrix
             </h2>
           </div>
 
           <div className="row g-4">
-            
             {/* Card 1: Design */}
             <div className="col-lg-4 col-md-6 col-sm-12">
-              <div style={{
-                background: '#ffffff',
-                borderRadius: '24px',
-                height: '100%',
-                padding: '28px',
-                display: 'flex',
-                flexDirection: 'column',
-                justify: 'space-between',
-                border: '1px solid #e2e8f0',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.03)'
-              }}>
+              <div style={{ background: '#ffffff', borderRadius: '20px', height: '100%', padding: '28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', border: '1px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.04)' }}>
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', paddingBottom: '12px', borderBottom: '1px solid #f1f5f9' }}>
                     <div style={{ display: 'flex', gap: '6px' }}>
@@ -388,18 +145,7 @@ const About = () => {
 
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                     {designSkills.map((skill, idx) => (
-                      <span key={idx} style={{
-                        padding: '6px 12px',
-                        background: '#f8fafc',
-                        border: '1px solid #e2e8f0',
-                        borderRadius: '20px',
-                        color: '#0f172a',
-                        fontSize: '12.5px',
-                        fontWeight: '700',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '6px'
-                      }}>
+                      <span key={idx} style={{ padding: '6px 12px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '20px', color: '#0f172a', fontSize: '12.5px', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
                         <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#65a30d' }}></span>
                         {skill}
                       </span>
@@ -408,24 +154,14 @@ const About = () => {
                 </div>
 
                 <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid #f1f5f9', fontSize: '12px', color: '#64748b', fontStyle: 'italic' }}>
-                  Figma, Photoshop, Wireframes & Systems
+                  Figma, Photoshop, Interface Systems
                 </div>
               </div>
             </div>
 
             {/* Card 2: Frontend Development */}
             <div className="col-lg-4 col-md-6 col-sm-12">
-              <div style={{
-                background: '#ffffff',
-                borderRadius: '24px',
-                height: '100%',
-                padding: '28px',
-                display: 'flex',
-                flexDirection: 'column',
-                justify: 'space-between',
-                border: '1px solid #e2e8f0',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.03)'
-              }}>
+              <div style={{ background: '#ffffff', borderRadius: '20px', height: '100%', padding: '28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', border: '1px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.04)' }}>
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', paddingBottom: '12px', borderBottom: '1px solid #f1f5f9' }}>
                     <div style={{ display: 'flex', gap: '6px' }}>
@@ -443,18 +179,7 @@ const About = () => {
 
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                     {frontendSkills.map((skill, idx) => (
-                      <span key={idx} style={{
-                        padding: '6px 12px',
-                        background: '#f8fafc',
-                        border: '1px solid #e2e8f0',
-                        borderRadius: '20px',
-                        color: '#0f172a',
-                        fontSize: '12.5px',
-                        fontWeight: '700',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '6px'
-                      }}>
+                      <span key={idx} style={{ padding: '6px 12px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '20px', color: '#0f172a', fontSize: '12.5px', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
                         <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#2563eb' }}></span>
                         {skill}
                       </span>
@@ -468,19 +193,9 @@ const About = () => {
               </div>
             </div>
 
-            {/* Card 3: Mindset & Soft Skills */}
+            {/* Card 3: Soft Skills */}
             <div className="col-lg-4 col-md-12 col-sm-12">
-              <div style={{
-                background: '#ffffff',
-                borderRadius: '24px',
-                height: '100%',
-                padding: '28px',
-                display: 'flex',
-                flexDirection: 'column',
-                justify: 'space-between',
-                border: '1px solid #e2e8f0',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.03)'
-              }}>
+              <div style={{ background: '#ffffff', borderRadius: '20px', height: '100%', padding: '28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', border: '1px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.04)' }}>
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', paddingBottom: '12px', borderBottom: '1px solid #f1f5f9' }}>
                     <div style={{ display: 'flex', gap: '6px' }}>
@@ -488,7 +203,7 @@ const About = () => {
                       <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#eab308' }}></span>
                       <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#22c55e' }}></span>
                     </div>
-                    <span style={{ color: '#7c3aed', fontWeight: '800', fontSize: '12px', letterSpacing: '1px' }}>03 / MINDSET</span>
+                    <span style={{ color: '#7c3aed', fontWeight: '800', fontSize: '12px', letterSpacing: '1px' }}>03 / SOFT SKILLS</span>
                   </div>
 
                   <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -498,18 +213,7 @@ const About = () => {
 
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                     {softSkills.map((skill, idx) => (
-                      <span key={idx} style={{
-                        padding: '6px 12px',
-                        background: '#f8fafc',
-                        border: '1px solid #e2e8f0',
-                        borderRadius: '20px',
-                        color: '#0f172a',
-                        fontSize: '12.5px',
-                        fontWeight: '700',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '6px'
-                      }}>
+                      <span key={idx} style={{ padding: '6px 12px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '20px', color: '#0f172a', fontSize: '12.5px', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
                         <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#7c3aed' }}></span>
                         {skill}
                       </span>
@@ -518,58 +222,14 @@ const About = () => {
                 </div>
 
                 <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid #f1f5f9', fontSize: '12px', color: '#64748b', fontStyle: 'italic' }}>
-                  Collaboration, Strategy & Problem Solving
+                  Collaboration, Problem Solving & Strategy
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
-
-      {/* ========================================================================= */}
-      {/* 4. CALL TO ACTION BANNER (LIGHT THEME) */}
-      {/* ========================================================================= */}
-      <section style={{ padding: '20px 0 40px 0' }}>
-        <div className="container">
-          <div style={{
-            background: 'linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%)',
-            border: '1px solid #cbd5e1',
-            borderRadius: '32px',
-            padding: '50px 30px',
-            textAlign: 'center',
-            boxShadow: '0 15px 35px rgba(0,0,0,0.03)'
-          }}>
-            <span style={{ fontSize: '12px', fontWeight: '800', letterSpacing: '1px', textTransform: 'uppercase', color: '#65a30d', display: 'inline-block', marginBottom: '12px' }}>
-              LET'S WORK TOGETHER
-            </span>
-            <h2 style={{ fontSize: '32px', fontWeight: '800', color: '#0f172a', marginBottom: '14px' }}>
-              Have a Project or Vision in Mind?
-            </h2>
-            <p style={{ fontSize: '15px', color: '#64748b', maxWidth: '500px', margin: '0 auto 28px auto', lineHeight: '1.6' }}>
-              I am available for freelance projects, design systems, and full-time UI/UX or Front-End development roles.
-            </p>
-            <a
-              href={`mailto:${email}`}
-              style={{
-                padding: '14px 32px',
-                background: '#0f172a',
-                color: '#ffffff',
-                borderRadius: '30px',
-                fontSize: '14px',
-                fontWeight: '700',
-                textDecoration: 'none',
-                display: 'inline-block',
-                boxShadow: '0 10px 25px rgba(15, 23, 42, 0.15)'
-              }}
-            >
-              Start a Conversation →
-            </a>
-          </div>
-        </div>
-      </section>
-
-    </div>
+    </>
   );
 };
 
