@@ -24,6 +24,26 @@ connectDB().catch((err) => {
 });
 configureCloudinary();
 
+// Auto-sync uploaded Elve images to public asset folders
+try {
+  const fs = require('fs');
+  const img1 = 'C:/Users/MY PC/.gemini/antigravity-ide/brain/5fd61c64-e1bc-4c72-94fe-265cd4a0c913/media__1786081314191.jpg';
+  const img2 = 'C:/Users/MY PC/.gemini/antigravity-ide/brain/5fd61c64-e1bc-4c72-94fe-265cd4a0c913/media__1786081314192.jpg';
+  if (fs.existsSync(img1)) {
+    ['public/assets/portfolio', 'client/public/assets/portfolio'].forEach(rel => {
+      const targetDir = path.join(__dirname, '..', rel);
+      if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true });
+      fs.copyFileSync(img1, path.join(targetDir, '2-elve.jpg'));
+      fs.copyFileSync(img1, path.join(targetDir, 'elve-hero.jpg'));
+      if (fs.existsSync(img2)) {
+        fs.copyFileSync(img2, path.join(targetDir, 'elve-showcase.jpg'));
+      }
+    });
+  }
+} catch (e) {
+  // Non-fatal fallback
+}
+
 const app = express();
 app.set('trust proxy', 1);
 
