@@ -126,26 +126,7 @@ const CaseStudy = () => {
             )}
           </div>
 
-          {/* Floating Key Impact Metrics Strip */}
-          <div className="row g-2 g-md-3 mb-4 mb-md-5">
-            {(project.metrics || [
-              { label: "Performance", value: "99+" },
-              { label: "Session Time", value: "+45%" },
-              { label: "Conversion Rate", value: "2.4x" },
-              { label: "Speed Latency", value: "< 0.4s" }
-            ]).map((metric, i) => (
-              <div className="col-6 col-md-3" key={i}>
-                <div className="cs-system-card text-center p-3 h-100">
-                  <span className="fs-3 fw-extrabold text-lime mb-1" style={{ color: '#849a00', letterSpacing: '-0.02em' }}>
-                    {metric.value}
-                  </span>
-                  <span className="cs-spec-label mb-0">
-                    {metric.label}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+
 
           {/* Hero Showcase Container (Laptop Glassmorphic Mockup Frame) */}
           <div className="cs-hero-frame mb-4 mb-md-5">
