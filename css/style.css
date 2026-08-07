@@ -6624,4 +6624,214 @@ body.preloader-active {
     margin-top: 24px;
 }
 
+/* ==========================================================================
+   ULTRA-PREMIUM MINIMALIST CASE STUDY DESIGN SYSTEM (.prem-cs-*)
+   ========================================================================== */
+.prem-cs-wrapper {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+.prem-cs-hero-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    color: var(--text-primary);
+    line-height: 1.1;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.prem-cs-hero-frame {
+    width: 100%;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
+    background: #f8fafc;
+}
+
+[data-theme="dark"] .prem-cs-hero-frame {
+    background: #0e0f13;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5);
+}
+
+.prem-cs-hero-img {
+    width: 100%;
+    height: auto;
+    max-height: 640px;
+    object-fit: cover;
+    display: block;
+}
+
+.prem-cs-meta-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px 24px;
+    background: #f8fafc;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 18px;
+    margin-bottom: 44px;
+}
+
+[data-theme="dark"] .prem-cs-meta-bar {
+    background: #121318;
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 768px) {
+    .prem-cs-meta-bar {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.prem-cs-meta-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.prem-cs-meta-lbl {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.prem-cs-meta-val {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.prem-cs-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 868px) {
+    .prem-cs-intro-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+.prem-cs-tagline-text {
+    font-size: clamp(20px, 2.2vw, 26px);
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+}
+
+.prem-cs-body-text {
+    font-size: 16.5px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.prem-cs-quote-box {
+    background: rgba(210, 234, 38, 0.1);
+    border-left: 4px solid #849a00;
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-top: 24px;
+}
+
+.prem-cs-quote-title {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: #849a00;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.prem-cs-quote-content {
+    font-size: 16px;
+    line-height: 1.65;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.prem-cs-section-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.prem-cs-sublabel {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: #849a00;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.prem-cs-sectitle {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.prem-cs-showcase-img {
+    width: 100%;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    margin-bottom: 50px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .prem-cs-showcase-img {
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.prem-cs-mobile-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+    .prem-cs-mobile-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.prem-cs-mobile-frame {
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: #000000;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
+}
+
+.prem-cs-mobile-img {
+    width: 100%;
+    max-height: 520px;
+    object-fit: cover;
+    display: block;
+}
+
+
 

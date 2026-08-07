@@ -83,10 +83,10 @@ const CaseStudy = () => {
 
   return (
     <main className="case-study-main grid-lines-bg">
-      <div className="container py-4 py-md-5">
-        <div className="new-cs-wrapper">
+      <div className="container py-3 py-md-5">
+        <div className="prem-cs-wrapper">
 
-          {/* Top Bar: Back to Projects Link & Category Badge */}
+          {/* Top Bar Nav */}
           <div className="d-flex align-items-center justify-content-between w-100 mb-4">
             <Link to="/works" className="cs-back-link">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -101,160 +101,148 @@ const CaseStudy = () => {
             </span>
           </div>
 
-          {/* New Clean Header Title & Subtitle */}
-          <div className="new-cs-header">
-            <h1 className="new-cs-title" id="cs-title">
-              {project.title}
-            </h1>
-            <p className="new-cs-tagline" id="cs-tagline">
-              {project.tagline}
-            </p>
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                id="cs-live-btn"
-                className="btn-primary-pill"
-              >
-                <span>Visit Live Website ↗</span>
-              </a>
-            )}
+          {/* Bold Clean Top Hero Title */}
+          <h1 className="prem-cs-hero-title" id="cs-title">
+            {project.title}
+          </h1>
+
+          {/* Main Desktop Hero Showcase Mockup */}
+          <div className="prem-cs-hero-frame">
+            <img src={project.heroImg} alt={project.title} id="cs-hero-img" className="prem-cs-hero-img" />
           </div>
 
-          {/* 4-Column Minimal Metadata Strip */}
-          <div className="new-cs-meta-strip">
-            <div>
-              <span className="new-cs-meta-label">CLIENT</span>
-              <span className="new-cs-meta-value" id="cs-client">{project.client || 'Client Studio'}</span>
+          {/* Minimal 4-Item Horizontal Metadata Bar */}
+          <div className="prem-cs-meta-bar">
+            <div className="prem-cs-meta-item">
+              <span className="prem-cs-meta-lbl">COMPANY / CLIENT</span>
+              <span className="prem-cs-meta-val" id="cs-client">{project.client || 'Client Studio'}</span>
             </div>
-            <div>
-              <span className="new-cs-meta-label">SERVICES</span>
-              <span className="new-cs-meta-value" id="cs-services">{project.services || 'UI/UX & Engineering'}</span>
+            <div className="prem-cs-meta-item">
+              <span className="prem-cs-meta-lbl">SERVICES</span>
+              <span className="prem-cs-meta-val" id="cs-services">{project.services || 'UI/UX + Frontend'}</span>
             </div>
-            <div>
-              <span className="new-cs-meta-label">CATEGORY</span>
-              <span className="new-cs-meta-value" id="cs-category">{project.category || 'Digital Experience'}</span>
+            <div className="prem-cs-meta-item">
+              <span className="prem-cs-meta-lbl">CATEGORY</span>
+              <span className="prem-cs-meta-val" id="cs-category">{project.category || 'Digital Platform'}</span>
             </div>
-            <div>
-              <span className="new-cs-meta-label">YEAR</span>
-              <span className="new-cs-meta-value" id="cs-year">{project.year || '2026'}</span>
+            <div className="prem-cs-meta-item">
+              <span className="prem-cs-meta-lbl">YEAR</span>
+              <span className="prem-cs-meta-val" id="cs-year">{project.year || '2026'}</span>
             </div>
           </div>
 
-          {/* Clean Main Desktop Mockup Image Container */}
-          <div className="new-cs-hero-container">
-            <img src={project.heroImg} alt={project.title} id="cs-hero-img" className="new-cs-hero-img" />
-          </div>
+          {/* Split Intro: Tagline & Live Button (Left) vs Project Overview Narrative (Right) */}
+          <div className="prem-cs-intro-grid">
+            {/* Left Box */}
+            <div>
+              <p className="prem-cs-tagline-text" id="cs-tagline">
+                {project.tagline}
+              </p>
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  id="cs-live-btn"
+                  className="btn-primary-pill"
+                >
+                  <span>Visit Website ↗</span>
+                </a>
+              )}
+            </div>
 
-          {/* 2-Column Split: Story Overview (Left) & Design Specs (Right) */}
-          <div className="row g-4 mb-5">
-            {/* Left Column: Narrative Overview & Outcome */}
-            <div className="col-lg-7 col-md-12">
-              <div className="new-cs-story-card h-100">
-                <span className="cs-section-label" style={{ color: '#849a00', fontSize: '11px', fontWeight: '800', letterSpacing: '0.12em', display: 'block', marginBottom: '12px' }}>PROJECT OVERVIEW</span>
-                <div id="cs-description">
-                  {project.description.map((paragraph, index) => (
-                    <p key={index} style={{ fontSize: '16.5px', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '16px' }}>
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-
-                {project.outcome && (
-                  <div className="new-cs-outcome-box">
-                    <span style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.1em', color: '#849a00', display: 'block', marginBottom: '6px' }}>KEY OUTCOME</span>
-                    <p id="cs-outcome-desc" style={{ fontSize: '15.5px', lineHeight: '1.6', fontWeight: '600', color: 'var(--text-primary)', margin: 0 }}>
-                      {project.outcome}
-                    </p>
-                  </div>
-                )}
+            {/* Right Box */}
+            <div>
+              <span className="prem-cs-sublabel">PROJECT OVERVIEW</span>
+              <div id="cs-description">
+                {project.description.map((paragraph, index) => (
+                  <p key={index} className="prem-cs-body-text">
+                    {paragraph}
+                  </p>
+                ))}
               </div>
-            </div>
 
-            {/* Right Column: Design System & Tech Stack */}
-            <div className="col-lg-5 col-md-12">
-              <div className="d-flex flex-column gap-3 h-100">
-                {/* Tech Stack Box */}
-                <div className="new-cs-story-card">
-                  <span style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.1em', color: '#849a00', display: 'block', marginBottom: '8px' }}>TECH STACK</span>
-                  <h4 className="fw-extrabold mb-3" style={{ fontSize: '16px' }}>Technologies Used</h4>
-                  <div className="d-flex flex-wrap gap-2">
-                    {(project.techTags || 'Figma, React, SCSS, Motion, Vercel').split(',').map((tag, i) => (
-                      <span key={i} className="service-pill" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', fontWeight: '600', color: '#334155' }}>{tag.trim()}</span>
-                    ))}
-                  </div>
+              {project.outcome && (
+                <div className="prem-cs-quote-box">
+                  <span className="prem-cs-quote-title">KEY OUTCOME</span>
+                  <p className="prem-cs-quote-content" id="cs-outcome-desc">
+                    {project.outcome}
+                  </p>
                 </div>
-
-                {/* Color Palette Box */}
-                <div className="new-cs-story-card">
-                  <span style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.1em', color: '#849a00', display: 'block', marginBottom: '8px' }}>COLOR PALETTE</span>
-                  <h4 className="fw-extrabold mb-3" style={{ fontSize: '16px' }}>Color Swatches</h4>
-                  <div className="d-flex flex-wrap gap-3">
-                    {[
-                      { hex: project.color1Hex, name: project.color1Name },
-                      { hex: project.color2Hex, name: project.color2Name },
-                      { hex: project.color3Hex, name: project.color3Name },
-                      { hex: project.color4Hex, name: project.color4Name },
-                    ].filter(swatch => swatch.hex && typeof swatch.hex === 'string' && swatch.hex.trim() !== '').map((swatch, i) => (
-                      <div key={i} className="d-flex align-items-center gap-2">
-                        <span style={{ width: '26px', height: '26px', borderRadius: '50%', background: swatch.hex, display: 'inline-block', border: '1px solid rgba(0,0,0,0.15)' }}></span>
-                        <div>
-                          <span className="d-block fw-bold" style={{ fontSize: '12px' }}>{swatch.name || swatch.hex}</span>
-                          <span className="d-block text-muted" style={{ fontSize: '11px' }}>{swatch.hex.toUpperCase()}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Typography Box */}
-                <div className="new-cs-story-card">
-                  <span style={{ fontSize: '11px', fontWeight: '800', letterSpacing: '0.1em', color: '#849a00', display: 'block', marginBottom: '8px' }}>TYPOGRAPHY</span>
-                  <div className="d-flex flex-column gap-2">
-                    <div>
-                      <span className="fw-bold d-block" style={{ fontSize: '13.5px' }}>{project.headingFont || 'Plus Jakarta Sans'}</span>
-                      <span className="text-muted" style={{ fontSize: '11.5px' }}>Headings & Display Titles</span>
-                    </div>
-                    <div>
-                      <span className="fw-bold d-block" style={{ fontSize: '13.5px' }}>{project.bodyFont || 'Inter / System Sans'}</span>
-                      <span className="text-muted" style={{ fontSize: '11.5px' }}>Body Text & Specifications</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              )}
             </div>
           </div>
 
-          {/* Mobile Showcase Cards */}
+          {/* Full Desktop Showcase Banner Image */}
+          {project.showcaseImg && (
+            <div className="prem-cs-showcase-img">
+              <img src={project.showcaseImg} alt={`${project.title} Full Showcase`} className="w-100 d-block" style={{ maxHeight: '600px', objectFit: 'cover' }} />
+            </div>
+          )}
+
+          {/* Minimal Mobile Experience Section */}
           {(project.mobileImg1 || project.mobileImg2) && (
             <div className="mb-5">
-              <span className="cs-section-label" style={{ color: '#849a00', fontSize: '11px', fontWeight: '800', letterSpacing: '0.12em', display: 'block', marginBottom: '16px' }}>MOBILE SHOWCASE</span>
-              <div className="row g-4">
+              <div className="prem-cs-section-header">
+                <span className="prem-cs-sublabel">MINIMAL & HIGH-PERFORMING</span>
+                <h2 className="prem-cs-sectitle">MOBILE EXPERIENCE</h2>
+              </div>
+
+              <div className="prem-cs-mobile-grid">
                 {project.mobileImg1 && (
-                  <div className="col-md-6">
-                    <div className="new-cs-hero-container mb-0">
-                      <img src={project.mobileImg1} alt="Mobile View 1" className="w-100 d-block" style={{ maxHeight: '480px', objectFit: 'cover' }} />
-                    </div>
+                  <div className="prem-cs-mobile-frame">
+                    <img src={project.mobileImg1} alt="Mobile View 1" className="prem-cs-mobile-img" />
                   </div>
                 )}
                 {project.mobileImg2 && (
-                  <div className="col-md-6">
-                    <div className="new-cs-hero-container mb-0">
-                      <img src={project.mobileImg2} alt="Mobile View 2" className="w-100 d-block" style={{ maxHeight: '480px', objectFit: 'cover' }} />
-                    </div>
+                  <div className="prem-cs-mobile-frame">
+                    <img src={project.mobileImg2} alt="Mobile View 2" className="prem-cs-mobile-img" />
                   </div>
                 )}
               </div>
             </div>
           )}
 
-          {/* Secondary Full Showcase Frame */}
-          {project.bannerImg && (
-            <div className="mb-5">
-              <div className="new-cs-hero-container mb-0">
-                <img src={project.bannerImg} alt="Secondary Showcase View" className="w-100 d-block" style={{ maxHeight: '580px', objectFit: 'cover' }} />
+          {/* Tech Stack & Design System Pills */}
+          <div className="p-4 rounded-4 mb-5" style={{ background: '#f8fafc', border: '1px solid rgba(0,0,0,0.06)' }}>
+            <div className="row g-4">
+              {/* Tech Stack */}
+              <div className="col-md-6">
+                <span className="prem-cs-sublabel">TECH STACK</span>
+                <div className="d-flex flex-wrap gap-2 mt-2">
+                  {(project.techTags || 'Figma, React, SCSS, Motion, Vercel').split(',').map((tag, i) => (
+                    <span key={i} className="service-pill" style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', fontWeight: '600', color: '#334155' }}>{tag.trim()}</span>
+                  ))}
+                </div>
               </div>
+
+              {/* Color Palette Theme */}
+              <div className="col-md-6">
+                <span className="prem-cs-sublabel">COLOR PALETTE</span>
+                <div className="d-flex flex-wrap gap-3 mt-2">
+                  {[
+                    { hex: project.color1Hex, name: project.color1Name },
+                    { hex: project.color2Hex, name: project.color2Name },
+                    { hex: project.color3Hex, name: project.color3Name },
+                    { hex: project.color4Hex, name: project.color4Name },
+                  ].filter(swatch => swatch.hex && typeof swatch.hex === 'string' && swatch.hex.trim() !== '').map((swatch, i) => (
+                    <div key={i} className="d-flex align-items-center gap-2">
+                      <span style={{ width: '24px', height: '24px', borderRadius: '50%', background: swatch.hex, display: 'inline-block', border: '1px solid rgba(0,0,0,0.15)' }}></span>
+                      <div>
+                        <span className="d-block fw-bold" style={{ fontSize: '11.5px', color: '#0f172a' }}>{swatch.name || swatch.hex}</span>
+                        <span className="d-block text-muted" style={{ fontSize: '10.5px' }}>{swatch.hex.toUpperCase()}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Secondary Banner Showcase */}
+          {project.bannerImg && (
+            <div className="prem-cs-showcase-img">
+              <img src={project.bannerImg} alt="Secondary Desktop View" className="w-100 d-block" style={{ maxHeight: '600px', objectFit: 'cover' }} />
             </div>
           )}
 
