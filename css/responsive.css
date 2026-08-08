@@ -548,10 +548,14 @@
     .features-section,
     .process-section,
     .bold-faq-section,
-    .minimal-projects-section,
-    .about-portrait-section {
+    .minimal-projects-section {
         padding-top: 40px !important;
         padding-bottom: 40px !important;
+    }
+
+    .about-portrait-section {
+        padding-top: 120px !important;
+        padding-bottom: 50px !important;
     }
 
     .page-inner-hero {

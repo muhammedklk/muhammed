@@ -6899,6 +6899,85 @@ body.preloader-active {
         linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
+/* ==========================================================================
+   SELECTED WORKS CARD HOVER OVERLAY BOUNDING & CORNER RADIUS FIX
+   ========================================================================== */
+.demo-mockup-frame {
+    width: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    background: #0d111a;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+}
+
+.demo-img-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.demo-mockup-img {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    display: block;
+    border-radius: 24px;
+    transition: transform 0.5s ease;
+}
+
+.demo-img-wrapper:hover .demo-mockup-img {
+    transform: scale(1.04);
+}
+
+.minimal-hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    border-radius: 24px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.demo-img-wrapper:hover .minimal-hover-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+.minimal-btn-hover {
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 800;
+    font-size: 13.5px;
+    text-decoration: none;
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.btn-hover-case {
+    background: #d2ea26;
+    color: #0f172a !important;
+}
+
+.btn-hover-live {
+    background: #ffffff;
+    color: #0f172a !important;
+}
+
+.minimal-btn-hover:hover {
+    transform: scale(1.06);
+}
+
+
 
 
 
