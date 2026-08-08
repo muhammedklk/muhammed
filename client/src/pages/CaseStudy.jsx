@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { caseStudiesDataMap } from '../data/caseStudiesData';
+import { caseStudiesDataMap, caseStudiesData } from '../data/caseStudiesData';
 import { usePortfolio } from '../context/PortfolioContext';
 import Maintenance from './Maintenance';
 
 const CaseStudy = () => {
   const { id: paramId } = useParams();
-  const { getProjectBySlug, settings } = usePortfolio();
+  const { getProjectBySlug, settings, projects: apiProjects = [] } = usePortfolio();
 
   // Public Visitors Maintenance Guard
   const localSettingsStr = typeof window !== 'undefined' ? localStorage.getItem('portfolio_maintenance_settings') : null;
@@ -107,14 +107,67 @@ const CaseStudy = () => {
     outcome: dynamicProject?.caseStudy?.outcome || staticProject?.outcome,
   };
 
-  // Calculate Previous and Next Project Keys for bottom pagination
-  const caseKeys = Object.keys(caseStudiesDataMap);
-  const currentIndex = caseKeys.indexOf(rawId);
-  const nextKey = currentIndex !== -1 && currentIndex < caseKeys.length - 1 ? caseKeys[currentIndex + 1] : caseKeys[0];
-  const prevKey = currentIndex > 0 ? caseKeys[currentIndex - 1] : caseKeys[caseKeys.length - 1];
+  // Combine API projects and static case studies into a single list
+  const combinedProjects = [];
+  if (Array.isArray(apiProjects) && apiProjects.length > 0) {
+    apiProjects.forEach(p => {
+      combinedProjects.push({
+        id: p.slug || p._id || p.id,
+        title: p.title,
+        showCaseStudyBtn: p.showCaseStudyBtn !== undefined ? p.showCaseStudyBtn : true
+      });
+    });
+  }
 
-  const nextProj = caseStudiesDataMap[nextKey];
-  const prevProj = caseStudiesDataMap[prevKey];
+  if (Array.isArray(caseStudiesData)) {
+    caseStudiesData.forEach(staticProj => {
+      const sId = (staticProj.id || staticProj.slug || '').toLowerCase();
+      const exists = combinedProjects.some(p => 
+        (p.id && String(p.id).toLowerCase() === sId) ||
+        (p.title && p.title.toLowerCase() === (staticProj.title || '').toLowerCase())
+      );
+      if (!exists) {
+        combinedProjects.push({
+          id: staticProj.id,
+          title: staticProj.title,
+          showCaseStudyBtn: staticProj.showCaseStudyBtn !== undefined ? staticProj.showCaseStudyBtn : true
+        });
+      }
+    });
+  }
+
+  // FILTER: Only include projects where showCaseStudyBtn !== false
+  const enabledCaseStudyProjects = combinedProjects.filter(p => p.showCaseStudyBtn !== false);
+
+  const currentFilteredIndex = enabledCaseStudyProjects.findIndex(p => {
+    const pId = String(p.id || '').toLowerCase();
+    return pId === rawId || (p.title && p.title.toLowerCase() === (project.title || '').toLowerCase());
+  });
+
+  let prevProj = null;
+  let nextProj = null;
+
+  if (enabledCaseStudyProjects.length > 1) {
+    const total = enabledCaseStudyProjects.length;
+    const baseIdx = currentFilteredIndex !== -1 ? currentFilteredIndex : 0;
+
+    const prevItem = enabledCaseStudyProjects[(baseIdx - 1 + total) % total];
+    const nextItem = enabledCaseStudyProjects[(baseIdx + 1) % total];
+
+    if (prevItem && String(prevItem.id).toLowerCase() !== String(rawId).toLowerCase()) {
+      prevProj = {
+        id: prevItem.id,
+        title: prevItem.title
+      };
+    }
+
+    if (nextItem && String(nextItem.id).toLowerCase() !== String(rawId).toLowerCase()) {
+      nextProj = {
+        id: nextItem.id,
+        title: nextItem.title
+      };
+    }
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
