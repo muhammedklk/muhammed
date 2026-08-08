@@ -4,8 +4,25 @@ import { caseStudiesData } from '../data/caseStudiesData';
 const PortfolioContext = createContext();
 
 export const PortfolioProvider = ({ children }) => {
-  const [content, setContent] = useState(null);
-  const [projects, setProjects] = useState([]);
+  const [content, setContent] = useState(() => {
+    try {
+      const cached = localStorage.getItem('portfolio_content_cache');
+      return cached ? JSON.parse(cached) : null;
+    } catch (e) {
+      return null;
+    }
+  });
+
+  const [projects, setProjects] = useState(() => {
+    try {
+      const cached = localStorage.getItem('portfolio_projects_cache');
+      const parsed = cached ? JSON.parse(cached) : [];
+      return Array.isArray(parsed) && parsed.length > 0 ? parsed : [];
+    } catch (e) {
+      return [];
+    }
+  });
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -19,11 +36,13 @@ export const PortfolioProvider = ({ children }) => {
 
       if (contentRes && contentRes.data) {
         setContent(contentRes.data);
+        try { localStorage.setItem('portfolio_content_cache', JSON.stringify(contentRes.data)); } catch (e) {}
       }
 
       const rawProjects = projectsRes?.data?.projects || projectsRes?.data || projectsRes?.projects;
       if (Array.isArray(rawProjects) && rawProjects.length > 0) {
         setProjects(rawProjects);
+        try { localStorage.setItem('portfolio_projects_cache', JSON.stringify(rawProjects)); } catch (e) {}
       } else if (Array.isArray(caseStudiesData)) {
         setProjects(caseStudiesData);
       }
@@ -73,7 +92,7 @@ export const PortfolioProvider = ({ children }) => {
       );
     }
 
-    return match || caseStudiesData[0];
+    return match || null;
   };
 
   return (

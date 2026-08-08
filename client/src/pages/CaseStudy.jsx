@@ -47,7 +47,7 @@ const CaseStudy = () => {
 
   const rawId = paramId ? paramId.toLowerCase() : "voyagera";
   const dynamicProject = getProjectBySlug(rawId);
-  const staticProject = caseStudiesDataMap[rawId] || caseStudiesDataMap.voyagera;
+  const staticProject = caseStudiesDataMap[rawId] || null;
 
   const pickImg = (...imgs) => imgs.find(img => img && typeof img === 'string' && img.trim() !== '') || '';
 
@@ -279,12 +279,11 @@ const CaseStudy = () => {
             </div>
           )}
 
-          {/* 7. Bottom Showcase Banner Card */}
+          {/* 7. Bottom Showcase Banner Image */}
           {project.bannerImg && (
             <div className="nexo-banner-block">
-              <span className="nexo-banner-tag">EVERY DETAIL CRAFTED FOR {project.title.toUpperCase()}</span>
-              <div className="nexo-showcase-card" style={{ marginBottom: 0 }}>
-                <img src={project.bannerImg} alt="Final Showcase Banner" className="nexo-showcase-img" />
+              <div className="nexo-banner-card">
+                <img src={project.bannerImg} alt={`${project.title} Showcase Banner`} className="nexo-banner-img" />
               </div>
             </div>
           )}
