@@ -108,7 +108,7 @@ const Works = () => {
               <h1 className="minimal-hero-title text-center mb-3">
                 Crafting <span className="text-highlight">Digital Experiences</span><br className="d-none d-md-block" /> That Drive Impact.
               </h1>
-              <p className="minimal-hero-subtitle text-center mx-auto mb-5">
+              <p className="minimal-hero-subtitle text-center mx-auto mb-3 mb-md-5">
                 Explore a collection of UI/UX design, custom web development, and digital product case studies built for modern brands.
               </p>
             </div>
