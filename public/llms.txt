@@ -1,0 +1,48 @@
+# MUHAMMED - UI/UX Designer & Front-End Developer
+
+> Multidisciplinary UI/UX Designer & Front-End Developer specialized in intuitive user experiences, scalable design systems, and high-performance React web applications.
+
+## Summary & Profile
+- **Name**: Muhammed
+- **Role**: Senior UI/UX Designer & Front-End Developer
+- **Specializations**: Web & Mobile UI/UX Design, Figma Design Systems, Interactive Prototyping, Front-End React Engineering, GSAP Animations, Web Performance Optimization
+- **Location**: Kochi, Kerala, India (Available for Remote Work Globally)
+- **Email**: muhammed@portfolio.dev
+- **Portfolio Website**: https://muhammed.dev
+- **Status**: Available for Select Freelance Projects, Product Design Consultations, & Full-Time Roles
+
+## Core Services & Capabilities
+1. **UI/UX Design**: Pixel-perfect digital interfaces, wireframes, user journeys, visual design, and scalable design systems built in Figma.
+2. **High-Performance Web Development**: Custom React.js web applications, Vite, HTML5/SCSS, GSAP smooth animations, sub-second page loading speeds (99+ PageSpeed).
+3. **Mobile & Web Product Design**: Responsive iOS/Android app interfaces, user flow optimization, micro-interactions, and conversion-focused UX layouts.
+4. **Design Systems & Component Libraries**: Reusable UI kits, typography scales, tokenized color palettes, and accessible component architectures.
+
+## Key Technical Skills & Stack
+- **Design Tools**: Figma, Adobe Photoshop, Wireframing, Interactive Prototyping, Design Token Systems, User Testing
+- **Front-End Technologies**: React.js, HTML5, SCSS/CSS3, JavaScript (ES6+), GSAP (GreenSock Animation Platform), Lenis Smooth Scroll, Vite, Bootstrap
+- **Workflow & Tools**: Git, GitHub, Cloudinary, Vercel, REST APIs, Web Performance & Core Web Vitals Optimization
+
+## Featured Portfolio Projects
+- **Voyagera** (`https://muhammed.dev/case-study/voyagera`): World Expeditions & Luxury Havens Travel Platform. Achieved 99+ PageSpeed rating and 2.4x booking conversion.
+- **Styleora** (`https://muhammed.dev/case-study/styleora-fashion-e-commerce`): Modern Luxury E-Commerce & Retail Flagship with fast product drawers and responsive luxury boutique UI.
+- **Elve** (`https://muhammed.dev/case-study/elve-creative-agency-portfolio`): Next-Gen Mobility & Asset Rental Platform featuring futuristic dark-themed UI and fluid interactions.
+- **Green Track** (`https://muhammed.dev/case-study/greentrack-sustainability-dashboard`): ESG Analytics & Enterprise Carbon Accounting Platform for real-time sustainability compliance reporting.
+
+## Client Impact & Key Metrics
+- **99+ PageSpeed Performance Ratings** achieved across web products.
+- **+45% Increase in Average Session Duration** through engaging UI/UX design.
+- **2.4x Direct Conversion Multiplier** for e-commerce and booking platforms.
+
+## How to Contact & Hire Muhammed
+- **Direct Contact Page**: https://muhammed.dev/contact
+- **Project Quote & Lead Inquiry**: https://muhammed.dev/?action=hire
+- **Email**: muhammed@portfolio.dev
+- **Location**: Kochi, Kerala, India / Remote Worldwide
+
+## Frequently Asked Questions (FAQs)
+- **Q: What services does Muhammed offer?**
+  A: Muhammed provides end-to-end UI/UX design, custom front-end React web development, design system architecture, and mobile app UI prototyping.
+- **Q: Is Muhammed available for remote freelance or contract projects?**
+  A: Yes, Muhammed is available for freelance projects, design consultations, agency contracts, and full-time positions globally.
+- **Q: What technologies does Muhammed specialize in?**
+  A: Muhammed specializes in Figma, React.js, JavaScript, SCSS, GSAP animations, Node.js, and modern front-end build pipelines.

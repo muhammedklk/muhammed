@@ -135,6 +135,12 @@ app.use(mongoSanitize);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/assets/uploads', express.static(path.join(__dirname, '../public/assets/uploads')));
 
+// Public SEO & GEO AI Files
+app.get('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, '../public/robots.txt')));
+app.get('/sitemap.xml', (req, res) => res.type('text/xml').sendFile(path.join(__dirname, '../public/sitemap.xml')));
+app.get('/llms.txt', (req, res) => res.type('text/plain').sendFile(path.join(__dirname, '../public/llms.txt')));
+app.get('/llms-full.txt', (req, res) => res.type('text/plain').sendFile(path.join(__dirname, '../public/llms-full.txt')));
+
 // Health Check API Endpoint
 app.get('/api/health', (req, res) => {
   const dbUri = process.env.MONGODB_URI || process.env.MONGO_URI;

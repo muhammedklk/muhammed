@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
-const MobileDrawer = ({ isOpen, onClose }) => {
+const MobileDrawer = ({ isOpen, onClose, onOpenLeadModal }) => {
 
   useEffect(() => {
     if (isOpen) {
@@ -85,7 +85,32 @@ const MobileDrawer = ({ isOpen, onClose }) => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/admin/login" className="overlay-nav-link" onClick={onClose} style={{ color: '#d2ea26' }}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onClose();
+                      if (onOpenLeadModal) onOpenLeadModal();
+                    }}
+                    style={{
+                      background: 'rgba(210, 234, 38, 0.12)',
+                      border: '1px solid rgba(210, 234, 38, 0.3)',
+                      color: '#d2ea26',
+                      padding: '12px 20px',
+                      borderRadius: '12px',
+                      fontWeight: '800',
+                      fontSize: '14px',
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      marginTop: '12px'
+                    }}
+                  >
+                    <span>⚡ REQUEST PROJECT QUOTE</span>
+                  </button>
+                </li>
+                <li>
+                  <NavLink to="/admin/login" className="overlay-nav-link" onClick={onClose} style={{ color: '#94a3b8', fontSize: '13px', marginTop: '10px' }}>
                     <span className="link-num">05.</span>
                     <span className="link-text">🔒 ADMIN PANEL</span>
                   </NavLink>

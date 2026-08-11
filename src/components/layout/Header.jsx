@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-const Header = ({ onToggleMobileMenu }) => {
+const Header = ({ onToggleMobileMenu, onOpenLeadModal }) => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  const isCaseStudyPage = location.pathname === '/case-study';
+  const isCaseStudyPage = location.pathname.startsWith('/case-study');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,10 +48,15 @@ const Header = ({ onToggleMobileMenu }) => {
               <span className="btn-discovery-text">← BACK TO WORKS</span>
             </Link>
           ) : (
-            <Link to="/contact" className="btn-discovery">
+            <button
+              type="button"
+              onClick={onOpenLeadModal}
+              className="btn-discovery"
+              style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}
+            >
               <span className="gold-dot"></span>
               <span className="btn-discovery-text">BEGIN DISCOVERY</span>
-            </Link>
+            </button>
           )}
 
           {/* Fullscreen Menu Trigger Button */}

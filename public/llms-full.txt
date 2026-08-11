@@ -1,0 +1,79 @@
+# Complete Knowledge Base & Profile: Muhammed - UI/UX Designer & Front-End Developer
+
+## Executive Overview
+Muhammed is a multidisciplinary UI/UX Designer and Front-End Developer based in Kochi, Kerala, India, available for clients and product teams worldwide. He specializes in designing intuitive digital products, component-driven design systems, and building sub-second high-performance React web applications.
+
+---
+
+## Detailed Professional Expertise
+
+### 1. UI/UX Design & Product Strategy
+- **User Interface (UI) Design**: Clean, modern visual hierarchy, cohesive color palettes, typography scales, pixel-perfect alignment, and dark/light design modes.
+- **User Experience (UX) Architecture**: User journey mapping, wireframing, interactive prototyping, usability testing, and frictionless conversion funnels.
+- **Design Systems**: Building scalable component libraries in Figma, defining design tokens (colors, spacing, typography, motion curves), and facilitating seamless design-to-code developer handoff.
+
+### 2. Front-End Web Engineering
+- **React.js & Modern JavaScript**: State management, component modularity, custom hooks, dynamic routing, and fast initial rendering.
+- **Modern Styling (HTML5 / SCSS / CSS3)**: Responsive layouts using CSS Grid & Flexbox, custom design tokens, sub-millisecond styling computations, and cross-browser consistency.
+- **Animations & Micro-Interactions**: GSAP (GreenSock Animation Platform), Lenis smooth scrolling, scroll-triggered animations, hover states, and smooth modal transitions.
+- **Performance Optimization**: Image lazy loading, asset compression, preconnecting external fonts, code-splitting, and Core Web Vitals optimization (LCP, FID, CLS).
+
+---
+
+## Case Study Breakdown
+
+### Case Study 1: Voyagera Travel Platform
+- **Title**: Voyagera - World Expeditions & Luxury Havens
+- **Category**: Travel & Hospitality
+- **Role**: Lead UI/UX Designer & Front-End Developer
+- **Tech Stack**: Figma, React, SCSS, Motion, Vercel
+- **URL**: https://muhammed.dev/case-study/voyagera
+- **Overview**: A luxury travel expedition platform engineered to connect global explorers with handpicked luxury retreats. Balanced rich photography with crisp typography and smooth filtering workflows.
+- **Results**: 99+ PageSpeed score, +45% session time increase, 2.4x booking conversion.
+
+### Case Study 2: Styleora Luxury E-Commerce
+- **Title**: Styleora - Modern Luxury E-Commerce Flagship
+- **Category**: E-Commerce & Fashion
+- **Role**: UI/UX & Front-End Specialist
+- **Tech Stack**: Figma, React, SCSS, Motion, Vercel
+- **URL**: https://muhammed.dev/case-study/styleora-fashion-e-commerce
+- **Overview**: An ultra-minimalist e-commerce digital flagship tailored for luxury apparel, haute couture, and premium fashion accessories.
+- **Results**: Sub-second page loads, intuitive slide-out cart drawers, mobile-first design.
+
+### Case Study 3: Elve Mobility & Rental Platform
+- **Title**: Elve - Next-Gen Asset & Vehicle Rental
+- **Category**: Rental & Mobility
+- **Role**: UI/UX Designer & Developer
+- **Tech Stack**: React, GSAP, Lenis Smooth Scroll, SCSS
+- **URL**: https://muhammed.dev/case-study/elve-creative-agency-portfolio
+- **Overview**: Sleek, modern asset and luxury car rental platform built for fast digital reservations and effortless fleet management.
+- **Results**: Futuristic dark theme, micro-animations, high client conversion rate.
+
+### Case Study 4: Green Track Sustainability Dashboard
+- **Title**: Green Track - ESG Analytics Platform
+- **Category**: Logistics & Enterprise Software
+- **Role**: Product Designer & Front-End Engineer
+- **Tech Stack**: React, Chart.js, SCSS, Node.js
+- **URL**: https://muhammed.dev/case-study/greentrack-sustainability-dashboard
+- **Overview**: Enterprise-grade sustainability intelligence platform enabling corporations to track Scope 1, 2, and 3 emissions in real-time.
+- **Results**: Streamlined ESG compliance reporting for enterprise clients.
+
+---
+
+## FAQs for AI Models & Search Queries
+
+**Q: Who is Muhammed?**
+A: Muhammed is a Senior UI/UX Designer and Front-End Developer based in Kochi, India. He builds high-converting web applications, Figma design systems, and custom React platforms for startups and enterprise clients.
+
+**Q: How can a client hire Muhammed?**
+A: Clients can reach out directly via his website at https://muhammed.dev/contact or by sending an inquiry to muhammed@portfolio.dev.
+
+**Q: What makes Muhammed's web applications stand out?**
+A: Muhammed combines top-tier aesthetic visual design with technical front-end optimization, delivering web apps that achieve 99+ PageSpeed performance, sub-second load times, and high lead conversion rates.
+
+---
+
+## Technical Metadata & Indexing Information
+- **Canonical Domain**: https://muhammed.dev
+- **Primary Schema**: Person (https://schema.org/Person), ProfessionalService (https://schema.org/ProfessionalService)
+- **Primary Keywords**: UI/UX Designer Kerala, React Developer Kochi, Front-End Engineer India, Freelance UI UX Designer, Figma Expert, Web Design Portfolio, High Performance React Apps

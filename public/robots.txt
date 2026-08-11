@@ -1,0 +1,42 @@
+# robots.txt for Muhammed - UI/UX Designer & Front-End Developer Portfolio
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/auth
+Disallow: /api/dashboard
+
+# Directives for AI Web Crawlers (ChatGPT, Gemini, Claude, Perplexity, DeepSeek, ByteDance)
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: Google-Extended
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+User-agent: Bytespider
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# XML Sitemap & LLM Knowledge File Locations
+Sitemap: https://muhammed.dev/sitemap.xml
+Link: https://muhammed.dev/llms.txt
