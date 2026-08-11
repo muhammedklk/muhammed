@@ -4,38 +4,95 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Prevent Browser Caching of Old Projects on localhost -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <!-- Force Light Theme: Prevent browser/device dark mode from overriding site theme -->
-    <meta name="color-scheme" content="light only" />
-    <style>:root { color-scheme: light only; }</style>
-    <title>Muhammed - Bringing ideas to life through design</title>
+    
+    <!-- Primary Page Metadata (Optimized for Google & AI Search Crawlers) -->
+    <title>Muhammed | UI/UX Designer & Front-End Developer | Kerala, India</title>
+    <meta name="description" content="Muhammed is a Senior UI/UX Designer & Front-End Developer in Kerala, India specializing in Figma design systems, custom React web development, and sub-second web performance." />
+    <meta name="keywords" content="UI/UX Designer Kerala, React Developer Kochi, Front-End Developer Kerala, Figma Design Systems, UI UX Designer India, Muhammed Portfolio, Hire UI UX Designer, Figma to React" />
+    <meta name="author" content="Muhammed" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="geo.region" content="IN-KL" />
+    <meta name="geo.placename" content="Kochi, Kerala" />
+
+    <!-- Canonical Link & LLM Context File Reference -->
+    <link rel="canonical" href="https://muhammedfolio.vercel.app/" />
+    <link rel="alternate" type="text/plain" href="https://muhammedfolio.vercel.app/llms.txt" title="LLM Context Knowledge File" />
+
+    <!-- OpenGraph Social Media Meta Tags -->
+    <meta property="og:title" content="Muhammed | UI/UX Designer & Front-End Developer | Kerala, India" />
+    <meta property="og:description" content="Senior UI/UX Designer & Front-End Developer in Kerala specializing in Figma design systems and custom React web applications." />
+    <meta property="og:image" content="https://muhammedfolio.vercel.app/assets/portfolio/gyogrea.png" />
+    <meta property="og:url" content="https://muhammedfolio.vercel.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Muhammed Portfolio" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Muhammed | UI/UX Designer & Front-End Developer | Kerala" />
+    <meta name="twitter:description" content="Senior UI/UX Designer & Front-End Developer in Kerala specializing in Figma design systems and custom React web applications." />
+    <meta name="twitter:image" content="https://muhammedfolio.vercel.app/assets/portfolio/gyogrea.png" />
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/favicom-img.png" />
+
     <!-- Bootstrap Grid Only -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap-grid.min.css" />
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
     <!-- Lenis Smooth Scroll CSS -->
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css" />
+
+    <!-- Force Light Theme Styling -->
+    <meta name="color-scheme" content="light only" />
+    <style>:root { color-scheme: light only; }</style>
+
+    <!-- Static Structured Data (JSON-LD) for Raw HTML Crawlers & AI Search Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://muhammedfolio.vercel.app/#person",
+          "name": "Muhammed",
+          "url": "https://muhammedfolio.vercel.app",
+          "jobTitle": "Senior UI/UX Designer & Front-End Developer",
+          "description": "Muhammed is a Senior UI/UX Designer & Front-End Developer in Kerala specializing in Figma design systems, React web development, and sub-second page performance.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Kochi",
+            "addressRegion": "Kerala",
+            "addressCountry": "India"
+          },
+          "knowsAbout": [
+            { "@type": "DefinedTerm", "name": "User Experience Design", "sameAs": "https://en.wikipedia.org/wiki/User_experience_design" },
+            { "@type": "DefinedTerm", "name": "User Interface Design", "sameAs": "https://en.wikipedia.org/wiki/User_interface_design" },
+            { "@type": "DefinedTerm", "name": "Front-End Web Development", "sameAs": "https://en.wikipedia.org/wiki/Front-end_web_development" },
+            { "@type": "DefinedTerm", "name": "React (JavaScript library)", "sameAs": "https://en.wikipedia.org/wiki/React_(JavaScript_library)" },
+            { "@type": "DefinedTerm", "name": "Figma", "sameAs": "https://en.wikipedia.org/wiki/Figma" }
+          ]
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://muhammedfolio.vercel.app/#service",
+          "name": "Muhammed UI/UX Design & Development Services",
+          "url": "https://muhammedfolio.vercel.app",
+          "priceRange": "$$",
+          "areaServed": ["Kerala", "India", "Worldwide", "Remote"]
+        }
+      ]
+    }
+    </script>
 </head>
 
 <body>
     <div id="root"></div>
-    <!-- Unregister lingering Service Workers from previous projects on localhost -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(function(registrations) {
-          for(let registration of registrations) {
-            registration.unregister();
-          }
-        });
-      }
-    </script>
+
     <script type="module" src="./src/main.jsx"></script>
 </body>
 

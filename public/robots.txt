@@ -1,4 +1,4 @@
-# robots.txt for Muhammed - UI/UX Designer & Front-End Developer Portfolio
+# robots.txt for Muhammed - UI/UX Designer & Front-End Developer Portfolio (Kerala, India)
 
 User-agent: *
 Allow: /
@@ -38,5 +38,5 @@ Allow: /llms.txt
 Allow: /llms-full.txt
 
 # XML Sitemap & LLM Knowledge File Locations
-Sitemap: https://muhammed.dev/sitemap.xml
-Link: https://muhammed.dev/llms.txt
+Sitemap: https://muhammedfolio.vercel.app/sitemap.xml
+Link: https://muhammedfolio.vercel.app/llms.txt

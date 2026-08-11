@@ -7,7 +7,7 @@
 
     <!-- Home Page -->
     <url>
-        <loc>https://muhammed.dev/</loc>
+        <loc>https://muhammedfolio.vercel.app/</loc>
         <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
@@ -15,7 +15,7 @@
 
     <!-- About Page -->
     <url>
-        <loc>https://muhammed.dev/about</loc>
+        <loc>https://muhammedfolio.vercel.app/about</loc>
         <lastmod>2026-08-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
@@ -23,7 +23,7 @@
 
     <!-- Works / Projects Gallery Page -->
     <url>
-        <loc>https://muhammed.dev/works</loc>
+        <loc>https://muhammedfolio.vercel.app/works</loc>
         <lastmod>2026-08-12</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
@@ -31,7 +31,7 @@
 
     <!-- Contact Page -->
     <url>
-        <loc>https://muhammed.dev/contact</loc>
+        <loc>https://muhammedfolio.vercel.app/contact</loc>
         <lastmod>2026-08-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -39,7 +39,7 @@
 
     <!-- Case Study: Voyagera Travel Platform -->
     <url>
-        <loc>https://muhammed.dev/case-study/voyagera</loc>
+        <loc>https://muhammedfolio.vercel.app/case-study/voyagera</loc>
         <lastmod>2026-08-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -47,7 +47,7 @@
 
     <!-- Case Study: Styleora E-Commerce -->
     <url>
-        <loc>https://muhammed.dev/case-study/styleora-fashion-e-commerce</loc>
+        <loc>https://muhammedfolio.vercel.app/case-study/styleora-fashion-e-commerce</loc>
         <lastmod>2026-08-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -55,7 +55,7 @@
 
     <!-- Case Study: Elve Mobility Platform -->
     <url>
-        <loc>https://muhammed.dev/case-study/elve-creative-agency-portfolio</loc>
+        <loc>https://muhammedfolio.vercel.app/case-study/elve-creative-agency-portfolio</loc>
         <lastmod>2026-08-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -63,7 +63,7 @@
 
     <!-- Case Study: Green Track Sustainability Dashboard -->
     <url>
-        <loc>https://muhammed.dev/case-study/greentrack-sustainability-dashboard</loc>
+        <loc>https://muhammedfolio.vercel.app/case-study/greentrack-sustainability-dashboard</loc>
         <lastmod>2026-08-12</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>

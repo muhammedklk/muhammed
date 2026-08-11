@@ -167,7 +167,7 @@ const ContactInbox = () => {
                 <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                   {/* Direct Email Sender Button */}
                   <a
-                    href={`mailto:${selectedMessage.email}?subject=${encodeURIComponent('Re: ' + selectedMessage.subject)}&body=${encodeURIComponent('Hi ' + selectedMessage.name + ',\n\n' + (replyText || '') + '\n\nBest regards,\nMuhammed\nUI/UX Designer & Front-End Developer\nPhone/WhatsApp: +91 9656216086\nPortfolio: https://muhammed.dev')}`}
+                    href={`mailto:${selectedMessage.email}?subject=${encodeURIComponent('Re: ' + selectedMessage.subject)}&body=${encodeURIComponent('Hi ' + selectedMessage.name + ',\n\n' + (replyText || '') + '\n\nBest regards,\nMuhammed\nUI/UX Designer & Front-End Developer\nPhone/WhatsApp: +91 9656216086\nPortfolio: https://muhammedfolio.vercel.app')}`}
                     target="_blank"
                     rel="noreferrer"
                     style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 20px', background: '#3b82f6', color: '#ffffff', borderRadius: '12px', fontWeight: '700', textDecoration: 'none', fontSize: '13.5px' }}

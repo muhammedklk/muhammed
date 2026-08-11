@@ -7,7 +7,7 @@ const SEO = ({ page = 'home', title, description, keywords, ogImage }) => {
   // Find page-specific SEO config from CMS or fallback to default
   const pageSeo = (seo || []).find((s) => s.page === page) || (seo || []).find((s) => s.page === 'global') || {};
 
-  const siteOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://muhammed.dev';
+  const siteOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://muhammedfolio.vercel.app';
   const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
   const currentUrl = pageSeo.canonicalUrl || `${siteOrigin}${currentPath}`;
 
@@ -156,7 +156,7 @@ const SEO = ({ page = 'home', title, description, keywords, ogImage }) => {
           'name': 'How to hire Muhammed for web design or front-end development?',
           'acceptedAnswer': {
             '@type': 'Answer',
-            'text': 'You can contact Muhammed directly via https://muhammed.dev/contact or submit a project lead inquiry on his portfolio website.'
+            'text': 'You can contact Muhammed directly via https://muhammedfolio.vercel.app/contact or submit a project lead inquiry on his portfolio website.'
           }
         }
       ]
