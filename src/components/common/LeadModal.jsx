@@ -35,13 +35,6 @@ const LeadModal = ({ isOpen, onClose }) => {
     '$5,000+'
   ];
 
-  const timelineOptions = [
-    'ASAP / Urgent',
-    '1-2 Weeks',
-    '1 Month',
-    'Flexible'
-  ];
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -98,8 +91,8 @@ const LeadModal = ({ isOpen, onClose }) => {
         right: 0,
         bottom: 0,
         zIndex: 9999,
-        background: 'rgba(9, 13, 22, 0.85)',
-        backdropFilter: 'blur(12px)',
+        background: 'rgba(15, 23, 42, 0.5)',
+        backdropFilter: 'blur(8px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -110,17 +103,17 @@ const LeadModal = ({ isOpen, onClose }) => {
     >
       <div
         style={{
-          background: 'linear-gradient(135deg, #0f172a 0%, #090d16 100%)',
-          border: '1px solid rgba(210, 234, 38, 0.25)',
+          background: '#ffffff',
+          border: '1px solid #e2e8f0',
           borderRadius: '24px',
           width: '100%',
-          maxWidth: '620px',
+          maxWidth: '600px',
           maxHeight: '90vh',
           overflowY: 'auto',
           padding: '32px',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)',
+          boxShadow: '0 25px 50px -12px rgba(15, 23, 42, 0.25)',
           position: 'relative',
-          color: '#ffffff'
+          color: '#0f172a'
         }}
       >
         {/* Close Button */}
@@ -130,9 +123,9 @@ const LeadModal = ({ isOpen, onClose }) => {
             position: 'absolute',
             top: '20px',
             right: '20px',
-            background: 'rgba(255, 255, 255, 0.06)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            color: '#94a3b8',
+            background: '#f1f5f9',
+            border: '1px solid #e2e8f0',
+            color: '#64748b',
             width: '36px',
             height: '36px',
             borderRadius: '50%',
@@ -142,8 +135,14 @@ const LeadModal = ({ isOpen, onClose }) => {
             cursor: 'pointer',
             transition: 'all 0.2s ease'
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-          onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = '#e2e8f0';
+            e.currentTarget.style.color = '#0f172a';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = '#f1f5f9';
+            e.currentTarget.style.color = '#64748b';
+          }}
         >
           <X size={18} />
         </button>
@@ -155,8 +154,8 @@ const LeadModal = ({ isOpen, onClose }) => {
                 width: '64px',
                 height: '64px',
                 borderRadius: '50%',
-                background: 'rgba(210, 234, 38, 0.15)',
-                color: '#d2ea26',
+                background: '#f4fce3',
+                color: '#5c7c00',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -165,10 +164,10 @@ const LeadModal = ({ isOpen, onClose }) => {
             >
               <CheckCircle2 size={36} />
             </div>
-            <h2 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '10px' }}>
+            <h2 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '10px', color: '#0f172a' }}>
               Project Request Sent!
             </h2>
-            <p style={{ color: '#94a3b8', fontSize: '14px', lineHeight: '1.6', marginBottom: '28px' }}>
+            <p style={{ color: '#64748b', fontSize: '14px', lineHeight: '1.6', marginBottom: '28px' }}>
               Thank you for reaching out. I have received your project details and will reply within 12-24 hours.
             </p>
 
@@ -202,9 +201,9 @@ const LeadModal = ({ isOpen, onClose }) => {
                 style={{
                   padding: '12px 24px',
                   borderRadius: '12px',
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  border: '1px solid rgba(255, 255, 255, 0.12)',
-                  color: '#ffffff',
+                  background: '#f1f5f9',
+                  border: '1px solid #e2e8f0',
+                  color: '#0f172a',
                   fontWeight: '700',
                   cursor: 'pointer',
                   fontSize: '14px'
@@ -224,8 +223,9 @@ const LeadModal = ({ isOpen, onClose }) => {
                   gap: '6px',
                   padding: '6px 12px',
                   borderRadius: '20px',
-                  background: 'rgba(210, 234, 38, 0.12)',
-                  color: '#d2ea26',
+                  background: '#f4fce3',
+                  border: '1px solid #d8f5a2',
+                  color: '#4d6b00',
                   fontSize: '12px',
                   fontWeight: '800',
                   textTransform: 'uppercase',
@@ -236,82 +236,90 @@ const LeadModal = ({ isOpen, onClose }) => {
                 <Sparkles size={14} />
                 <span>Let's Build Something Great</span>
               </div>
-              <h2 style={{ fontSize: '24px', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.5px' }}>
+              <h2 style={{ fontSize: '24px', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.5px', color: '#0f172a' }}>
                 Start Your Project Inquiry
               </h2>
-              <p style={{ fontSize: '13.5px', color: '#94a3b8', margin: 0, lineHeight: '1.5' }}>
+              <p style={{ fontSize: '13.5px', color: '#64748b', margin: 0, lineHeight: '1.5' }}>
                 Fill out your project details below to receive a custom estimate & consultation within 24 hours.
               </p>
             </div>
 
             {errorMsg && (
-              <div style={{ padding: '12px', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '10px', color: '#f87171', fontSize: '13px', marginBottom: '18px' }}>
+              <div style={{ padding: '12px', background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '10px', color: '#dc2626', fontSize: '13px', marginBottom: '18px' }}>
                 {errorMsg}
               </div>
             )}
 
             <form onSubmit={handleSubmit}>
               {/* Service Selection */}
-              <div style={{ marginBottom: '18px' }}>
-                <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', color: '#94a3b8', marginBottom: '8px', textTransform: 'uppercase' }}>
+              <div style={{ marginBottom: '20px' }}>
+                <label style={{ display: 'block', fontSize: '12px', fontWeight: '800', color: '#475569', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   What service do you need?
                 </label>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                  {serviceOptions.map((opt) => (
-                    <button
-                      type="button"
-                      key={opt}
-                      onClick={() => setFormData({ ...formData, serviceType: opt })}
-                      style={{
-                        padding: '8px 14px',
-                        borderRadius: '10px',
-                        fontSize: '12.5px',
-                        fontWeight: '600',
-                        border: formData.serviceType === opt ? '1px solid #d2ea26' : '1px solid rgba(255,255,255,0.1)',
-                        background: formData.serviceType === opt ? 'rgba(210, 234, 38, 0.15)' : 'rgba(255,255,255,0.03)',
-                        color: formData.serviceType === opt ? '#d2ea26' : '#94a3b8',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      {opt}
-                    </button>
-                  ))}
+                  {serviceOptions.map((opt) => {
+                    const isSelected = formData.serviceType === opt;
+                    return (
+                      <button
+                        type="button"
+                        key={opt}
+                        onClick={() => setFormData({ ...formData, serviceType: opt })}
+                        style={{
+                          padding: '8px 14px',
+                          borderRadius: '10px',
+                          fontSize: '12.5px',
+                          fontWeight: isSelected ? '700' : '500',
+                          border: isSelected ? '1px solid #849a00' : '1px solid #e2e8f0',
+                          background: isSelected ? '#f4fce3' : '#f8fafc',
+                          color: isSelected ? '#2b3d00' : '#475569',
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease'
+                        }}
+                      >
+                        {opt}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
               {/* Budget Picker */}
-              <div style={{ marginBottom: '18px' }}>
-                <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', color: '#94a3b8', marginBottom: '8px', textTransform: 'uppercase' }}>
+              <div style={{ marginBottom: '20px' }}>
+                <label style={{ display: 'block', fontSize: '12px', fontWeight: '800', color: '#475569', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   Estimated Project Budget
                 </label>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px' }}>
-                  {budgetOptions.map((b) => (
-                    <button
-                      type="button"
-                      key={b}
-                      onClick={() => setFormData({ ...formData, budget: b })}
-                      style={{
-                        padding: '8px',
-                        borderRadius: '10px',
-                        fontSize: '12px',
-                        fontWeight: '700',
-                        textAlign: 'center',
-                        border: formData.budget === b ? '1px solid #d2ea26' : '1px solid rgba(255,255,255,0.1)',
-                        background: formData.budget === b ? 'rgba(210, 234, 38, 0.15)' : 'rgba(255,255,255,0.03)',
-                        color: formData.budget === b ? '#d2ea26' : '#94a3b8',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      {b}
-                    </button>
-                  ))}
+                  {budgetOptions.map((b) => {
+                    const isSelected = formData.budget === b;
+                    return (
+                      <button
+                        type="button"
+                        key={b}
+                        onClick={() => setFormData({ ...formData, budget: b })}
+                        style={{
+                          padding: '10px 8px',
+                          borderRadius: '10px',
+                          fontSize: '12.5px',
+                          fontWeight: '800',
+                          textAlign: 'center',
+                          border: isSelected ? '1px solid #849a00' : '1px solid #e2e8f0',
+                          background: isSelected ? '#d2ea26' : '#f8fafc',
+                          color: '#0f172a',
+                          cursor: 'pointer',
+                          transition: 'all 0.15s ease'
+                        }}
+                      >
+                        {b}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
               {/* Name & Email Fields */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '16px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '18px' }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', color: '#94a3b8', marginBottom: '6px' }}>YOUR NAME *</label>
+                  <label style={{ display: 'block', fontSize: '12px', fontWeight: '800', color: '#475569', marginBottom: '6px', textTransform: 'uppercase' }}>YOUR NAME *</label>
                   <input
                     type="text"
                     required
@@ -322,15 +330,16 @@ const LeadModal = ({ isOpen, onClose }) => {
                       width: '100%',
                       padding: '10px 14px',
                       borderRadius: '10px',
-                      background: 'rgba(255, 255, 255, 0.04)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
-                      color: '#ffffff',
-                      fontSize: '13.5px'
+                      background: '#f8fafc',
+                      border: '1px solid #cbd5e1',
+                      color: '#0f172a',
+                      fontSize: '13.5px',
+                      outline: 'none'
                     }}
                   />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', color: '#94a3b8', marginBottom: '6px' }}>EMAIL ADDRESS *</label>
+                  <label style={{ display: 'block', fontSize: '12px', fontWeight: '800', color: '#475569', marginBottom: '6px', textTransform: 'uppercase' }}>EMAIL ADDRESS *</label>
                   <input
                     type="email"
                     required
@@ -341,18 +350,19 @@ const LeadModal = ({ isOpen, onClose }) => {
                       width: '100%',
                       padding: '10px 14px',
                       borderRadius: '10px',
-                      background: 'rgba(255, 255, 255, 0.04)',
-                      border: '1px solid rgba(255, 255, 255, 0.12)',
-                      color: '#ffffff',
-                      fontSize: '13.5px'
+                      background: '#f8fafc',
+                      border: '1px solid #cbd5e1',
+                      color: '#0f172a',
+                      fontSize: '13.5px',
+                      outline: 'none'
                     }}
                   />
                 </div>
               </div>
 
               {/* Project Brief */}
-              <div style={{ marginBottom: '22px' }}>
-                <label style={{ display: 'block', fontSize: '12px', fontWeight: '700', color: '#94a3b8', marginBottom: '6px' }}>PROJECT DETAILS / BRIEF</label>
+              <div style={{ marginBottom: '24px' }}>
+                <label style={{ display: 'block', fontSize: '12px', fontWeight: '800', color: '#475569', marginBottom: '6px', textTransform: 'uppercase' }}>PROJECT DETAILS / BRIEF</label>
                 <textarea
                   rows={3}
                   placeholder="Tell me about your goals, target audience, or specific requirements..."
@@ -362,11 +372,12 @@ const LeadModal = ({ isOpen, onClose }) => {
                     width: '100%',
                     padding: '10px 14px',
                     borderRadius: '10px',
-                    background: 'rgba(255, 255, 255, 0.04)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    color: '#ffffff',
+                    background: '#f8fafc',
+                    border: '1px solid #cbd5e1',
+                    color: '#0f172a',
                     fontSize: '13.5px',
-                    fontFamily: 'inherit'
+                    fontFamily: 'inherit',
+                    outline: 'none'
                   }}
                 />
               </div>
@@ -385,11 +396,12 @@ const LeadModal = ({ isOpen, onClose }) => {
                     padding: '14px 20px',
                     borderRadius: '12px',
                     background: '#d2ea26',
-                    color: '#090d16',
+                    color: '#0f172a',
                     fontWeight: '800',
-                    border: 'none',
+                    border: '1px solid #849a00',
                     cursor: submitting ? 'not-allowed' : 'pointer',
-                    fontSize: '14px'
+                    fontSize: '14px',
+                    boxShadow: '0 4px 14px rgba(132, 154, 0, 0.2)'
                   }}
                 >
                   <Send size={16} />
@@ -407,12 +419,12 @@ const LeadModal = ({ isOpen, onClose }) => {
                     gap: '8px',
                     padding: '14px 20px',
                     borderRadius: '12px',
-                    background: 'rgba(37, 211, 102, 0.15)',
-                    border: '1px solid rgba(37, 211, 102, 0.4)',
-                    color: '#25D366',
+                    background: '#25D366',
+                    color: '#ffffff',
                     fontWeight: '700',
                     textDecoration: 'none',
-                    fontSize: '14px'
+                    fontSize: '14px',
+                    boxShadow: '0 4px 14px rgba(37, 211, 102, 0.25)'
                   }}
                 >
                   <MessageSquare size={16} />
@@ -428,3 +440,4 @@ const LeadModal = ({ isOpen, onClose }) => {
 };
 
 export default LeadModal;
+
