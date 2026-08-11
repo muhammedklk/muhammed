@@ -74,9 +74,10 @@ const LeadModal = ({ isOpen, onClose }) => {
   const whatsappMessage = encodeURIComponent(
     `Hi Muhammed! I'm interested in working with you.\n` +
     `Name: ${formData.name || 'A Client'}\n` +
+    `Email: ${formData.email || 'N/A'}\n` +
+    `Phone: ${formData.phone || 'N/A'}\n` +
     `Service Needed: ${formData.serviceType}\n` +
     `Budget: ${formData.budget}\n` +
-    `Timeline: ${formData.timeline}\n` +
     (formData.message ? `Details: ${formData.message}` : '')
   );
 
@@ -316,8 +317,8 @@ const LeadModal = ({ isOpen, onClose }) => {
                 </div>
               </div>
 
-              {/* Name & Email Fields */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '18px' }}>
+              {/* Name, Email & Phone Fields */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '14px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '12px', fontWeight: '800', color: '#475569', marginBottom: '6px', textTransform: 'uppercase' }}>YOUR NAME *</label>
                   <input
@@ -358,6 +359,27 @@ const LeadModal = ({ isOpen, onClose }) => {
                     }}
                   />
                 </div>
+              </div>
+
+              {/* Phone / WhatsApp Number Field */}
+              <div style={{ marginBottom: '18px' }}>
+                <label style={{ display: 'block', fontSize: '12px', fontWeight: '800', color: '#475569', marginBottom: '6px', textTransform: 'uppercase' }}>PHONE / WHATSAPP NUMBER</label>
+                <input
+                  type="tel"
+                  placeholder="+91 9876543210 or +1 (555) 000-0000"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  style={{
+                    width: '100%',
+                    padding: '10px 14px',
+                    borderRadius: '10px',
+                    background: '#f8fafc',
+                    border: '1px solid #cbd5e1',
+                    color: '#0f172a',
+                    fontSize: '13.5px',
+                    outline: 'none'
+                  }}
+                />
               </div>
 
               {/* Project Brief */}
