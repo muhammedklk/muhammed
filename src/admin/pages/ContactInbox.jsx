@@ -155,18 +155,32 @@ const ContactInbox = () => {
 
               {/* Reply Section */}
               <form onSubmit={handleSendReply}>
-                <label style={{ display: 'block', fontSize: '12px', color: '#d2ea26', fontWeight: '800', marginBottom: '8px', textTransform: 'uppercase' }}>RECORD REPLY / NOTES</label>
+                <label style={{ display: 'block', fontSize: '12px', color: '#d2ea26', fontWeight: '800', marginBottom: '8px', textTransform: 'uppercase' }}>RECORD REPLY & SEND RESPONSE</label>
                 <textarea
                   rows={4}
                   value={replyText}
                   onChange={(e) => setReplyText(e.target.value)}
-                  placeholder="Write response email or reply status notes here..."
+                  placeholder="Type your response email message here..."
                   style={{ width: '100%', padding: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '14px', color: '#ffffff', fontSize: '13.5px', marginBottom: '16px' }}
                 />
-                <button type="submit" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 24px', background: '#d2ea26', color: '#0f172a', borderRadius: '12px', fontWeight: '800', border: 'none', cursor: 'pointer' }}>
-                  <Reply size={16} />
-                  <span>{selectedMessage.isReplied ? 'Update Reply Status' : 'Save Reply Status'}</span>
-                </button>
+
+                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                  {/* Direct Email Sender Button */}
+                  <a
+                    href={`mailto:${selectedMessage.email}?subject=${encodeURIComponent('Re: ' + selectedMessage.subject)}&body=${encodeURIComponent('Hi ' + selectedMessage.name + ',\n\n' + (replyText || '') + '\n\nBest regards,\nMuhammed\nUI/UX Designer & Front-End Developer\nPhone/WhatsApp: +91 9656216086\nPortfolio: https://muhammed.dev')}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 20px', background: '#3b82f6', color: '#ffffff', borderRadius: '12px', fontWeight: '700', textDecoration: 'none', fontSize: '13.5px' }}
+                  >
+                    <span>✉️ Send Email to {selectedMessage.name}</span>
+                  </a>
+
+                  {/* Save Status in CMS DB */}
+                  <button type="submit" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 20px', background: '#d2ea26', color: '#0f172a', borderRadius: '12px', fontWeight: '800', border: 'none', cursor: 'pointer', fontSize: '13.5px' }}>
+                    <Reply size={16} />
+                    <span>{selectedMessage.isReplied ? 'Update Reply Status' : 'Save Reply Status'}</span>
+                  </button>
+                </div>
               </form>
             </div>
           </div>
