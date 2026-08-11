@@ -49,6 +49,12 @@ const AdminLayout = () => {
 
   return (
     <div className="admin-root" style={{ display: 'flex', minHeight: '100vh', background: '#090d16', color: '#f8fafc', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+      {/* Mobile Drawer Backdrop Overlay */}
+      <div
+        className={`admin-backdrop ${mobileOpen ? 'show' : ''}`}
+        onClick={() => setMobileOpen(false)}
+      />
+
       {/* Sidebar Navigation */}
       <aside
         className={`admin-sidebar ${mobileOpen ? 'mobile-show' : ''}`}
@@ -63,7 +69,7 @@ const AdminLayout = () => {
           bottom: 0,
           left: 0,
           zIndex: 999,
-          transition: 'all 0.3s ease'
+          transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       >
         {/* Brand Header */}
@@ -77,7 +83,7 @@ const AdminLayout = () => {
               <span style={{ fontSize: '11px', color: '#849a00', fontWeight: '700' }}>ADMIN PANEL v1.0</span>
             </div>
           </div>
-          <button className="d-md-none border-0 bg-transparent text-white" onClick={() => setMobileOpen(false)}>
+          <button className="d-lg-none border-0 bg-transparent text-white" onClick={() => setMobileOpen(false)} style={{ cursor: 'pointer' }}>
             <X size={20} />
           </button>
         </div>
@@ -145,14 +151,14 @@ const AdminLayout = () => {
       </aside>
 
       {/* Main Content Area */}
-      <div style={{ flex: 1, marginLeft: '260px', minWidth: 0, display: 'flex', flexDirection: 'column' }}>
+      <div className="admin-main-wrapper" style={{ flex: 1, marginLeft: '260px', minWidth: 0, display: 'flex', flexDirection: 'column' }}>
         {/* Top Navbar Header */}
-        <header style={{ height: '64px', background: '#0f172a', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', position: 'sticky', top: 0, zIndex: 900 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <button className="d-md-none border-0 bg-transparent text-white" onClick={() => setMobileOpen(true)}>
+        <header className="admin-top-header" style={{ height: '64px', background: '#0f172a', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', position: 'sticky', top: 0, zIndex: 900 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', overflow: 'hidden' }}>
+            <button className="d-lg-none border-0 bg-transparent text-white" onClick={() => setMobileOpen(true)} style={{ cursor: 'pointer' }}>
               <Menu size={22} />
             </button>
-            <span style={{ fontSize: '13px', color: '#94a3b8', fontWeight: '600' }}>
+            <span style={{ fontSize: '13px', color: '#94a3b8', fontWeight: '600', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
               CONTROL CENTER &gt; <strong style={{ color: '#ffffff' }}>{location.pathname}</strong>
             </span>
           </div>
@@ -177,14 +183,14 @@ const AdminLayout = () => {
                 textDecoration: 'none'
               }}
             >
-              <span>Live Portfolio (Admin Preview)</span>
+              <span className="admin-top-preview-text">Live Portfolio (Admin Preview)</span>
               <ExternalLink size={14} />
             </a>
           </div>
         </header>
 
         {/* Dynamic Page Content */}
-        <main style={{ flex: 1, padding: '32px 24px', overflowY: 'auto' }}>
+        <main className="admin-content-padding" style={{ flex: 1, padding: '32px 24px', overflowY: 'auto' }}>
           <Outlet />
         </main>
       </div>

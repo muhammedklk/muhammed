@@ -106,7 +106,7 @@ const Dashboard = () => {
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {safeLogs.map((log) => (
-              <div key={log._id || Math.random()} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 18px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', gap: '16px' }}>
+              <div key={log._id || Math.random()} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 18px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', gap: '16px', flexWrap: 'wrap' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <div style={{ padding: '6px 12px', borderRadius: '8px', background: 'rgba(210, 234, 38, 0.1)', color: '#d2ea26', fontSize: '11px', fontWeight: '800', textTransform: 'uppercase' }}>
                     {log.module || 'SYSTEM'}
