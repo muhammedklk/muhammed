@@ -49,7 +49,7 @@ const seedData = async () => {
         siteTitle: 'MUHAMMED | Portfolio CMS',
         logoText: 'MUHAMMED',
         contactEmail: 'muhammed@portfolio.dev',
-        contactPhone: '+91 9656 000 000',
+        contactPhone: '+91 9656216086',
         location: 'Kochi, Kerala / Remote',
         footerText: '© 2026 MUHAMMED. All rights reserved.',
         maintenanceMode: false,

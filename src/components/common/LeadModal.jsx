@@ -69,7 +69,7 @@ const LeadModal = ({ isOpen, onClose }) => {
 
   const whatsappNumber = siteSettings?.contactPhone
     ? siteSettings.contactPhone.replace(/[^0-9]/g, '')
-    : '919656000000';
+    : '919656216086';
 
   const whatsappMessage = encodeURIComponent(
     `Hi Muhammed! I'm interested in working with you.\n` +
