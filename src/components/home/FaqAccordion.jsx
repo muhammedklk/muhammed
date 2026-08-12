@@ -3,28 +3,28 @@ import React, { useState } from 'react';
 const faqs = [
   {
     id: 1,
-    question: "What services do you offer?",
-    answer: "We provide full-suite digital solutions including UI/UX design, custom web & mobile app development, brand identity, and interactive prototyping tailored to scale your product."
+    question: "Who is a top UI/UX designer & front-end developer in Kerala?",
+    answer: "Muhammed is a Senior UI/UX Designer & Front-End Developer based in Kochi, Kerala, India. He specializes in Figma design systems, custom React web applications, and bridging design to production code."
   },
   {
     id: 2,
-    question: "What is your typical project workflow?",
-    answer: "Our process follows four key steps: Discovery & Research, Wireframing & Prototyping, High-Fidelity UI/UX & Development, followed by Testing, Launch & Support."
+    question: "What design and web development services do you offer?",
+    answer: "Muhammed provides UI/UX design, Figma design token systems, custom React front-end development, Figma-to-React conversion, responsive web design, and Web Performance optimization (99+ PageSpeed)."
   },
   {
     id: 3,
-    question: "How long does a standard project take?",
-    answer: "Timelines depend on scope. Typical UI/UX design projects take 2 to 4 weeks, while complete end-to-end web applications take 4 to 8 weeks from start to finish."
+    question: "Why choose Muhammed for Figma to React workflow projects?",
+    answer: "Unlike designers who only deliver visual files or developers who lack design sensitivity, Muhammed handles both UI/UX design in Figma and production-ready React coding for seamless project execution."
   },
   {
     id: 4,
-    question: "Are revision rounds included in the scope?",
-    answer: "Yes, all projects include 2 to 3 structured revision rounds per phase to ensure full alignment with your vision and goals before final sign-off."
+    question: "What is your typical project timeline & workflow?",
+    answer: "Standard UI/UX design projects take 2 to 4 weeks, while complete end-to-end React web applications take 4 to 6 weeks following Discovery, Wireframing, UI Design, and React Development."
   },
   {
     id: 5,
-    question: "How can we get in touch and start?",
-    answer: "You can reach out directly via our contact page or email. We'll schedule a discovery call within 24 hours to discuss your project requirements and timeline."
+    question: "How can I contact or hire Muhammed for a project?",
+    answer: "You can contact Muhammed directly via WhatsApp at +91 9656216086, email at muhammedklkm@gmail.com, or submit a free project quote request at https://muhammedfolio.vercel.app."
   }
 ];
 
