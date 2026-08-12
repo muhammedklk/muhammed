@@ -24,9 +24,16 @@ connectDB().catch((err) => {
 });
 configureCloudinary();
 
-// Auto-sync uploaded Elve images to public asset folders
+// Auto-sync uploaded Elve images & root favicons to public asset folders
 try {
   const fs = require('fs');
+  const favSrc = path.join(__dirname, '../public/assets/favicom-img.png');
+  if (fs.existsSync(favSrc)) {
+    ['favicon.ico', 'favicon.png', 'apple-touch-icon.png'].forEach(file => {
+      fs.copyFileSync(favSrc, path.join(__dirname, '../public', file));
+    });
+  }
+
   const img1 = 'C:/Users/MY PC/.gemini/antigravity-ide/brain/5fd61c64-e1bc-4c72-94fe-265cd4a0c913/media__1786081314191.jpg';
   const img2 = 'C:/Users/MY PC/.gemini/antigravity-ide/brain/5fd61c64-e1bc-4c72-94fe-265cd4a0c913/media__1786081314192.jpg';
   if (fs.existsSync(img1)) {

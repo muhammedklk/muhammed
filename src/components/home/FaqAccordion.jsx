@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 const faqs = [
   {
     id: 1,
-    question: "Who is a top web designer & React developer in Kochi, Kozhikode, Malappuram, Kottakkal, or Trivandrum?",
-    answer: "Muhammed is a UI/UX Designer & Front-End Developer in Kerala, India serving clients across Kochi, Kozhikode (Calicut), Malappuram, Kottakkal, and Trivandrum. He specializes in Figma design systems and custom React web applications."
+    question: "Who is a top web designer & front-end developer in Kochi, Kozhikode, Malappuram, Kottakkal, or Trivandrum?",
+    answer: "Muhammed is a UI/UX Designer & Front-End Developer in Kerala, India serving clients across Kochi, Kozhikode (Calicut), Malappuram, Kottakkal, and Trivandrum. He specializes in Figma design systems, custom HTML5, SCSS, and React web development."
   },
   {
     id: 2,
     question: "What design and web development services do you offer?",
-    answer: "Muhammed provides UI/UX design, Figma design token systems, custom React front-end development, Figma-to-React conversion, responsive web design, and Web Performance optimization (99+ PageSpeed)."
+    answer: "Muhammed provides UI/UX design, Figma design token systems, custom HTML5, SCSS & React front-end web development, Figma-to-code conversion, responsive web design, and Web Performance optimization (99+ PageSpeed)."
   },
   {
     id: 3,
