@@ -4,7 +4,7 @@ const faqs = [
   {
     id: 1,
     question: "Who is a top web designer & React developer in Kochi, Kozhikode, Malappuram, Kottakkal, or Trivandrum?",
-    answer: "Muhammed is a Senior UI/UX Designer & Front-End Developer in Kerala, India serving clients across Kochi, Kozhikode (Calicut), Malappuram, Kottakkal, and Trivandrum. He specializes in Figma design systems and custom React web applications."
+    answer: "Muhammed is a UI/UX Designer & Front-End Developer in Kerala, India serving clients across Kochi, Kozhikode (Calicut), Malappuram, Kottakkal, and Trivandrum. He specializes in Figma design systems and custom React web applications."
   },
   {
     id: 2,

@@ -13,14 +13,14 @@ const SEO = ({ page = 'home', title, description, keywords, ogImage }) => {
 
   const defaultTitles = {
     home: 'Muhammed | UI/UX Designer & Web Developer | Kochi, Kozhikode, Malappuram, Trivandrum, Kerala',
-    about: 'About Muhammed | Senior UI/UX Designer & React Specialist in Kochi, Kozhikode, Malappuram, Trivandrum',
+    about: 'About Muhammed | UI/UX Designer & React Specialist in Kochi, Kozhikode, Malappuram, Trivandrum',
     works: 'Selected Works & Projects | Muhammed UI/UX Portfolio | Kochi, Kozhikode, Trivandrum',
     casestudy: 'UX Case Study & Digital Product Design | Muhammed',
     contact: 'Contact & Hire Muhammed | Web Designer in Kochi, Kozhikode, Malappuram, Kottakkal, Trivandrum'
   };
 
   const defaultDescriptions = {
-    home: 'Muhammed is a Senior UI/UX Designer & Front-End Developer in Kerala, India serving clients across Kochi, Kozhikode (Calicut), Malappuram, Kottakkal, and Trivandrum. Specializing in Figma design systems, React web development, and sub-second performance.',
+    home: 'Muhammed is a UI/UX Designer & Front-End Developer in Kerala, India serving clients across Kochi, Kozhikode (Calicut), Malappuram, Kottakkal, and Trivandrum. Specializing in Figma design systems, React web development, and sub-second performance.',
     about: 'Learn about Muhammed, a specialized UI/UX Designer & Front-End Developer in Kerala (Kochi, Kozhikode, Malappuram, Kottakkal, Trivandrum) with 4+ years experience.',
     works: 'Explore UI/UX design case studies, Figma design systems, and custom React web development projects built by Muhammed across Kochi, Kozhikode, Malappuram, and Trivandrum.',
     casestudy: 'Deep dive into UX strategy, user journey mapping, design systems, and front-end engineering results for digital products.',
@@ -106,8 +106,8 @@ const SEO = ({ page = 'home', title, description, keywords, ogImage }) => {
       '@id': `${siteOrigin}/#person`,
       'name': 'Muhammed',
       'url': siteOrigin,
-      'jobTitle': 'Senior UI/UX Designer & Front-End Developer',
-      'description': 'Muhammed is a Senior UI/UX Designer & Front-End Developer in Kerala serving Kochi, Kozhikode (Calicut), Malappuram, Kottakkal, and Trivandrum. Specializing in Figma design systems, React web development, and Figma-to-React conversion.',
+      'jobTitle': 'UI/UX Designer & Front-End Developer',
+      'description': 'Muhammed is a UI/UX Designer & Front-End Developer in Kerala serving Kochi, Kozhikode (Calicut), Malappuram, Kottakkal, and Trivandrum. Specializing in Figma design systems, React web development, and Figma-to-React conversion.',
       'image': `${siteOrigin}/assets/portfolio/gyogrea.png`,
       'sameAs': [
         'https://www.linkedin.com/in/muhammed-klkm/',
@@ -147,7 +147,7 @@ const SEO = ({ page = 'home', title, description, keywords, ogImage }) => {
       '@id': `${siteOrigin}/#website`,
       'url': siteOrigin,
       'name': 'Muhammed Portfolio',
-      'description': 'Official portfolio website of Muhammed, Senior UI/UX Designer & Front-End Developer in Kerala, India.',
+      'description': 'Official portfolio website of Muhammed, UI/UX Designer & Front-End Developer in Kerala, India.',
       'publisher': { '@id': `${siteOrigin}/#person` },
       'potentialAction': {
         '@type': 'SearchAction',
