@@ -64,37 +64,6 @@ const Layout = ({ children }) => {
 
       <main className="main-content">{children}</main>
 
-      {/* Sticky Floating High-Converting Lead Trigger Button */}
-      <button
-        type="button"
-        onClick={() => setIsLeadModalOpen(true)}
-        style={{
-          position: 'fixed',
-          bottom: '90px',
-          right: '24px',
-          zIndex: 990,
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '12px 20px',
-          borderRadius: '30px',
-          background: 'linear-gradient(135deg, #d2ea26 0%, #a8bc18 100%)',
-          color: '#090d16',
-          fontWeight: '800',
-          fontSize: '13px',
-          border: 'none',
-          boxShadow: '0 10px 25px -5px rgba(210, 234, 38, 0.4)',
-          cursor: 'pointer',
-          transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
-        }}
-        className="lead-float-btn"
-        onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-        onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-      >
-        <Sparkles size={16} />
-        <span>Request a Quote</span>
-      </button>
-
       <LeadModal
         isOpen={isLeadModalOpen}
         onClose={() => setIsLeadModalOpen(false)}
