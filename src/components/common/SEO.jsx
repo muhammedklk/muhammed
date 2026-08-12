@@ -12,24 +12,24 @@ const SEO = ({ page = 'home', title, description, keywords, ogImage }) => {
   const currentUrl = pageSeo.canonicalUrl || `${siteOrigin}${currentPath}`;
 
   const defaultTitles = {
-    home: 'Muhammed | UI/UX Designer & Front-End Developer | Kochi, Kerala, India',
-    about: 'About Muhammed | Senior UI/UX Designer & React Front-End Specialist in Kerala',
-    works: 'Selected Works & Projects | Muhammed UI/UX Portfolio | Figma to React',
+    home: 'Muhammed | UI/UX Designer & Web Developer | Kochi, Kozhikode, Malappuram, Trivandrum, Kerala',
+    about: 'About Muhammed | Senior UI/UX Designer & React Specialist in Kochi, Kozhikode, Malappuram, Trivandrum',
+    works: 'Selected Works & Projects | Muhammed UI/UX Portfolio | Kochi, Kozhikode, Trivandrum',
     casestudy: 'UX Case Study & Digital Product Design | Muhammed',
-    contact: 'Contact & Hire Muhammed | UI/UX Designer & Web Developer in Kerala'
+    contact: 'Contact & Hire Muhammed | Web Designer in Kochi, Kozhikode, Malappuram, Kottakkal, Trivandrum'
   };
 
   const defaultDescriptions = {
-    home: 'Muhammed is a Senior UI/UX Designer & Front-End Developer in Kochi, Kerala, India specializing in Figma design systems, React web development, and sub-second web performance.',
-    about: 'Learn about Muhammed, a specialized UI/UX Designer & Front-End Developer in Kerala with 4+ years experience building high-performance React web applications.',
-    works: 'Explore UI/UX design case studies, Figma design systems, and custom React web development projects built by Muhammed in Kerala.',
+    home: 'Muhammed is a Senior UI/UX Designer & Front-End Developer in Kerala, India serving clients across Kochi, Kozhikode (Calicut), Malappuram, Kottakkal, and Trivandrum. Specializing in Figma design systems, React web development, and sub-second performance.',
+    about: 'Learn about Muhammed, a specialized UI/UX Designer & Front-End Developer in Kerala (Kochi, Kozhikode, Malappuram, Kottakkal, Trivandrum) with 4+ years experience.',
+    works: 'Explore UI/UX design case studies, Figma design systems, and custom React web development projects built by Muhammed across Kochi, Kozhikode, Malappuram, and Trivandrum.',
     casestudy: 'Deep dive into UX strategy, user journey mapping, design systems, and front-end engineering results for digital products.',
-    contact: 'Get in touch with Muhammed in Kochi, Kerala for freelance projects, design system consultations, and full-stack web engineering inquiries.'
+    contact: 'Get in touch with Muhammed for freelance web design and React engineering projects in Kochi, Kozhikode, Malappuram, Kottakkal, Trivandrum, and worldwide.'
   };
 
   const finalTitle = title || pageSeo.metaTitle || defaultTitles[page] || defaultTitles.home;
   const finalDescription = description || pageSeo.metaDescription || defaultDescriptions[page] || defaultDescriptions.home;
-  const finalKeywords = keywords || (pageSeo.keywords && pageSeo.keywords.length ? pageSeo.keywords.join(', ') : 'UI/UX designer Kerala, web designer Kochi, website developer Kerala, front-end developer India, Figma to React developer, hire UI/UX designer India, Muhammed portfolio, UI UX design systems');
+  const finalKeywords = keywords || (pageSeo.keywords && pageSeo.keywords.length ? pageSeo.keywords.join(', ') : 'web designer Kochi, web designer Kozhikode, web designer Calicut, web designer Malappuram, web designer Kottakkal, web designer Trivandrum, UI/UX designer Kerala, website developer Kerala, front-end developer India, Figma to React developer, hire UI UX designer Kerala');
   const rawOgImg = ogImage || pageSeo.ogImage || '/assets/portfolio/gyogrea.png';
   const finalOgImage = rawOgImg.startsWith('http') ? rawOgImg : `${siteOrigin}${rawOgImg}`;
   const finalRobots = pageSeo.robots || 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
@@ -59,7 +59,7 @@ const SEO = ({ page = 'home', title, description, keywords, ogImage }) => {
     updateMetaTag('meta[name="author"]', 'name', 'author', 'Muhammed');
     updateMetaTag('meta[name="publisher"]', 'name', 'publisher', 'Muhammed');
     updateMetaTag('meta[name="geo.region"]', 'name', 'geo.region', 'IN-KL');
-    updateMetaTag('meta[name="geo.placename"]', 'name', 'geo.placename', 'Kochi, Kerala');
+    updateMetaTag('meta[name="geo.placename"]', 'name', 'geo.placename', 'Kochi, Kozhikode, Calicut, Malappuram, Kottakkal, Trivandrum, Kerala');
 
     // 3. OpenGraph Social Card Meta Tags
     updateMetaTag('meta[property="og:title"]', 'property', 'og:title', finalTitle);
@@ -107,7 +107,7 @@ const SEO = ({ page = 'home', title, description, keywords, ogImage }) => {
       'name': 'Muhammed',
       'url': siteOrigin,
       'jobTitle': 'Senior UI/UX Designer & Front-End Developer',
-      'description': 'Muhammed is a Senior UI/UX Designer & Front-End Developer in Kochi, Kerala, India specializing in Figma design systems, custom React web development, and Figma-to-React conversion.',
+      'description': 'Muhammed is a Senior UI/UX Designer & Front-End Developer in Kerala serving Kochi, Kozhikode (Calicut), Malappuram, Kottakkal, and Trivandrum. Specializing in Figma design systems, React web development, and Figma-to-React conversion.',
       'image': `${siteOrigin}/assets/portfolio/gyogrea.png`,
       'sameAs': [
         'https://www.linkedin.com/in/muhammed-klkm/',
@@ -116,7 +116,7 @@ const SEO = ({ page = 'home', title, description, keywords, ogImage }) => {
       ],
       'address': {
         '@type': 'PostalAddress',
-        'addressLocality': 'Kochi',
+        'addressLocality': 'Kochi, Kozhikode, Calicut, Malappuram, Kottakkal, Trivandrum',
         'addressRegion': 'Kerala',
         'addressCountry': 'India'
       },
@@ -164,10 +164,10 @@ const SEO = ({ page = 'home', title, description, keywords, ogImage }) => {
       'name': 'Muhammed UI/UX Design & Development Services',
       'url': siteOrigin,
       'priceRange': '$$',
-      'areaServed': ['Kerala', 'Kochi', 'India', 'Worldwide', 'Remote'],
+      'areaServed': ['Kochi', 'Kozhikode', 'Calicut', 'Malappuram', 'Kottakkal', 'Trivandrum', 'Kerala', 'India', 'Worldwide', 'Remote'],
       'address': {
         '@type': 'PostalAddress',
-        'addressLocality': 'Kochi',
+        'addressLocality': 'Kochi, Kozhikode, Calicut, Malappuram, Kottakkal, Trivandrum',
         'addressRegion': 'Kerala',
         'addressCountry': 'India'
       },
