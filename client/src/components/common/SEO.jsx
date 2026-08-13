@@ -9,7 +9,7 @@ const SEO = ({ page = 'home', title, description, keywords, ogImage }) => {
   const finalTitle = title || pageSeo.metaTitle || 'Muhammed | UI/UX Designer & Front-End Developer';
   const finalDescription = description || pageSeo.metaDescription || 'Multidisciplinary UI/UX Designer & Front-End Developer crafting high-performance, pixel-perfect web products.';
   const finalKeywords = keywords || (pageSeo.keywords ? pageSeo.keywords.join(', ') : 'UI/UX Designer, Front-End Developer, React, Web Design, Figma, Portfolio');
-  const finalOgImage = ogImage || pageSeo.ogImage || '/assets/portfolio/gyogrea.png';
+  const finalOgImage = ogImage || pageSeo.ogImage || '/assets/favicom-img.png';
   const finalRobots = pageSeo.robots || 'index, follow';
 
   useEffect(() => {

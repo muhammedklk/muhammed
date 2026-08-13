@@ -30,7 +30,7 @@ const SEO = ({ page = 'home', title, description, keywords, ogImage }) => {
   const finalTitle = title || pageSeo.metaTitle || defaultTitles[page] || defaultTitles.home;
   const finalDescription = description || pageSeo.metaDescription || defaultDescriptions[page] || defaultDescriptions.home;
   const finalKeywords = keywords || (pageSeo.keywords && pageSeo.keywords.length ? pageSeo.keywords.join(', ') : 'web designer Kochi, web designer Kozhikode, web designer Calicut, web designer Malappuram, web designer Kottakkal, web designer Trivandrum, UI/UX designer Kerala, website developer Kerala, front-end developer India, HTML web developer, Figma to React developer, hire UI UX designer Kerala');
-  const rawOgImg = ogImage || pageSeo.ogImage || '/assets/portfolio/gyogrea.png';
+  const rawOgImg = ogImage || pageSeo.ogImage || '/assets/favicom-img.png';
   const finalOgImage = rawOgImg.startsWith('http') ? rawOgImg : `${siteOrigin}${rawOgImg}`;
   const finalRobots = pageSeo.robots || 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
 
@@ -125,7 +125,7 @@ const SEO = ({ page = 'home', title, description, keywords, ogImage }) => {
       'url': siteOrigin,
       'jobTitle': 'UI/UX Designer & Front-End Developer',
       'description': 'Muhammed is a UI/UX Designer & Front-End Developer in Kerala serving Kochi, Kozhikode (Calicut), Malappuram, Kottakkal, and Trivandrum. Specializing in Figma design systems, React web development, and Figma-to-React conversion.',
-      'image': `${siteOrigin}/assets/portfolio/gyogrea.png`,
+      'image': `${siteOrigin}/assets/favicom-img.png`,
       'sameAs': [
         'https://www.linkedin.com/in/muhammed-klkm/',
         'https://github.com/muhammedklk',

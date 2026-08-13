@@ -70,7 +70,7 @@ const SeoManager = () => {
         keywords: 'Software Architect, Full Stack Developer, React, Node.js, Express, MongoDB',
         ogTitle: '',
         ogDescription: '',
-        ogImage: '/assets/portfolio/gyogrea.png',
+        ogImage: '/assets/favicom-img.png',
         canonicalUrl: '',
         jsonLdSchema: '',
         robots: 'index, follow',
