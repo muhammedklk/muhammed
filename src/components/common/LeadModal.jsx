@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Send, CheckCircle2, MessageSquare, Sparkles } from 'lucide-react';
+import { X, Send, CheckCircle2, MessageSquare } from 'lucide-react';
 import { usePortfolio } from '../../context/PortfolioContext';
 
 const LeadModal = ({ isOpen, onClose }) => {
@@ -9,7 +9,6 @@ const LeadModal = ({ isOpen, onClose }) => {
     email: '',
     phone: '',
     serviceType: 'UI/UX Design & Prototyping',
-    budget: '$1,000 - $3,000',
     timeline: '1-2 Weeks',
     message: ''
   });
@@ -28,13 +27,6 @@ const LeadModal = ({ isOpen, onClose }) => {
     'Design System & Wireframing'
   ];
 
-  const budgetOptions = [
-    '< $1,000',
-    '$1,000 - $3,000',
-    '$3,000 - $5,000',
-    '$5,000+'
-  ];
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -44,8 +36,8 @@ const LeadModal = ({ isOpen, onClose }) => {
       const payload = {
         name: formData.name,
         email: formData.email,
-        subject: `[LEAD INQUIRY] ${formData.serviceType} (${formData.budget})`,
-        message: `Project Service: ${formData.serviceType}\nBudget Range: ${formData.budget}\nTimeline: ${formData.timeline}\nPhone/Contact: ${formData.phone || 'N/A'}\n\nProject Brief:\n${formData.message}`
+        subject: `[LEAD INQUIRY] ${formData.serviceType}`,
+        message: `Project Service: ${formData.serviceType}\nTimeline: ${formData.timeline}\nPhone/Contact: ${formData.phone || 'N/A'}\n\nProject Brief:\n${formData.message}`
       };
 
       const res = await fetch('/api/contact', {
@@ -77,7 +69,6 @@ const LeadModal = ({ isOpen, onClose }) => {
     `Email: ${formData.email || 'N/A'}\n` +
     `Phone: ${formData.phone || 'N/A'}\n` +
     `Service Needed: ${formData.serviceType}\n` +
-    `Budget: ${formData.budget}\n` +
     (formData.message ? `Details: ${formData.message}` : '')
   );
 
@@ -219,23 +210,24 @@ const LeadModal = ({ isOpen, onClose }) => {
             <div style={{ marginBottom: '24px' }}>
               <div
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  padding: '6px 12px',
+                  display: 'inline-block',
+                  padding: '6px 14px',
                   borderRadius: '20px',
                   background: '#f4fce3',
                   border: '1px solid #d8f5a2',
                   color: '#4d6b00',
-                  fontSize: '12px',
+                  fontSize: 'clamp(10px, 3vw, 12px)',
                   fontWeight: '800',
                   textTransform: 'uppercase',
                   letterSpacing: '0.5px',
-                  marginBottom: '12px'
+                  marginBottom: '12px',
+                  whiteSpace: 'nowrap',
+                  maxWidth: '100%',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
                 }}
               >
-                <Sparkles size={14} />
-                <span>Let's Build Something Great</span>
+                Let's Build Something Great
               </div>
               <h2 style={{ fontSize: '24px', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.5px', color: '#0f172a' }}>
                 Start Your Project Inquiry
@@ -284,38 +276,7 @@ const LeadModal = ({ isOpen, onClose }) => {
                 </div>
               </div>
 
-              {/* Budget Picker */}
-              <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', fontSize: '12px', fontWeight: '800', color: '#475569', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                  Estimated Project Budget
-                </label>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px' }}>
-                  {budgetOptions.map((b) => {
-                    const isSelected = formData.budget === b;
-                    return (
-                      <button
-                        type="button"
-                        key={b}
-                        onClick={() => setFormData({ ...formData, budget: b })}
-                        style={{
-                          padding: '10px 8px',
-                          borderRadius: '10px',
-                          fontSize: '12.5px',
-                          fontWeight: '800',
-                          textAlign: 'center',
-                          border: isSelected ? '1px solid #849a00' : '1px solid #e2e8f0',
-                          background: isSelected ? '#d2ea26' : '#f8fafc',
-                          color: '#0f172a',
-                          cursor: 'pointer',
-                          transition: 'all 0.15s ease'
-                        }}
-                      >
-                        {b}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
+
 
               {/* Name, Email & Phone Fields */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '14px' }}>

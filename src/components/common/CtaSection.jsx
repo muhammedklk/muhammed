@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, MessageSquare, ArrowRight } from 'lucide-react';
+import { MessageSquare, ArrowRight } from 'lucide-react';
 
 const CtaSection = ({ onOpenLeadModal }) => {
   return (
@@ -40,18 +40,19 @@ const CtaSection = ({ onOpenLeadModal }) => {
               border: '1px solid #d8f5a2',
               padding: '6px 14px',
               borderRadius: '20px',
-              fontSize: '12px',
+              fontSize: 'clamp(9.5px, 2.8vw, 12px)',
               fontWeight: '800',
-              letterSpacing: '1.2px',
+              letterSpacing: '1px',
               textTransform: 'uppercase',
               marginBottom: '16px',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px'
+              display: 'inline-block',
+              whiteSpace: 'nowrap',
+              maxWidth: '100%',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
             }}
           >
-            <Sparkles size={14} />
-            <span>LET'S COLLABORATE & BUILD YOUR PRODUCT</span>
+            LET'S COLLABORATE & BUILD YOUR PRODUCT
           </span>
 
           <h2

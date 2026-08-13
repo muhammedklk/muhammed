@@ -5,12 +5,10 @@ const Contact = () => {
     name: '',
     email: '',
     service: 'uiux',
-    budget: '1k-3k',
     message: ''
   });
 
   const [serviceSelectOpen, setServiceSelectOpen] = useState(false);
-  const [budgetSelectOpen, setBudgetSelectOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [feedback, setFeedback] = useState(null);
 
@@ -20,14 +18,6 @@ const Contact = () => {
     { value: 'fullstack', label: 'Full Web Application' },
     { value: 'redesign', label: 'Website Redesign' },
     { value: 'other', label: 'Consultation & Strategy' }
-  ];
-
-  const budgetOptions = [
-    { value: 'sub1k', label: 'Under $1,000' },
-    { value: '1k-3k', label: '$1,000 – $3,000' },
-    { value: '3k-5k', label: '$3,000 – $5,000' },
-    { value: '5k-10k', label: '$5,000 – $10,000' },
-    { value: '10k+', label: '$10,000+' }
   ];
 
   const handleSubmit = async (e) => {
@@ -43,7 +33,7 @@ const Contact = () => {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          subject: `Inquiry: ${formData.service} (${formData.budget})`,
+          subject: `Inquiry: ${formData.service}`,
           message: formData.message
         })
       }).catch(() => null);
@@ -53,7 +43,6 @@ const Contact = () => {
       bodyData.append('name', formData.name);
       bodyData.append('email', formData.email);
       bodyData.append('service', formData.service);
-      bodyData.append('budget', formData.budget);
       bodyData.append('message', formData.message);
       bodyData.append('_subject', `New Portfolio Message from ${formData.name}`);
       bodyData.append('_captcha', 'false');
@@ -68,7 +57,7 @@ const Contact = () => {
         text: "✅ Message sent successfully! I will respond within 24 hours.",
         color: '#4ade80'
       });
-      setFormData({ name: '', email: '', service: 'uiux', budget: '1k-3k', message: '' });
+      setFormData({ name: '', email: '', service: 'uiux', message: '' });
     } catch (err) {
       console.error('Failed to submit inquiry:', err);
       // Fallback feedback if network was offline
@@ -76,7 +65,7 @@ const Contact = () => {
         text: "✅ Message sent! Thank you for reaching out.",
         color: '#4ade80'
       });
-      setFormData({ name: '', email: '', service: 'uiux', budget: '1k-3k', message: '' });
+      setFormData({ name: '', email: '', service: 'uiux', message: '' });
     } finally {
       setSubmitting(false);
     }
@@ -209,7 +198,7 @@ const Contact = () => {
                       </div>
                     </div>
 
-                    <div className="col-md-6 col-sm-12">
+                    <div className="col-12">
                       <div className="form-group-item">
                         <label className="form-label">Service Needed</label>
                         <div className={`custom-select-wrapper ${serviceSelectOpen ? 'open' : ''}`}>
@@ -218,7 +207,6 @@ const Contact = () => {
                             className="custom-select-trigger"
                             onClick={() => {
                               setServiceSelectOpen(!serviceSelectOpen);
-                              setBudgetSelectOpen(false);
                             }}
                           >
                             <span className="custom-select-label">
@@ -236,43 +224,6 @@ const Contact = () => {
                                 onClick={() => {
                                   setFormData({ ...formData, service: opt.value });
                                   setServiceSelectOpen(false);
-                                }}
-                              >
-                                {opt.label}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="col-md-6 col-sm-12">
-                      <div className="form-group-item">
-                        <label className="form-label">Budget Range</label>
-                        <div className={`custom-select-wrapper ${budgetSelectOpen ? 'open' : ''}`}>
-                          <button
-                            type="button"
-                            className="custom-select-trigger"
-                            onClick={() => {
-                              setBudgetSelectOpen(!budgetSelectOpen);
-                              setServiceSelectOpen(false);
-                            }}
-                          >
-                            <span className="custom-select-label">
-                              {budgetOptions.find((o) => o.value === formData.budget)?.label}
-                            </span>
-                            <svg className="custom-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                              <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                          </button>
-                          <div className="custom-select-options">
-                            {budgetOptions.map((opt) => (
-                              <div
-                                key={opt.value}
-                                className={`custom-option ${formData.budget === opt.value ? 'selected' : ''}`}
-                                onClick={() => {
-                                  setFormData({ ...formData, budget: opt.value });
-                                  setBudgetSelectOpen(false);
                                 }}
                               >
                                 {opt.label}
