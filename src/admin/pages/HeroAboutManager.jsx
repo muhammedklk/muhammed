@@ -3,6 +3,7 @@ import { contentApi } from '../services/api';
 import { Save, Sparkles } from '../components/Icons';
 import { usePortfolio } from '../../context/PortfolioContext';
 import ImageUploadInput from '../components/ImageUploadInput';
+import CvUploadInput from '../components/CvUploadInput';
 
 const HeroAboutManager = () => {
   const { refreshPortfolio } = usePortfolio();
@@ -221,6 +222,10 @@ const HeroAboutManager = () => {
 
             <div className="col-12">
               <ImageUploadInput label="PROFILE AVATAR IMAGE URL / PHOTO" value={aboutForm.avatarUrl} onChange={(val) => setAboutForm({ ...aboutForm, avatarUrl: val })} placeholder="/assets/profile_photo.jpg or choose file..." />
+            </div>
+
+            <div className="col-12">
+              <CvUploadInput label="RESUME / CV FILE OR URL (DOWNLOAD CV BUTTON ON ABOUT PAGE)" value={aboutForm.resumeUrl} onChange={(val) => setAboutForm({ ...aboutForm, resumeUrl: val })} placeholder="/assets/cv/Muhammed_K_Resume.pdf or upload PDF..." />
             </div>
           </div>
 

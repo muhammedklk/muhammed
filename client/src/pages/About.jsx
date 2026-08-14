@@ -97,8 +97,9 @@ const About = () => {
                 {/* Download CV Prominent CTA Buttons */}
                 <div className="portrait-actions-row">
                   <a
-                    href="assets/cv/Muhammed_K_Resume.pdf"
+                    href={about?.resumeUrl || "assets/cv/Muhammed_K_Resume.pdf"}
                     target="_blank"
+                    rel="noopener noreferrer"
                     download="Muhammed_K_Resume.pdf"
                     className="btn-download-cv-lg"
                   >
