@@ -73,10 +73,10 @@ const defaultWorks = [
 const Works = () => {
   const { projects } = usePortfolio();
 
-  // Display all dynamic projects from CMS/MongoDB, merged with defaults
+  // Display all dynamic projects from CMS/MongoDB sorted by priority order rank, merged with defaults
   const displayWorks = (() => {
     if (Array.isArray(projects) && projects.length > 0) {
-      const merged = [...projects];
+      const merged = [...projects].sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0));
       defaultWorks.forEach((defaultItem) => {
         const exists = merged.some(
           (p) =>

@@ -115,6 +115,22 @@ const ProjectSchema = new mongoose.Schema(
       type: Number,
       default: 0
     },
+    homeMockupImg: {
+      type: String,
+      default: ''
+    },
+    homeTitle: {
+      type: String,
+      default: ''
+    },
+    homeCategory: {
+      type: String,
+      default: ''
+    },
+    homeLiveUrl: {
+      type: String,
+      default: ''
+    },
     status: {
       type: String,
       enum: ['publish', 'draft'],

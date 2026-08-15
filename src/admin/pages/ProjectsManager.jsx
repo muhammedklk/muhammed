@@ -25,6 +25,9 @@ const ProjectsManager = () => {
     technologies: 'React, Node.js, Tailwind',
     status: 'publish',
     featured: false,
+    order: 1,
+    showCaseStudyBtn: true,
+    showLiveUrlBtn: true,
   });
 
   const fetchProjects = async () => {
@@ -61,6 +64,9 @@ const ProjectsManager = () => {
         });
       }
 
+      // Sort by order ascending
+      combined.sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0));
+
       setProjects(combined);
     } catch (err) {
       console.error('Failed to load projects:', err);
@@ -85,6 +91,7 @@ const ProjectsManager = () => {
         technologies: Array.isArray(project.tags) ? project.tags.join(', ') : project.technologies?.join(', ') || '',
         status: project.status || 'publish',
         featured: project.featured || false,
+        order: project.order !== undefined ? Number(project.order) : 1,
         showCaseStudyBtn: project.showCaseStudyBtn !== undefined ? project.showCaseStudyBtn : true,
         showLiveUrlBtn: project.showLiveUrlBtn !== undefined ? project.showLiveUrlBtn : true,
       });
@@ -101,6 +108,7 @@ const ProjectsManager = () => {
         technologies: 'React, Node.js, Tailwind',
         status: 'publish',
         featured: false,
+        order: projects.length + 1,
         showCaseStudyBtn: true,
         showLiveUrlBtn: true,
       });
@@ -183,7 +191,10 @@ const ProjectsManager = () => {
             <div key={project._id} style={{ background: '#0f172a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               <div style={{ height: '180px', background: '#1e293b', position: 'relative', overflow: 'hidden' }}>
                 <img src={project.heroImg || project.image || '/assets/portfolio/gyogrea.png'} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                <span style={{ position: 'absolute', top: '12px', right: '12px', padding: '4px 10px', background: 'rgba(15, 23, 42, 0.8)', color: '#d2ea26', borderRadius: '20px', fontSize: '11px', fontWeight: '800', backdropFilter: 'blur(4px)' }}>
+                <span style={{ position: 'absolute', top: '12px', left: '12px', padding: '4px 10px', background: '#d2ea26', color: '#0f172a', borderRadius: '20px', fontSize: '11px', fontWeight: '800' }}>
+                  Priority #{project.order ?? 1}
+                </span>
+                <span style={{ position: 'absolute', top: '12px', right: '12px', padding: '4px 10px', background: 'rgba(15, 23, 42, 0.8)', color: '#ffffff', borderRadius: '20px', fontSize: '11px', fontWeight: '800', backdropFilter: 'blur(4px)' }}>
                   {project.category}
                 </span>
               </div>
@@ -241,6 +252,11 @@ const ProjectsManager = () => {
               <div>
                 <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>LIVE DEMO URL</label>
                 <input type="text" value={formData.liveUrl} onChange={(e) => setFormData({ ...formData, liveUrl: e.target.value })} placeholder="https://..." style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '12px', color: '#d2ea26', fontWeight: '700', marginBottom: '6px' }}>DISPLAY PRIORITY ORDER (1 = First, 2 = Second, 3 = Third...)</label>
+                <input type="number" min="1" value={formData.order} onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value, 10) || 1 })} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(210, 234, 38, 0.4)', borderRadius: '10px', color: '#ffffff', fontWeight: '800' }} />
               </div>
 
               <div>

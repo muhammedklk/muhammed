@@ -41,25 +41,31 @@ const SelectedWorks = () => {
   const { projects } = usePortfolio();
 
   // Selected works for Home page:
-  // Map slots 0 to 3 to display top 4 dynamic projects saved from admin panel/MongoDB.
-  // Fall back to defaultFeatured item if a dynamic project is missing for that slot.
+  // Sort projects by order rank, take top 4 dynamic projects.
+  // Use home-specific fields (homeMockupImg, homeTitle, homeCategory, homeLiveUrl) first!
+  const sortedProjects = Array.isArray(projects) 
+    ? [...projects].sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0))
+    : [];
+
   const safeProjects = [0, 1, 2, 3].map((index) => {
     const defaultItem = defaultFeatured[index] || {};
     
-    // Positional match first (HOME SLOT #1 to #4 in Admin), fallback to slug/title match
-    const dynamicProj = (Array.isArray(projects) && projects[index])
-      ? projects[index]
-      : (projects || []).find(
-          (p) =>
-            (p.slug && String(p.slug).toLowerCase() === String(defaultItem.slug).toLowerCase()) ||
-            (p.id && String(p.id).toLowerCase() === String(defaultItem.id).toLowerCase()) ||
-            (p.title && String(p.title).toLowerCase() === String(defaultItem.title).toLowerCase())
-        );
+    // Positional match first from sorted projects (HOME SLOT #1 to #4 in Admin)
+    const dynamicProj = sortedProjects[index] || (projects || []).find(
+      (p) =>
+        (p.slug && String(p.slug).toLowerCase() === String(defaultItem.slug).toLowerCase()) ||
+        (p.id && String(p.id).toLowerCase() === String(defaultItem.id).toLowerCase()) ||
+        (p.title && String(p.title).toLowerCase() === String(defaultItem.title).toLowerCase())
+    );
 
     if (!dynamicProj) return defaultItem;
 
-    const heroImg = dynamicProj.heroImg || dynamicProj.image || defaultItem.heroImg;
-    const categoryVal = dynamicProj.category || dynamicProj.subtitle || dynamicProj.shortDescription || defaultItem.category;
+    const heroImg = dynamicProj.homeMockupImg || dynamicProj.heroImg || dynamicProj.image || defaultItem.heroImg;
+    const categoryVal = dynamicProj.homeCategory || dynamicProj.category || dynamicProj.subtitle || dynamicProj.shortDescription || defaultItem.category;
+    const titleVal = dynamicProj.homeTitle || dynamicProj.title || defaultItem.title;
+    const liveUrlVal = (dynamicProj.homeLiveUrl !== undefined && dynamicProj.homeLiveUrl !== '') 
+      ? dynamicProj.homeLiveUrl 
+      : (dynamicProj.liveUrl !== undefined ? dynamicProj.liveUrl : defaultItem.liveUrl);
 
     return {
       ...defaultItem,
@@ -67,8 +73,8 @@ const SelectedWorks = () => {
       heroImg,
       subtitle: categoryVal,
       category: categoryVal,
-      title: dynamicProj.title || defaultItem.title,
-      liveUrl: dynamicProj.liveUrl !== undefined && dynamicProj.liveUrl !== null ? dynamicProj.liveUrl : defaultItem.liveUrl,
+      title: titleVal,
+      liveUrl: liveUrlVal,
       showCaseStudyBtn: dynamicProj.showCaseStudyBtn !== undefined ? dynamicProj.showCaseStudyBtn : defaultItem.showCaseStudyBtn,
       showLiveUrlBtn: dynamicProj.showLiveUrlBtn !== undefined ? dynamicProj.showLiveUrlBtn : defaultItem.showLiveUrlBtn
     };
