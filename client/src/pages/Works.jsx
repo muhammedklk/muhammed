@@ -73,29 +73,25 @@ const defaultWorks = [
 const Works = () => {
   const { projects } = usePortfolio();
 
-  // Always display ALL 8 core works, merged with dynamic CMS updates from MongoDB
-  const displayWorks = defaultWorks.map((defaultItem) => {
-    const apiMatch = (projects || []).find(
-      (p) =>
-        (p.slug && String(p.slug).toLowerCase() === String(defaultItem.slug).toLowerCase()) ||
-        (p.id && String(p.id).toLowerCase() === String(defaultItem.id).toLowerCase()) ||
-        (p.title && String(p.title).toLowerCase() === String(defaultItem.title).toLowerCase()) ||
-        (p.slug && defaultItem.slug && (
-          String(defaultItem.slug).toLowerCase().includes(String(p.slug).toLowerCase()) ||
-          String(p.slug).toLowerCase().includes(String(defaultItem.slug).toLowerCase())
-        ))
-    );
-    if (!apiMatch) return defaultItem;
-
-    return {
-      ...defaultItem,
-      ...apiMatch,
-      heroImg: apiMatch.heroImg || apiMatch.image || defaultItem.heroImg,
-      subtitle: apiMatch.category || apiMatch.subtitle || defaultItem.subtitle,
-      title: apiMatch.title || defaultItem.title,
-      liveUrl: apiMatch.liveUrl || defaultItem.liveUrl
-    };
-  });
+  // Display all dynamic projects from CMS/MongoDB, merged with defaults
+  const displayWorks = (() => {
+    if (Array.isArray(projects) && projects.length > 0) {
+      const merged = [...projects];
+      defaultWorks.forEach((defaultItem) => {
+        const exists = merged.some(
+          (p) =>
+            (p.slug && String(p.slug).toLowerCase() === String(defaultItem.slug).toLowerCase()) ||
+            (p.id && String(p.id).toLowerCase() === String(defaultItem.id).toLowerCase()) ||
+            (p.title && String(p.title).toLowerCase() === String(defaultItem.title).toLowerCase())
+        );
+        if (!exists && merged.length < 8) {
+          merged.push(defaultItem);
+        }
+      });
+      return merged;
+    }
+    return defaultWorks;
+  })();
 
   return (
     <>

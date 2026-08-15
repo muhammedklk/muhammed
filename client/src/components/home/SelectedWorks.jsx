@@ -40,29 +40,37 @@ const defaultFeatured = [
 const SelectedWorks = () => {
   const { projects } = usePortfolio();
 
-  // Merge dynamic MongoDB projects with static defaults to ensure updated CMS images render
-  const safeProjects = defaultFeatured.map((defaultItem) => {
-    const apiMatch = (projects || []).find(
-      (p) =>
-        (p.slug && String(p.slug).toLowerCase() === String(defaultItem.slug).toLowerCase()) ||
-        (p.id && String(p.id).toLowerCase() === String(defaultItem.id).toLowerCase()) ||
-        (p.title && String(p.title).toLowerCase() === String(defaultItem.title).toLowerCase()) ||
-        (p.slug && defaultItem.slug && (
-          String(defaultItem.slug).toLowerCase().includes(String(p.slug).toLowerCase()) ||
-          String(p.slug).toLowerCase().includes(String(defaultItem.slug).toLowerCase())
-        ))
-    );
-    if (!apiMatch) return defaultItem;
+  // Selected works for Home page:
+  // Map slots 0 to 3 to display top 4 dynamic projects saved from admin panel/MongoDB.
+  // Fall back to defaultFeatured item if a dynamic project is missing for that slot.
+  const safeProjects = [0, 1, 2, 3].map((index) => {
+    const defaultItem = defaultFeatured[index] || {};
+    
+    // Positional match first (HOME SLOT #1 to #4 in Admin), fallback to slug/title match
+    const dynamicProj = (Array.isArray(projects) && projects[index])
+      ? projects[index]
+      : (projects || []).find(
+          (p) =>
+            (p.slug && String(p.slug).toLowerCase() === String(defaultItem.slug).toLowerCase()) ||
+            (p.id && String(p.id).toLowerCase() === String(defaultItem.id).toLowerCase()) ||
+            (p.title && String(p.title).toLowerCase() === String(defaultItem.title).toLowerCase())
+        );
 
-    const heroImg = apiMatch.heroImg || apiMatch.image || defaultItem.heroImg;
+    if (!dynamicProj) return defaultItem;
+
+    const heroImg = dynamicProj.heroImg || dynamicProj.image || defaultItem.heroImg;
+    const categoryVal = dynamicProj.category || dynamicProj.subtitle || dynamicProj.shortDescription || defaultItem.category;
 
     return {
       ...defaultItem,
-      ...apiMatch,
+      ...dynamicProj,
       heroImg,
-      subtitle: apiMatch.category || apiMatch.subtitle || defaultItem.category,
-      title: apiMatch.title || defaultItem.title,
-      liveUrl: apiMatch.liveUrl !== undefined ? apiMatch.liveUrl : defaultItem.liveUrl
+      subtitle: categoryVal,
+      category: categoryVal,
+      title: dynamicProj.title || defaultItem.title,
+      liveUrl: dynamicProj.liveUrl !== undefined && dynamicProj.liveUrl !== null ? dynamicProj.liveUrl : defaultItem.liveUrl,
+      showCaseStudyBtn: dynamicProj.showCaseStudyBtn !== undefined ? dynamicProj.showCaseStudyBtn : defaultItem.showCaseStudyBtn,
+      showLiveUrlBtn: dynamicProj.showLiveUrlBtn !== undefined ? dynamicProj.showLiveUrlBtn : defaultItem.showLiveUrlBtn
     };
   });
 
