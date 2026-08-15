@@ -95,6 +95,29 @@ export const PortfolioProvider = ({ children }) => {
     return match || null;
   };
 
+  const updateProjectLocally = (updatedProj) => {
+    if (!updatedProj) return;
+    setProjects((prev) => {
+      const targetId = updatedProj._id || updatedProj.id;
+      const idx = prev.findIndex(p => (p._id || p.id) === targetId || (p.slug && updatedProj.slug && p.slug === updatedProj.slug));
+      let newList;
+      if (idx !== -1) {
+        newList = [...prev];
+        newList[idx] = { ...newList[idx], ...updatedProj };
+      } else {
+        newList = [updatedProj, ...prev];
+      }
+      try { localStorage.setItem('portfolio_projects_cache', JSON.stringify(newList)); } catch (e) {}
+      return newList;
+    });
+  };
+
+  const updateAllProjectsLocally = (newList) => {
+    if (!Array.isArray(newList)) return;
+    setProjects(newList);
+    try { localStorage.setItem('portfolio_projects_cache', JSON.stringify(newList)); } catch (e) {}
+  };
+
   return (
     <PortfolioContext.Provider
       value={{
@@ -113,7 +136,9 @@ export const PortfolioProvider = ({ children }) => {
         loading,
         error,
         getProjectBySlug,
-        refreshPortfolio: fetchPortfolioData
+        refreshPortfolio: fetchPortfolioData,
+        updateProjectLocally,
+        updateAllProjectsLocally
       }}
     >
       {children}
