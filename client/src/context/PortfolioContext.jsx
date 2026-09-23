@@ -29,14 +29,32 @@ export const PortfolioProvider = ({ children }) => {
   const fetchPortfolioData = async () => {
     try {
       setLoading(true);
-      const [contentRes, projectsRes] = await Promise.all([
+      const [contentRes, projectsRes, settingsRes] = await Promise.all([
         fetch('/api/content/all?t=' + Date.now()).then(r => r.json()).catch(() => null),
-        fetch('/api/projects?t=' + Date.now()).then(r => r.json()).catch(() => null)
+        fetch('/api/projects?t=' + Date.now()).then(r => r.json()).catch(() => null),
+        fetch('/api/content/settings?t=' + Date.now()).then(r => r.json()).catch(() => null)
       ]);
 
+      const fetchedSettings = settingsRes?.data?.settings || settingsRes?.settings || contentRes?.settings || contentRes?.data?.settings;
+
+      if (fetchedSettings) {
+        try {
+          localStorage.setItem('portfolio_maintenance_settings', JSON.stringify(fetchedSettings));
+        } catch (e) {}
+      }
+
       if (contentRes && contentRes.data) {
-        setContent(contentRes.data);
-        try { localStorage.setItem('portfolio_content_cache', JSON.stringify(contentRes.data)); } catch (e) {}
+        const fullContent = {
+          ...contentRes.data,
+          settings: fetchedSettings || contentRes.data.settings
+        };
+        setContent(fullContent);
+        try { localStorage.setItem('portfolio_content_cache', JSON.stringify(fullContent)); } catch (e) {}
+      } else if (fetchedSettings) {
+        setContent(prev => ({
+          ...(prev || {}),
+          settings: fetchedSettings
+        }));
       }
 
       const rawProjects = projectsRes?.data?.projects || projectsRes?.data || projectsRes?.projects;

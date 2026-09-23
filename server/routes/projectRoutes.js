@@ -8,6 +8,7 @@ const {
   updateProject,
   updateCaseStudy,
   deleteProject,
+  reorderProjects,
 } = require('../controllers/projectController');
 const { protect } = require('../middleware/authMiddleware');
 
@@ -18,6 +19,7 @@ router.get('/:slug', getProjectBySlug);
 // Admin Endpoints
 router.get('/admin/all', protect, getAllProjectsAdmin);
 router.post('/', protect, createProject);
+router.put('/reorder', protect, reorderProjects);
 router.put('/:id', protect, updateProject);
 router.put('/:id/casestudy', protect, updateCaseStudy);
 router.delete('/:id', protect, deleteProject);

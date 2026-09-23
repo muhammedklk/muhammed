@@ -22,7 +22,7 @@ const checkMaintenance = async (req, res, next) => {
   }
 
   try {
-    const settings = await SiteSettings.findOne();
+    const settings = await SiteSettings.findOne().sort({ createdAt: -1 });
     if (!settings || !settings.maintenanceMode) {
       return next();
     }
@@ -40,7 +40,10 @@ const checkMaintenance = async (req, res, next) => {
       message: settings.maintenanceMessage || 'We are currently upgrading the portfolio. Please check back soon!',
       settings: {
         siteTitle: settings.siteTitle,
-        contactEmail: settings.contactEmail
+        contactEmail: settings.contactEmail,
+        maintenanceMode: true,
+        maintenanceMessage: settings.maintenanceMessage,
+        maintenancePages: settings.maintenancePages || {}
       }
     });
   } catch (error) {

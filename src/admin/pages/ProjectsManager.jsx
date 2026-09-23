@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { projectsApi } from '../services/api';
-import { Plus, Edit, Trash2, ExternalLink, Sparkles } from '../components/Icons';
+import { Plus, Edit, Trash2, ExternalLink, Sparkles, GripVertical, ArrowLeft, ArrowRight, CheckCircle, Loader2 } from '../components/Icons';
 import { usePortfolio } from '../../context/PortfolioContext';
 import { caseStudiesData } from '../../data/caseStudiesData';
 import ImageUploadInput from '../components/ImageUploadInput';
@@ -13,6 +13,13 @@ const ProjectsManager = () => {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState(null);
+
+  // Drag-and-drop & Touch Swipe reordering state
+  const [draggedIndex, setDraggedIndex] = useState(null);
+  const [dragOverIndex, setDragOverIndex] = useState(null);
+  const [isSavingOrder, setIsSavingOrder] = useState(false);
+  const [orderToast, setOrderToast] = useState('');
+  const touchStartRef = useRef({ x: 0, y: 0, index: null });
 
   const [formData, setFormData] = useState({
     title: '',
@@ -77,6 +84,114 @@ const ProjectsManager = () => {
     fetchProjects();
   }, []);
 
+  // --- REORDER & DRAG/SWIPE HANDLERS ---
+  const saveNewOrder = async (updatedProjects) => {
+    const reorderedList = updatedProjects.map((p, idx) => ({
+      ...p,
+      order: idx + 1
+    }));
+
+    setProjects(reorderedList);
+    setIsSavingOrder(true);
+
+    try {
+      const payload = reorderedList.map((p) => ({
+        id: p._id || p.id,
+        _id: p._id || p.id,
+        order: p.order
+      }));
+
+      await projectsApi.reorder(payload);
+      if (refreshPortfolio) {
+        await refreshPortfolio();
+      }
+      setOrderToast('Priority order updated successfully!');
+      setTimeout(() => setOrderToast(''), 3000);
+    } catch (err) {
+      console.error('Failed to save order:', err);
+      setOrderToast('Error saving priority order.');
+      setTimeout(() => setOrderToast(''), 3000);
+    } finally {
+      setIsSavingOrder(false);
+    }
+  };
+
+  const handleDragStart = (e, index) => {
+    setDraggedIndex(index);
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', index.toString());
+  };
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+    if (dragOverIndex !== index) {
+      setDragOverIndex(index);
+    }
+  };
+
+  const handleDragLeave = (e, index) => {
+    if (dragOverIndex === index) {
+      setDragOverIndex(null);
+    }
+  };
+
+  const handleDrop = (e, targetIndex) => {
+    e.preventDefault();
+    setDragOverIndex(null);
+    if (draggedIndex === null || draggedIndex === targetIndex) {
+      setDraggedIndex(null);
+      return;
+    }
+
+    const updated = [...projects];
+    const [movedItem] = updated.splice(draggedIndex, 1);
+    updated.splice(targetIndex, 0, movedItem);
+
+    setDraggedIndex(null);
+    saveNewOrder(updated);
+  };
+
+  const handleDragEnd = () => {
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const handleShiftPriority = (index, direction) => {
+    const targetIndex = direction === 'left' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= projects.length) return;
+
+    const updated = [...projects];
+    const [movedItem] = updated.splice(index, 1);
+    updated.splice(targetIndex, 0, movedItem);
+
+    saveNewOrder(updated);
+  };
+
+  const handleTouchStart = (e, index) => {
+    const touch = e.touches[0];
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY, index };
+  };
+
+  const handleTouchEnd = (e, index) => {
+    if (touchStartRef.current.index !== index) return;
+    const touch = e.changedTouches[0];
+    const deltaX = touch.clientX - touchStartRef.current.x;
+    const deltaY = touch.clientY - touchStartRef.current.y;
+
+    // Detect horizontal swipe gesture (min 50px movement horizontally)
+    if (Math.abs(deltaX) > 50 && Math.abs(deltaY) < 60) {
+      if (deltaX < 0) {
+        // Swipe left -> move priority down (right)
+        handleShiftPriority(index, 'right');
+      } else {
+        // Swipe right -> move priority up (left)
+        handleShiftPriority(index, 'left');
+      }
+    }
+    touchStartRef.current = { x: 0, y: 0, index: null };
+  };
+
+  // --- MODAL HANDLERS ---
   const handleOpenModal = (project = null) => {
     if (project) {
       setEditingId(project._id);
@@ -171,7 +286,9 @@ const ProjectsManager = () => {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px' }}>
         <div>
           <h1 style={{ fontSize: '24px', fontWeight: '800', margin: '0 0 6px 0', color: '#ffffff' }}>Projects & Case Studies</h1>
-          <p style={{ fontSize: '13.5px', color: '#94a3b8', margin: 0 }}>Manage client portfolio showcases, live URLs, images, and case study pages.</p>
+          <p style={{ fontSize: '13.5px', color: '#94a3b8', margin: 0 }}>
+            Manage client portfolio showcases. <span style={{ color: '#d2ea26', fontWeight: '700' }}>Drag & drop cards or use ← → arrows to reorder display priority.</span>
+          </p>
         </div>
 
         <button onClick={() => handleOpenModal()} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '12px 20px', background: '#d2ea26', color: '#0f172a', borderRadius: '12px', fontWeight: '800', border: 'none', cursor: 'pointer' }}>
@@ -180,6 +297,20 @@ const ProjectsManager = () => {
         </button>
       </div>
 
+      {/* Reorder Saving Status Toasts */}
+      {orderToast && (
+        <div style={{ position: 'fixed', bottom: '24px', right: '24px', background: '#d2ea26', color: '#0f172a', padding: '12px 20px', borderRadius: '14px', fontWeight: '800', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.5)', zIndex: 9999 }}>
+          <CheckCircle size={18} />
+          <span>{orderToast}</span>
+        </div>
+      )}
+      {isSavingOrder && (
+        <div style={{ position: 'fixed', bottom: '24px', right: '24px', background: '#1e293b', color: '#ffffff', border: '1px solid rgba(210,234,38,0.4)', padding: '12px 20px', borderRadius: '14px', fontWeight: '700', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.5)', zIndex: 9999 }}>
+          <Loader2 size={18} style={{ animation: 'spin 1s linear infinite' }} />
+          <span>Saving updated project order...</span>
+        </div>
+      )}
+
       {/* Projects Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '20px' }}>
         {projects.length === 0 ? (
@@ -187,13 +318,78 @@ const ProjectsManager = () => {
             No projects added yet. Click "Add New Project" above to create your first portfolio work.
           </div>
         ) : (
-          projects.map((project) => (
-            <div key={project._id} style={{ background: '#0f172a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+          projects.map((project, index) => (
+            <div
+              key={project._id || project.id || index}
+              draggable
+              onDragStart={(e) => handleDragStart(e, index)}
+              onDragOver={(e) => handleDragOver(e, index)}
+              onDragLeave={(e) => handleDragLeave(e, index)}
+              onDrop={(e) => handleDrop(e, index)}
+              onDragEnd={handleDragEnd}
+              onTouchStart={(e) => handleTouchStart(e, index)}
+              onTouchEnd={(e) => handleTouchEnd(e, index)}
+              style={{
+                background: '#0f172a',
+                border: dragOverIndex === index ? '2px dashed #d2ea26' : '1px solid rgba(255,255,255,0.08)',
+                borderRadius: '20px',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                opacity: draggedIndex === index ? 0.4 : 1,
+                transform: dragOverIndex === index ? 'scale(1.02)' : 'none',
+                transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                cursor: 'grab',
+                position: 'relative',
+                userSelect: 'none'
+              }}
+            >
               <div style={{ height: '180px', background: '#1e293b', position: 'relative', overflow: 'hidden' }}>
-                <img src={project.heroImg || project.image || '/assets/portfolio/gyogrea.png'} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                <span style={{ position: 'absolute', top: '12px', left: '12px', padding: '4px 10px', background: '#d2ea26', color: '#0f172a', borderRadius: '20px', fontSize: '11px', fontWeight: '800' }}>
-                  Priority #{project.order ?? 1}
-                </span>
+                <img src={project.heroImg || project.image || '/assets/portfolio/gyogrea.png'} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }} />
+                
+                {/* Priority Badge with Grip Handle & Quick Move Arrows */}
+                <div style={{ position: 'absolute', top: '12px', left: '12px', display: 'flex', alignItems: 'center', gap: '6px', background: '#d2ea26', color: '#0f172a', padding: '4px 10px', borderRadius: '20px', fontSize: '11px', fontWeight: '800', boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>
+                  <GripVertical size={14} style={{ opacity: 0.8 }} />
+                  <span>Priority #{index + 1}</span>
+
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '2px', marginLeft: '4px', borderLeft: '1px solid rgba(15,23,42,0.25)', paddingLeft: '4px' }}>
+                    <button
+                      type="button"
+                      disabled={index === 0}
+                      onClick={(e) => { e.stopPropagation(); handleShiftPriority(index, 'left'); }}
+                      title="Move Priority Up (Left)"
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: index === 0 ? 'rgba(15,23,42,0.3)' : '#0f172a',
+                        cursor: index === 0 ? 'default' : 'pointer',
+                        padding: '0 2px',
+                        display: 'flex',
+                        alignItems: 'center'
+                      }}
+                    >
+                      <ArrowLeft size={13} />
+                    </button>
+                    <button
+                      type="button"
+                      disabled={index === projects.length - 1}
+                      onClick={(e) => { e.stopPropagation(); handleShiftPriority(index, 'right'); }}
+                      title="Move Priority Down (Right)"
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: index === projects.length - 1 ? 'rgba(15,23,42,0.3)' : '#0f172a',
+                        cursor: index === projects.length - 1 ? 'default' : 'pointer',
+                        padding: '0 2px',
+                        display: 'flex',
+                        alignItems: 'center'
+                      }}
+                    >
+                      <ArrowRight size={13} />
+                    </button>
+                  </div>
+                </div>
+
                 <span style={{ position: 'absolute', top: '12px', right: '12px', padding: '4px 10px', background: 'rgba(15, 23, 42, 0.8)', color: '#ffffff', borderRadius: '20px', fontSize: '11px', fontWeight: '800', backdropFilter: 'blur(4px)' }}>
                   {project.category}
                 </span>
@@ -208,14 +404,14 @@ const ProjectsManager = () => {
                 </div>
 
                 <div style={{ display: 'flex', gap: '8px', paddingTop: '16px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-                  <button onClick={() => navigate(`/admin/projects/${project._id}/case-study`)} style={{ flex: 1, padding: '8px 12px', background: 'rgba(210, 234, 38, 0.15)', color: '#d2ea26', borderRadius: '10px', border: '1px solid rgba(210, 234, 38, 0.3)', cursor: 'pointer', fontSize: '12px', fontWeight: '800', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                  <button onClick={(e) => { e.stopPropagation(); navigate(`/admin/projects/${project._id}/case-study`); }} style={{ flex: 1, padding: '8px 12px', background: 'rgba(210, 234, 38, 0.15)', color: '#d2ea26', borderRadius: '10px', border: '1px solid rgba(210, 234, 38, 0.3)', cursor: 'pointer', fontSize: '12px', fontWeight: '800', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
                     <Sparkles size={14} />
                     <span>Case Study</span>
                   </button>
-                  <button onClick={() => handleOpenModal(project)} style={{ padding: '8px 12px', background: 'rgba(255,255,255,0.05)', color: '#ffffff', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.1)', cursor: 'pointer', fontSize: '12px', fontWeight: '700' }}>
+                  <button onClick={(e) => { e.stopPropagation(); handleOpenModal(project); }} style={{ padding: '8px 12px', background: 'rgba(255,255,255,0.05)', color: '#ffffff', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.1)', cursor: 'pointer', fontSize: '12px', fontWeight: '700' }}>
                     <Edit size={14} />
                   </button>
-                  <button onClick={() => handleDelete(project._id)} style={{ padding: '8px 12px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderRadius: '10px', border: '1px solid rgba(239, 68, 68, 0.3)', cursor: 'pointer', fontSize: '12px', fontWeight: '700' }}>
+                  <button onClick={(e) => { e.stopPropagation(); handleDelete(project._id); }} style={{ padding: '8px 12px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderRadius: '10px', border: '1px solid rgba(239, 68, 68, 0.3)', cursor: 'pointer', fontSize: '12px', fontWeight: '700' }}>
                     <Trash2 size={14} />
                   </button>
                 </div>

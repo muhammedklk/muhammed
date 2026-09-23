@@ -89,6 +89,7 @@ export const projectsApi = {
   getAllAdmin: () => API.get('/projects/admin/all'),
   create: (data) => API.post('/projects', data),
   update: (id, data) => API.put(`/projects/${id}`, data),
+  reorder: (items) => API.put('/projects/reorder', { items }),
   updateCaseStudy: (id, data) => API.put(`/projects/${id}/casestudy`, data),
   delete: (id) => API.delete(`/projects/${id}`),
 };

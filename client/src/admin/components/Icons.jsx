@@ -242,3 +242,14 @@ export const Loader2 = (props) => (
     <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
   </svg>
 );
+
+export const GripVertical = (props) => (
+  <svg width={props.size || 18} height={props.size || 18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <circle cx="9" cy="12" r="1.5" fill="currentColor" />
+    <circle cx="9" cy="6" r="1.5" fill="currentColor" />
+    <circle cx="9" cy="18" r="1.5" fill="currentColor" />
+    <circle cx="15" cy="12" r="1.5" fill="currentColor" />
+    <circle cx="15" cy="6" r="1.5" fill="currentColor" />
+    <circle cx="15" cy="18" r="1.5" fill="currentColor" />
+  </svg>
+);

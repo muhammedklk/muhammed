@@ -213,6 +213,47 @@ const deleteProject = async (req, res, next) => {
   }
 };
 
+/**
+ * @desc    Reorder Projects (Admin)
+ * @route   PUT /api/projects/reorder
+ * @access  Private/Admin
+ */
+const reorderProjects = async (req, res, next) => {
+  try {
+    const { items } = req.body;
+    if (Array.isArray(items) && items.length > 0) {
+      await Promise.all(
+        items.map(async (item) => {
+          const targetId = item._id || item.id;
+          const orderNum = Number(item.order);
+          if (targetId && !isNaN(orderNum)) {
+            let project = await findProjectByIdOrSlug(targetId);
+            if (project) {
+              project.order = orderNum;
+              await project.save();
+            }
+          }
+        })
+      );
+
+      if (req.user) {
+        await ActivityLog.create({
+          user: req.user.id,
+          userName: req.user.name,
+          action: 'REORDERED_PROJECTS',
+          module: 'Projects',
+          details: `Reordered ${items.length} projects`,
+          ipAddress: req.ip
+        });
+      }
+    }
+
+    return successResponse(res, 200, 'Projects reordered successfully');
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getProjects,
   getProjectBySlug,
@@ -221,4 +262,6 @@ module.exports = {
   updateProject,
   updateCaseStudy,
   deleteProject,
+  reorderProjects,
 };
+
