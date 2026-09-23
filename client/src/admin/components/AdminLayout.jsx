@@ -15,7 +15,9 @@ import {
   LogOut,
   Menu,
   X,
-  ExternalLink
+  ExternalLink,
+  User,
+  FileText
 } from './Icons';
 
 const AdminLayout = () => {
@@ -27,20 +29,20 @@ const AdminLayout = () => {
   const navItems = [
     { label: 'Control Dashboard', path: '/admin', icon: LayoutDashboard },
     
-    { isHeader: true, title: 'EDIT WEBSITE PAGES' },
-    { label: '🏠 Edit Home Page', path: '/admin/home', icon: Sparkles },
-    { label: '🖼️ Edit Home Mockups', path: '/admin/home-selected-works', icon: FolderKanban },
-    { label: '👤 Edit About Page', path: '/admin/about', icon: Sparkles },
-    { label: '💼 Edit Projects Page', path: '/admin/projects', icon: FolderKanban },
-    { label: '📖 Edit Case Studies', path: '/admin/case-studies', icon: Sparkles },
-    { label: '🛠️ Edit Services Page', path: '/admin/services', icon: Wrench },
-    { label: '🎓 Edit Experience Page', path: '/admin/experience', icon: Briefcase },
-    { label: '📬 Edit Contact Inbox', path: '/admin/contact', icon: MessageSquare },
+    { isHeader: true, title: 'WEBSITE CONTENT' },
+    { label: 'Home Page', path: '/admin/home', icon: Sparkles },
+    { label: 'Home Mockups', path: '/admin/home-selected-works', icon: FolderKanban },
+    { label: 'About Page', path: '/admin/about', icon: User },
+    { label: 'Projects Gallery', path: '/admin/projects', icon: FolderKanban },
+    { label: 'Case Studies', path: '/admin/case-studies', icon: FileText },
+    { label: 'Services & Skills', path: '/admin/services', icon: Wrench },
+    { label: 'Experience & Edu', path: '/admin/experience', icon: Briefcase },
+    { label: 'Contact Inbox', path: '/admin/contact', icon: MessageSquare },
 
-    { isHeader: true, title: 'ASSETS & SETTINGS' },
-    { label: '📁 Media Library', path: '/admin/media', icon: Image },
-    { label: '🔍 SEO Manager', path: '/admin/seo', icon: Search },
-    { label: '⚙️ Site & Maintenance', path: '/admin/settings', icon: Settings },
+    { isHeader: true, title: 'SYSTEM & SETTINGS' },
+    { label: 'Media Library', path: '/admin/media', icon: Image },
+    { label: 'SEO Manager', path: '/admin/seo', icon: Search },
+    { label: 'Site Settings', path: '/admin/settings', icon: Settings },
   ];
 
   const handleLogout = () => {
@@ -49,20 +51,20 @@ const AdminLayout = () => {
   };
 
   return (
-    <div className="admin-root" style={{ display: 'flex', minHeight: '100vh', background: '#f8fafc', color: '#0f172a', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+    <div className="admin-root" style={{ display: 'flex', minHeight: '100vh', background: '#f1f5f9', color: '#0f172a', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
       {/* Mobile Drawer Backdrop Overlay */}
-      <div
-        className={`admin-backdrop ${mobileOpen ? 'show' : ''}`}
-        onClick={() => setMobileOpen(false)}
-        style={{
-          position: 'fixed',
-          inset: 0,
-          background: 'rgba(15, 23, 42, 0.4)',
-          backdropFilter: 'blur(4px)',
-          zIndex: 998,
-          display: mobileOpen ? 'block' : 'none'
-        }}
-      />
+      {mobileOpen && (
+        <div
+          onClick={() => setMobileOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(15, 23, 42, 0.4)',
+            backdropFilter: 'blur(4px)',
+            zIndex: 998
+          }}
+        />
+      )}
 
       {/* Sidebar Navigation */}
       <aside
@@ -78,7 +80,7 @@ const AdminLayout = () => {
           bottom: 0,
           left: 0,
           zIndex: 999,
-          boxShadow: '2px 0 12px rgba(15, 23, 42, 0.03)',
+          boxShadow: '2px 0 10px rgba(15, 23, 42, 0.03)',
           transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       >
@@ -90,7 +92,7 @@ const AdminLayout = () => {
             </div>
             <div>
               <h2 style={{ fontSize: '15px', fontWeight: '800', margin: 0, color: '#0f172a', letterSpacing: '-0.02em' }}>Portfolio CMS</h2>
-              <span style={{ fontSize: '11px', color: '#4f46e5', fontWeight: '700' }}>LIGHT EDITION v1.0</span>
+              <span style={{ fontSize: '11px', color: '#4f46e5', fontWeight: '800', letterSpacing: '0.04em' }}>LIGHT CONTROL</span>
             </div>
           </div>
           <button className="d-lg-none border-0 bg-transparent" onClick={() => setMobileOpen(false)} style={{ cursor: 'pointer', color: '#64748b' }}>
@@ -125,14 +127,14 @@ const AdminLayout = () => {
                   marginBottom: '4px',
                   fontSize: '13.5px',
                   fontWeight: isActive ? '700' : '600',
-                  color: isActive ? '#4338ca' : '#475569',
-                  background: isActive ? '#eff6ff' : 'transparent',
-                  border: isActive ? '1px solid #bfdbfe' : '1px solid transparent',
+                  color: isActive ? '#ffffff' : '#334155',
+                  background: isActive ? '#0f172a' : 'transparent',
+                  boxShadow: isActive ? '0 4px 12px rgba(15, 23, 42, 0.15)' : 'none',
                   textDecoration: 'none',
                   transition: 'all 0.2s ease'
                 }}
               >
-                <Icon size={18} color={isActive ? '#4f46e5' : '#64748b'} />
+                <Icon size={18} color={isActive ? '#ffffff' : '#64748b'} />
                 <span>{item.label}</span>
               </Link>
             );
@@ -143,7 +145,7 @@ const AdminLayout = () => {
         <div style={{ padding: '16px', borderTop: '1px solid #e2e8f0', background: '#f8fafc' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <img src={user?.avatar || '/assets/profile_photo.jpg'} alt="Admin" style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover', border: '1px solid #e2e8f0' }} />
+              <img src={user?.avatar || '/assets/profile_photo.jpg'} alt="Admin" style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover', border: '1px solid #cbd5e1' }} />
               <div>
                 <span style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a', display: 'block', lineHeight: 1.2 }}>{user?.name || 'Muhammed'}</span>
                 <span style={{ fontSize: '11px', color: '#64748b', fontWeight: '600' }}>{user?.role || 'Administrator'}</span>
@@ -163,7 +165,7 @@ const AdminLayout = () => {
       {/* Main Content Area */}
       <div className="admin-main-wrapper" style={{ flex: 1, marginLeft: '260px', minWidth: 0, display: 'flex', flexDirection: 'column' }}>
         {/* Top Navbar Header */}
-        <header className="admin-top-header" style={{ height: '64px', background: '#ffffff', borderBottom: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', position: 'sticky', top: 0, zIndex: 900, boxShadow: '0 1px 3px rgba(15, 23, 42, 0.02)' }}>
+        <header className="admin-top-header" style={{ height: '64px', background: '#ffffff', borderBottom: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 24px', position: 'sticky', top: 0, zIndex: 900, boxShadow: '0 1px 3px rgba(15, 23, 42, 0.03)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', overflow: 'hidden' }}>
             <button className="d-lg-none border-0 bg-transparent text-dark" onClick={() => setMobileOpen(true)} style={{ cursor: 'pointer' }}>
               <Menu size={22} />
@@ -184,18 +186,19 @@ const AdminLayout = () => {
                 alignItems: 'center',
                 gap: '8px',
                 padding: '8px 16px',
-                background: '#eff6ff',
-                border: '1px solid #bfdbfe',
-                color: '#2563eb',
+                background: '#ffffff',
+                border: '1px solid #cbd5e1',
+                color: '#0f172a',
                 borderRadius: '10px',
                 fontSize: '12.5px',
                 fontWeight: '700',
                 textDecoration: 'none',
+                boxShadow: '0 1px 2px rgba(15, 23, 42, 0.04)',
                 transition: 'all 0.2s ease'
               }}
             >
-              <span className="admin-top-preview-text">Live Website Preview</span>
-              <ExternalLink size={14} />
+              <span>Live Website Preview</span>
+              <ExternalLink size={14} color="#4f46e5" />
             </a>
           </div>
         </header>

@@ -1,15 +1,15 @@
 /* Modern Clean Light Theme Design System for Portfolio CMS */
 
 :root {
-  --admin-bg: #f8fafc;
+  --admin-bg: #f1f5f9;
   --admin-sidebar-bg: #ffffff;
   --admin-card-bg: #ffffff;
   --admin-header-bg: #ffffff;
   --admin-border: #e2e8f0;
   --admin-border-strong: #cbd5e1;
   --admin-text-main: #0f172a;
+  --admin-text-sub: #334155;
   --admin-text-muted: #64748b;
-  --admin-text-sub: #475569;
   --admin-primary: #0f172a;
   --admin-accent: #4f46e5;
   --admin-accent-hover: #4338ca;
@@ -22,7 +22,7 @@
   --admin-danger-bg: #fef2f2;
 }
 
-/* Global Light Theme Resets for Admin */
+/* Global Light Theme Body & Root */
 .admin-root {
   background-color: var(--admin-bg) !important;
   color: var(--admin-text-main) !important;
@@ -33,39 +33,62 @@
 .admin-sidebar {
   background-color: var(--admin-sidebar-bg) !important;
   border-right: 1px solid var(--admin-border) !important;
-  box-shadow: 2px 0 12px rgba(15, 23, 42, 0.03) !important;
+  box-shadow: 2px 0 10px rgba(15, 23, 42, 0.03) !important;
 }
 
 .admin-sidebar-brand {
   border-bottom: 1px solid var(--admin-border) !important;
 }
 
-/* Navigation Links */
-.admin-nav-link {
-  color: var(--admin-text-sub) !important;
+/* Navigation Items */
+.admin-nav-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 10px 14px !important;
+  border-radius: 10px !important;
+  margin-bottom: 4px !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  color: #475569 !important;
+  text-decoration: none !important;
   transition: all 0.2s ease !important;
 }
 
-.admin-nav-link:hover {
+.admin-nav-item:hover {
   background-color: #f1f5f9 !important;
-  color: var(--admin-text-main) !important;
+  color: #0f172a !important;
 }
 
-.admin-nav-link.active {
-  background-color: #e0e7ff !important;
-  color: #4338ca !important;
+.admin-nav-item.active {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
   font-weight: 700 !important;
-  border: 1px solid #c7d2fe !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15) !important;
+}
+
+.admin-nav-item.active svg {
+  color: #ffffff !important;
+}
+
+/* Section Header Titles in Sidebar */
+.admin-nav-section-title {
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  color: #94a3b8 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  margin: 20px 10px 8px 10px !important;
 }
 
 /* Header Navbar */
 .admin-top-header {
   background-color: var(--admin-header-bg) !important;
   border-bottom: 1px solid var(--admin-border) !important;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02) !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03) !important;
 }
 
-/* Universal Light Input Controls */
+/* Universal Light Form Inputs */
 .admin-root input[type="text"],
 .admin-root input[type="email"],
 .admin-root input[type="password"],
@@ -103,28 +126,33 @@
   font-weight: 700 !important;
   font-size: 12.5px !important;
   margin-bottom: 6px !important;
+  display: block !important;
 }
 
 /* Cards & Panel Boxes */
 .admin-card {
   background-color: #ffffff !important;
-  border: 1px solid var(--admin-border) !important;
+  border: 1px solid #e2e8f0 !important;
   border-radius: 16px !important;
-  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03) !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 10px 25px -5px rgba(15, 23, 42, 0.02) !important;
 }
 
-/* Section Titles */
+/* Section Titles & Descriptions */
 .admin-page-title {
   color: #0f172a !important;
   font-weight: 800 !important;
+  font-size: 24px !important;
   letter-spacing: -0.02em !important;
+  margin-bottom: 4px !important;
 }
 
 .admin-page-desc {
-  color: #64748b !important;
+  color: #475569 !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
 }
 
-/* Action Buttons */
+/* Buttons */
 .admin-btn-primary {
   background-color: #0f172a !important;
   color: #ffffff !important;
@@ -135,7 +163,7 @@
   font-size: 13.5px !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15) !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12) !important;
 }
 
 .admin-btn-primary:hover {
@@ -153,7 +181,7 @@
   font-size: 13.5px !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
-  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25) !important;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.2) !important;
 }
 
 .admin-btn-accent:hover {
@@ -162,7 +190,7 @@
 
 .admin-btn-secondary {
   background-color: #ffffff !important;
-  color: #334155 !important;
+  color: #0f172a !important;
   border: 1px solid #cbd5e1 !important;
   border-radius: 10px !important;
   padding: 9px 16px !important;
@@ -170,6 +198,7 @@
   font-size: 13px !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
 }
 
 .admin-btn-secondary:hover {
@@ -212,18 +241,21 @@
   background-color: #f0fdf4 !important;
   color: #16a34a !important;
   border: 1px solid #bbf7d0 !important;
+  font-weight: 700 !important;
 }
 
 .admin-badge-warning {
   background-color: #fffbeb !important;
   color: #d97706 !important;
   border: 1px solid #fef08a !important;
+  font-weight: 700 !important;
 }
 
 .admin-badge-info {
   background-color: #eff6ff !important;
   color: #2563eb !important;
   border: 1px solid #bfdbfe !important;
+  font-weight: 700 !important;
 }
 
 /* Spin animation helper */
