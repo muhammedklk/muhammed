@@ -173,27 +173,27 @@ const CaseStudyManager = () => {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
         <div>
-          <h1 style={{ fontSize: '24px', fontWeight: '800', margin: '0 0 6px 0', color: '#ffffff' }}>Case Study Pages Manager</h1>
-          <p style={{ fontSize: '13.5px', color: '#94a3b8', margin: 0 }}>Easily edit content, hero mockups, narrative story, mobile experience cards, and showcase images.</p>
+          <h1 style={{ fontSize: '24px', fontWeight: '800', margin: '0 0 6px 0', color: '#0f172a', letterSpacing: '-0.02em' }}>Case Study Pages Manager</h1>
+          <p style={{ fontSize: '13.5px', color: '#475569', margin: 0, fontWeight: '500' }}>Easily edit content, hero mockups, narrative story, mobile experience cards, and showcase images.</p>
         </div>
       </div>
 
       {message && (
-        <div style={{ padding: '14px 18px', background: 'rgba(210, 234, 38, 0.15)', border: '1px solid rgba(210, 234, 38, 0.3)', color: '#d2ea26', borderRadius: '12px', marginBottom: '24px', fontWeight: '700', fontSize: '13.5px' }}>
+        <div style={{ padding: '14px 18px', background: '#f0fdf4', border: '1px solid #bbf7d0', color: '#16a34a', borderRadius: '12px', marginBottom: '24px', fontWeight: '700', fontSize: '13.5px' }}>
           {message}
         </div>
       )}
 
       {/* Project Selector Bar */}
-      <div style={{ background: '#0f172a', border: '1px solid rgba(210, 234, 38, 0.3)', borderRadius: '20px', padding: '20px 24px', marginBottom: '28px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <label style={{ fontSize: '13.5px', fontWeight: '800', color: '#d2ea26', whiteSpace: 'nowrap' }}>SELECT PROJECT TO EDIT CASE STUDY:</label>
+      <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '20px', padding: '20px 24px', marginBottom: '28px', display: 'flex', alignItems: 'center', gap: '16px', boxShadow: '0 1px 3px rgba(15, 23, 42, 0.04)' }}>
+        <label style={{ fontSize: '13px', fontWeight: '800', color: '#0f172a', whiteSpace: 'nowrap' }}>SELECT PROJECT TO EDIT CASE STUDY:</label>
         <select
           value={selectedId}
           onChange={handleSelectProject}
-          style={{ flex: 1, padding: '12px 16px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '12px', color: '#ffffff', fontWeight: '700', fontSize: '14px', cursor: 'pointer' }}
+          style={{ flex: 1, padding: '12px 16px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '12px', color: '#0f172a', fontWeight: '700', fontSize: '14px', cursor: 'pointer' }}
         >
           {projects.map(p => (
-            <option key={p._id || p.id} value={p._id || p.id} style={{ background: '#0f172a', color: '#ffffff' }}>
+            <option key={p._id || p.id} value={p._id || p.id} style={{ background: '#ffffff', color: '#0f172a' }}>
               {p.title} ({p.category || 'Project'})
             </option>
           ))}
@@ -201,59 +201,59 @@ const CaseStudyManager = () => {
       </div>
 
       {/* Case Study Full Form */}
-      <form onSubmit={handleSubmit} style={{ background: '#0f172a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '32px', display: 'flex', flexDirection: 'column', gap: '28px' }}>
+      <form onSubmit={handleSubmit} style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '24px', padding: '32px', display: 'flex', flexDirection: 'column', gap: '28px', boxShadow: '0 1px 3px rgba(15, 23, 42, 0.04), 0 10px 25px -5px rgba(15, 23, 42, 0.02)' }}>
         
         {/* 1. Header & Client Metadata */}
         <div>
-          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>1. Header & Page Metadata</h3>
+          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px', borderBottom: '1px solid #e2e8f0', paddingBottom: '8px' }}>1. Header & Page Metadata</h3>
           <div className="row g-3">
             <div className="col-12 col-md-6">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>CASE STUDY TITLE</label>
-              <input type="text" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>CASE STUDY TITLE</label>
+              <input type="text" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-6">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>SERVICES PROVIDED</label>
-              <input type="text" value={formData.services} onChange={(e) => setFormData({ ...formData, services: e.target.value })} placeholder="UI/UX & Web Development" style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>SERVICES PROVIDED</label>
+              <input type="text" value={formData.services} onChange={(e) => setFormData({ ...formData, services: e.target.value })} placeholder="UI/UX & Web Development" style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-4">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>INDUSTRY / CATEGORY</label>
-              <input type="text" value={formData.category} onChange={(e) => setFormData({ ...formData, category: e.target.value })} placeholder="Travel & Hospitality" style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>INDUSTRY / CATEGORY</label>
+              <input type="text" value={formData.category} onChange={(e) => setFormData({ ...formData, category: e.target.value })} placeholder="Travel & Hospitality" style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-4">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>COMPANY / CLIENT</label>
-              <input type="text" value={formData.client} onChange={(e) => setFormData({ ...formData, client: e.target.value })} placeholder="Client Name" style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>COMPANY / CLIENT</label>
+              <input type="text" value={formData.client} onChange={(e) => setFormData({ ...formData, client: e.target.value })} placeholder="Client Name" style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-4">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>YEAR</label>
-              <input type="text" value={formData.year} onChange={(e) => setFormData({ ...formData, year: e.target.value })} placeholder="2026" style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>YEAR</label>
+              <input type="text" value={formData.year} onChange={(e) => setFormData({ ...formData, year: e.target.value })} placeholder="2026" style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-6">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>LIVE WEBSITE BUTTON URL</label>
-              <input type="text" value={formData.liveUrl} onChange={(e) => setFormData({ ...formData, liveUrl: e.target.value })} placeholder="https://..." style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>LIVE WEBSITE BUTTON URL</label>
+              <input type="text" value={formData.liveUrl} onChange={(e) => setFormData({ ...formData, liveUrl: e.target.value })} placeholder="https://..." style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-6 d-flex align-items-center gap-4 pt-4">
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '13px', color: '#ffffff', fontWeight: '600' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '13px', color: '#0f172a', fontWeight: '700' }}>
                 <input
                   type="checkbox"
                   checked={formData.showCaseStudyBtn !== false}
                   onChange={(e) => setFormData({ ...formData, showCaseStudyBtn: e.target.checked })}
-                  style={{ width: '18px', height: '18px', accentColor: '#d2ea26', cursor: 'pointer' }}
+                  style={{ width: '18px', height: '18px', accentColor: '#0f172a', cursor: 'pointer' }}
                 />
                 <span>Show Case Study Button</span>
               </label>
 
-              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '13px', color: '#ffffff', fontWeight: '600' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '13px', color: '#0f172a', fontWeight: '700' }}>
                 <input
                   type="checkbox"
                   checked={formData.showLiveUrlBtn !== false}
                   onChange={(e) => setFormData({ ...formData, showLiveUrlBtn: e.target.checked })}
-                  style={{ width: '18px', height: '18px', accentColor: '#d2ea26', cursor: 'pointer' }}
+                  style={{ width: '18px', height: '18px', accentColor: '#0f172a', cursor: 'pointer' }}
                 />
                 <span>Show Live Link Button</span>
               </label>
@@ -262,8 +262,8 @@ const CaseStudyManager = () => {
         </div>
 
         {/* 2. Main Top Hero Mockup Image */}
-        <div style={{ paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>2. Top Hero Featured Mockup Image</h3>
+        <div style={{ paddingTop: '20px', borderTop: '1px solid #e2e8f0' }}>
+          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>2. Top Hero Featured Mockup Image</h3>
           <ImageUploadInput
             label="MAIN HERO FEATURED SCREENSHOT (UPLOAD FROM PC / SELECT FILE)"
             value={formData.heroImg}
@@ -273,29 +273,29 @@ const CaseStudyManager = () => {
         </div>
 
         {/* 3. Narrative Story (THE BRIEF & THE APPROACH) */}
-        <div style={{ paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>3. Narrative Story ("THE BRIEF" & "THE APPROACH")</h3>
+        <div style={{ paddingTop: '20px', borderTop: '1px solid #e2e8f0' }}>
+          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>3. Narrative Story ("THE BRIEF" & "THE APPROACH")</h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>THE BRIEF - TAGLINE / INTRO PARAGRAPH</label>
-              <textarea rows={2} value={formData.tagline} onChange={(e) => setFormData({ ...formData, tagline: e.target.value })} placeholder="Short project tagline or intro paragraph for The Brief section..." style={{ width: '100%', padding: '12px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>THE BRIEF - TAGLINE / INTRO PARAGRAPH</label>
+              <textarea rows={2} value={formData.tagline} onChange={(e) => setFormData({ ...formData, tagline: e.target.value })} placeholder="Short project tagline or intro paragraph for The Brief section..." style={{ width: '100%', padding: '12px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>NARRATIVE OVERVIEW PARAGRAPHS (Separate paragraphs with double enter)</label>
-              <textarea rows={4} value={formData.descriptionText} onChange={(e) => setFormData({ ...formData, descriptionText: e.target.value })} placeholder="Detailed narrative paragraphs explaining project goals and strategy..." style={{ width: '100%', padding: '12px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>NARRATIVE OVERVIEW PARAGRAPHS (Separate paragraphs with double enter)</label>
+              <textarea rows={4} value={formData.descriptionText} onChange={(e) => setFormData({ ...formData, descriptionText: e.target.value })} placeholder="Detailed narrative paragraphs explaining project goals and strategy..." style={{ width: '100%', padding: '12px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>THE APPROACH - SUMMARY / OUTCOME PARAGRAPH</label>
-              <textarea rows={3} value={formData.outcome} onChange={(e) => setFormData({ ...formData, outcome: e.target.value })} placeholder="Summary paragraph for The Approach section..." style={{ width: '100%', padding: '12px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>THE APPROACH - SUMMARY / OUTCOME PARAGRAPH</label>
+              <textarea rows={3} value={formData.outcome} onChange={(e) => setFormData({ ...formData, outcome: e.target.value })} placeholder="Summary paragraph for The Approach section..." style={{ width: '100%', padding: '12px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
           </div>
         </div>
 
         {/* 4. Secondary Desktop Showcase Image */}
-        <div style={{ paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>4. Secondary Showcase Card Image</h3>
+        <div style={{ paddingTop: '20px', borderTop: '1px solid #e2e8f0' }}>
+          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>4. Secondary Showcase Card Image</h3>
           <ImageUploadInput
             label="SECONDARY DESKTOP MOCKUP CARD (UPLOAD FROM PC)"
             value={formData.showcaseImg}
@@ -305,8 +305,8 @@ const CaseStudyManager = () => {
         </div>
 
         {/* 5. Mobile Experience Screenshots */}
-        <div style={{ paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>5. Mobile Experience Screenshots ("Designed for every screen")</h3>
+        <div style={{ paddingTop: '20px', borderTop: '1px solid #e2e8f0' }}>
+          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>5. Mobile Experience Screenshots ("Designed for every screen")</h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <ImageUploadInput
               label="MOBILE SCREEN #1 (LEFT CARD - UPLOAD FROM PC)"
@@ -325,8 +325,8 @@ const CaseStudyManager = () => {
         </div>
 
         {/* 6. Bottom Full-Width Banner Image */}
-        <div style={{ paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>6. Bottom Showcase Banner Image</h3>
+        <div style={{ paddingTop: '20px', borderTop: '1px solid #e2e8f0' }}>
+          <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.8px' }}>6. Bottom Showcase Banner Image</h3>
           <ImageUploadInput
             label="BOTTOM FULL-WIDTH BANNER IMAGE (UPLOAD FROM PC)"
             value={formData.bannerImg}
@@ -337,7 +337,7 @@ const CaseStudyManager = () => {
 
         {/* Submit */}
         <div style={{ marginTop: '12px', display: 'flex', justifyContent: 'flex-end' }}>
-          <button type="submit" disabled={saving} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 32px', background: '#d2ea26', color: '#0f172a', borderRadius: '12px', fontWeight: '800', border: 'none', cursor: saving ? 'not-allowed' : 'pointer', fontSize: '15px' }}>
+          <button type="submit" disabled={saving} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 32px', background: '#0f172a', color: '#ffffff', borderRadius: '12px', fontWeight: '800', border: 'none', cursor: saving ? 'not-allowed' : 'pointer', fontSize: '15px', boxShadow: '0 4px 12px rgba(15, 23, 42, 0.15)' }}>
             <Save size={18} />
             <span>{saving ? 'Saving Case Study...' : 'Save Case Study Live'}</span>
           </button>

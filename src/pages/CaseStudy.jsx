@@ -6,21 +6,28 @@ import Maintenance from './Maintenance';
 
 const CaseStudy = () => {
   const { id: paramId } = useParams();
-  const { getProjectBySlug, settings, projects: apiProjects = [] } = usePortfolio();
+  const { getProjectBySlug, settings, loading, projects: apiProjects = [] } = usePortfolio();
+
+  // Admin preview: ONLY bypass when ?preview=admin is in the URL right now
+  const isAdminPreview = typeof window !== 'undefined' &&
+    window.location.search.includes('preview=admin');
 
   // Public Visitors Maintenance Guard
   const localSettingsStr = typeof window !== 'undefined' ? localStorage.getItem('portfolio_maintenance_settings') : null;
   let localSettings = null;
   try { localSettings = localSettingsStr ? JSON.parse(localSettingsStr) : null; } catch (e) {}
 
-  const activeSettings = {
-    ...localSettings,
-    ...settings,
-    maintenancePages: {
-      ...(localSettings?.maintenancePages || {}),
-      ...(settings?.maintenancePages || {})
-    }
-  };
+  // While API is loading, use localStorage cache. After load, API is the source of truth.
+  const activeSettings = loading
+    ? (localSettings || {})
+    : {
+        ...localSettings,
+        ...settings,
+        maintenancePages: {
+          ...(localSettings?.maintenancePages || {}),
+          ...(settings?.maintenancePages || {})
+        }
+      };
 
   const isGlobalMaintenance = Boolean(activeSettings?.maintenanceMode);
   const isCaseStudyMaintenance = Boolean(
@@ -28,11 +35,6 @@ const CaseStudy = () => {
     activeSettings?.maintenancePages?.casestudy ||
     activeSettings?.maintenancePages?.['case-study'] ||
     activeSettings?.maintenancePages?.casestudies
-  );
-
-  const isAdminPreview = typeof window !== 'undefined' && (
-    sessionStorage.getItem('admin_preview_active') === 'true' ||
-    window.location.search.includes('preview=admin')
   );
 
   if (!isAdminPreview && (isGlobalMaintenance || isCaseStudyMaintenance)) {

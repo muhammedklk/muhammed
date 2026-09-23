@@ -112,79 +112,79 @@ const CaseStudyEditor = () => {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <button onClick={() => navigate('/admin/projects')} style={{ padding: '8px 12px', background: 'rgba(255,255,255,0.05)', color: '#ffffff', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.1)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '700' }}>
+          <button onClick={() => navigate('/admin/projects')} style={{ padding: '8px 14px', background: '#ffffff', color: '#0f172a', borderRadius: '10px', border: '1px solid #cbd5e1', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: '700' }}>
             <ArrowLeft size={16} />
             <span>Back to Projects</span>
           </button>
           <div>
-            <h1 style={{ fontSize: '22px', fontWeight: '800', margin: 0, color: '#ffffff' }}>Edit Case Study: {projectTitle || 'Project'}</h1>
-            <p style={{ fontSize: '13px', color: '#94a3b8', margin: 0 }}>Configure comprehensive showcase narrative, mockups, and client result metrics.</p>
+            <h1 style={{ fontSize: '22px', fontWeight: '800', margin: 0, color: '#0f172a', letterSpacing: '-0.02em' }}>Edit Case Study: {projectTitle || 'Project'}</h1>
+            <p style={{ fontSize: '13px', color: '#475569', margin: 0, fontWeight: '500' }}>Configure comprehensive showcase narrative, mockups, and client result metrics.</p>
           </div>
         </div>
       </div>
 
       {message && (
-        <div style={{ padding: '14px 18px', background: 'rgba(210, 234, 38, 0.15)', border: '1px solid rgba(210, 234, 38, 0.3)', color: '#d2ea26', borderRadius: '12px', marginBottom: '24px', fontWeight: '700', fontSize: '13.5px' }}>
+        <div style={{ padding: '14px 18px', background: '#f0fdf4', border: '1px solid #bbf7d0', color: '#16a34a', borderRadius: '12px', marginBottom: '24px', fontWeight: '700', fontSize: '13.5px' }}>
           {message}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} style={{ background: '#0f172a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <form onSubmit={handleSubmit} style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '24px', padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px', boxShadow: '0 1px 3px rgba(15, 23, 42, 0.04), 0 10px 25px -5px rgba(15, 23, 42, 0.02)' }}>
         {/* Section 1: Overview Metadata */}
         <div>
-          <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>1. Hero & Client Metadata</h3>
+          <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#0f172a', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.5px', borderBottom: '1px solid #e2e8f0', paddingBottom: '8px' }}>1. Hero & Client Metadata</h3>
           <div className="row g-3">
             <div className="col-12 col-md-6">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>CASE STUDY DISPLAY TITLE</label>
-              <input type="text" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>CASE STUDY DISPLAY TITLE</label>
+              <input type="text" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-6">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>SUBTITLE TAGLINE</label>
-              <input type="text" value={formData.subtitle} onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>SUBTITLE TAGLINE</label>
+              <input type="text" value={formData.subtitle} onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-4">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>CLIENT NAME / INDUSTRY</label>
-              <input type="text" value={formData.client} onChange={(e) => setFormData({ ...formData, client: e.target.value })} placeholder="e.g. Gyogrea Tech Ltd" style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>CLIENT NAME / INDUSTRY</label>
+              <input type="text" value={formData.client} onChange={(e) => setFormData({ ...formData, client: e.target.value })} placeholder="e.g. Gyogrea Tech Ltd" style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-4">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>YOUR ROLE</label>
-              <input type="text" value={formData.role} onChange={(e) => setFormData({ ...formData, role: e.target.value })} placeholder="e.g. Lead UI/UX & Frontend Architect" style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>YOUR ROLE</label>
+              <input type="text" value={formData.role} onChange={(e) => setFormData({ ...formData, role: e.target.value })} placeholder="e.g. Lead UI/UX & Frontend Architect" style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-4">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>TIMELINE / YEAR</label>
-              <input type="text" value={formData.timeline} onChange={(e) => setFormData({ ...formData, timeline: e.target.value })} placeholder="e.g. 2026 (3 Months)" style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>TIMELINE / YEAR</label>
+              <input type="text" value={formData.timeline} onChange={(e) => setFormData({ ...formData, timeline: e.target.value })} placeholder="e.g. 2026 (3 Months)" style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
           </div>
         </div>
 
         {/* Section 2: Narrative Overview */}
-        <div style={{ paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>2. Project Narrative & Case Details</h3>
+        <div style={{ paddingTop: '20px', borderTop: '1px solid #e2e8f0' }}>
+          <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#0f172a', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>2. Project Narrative & Case Details</h3>
           <div className="row g-3">
             <div className="col-12">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>EXECUTIVE OVERVIEW</label>
-              <textarea rows={3} value={formData.overview} onChange={(e) => setFormData({ ...formData, overview: e.target.value })} placeholder="Comprehensive overview of the client project background..." style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>EXECUTIVE OVERVIEW</label>
+              <textarea rows={3} value={formData.overview} onChange={(e) => setFormData({ ...formData, overview: e.target.value })} placeholder="Comprehensive overview of the client project background..." style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-6">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>THE CHALLENGE</label>
-              <textarea rows={3} value={formData.challenge} onChange={(e) => setFormData({ ...formData, challenge: e.target.value })} placeholder="Key problems and engineering bottlenecks solved..." style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>THE CHALLENGE</label>
+              <textarea rows={3} value={formData.challenge} onChange={(e) => setFormData({ ...formData, challenge: e.target.value })} placeholder="Key problems and engineering bottlenecks solved..." style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-6">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>THE ARCHITECTURAL SOLUTION</label>
-              <textarea rows={3} value={formData.solution} onChange={(e) => setFormData({ ...formData, solution: e.target.value })} placeholder="Design system approach and frontend technologies leveraged..." style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>THE ARCHITECTURAL SOLUTION</label>
+              <textarea rows={3} value={formData.solution} onChange={(e) => setFormData({ ...formData, solution: e.target.value })} placeholder="Design system approach and frontend technologies leveraged..." style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
           </div>
         </div>
 
         {/* Section 3: Showcase Screenshots Gallery */}
-        <div style={{ paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#d2ea26', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>3. Showcase Screenshots & Mockups Gallery</h3>
+        <div style={{ paddingTop: '20px', borderTop: '1px solid #e2e8f0' }}>
+          <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#0f172a', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>3. Showcase Screenshots & Mockups Gallery</h3>
           
           <ImageUploadInput
             label="ADD NEW MOCKUP SCREENSHOT / UPLOAD FROM PC"
@@ -197,23 +197,23 @@ const CaseStudyEditor = () => {
             type="button"
             onClick={addGalleryImage}
             disabled={!newGalleryUrl}
-            style={{ padding: '10px 20px', background: '#d2ea26', color: '#0f172a', fontWeight: '800', border: 'none', borderRadius: '10px', cursor: newGalleryUrl ? 'pointer' : 'not-allowed', marginBottom: '20px' }}
+            style={{ padding: '10px 20px', background: '#0f172a', color: '#ffffff', fontWeight: '800', border: 'none', borderRadius: '10px', cursor: newGalleryUrl ? 'pointer' : 'not-allowed', marginBottom: '20px', boxShadow: '0 4px 12px rgba(15, 23, 42, 0.15)' }}
           >
             Add Screenshot to Gallery
           </button>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '12px' }}>
             {formData.gallery.map((url, idx) => (
-              <div key={idx} style={{ position: 'relative', height: '110px', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
+              <div key={idx} style={{ position: 'relative', height: '110px', borderRadius: '12px', overflow: 'hidden', border: '1px solid #cbd5e1' }}>
                 <img src={url} alt={`Gallery ${idx}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                <button type="button" onClick={() => removeGalleryImage(idx)} style={{ position: 'absolute', top: '6px', right: '6px', background: 'rgba(239, 68, 68, 0.8)', border: 'none', color: '#ffffff', borderRadius: '6px', padding: '4px', cursor: 'pointer' }}><Trash2 size={14} /></button>
+                <button type="button" onClick={() => removeGalleryImage(idx)} style={{ position: 'absolute', top: '6px', right: '6px', background: 'rgba(239, 68, 68, 0.9)', border: 'none', color: '#ffffff', borderRadius: '6px', padding: '4px', cursor: 'pointer' }}><Trash2 size={14} /></button>
               </div>
             ))}
           </div>
         </div>
 
         <div style={{ marginTop: '12px', display: 'flex', justifyContent: 'flex-end' }}>
-          <button type="submit" disabled={saving} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 28px', background: '#d2ea26', color: '#0f172a', borderRadius: '12px', fontWeight: '800', border: 'none', cursor: saving ? 'not-allowed' : 'pointer', fontSize: '15px' }}>
+          <button type="submit" disabled={saving} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 28px', background: '#0f172a', color: '#ffffff', borderRadius: '12px', fontWeight: '800', border: 'none', cursor: saving ? 'not-allowed' : 'pointer', fontSize: '15px', boxShadow: '0 4px 12px rgba(15, 23, 42, 0.15)' }}>
             <Save size={18} />
             <span>{saving ? 'Saving Case Study...' : 'Save Case Study'}</span>
           </button>

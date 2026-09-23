@@ -101,8 +101,8 @@ const SeoManager = () => {
     <div>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px', flexWrap: 'wrap', gap: '16px' }}>
         <div>
-          <h1 style={{ fontSize: '24px', fontWeight: '800', margin: '0 0 6px 0', color: '#ffffff' }}>Dynamic SEO & Meta Manager</h1>
-          <p style={{ fontSize: '13.5px', color: '#94a3b8', margin: 0 }}>Configure per-page title tags, meta descriptions, OpenGraph cards, and JSON-LD schema.</p>
+          <h1 style={{ fontSize: '24px', fontWeight: '800', margin: '0 0 6px 0', color: '#0f172a', letterSpacing: '-0.02em' }}>Dynamic SEO & Meta Manager</h1>
+          <p style={{ fontSize: '13.5px', color: '#475569', margin: 0, fontWeight: '500' }}>Configure per-page title tags, meta descriptions, OpenGraph cards, and JSON-LD schema.</p>
         </div>
       </div>
 
@@ -117,10 +117,11 @@ const SeoManager = () => {
               borderRadius: '12px',
               fontSize: '13px',
               fontWeight: '700',
-              border: selectedPage === p.id ? '1px solid rgba(210, 234, 38, 0.3)' : '1px solid rgba(255,255,255,0.08)',
-              background: selectedPage === p.id ? 'rgba(210, 234, 38, 0.1)' : '#0f172a',
-              color: selectedPage === p.id ? '#d2ea26' : '#94a3b8',
-              cursor: 'pointer'
+              border: selectedPage === p.id ? 'none' : '1px solid #cbd5e1',
+              background: selectedPage === p.id ? '#0f172a' : '#ffffff',
+              color: selectedPage === p.id ? '#ffffff' : '#475569',
+              cursor: 'pointer',
+              boxShadow: selectedPage === p.id ? '0 4px 12px rgba(15, 23, 42, 0.15)' : 'none'
             }}
           >
             {p.label}
@@ -130,40 +131,40 @@ const SeoManager = () => {
 
       {/* SEO Form */}
       <form onSubmit={handleSubmit}>
-        <div style={{ background: '#0f172a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '28px', marginBottom: '24px' }}>
-          <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', marginBottom: '20px' }}>
+        <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '20px', padding: '28px', marginBottom: '24px', boxShadow: '0 1px 3px rgba(15, 23, 42, 0.04), 0 10px 25px -5px rgba(15, 23, 42, 0.02)' }}>
+          <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', marginBottom: '20px' }}>
             Metadata Settings for "{pages.find((p) => p.id === selectedPage)?.label}"
           </h3>
 
           <div className="row g-3">
             <div className="col-12">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>META TITLE TAG</label>
-              <input type="text" required value={formData.metaTitle} onChange={(e) => setFormData({ ...formData, metaTitle: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>META TITLE TAG</label>
+              <input type="text" required value={formData.metaTitle} onChange={(e) => setFormData({ ...formData, metaTitle: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>META DESCRIPTION</label>
-              <textarea rows={3} required value={formData.metaDescription} onChange={(e) => setFormData({ ...formData, metaDescription: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>META DESCRIPTION</label>
+              <textarea rows={3} required value={formData.metaDescription} onChange={(e) => setFormData({ ...formData, metaDescription: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-6">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>KEYWORDS (COMMA SEPARATED)</label>
-              <input type="text" value={formData.keywords} onChange={(e) => setFormData({ ...formData, keywords: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>KEYWORDS (COMMA SEPARATED)</label>
+              <input type="text" value={formData.keywords} onChange={(e) => setFormData({ ...formData, keywords: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-6">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>OPENGRAPH PREVIEW IMAGE URL</label>
-              <input type="text" value={formData.ogImage} onChange={(e) => setFormData({ ...formData, ogImage: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>OPENGRAPH PREVIEW IMAGE URL</label>
+              <input type="text" value={formData.ogImage} onChange={(e) => setFormData({ ...formData, ogImage: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>JSON-LD SCHEMA.ORG STRUCTURED DATA (JSON)</label>
-              <textarea rows={4} value={formData.jsonLdSchema} onChange={(e) => setFormData({ ...formData, jsonLdSchema: e.target.value })} placeholder='{"@context": "https://schema.org", "@type": "Person", "name": "UI/UX Designer & Front-End Developer"}' style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff', fontFamily: 'monospace', fontSize: '12.5px' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>JSON-LD SCHEMA.ORG STRUCTURED DATA (JSON)</label>
+              <textarea rows={4} value={formData.jsonLdSchema} onChange={(e) => setFormData({ ...formData, jsonLdSchema: e.target.value })} placeholder='{"@context": "https://schema.org", "@type": "Person", "name": "UI/UX Designer & Front-End Developer"}' style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontFamily: 'monospace', fontSize: '12.5px' }} />
             </div>
           </div>
         </div>
 
-        <button type="submit" disabled={saving} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 28px', background: '#d2ea26', color: '#0f172a', borderRadius: '12px', fontWeight: '800', border: 'none', cursor: saving ? 'not-allowed' : 'pointer' }}>
+        <button type="submit" disabled={saving} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 28px', background: '#0f172a', color: '#ffffff', borderRadius: '12px', fontWeight: '800', border: 'none', cursor: saving ? 'not-allowed' : 'pointer', boxShadow: '0 4px 12px rgba(15, 23, 42, 0.15)' }}>
           <Save size={18} />
           <span>{saving ? 'Saving SEO Metadata...' : 'Save SEO Metadata'}</span>
         </button>

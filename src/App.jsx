@@ -50,26 +50,18 @@ const ProtectedAdminRoute = ({ children }) => {
 
 // Public Route Guard for Maintenance Mode
 const PublicRouteGuard = ({ children, pageKey }) => {
-  const { settings } = usePortfolio();
+  const { settings, loading } = usePortfolio();
 
-  if (typeof window !== 'undefined') {
-    if (window.location.search.includes('preview=admin')) {
-      sessionStorage.setItem('admin_preview_active', 'true');
-    }
-  }
+  // Admin preview: ONLY bypass when ?preview=admin is in the URL right now
+  const isAdminPreview = typeof window !== 'undefined' &&
+    window.location.search.includes('preview=admin');
 
-  // Admin preview mode is ONLY active when explicitly requested via Live Portfolio (Admin Preview) link
-  const isAdminPreview = typeof window !== 'undefined' && (
-    sessionStorage.getItem('admin_preview_active') === 'true' ||
-    window.location.search.includes('preview=admin')
-  );
-
-  // Admin explicit preview sees live site pages
+  // Admin explicit preview sees live site pages (bypasses maintenance)
   if (isAdminPreview) {
     return children;
   }
 
-  // Public Visitors Guard (Locks all devices globally)
+  // Read localStorage cached settings (available immediately on first render)
   const localSettingsStr = typeof window !== 'undefined' ? localStorage.getItem('portfolio_maintenance_settings') : null;
   let localSettings = null;
   try {
@@ -78,14 +70,19 @@ const PublicRouteGuard = ({ children, pageKey }) => {
     localSettings = null;
   }
 
-  const activeSettings = {
-    ...localSettings,
-    ...settings,
-    maintenancePages: {
-      ...(localSettings?.maintenancePages || {}),
-      ...(settings?.maintenancePages || {})
-    }
-  };
+  // API settings (from PortfolioContext) take full authority once loaded.
+  // While loading, fall back to localStorage cache so maintenance shows immediately.
+  // After loading, API value is the single source of truth for all devices.
+  const activeSettings = loading
+    ? (localSettings || {})
+    : {
+        ...localSettings,
+        ...settings,
+        maintenancePages: {
+          ...(localSettings?.maintenancePages || {}),
+          ...(settings?.maintenancePages || {})
+        }
+      };
 
   const isGlobalMaintenance = Boolean(activeSettings?.maintenanceMode);
   const isPageMaintenance = Boolean(

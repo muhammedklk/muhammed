@@ -144,26 +144,26 @@ const SettingsManager = () => {
     <div style={{ width: '100%' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px' }}>
         <div>
-          <h1 style={{ fontSize: '24px', fontWeight: '800', margin: '0 0 6px 0', color: '#ffffff' }}>Site Settings & Per-Page Maintenance</h1>
-          <p style={{ fontSize: '13.5px', color: '#94a3b8', margin: 0 }}>Configure global branding, contact details, and lock individual pages under maintenance mode.</p>
+          <h1 style={{ fontSize: '24px', fontWeight: '800', margin: '0 0 6px 0', color: '#0f172a', letterSpacing: '-0.02em' }}>Site Settings & Per-Page Maintenance</h1>
+          <p style={{ fontSize: '13.5px', color: '#475569', margin: 0, fontWeight: '500' }}>Configure global branding, contact details, and lock individual pages under maintenance mode.</p>
         </div>
       </div>
 
       {message && (
-        <div style={{ padding: '14px 18px', background: 'rgba(210, 234, 38, 0.15)', border: '1px solid rgba(210, 234, 38, 0.3)', color: '#d2ea26', borderRadius: '12px', marginBottom: '24px', fontWeight: '700', fontSize: '13.5px' }}>
+        <div style={{ padding: '14px 18px', background: '#f0fdf4', border: '1px solid #bbf7d0', color: '#16a34a', borderRadius: '12px', marginBottom: '24px', fontWeight: '700', fontSize: '13.5px' }}>
           {message}
         </div>
       )}
 
       <form onSubmit={handleSubmit}>
         {/* Global Maintenance Mode Box */}
-        <div style={{ background: settings.maintenanceMode ? 'rgba(239, 68, 68, 0.08)' : '#0f172a', border: settings.maintenanceMode ? '1px solid rgba(239, 68, 68, 0.4)' : '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '28px', marginBottom: '28px' }}>
+        <div style={{ background: settings.maintenanceMode ? '#fef2f2' : '#ffffff', border: settings.maintenanceMode ? '1px solid #fecaca' : '1px solid #e2e8f0', borderRadius: '24px', padding: '28px', marginBottom: '28px', boxShadow: '0 1px 3px rgba(15, 23, 42, 0.04)' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-              <Shield size={26} color={settings.maintenanceMode ? '#ef4444' : '#22c55e'} />
+              <Shield size={26} color={settings.maintenanceMode ? '#ef4444' : '#16a34a'} />
               <div>
-                <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', margin: 0 }}>Entire Website Maintenance Mode</h3>
-                <span style={{ fontSize: '12.5px', color: '#94a3b8' }}>Locks the whole website for public visitors.</span>
+                <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: 0 }}>Entire Website Maintenance Mode</h3>
+                <span style={{ fontSize: '12.5px', color: '#475569', fontWeight: '500' }}>Locks the whole website for public visitors.</span>
               </div>
             </div>
             <label style={{ display: 'inline-flex', alignItems: 'center', cursor: 'pointer', gap: '10px' }}>
@@ -173,36 +173,36 @@ const SettingsManager = () => {
                 onChange={(e) => handleToggleGlobalMaintenance(e.target.checked)}
                 style={{ width: '22px', height: '22px', accentColor: '#ef4444' }}
               />
-              <span style={{ fontSize: '14px', fontWeight: '800', color: settings.maintenanceMode ? '#ef4444' : '#22c55e' }}>
+              <span style={{ fontSize: '14px', fontWeight: '800', color: settings.maintenanceMode ? '#ef4444' : '#16a34a' }}>
                 {settings.maintenanceMode ? 'ACTIVE (ALL PAGES LOCKED)' : 'OFF (PUBLIC)'}
               </span>
             </label>
           </div>
 
-          <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-            <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '8px' }}>MAINTENANCE ANNOUNCEMENT MESSAGE</label>
+          <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid #e2e8f0' }}>
+            <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '8px' }}>MAINTENANCE ANNOUNCEMENT MESSAGE</label>
             <textarea
               rows={2}
               value={settings.maintenanceMessage}
               onChange={(e) => setSettings({ ...settings, maintenanceMessage: e.target.value })}
-              style={{ width: '100%', padding: '12px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', color: '#ffffff', fontSize: '13.5px' }}
+              style={{ width: '100%', padding: '12px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '12px', color: '#0f172a', fontSize: '13.5px' }}
             />
           </div>
         </div>
 
         {/* Per-Page Maintenance Toggles Grid */}
-        <div style={{ background: '#0f172a', border: '1px solid rgba(210, 234, 38, 0.25)', borderRadius: '24px', padding: '28px', marginBottom: '28px' }}>
-          <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#d2ea26', marginBottom: '8px' }}>Per-Page Maintenance Toggles</h3>
-          <p style={{ fontSize: '13px', color: '#94a3b8', marginBottom: '20px' }}>Turn ON maintenance for a specific page while editing it (e.g. Case Study page). Visitors opening that page will see a Maintenance Screen with a "Go Back" button!</p>
+        <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '24px', padding: '28px', marginBottom: '28px', boxShadow: '0 1px 3px rgba(15, 23, 42, 0.04)' }}>
+          <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', marginBottom: '8px' }}>Per-Page Maintenance Toggles</h3>
+          <p style={{ fontSize: '13px', color: '#475569', marginBottom: '20px', fontWeight: '500' }}>Turn ON maintenance for a specific page while editing it (e.g. Case Study page). Visitors opening that page will see a Maintenance Screen with a "Go Back" button!</p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {pagesList.map(item => {
               const isLocked = settings.maintenancePages?.[item.key] || false;
               return (
-                <div key={item.key} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px', background: isLocked ? 'rgba(239, 68, 68, 0.1)' : 'rgba(255,255,255,0.03)', border: isLocked ? '1px solid rgba(239, 68, 68, 0.3)' : '1px solid rgba(255,255,255,0.08)', borderRadius: '16px' }}>
+                <div key={item.key} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px', background: isLocked ? '#fef2f2' : '#f8fafc', border: isLocked ? '1px solid #fecaca' : '1px solid #e2e8f0', borderRadius: '16px' }}>
                   <div>
-                    <h4 style={{ fontSize: '15px', fontWeight: '800', color: '#ffffff', margin: '0 0 4px 0' }}>{item.label}</h4>
-                    <p style={{ fontSize: '12.5px', color: '#94a3b8', margin: 0 }}>{item.desc}</p>
+                    <h4 style={{ fontSize: '15px', fontWeight: '800', color: '#0f172a', margin: '0 0 4px 0' }}>{item.label}</h4>
+                    <p style={{ fontSize: '12.5px', color: '#475569', margin: 0 }}>{item.desc}</p>
                   </div>
                   <label style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
                     <input
@@ -211,7 +211,7 @@ const SettingsManager = () => {
                       onChange={(e) => handleTogglePageMaintenance(item.key, e.target.checked)}
                       style={{ width: '20px', height: '20px', accentColor: '#ef4444' }}
                     />
-                    <span style={{ fontSize: '13px', fontWeight: '800', color: isLocked ? '#ef4444' : '#22c55e' }}>
+                    <span style={{ fontSize: '13px', fontWeight: '800', color: isLocked ? '#ef4444' : '#16a34a' }}>
                       {isLocked ? 'LOCKED' : 'ACTIVE'}
                     </span>
                   </label>
@@ -222,38 +222,38 @@ const SettingsManager = () => {
         </div>
 
         {/* Global Branding & Contact */}
-        <div style={{ background: '#0f172a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '28px', marginBottom: '28px' }}>
-          <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', marginBottom: '20px' }}>General Portfolio Settings</h3>
+        <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '24px', padding: '28px', marginBottom: '28px', boxShadow: '0 1px 3px rgba(15, 23, 42, 0.04)' }}>
+          <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', marginBottom: '20px' }}>General Portfolio Settings</h3>
 
           <div className="row g-3">
             <div className="col-12 col-md-6">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>SITE TITLE</label>
-              <input type="text" value={settings.siteTitle} onChange={(e) => setSettings({ ...settings, siteTitle: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>SITE TITLE</label>
+              <input type="text" value={settings.siteTitle} onChange={(e) => setSettings({ ...settings, siteTitle: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-6">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>LOGO TEXT</label>
-              <input type="text" value={settings.logoText} onChange={(e) => setSettings({ ...settings, logoText: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>LOGO TEXT</label>
+              <input type="text" value={settings.logoText} onChange={(e) => setSettings({ ...settings, logoText: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-4">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>CONTACT EMAIL</label>
-              <input type="email" value={settings.contactEmail} onChange={(e) => setSettings({ ...settings, contactEmail: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>CONTACT EMAIL</label>
+              <input type="email" value={settings.contactEmail} onChange={(e) => setSettings({ ...settings, contactEmail: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-4">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>CONTACT PHONE</label>
-              <input type="text" value={settings.contactPhone} onChange={(e) => setSettings({ ...settings, contactPhone: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>CONTACT PHONE</label>
+              <input type="text" value={settings.contactPhone} onChange={(e) => setSettings({ ...settings, contactPhone: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
 
             <div className="col-12 col-md-4">
-              <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>LOCATION</label>
-              <input type="text" value={settings.location} onChange={(e) => setSettings({ ...settings, location: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: '#ffffff' }} />
+              <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>LOCATION</label>
+              <input type="text" value={settings.location} onChange={(e) => setSettings({ ...settings, location: e.target.value })} style={{ width: '100%', padding: '10px 14px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '10px', color: '#0f172a', fontSize: '13.5px' }} />
             </div>
           </div>
         </div>
 
-        <button type="submit" disabled={saving} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 32px', background: '#d2ea26', color: '#0f172a', borderRadius: '12px', fontWeight: '800', border: 'none', cursor: saving ? 'not-allowed' : 'pointer', fontSize: '15px' }}>
+        <button type="submit" disabled={saving} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '14px 32px', background: '#0f172a', color: '#ffffff', borderRadius: '12px', fontWeight: '800', border: 'none', cursor: saving ? 'not-allowed' : 'pointer', fontSize: '15px', boxShadow: '0 4px 12px rgba(15, 23, 42, 0.15)' }}>
           <Save size={18} />
           <span>{saving ? 'Saving Settings...' : 'Save All Settings & Maintenance'}</span>
         </button>

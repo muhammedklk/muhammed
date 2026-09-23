@@ -180,25 +180,25 @@ const HomeSelectedWorksManager = () => {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
         <div>
-          <h1 style={{ fontSize: '22px', fontWeight: '800', margin: '0 0 4px 0', color: '#ffffff' }}>
+          <h1 style={{ fontSize: '24px', fontWeight: '800', margin: '0 0 4px 0', color: '#0f172a', letterSpacing: '-0.02em' }}>
             Home Page Selected Works (Drag / Move to Reorder)
           </h1>
-          <p style={{ fontSize: '13px', color: '#94a3b8', margin: 0 }}>
-            Use the <strong style={{ color: '#d2ea26' }}>▲ Move Up</strong> & <strong style={{ color: '#d2ea26' }}>▼ Move Down</strong> buttons (or drag with mouse) to position your cards. Top card (SLOT #1) displays 1st on the Home page.
+          <p style={{ fontSize: '13.5px', color: '#475569', margin: 0, fontWeight: '500' }}>
+            Use the <strong style={{ color: '#4f46e5' }}>▲ Move Up</strong> & <strong style={{ color: '#4f46e5' }}>▼ Move Down</strong> buttons (or drag with mouse) to position your cards. Top card (SLOT #1) displays 1st on the Home page.
           </p>
         </div>
       </div>
 
       {message && (
-        <div style={{ padding: '10px 16px', background: 'rgba(210, 234, 38, 0.15)', border: '1px solid rgba(210, 234, 38, 0.3)', color: '#d2ea26', borderRadius: '10px', marginBottom: '16px', fontWeight: '700', fontSize: '13px' }}>
+        <div style={{ padding: '12px 18px', background: '#f0fdf4', border: '1px solid #bbf7d0', color: '#16a34a', borderRadius: '12px', marginBottom: '20px', fontWeight: '700', fontSize: '13.5px' }}>
           {message}
         </div>
       )}
 
       {/* 2x2 Grid of 4 Home Selected Works */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(540px, 1fr))', gap: '16px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(540px, 1fr))', gap: '20px' }}>
         {featuredProjects.length === 0 ? (
-          <div style={{ background: '#0f172a', padding: '30px', gridColumn: '1 / -1', borderRadius: '16px', textAlign: 'center', color: '#64748b' }}>
+          <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', padding: '30px', gridColumn: '1 / -1', borderRadius: '16px', textAlign: 'center', color: '#64748b' }}>
             No projects found. Add projects from the Projects Manager first.
           </div>
         ) : (
@@ -216,28 +216,29 @@ const HomeSelectedWorksManager = () => {
                 onDragOver={handleDragOver}
                 onDrop={(e) => handleDrop(e, index)}
                 style={{
-                  background: '#0f172a',
-                  border: draggedIndex === index ? '2px dashed #d2ea26' : '1px solid rgba(210, 234, 38, 0.25)',
-                  borderRadius: '18px',
-                  padding: '18px',
+                  background: '#ffffff',
+                  border: draggedIndex === index ? '2px dashed #4f46e5' : '1px solid #e2e8f0',
+                  borderRadius: '16px',
+                  padding: '20px',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '12px',
+                  gap: '14px',
                   opacity: draggedIndex === index ? 0.6 : 1,
-                  cursor: 'grab'
+                  cursor: 'grab',
+                  boxShadow: '0 1px 3px rgba(15, 23, 42, 0.04), 0 10px 25px -5px rgba(15, 23, 42, 0.02)'
                 }}
               >
                 
                 {/* Header Badge & Move Controls */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '10px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #e2e8f0', paddingBottom: '12px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ cursor: 'grab', color: '#64748b', fontSize: '14px', fontWeight: '800' }} title="Drag to reorder">
+                    <span style={{ cursor: 'grab', color: '#94a3b8', fontSize: '14px', fontWeight: '800' }} title="Drag to reorder">
                       ⋮⋮
                     </span>
-                    <span style={{ fontSize: '11px', fontWeight: '800', padding: '3px 10px', background: '#d2ea26', color: '#0f172a', borderRadius: '20px' }}>
+                    <span style={{ fontSize: '11px', fontWeight: '800', padding: '4px 10px', background: '#0f172a', color: '#ffffff', borderRadius: '20px' }}>
                       HOME SLOT #{index + 1}
                     </span>
-                    <span style={{ fontSize: '12px', fontWeight: '700', color: '#ffffff' }}>{proj.title}</span>
+                    <span style={{ fontSize: '13px', fontWeight: '700', color: '#0f172a' }}>{proj.title}</span>
                   </div>
 
                   {/* Move Up / Down Buttons */}
@@ -248,12 +249,12 @@ const HomeSelectedWorksManager = () => {
                       disabled={index === 0}
                       title="Move card up in priority"
                       style={{
-                        padding: '4px 10px',
-                        background: index === 0 ? 'rgba(255,255,255,0.04)' : 'rgba(210, 234, 38, 0.15)',
-                        border: '1px solid rgba(210, 234, 38, 0.3)',
-                        borderRadius: '6px',
-                        color: index === 0 ? '#64748b' : '#d2ea26',
-                        fontSize: '11px',
+                        padding: '5px 12px',
+                        background: index === 0 ? '#f8fafc' : '#eff6ff',
+                        border: index === 0 ? '1px solid #e2e8f0' : '1px solid #bfdbfe',
+                        borderRadius: '8px',
+                        color: index === 0 ? '#cbd5e1' : '#2563eb',
+                        fontSize: '11.5px',
                         fontWeight: '800',
                         cursor: index === 0 ? 'not-allowed' : 'pointer',
                         display: 'inline-flex',
@@ -271,12 +272,12 @@ const HomeSelectedWorksManager = () => {
                       disabled={index === featuredProjects.length - 1 || index === 3}
                       title="Move card down in priority"
                       style={{
-                        padding: '4px 10px',
-                        background: index === featuredProjects.length - 1 || index === 3 ? 'rgba(255,255,255,0.04)' : 'rgba(210, 234, 38, 0.15)',
-                        border: '1px solid rgba(210, 234, 38, 0.3)',
-                        borderRadius: '6px',
-                        color: index === featuredProjects.length - 1 || index === 3 ? '#64748b' : '#d2ea26',
-                        fontSize: '11px',
+                        padding: '5px 12px',
+                        background: index === featuredProjects.length - 1 || index === 3 ? '#f8fafc' : '#eff6ff',
+                        border: index === featuredProjects.length - 1 || index === 3 ? '1px solid #e2e8f0' : '1px solid #bfdbfe',
+                        borderRadius: '8px',
+                        color: index === featuredProjects.length - 1 || index === 3 ? '#cbd5e1' : '#2563eb',
+                        fontSize: '11.5px',
                         fontWeight: '800',
                         cursor: index === featuredProjects.length - 1 || index === 3 ? 'not-allowed' : 'pointer',
                         display: 'inline-flex',
@@ -291,24 +292,24 @@ const HomeSelectedWorksManager = () => {
                 </div>
 
                 {/* Card Body Flex */}
-                <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
+                <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
                   {/* Mockup Preview Column */}
                   <div style={{ width: '150px', flexShrink: 0 }}>
-                    <div style={{ height: '145px', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', background: '#090d16', position: 'relative' }}>
+                    <div style={{ height: '145px', borderRadius: '12px', overflow: 'hidden', border: '1px solid #e2e8f0', background: '#f8fafc', position: 'relative' }}>
                       <img src={currentHomeImg || '/assets/portfolio/gyogrea.png'} alt={currentHomeTitle} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
-                    <span style={{ display: 'block', textAlign: 'center', fontSize: '10px', color: '#64748b', marginTop: '4px' }}>
+                    <span style={{ display: 'block', textAlign: 'center', fontSize: '11px', color: '#64748b', marginTop: '6px', fontWeight: '600' }}>
                       Home Mockup Preview
                     </span>
                   </div>
 
                   {/* Form Fields Column */}
-                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     
                     {/* Title & Subtitle side-by-side */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                       <div>
-                        <label style={{ display: 'block', fontSize: '10.5px', color: '#94a3b8', fontWeight: '700', marginBottom: '3px' }}>HOME TITLE</label>
+                        <label style={{ display: 'block', fontSize: '11px', color: '#334155', fontWeight: '700', marginBottom: '4px' }}>HOME TITLE</label>
                         <input
                           type="text"
                           value={currentHomeTitle}
@@ -316,12 +317,12 @@ const HomeSelectedWorksManager = () => {
                             const newTitle = e.target.value;
                             setProjects(prev => prev.map(p => (p._id || p.id) === (proj._id || proj.id) ? { ...p, homeTitle: newTitle } : p));
                           }}
-                          style={{ width: '100%', padding: '6px 10px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff', fontSize: '13px' }}
+                          style={{ width: '100%', padding: '8px 12px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '8px', color: '#0f172a', fontSize: '13px' }}
                         />
                       </div>
 
                       <div>
-                        <label style={{ display: 'block', fontSize: '10.5px', color: '#94a3b8', fontWeight: '700', marginBottom: '3px' }}>HOME CATEGORY</label>
+                        <label style={{ display: 'block', fontSize: '11px', color: '#334155', fontWeight: '700', marginBottom: '4px' }}>HOME CATEGORY</label>
                         <input
                           type="text"
                           value={currentHomeCat}
@@ -329,14 +330,14 @@ const HomeSelectedWorksManager = () => {
                             const newCat = e.target.value;
                             setProjects(prev => prev.map(p => (p._id || p.id) === (proj._id || proj.id) ? { ...p, homeCategory: newCat } : p));
                           }}
-                          style={{ width: '100%', padding: '6px 10px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#ffffff', fontSize: '13px' }}
+                          style={{ width: '100%', padding: '8px 12px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '8px', color: '#0f172a', fontSize: '13px' }}
                         />
                       </div>
                     </div>
 
                     {/* Live Website Demo URL */}
                     <div>
-                      <label style={{ display: 'block', fontSize: '10.5px', color: '#d2ea26', fontWeight: '700', marginBottom: '3px' }}>HOME LIVE DEMO URL</label>
+                      <label style={{ display: 'block', fontSize: '11px', color: '#334155', fontWeight: '700', marginBottom: '4px' }}>HOME LIVE DEMO URL</label>
                       <input
                         type="text"
                         value={currentHomeLive}
@@ -345,7 +346,7 @@ const HomeSelectedWorksManager = () => {
                           const newUrl = e.target.value;
                           setProjects(prev => prev.map(p => (p._id || p.id) === (proj._id || proj.id) ? { ...p, homeLiveUrl: newUrl } : p));
                         }}
-                        style={{ width: '100%', padding: '6px 10px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(210, 234, 38, 0.4)', borderRadius: '8px', color: '#ffffff', fontSize: '12.5px' }}
+                        style={{ width: '100%', padding: '8px 12px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '8px', color: '#0f172a', fontSize: '12.5px' }}
                       />
                     </div>
 
@@ -360,12 +361,12 @@ const HomeSelectedWorksManager = () => {
                     />
 
                     {/* Submit Button */}
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '2px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '4px' }}>
                       <button
                         type="button"
                         onClick={() => handleUpdateProject(proj, index)}
                         disabled={savingId === (proj._id || proj.id)}
-                        style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 16px', background: '#d2ea26', color: '#0f172a', borderRadius: '8px', fontWeight: '800', fontSize: '12px', border: 'none', cursor: savingId === (proj._id || proj.id) ? 'not-allowed' : 'pointer' }}
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '10px 18px', background: '#0f172a', color: '#ffffff', borderRadius: '8px', fontWeight: '800', fontSize: '12.5px', border: 'none', cursor: savingId === (proj._id || proj.id) ? 'not-allowed' : 'pointer', boxShadow: '0 2px 6px rgba(15, 23, 42, 0.12)' }}
                       >
                         <Save size={14} />
                         <span>{savingId === (proj._id || proj.id) ? 'Saving...' : 'Update Home Card'}</span>
