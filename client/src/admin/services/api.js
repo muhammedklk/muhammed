@@ -1,5 +1,8 @@
 const BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
+/**
+ * Native Fetch Client Wrapper with Bearer Auth & 401 Interceptors
+ */
 const request = async (endpoint, options = {}) => {
   const token = localStorage.getItem('cms_token');
   const headers = {
@@ -70,6 +73,7 @@ const API = {
   delete: (url, config) => request(url, { method: 'DELETE', ...config }),
 };
 
+// --- AUTH API ---
 export const authApi = {
   login: (credentials) => API.post('/auth/login', credentials),
   registerInitial: (data) => API.post('/auth/register-initial', data),
@@ -78,6 +82,7 @@ export const authApi = {
   updatePassword: (data) => API.put('/auth/updatepassword', data),
 };
 
+// --- PROJECTS & CASE STUDY API ---
 export const projectsApi = {
   getPublic: (params) => API.get('/projects', { params }),
   getBySlug: (slug) => API.get(`/projects/${slug}`),
@@ -89,6 +94,7 @@ export const projectsApi = {
   delete: (id) => API.delete(`/projects/${id}`),
 };
 
+// --- CONTENT MODULES API ---
 export const contentApi = {
   getBatchAll: () => API.get('/content/all'),
   getHero: () => API.get('/content/hero'),
@@ -105,6 +111,7 @@ export const contentApi = {
   deleteCrud: (module, id) => API.delete(`/content/${module}/${id}`),
 };
 
+// --- CONTACT INBOX API ---
 export const contactApi = {
   submit: (data) => API.post('/contact', data),
   getMessages: (params) => API.get('/contact/messages', { params }),
@@ -113,12 +120,14 @@ export const contactApi = {
   deleteMessage: (id) => API.delete(`/contact/messages/${id}`),
 };
 
+// --- MEDIA LIBRARY API ---
 export const mediaApi = {
   getAll: () => API.get('/media'),
   upload: (formData) => API.post('/media/upload', formData, { isFormData: true }),
   delete: (id) => API.delete(`/media/${id}`),
 };
 
+// --- DASHBOARD API ---
 export const dashboardApi = {
   getStats: () => API.get('/dashboard/stats'),
   getLogs: () => API.get('/dashboard/logs'),

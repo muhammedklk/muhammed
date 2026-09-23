@@ -1,0 +1,237 @@
+/* Modern Clean Light Theme Design System for Portfolio CMS */
+
+:root {
+  --admin-bg: #f8fafc;
+  --admin-sidebar-bg: #ffffff;
+  --admin-card-bg: #ffffff;
+  --admin-header-bg: #ffffff;
+  --admin-border: #e2e8f0;
+  --admin-border-strong: #cbd5e1;
+  --admin-text-main: #0f172a;
+  --admin-text-muted: #64748b;
+  --admin-text-sub: #475569;
+  --admin-primary: #0f172a;
+  --admin-accent: #4f46e5;
+  --admin-accent-hover: #4338ca;
+  --admin-accent-light: #eff6ff;
+  --admin-success: #16a34a;
+  --admin-success-bg: #f0fdf4;
+  --admin-warning: #d97706;
+  --admin-warning-bg: #fffbeb;
+  --admin-danger: #dc2626;
+  --admin-danger-bg: #fef2f2;
+}
+
+/* Global Light Theme Resets for Admin */
+.admin-root {
+  background-color: var(--admin-bg) !important;
+  color: var(--admin-text-main) !important;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* Sidebar Light Styling */
+.admin-sidebar {
+  background-color: var(--admin-sidebar-bg) !important;
+  border-right: 1px solid var(--admin-border) !important;
+  box-shadow: 2px 0 12px rgba(15, 23, 42, 0.03) !important;
+}
+
+.admin-sidebar-brand {
+  border-bottom: 1px solid var(--admin-border) !important;
+}
+
+/* Navigation Links */
+.admin-nav-link {
+  color: var(--admin-text-sub) !important;
+  transition: all 0.2s ease !important;
+}
+
+.admin-nav-link:hover {
+  background-color: #f1f5f9 !important;
+  color: var(--admin-text-main) !important;
+}
+
+.admin-nav-link.active {
+  background-color: #e0e7ff !important;
+  color: #4338ca !important;
+  font-weight: 700 !important;
+  border: 1px solid #c7d2fe !important;
+}
+
+/* Header Navbar */
+.admin-top-header {
+  background-color: var(--admin-header-bg) !important;
+  border-bottom: 1px solid var(--admin-border) !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02) !important;
+}
+
+/* Universal Light Input Controls */
+.admin-root input[type="text"],
+.admin-root input[type="email"],
+.admin-root input[type="password"],
+.admin-root input[type="number"],
+.admin-root input[type="url"],
+.admin-root input[type="search"],
+.admin-root textarea,
+.admin-root select {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+  font-size: 13.5px !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+}
+
+.admin-root input:focus,
+.admin-root textarea:focus,
+.admin-root select:focus {
+  outline: none !important;
+  border-color: #4f46e5 !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15) !important;
+}
+
+.admin-root input::placeholder,
+.admin-root textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Labels & Form Helper Text */
+.admin-root label {
+  color: #334155 !important;
+  font-weight: 700 !important;
+  font-size: 12.5px !important;
+  margin-bottom: 6px !important;
+}
+
+/* Cards & Panel Boxes */
+.admin-card {
+  background-color: #ffffff !important;
+  border: 1px solid var(--admin-border) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03) !important;
+}
+
+/* Section Titles */
+.admin-page-title {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.admin-page-desc {
+  color: #64748b !important;
+}
+
+/* Action Buttons */
+.admin-btn-primary {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  border: 1px solid #0f172a !important;
+  border-radius: 10px !important;
+  padding: 10px 20px !important;
+  font-weight: 700 !important;
+  font-size: 13.5px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15) !important;
+}
+
+.admin-btn-primary:hover {
+  background-color: #1e293b !important;
+  border-color: #1e293b !important;
+}
+
+.admin-btn-accent {
+  background-color: #4f46e5 !important;
+  color: #ffffff !important;
+  border: 1px solid #4f46e5 !important;
+  border-radius: 10px !important;
+  padding: 10px 20px !important;
+  font-weight: 700 !important;
+  font-size: 13.5px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25) !important;
+}
+
+.admin-btn-accent:hover {
+  background-color: #4338ca !important;
+}
+
+.admin-btn-secondary {
+  background-color: #ffffff !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 10px !important;
+  padding: 9px 16px !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.admin-btn-secondary:hover {
+  background-color: #f8fafc !important;
+  border-color: #94a3b8 !important;
+}
+
+.admin-btn-danger {
+  background-color: #fef2f2 !important;
+  color: #dc2626 !important;
+  border: 1px solid #fca5a5 !important;
+  border-radius: 8px !important;
+  padding: 8px 14px !important;
+  font-weight: 700 !important;
+  font-size: 12.5px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.admin-btn-danger:hover {
+  background-color: #fee2e2 !important;
+}
+
+/* Modals & Backdrop */
+.admin-modal-backdrop {
+  background-color: rgba(15, 23, 42, 0.4) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+.admin-modal-content {
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 20px !important;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12) !important;
+  color: #0f172a !important;
+}
+
+/* Badges & Pills */
+.admin-badge-success {
+  background-color: #f0fdf4 !important;
+  color: #16a34a !important;
+  border: 1px solid #bbf7d0 !important;
+}
+
+.admin-badge-warning {
+  background-color: #fffbeb !important;
+  color: #d97706 !important;
+  border: 1px solid #fef08a !important;
+}
+
+.admin-badge-info {
+  background-color: #eff6ff !important;
+  color: #2563eb !important;
+  border: 1px solid #bfdbfe !important;
+}
+
+/* Spin animation helper */
+@keyframes spinGear {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spinGear 1s linear infinite;
+}

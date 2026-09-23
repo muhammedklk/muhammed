@@ -106,6 +106,7 @@ const SeoManager = () => {
         </div>
       </div>
 
+      {/* Page Selector Tabs */}
       <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' }}>
         {pages.map((p) => (
           <button
@@ -127,6 +128,7 @@ const SeoManager = () => {
         ))}
       </div>
 
+      {/* SEO Form */}
       <form onSubmit={handleSubmit}>
         <div style={{ background: '#0f172a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '28px', marginBottom: '24px' }}>
           <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#ffffff', marginBottom: '20px' }}>

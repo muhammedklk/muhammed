@@ -12,6 +12,7 @@ import Contact from './pages/Contact';
 import CaseStudy from './pages/CaseStudy';
 import Maintenance from './pages/Maintenance';
 
+// Admin Panel Components
 import AdminLayout from './admin/components/AdminLayout';
 import Login from './admin/pages/Login';
 import Dashboard from './admin/pages/Dashboard';
@@ -28,6 +29,7 @@ import MediaLibrary from './admin/pages/MediaLibrary';
 import SettingsManager from './admin/pages/SettingsManager';
 import SeoManager from './admin/pages/SeoManager';
 
+// Protected Route Wrapper for Admin Panel
 const ProtectedAdminRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
 
@@ -121,6 +123,7 @@ function App() {
         <PortfolioProvider>
           <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
             <Routes>
+              {/* Public Portfolio Routes guarded by Maintenance Mode */}
               <Route path="/" element={<PublicRouteGuard pageKey="home"><Layout><SEO page="home" /><Home /></Layout></PublicRouteGuard>} />
               <Route path="/about" element={<PublicRouteGuard pageKey="about"><Layout><SEO page="about" /><About /></Layout></PublicRouteGuard>} />
               <Route path="/works" element={<PublicRouteGuard pageKey="projects"><Layout><SEO page="works" /><Works /></Layout></PublicRouteGuard>} />
@@ -128,8 +131,10 @@ function App() {
               <Route path="/case-study" element={<PublicRouteGuard pageKey="caseStudy"><Layout><SEO page="casestudy" /><CaseStudy /></Layout></PublicRouteGuard>} />
               <Route path="/case-study/:id" element={<PublicRouteGuard pageKey="caseStudy"><Layout><SEO page="casestudy" /><CaseStudy /></Layout></PublicRouteGuard>} />
 
+              {/* Admin Panel Public Routes */}
               <Route path="/admin/login" element={<Login />} />
 
+              {/* Admin Panel Protected Routes */}
               <Route
                 path="/admin"
                 element={
@@ -158,6 +163,7 @@ function App() {
                 <Route path="*" element={<Dashboard />} />
               </Route>
 
+              {/* Catch-All & Fallback Routes */}
               <Route path="/index.html" element={<Navigate to="/" replace />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

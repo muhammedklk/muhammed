@@ -57,11 +57,12 @@ const CvUploadInput = ({ label = 'RESUME / CV FILE OR URL', value, onChange, pla
             style={{
               width: '100%',
               padding: '10px 14px',
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.1)',
+              background: '#ffffff',
+              border: '1px solid #cbd5e1',
               borderRadius: '10px',
-              color: '#ffffff',
-              fontSize: '13px'
+              color: '#0f172a',
+              fontSize: '13.5px',
+              boxShadow: '0 1px 2px rgba(15, 23, 42, 0.04)'
             }}
           />
         </div>
@@ -76,10 +77,10 @@ const CvUploadInput = ({ label = 'RESUME / CV FILE OR URL', value, onChange, pla
             alignItems: 'center',
             gap: '8px',
             padding: '10px 16px',
-            background: 'rgba(210, 234, 38, 0.15)',
-            border: '1px solid rgba(210, 234, 38, 0.3)',
+            background: '#eff6ff',
+            border: '1px solid #bfdbfe',
             borderRadius: '10px',
-            color: '#d2ea26',
+            color: '#2563eb',
             fontWeight: '700',
             fontSize: '12.5px',
             cursor: uploading ? 'not-allowed' : 'pointer',
@@ -104,7 +105,7 @@ const CvUploadInput = ({ label = 'RESUME / CV FILE OR URL', value, onChange, pla
       {/* Status & Preview link */}
       {value && (
         <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
-          <span style={{ fontSize: '12px', color: '#10b981', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: '600' }}>
+          <span style={{ fontSize: '12px', color: '#16a34a', display: 'flex', alignItems: 'center', gap: '4px', fontWeight: '600' }}>
             <Check size={14} /> CV document attached & active
           </span>
           <a
@@ -113,7 +114,7 @@ const CvUploadInput = ({ label = 'RESUME / CV FILE OR URL', value, onChange, pla
             rel="noopener noreferrer"
             style={{
               fontSize: '12px',
-              color: '#d2ea26',
+              color: '#2563eb',
               textDecoration: 'none',
               display: 'inline-flex',
               alignItems: 'center',

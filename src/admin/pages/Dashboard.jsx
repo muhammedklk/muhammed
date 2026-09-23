@@ -51,19 +51,19 @@ const Dashboard = () => {
       {/* Top Welcome Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px', flexWrap: 'wrap', gap: '16px' }}>
         <div>
-          <h1 style={{ fontSize: '24px', fontWeight: '800', margin: '0 0 6px 0', color: '#ffffff', letterSpacing: '-0.02em' }}>
+          <h1 style={{ fontSize: '24px', fontWeight: '800', margin: '0 0 6px 0', color: '#0f172a', letterSpacing: '-0.02em' }}>
             System Dashboard
           </h1>
-          <p style={{ fontSize: '13.5px', color: '#94a3b8', margin: 0 }}>
+          <p style={{ fontSize: '13.5px', color: '#64748b', margin: 0 }}>
             Real-time control metrics and activity logs for your portfolio CMS.
           </p>
         </div>
         <button
           onClick={fetchStats}
           disabled={loading}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 18px', background: '#0f172a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', color: '#ffffff', fontSize: '13px', fontWeight: '700', cursor: 'pointer' }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 18px', background: '#ffffff', border: '1px solid #cbd5e1', borderRadius: '12px', color: '#0f172a', fontSize: '13px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 1px 2px rgba(15, 23, 42, 0.04)' }}
         >
-          <RefreshCw size={15} className={loading ? 'spin' : ''} />
+          <RefreshCw size={15} className={loading ? 'spin' : ''} color="#4f46e5" />
           <span>Refresh Data</span>
         </button>
       </div>
@@ -74,15 +74,15 @@ const Dashboard = () => {
           const Icon = card.icon;
           return (
             <div key={i} className="col-12 col-sm-6 col-lg-3">
-              <div style={{ background: '#0f172a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '24px', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '24px', position: 'relative', overflow: 'hidden', boxShadow: '0 4px 16px rgba(15, 23, 42, 0.03)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
-                  <span style={{ fontSize: '12.5px', fontWeight: '700', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{card.title}</span>
+                  <span style={{ fontSize: '12.5px', fontWeight: '700', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{card.title}</span>
                   <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: `${card.color}15`, color: card.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Icon size={20} />
                   </div>
                 </div>
-                <div style={{ fontSize: '28px', fontWeight: '800', color: '#ffffff', marginBottom: '6px', letterSpacing: '-0.03em' }}>{card.value}</div>
-                <span style={{ fontSize: '12px', color: '#64748b', fontWeight: '600' }}>{card.subtitle}</span>
+                <div style={{ fontSize: '28px', fontWeight: '800', color: '#0f172a', marginBottom: '6px', letterSpacing: '-0.03em' }}>{card.value}</div>
+                <span style={{ fontSize: '12px', color: '#475569', fontWeight: '600' }}>{card.subtitle}</span>
               </div>
             </div>
           );
@@ -90,13 +90,13 @@ const Dashboard = () => {
       </div>
 
       {/* Recent Activity Audit Trail */}
-      <div style={{ background: '#0f172a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '24px' }}>
+      <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 16px rgba(15, 23, 42, 0.03)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <Activity size={20} color="#d2ea26" />
-            <h3 style={{ fontSize: '16px', fontWeight: '800', margin: 0, color: '#ffffff' }}>Recent Activity Logs</h3>
+            <Activity size={20} color="#4f46e5" />
+            <h3 style={{ fontSize: '16px', fontWeight: '800', margin: 0, color: '#0f172a' }}>Recent Activity Logs</h3>
           </div>
-          <span style={{ fontSize: '12px', color: '#64748b' }}>Last 10 administrative actions</span>
+          <span style={{ fontSize: '12px', color: '#64748b', fontWeight: '600' }}>Last 10 administrative actions</span>
         </div>
 
         {safeLogs.length === 0 ? (
@@ -106,17 +106,17 @@ const Dashboard = () => {
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {safeLogs.map((log) => (
-              <div key={log._id || Math.random()} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 18px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', gap: '16px', flexWrap: 'wrap' }}>
+              <div key={log._id || Math.random()} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 18px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', gap: '16px', flexWrap: 'wrap' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <div style={{ padding: '6px 12px', borderRadius: '8px', background: 'rgba(210, 234, 38, 0.1)', color: '#d2ea26', fontSize: '11px', fontWeight: '800', textTransform: 'uppercase' }}>
+                  <div style={{ padding: '6px 12px', borderRadius: '8px', background: '#eff6ff', border: '1px solid #bfdbfe', color: '#2563eb', fontSize: '11px', fontWeight: '800', textTransform: 'uppercase' }}>
                     {log.module || 'SYSTEM'}
                   </div>
                   <div>
-                    <span style={{ fontSize: '13.5px', fontWeight: '700', color: '#ffffff', display: 'block' }}>{log.details || log.action}</span>
+                    <span style={{ fontSize: '13.5px', fontWeight: '700', color: '#0f172a', display: 'block' }}>{log.details || log.action}</span>
                     <span style={{ fontSize: '11.5px', color: '#64748b' }}>By {log.userName || 'Admin'}</span>
                   </div>
                 </div>
-                <span style={{ fontSize: '12px', color: '#64748b', whiteSpace: 'nowrap' }}>
+                <span style={{ fontSize: '12px', color: '#64748b', whiteSpace: 'nowrap', fontWeight: '600' }}>
                   {log.createdAt ? new Date(log.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}
                 </span>
               </div>

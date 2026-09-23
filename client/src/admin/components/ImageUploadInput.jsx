@@ -68,7 +68,7 @@ const ImageUploadInput = ({ label, value, onChange, placeholder = 'https://... o
   return (
     <div style={{ marginBottom: '16px' }}>
       {label && (
-        <label style={{ display: 'block', fontSize: '12px', color: '#94a3b8', fontWeight: '700', marginBottom: '6px' }}>
+        <label style={{ display: 'block', fontSize: '12.5px', color: '#334155', fontWeight: '700', marginBottom: '6px' }}>
           {label}
         </label>
       )}
@@ -96,11 +96,12 @@ const ImageUploadInput = ({ label, value, onChange, placeholder = 'https://... o
             style={{
               width: '100%',
               padding: '10px 14px',
-              background: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.1)',
+              background: '#ffffff',
+              border: '1px solid #cbd5e1',
               borderRadius: '10px',
-              color: '#ffffff',
-              fontSize: '13px'
+              color: '#0f172a',
+              fontSize: '13.5px',
+              boxShadow: '0 1px 2px rgba(15, 23, 42, 0.04)'
             }}
           />
         </div>
@@ -115,10 +116,10 @@ const ImageUploadInput = ({ label, value, onChange, placeholder = 'https://... o
             alignItems: 'center',
             gap: '8px',
             padding: '10px 16px',
-            background: 'rgba(210, 234, 38, 0.15)',
-            border: '1px solid rgba(210, 234, 38, 0.3)',
+            background: '#eff6ff',
+            border: '1px solid #bfdbfe',
             borderRadius: '10px',
-            color: '#d2ea26',
+            color: '#2563eb',
             fontWeight: '700',
             fontSize: '12.5px',
             cursor: uploading ? 'not-allowed' : 'pointer',
@@ -147,9 +148,9 @@ const ImageUploadInput = ({ label, value, onChange, placeholder = 'https://... o
             src={value}
             alt="Preview"
             onError={() => setPreviewError(true)}
-            style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.15)', background: '#1e293b' }}
+            style={{ width: '40px', height: '40px', objectFit: 'cover', borderRadius: '8px', border: '1px solid #e2e8f0', background: '#f8fafc' }}
           />
-          <span style={{ fontSize: '11px', color: '#10b981', display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <span style={{ fontSize: '11.5px', color: '#16a34a', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '4px' }}>
             <Check size={14} /> Image linked successfully
           </span>
         </div>

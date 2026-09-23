@@ -26,6 +26,7 @@ const Contact = () => {
     setFeedback(null);
 
     try {
+      // 1. Post to Portfolio CMS Backend Contact Inbox
       fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -37,6 +38,7 @@ const Contact = () => {
         })
       }).catch(() => null);
 
+      // 2. Send email notification via FormSubmit
       const bodyData = new FormData();
       bodyData.append('name', formData.name);
       bodyData.append('email', formData.email);
@@ -58,6 +60,7 @@ const Contact = () => {
       setFormData({ name: '', email: '', service: 'uiux', message: '' });
     } catch (err) {
       console.error('Failed to submit inquiry:', err);
+      // Fallback feedback if network was offline
       setFeedback({
         text: "✅ Message sent! Thank you for reaching out.",
         color: '#4ade80'
@@ -67,6 +70,8 @@ const Contact = () => {
       setSubmitting(false);
     }
   };
+
+
 
   return (
     <>
@@ -89,6 +94,7 @@ const Contact = () => {
       <section className="contact-main-section py-4">
         <div className="container">
           <div className="row g-4 align-items-stretch">
+            {/* Left Column: Direct Contact Info & Availability */}
             <div className="col-lg-5 col-md-12">
               <div className="contact-info-wrapper">
                 <h2 className="contact-info-title">Direct Connection</h2>
@@ -96,6 +102,7 @@ const Contact = () => {
                   Prefer direct emails or messages? Feel free to reach out via any of the channels below.
                 </p>
 
+                {/* Live Availability Status Card */}
                 <div className="availability-status-card">
                   <span className="avail-pulse"></span>
                   <div className="avail-text">
@@ -104,6 +111,7 @@ const Contact = () => {
                   </div>
                 </div>
 
+                {/* Direct Info Cards */}
                 <div className="direct-contact-cards">
                   <div className="contact-card-item">
                     <div className="contact-card-icon">
@@ -150,6 +158,7 @@ const Contact = () => {
               </div>
             </div>
 
+            {/* Right Column: Interactive Handcrafted Form */}
             <div className="col-lg-7 col-md-12">
               <div className="contact-form-card">
                 <h3 className="form-card-title">Send a Message</h3>
