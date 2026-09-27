@@ -46,7 +46,7 @@ const AboutTeaser = () => {
           opacity: 0.25
         },
         {
-          color: '#000000',
+          color: '#0f172a',
           opacity: 1,
           stagger: 0.08,
           ease: 'power1.out',
