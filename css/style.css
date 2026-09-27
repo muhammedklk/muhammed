@@ -830,7 +830,6 @@ button {
 .social-link:hover {
     color: #849a00 !important;
 }
-}
 
 /* --- Main Content Area --- */
 .main-content {
@@ -840,14 +839,19 @@ button {
 
 /* --- Hero Section --- */
 .hero-section {
-    padding: 130px 0 80px;
+    padding: 90px 0 25px;
     position: relative;
     overflow: hidden;
+    min-height: calc(100vh - 30px);
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .hero-section .container {
     position: relative;
     z-index: 3;
+    width: 100%;
 }
 
 .hero-ambient-glow,
@@ -869,11 +873,11 @@ button {
 
 /* 2-Line Heading Across Top */
 .hero-heading {
-    font-size: 82px;
+    font-size: clamp(44px, 4.5vw, 62px);
     font-weight: 600;
-    line-height: 1.08;
+    line-height: 1.06;
     letter-spacing: -0.035em;
-    margin-bottom: 50px;
+    margin-bottom: 24px;
     width: 100%;
     text-wrap: balance;
 }
@@ -911,11 +915,11 @@ button {
 }
 
 .hero-description {
-    font-size: 15px;
-    line-height: 1.65;
+    font-size: 14.5px;
+    line-height: 1.6;
     color: var(--text-muted);
     max-width: 380px;
-    margin-bottom: 36px;
+    margin-bottom: 20px;
 }
 
 /* Hero CTA Buttons */
@@ -930,11 +934,11 @@ button {
     color: var(--btn-primary-color);
     font-size: 14px;
     font-weight: 600;
-    padding: 14px 35px;
+    padding: 12px 30px;
     border-radius: 40px;
     display: inline-block;
     transition: all 0.25s ease;
-        border: 1.5px solid #849a00 !important;
+    border: 1.5px solid #849a00 !important;
 }
 
 .btn-primary-pill:hover {
@@ -948,7 +952,7 @@ button {
     color: var(--btn-secondary-color);
     font-size: 14px;
     font-weight: 500;
-        padding: 14px 37px;
+    padding: 12px 30px;
     border-radius: 40px;
     display: inline-block;
     transition: all 0.25s ease;
@@ -957,7 +961,7 @@ button {
 .btn-secondary-pill:hover {
     background: var(--header-link-active-bg);
     transform: translateY(-2px);
-        border: 1px solid #0a0a0c;
+    border: 1px solid #0a0a0c;
 }
 
 /* --- Hero 3D Card Visual Container --- */
@@ -973,28 +977,17 @@ button {
 .hero-orbit-stage {
     position: relative;
     width: 100%;
-    max-width: 500px;
-    height: 480px;
+    max-width: 380px;
+    height: 340px;
     margin-left: auto;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Ambient Red Spotlight behind Orbit */
+/* Ambient Spotlight behind Orbit */
 .orbit-glow-spotlight {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 360px;
-    height: 360px;
-    background: radial-gradient(circle, rgba(210, 234, 38, 0.35) 0%, rgba(210, 234, 38, 0.1) 50%, transparent 75%);
-    filter: blur(55px);
-    pointer-events: none;
-    z-index: 1;
-    border-radius: 50%;
-    animation: auraPulse 4s infinite alternate ease-in-out;
+    display: none !important;
 }
 
 /* Concentric Orbit Track Lines */
@@ -1008,15 +1001,15 @@ button {
 }
 
 .track-inner {
-    width: 270px;
-    height: 270px;
-    border: 1px dashed rgba(210, 234, 38, 0.4);
-    box-shadow: 0 0 20px rgba(210, 234, 38, 0.15);
+    width: 200px;
+    height: 200px;
+    border: 1px dashed rgba(0, 0, 0, 0.12);
+    box-shadow: none;
 }
 
 .track-outer {
-    width: 420px;
-    height: 420px;
+    width: 310px;
+    height: 310px;
     border: 1px dashed rgba(0, 0, 0, 0.12);
 }
 
@@ -1028,57 +1021,57 @@ button {
 .orbit-core-glass {
     position: relative;
     z-index: 10;
-    width: 190px;
-    height: 190px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.94);
-    border: 1px solid rgba(210, 234, 38, 0.5);
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid #e2e8f0;
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08), 0 0 25px rgba(210, 234, 38, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 16px;
+    padding: 10px;
     transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
 [data-theme="light"] .orbit-core-glass {
-    background: rgba(255, 255, 255, 0.94);
-    border-color: rgba(210, 234, 38, 0.6);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08), 0 0 25px rgba(210, 234, 38, 0.2);
+    background: rgba(255, 255, 255, 0.96);
+    border-color: #e2e8f0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 
 .orbit-core-glass:hover {
-    transform: scale(1.06);
-    border-color: #d2ea26;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12), 0 0 45px rgba(210, 234, 38, 0.4);
+    transform: scale(1.05);
+    border-color: #cbd5e1;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
 }
 
 .core-avatar-ring {
-    width: 38px;
-    height: 38px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: #d2ea26;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 16px rgba(210, 234, 38, 0.6);
-    margin-bottom: 8px;
+    box-shadow: none;
+    margin-bottom: 4px;
 }
 
 .core-sparkle {
     color: #000000;
-    font-size: 16px;
+    font-size: 13px;
 }
 
 .core-name {
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 800;
     color: #ffffff;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
     letter-spacing: -0.02em;
 }
 
@@ -1087,11 +1080,11 @@ button {
 }
 
 .core-role {
-    font-size: 8.5px;
+    font-size: 7.5px;
     font-weight: 700;
     letter-spacing: 0.1em;
     color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 10px;
+    margin-bottom: 0;
 }
 
 [data-theme="light"] .core-role {
@@ -1101,13 +1094,13 @@ button {
 .core-availability-pill {
     display: flex;
     align-items: center;
-    gap: 5px;
-    font-size: 8.5px;
+    gap: 4px;
+    font-size: 7.5px;
     font-weight: 800;
     color: #4ade80;
     background: rgba(74, 222, 128, 0.12);
     border: 1px solid rgba(74, 222, 128, 0.28);
-    padding: 3px 9px;
+    padding: 2px 7px;
     border-radius: 20px;
 }
 
@@ -1131,15 +1124,15 @@ button {
 }
 
 .rotator-inner {
-    width: 270px;
-    height: 270px;
+    width: 200px;
+    height: 200px;
     z-index: 6;
     animation: orbitRotateCW 28s linear infinite;
 }
 
 .rotator-outer {
-    width: 420px;
-    height: 420px;
+    width: 310px;
+    height: 310px;
     z-index: 5;
     animation: orbitRotateCCW 36s linear infinite;
 }
@@ -1167,36 +1160,36 @@ button {
 .node-content {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
-    background: rgba(14, 15, 20, 0.88);
-    border: 1px solid rgba(255, 59, 64, 0.32);
+    gap: 5px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    padding: 7px 15px;
+    padding: 5px 11px;
     border-radius: 30px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 16px rgba(255, 59, 64, 0.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     white-space: nowrap;
     transition: all 0.3s ease;
 }
 
 [data-theme="light"] .node-content {
-    background: rgba(255, 255, 255, 0.94);
-    border-color: rgba(255, 59, 64, 0.35);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    background: #ffffff;
+    border-color: #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .node-content:hover {
-    transform: scale(1.1);
-    border-color: #ff3b40;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 59, 64, 0.3);
+    transform: scale(1.06);
+    border-color: #cbd5e1;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .node-icon {
-    font-size: 13px;
+    font-size: 11px;
 }
 
 .node-text {
-    font-size: 10.5px;
+    font-size: 9px;
     font-weight: 700;
     color: #ffffff;
 }
@@ -1205,21 +1198,21 @@ button {
     color: #000000;
 }
 
-/* Position Nodes on Inner Rotator (270px) */
+/* Position Nodes on Inner Rotator (200px) */
 .rotator-inner .node-figma {
-    top: -16px;
+    top: -12px;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .rotator-inner .node-uiux {
-    bottom: 25px;
-    left: 0;
+    bottom: 15px;
+    left: -10px;
 }
 
 .rotator-inner .node-code {
-    bottom: 25px;
-    right: 0;
+    bottom: 15px;
+    right: -10px;
 }
 
 /* Counter-Rotate Inner Nodes so text stays upright! */
@@ -1232,25 +1225,25 @@ button {
     to   { transform: rotate(-360deg); }
 }
 
-/* Position Nodes on Outer Rotator (420px) */
+/* Position Nodes on Outer Rotator (310px) */
 .rotator-outer .node-js {
-    top: 20px;
-    right: 30px;
+    top: 10px;
+    right: 10px;
 }
 
 .rotator-outer .node-speed {
-    bottom: 40px;
-    right: 30px;
+    bottom: 15px;
+    right: 10px;
 }
 
 .rotator-outer .node-anim {
-    bottom: 40px;
-    left: 30px;
+    bottom: 15px;
+    left: 10px;
 }
 
 .rotator-outer .node-responsive {
-    top: 20px;
-    left: 30px;
+    top: 10px;
+    left: 10px;
 }
 
 /* Counter-Rotate Outer Nodes so text stays upright! */

@@ -67,10 +67,6 @@ const Hero = () => {
                 </div>
                 <h3 className="core-name">{orbitName}</h3>
                 <span className="core-role">{orbitRole}</span>
-                <div className="core-availability-pill">
-                  <span className="pulse-green-dot"></span>
-                  <span>{badge.toUpperCase()}</span>
-                </div>
               </div>
 
               {/* FLOATING ORBITING SKILL NODES (INNER RING ROTATION) */}
