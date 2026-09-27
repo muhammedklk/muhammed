@@ -48,12 +48,16 @@ const HeroAboutManager = () => {
         contentApi.getAbout().catch(() => null)
       ]);
 
-      if (heroRes && heroRes.data && heroRes.data.data) {
-        setHeroForm(prev => ({ ...prev, ...heroRes.data.data }));
+      const heroObj = heroRes?.data?.data?.hero || heroRes?.data?.hero || heroRes?.data?.data;
+      if (heroObj && typeof heroObj === 'object') {
+        const { _id, __v, createdAt, updatedAt, ...heroData } = heroObj;
+        setHeroForm(prev => ({ ...prev, ...heroData }));
       }
 
-      if (aboutRes && aboutRes.data && aboutRes.data.data) {
-        setAboutForm(prev => ({ ...prev, ...aboutRes.data.data }));
+      const aboutObj = aboutRes?.data?.data?.about || aboutRes?.data?.about || aboutRes?.data?.data;
+      if (aboutObj && typeof aboutObj === 'object') {
+        const { _id, __v, createdAt, updatedAt, ...aboutData } = aboutObj;
+        setAboutForm(prev => ({ ...prev, ...aboutData }));
       }
     } catch (err) {
       console.error('Error fetching hero & about content:', err);
@@ -69,7 +73,12 @@ const HeroAboutManager = () => {
     setSaving(true);
     setMessage('');
     try {
-      await contentApi.updateHero(heroForm);
+      const res = await contentApi.updateHero(heroForm);
+      const updatedHero = res?.data?.data?.hero || res?.data?.hero || res?.data?.data;
+      if (updatedHero && typeof updatedHero === 'object') {
+        const { _id, __v, createdAt, updatedAt, ...heroData } = updatedHero;
+        setHeroForm(prev => ({ ...prev, ...heroData }));
+      }
       if (refreshPortfolio) {
         await refreshPortfolio();
       }
@@ -87,7 +96,12 @@ const HeroAboutManager = () => {
     setSaving(true);
     setMessage('');
     try {
-      await contentApi.updateAbout(aboutForm);
+      const res = await contentApi.updateAbout(aboutForm);
+      const updatedAbout = res?.data?.data?.about || res?.data?.about || res?.data?.data;
+      if (updatedAbout && typeof updatedAbout === 'object') {
+        const { _id, __v, createdAt, updatedAt, ...aboutData } = updatedAbout;
+        setAboutForm(prev => ({ ...prev, ...aboutData }));
+      }
       if (refreshPortfolio) {
         await refreshPortfolio();
       }

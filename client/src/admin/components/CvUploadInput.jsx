@@ -29,6 +29,36 @@ const CvUploadInput = ({ label = 'RESUME / CV FILE OR URL', value, onChange, pla
     reader.readAsDataURL(file);
   };
 
+  const handlePreviewCv = (e) => {
+    e.preventDefault();
+    if (!value) return;
+
+    if (value.startsWith('data:')) {
+      try {
+        const arr = value.split(',');
+        const mimeMatch = arr[0].match(/:(.*?);/);
+        const mime = mimeMatch ? mimeMatch[1] : 'application/pdf';
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8arr = new Uint8Array(n);
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        const blob = new Blob([u8arr], { type: mime });
+        const blobUrl = URL.createObjectURL(blob);
+        window.open(blobUrl, '_blank');
+      } catch (err) {
+        console.error('Error opening base64 document:', err);
+        const win = window.open('', '_blank');
+        if (win) {
+          win.document.write(`<iframe src="${value}" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>`);
+        }
+      }
+    } else {
+      window.open(value, '_blank');
+    }
+  };
+
   return (
     <div style={{ marginBottom: '16px' }}>
       {label && (
@@ -110,6 +140,7 @@ const CvUploadInput = ({ label = 'RESUME / CV FILE OR URL', value, onChange, pla
           </span>
           <a
             href={value}
+            onClick={handlePreviewCv}
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -119,7 +150,8 @@ const CvUploadInput = ({ label = 'RESUME / CV FILE OR URL', value, onChange, pla
               display: 'inline-flex',
               alignItems: 'center',
               gap: '4px',
-              fontWeight: '700'
+              fontWeight: '700',
+              cursor: 'pointer'
             }}
           >
             <ExternalLink size={13} /> Test / View Uploaded CV
