@@ -210,7 +210,8 @@ function InlineImageStatement({ aboutSnippet }) {
 
 export default function HomePage() {
   const { personalInfo, projects, faqItems, homeContent } = usePortfolio();
-  const featuredProjects = (projects || []).filter(p => p.featured).slice(0, 4);
+  const featuredList = (projects || []).filter(p => p.featured);
+  const featuredProjects = featuredList.length > 0 ? featuredList : (projects || []).slice(0, 4);
 
   const hero = homeContent?.hero || {};
   const aboutSnip = homeContent?.aboutSnippet || {};

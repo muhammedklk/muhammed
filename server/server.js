@@ -24,14 +24,40 @@ app.use(cors());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Ensure uploads folder exists in public/uploads
+// Ensure uploads folder exists in public/uploads (safely for serverless)
 const uploadsDir = path.join(__dirname, '../public/uploads');
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
+try {
+  if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+  }
+} catch (e) {
+  // Read-only filesystem in serverless environments
 }
 
 // Serve uploaded media statically
 app.use('/uploads', express.static(uploadsDir));
+
+// Connect DB helper
+let isConnected = false;
+export async function connectDB() {
+  if (isConnected || mongoose.connection.readyState === 1) return;
+  try {
+    await mongoose.connect(MONGO_URI);
+    isConnected = true;
+    console.log('✅ Connected to MongoDB Atlas (portfolio_cms)');
+    await seedInitialDataIfNeeded();
+  } catch (err) {
+    console.error('❌ MongoDB Atlas connection error:', err.message);
+  }
+}
+
+// Ensure DB is connected for incoming requests
+app.use(async (req, res, next) => {
+  if (mongoose.connection.readyState !== 1) {
+    await connectDB();
+  }
+  next();
+});
 
 // Multer Storage Configuration for desktop image/file uploads
 const storage = multer.diskStorage({
@@ -332,6 +358,7 @@ app.put('/api/content/projects/:id', async (req, res) => {
     }
 
     doc.projects[pIdx] = { ...doc.projects[pIdx].toObject(), ...req.body };
+    doc.markModified('projects');
     await doc.save();
     res.json({ success: true, message: 'Project updated successfully', project: doc.projects[pIdx] });
   } catch (error) {
@@ -394,19 +421,17 @@ app.post('/api/content/reset-defaults', async (req, res) => {
   }
 });
 
-// Connect to MongoDB and start server
-mongoose.connect(MONGO_URI)
-  .then(() => {
-    console.log('✅ Connected to MongoDB Atlas (portfolio_cms)');
-    seedInitialDataIfNeeded();
+// Start server if run directly (not on Vercel serverless)
+if (!process.env.VERCEL) {
+  connectDB().then(() => {
     app.listen(PORT, () => {
       console.log(`🚀 Portfolio CMS Server running on http://localhost:${PORT}`);
     });
-  })
-  .catch(err => {
-    console.error('❌ MongoDB Atlas connection error:', err.message);
-    // Start server anyway so fallback endpoints work
+  }).catch(() => {
     app.listen(PORT, () => {
-      console.log(`⚠️ Portfolio CMS Server running in offline fallback mode on http://localhost:${PORT}`);
+      console.log(`⚠️ Portfolio CMS Server running on http://localhost:${PORT}`);
     });
   });
+}
+
+export default app;

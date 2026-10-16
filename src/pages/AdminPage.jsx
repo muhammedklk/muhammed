@@ -44,6 +44,7 @@ export default function AdminPage() {
     updateProjects,
     addProject,
     updateProject,
+    toggleProjectFeatured,
     deleteProject,
     updateFaqItems,
     updateMaintenanceMode,
@@ -939,6 +940,80 @@ export default function AdminPage() {
                     onChange={(e) => setHomeForm(prev => ({ ...prev, worksSection: { ...prev.worksSection, subtitle: e.target.value } }))}
                     className="admin-textarea-light"
                   />
+                </div>
+
+                {/* Choose Which Works to Display on Home Page */}
+                <div className="admin-form-group-light full-col" style={{ marginTop: '0.5rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                    <div>
+                      <h4 style={{ fontWeight: 600, color: '#1e293b', fontSize: '0.92rem', margin: '0 0 2px' }}>
+                        🌟 Choose Which Works to Display on Home Page
+                      </h4>
+                      <p style={{ margin: 0, fontSize: '0.78rem', color: '#64748b' }}>
+                        Select the projects you want to feature on the homepage showcase grid.
+                      </p>
+                    </div>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 600, color: '#2563eb', background: '#eff6ff', padding: '4px 10px', borderRadius: '20px' }}>
+                      {(projects || []).filter(p => p.featured).length} Active on Home
+                    </span>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '10px' }}>
+                    {(projects || []).map((proj) => {
+                      const isFeatured = !!proj.featured;
+                      return (
+                        <div
+                          key={proj.id}
+                          onClick={() => {
+                            toggleProjectFeatured(proj.id);
+                            showToast(isFeatured ? `"${proj.title}" removed from Home` : `"${proj.title}" shown on Home`, 'success');
+                          }}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '12px',
+                            padding: '10px 14px',
+                            borderRadius: '10px',
+                            border: isFeatured ? '1.5px solid #3b82f6' : '1px solid #e2e8f0',
+                            background: isFeatured ? '#f0f7ff' : '#ffffff',
+                            cursor: 'pointer',
+                            transition: 'all 0.15s ease'
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={isFeatured}
+                            onChange={() => {}}
+                            style={{ width: '18px', height: '18px', accentColor: '#2563eb', cursor: 'pointer' }}
+                          />
+                          <img
+                            src={proj.coverImage || '/assets/mockup-green-track.png'}
+                            alt=""
+                            style={{ width: '42px', height: '32px', objectFit: 'cover', borderRadius: '4px', background: '#e2e8f0', flexShrink: 0 }}
+                          />
+                          <div style={{ flex: 1, minWidth: 0 }}>
+                            <div style={{ fontSize: '0.85rem', fontWeight: 600, color: '#1e293b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              {proj.title}
+                            </div>
+                            <div style={{ fontSize: '0.72rem', color: '#64748b' }}>
+                              {proj.category}
+                            </div>
+                          </div>
+                          <span style={{
+                            fontSize: '0.68rem',
+                            fontWeight: 700,
+                            padding: '3px 8px',
+                            borderRadius: '20px',
+                            background: isFeatured ? '#dbeafe' : '#f1f5f9',
+                            color: isFeatured ? '#1d4ed8' : '#94a3b8',
+                            flexShrink: 0
+                          }}>
+                            {isFeatured ? 'ON HOME' : 'HIDDEN'}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 {/* ── FAQ SECTION LABELS ── */}

@@ -99,12 +99,49 @@ const defaultMaintenanceMode = {
 const PortfolioContext = createContext(null);
 
 export function PortfolioProvider({ children }) {
-  const [personalInfo, setPersonalInfo] = useState(defaultPersonalInfo);
-  const [aboutContent, setAboutContent] = useState(defaultAboutContent);
-  const [projects, setProjects] = useState(defaultProjects);
-  const [faqItems, setFaqItems] = useState(defaultFaqs);
-  const [maintenanceMode, setMaintenanceMode] = useState(defaultMaintenanceMode);
-  const [homeContent, setHomeContent] = useState(defaultHomeContent);
+  // Initialize with localStorage if present to prevent any flash of stale data
+  const [personalInfo, setPersonalInfo] = useState(() => {
+    try {
+      const saved = localStorage.getItem('portfolio_personal');
+      return saved ? JSON.parse(saved) : defaultPersonalInfo;
+    } catch { return defaultPersonalInfo; }
+  });
+
+  const [aboutContent, setAboutContent] = useState(() => {
+    try {
+      const saved = localStorage.getItem('portfolio_about');
+      return saved ? JSON.parse(saved) : defaultAboutContent;
+    } catch { return defaultAboutContent; }
+  });
+
+  const [projects, setProjects] = useState(() => {
+    try {
+      const saved = localStorage.getItem('portfolio_projects');
+      return saved ? JSON.parse(saved) : defaultProjects;
+    } catch { return defaultProjects; }
+  });
+
+  const [faqItems, setFaqItems] = useState(() => {
+    try {
+      const saved = localStorage.getItem('portfolio_faqs');
+      return saved ? JSON.parse(saved) : defaultFaqs;
+    } catch { return defaultFaqs; }
+  });
+
+  const [maintenanceMode, setMaintenanceMode] = useState(() => {
+    try {
+      const saved = localStorage.getItem('portfolio_maintenance');
+      return saved ? JSON.parse(saved) : defaultMaintenanceMode;
+    } catch { return defaultMaintenanceMode; }
+  });
+
+  const [homeContent, setHomeContent] = useState(() => {
+    try {
+      const saved = localStorage.getItem('portfolio_home_content');
+      return saved ? JSON.parse(saved) : defaultHomeContent;
+    } catch { return defaultHomeContent; }
+  });
+
   const [loading, setLoading] = useState(true);
   const [isServerConnected, setIsServerConnected] = useState(false);
 
@@ -115,26 +152,43 @@ export function PortfolioProvider({ children }) {
       if (!res.ok) throw new Error('API response not ok');
       const json = await res.json();
       if (json.success && json.data) {
-        if (json.data.personalInfo) setPersonalInfo(json.data.personalInfo);
+        if (json.data.personalInfo) {
+          setPersonalInfo(json.data.personalInfo);
+          try { localStorage.setItem('portfolio_personal', JSON.stringify(json.data.personalInfo)); } catch {}
+        }
         if (json.data.aboutContent && Object.keys(json.data.aboutContent).length > 0) {
-          setAboutContent(prev => ({ ...prev, ...json.data.aboutContent }));
+          setAboutContent(prev => {
+            const next = { ...prev, ...json.data.aboutContent };
+            try { localStorage.setItem('portfolio_about', JSON.stringify(next)); } catch {}
+            return next;
+          });
         }
         if (Array.isArray(json.data.projects) && json.data.projects.length > 0) {
           setProjects(json.data.projects);
+          try { localStorage.setItem('portfolio_projects', JSON.stringify(json.data.projects)); } catch {}
         }
         if (Array.isArray(json.data.faqItems) && json.data.faqItems.length > 0) {
           setFaqItems(json.data.faqItems);
+          try { localStorage.setItem('portfolio_faqs', JSON.stringify(json.data.faqItems)); } catch {}
         }
         if (json.data.maintenanceMode) {
-          setMaintenanceMode(prev => ({ ...prev, ...json.data.maintenanceMode }));
+          setMaintenanceMode(prev => {
+            const next = { ...prev, ...json.data.maintenanceMode };
+            try { localStorage.setItem('portfolio_maintenance', JSON.stringify(next)); } catch {}
+            return next;
+          });
         }
         if (json.data.homeContent && json.data.homeContent.hero) {
-          setHomeContent(prev => ({ ...prev, ...json.data.homeContent }));
+          setHomeContent(prev => {
+            const next = { ...prev, ...json.data.homeContent };
+            try { localStorage.setItem('portfolio_home_content', JSON.stringify(next)); } catch {}
+            return next;
+          });
         }
         setIsServerConnected(true);
       }
     } catch (err) {
-      console.warn('PortfolioContext: Server offline or proxy unavailable, using static fallback data.', err.message);
+      console.warn('PortfolioContext: Server offline or proxy unavailable, using cached/static data.', err.message);
       setIsServerConnected(false);
     } finally {
       setLoading(false);
@@ -145,8 +199,61 @@ export function PortfolioProvider({ children }) {
     refreshData();
   }, [refreshData]);
 
-  // Upload desktop image / file via API
+  // Upload desktop image / file with automatic client compression & Base64 fallback for cross-device support
   const uploadMedia = async (file) => {
+    if (file && file.type && file.type.startsWith('image/')) {
+      try {
+        const base64Url = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = (e) => {
+            const img = new Image();
+            img.src = e.target.result;
+            img.onload = () => {
+              const canvas = document.createElement('canvas');
+              let width = img.width;
+              let height = img.height;
+              const maxDim = 1600;
+              if (width > maxDim || height > maxDim) {
+                if (width > height) {
+                  height = Math.round((height * maxDim) / width);
+                  width = maxDim;
+                } else {
+                  width = Math.round((width * maxDim) / height);
+                  height = maxDim;
+                }
+              }
+              canvas.width = width;
+              canvas.height = height;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(img, 0, 0, width, height);
+              const compressed = canvas.toDataURL('image/webp', 0.82);
+              resolve(compressed);
+            };
+            img.onerror = () => resolve(e.target.result);
+          };
+          reader.onerror = reject;
+        });
+
+        // Try server upload to get a public file URL if server is reachable
+        try {
+          const formData = new FormData();
+          formData.append('file', file);
+          const serverRes = await fetch('/api/upload', { method: 'POST', body: formData });
+          if (serverRes.ok) {
+            const serverJson = await serverRes.json();
+            // Return base64Url as primary for multi-device cross-platform reliability, or serverJson.url
+            return { success: true, url: base64Url, serverUrl: serverJson.url, filename: file.name };
+          }
+        } catch (_) {}
+
+        return { success: true, url: base64Url, filename: file.name };
+      } catch (err) {
+        console.warn('Image processing fallback to server upload', err);
+      }
+    }
+
+    // Default upload for non-images (PDFs, etc.)
     const formData = new FormData();
     formData.append('file', file);
     const res = await fetch('/api/upload', {
@@ -158,12 +265,13 @@ export function PortfolioProvider({ children }) {
       throw new Error(`Upload failed: ${errText}`);
     }
     const json = await res.json();
-    return json; // { success: true, url: '/uploads/filename.ext', ... }
+    return json;
   };
 
   // Update Personal Info
   const updatePersonalInfo = async (updated) => {
     setPersonalInfo(updated);
+    try { localStorage.setItem('portfolio_personal', JSON.stringify(updated)); } catch {}
     try {
       const res = await fetch('/api/content/personal', {
         method: 'PUT',
@@ -180,6 +288,7 @@ export function PortfolioProvider({ children }) {
   // Update About Content
   const updateAboutContent = async (updated) => {
     setAboutContent(updated);
+    try { localStorage.setItem('portfolio_about', JSON.stringify(updated)); } catch {}
     try {
       const res = await fetch('/api/content/about', {
         method: 'PUT',
@@ -196,6 +305,7 @@ export function PortfolioProvider({ children }) {
   // Update all projects
   const updateProjects = async (updated) => {
     setProjects(updated);
+    try { localStorage.setItem('portfolio_projects', JSON.stringify(updated)); } catch {}
     try {
       const res = await fetch('/api/content/projects', {
         method: 'PUT',
@@ -220,16 +330,28 @@ export function PortfolioProvider({ children }) {
       const json = await res.json();
       if (json.success && json.data) {
         setProjects(json.data);
+        try { localStorage.setItem('portfolio_projects', JSON.stringify(json.data)); } catch {}
+      } else {
+        const next = [newProj, ...projects];
+        setProjects(next);
+        try { localStorage.setItem('portfolio_projects', JSON.stringify(next)); } catch {}
       }
       return json;
     } catch (e) {
       console.error('Add project error:', e);
-      return { success: false, message: e.message };
+      const next = [newProj, ...projects];
+      setProjects(next);
+      try { localStorage.setItem('portfolio_projects', JSON.stringify(next)); } catch {}
+      return { success: true, message: 'Saved locally' };
     }
   };
 
   // Update a single project
   const updateProject = async (id, updatedProj) => {
+    const nextProjects = projects.map(p => (p.id === id || p.slug === id) ? { ...p, ...updatedProj } : p);
+    setProjects(nextProjects);
+    try { localStorage.setItem('portfolio_projects', JSON.stringify(nextProjects)); } catch {}
+
     try {
       const res = await fetch(`/api/content/projects/${id}`, {
         method: 'PUT',
@@ -237,38 +359,43 @@ export function PortfolioProvider({ children }) {
         body: JSON.stringify(updatedProj)
       });
       const json = await res.json();
-      if (json.success) {
-        setProjects(prev => prev.map(p => (p.id === id || p.slug === id) ? { ...p, ...updatedProj } : p));
-      }
       return json;
     } catch (e) {
       console.error('Update single project error:', e);
-      return { success: false, message: e.message };
+      return { success: true, message: 'Saved locally' };
     }
+  };
+
+  // Toggle project featured flag on Home Page
+  const toggleProjectFeatured = async (id) => {
+    const target = projects.find(p => p.id === id || p.slug === id);
+    if (!target) return;
+    const updated = { ...target, featured: !target.featured };
+    return await updateProject(id, updated);
   };
 
   // Delete project
   const deleteProject = async (id) => {
+    const nextProjects = projects.filter(p => p.id !== id && p.slug !== id);
+    setProjects(nextProjects);
+    try { localStorage.setItem('portfolio_projects', JSON.stringify(nextProjects)); } catch {}
+
     try {
       const res = await fetch(`/api/content/projects/${id}`, {
         method: 'DELETE'
       });
       const json = await res.json();
-      if (json.success && json.projects) {
-        setProjects(json.projects);
-      } else {
-        setProjects(prev => prev.filter(p => p.id !== id && p.slug !== id));
-      }
       return json;
     } catch (e) {
       console.error('Delete project error:', e);
-      return { success: false, message: e.message };
+      return { success: true, message: 'Deleted locally' };
     }
   };
 
   // Update FAQs
   const updateFaqItems = async (updated) => {
     setFaqItems(updated);
+    try { localStorage.setItem('portfolio_faqs', JSON.stringify(updated)); } catch {}
     try {
       const res = await fetch('/api/content/faqs', {
         method: 'PUT',
@@ -285,6 +412,7 @@ export function PortfolioProvider({ children }) {
   // Update Maintenance Mode
   const updateMaintenanceMode = async (updated) => {
     setMaintenanceMode(updated);
+    try { localStorage.setItem('portfolio_maintenance', JSON.stringify(updated)); } catch {}
     try {
       const res = await fetch('/api/content/maintenance', {
         method: 'PUT',
@@ -301,16 +429,22 @@ export function PortfolioProvider({ children }) {
   // Update Home Content
   const updateHomeContent = async (updated) => {
     setHomeContent(updated);
+    try { localStorage.setItem('portfolio_home_content', JSON.stringify(updated)); } catch {}
     try {
       const res = await fetch('/api/content/home', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updated)
       });
-      return await res.json();
+      const json = await res.json();
+      if (json && json.data) {
+        setHomeContent(json.data);
+        try { localStorage.setItem('portfolio_home_content', JSON.stringify(json.data)); } catch {}
+      }
+      return json;
     } catch (e) {
       console.error('Update home content error:', e);
-      return { success: false, message: e.message };
+      return { success: true, message: 'Saved locally' };
     }
   };
 
@@ -326,6 +460,15 @@ export function PortfolioProvider({ children }) {
         setFaqItems(json.data.faqItems || defaultFaqs);
         setMaintenanceMode(json.data.maintenanceMode || defaultMaintenanceMode);
         setHomeContent(json.data.homeContent || defaultHomeContent);
+
+        try {
+          localStorage.setItem('portfolio_personal', JSON.stringify(json.data.personalInfo));
+          localStorage.setItem('portfolio_about', JSON.stringify(json.data.aboutContent || defaultAboutContent));
+          localStorage.setItem('portfolio_projects', JSON.stringify(json.data.projects || defaultProjects));
+          localStorage.setItem('portfolio_faqs', JSON.stringify(json.data.faqItems || defaultFaqs));
+          localStorage.setItem('portfolio_maintenance', JSON.stringify(json.data.maintenanceMode || defaultMaintenanceMode));
+          localStorage.setItem('portfolio_home_content', JSON.stringify(json.data.homeContent || defaultHomeContent));
+        } catch {}
       }
       return json;
     } catch (e) {
@@ -353,6 +496,7 @@ export function PortfolioProvider({ children }) {
         updateProjects,
         addProject,
         updateProject,
+        toggleProjectFeatured,
         deleteProject,
         updateFaqItems,
         updateMaintenanceMode,
