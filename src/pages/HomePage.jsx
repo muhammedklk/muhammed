@@ -243,7 +243,19 @@ export default function HomePage() {
                 <div className="col-lg-6 col-md-6 col-12 hero-pointer-enable">
                   <div className="hero-left-col">
                     <h1 className="hero-main-title">
-                      <span className="title-line">{hero.headline || 'Design That Feels. Experiences That Resonate.'}</span>
+                      {(() => {
+                        const raw = hero.headline || 'Design That Feels.\nExperiences That Resonate.';
+                        let lines = raw.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+                        if (lines.length <= 1 && raw.includes('. ')) {
+                          const parts = raw.split('. ');
+                          if (parts.length === 2) {
+                            lines = [parts[0] + '.', parts[1]];
+                          }
+                        }
+                        return lines.map((line, idx) => (
+                          <span key={idx} className="title-line">{line}</span>
+                        ));
+                      })()}
                     </h1>
                     <p className="hero-description">
                       {hero.subtext || 'I blend human-centered design, modern front-end engineering, and aesthetic precision to create digital experiences that people connect with — seamlessly across every screen.'}

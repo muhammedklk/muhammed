@@ -89,17 +89,18 @@
 
 .hero-main-title {
   font-family: var(--font-display, "Mona Sans", sans-serif);
-  font-size: clamp(2rem, 3.6vw, 3.5rem);
+  font-size: clamp(2rem, 3.4vw, 3.4rem);
   font-weight: 500;
   color: #141414;
-  line-height: 1.15;
+  line-height: 1.18;
   letter-spacing: -0.035em;
   margin-bottom: 1.25rem;
+  max-width: 540px;
 }
 
 .hero-main-title .title-line {
   display: block;
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .hero-description {

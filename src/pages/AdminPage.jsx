@@ -608,14 +608,17 @@ export default function AdminPage() {
                 </div>
 
                 <div className="admin-form-group-light full-col">
-                  <label>Hero Main Headline</label>
-                  <input
-                    type="text"
+                  <label>Hero Main Headline (2 Lines)</label>
+                  <textarea
+                    rows={2}
                     value={homeForm?.hero?.headline || ''}
                     onChange={(e) => setHomeForm(prev => ({ ...prev, hero: { ...prev.hero, headline: e.target.value } }))}
-                    className="admin-input-light"
-                    placeholder="Design That Feels. Experiences That Resonate."
+                    className="admin-textarea-light"
+                    placeholder={"Design That Feels.\nExperiences That Resonate."}
                   />
+                  <span style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '4px', display: 'block' }}>
+                    Tip: Enter key (newline) press cheythal 2 line aayi break aakum. (Allenkil dot '.' vech automatic aayi 2 line aavum)
+                  </span>
                 </div>
 
                 <div className="admin-form-group-light full-col">
