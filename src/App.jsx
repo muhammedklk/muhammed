@@ -1,174 +1,102 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { ThemeProvider } from './context/ThemeContext';
-import { AuthProvider, useAuth } from './admin/context/AuthContext';
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import CustomCursor from './components/CustomCursor';
+import AIChatbot from './components/AIChatbot';
+import ScrollToTop from './components/ScrollToTop';
+import SmoothScroll from './components/SmoothScroll';
+
 import { PortfolioProvider, usePortfolio } from './context/PortfolioContext';
-import SEO from './components/common/SEO';
-import Layout from './components/layout/Layout';
-import Home from './pages/Home';
-import About from './pages/About';
-import Works from './pages/Works';
-import Contact from './pages/Contact';
-import CaseStudy from './pages/CaseStudy';
-import Maintenance from './pages/Maintenance';
 
-// Admin Panel Components
-import AdminLayout from './admin/components/AdminLayout';
-import Login from './admin/pages/Login';
-import Dashboard from './admin/pages/Dashboard';
-import HeroAboutManager from './admin/pages/HeroAboutManager';
-import ProjectsManager from './admin/pages/ProjectsManager';
-import CaseStudyEditor from './admin/pages/CaseStudyEditor';
-import ExperienceEduManager from './admin/pages/ExperienceEduManager';
-import ServicesSkillsManager from './admin/pages/ServicesSkillsManager';
-import TestimonialsFaqManager from './admin/pages/TestimonialsFaqManager';
-import ContactInbox from './admin/pages/ContactInbox';
-import HomeSelectedWorksManager from './admin/pages/HomeSelectedWorksManager';
-import CaseStudyManager from './admin/pages/CaseStudyManager';
-import MediaLibrary from './admin/pages/MediaLibrary';
-import SettingsManager from './admin/pages/SettingsManager';
-import SeoManager from './admin/pages/SeoManager';
+// Lazy-load pages for code splitting
+const HomePage = lazy(() => import('./pages/HomePage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const WorksPage = lazy(() => import('./pages/WorksPage'));
+const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const AdminPage = lazy(() => import('./pages/AdminPage'));
+const MaintenancePage = lazy(() => import('./pages/MaintenancePage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
-// Protected Route Wrapper for Admin Panel
-const ProtectedAdminRoute = ({ children }) => {
-  const { isAuthenticated, loading } = useAuth();
-
-  if (loading) {
-    return (
-      <div style={{ minHeight: '100vh', background: '#090d16', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d2ea26', fontWeight: '800' }}>
-        Authenticating CMS Session...
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to="/admin/login" replace />;
-  }
-
-  return children;
-};
-
-// Public Route Guard for Maintenance Mode
-const PublicRouteGuard = ({ children, pageKey }) => {
-  const { settings, loading } = usePortfolio();
-
-  // Admin preview: ONLY bypass when ?preview=admin is in the URL right now
-  const isAdminPreview = typeof window !== 'undefined' &&
-    window.location.search.includes('preview=admin');
-
-  // Admin explicit preview sees live site pages (bypasses maintenance)
-  if (isAdminPreview) {
-    return children;
-  }
-
-  // Read localStorage cached settings (available immediately on first render)
-  const localSettingsStr = typeof window !== 'undefined' ? localStorage.getItem('portfolio_maintenance_settings') : null;
-  let localSettings = null;
-  try {
-    localSettings = localSettingsStr ? JSON.parse(localSettingsStr) : null;
-  } catch (e) {
-    localSettings = null;
-  }
-
-  // API settings (from PortfolioContext) take full authority once loaded.
-  // While loading, fall back to localStorage cache so maintenance shows immediately.
-  // After loading, API value is the single source of truth for all devices.
-  const activeSettings = loading
-    ? (localSettings || {})
-    : {
-        ...localSettings,
-        ...settings,
-        maintenancePages: {
-          ...(localSettings?.maintenancePages || {}),
-          ...(settings?.maintenancePages || {})
-        }
-      };
-
-  const isGlobalMaintenance = Boolean(activeSettings?.maintenanceMode);
-  const isPageMaintenance = Boolean(
-    pageKey && (
-      activeSettings?.maintenancePages?.[pageKey] ||
-      activeSettings?.maintenancePages?.[pageKey.toLowerCase()] ||
-      (pageKey === 'caseStudy' && (activeSettings?.maintenancePages?.caseStudy || activeSettings?.maintenancePages?.casestudy))
-    )
-  );
-
-  if (isGlobalMaintenance || isPageMaintenance) {
-    const pageNames = {
-      home: 'Home Page',
-      about: 'About Page',
-      projects: 'Works Gallery Page',
-      caseStudy: 'Case Study Page',
-      contact: 'Contact Page'
-    };
-    return (
-      <Maintenance
-        isGlobal={isGlobalMaintenance}
-        pageName={pageNames[pageKey] || 'This Page'}
-        message={activeSettings?.maintenanceMessage}
-      />
-    );
-  }
-
-  return children;
-};
-
-function App() {
+function PageLoader() {
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <PortfolioProvider>
-          <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-            <Routes>
-              {/* Public Portfolio Routes guarded by Maintenance Mode */}
-              <Route path="/" element={<PublicRouteGuard pageKey="home"><Layout><SEO page="home" /><Home /></Layout></PublicRouteGuard>} />
-              <Route path="/about" element={<PublicRouteGuard pageKey="about"><Layout><SEO page="about" /><About /></Layout></PublicRouteGuard>} />
-              <Route path="/works" element={<PublicRouteGuard pageKey="projects"><Layout><SEO page="works" /><Works /></Layout></PublicRouteGuard>} />
-              <Route path="/contact" element={<PublicRouteGuard pageKey="contact"><Layout><SEO page="contact" /><Contact /></Layout></PublicRouteGuard>} />
-              <Route path="/case-study" element={<PublicRouteGuard pageKey="caseStudy"><Layout><SEO page="casestudy" /><CaseStudy /></Layout></PublicRouteGuard>} />
-              <Route path="/case-study/:id" element={<PublicRouteGuard pageKey="caseStudy"><Layout><SEO page="casestudy" /><CaseStudy /></Layout></PublicRouteGuard>} />
-
-              {/* Admin Panel Public Routes */}
-              <Route path="/admin/login" element={<Login />} />
-
-              {/* Admin Panel Protected Routes */}
-              <Route
-                path="/admin"
-                element={
-                  <ProtectedAdminRoute>
-                    <AdminLayout />
-                  </ProtectedAdminRoute>
-                }
-              >
-                <Route index element={<Dashboard />} />
-                <Route path="home" element={<HeroAboutManager />} />
-                <Route path="home-selected-works" element={<HomeSelectedWorksManager />} />
-                <Route path="about" element={<HeroAboutManager />} />
-                <Route path="hero-about" element={<HeroAboutManager />} />
-                <Route path="projects" element={<ProjectsManager />} />
-                <Route path="case-studies" element={<CaseStudyManager />} />
-                <Route path="projects/:id/casestudy" element={<CaseStudyEditor />} />
-                <Route path="experience" element={<ExperienceEduManager />} />
-                <Route path="services" element={<ServicesSkillsManager />} />
-                <Route path="services-skills" element={<ServicesSkillsManager />} />
-                <Route path="testimonials-faq" element={<TestimonialsFaqManager />} />
-                <Route path="contact" element={<ContactInbox />} />
-                <Route path="messages" element={<ContactInbox />} />
-                <Route path="media" element={<MediaLibrary />} />
-                <Route path="seo" element={<SeoManager />} />
-                <Route path="settings" element={<SettingsManager />} />
-                <Route path="*" element={<Dashboard />} />
-              </Route>
-
-              {/* Catch-All & Fallback Routes */}
-              <Route path="/index.html" element={<Navigate to="/" replace />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </Router>
-        </PortfolioProvider>
-      </AuthProvider>
-    </ThemeProvider>
+    <div style={{
+      minHeight: '60vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '1rem'
+      }}>
+        <div style={{
+          width: '44px',
+          height: '44px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle at 35% 35%, #ffffff 0%, #d4baff 45%, #7C5CE1 90%)',
+          boxShadow: '0 8px 20px rgba(124, 92, 225, 0.3)',
+          animation: 'spherePulse 1.8s ease-in-out infinite'
+        }} />
+        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 500 }}>Loading…</span>
+      </div>
+    </div>
   );
 }
 
-export default App;
+function MainLayout() {
+  const location = useLocation();
+  const { maintenanceMode } = usePortfolio();
+  const isAdmin = location.pathname.startsWith('/admin');
+
+  // If maintenance mode is enabled and visitor is not accessing /admin, show MaintenancePage
+  if (maintenanceMode?.enabled && !isAdmin) {
+    return (
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="*" element={<MaintenancePage />} />
+        </Routes>
+      </Suspense>
+    );
+  }
+
+  return (
+    <>
+      <CustomCursor />
+      <AIChatbot />
+      <SmoothScroll />
+      <ScrollToTop />
+      {!isAdmin && <Navbar />}
+
+      <main id="main-content">
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/works" element={<WorksPage />} />
+            <Route path="/works/:slug" element={<CaseStudyPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
+      </main>
+
+      {!isAdmin && <Footer />}
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <PortfolioProvider>
+      <BrowserRouter>
+        <MainLayout />
+      </BrowserRouter>
+    </PortfolioProvider>
+  );
+}

@@ -1,0 +1,72 @@
+:root {
+  /* Color Palette — Inspired by MDX Reference & Light Minimalism */
+  --bg-primary: #ededf0;
+  --bg-canvas: #f6f6f8;
+  --bg-surface: #ffffff;
+  --bg-surface-alt: #f1f2f5;
+  --bg-glass: rgba(255, 255, 255, 0.68);
+  --bg-glass-card: rgba(255, 255, 255, 0.75);
+  --bg-glass-subtle: rgba(255, 255, 255, 0.45);
+  --bg-dark-pill: linear-gradient(135deg, #0e2447 0%, #4087fb 35%, #3b82f6 100%);
+  --bg-dark-pill-hover: linear-gradient(135deg, #133261 0%, #5294fc 35%, #60a5fa 100%);
+
+  /* Accent Glow & Highlights — Soft Violet-Purple & Lavender Theme */
+  --peach-500: #9f75ff;
+  --peach-400: #b99aff;
+  --peach-300: #cdb5ff;
+  --peach-200: #e6d9ff;
+  --peach-100: #f5f0ff;
+  --peach-glow: rgba(185, 154, 255, 0.38);
+  --peach-glow-soft: rgba(185, 154, 255, 0.16);
+
+  --accent-purple-500: #9f75ff;
+  --accent-purple-400: #b99aff;
+  --accent-purple-300: #cdb5ff;
+  --accent-purple-200: #e6d9ff;
+  --accent-purple-100: #f5f0ff;
+
+  /* Typography Colors */
+  --text-primary: #111216;
+  --text-secondary: #4a4d56;
+  --text-muted: #797c88;
+  --text-light: #a4a7b2;
+  --text-inverse: #ffffff;
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(0, 0, 0, 0.07);
+  --border-glass: rgba(255, 255, 255, 0.85);
+  --border-dark: #121316;
+  --border-light: rgba(0, 0, 0, 0.05);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 20px 45px -12px rgba(0, 0, 0, 0.09);
+  --shadow-sphere: 0 35px 60px -15px rgba(185, 154, 255, 0.28);
+  --shadow-glass: 0 15px 35px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  /* Blur Effects */
+  --blur-glass: blur(16px);
+  --blur-subtle: blur(8px);
+  --blur-deep: blur(28px);
+
+  /* Typography Families */
+  --font-main: "Mona Sans", "Mona Sans Placeholder", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: "Mona Sans", "Mona Sans Placeholder", sans-serif;
+  --font-accent: "Mona Sans", "Mona Sans Placeholder", sans-serif;
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --radius-pill: 9999px;
+
+  /* Transitions */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-fast: 0.2s var(--ease-smooth);
+  --transition-normal: 0.35s var(--ease-smooth);
+  --transition-slow: 0.6s var(--ease-smooth);
+}

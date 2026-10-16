@@ -1,0 +1,407 @@
+/* ============================================================
+   Works & Case Studies Directory — Bespoke Redesign
+   - Editorial hero typography
+   - Interactive search toolbar & view switcher (Grid / List)
+   - Balanced 2-column showcase grid for all 8 projects
+   - Curated category filter pills with counter badges
+   - Collaboration banner CTA
+   ============================================================ */
+
+.works-page {
+  min-height: 100vh;
+  background: var(--bg-canvas);
+}
+
+/* ── Page Header Section ── */
+.works-page-header {
+  padding: 8.5rem 0 2.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: var(--bg-canvas);
+  position: relative;
+}
+
+.works-header-top {
+  margin-bottom: 0;
+}
+
+/* ── Icon Badge (like Contact page chat badge) ── */
+.works-icon-badge {
+  margin-bottom: 1.25rem;
+  display: inline-block;
+  animation: worksFloat 3s ease-in-out infinite;
+}
+
+@keyframes worksFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* ── Title + Toggle Row ── */
+.works-title-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.1rem;
+}
+
+.works-page-main-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 5.8vw, 4.8rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-bottom: 0;
+  color: var(--text-primary);
+}
+
+.works-page-lead-desc {
+  font-size: 1.08rem;
+  color: var(--text-secondary);
+  line-height: 1.68;
+  max-width: 660px;
+  margin: 0;
+}
+
+/* ── Search & Filter Toolbar ── */
+.works-filter-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-bottom: 1.4rem;
+  flex-wrap: wrap;
+}
+
+.works-search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 480px;
+  min-width: 260px;
+}
+
+.works-search-icon {
+  position: absolute;
+  left: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888898;
+  pointer-events: none;
+}
+
+.works-search-input {
+  width: 100%;
+  padding: 0.72rem 2.8rem 0.72rem 2.8rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  font-family: var(--font-main);
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.works-search-input:focus {
+  outline: none;
+  border-color: #7C5CE1;
+  box-shadow: 0 0 0 3px rgba(124, 92, 225, 0.12);
+}
+
+.works-search-clear {
+  position: absolute;
+  right: 0.95rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.06);
+  color: #555562;
+  font-size: 0.72rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.works-search-clear:hover {
+  background: rgba(0, 0, 0, 0.12);
+  color: #111118;
+}
+
+/* ── View Toggle (Grid / List) ── */
+.works-view-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px;
+  background: #f1f1f5;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.view-toggle-btn {
+  padding: 0.42rem 1.1rem;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  font-family: var(--font-main);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #5a5a68;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.view-toggle-btn.active {
+  background: #ffffff;
+  color: #0d0d12;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Category Pills Row ── */
+.works-categories-pills-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.category-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.15rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-family: var(--font-main);
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #4a4a58;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.category-pill-btn:hover {
+  background: #f7f6fb;
+  color: #111116;
+  border-color: rgba(124, 92, 225, 0.3);
+  transform: translateY(-1px);
+}
+
+.category-pill-btn.active {
+  background: linear-gradient(135deg, #0e2447 0%, #4087fb 35%, #3b82f6 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(64, 135, 251, 0.35);
+}
+
+.pill-count-num {
+  font-size: 0.72rem;
+  padding: 0.12rem 0.48rem;
+  border-radius: 9999px;
+  background: #f1f1f5;
+  color: #666678;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.category-pill-btn.active .pill-count-num {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* ── Results Bar ── */
+.works-results-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.2rem;
+  padding: 0.75rem 1.3rem;
+  background: rgba(124, 92, 225, 0.04);
+  border-radius: 12px;
+  border: 1px solid rgba(124, 92, 225, 0.14);
+}
+
+.results-text {
+  font-size: 0.86rem;
+  color: #4a4a58;
+}
+
+.reset-filter-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #7C5CE1;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.reset-filter-link:hover {
+  opacity: 0.8;
+}
+
+/* ── Main Grid Section ── */
+.works-grid-section {
+  padding: 3.5rem 0 6.5rem;
+}
+
+.works-gallery-grid {
+  margin-bottom: 3rem;
+}
+
+.works-list-mode-wrap {
+  margin-bottom: 3rem;
+}
+
+/* ── Empty State ── */
+.works-empty-state {
+  text-align: center;
+  padding: 5.5rem 2rem;
+  background: #ffffff;
+  border-radius: 28px;
+  border: 1.5px dashed rgba(0, 0, 0, 0.1);
+  margin: 1.5rem 0 3rem;
+}
+
+.empty-state-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(124, 92, 225, 0.08);
+  color: #7C5CE1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.4rem;
+}
+
+.empty-state-title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.6rem;
+}
+
+.empty-state-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto 1.8rem;
+}
+
+/* ── Bottom Collaboration CTA ── */
+.works-bottom-cta {
+  margin-top: 4.5rem;
+  padding-top: 3.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.works-cta-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 28px;
+  padding: 3.5rem 3.2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.04);
+}
+
+.works-cta-card::after {
+  content: '';
+  position: absolute;
+  top: -60%;
+  right: -15%;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 92, 225, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-eyebrow {
+  display: inline-block;
+  font-family: var(--font-accent, sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7C5CE1;
+  margin-bottom: 0.85rem;
+}
+
+.works-cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.03em;
+  line-height: 1.22;
+}
+
+.works-cta-subtext {
+  font-size: 0.96rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 540px;
+  margin: 0;
+}
+
+.cta-actions-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.cta-direct-email {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.cta-direct-email:hover {
+  color: #7C5CE1;
+}
+
+/* ── Responsive Media Queries ── */
+@media (max-width: 992px) {
+  .works-page-header {
+    padding: 7rem 0 2.5rem;
+  }
+  .works-cta-card {
+    padding: 2.5rem 2rem;
+  }
+  .cta-actions-group {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 576px) {
+  .works-page-main-title {
+    font-size: 2.1rem;
+  }
+  .works-filter-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .works-search-wrap {
+    max-width: 100%;
+  }
+}

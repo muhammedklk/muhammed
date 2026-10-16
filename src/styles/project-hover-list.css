@@ -1,0 +1,348 @@
+/* ============================================================
+   Interactive Project Hover List Styles
+   - Awwwards-style typography list
+   - Cursor-following floating mockup image with tilt physics
+   - Focus dimming for non-hovered items
+   - Touch/mobile responsive fallback
+   ============================================================ */
+
+.project-hover-list-container {
+  position: relative;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+/* ── Floating Preview Portal ── */
+.floating-preview-portal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 460px;
+  aspect-ratio: 16 / 10.5;
+  pointer-events: none;
+  z-index: 30;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.8);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow:
+    0 35px 80px -15px rgba(0, 0, 0, 0.28),
+    0 10px 30px -5px rgba(124, 92, 225, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.95);
+  background: #ffffff;
+}
+
+.floating-preview-portal.active {
+  opacity: 1;
+}
+
+/* Stacked preview cards inside the portal */
+.floating-preview-card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 0.32s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floating-preview-card.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.preview-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #f1f2f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Floating pill on preview */
+.preview-floating-pill {
+  position: absolute;
+  bottom: 1.1rem;
+  left: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  background: rgba(13, 13, 18, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #ffffff;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.preview-pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7C5CE1;
+}
+
+.preview-pill-arrow {
+  color: #7C5CE1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Project List Items ── */
+.project-list-items {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Dim non-hovered rows when one is active */
+.project-list-items.has-active-item .project-list-row:not(.row-active) {
+  opacity: 0.32;
+  filter: blur(0.3px);
+}
+
+/* ── Individual List Row ── */
+.project-list-row {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 2.2rem 1.2rem;
+  transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.project-list-row:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.project-list-row.row-active {
+  background: rgba(124, 92, 225, 0.025);
+  border-color: rgba(124, 92, 225, 0.3);
+}
+
+/* Row Inner Flexbox */
+.row-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Row Left (Index + Title) */
+.row-left {
+  display: flex;
+  align-items: baseline;
+  gap: 1.8rem;
+  flex: 1;
+}
+
+.row-index {
+  font-family: var(--font-accent, monospace);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #9b9ba8;
+  letter-spacing: 0.06em;
+  min-width: 28px;
+  transition: color 0.25s ease;
+}
+
+.project-list-row.row-active .row-index {
+  color: #7C5CE1;
+}
+
+.row-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.row-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.6rem);
+  font-weight: 500;
+  color: #111116;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease;
+}
+
+.project-list-row.row-active .row-title {
+  color: #7C5CE1;
+  transform: translateX(10px);
+}
+
+.row-category-mobile {
+  display: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #7C5CE1;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Row Right (Tags, Category, Year, Arrow) */
+.row-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-shrink: 0;
+}
+
+.row-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.row-tag-pill {
+  font-size: 0.74rem;
+  font-weight: 500;
+  padding: 0.28rem 0.85rem;
+  border-radius: 9999px;
+  background: #f4f4f7;
+  color: #4e4e60;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.project-list-row.row-active .row-tag-pill {
+  background: #eceaf6;
+  color: #1d1b28;
+  border-color: rgba(124, 92, 225, 0.18);
+}
+
+.row-category-desktop {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #6a6a7c;
+  white-space: nowrap;
+}
+
+.row-year {
+  font-family: var(--font-accent, monospace);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #9e9eb0;
+  white-space: nowrap;
+}
+
+/* Action Arrow Circle */
+.row-arrow-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f4f4f8;
+  color: #1a1a24;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.project-list-row.row-active .row-arrow-circle {
+  background: #0d0d12;
+  color: #ffffff;
+  border-color: #0d0d12;
+  transform: translate(3px, -3px) rotate(45deg);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Mobile Inline Preview (hidden on desktop) ── */
+.mobile-preview-stage {
+  display: none;
+  width: 100%;
+  aspect-ratio: 16 / 9.5;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 1.25rem;
+  background: #f2f2f6;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.mobile-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Responsive Breakpoints ── */
+@media (max-width: 1024px) {
+  .floating-preview-portal {
+    width: 380px;
+  }
+  .row-tags {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  /* Disable floating portal on touch devices */
+  .floating-preview-portal {
+    display: none;
+  }
+
+  .project-list-items.has-active-item .project-list-row:not(.row-active) {
+    opacity: 1;
+    filter: none;
+  }
+
+  .project-list-row {
+    padding: 1.8rem 0.5rem;
+  }
+
+  .project-list-row.row-active .row-title {
+    transform: none;
+  }
+
+  .row-category-desktop,
+  .row-year {
+    display: none;
+  }
+
+  .row-category-mobile {
+    display: block;
+  }
+
+  .mobile-preview-stage {
+    display: block;
+  }
+
+  .row-arrow-circle {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+@media (max-width: 480px) {
+  .row-left {
+    gap: 1rem;
+  }
+  .row-title {
+    font-size: 1.45rem;
+  }
+}

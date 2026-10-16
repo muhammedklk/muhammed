@@ -1,0 +1,377 @@
+@import 'bootstrap/dist/css/bootstrap-grid.min.css';
+@import './styles/tokens.css';
+@import './styles/cursor.css';
+
+/* Container Width: Cap Bootstrap grid container at 1200px (instead of 1320px) */
+@media (min-width: 1200px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl {
+    max-width: 1200px !important;
+  }
+}
+
+/* Global Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Mona Sans", "Mona Sans Placeholder", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: "Mona Sans", "Mona Sans Placeholder", sans-serif !important;
+}
+
+body {
+  font-family: "Mona Sans", "Mona Sans Placeholder", sans-serif !important;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+  position: relative;
+  font-weight: 400;
+}
+
+/* Strict font-weight clamp: max 500 across all elements */
+h1, h2, h3, h4, h5, h6,
+b, strong, th, button,
+.nav-brand-group, .nav-logo-text,
+.hero-headline, .hero-title,
+.footer-cta-title, .ref-footer-heading, .ref-block-title, .ref-giant-wordmark,
+.btn-talk-dark, .btn-glass, .btn-pill, .ref-contact-btn,
+.case-title, .project-card-title, .case-header-title,
+.section-title, .section-tag, .stat-number, .stat-label,
+[class*="title"], [class*="heading"], [class*="bold"], [class*="strong"] {
+  font-weight: 500 !important;
+}
+
+/* ─── Unified Editorial Section Tag Line (Matches ( ABOUT ) design) ─── */
+.section-tag-editorial,
+.about-editorial-eyebrow,
+.works-eyebrow-tag,
+.faq-ref-eyebrow,
+.section-eyebrow,
+.about-craft-pill,
+.about-skills-eyebrow,
+.cs-narrative-eyebrow,
+.cs-responsive-eyebrow {
+  display: inline-block !important;
+  font-family: var(--font-accent, "Mona Sans", sans-serif) !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: var(--text-muted, #8e909a) !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin-bottom: 1.25rem !important;
+}
+
+.section-eyebrow::before,
+.section-tag-editorial::before,
+.about-skills-eyebrow::before,
+.about-craft-pill::before,
+.cs-narrative-eyebrow::before,
+.cs-responsive-eyebrow::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* ─── Unified Section Headings Style Across All Sections ─── */
+.section-main-headline,
+.services-main-headline,
+.works-headline,
+.faq-ref-headline,
+.about-skills-main-title,
+.cs-responsive-title,
+.section-title {
+  font-family: var(--font-display, "Mona Sans", sans-serif) !important;
+  font-size: clamp(2.1rem, 3.8vw, 3.25rem) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.18 !important;
+  color: var(--text-primary, #111216) !important;
+  font-style: normal !important;
+  margin-bottom: 0.95rem !important;
+}
+
+.services-headline-accent,
+.works-headline-accent,
+.headline-accent {
+  color: inherit !important;
+  font-style: normal !important;
+  font-family: inherit !important;
+  font-weight: 500 !important;
+}
+
+/* ─── Unified Subtitle Description Across All Sections ─── */
+.section-main-sub,
+.services-main-desc,
+.works-sub-description,
+.faq-ref-sub,
+.section-description {
+  font-size: 1.05rem !important;
+  color: var(--text-secondary, #4a4d56) !important;
+  line-height: 1.65 !important;
+  font-weight: 400 !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-canvas);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1aa;
+}
+
+::selection {
+  background: var(--peach-200);
+  color: var(--text-primary);
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  transition: var(--transition-fast);
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Glassmorphism Panels */
+.glass-panel {
+  background: var(--bg-glass);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-glass);
+  border-radius: var(--radius-lg);
+}
+
+.glass-card {
+  background: var(--bg-glass-card);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-md);
+  transition: var(--transition-normal);
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Interactive Pill Badges & Buttons */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.38rem 0.95rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: var(--blur-subtle);
+  -webkit-backdrop-filter: var(--blur-subtle);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+}
+
+.pill-badge:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+  background: #ffffff;
+}
+
+/* Reference-Style Dark CTA Pill Button */
+.btn-talk-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  background: var(--bg-dark-pill);
+  color: var(--text-inverse);
+  padding: 0.75rem 1.7rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: var(--transition-fast);
+  cursor: pointer;
+  border: none;
+  border: 4px solid rgba(250, 250, 250, 0.878);
+}
+
+.btn-talk-dark:hover {
+  background: var(--bg-dark-pill-hover);
+  color: var(--text-inverse);
+}
+
+.btn-talk-dark svg {
+  transition: transform 0.25s ease;
+}
+
+.btn-talk-dark:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* Light Glass Button */
+.btn-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: var(--blur-subtle);
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  color: var(--text-primary);
+  padding: 0.75rem 1.6rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: var(--transition-fast);
+}
+
+.btn-glass:hover {
+  background: #ffffff;
+  border-color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Glow Pill Accent */
+.pill-glow {
+  background: var(--peach-100);
+  color: var(--peach-500);
+  border: 1px solid rgba(124, 92, 225, 0.3);
+  box-shadow: 0 0 15px var(--peach-glow-soft);
+}
+
+/* Section Header Shared */
+.section-tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--peach-500);
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.section-description {
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  color: var(--text-secondary);
+  max-width: 650px;
+  margin-bottom: 2.5rem;
+}
+
+/* Background Atmosphere Glows */
+.bg-ambient-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.45;
+}
+
+.ambient-orb-peach {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(124, 92, 225, 0.28) 0%, rgba(205, 181, 255, 0.12) 50%, transparent 70%);
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ambient-orb-pearl {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(240, 240, 245, 0.4) 60%, transparent 80%);
+  top: -10%;
+  left: 30%;
+}
+
+/* Reduced Motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

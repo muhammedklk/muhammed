@@ -1,182 +1,155 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { usePortfolio } from '../context/PortfolioContext';
-import CtaSection from '../components/common/CtaSection';
+import React, { useState } from 'react';
+import { projectsData, projectCategories } from '../data/portfolioData';
+import ProjectCard from '../components/ProjectCard';
+import { Search, Filter, Layers } from 'lucide-react';
 
-const defaultWorks = [
-  {
-    id: 'voyagera',
-    slug: 'voyagera',
-    title: 'Voyagera',
-    subtitle: 'World Expeditions, UI/UX Design & Development',
-    heroImg: '/assets/portfolio/gyogrea.png',
-    liveUrl: 'https://voyageratravel.vercel.app/',
-  },
-  {
-    id: 'styleora-fashion-e-commerce',
-    slug: 'styleora-fashion-e-commerce',
-    title: 'Styleora',
-    subtitle: 'E-Commerce, UI/UX Design & Development',
-    heroImg: '/assets/portfolio/1-styleora.jpg',
-    liveUrl: 'https://styleorashop.vercel.app/',
-  },
-  {
-    id: 'elve-creative-agency-portfolio',
-    slug: 'elve-creative-agency-portfolio',
-    title: 'Elve',
-    subtitle: 'Rental, UI/UX Design & Development',
-    heroImg: '/assets/portfolio/2-elve.jpg',
-    liveUrl: 'https://elve.vercel.app/',
-  },
-  {
-    id: 'greentrack-sustainability-dashboard',
-    slug: 'greentrack-sustainability-dashboard',
-    title: 'Green Track',
-    subtitle: 'Sustainability, UI/UX Design & Development',
-    heroImg: '/assets/portfolio/3-greentrack.jpg',
-    liveUrl: 'https://greentrack-ten.vercel.app/',
-  },
-  {
-    id: 'travelgallery-curated-destinations',
-    slug: 'travelgallery-curated-destinations',
-    title: 'Travel Gallery',
-    subtitle: 'Travel Gallery, UI/UX Design & Development',
-    heroImg: '/assets/portfolio/4-travellgallery.jpg',
-    liveUrl: '',
-  },
-  {
-    id: 'icone-luxury-hotel-booking',
-    slug: 'icone-luxury-hotel-booking',
-    title: 'Icone Hotel Booking',
-    subtitle: 'Hotel Booking, UI/UX, Apps Design',
-    heroImg: '/assets/portfolio/5-icone-hotel-booking.jpg',
-    liveUrl: '',
-  },
-  {
-    id: 'modernbrand-identity-system',
-    slug: 'modernbrand-identity-system',
-    title: 'Modern Brand',
-    subtitle: 'Brand Identity & Apps Design',
-    heroImg: '/assets/portfolio/7-modernbrand.jpg',
-    liveUrl: '',
-  },
-  {
-    id: 'chrona-ai-time-management-app',
-    slug: 'chrona-ai-time-management-app',
-    title: 'Chrona',
-    subtitle: 'Interface, 2 Commerce App',
-    heroImg: '/assets/portfolio/6-chrona.jpg',
-    liveUrl: '',
-  }
-];
+export default function Works() {
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
-const Works = () => {
-  const { projects } = usePortfolio();
-
-  // Display all dynamic projects from CMS/MongoDB sorted by priority order rank, merged with defaults
-  const displayWorks = (() => {
-    if (Array.isArray(projects) && projects.length > 0) {
-      const merged = [...projects].sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0));
-      defaultWorks.forEach((defaultItem) => {
-        const exists = merged.some(
-          (p) =>
-            (p.slug && String(p.slug).toLowerCase() === String(defaultItem.slug).toLowerCase()) ||
-            (p.id && String(p.id).toLowerCase() === String(defaultItem.id).toLowerCase()) ||
-            (p.title && String(p.title).toLowerCase() === String(defaultItem.title).toLowerCase())
-        );
-        if (!exists && merged.length < 8) {
-          merged.push(defaultItem);
-        }
-      });
-      return merged;
-    }
-    return defaultWorks;
-  })();
+  const filteredProjects = projectsData.filter((project) => {
+    const matchesCategory =
+      activeCategory === 'all' || project.category === activeCategory;
+    const matchesSearch =
+      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesCategory && matchesSearch;
+  });
 
   return (
-    <>
-      {/* Inner Page Hero Section */}
-      <section className="page-inner-hero minimal-works-hero text-center grid-lines-bg">
-        <div className="container">
-          <div className="row justify-content-center text-center">
-            <div className="col-lg-9 col-md-11 col-sm-12 text-center d-flex flex-column align-items-center mx-auto">
-              <span className="minimal-badge mb-3">FEATURED PROJECTS</span>
-              <h1 className="minimal-hero-title text-center mb-3">
-                Crafting <span className="text-highlight">Digital Experiences</span><br className="d-none d-md-block" /> That Drive Impact.
-              </h1>
-              <p className="minimal-hero-subtitle text-center mx-auto mb-5">
-                Explore a collection of UI/UX design, custom web development, and digital product case studies built for modern brands.
-              </p>
+    <div className="works-page-container section-padding-hero">
+      <div className="container">
+        {/* Header */}
+        <div className="mb-5">
+          <div className="badge-pill mb-3">
+            <Layers size={14} className="text-accent" />
+            <span>Complete Work Directory</span>
+          </div>
+          <h1 className="heading-display font-serif mb-3">
+            Selected <span className="italic font-normal text-accent">Case Studies</span> & Projects.
+          </h1>
+          <p className="subheading-lead">
+            Explore 8 in-depth product design and front-end engineering case studies spanning drone analytics, aviation guidance, spatial mobile apps, and design systems.
+          </p>
+        </div>
+
+        {/* Filter Bar & Search */}
+        <div className="filter-search-wrapper mb-5 p-3 card-portfolio">
+          <div className="row align-items-center g-3">
+            <div className="col-lg-8">
+              <div className="category-filter-pills">
+                {projectCategories.map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveCategory(cat.id)}
+                    className={`filter-pill-btn ${activeCategory === cat.id ? 'active' : ''}`}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="col-lg-4">
+              <div className="search-input-box">
+                <Search size={16} className="search-icon" />
+                <input
+                  type="text"
+                  placeholder="Search by keyword, tag, or tech..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="search-field"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Works Grid Section */}
-      <section className="works-gallery-section section-padding-bottom">
-        <div className="container">
-          {/* Works Grid — All 8 Projects */}
-          <div className="row g-4">
-            {displayWorks.map((item) => {
-              const projectKey = item.slug || item._id || item.id;
-              const projectImg = item.heroImg || item.image || item.imgSrc || '/assets/portfolio/gyogrea.png';
-              const projectCat = item.category || item.subtitle || 'UI/UX Design & Development';
-
-              const hasCaseStudyBtn = item.showCaseStudyBtn !== false;
-              const hasLiveUrlBtn = item.showLiveUrlBtn !== false && Boolean(item.liveUrl && item.liveUrl !== '#');
-              const hasAnyButton = hasCaseStudyBtn || hasLiveUrlBtn;
-
-              return (
-                <div className="col-md-6 col-lg-6" key={projectKey}>
-                  <div className="demo-card-item">
-                    <div className="demo-mockup-frame">
-                      <div className="demo-img-wrapper">
-                        <img src={projectImg} alt={item.title} className="demo-mockup-img" />
-                        {hasAnyButton && (
-                          <div className="minimal-hover-overlay">
-                            {hasCaseStudyBtn && (
-                              <Link to={`/case-study/${projectKey}`} className="minimal-btn-hover btn-hover-case">
-                                Case Study
-                              </Link>
-                            )}
-                            {hasLiveUrlBtn && (
-                              <a
-                                href={item.liveUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="minimal-btn-hover btn-hover-live"
-                              >
-                                Live Preview
-                              </a>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div className="demo-card-footer" style={{ textAlign: 'center', padding: '16px 4px 0 4px', width: '100%' }}>
-                      <div className="demo-title-group" style={{ textAlign: 'center' }}>
-                        <h3 className="demo-item-title" style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', margin: '0 0 4px 0', textAlign: 'center', lineHeight: 1.3 }}>
-                          {hasCaseStudyBtn ? (
-                            <Link to={`/case-study/${projectKey}`} style={{ color: 'inherit', textDecoration: 'none' }}>{item.title}</Link>
-                          ) : (
-                            <span>{item.title}</span>
-                          )}
-                        </h3>
-                        <p className="demo-item-category" style={{ fontSize: '13.5px', color: '#64748b', margin: 0, textAlign: 'center', fontWeight: '500' }}>{projectCat}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+        {/* Projects Grid */}
+        {filteredProjects.length === 0 ? (
+          <div className="card-portfolio p-5 text-center my-5">
+            <h4 className="font-serif heading-section mb-2">No projects found</h4>
+            <p className="text-secondary text-sm mb-3">Try adjusting your search query or category filter.</p>
+            <button
+              onClick={() => {
+                setActiveCategory('all');
+                setSearchQuery('');
+              }}
+              className="btn-secondary-custom mx-auto"
+            >
+              Reset Filters
+            </button>
           </div>
-        </div>
-      </section>
+        ) : (
+          <div className="projects-list-container">
+            {filteredProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        )}
+      </div>
 
-      {/* Light Theme CTA Section with Spacing */}
-      <CtaSection />
-    </>
+      <style>{`
+        .filter-search-wrapper {
+          background-color: var(--bg-surface);
+        }
+
+        .category-filter-pills {
+          display: flex;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+        }
+
+        .filter-pill-btn {
+          padding: 0.45rem 1rem;
+          font-size: 0.85rem;
+          font-weight: 500;
+          border-radius: var(--radius-pill);
+          background-color: var(--bg-card);
+          border: 1px solid var(--border-subtle);
+          color: var(--text-secondary);
+          transition: all var(--transition-fast);
+        }
+
+        .filter-pill-btn:hover {
+          color: var(--text-primary);
+          background-color: var(--bg-card-hover);
+        }
+
+        .filter-pill-btn.active {
+          background-color: var(--text-primary);
+          color: var(--bg-body);
+          border-color: var(--text-primary);
+        }
+
+        .search-input-box {
+          position: relative;
+          display: flex;
+          align-items: center;
+        }
+
+        .search-icon {
+          position: absolute;
+          left: 0.9rem;
+          color: var(--text-muted);
+        }
+
+        .search-field {
+          width: 100%;
+          padding: 0.55rem 0.9rem 0.55rem 2.4rem;
+          border-radius: var(--radius-pill);
+          border: 1px solid var(--border-subtle);
+          background-color: var(--bg-body);
+          color: var(--text-primary);
+          font-size: 0.85rem;
+          outline: none;
+        }
+
+        .search-field:focus {
+          border-color: var(--accent-primary);
+        }
+      `}</style>
+    </div>
   );
-};
-
-export default Works;
+}

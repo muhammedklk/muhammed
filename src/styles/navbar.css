@@ -1,0 +1,347 @@
+/* ============================================================
+   Capsule Header — Glass Navbar
+   Logo: MUHAMMEDK minimal wordmark
+   Links: Home, About, Works, Contact
+   CTA: Let's Talk (filled dark pill)
+   Background: Frosted glassmorphism
+   ============================================================ */
+
+.capsule-header {
+  position: fixed;
+  top: 1.25rem;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 1.5rem;
+  pointer-events: none;
+}
+
+.capsule-nav-container {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+/* ── Glassmorphism Bar ── */
+.capsule-nav-bar {
+  pointer-events: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Pure Frosted Glass Effect */
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  /* Translucent Glass Rim Border */
+  border: 4px solid rgba(255, 255, 255, 0.42);
+  box-shadow:
+    0 8px 32px -6px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.02),
+    inset 0 1px 1px rgba(255, 255, 255, 0.65);
+  border-radius: 9999px;
+  padding: 0.52rem 0.6rem 0.52rem 1.5rem;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.capsule-nav-bar.scrolled {
+  background: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 12px 36px -6px rgba(0, 0, 0, 0.1),
+    0 2px 10px rgba(0, 0, 0, 0.03),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+/* ── Logo: Modern MK Monogram Mark + Wordmark ── */
+.capsule-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  flex-shrink: 0;
+  z-index: 2;
+  transition: transform 0.22s ease, opacity 0.2s ease;
+}
+
+.capsule-logo:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.capsule-logo-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: #0d0d12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.capsule-logo:hover .capsule-logo-badge {
+  background: #14141e;
+  border-color: rgba(124, 92, 225, 0.45);
+  box-shadow: 0 4px 16px rgba(124, 92, 225, 0.3);
+  transform: rotate(-3deg) scale(1.05);
+}
+
+.capsule-logo-text {
+  font-family: "Mona Sans", "Mona Sans Placeholder", "Inter", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #0d0d0f;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* ── Nav Menu (Centered) ── */
+.capsule-menu {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+  z-index: 1;
+}
+
+.capsule-link {
+  font-family: "Mona Sans", "Mona Sans Placeholder", "Inter", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #2b2b36;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  padding: 0.2rem 0;
+  position: relative;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+/* Subtle underline on active */
+.capsule-link.active {
+  color: #000000;
+  font-weight: 700;
+}
+
+.capsule-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #000000;
+  border-radius: 2px;
+}
+
+.capsule-link:hover {
+  color: #000000;
+}
+
+/* ── Right Actions ── */
+.capsule-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+/* Let's Talk — filled dark pill */
+.capsule-talk-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.3rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #0e2447 0%, #4087fb 35%, #3b82f6 100%);
+  color: #ffffff;
+  font-family: "Mona Sans", "Mona Sans Placeholder", "Inter", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: all 0.22s ease;
+  border: 4px solid rgba(250, 250, 250, 0.878);
+}
+
+.capsule-talk-btn:hover {
+  background: linear-gradient(135deg, #133261 0%, #5294fc 35%, #60a5fa 100%);
+  color: #ffffff;
+}
+
+/* ── Mobile Toggle ── */
+.capsule-mobile-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  padding: 0;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+.capsule-mobile-toggle:hover {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.capsule-bar {
+  width: 15px;
+  height: 1.5px;
+  background: #111111;
+  border-radius: 2px;
+  transition: transform 0.25s ease;
+}
+
+/* ── Mobile Drawer Backdrop ── */
+.mobile-nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 1099;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-nav-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ── Mobile Drawer ── */
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 82%;
+  max-width: 360px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 1100;
+  padding: 2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-nav-drawer.open {
+  transform: translateX(0);
+}
+
+.mobile-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* In drawer: reset logo margin */
+.mobile-nav-drawer .capsule-logo {
+  margin-right: 0;
+}
+
+.mobile-close-btn {
+  padding: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.mobile-close-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.mobile-nav-links {
+  list-style: none;
+  padding: 2rem 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: 0.4rem 0;
+  transition: color 0.2s ease;
+}
+
+.mobile-nav-link:hover {
+  color: #7C5CE1;
+}
+
+.mobile-link-num {
+  font-size: 0.82rem;
+  color: #aaaaaa;
+  font-weight: 400;
+}
+
+.mobile-nav-footer {
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .capsule-menu {
+    display: none;
+  }
+
+  .capsule-mobile-toggle {
+    display: flex;
+  }
+
+  .capsule-talk-btn {
+    display: none;
+  }
+
+  .capsule-logo {
+    margin-right: 0;
+  }
+
+  .capsule-nav-bar {
+    padding: 0.45rem 0.65rem 0.45rem 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .capsule-header {
+    top: 0.85rem;
+    padding: 0 0.85rem;
+  }
+}

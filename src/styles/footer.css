@@ -1,0 +1,202 @@
+/* ==========================================================================
+   Modern Glowing Footer with Bottom Theme Gradient
+   Matches reference:
+   - Dark base background (#08080b)
+   - Lush theme color (Violet #7C5CE1) glowing from bottom upwards
+   - Giant bold black wordmark text sitting on top of the glow
+   - "Have a project in mind? Let's work together." headline
+   - Vibrant theme pill button with email and diagonal arrow
+   - Clean sub-row with copyright on left and minimalist icons on right
+   ========================================================================== */
+
+.theme-glow-footer {
+  position: relative;
+  background-color: #08080b;
+  /* Rising vibrant theme color gradient from bottom */
+  background-image: 
+    radial-gradient(ellipse 115% 75% at 50% 100%, #7C5CE1 0%, rgba(124, 92, 225, 0.72) 28%, rgba(124, 92, 225, 0.3) 52%, rgba(8, 8, 11, 0) 82%),
+    linear-gradient(to top, rgba(124, 92, 225, 0.65) 0%, rgba(124, 92, 225, 0.22) 32%, transparent 68%);
+  color: #ffffff;
+  padding-top: 5.5rem;
+  padding-bottom: 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.theme-glow-footer-container {
+  position: relative;
+  z-index: 3;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Top Invitation Section */
+.footer-glow-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.75rem;
+  margin-bottom: 4.5rem;
+}
+
+.footer-glow-heading {
+  font-family: var(--font-display, "Mona Sans", -apple-system, sans-serif);
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1.18;
+  margin: 0;
+  max-width: 800px;
+}
+
+/* Pill Button */
+.footer-glow-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.78rem 1.65rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #0e2447 0%, #4087fb 35%, #3b82f6 100%);
+  color: #ffffff;
+  font-size: 0.96rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 22px rgba(64, 135, 251, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.footer-glow-pill-btn:hover {
+  background: linear-gradient(135deg, #133261 0%, #5294fc 35%, #60a5fa 100%);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(64, 135, 251, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+}
+
+.footer-pill-arrow {
+  transition: transform 0.2s ease;
+}
+
+.footer-glow-pill-btn:hover .footer-pill-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* Mid Row: Copyright + Social Icons */
+.footer-glow-mid-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 2rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-glow-copyright {
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.footer-glow-socials {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.footer-social-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.footer-social-icon-btn:hover {
+  color: #ffffff;
+  background: rgba(124, 92, 225, 0.3);
+  border-color: rgba(124, 92, 225, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(124, 92, 225, 0.3);
+}
+
+/* Giant Bottom Wordmark on Bottom Glow */
+.footer-glow-bottom-wordmark {
+  position: relative;
+  width: 100%;
+  margin-top: 1.5rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+  user-select: none;
+  z-index: 2;
+  line-height: 0.8;
+}
+
+.footer-wordmark-svg {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.footer-wordmark-text {
+  font-family: var(--font-display, "Mona Sans", -apple-system, sans-serif);
+  font-size: 195px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  fill: #08080b; /* Deep black silhouette matching reference "NYRA" over the bottom glow */
+  text-anchor: middle;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .theme-glow-footer {
+    padding-top: 4.5rem;
+  }
+  .footer-glow-top {
+    margin-bottom: 3.5rem;
+    gap: 1.5rem;
+  }
+  .footer-glow-heading {
+    font-size: 2.25rem;
+  }
+  .footer-wordmark-text {
+    font-size: 170px;
+  }
+}
+
+@media (max-width: 576px) {
+  .theme-glow-footer {
+    padding-top: 3.8rem;
+  }
+  .footer-glow-heading {
+    font-size: 1.85rem;
+  }
+  .footer-glow-pill-btn {
+    padding: 0.7rem 1.4rem;
+    font-size: 0.88rem;
+  }
+  .footer-glow-mid-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .footer-wordmark-text {
+    font-size: 130px;
+  }
+}

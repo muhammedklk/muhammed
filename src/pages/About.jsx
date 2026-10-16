@@ -1,237 +1,283 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { usePortfolio } from '../context/PortfolioContext';
+import React, { useState } from 'react';
+import {
+  personalInfo,
+  experienceData,
+  educationData,
+  skillsData,
+  cameraRollPhotos,
+  faqData,
+} from '../data/portfolioData';
+import PhotoLightbox from '../components/PhotoLightbox';
+import { Briefcase, GraduationCap, Camera, ChevronDown, Download, Sparkles } from 'lucide-react';
 
-const About = () => {
-  const { about, settings } = usePortfolio();
-
-  const avatar = (about?.avatarUrl && !about.avatarUrl.includes('gyogrea')) ? about.avatarUrl : '/assets/profile_photo.jpg';
-  const title = about?.title || "Hi, I'm Muhammed 👋";
-  const subtitle = about?.subtitle || "Multidisciplinary UI/UX Designer & Front-End Developer dedicated to building thoughtful, high-performance web products that feel intuitive and alive.";
-  
-  const singleParagraph = Array.isArray(about?.bioParagraphs) && about.bioParagraphs.length > 0
-    ? about.bioParagraphs.join(' ')
-    : "I bridge the gap between creative visual artistry and technical front-end engineering. My goal is to build digital products that not only look breathtaking, but perform flawlessly across every screen size. My approach combines rigorous user research with meticulous typographic hierarchies, smooth micro-interactions, and resilient code to ensure every project leaves a lasting impact.";
-
-  const email = settings?.contactEmail || "muhammedklkm@gmail.com";
-  const location = settings?.location || "Kerala, India (Remote Worldwide)";
-
-  // Skill categories matching exact resume
-  const designSkills = ['Figma', 'Adobe Photoshop', 'Wireframing & Prototyping', 'Design Systems', 'Mobile & Web Interface Design', 'UI Animation & Interaction'];
-  const frontendSkills = ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap', 'GSAP', 'Responsive Design', 'GitHub'];
-  const softSkills = ['Creative Thinking', 'Communication', 'Problem Solving', 'Collaboration'];
+export default function About({ onOpenResume }) {
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [openFaqIndex, setOpenFaqIndex] = useState(0);
 
   return (
-    <>
-      {/* Personal Profile Photo & Identity Section */}
-      <section className="about-portrait-section grid-lines-bg">
-        <div className="container">
-          <div className="row g-5 align-items-center">
-            {/* Profile Photo Card (Left) */}
-            <div className="col-lg-5 col-md-12">
-              <div className="about-portrait-card">
-                <div className="portrait-image-wrapper">
-                  <img
-                    src={avatar}
-                    alt="Muhammed - UI/UX Designer & Developer"
-                    className="about-portrait-img"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      if (e.target.nextElementSibling) {
-                        e.target.nextElementSibling.style.display = 'flex';
-                      }
-                    }}
-                  />
+    <div className="about-page-container section-padding-hero">
+      <div className="container">
+        {/* Hero Section */}
+        <div className="row align-items-center g-5 mb-5">
+          <div className="col-lg-7">
+            <span className="badge-pill mb-3">
+              <Sparkles size={14} className="text-accent" />
+              <span>Hey, I’m Muhammed.</span>
+            </span>
+            <h1 className="heading-display font-serif mb-4">
+              I design products, build things, and craft <span className="italic font-normal text-accent">human interfaces</span>.
+            </h1>
+            <p className="subheading-lead mb-4">
+              {personalInfo.longBio}
+            </p>
+            <div className="d-flex flex-wrap gap-3">
+              <button onClick={onOpenResume} className="btn-primary-custom">
+                <Download size={16} />
+                <span>Download Full CV</span>
+              </button>
+            </div>
+          </div>
 
-                  {/* Styled Avatar Fallback Render */}
-                  <div className="portrait-avatar-fallback">
-                    <div className="avatar-circle-inner">
-                      <span className="avatar-initials">M</span>
-                    </div>
-                  </div>
+          <div className="col-lg-5">
+            <div className="card-portfolio text-center p-4">
+              <div className="profile-avatar-frame mb-3 mx-auto">
+                <div className="profile-avatar-placeholder font-serif">MK</div>
+              </div>
+              <h3 className="font-serif text-xl mb-1">{personalInfo.name}</h3>
+              <p className="text-xs text-accent font-medium mb-3">{personalInfo.role}</p>
+              <div className="badge-pill mx-auto text-xs">
+                <span>📍 {personalInfo.location}</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                  <div className="portrait-badges-layer">
-                    <div className="portrait-floating-badge badge-role">
-                      <span className="badge-icon">⚡</span>
-                      <span>UI/UX & Web Dev</span>
+        {/* Story Section: How I got into design */}
+        <div className="section-padding py-5 border-top-subtle">
+          <div className="max-w-2xl">
+            <h2 className="heading-section font-serif mb-3">How I got into design & code</h2>
+            <p className="text-secondary leading-relaxed mb-3">
+              I started out filling notebook margins with UI layouts, icon sets, and vector illustrations. During my software engineering studies, I realized that many powerful digital tools failed because their interfaces were confusing.
+            </p>
+            <p className="text-secondary leading-relaxed mb-0">
+              I taught myself product design, studied typography, and started building the things I designed in React and CSS. AI helped streamline repetitive code so I could focus on high-craft interactions, micro-animations, and seamless user experiences.
+            </p>
+          </div>
+        </div>
+
+        {/* Experience & Education Timeline */}
+        <div className="section-padding py-5 border-top-subtle">
+          <div className="row g-5">
+            {/* Experience Column */}
+            <div className="col-lg-7">
+              <h2 className="heading-section font-serif mb-4 d-flex align-items-center gap-2">
+                <Briefcase size={22} className="text-accent" />
+                <span>Experience</span>
+              </h2>
+
+              <div className="experience-timeline">
+                {experienceData.map((exp, index) => (
+                  <div key={index} className="timeline-card card-portfolio mb-4">
+                    <div className="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-2">
+                      <div>
+                        <h4 className="font-serif text-lg mb-0">{exp.role}</h4>
+                        <span className="text-sm text-accent font-medium">{exp.company}</span>
+                      </div>
+                      <span className="badge-pill font-mono">{exp.period}</span>
                     </div>
-                    <div className="portrait-floating-badge badge-avail">
-                      <span className="badge-pulse"></span>
-                      <span>Available for Hire</span>
-                    </div>
+
+                    <p className="text-sm text-secondary mb-3">{exp.description}</p>
+
+                    <ul className="exp-highlights-list">
+                      {exp.highlights.map((h, i) => (
+                        <li key={i} className="text-xs text-secondary mb-1">
+                          {h}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
 
-            {/* Intro Statement & Quick Info (Right) */}
-            <div className="col-lg-7 col-md-12">
-              <div className="portrait-intro-block">
-                <span className="page-badge">ABOUT MY CRAFT</span>
-                <h2 className="portrait-intro-name">{title}</h2>
-                <h3 className="portrait-intro-role">
-                  {subtitle}
-                </h3>
+            {/* Education & Skills Column */}
+            <div className="col-lg-5">
+              <h2 className="heading-section font-serif mb-4 d-flex align-items-center gap-2">
+                <GraduationCap size={22} className="text-accent" />
+                <span>Education</span>
+              </h2>
+
+              {educationData.map((edu, idx) => (
+                <div key={idx} className="card-portfolio p-4 mb-4">
+                  <div className="d-flex justify-content-between align-items-start mb-2">
+                    <h5 className="font-serif text-base mb-0">{edu.degree}</h5>
+                    <span className="badge-pill font-mono text-xs">{edu.period}</span>
+                  </div>
+                  <p className="text-xs text-accent mb-2">{edu.institution}</p>
+                  <p className="text-xs text-secondary mb-0">{edu.details}</p>
+                </div>
+              ))}
+
+              {/* Skills Matrix */}
+              <div className="card-portfolio p-4 mt-4">
+                <h4 className="font-serif text-lg mb-3">Skills Matrix</h4>
                 
-                <p className="portrait-intro-text">
-                  {singleParagraph}
-                </p>
-
-                <div className="portrait-quick-details">
-                  <div className="quick-detail-item">
-                    <span className="detail-label">Location</span>
-                    <span className="detail-val">{location}</span>
-                  </div>
-                  <div className="quick-detail-item">
-                    <span className="detail-label">Specialization</span>
-                    <span className="detail-val">Web Design, Development</span>
-                  </div>
-                  <div className="quick-detail-item">
-                    <span className="detail-label">Email</span>
-                    <a href={`mailto:${email}`} className="detail-val text-link">
-                      {email}
-                    </a>
+                <div className="mb-3">
+                  <span className="text-xs font-semibold text-muted-custom block mb-2">DESIGN & UX</span>
+                  <div className="d-flex flex-wrap gap-1.5">
+                    {skillsData.design.map((s, i) => (
+                      <span key={i} className="badge-pill text-xs">{s}</span>
+                    ))}
                   </div>
                 </div>
 
-                {/* Download CV Prominent CTA Buttons */}
-                <div className="portrait-actions-row">
-                  <a
-                    href={about?.resumeUrl || "assets/cv/Muhammed_K_Resume.pdf"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    download="Muhammed_K_Resume.pdf"
-                    className="btn-download-cv-lg"
-                  >
-                    <span>Download My CV</span>
-                  </a>
-                  <Link to="/contact" className="btn-contact-outline-lg">
-                    <span>Get in Touch</span>
-                  </Link>
+                <div>
+                  <span className="text-xs font-semibold text-muted-custom block mb-2">DEVELOPMENT & REACT</span>
+                  <div className="d-flex flex-wrap gap-1.5">
+                    {skillsData.development.map((s, i) => (
+                      <span key={i} className="badge-pill text-xs">{s}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* 3 Separate Cards for Skills - Light Theme Premium Styling */}
-      <section style={{ padding: '40px 0 90px 0' }}>
-        <div className="container">
-          <div style={{ marginBottom: '36px', textAlign: 'center' }}>
-            <span className="page-badge" style={{ marginBottom: '8px', display: 'inline-block' }}>TECHNICAL CAPABILITIES</span>
-            <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#0f172a', margin: 0 }}>
-              Skills & Expertise Matrix
-            </h2>
+        {/* My Camera Roll Section */}
+        <div className="section-padding py-5 border-top-subtle">
+          <div className="mb-4">
+            <span className="badge-pill mb-2">
+              <Camera size={14} className="text-accent" />
+              <span>My Camera Roll</span>
+            </span>
+            <h2 className="heading-section font-serif mb-1">A few photos from my travels</h2>
+            <p className="text-secondary text-sm">Click any photo to expand in full lightbox.</p>
           </div>
 
-          <div className="row g-4">
-            {/* Card 1: Design */}
-            <div className="col-lg-4 col-md-6 col-sm-12">
-              <div style={{ background: '#ffffff', borderRadius: '20px', height: '100%', padding: '28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', border: '1px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.04)' }}>
-                <div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', paddingBottom: '12px', borderBottom: '1px solid #f1f5f9' }}>
-                    <div style={{ display: 'flex', gap: '6px' }}>
-                      <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444' }}></span>
-                      <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#eab308' }}></span>
-                      <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#22c55e' }}></span>
-                    </div>
-                    <span style={{ color: '#65a30d', fontWeight: '800', fontSize: '12px', letterSpacing: '1px' }}>01 / DESIGN</span>
+          <div className="row g-3">
+            {cameraRollPhotos.map((photo) => (
+              <div key={photo.id} className="col-md-4 col-sm-6">
+                <div
+                  onClick={() => setSelectedPhoto(photo)}
+                  className="camera-photo-card"
+                >
+                  <img src={photo.url} alt={photo.title} className="camera-photo-img" />
+                  <div className="camera-photo-overlay">
+                    <span className="font-serif text-sm text-white mb-0">{photo.title}</span>
+                    <span className="text-xs text-white-50">{photo.location}</span>
                   </div>
-
-                  <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(101, 163, 13, 0.12)', color: '#65a30d' }}>🎨</span>
-                    Design & UI/UX
-                  </h3>
-
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                    {designSkills.map((skill, idx) => (
-                      <span key={idx} style={{ padding: '6px 12px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '20px', color: '#0f172a', fontSize: '12.5px', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#65a30d' }}></span>
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid #f1f5f9', fontSize: '12px', color: '#64748b', fontStyle: 'italic' }}>
-                  Figma, Photoshop, Interface Systems
                 </div>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
 
-            {/* Card 2: Frontend Development */}
-            <div className="col-lg-4 col-md-6 col-sm-12">
-              <div style={{ background: '#ffffff', borderRadius: '20px', height: '100%', padding: '28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', border: '1px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.04)' }}>
-                <div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', paddingBottom: '12px', borderBottom: '1px solid #f1f5f9' }}>
-                    <div style={{ display: 'flex', gap: '6px' }}>
-                      <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444' }}></span>
-                      <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#eab308' }}></span>
-                      <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#22c55e' }}></span>
-                    </div>
-                    <span style={{ color: '#2563eb', fontWeight: '800', fontSize: '12px', letterSpacing: '1px' }}>02 / FRONTEND</span>
+        {/* FAQ Accordion Section */}
+        <div className="section-padding py-5 border-top-subtle">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="heading-section font-serif mb-4 text-center">Frequently Asked Questions</h2>
+            
+            <div className="faq-accordion-list">
+              {faqData.map((faq, idx) => {
+                const isOpen = openFaqIndex === idx;
+                return (
+                  <div key={idx} className="faq-item card-portfolio mb-3 p-3">
+                    <button
+                      onClick={() => setOpenFaqIndex(isOpen ? -1 : idx)}
+                      className="faq-question-btn d-flex justify-content-between align-items-center w-100 text-left"
+                    >
+                      <span className="font-serif text-base font-semibold">{faq.question}</span>
+                      <ChevronDown size={18} className={`faq-chevron ${isOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {isOpen && (
+                      <p className="text-sm text-secondary mt-3 mb-0 pt-2 border-top-subtle animate-fade-in">
+                        {faq.answer}
+                      </p>
+                    )}
                   </div>
-
-                  <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(37, 99, 235, 0.12)', color: '#2563eb' }}>💻</span>
-                    Frontend Development
-                  </h3>
-
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                    {frontendSkills.map((skill, idx) => (
-                      <span key={idx} style={{ padding: '6px 12px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '20px', color: '#0f172a', fontSize: '12.5px', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#2563eb' }}></span>
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid #f1f5f9', fontSize: '12px', color: '#64748b', fontStyle: 'italic' }}>
-                  HTML5, CSS3, JS, React, GSAP, GitHub
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3: Soft Skills */}
-            <div className="col-lg-4 col-md-12 col-sm-12">
-              <div style={{ background: '#ffffff', borderRadius: '20px', height: '100%', padding: '28px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', border: '1px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.04)' }}>
-                <div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', paddingBottom: '12px', borderBottom: '1px solid #f1f5f9' }}>
-                    <div style={{ display: 'flex', gap: '6px' }}>
-                      <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444' }}></span>
-                      <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#eab308' }}></span>
-                      <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#22c55e' }}></span>
-                    </div>
-                    <span style={{ color: '#7c3aed', fontWeight: '800', fontSize: '12px', letterSpacing: '1px' }}>03 / SOFT SKILLS</span>
-                  </div>
-
-                  <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#0f172a', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(124, 58, 237, 0.12)', color: '#7c3aed' }}>💡</span>
-                    Soft Skills & Mindset
-                  </h3>
-
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                    {softSkills.map((skill, idx) => (
-                      <span key={idx} style={{ padding: '6px 12px', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '20px', color: '#0f172a', fontSize: '12.5px', fontWeight: '700', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#7c3aed' }}></span>
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid #f1f5f9', fontSize: '12px', color: '#64748b', fontStyle: 'italic' }}>
-                  Collaboration, Problem Solving & Strategy
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+
+      {/* Photo Lightbox Modal */}
+      {selectedPhoto && (
+        <PhotoLightbox photo={selectedPhoto} onClose={() => setSelectedPhoto(null)} />
+      )}
+
+      <style>{`
+        .profile-avatar-frame {
+          width: 90px;
+          height: 90px;
+          border-radius: 50%;
+          background-color: var(--accent-subtle);
+          border: 2px solid var(--accent-primary);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .profile-avatar-placeholder {
+          font-size: 2.2rem;
+          color: var(--accent-primary);
+        }
+
+        .exp-highlights-list {
+          padding-left: 1rem;
+          margin-bottom: 0;
+        }
+
+        .camera-photo-card {
+          position: relative;
+          height: 240px;
+          border-radius: var(--radius-md);
+          overflow: hidden;
+          cursor: pointer;
+          border: 1px solid var(--border-subtle);
+        }
+
+        .camera-photo-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+
+        .camera-photo-card:hover .camera-photo-img {
+          transform: scale(1.06);
+        }
+
+        .camera-photo-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: 1rem;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .camera-photo-card:hover .camera-photo-overlay {
+          opacity: 1;
+        }
+
+        .faq-chevron {
+          transition: transform 0.3s ease;
+        }
+
+        .rotate-180 {
+          transform: rotate(180deg);
+        }
+
+        .text-white-50 {
+          color: rgba(255, 255, 255, 0.7);
+        }
+      `}</style>
+    </div>
   );
-};
-
-export default About;
+}

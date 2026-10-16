@@ -1,0 +1,104 @@
+/* ============================================================
+   Modern Creative Custom Cursor
+   Desktop only (disabled on touch devices)
+   ============================================================ */
+
+@media (hover: hover) and (pointer: fine) {
+  /* Hide standard cursor only on non-text elements to preserve text selection usability */
+  a, button, [role="button"], .interactive, .pill-badge, .service-pill-btn, .project-card, .hero-canvas-container, .hero-canvas-container canvas {
+    cursor: none !important;
+  }
+}
+
+.custom-cursor-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999999;
+  overflow: hidden;
+}
+
+/* 1. Precision Center Dot */
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #121316;
+  pointer-events: none;
+  z-index: 1000000;
+  will-change: transform, width, height, background-color;
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.22s ease,
+              opacity 0.2s ease;
+  transform: translate(-50%, -50%);
+}
+
+.custom-cursor-dot.is-hovering {
+  width: 8px;
+  height: 8px;
+  background-color: #b99aff;
+}
+
+.custom-cursor-dot.is-clicking {
+  transform: translate(-50%, -50%) scale(0.6);
+}
+
+/* 2. Smooth Fluid Trailing Ring */
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.25px solid rgba(18, 19, 22, 0.28);
+  background: rgba(185, 154, 255, 0.05);
+  pointer-events: none;
+  z-index: 999999;
+  will-change: transform, width, height, border-color, background;
+  transform: translate(-50%, -50%);
+  transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              background 0.25s ease,
+              backdrop-filter 0.25s ease,
+              opacity 0.2s ease;
+}
+
+/* Hovering over links / buttons */
+.custom-cursor-ring.is-hovering {
+  width: 54px;
+  height: 54px;
+  border: 1.5px solid #b99aff;
+  background: rgba(185, 154, 255, 0.14);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* Hovering over 3D interactive Canvas */
+.custom-cursor-ring.is-canvas {
+  width: 58px;
+  height: 58px;
+  border: 1.5px dashed #b99aff;
+  background: rgba(185, 154, 255, 0.12);
+}
+
+/* Clicking / Holding */
+.custom-cursor-ring.is-clicking {
+  transform: translate(-50%, -50%) scale(0.78);
+  border-color: #9f75ff;
+  background: rgba(159, 117, 255, 0.22);
+}
+
+/* Hidden when outside window or on touch */
+.custom-cursor-hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}

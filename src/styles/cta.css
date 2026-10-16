@@ -1,0 +1,470 @@
+/* ==========================================================================
+   Bespoke Call-To-Action (CTA) Section Styling
+   - High-end dark obsidian stage card with deep atmospheric purple glow
+   - Live availability beacon and response time badge
+   - Interactive customizable inquiry chips
+   - 1-click clipboard email copy card with toast animation
+   - Editorial typography with glowing violet highlights
+   - Responsive trust & craft pillars
+   ========================================================================== */
+
+.cta-showcase-section {
+  padding: 6.5rem 0 6.5rem;
+  background: var(--bg-canvas);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Obsidian Stage Card ── */
+.cta-stage-card {
+  position: relative;
+  background: #0c0b12;
+  border-radius: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 30px 80px -20px rgba(12, 11, 18, 0.5),
+    0 0 0 1px rgba(124, 92, 225, 0.15) inset;
+  overflow: hidden;
+  padding: 4.8rem 4rem 4rem;
+  color: #ffffff;
+}
+
+/* ── Ambient Background Lighting ── */
+.cta-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+.cta-glow-primary {
+  width: 520px;
+  height: 520px;
+  top: -160px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(124, 92, 225, 0.32) 0%, rgba(124, 92, 225, 0.05) 60%, transparent 80%);
+}
+
+.cta-glow-secondary {
+  width: 380px;
+  height: 380px;
+  bottom: -120px;
+  left: -80px;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.18) 0%, transparent 70%);
+}
+
+.cta-grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.cta-inner-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Top Bar: Availability & Response Time ── */
+.cta-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2.2rem;
+  flex-wrap: wrap;
+}
+
+.cta-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.cta-live-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
+  animation: ctaPulseDot 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes ctaPulseDot {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+.cta-status-text {
+  font-family: var(--font-main);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e2e8f0;
+}
+
+.cta-response-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.cta-badge-icon {
+  color: #a78bfa;
+}
+
+/* ── Main Headline & Narrative ── */
+.cta-headline-wrapper {
+  margin-bottom: 2.6rem;
+  max-width: 880px;
+}
+
+.cta-main-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  margin-bottom: 1.3rem;
+}
+
+.cta-title-highlight {
+  background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 45%, #7C5CE1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.cta-lead-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #9ca3af;
+  max-width: 720px;
+  margin: 0;
+}
+
+/* ── Interactive Service / Scope Selector ── */
+.cta-services-selector {
+  margin-bottom: 3rem;
+  padding: 1.5rem 1.8rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.cta-selector-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #a78bfa;
+  margin-bottom: 1rem;
+}
+
+.cta-sparkle-icon {
+  color: #a78bfa;
+}
+
+.cta-chips-cloud {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.cta-chip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0.55rem 1.15rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #d1d5db;
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta-chip-btn:hover {
+  background: rgba(124, 92, 225, 0.18);
+  border-color: rgba(124, 92, 225, 0.4);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.cta-chip-btn.selected {
+  background: linear-gradient(135deg, #0e2447 0%, #4087fb 35%, #3b82f6 100%);
+  border-color: #3b82f6;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 18px rgba(64, 135, 251, 0.45);
+  transform: translateY(-2px);
+}
+
+.cta-chip-indicator {
+  font-size: 0.82rem;
+  opacity: 0.85;
+}
+
+/* ── Actions Row: Primary Button & Email Card ── */
+.cta-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 3.8rem;
+  flex-wrap: wrap;
+}
+
+.cta-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.95rem 2.2rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #0e2447 0%, #4087fb 35%, #3b82f6 100%);
+  color: #ffffff;
+  font-family: var(--font-main);
+  font-size: 0.98rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 18px rgba(64, 135, 251, 0.38);
+}
+
+.cta-primary-btn:hover {
+  background: linear-gradient(135deg, #133261 0%, #5294fc 35%, #60a5fa 100%);
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 26px rgba(64, 135, 251, 0.55);
+}
+
+.cta-btn-selected-tag {
+  font-size: 0.82rem;
+  color: #cdb5ff;
+  font-weight: 700;
+}
+
+.cta-btn-arrow-bubble {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
+}
+
+.cta-primary-btn:hover .cta-btn-arrow-bubble {
+  transform: translate(2px, -2px);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Email Card with 1-Click Copy */
+.cta-email-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0.55rem 0.65rem 0.55rem 1.4rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  transition: border-color 0.2s ease;
+}
+
+.cta-email-card:hover {
+  border-color: rgba(124, 92, 225, 0.35);
+}
+
+.cta-email-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cta-mail-icon {
+  color: #a78bfa;
+}
+
+.cta-email-address {
+  color: #e2e8f0;
+  font-family: var(--font-main);
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.cta-email-address:hover {
+  color: #ffffff;
+}
+
+.cta-copy-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.45rem 1.05rem;
+  border-radius: 9999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-family: var(--font-main);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.cta-copy-action-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.02);
+}
+
+.cta-copy-action-btn.copied {
+  background: #22c55e;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(34, 197, 94, 0.4);
+}
+
+/* Secondary phone link */
+.cta-secondary-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0.65rem 1.25rem;
+  color: #94a3b8;
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 9999px;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  transition: all 0.2s ease;
+}
+
+.cta-secondary-link:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* ── Value Pillars Strip ── */
+.cta-value-strip {
+  padding-top: 2.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cta-value-pill {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 1.2rem 1.4rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  height: 100%;
+  transition: all 0.25s ease;
+}
+
+.cta-value-pill:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(124, 92, 225, 0.25);
+  transform: translateY(-2px);
+}
+
+.cta-value-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(124, 92, 225, 0.15);
+  color: #c4b5fd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cta-value-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cta-value-title {
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.cta-value-sub {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  line-height: 1.45;
+}
+
+/* ── Responsive Adaptations ── */
+@media (max-width: 991px) {
+  .cta-stage-card {
+    padding: 3.5rem 2.5rem 2.8rem;
+    border-radius: 28px;
+  }
+  .cta-actions-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .cta-primary-btn,
+  .cta-email-card {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 767px) {
+  .cta-showcase-section {
+    padding: 4.5rem 0;
+  }
+  .cta-stage-card {
+    padding: 2.6rem 1.5rem 2.2rem;
+    border-radius: 22px;
+  }
+  .cta-top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cta-services-selector {
+    padding: 1.2rem 1.1rem;
+  }
+  .cta-value-pill {
+    padding: 1rem 1.1rem;
+  }
+}

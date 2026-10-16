@@ -1,0 +1,396 @@
+/* ==========================================================================
+   Editorial Studio Case Study Page — Bespoke Portfolio Theme
+   - Matched 1:1 with Reference Design
+   - Pure Light Theme with Muhammed's Website Color Palette
+   - Monumental Centered Title
+   - Studio Hardware Mockup Frames (Monitor, Laptop, Dual Phones, Workspace)
+   - Two-Column Editorial Narrative
+   - Previous / Next Project Bottom Navigation
+   ========================================================================== */
+
+.cs-editorial-page {
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: #0d0d12;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.cs-editorial-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   1. HERO HEADER: BIG MONUMENTAL TITLE
+   ───────────────────────────────────────────────────────────── */
+.cs-editorial-header {
+  padding-top: 8.5rem;
+  padding-bottom: 2.8rem;
+  text-align: center;
+}
+
+.cs-hero-monumental-title {
+  font-family: var(--font-display, "Mona Sans", sans-serif);
+  font-size: clamp(3rem, 6.2vw, 4.8rem);
+  font-weight: 700 !important;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: #0d0d12;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   2. HERO STUDIO MOCKUP FRAME
+   ───────────────────────────────────────────────────────────── */
+.cs-hero-mockup-frame {
+  width: 100%;
+  height: 600px;
+  max-height: 620px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #f7f7fa;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.06);
+  line-height: 0;
+  margin-bottom: 2.4rem;
+}
+
+.cs-mockup-full-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   3. ACTION & METADATA BAR
+   ───────────────────────────────────────────────────────────── */
+.cs-action-meta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding-bottom: 3.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  margin-bottom: 4rem;
+}
+
+/* View Live Site Button — Muhammed's Website Signature Pill */
+.cs-view-site-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.6rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #0e2447 0%, #4087fb 35%, #3b82f6 100%);
+  color: #ffffff;
+  font-family: var(--font-main, "Mona Sans", sans-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 8px 24px rgba(64, 135, 251, 0.28);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cs-view-site-pill-btn:hover {
+  background: linear-gradient(135deg, #133261 0%, #5294fc 35%, #60a5fa 100%);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(64, 135, 251, 0.4);
+}
+
+.cs-view-site-pill-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.cs-view-site-pill-btn:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* Metadata Columns */
+.cs-meta-columns {
+  display: flex;
+  align-items: center;
+  gap: 3.2rem;
+  flex-wrap: wrap;
+}
+
+.cs-meta-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.cs-meta-col-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8e909a;
+  margin-bottom: 0.35rem;
+}
+
+.cs-meta-col-value {
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: #111218;
+  letter-spacing: -0.01em;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   4. TWO-COLUMN EDITORIAL NARRATIVE
+   ───────────────────────────────────────────────────────────── */
+.cs-editorial-narrative-section {
+  padding-bottom: 4.5rem;
+}
+
+.cs-narrative-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.cs-narrative-eyebrow {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8e909a;
+  margin-bottom: 1.1rem;
+}
+
+.cs-narrative-subheading {
+  font-family: var(--font-display, "Mona Sans", sans-serif);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: 700 !important;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: #111218;
+  margin-bottom: 1.2rem;
+}
+
+.cs-narrative-body {
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: #4b4e5b;
+  margin-bottom: 1.25rem;
+}
+
+.cs-narrative-lead-challenge {
+  font-size: 1.05rem;
+  color: #2a2c36;
+  font-weight: 450;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   5. FULL-WIDTH STUDIO MOCKUP FRAMES (LAPTOP & PERSPECTIVE)
+   ───────────────────────────────────────────────────────────── */
+.cs-fullwidth-mockup-frame {
+  width: 100%;
+  height: 580px;
+  max-height: 600px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #f7f7fa;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.06);
+  line-height: 0;
+  margin-bottom: 5.5rem;
+}
+
+.cs-mockup-last-frame {
+  margin-bottom: 4.5rem;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   6. "DESIGNED FOR EVERY SCREEN" (DUAL MOBILE SHOWCASE)
+   ───────────────────────────────────────────────────────────── */
+.cs-responsive-showcase-section {
+  padding: 1rem 0 5.5rem;
+}
+
+.cs-responsive-eyebrow {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8e909a;
+  margin-bottom: 0.75rem;
+}
+
+.cs-responsive-title {
+  font-family: var(--font-display, "Mona Sans", sans-serif);
+  font-size: clamp(2rem, 3.5vw, 2.85rem);
+  font-weight: 700 !important;
+  letter-spacing: -0.035em;
+  color: #0d0d12;
+  margin-bottom: 3.2rem;
+}
+
+.cs-dual-phone-grid {
+  margin-top: 1rem;
+}
+
+.cs-dual-phone-card {
+  height: 540px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #f7f7fa;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.06);
+  line-height: 0;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.cs-dual-phone-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.1);
+}
+
+.cs-phone-mockup-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   7. PREVIOUS & NEXT PROJECT FOOTER NAVIGATION
+   ───────────────────────────────────────────────────────────── */
+.cs-prev-next-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 3rem 0.5rem 5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.cs-nav-anchor {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.cs-nav-prev:hover .cs-nav-anchor {
+  transform: translateX(-4px);
+}
+
+.cs-nav-next:hover .cs-nav-anchor {
+  transform: translateX(4px);
+}
+
+.cs-nav-direction {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8e909a;
+  margin-bottom: 0.45rem;
+  transition: color 0.2s ease;
+}
+
+.cs-nav-anchor:hover .cs-nav-direction {
+  color: #7C5CE1;
+}
+
+.cs-nav-title {
+  font-family: var(--font-display, "Mona Sans", sans-serif);
+  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  font-weight: 700 !important;
+  color: #0d0d12;
+  letter-spacing: -0.02em;
+  transition: color 0.2s ease;
+}
+
+.cs-nav-anchor:hover .cs-nav-title {
+  color: #7C5CE1;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   RESPONSIVE DESIGN (TABLETS & PHONES)
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 991px) {
+  .cs-editorial-header {
+    padding-top: 7rem;
+  }
+
+  .cs-hero-mockup-frame,
+  .cs-fullwidth-mockup-frame {
+    height: 440px;
+  }
+
+  .cs-dual-phone-card {
+    height: 460px;
+  }
+
+  .cs-meta-columns {
+    gap: 1.8rem;
+  }
+
+  .cs-action-meta-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.6rem;
+  }
+
+  .cs-fullwidth-mockup-frame {
+    margin-bottom: 3.5rem;
+  }
+
+  .cs-responsive-showcase-section {
+    padding-bottom: 3.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .cs-editorial-header {
+    padding-top: 6rem;
+  }
+
+  .cs-hero-monumental-title {
+    font-size: 2.5rem;
+  }
+
+  .cs-hero-mockup-frame,
+  .cs-fullwidth-mockup-frame {
+    height: 290px;
+    border-radius: 18px;
+  }
+
+  .cs-dual-phone-card {
+    height: 380px;
+    border-radius: 18px;
+  }
+
+  .cs-meta-columns {
+    width: 100%;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .cs-responsive-title {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .cs-prev-next-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.8rem;
+  }
+
+  .cs-nav-next {
+    text-align: left !important;
+  }
+}

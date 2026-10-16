@@ -1,0 +1,585 @@
+/* ==========================================================================
+   Simple & Clean About Page Styles
+   - Matching the user's reference layout
+   - Theme: Current Portfolio Violet (#7C5CE1), Dark Primary, Clean Canvas
+   - Top: 2-column portrait card + bio narrative
+   - Bottom: 3 Mac-style window cards for Skills & Expertise Matrix
+   ========================================================================== */
+
+.simple-about-page {
+  min-height: 100vh;
+  background: var(--bg-canvas, #f7f7f9);
+  padding: 8.5rem 1.25rem 6.5rem;
+  color: var(--text-primary, #18181b);
+  position: relative;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   TOP SECTION: INTRO & PORTRAIT
+   ───────────────────────────────────────────────────────────── */
+.about-intro-section {
+  margin-bottom: 6rem;
+}
+
+.about-intro-grid {
+  display: grid;
+  grid-template-columns: 0.88fr 1.12fr;
+  gap: 4.5rem;
+  align-items: flex-start;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* Photo Card */
+.about-photo-col {
+  display: flex;
+  justify-content: center;
+}
+
+.about-photo-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border-radius: 28px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 16px 45px -12px rgba(0, 0, 0, 0.08);
+  padding: 0.9rem;
+  overflow: hidden;
+}
+
+/* Top-Left Badge */
+.about-photo-badge-top {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #18181b;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.about-badge-icon-zap {
+  color: #f59e0b;
+}
+
+/* Cutout Frame */
+.about-photo-frame {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #f0f0f5 0%, #e5e5ec 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.about-photo-glow {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 92, 225, 0.22) 0%, transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.about-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-photo-card:hover .about-photo-img {
+  transform: scale(1.03);
+}
+
+/* Bottom-Right Status Badge */
+.about-photo-badge-bottom {
+  position: absolute;
+  bottom: 1.6rem;
+  right: 1.6rem;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #10b981;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.about-status-dot-green {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+/* Right: Bio Column */
+.about-info-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-craft-pill {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  background: #eaeaf0;
+  color: #555555;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  width: fit-content;
+}
+
+.about-greeting-title {
+  font-family: var(--font-display, "Mona Sans", sans-serif);
+  font-size: clamp(2.4rem, 4.2vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--text-primary, #18181b);
+  margin-bottom: 1rem;
+  line-height: 1.15;
+}
+
+.about-hand-wave {
+  display: inline-block;
+  transform-origin: 70% 70%;
+  animation: waveHand 2.2s infinite ease-in-out;
+}
+
+@keyframes waveHand {
+  0%, 100% { transform: rotate(0deg); }
+  20%, 60% { transform: rotate(14deg); }
+  40%, 80% { transform: rotate(-10deg); }
+}
+
+.about-lead-statement {
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--text-primary, #18181b);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.about-bio-body {
+  font-size: 0.94rem;
+  color: var(--text-secondary, #555555);
+  line-height: 1.72;
+  margin-bottom: 1.8rem;
+}
+
+/* Key-Value Details */
+.about-meta-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2.2rem;
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.about-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+}
+
+.about-meta-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-muted, #777777);
+  text-transform: uppercase;
+}
+
+.about-meta-value {
+  font-weight: 600;
+  color: var(--text-primary, #18181b);
+  text-decoration: none;
+}
+
+.about-meta-value.email-highlight {
+  color: #7C5CE1;
+  transition: color 0.2s ease;
+}
+
+.about-meta-value.email-highlight:hover {
+  text-decoration: underline;
+}
+
+/* Action Buttons */
+.about-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.about-btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.85rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #0e2447 0%, #4087fb 35%, #3b82f6 100%);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 4px solid rgba(250, 250, 250, 0.878);
+}
+
+.about-btn-download:hover {
+  background: linear-gradient(135deg, #133261 0%, #5294fc 35%, #60a5fa 100%);
+  color: #ffffff;
+}
+
+.about-btn-touch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.7rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: var(--text-primary, #18181b);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 4px solid rgba(237, 237, 237, 0.74);
+}
+
+.about-btn-touch:hover {
+  background: #f4f4f7;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   BOTTOM SECTION: SKILLS & EXPERTISE MATRIX
+   ───────────────────────────────────────────────────────────── */
+.about-skills-matrix-section {
+  max-width: 1120px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.about-skills-matrix-section::before {
+  content: '';
+  position: absolute;
+  top: 25%;
+  left: 8%;
+  width: 480px;
+  height: 340px;
+  background: radial-gradient(circle, rgba(64, 135, 251, 0.08) 0%, rgba(124, 92, 225, 0.04) 50%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-skills-matrix-section::after {
+  content: '';
+  position: absolute;
+  top: 35%;
+  right: 8%;
+  width: 420px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.07) 0%, rgba(59, 130, 246, 0.05) 50%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-skills-eyebrow {
+  display: inline-block;
+  padding: 0.35rem 0.95rem;
+  border-radius: 9999px;
+  background: #eaeaf0;
+  color: #555555;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+
+.about-skills-main-title {
+  font-family: var(--font-display, "Mona Sans", sans-serif);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-primary, #18181b);
+}
+
+.about-skills-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Mac-Style Card — Glassmorphism Effect */
+.about-matrix-card {
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  border-radius: 24px;
+  border: 4px solid rgba(255, 255, 255, 0.72);
+  padding: 1.6rem 1.6rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-matrix-card:hover {
+  background: rgba(255, 255, 255, 0.82);
+  transform: scale(1.03);
+}
+
+/* Glass shimmer light sweep across on hover */
+.about-matrix-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 70%
+  );
+  transition: left 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.about-matrix-card:hover::after {
+  left: 140%;
+}
+
+/* Mac Window Top Bar */
+.about-card-window-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.4rem;
+}
+
+.about-window-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.about-window-dots .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.about-window-dots .dot.red { background: #ef4444; }
+.about-window-dots .dot.yellow { background: #f59e0b; }
+.about-window-dots .dot.green { background: #10b981; }
+
+.about-window-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.about-window-tag.tag-design { color: #10b981; }
+.about-window-tag.tag-frontend { color: #3b82f6; }
+.about-window-tag.tag-soft { color: #7C5CE1; }
+
+/* Icon & Heading Inner */
+.about-card-header-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.4rem;
+}
+
+.about-card-icon-bubble {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-card-icon-bubble.bubble-design {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.about-card-icon-bubble.bubble-frontend {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+}
+
+.about-card-icon-bubble.bubble-soft {
+  background: rgba(124, 92, 225, 0.1);
+  color: #7C5CE1;
+}
+
+.about-card-heading {
+  font-family: var(--font-display, "Mona Sans", sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary, #18181b);
+  margin: 0;
+}
+
+/* Pills Wrap */
+.about-card-pills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  margin-bottom: 1.6rem;
+  flex-grow: 1;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.about-matrix-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #1e293b;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.about-matrix-pill:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #0f172a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.matrix-pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.matrix-pill-dot.dot-green { 
+  background: #10b981; 
+}
+
+.matrix-pill-dot.dot-blue { 
+  background: #3b82f6; 
+}
+
+.matrix-pill-dot.dot-violet { 
+  background: #8b5cf6; 
+}
+
+/* Card Footer Caption */
+.about-card-footer-caption {
+  font-size: 0.74rem;
+  color: #94a3b8;
+  font-style: italic;
+  padding-top: 1rem;
+  border-top: 1px solid #f1f5f9;
+  letter-spacing: 0.01em;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   RESPONSIVE DESIGN
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 991px) {
+  .simple-about-page {
+    padding-top: 7rem;
+  }
+  .about-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+  .about-photo-card {
+    max-width: 380px;
+  }
+  .about-skills-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .simple-about-page {
+    padding: 6.5rem 1rem 4.5rem;
+  }
+  .about-photo-card {
+    border-radius: 22px;
+  }
+  .about-photo-frame {
+    height: 380px;
+  }
+  .about-greeting-title {
+    font-size: 2.2rem;
+  }
+  .about-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .about-actions-row a {
+    justify-content: center;
+    width: 100%;
+  }
+  .about-matrix-card {
+    padding: 1.4rem 1.2rem;
+  }
+}

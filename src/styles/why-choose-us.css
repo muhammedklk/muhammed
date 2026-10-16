@@ -1,0 +1,500 @@
+/* ============================================================
+   Why Choose Us — Bento Grid Section
+   Matches reference: tall left card + 2 top cards + 1 wide bottom card
+   ============================================================ */
+
+.why-choose-section {
+  padding: 6rem 0 7rem;
+  background: var(--bg-canvas);
+}
+
+/* Section Header */
+.why-choose-header {
+  margin-bottom: 3rem;
+}
+
+.why-choose-title {
+  font-size: clamp(2rem, 3.8vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  margin-bottom: 0.85rem;
+  line-height: 1.15;
+}
+
+.why-choose-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 460px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ============================================================
+   SHARED BENTO CARD BASE
+   ============================================================ */
+.bento-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================
+   LEFT TALL CARD
+   ============================================================ */
+.bento-tall-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 560px;
+}
+
+/* Browser Bar */
+.bento-browser-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: #fafafa;
+}
+
+.bento-url-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f0f0f2;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 999px;
+  padding: 0.32rem 0.9rem;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.bento-url-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  flex-shrink: 0;
+}
+
+.bento-url-text {
+  font-size: 0.78rem;
+  color: #444;
+}
+
+.bento-grid-icon-btn {
+  color: #999;
+  cursor: pointer;
+  border: none;
+  background: none;
+  display: flex;
+  padding: 0;
+}
+
+/* Tall Card Content */
+.bento-tall-content {
+  padding: 1.75rem 1.5rem 1.25rem;
+}
+
+.bento-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #f1f0ff;
+  border: 1px solid rgba(100, 80, 255, 0.15);
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.78rem;
+  color: #6450ff;
+  font-weight: 500;
+  margin-bottom: 1.1rem;
+}
+
+.bento-tag-orb {
+  font-size: 0.7rem;
+}
+
+.bento-tall-heading {
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
+}
+
+.bento-tall-sub {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.2rem;
+  line-height: 1.55;
+}
+
+.bento-tall-sub strong {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Simulated Search Bar */
+.bento-search-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f5f5f7;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  padding: 0.65rem 0.65rem 0.65rem 1rem;
+  gap: 0.5rem;
+}
+
+.bento-search-text {
+  font-size: 0.82rem;
+  color: #666;
+  flex: 1;
+}
+
+.bento-search-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #6450ff;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Tall Visual Area */
+.bento-tall-visual-area {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  min-height: 200px;
+}
+
+.bento-wave-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  display: block;
+}
+
+.bento-wave-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* Logos Strip */
+.bento-logos-strip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.7rem 1rem;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  overflow: hidden;
+}
+
+.bento-logos-marquee {
+  display: flex;
+  gap: 1.4rem;
+  animation: marqueeScroll 16s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.bento-logo-item {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   WEBSITE DESIGN CARD (top right 1)
+   ============================================================ */
+.bento-website-card {
+  min-height: 340px;
+}
+
+.bento-card-header {
+  padding: 1.5rem 1.5rem 1rem;
+}
+
+.bento-card-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 0.55rem;
+}
+
+.bento-card-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.bento-sketch-frame {
+  flex: 1;
+  overflow: hidden;
+  margin: 0 0.5rem;
+  border-radius: 10px;
+}
+
+.bento-sketch-img {
+  width: 100%;
+  height: 145px;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}
+
+.bento-pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding: 1rem 1.25rem;
+  overflow: hidden;
+}
+
+.bento-pill-chip {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #555;
+  background: #f5f5f7;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   CREATIVE STRATEGY CARD (top right 2)
+   ============================================================ */
+.bento-strategy-card {
+  min-height: 340px;
+}
+
+/* Tree Diagram */
+.bento-tree-diagram {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1.5rem 1.5rem;
+  gap: 0;
+  margin-top: 0.5rem;
+}
+
+.tree-root-node {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #6450ff;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 4px 16px rgba(100, 80, 255, 0.3);
+  margin-bottom: 0;
+}
+
+.tree-connectors-svg {
+  width: 100%;
+  height: 90px;
+  overflow: visible;
+  margin-top: -8px;
+}
+
+.tree-nodes-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 0.25rem;
+  margin-top: -16px;
+}
+
+.tree-node-item {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.node-ai {
+  background: #10a37f;
+  color: #fff;
+}
+
+.node-framer {
+  background: #1a1a2e;
+  color: #fff;
+}
+
+.node-figma {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.node-webflow {
+  background: #4353ff;
+  color: #fff;
+}
+
+/* ============================================================
+   BOTTOM WIDE CARD
+   ============================================================ */
+.bento-wide-card {
+  padding: 2rem 2.5rem;
+}
+
+.bento-wide-title {
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  line-height: 1.25;
+  margin-bottom: 0.85rem;
+}
+
+.bento-wide-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  max-width: 420px;
+}
+
+.bento-wide-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.bento-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.5rem;
+  border-radius: 999px;
+  border: 1.5px solid #222;
+  background: transparent;
+  color: #222;
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.22s ease;
+}
+
+.bento-btn-outline:hover {
+  background: #222;
+  color: #fff;
+}
+
+.bento-btn-purple {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.5rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #0e2447 0%, #4087fb 35%, #3b82f6 100%);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 16px rgba(64, 135, 251, 0.35);
+}
+
+.bento-btn-purple:hover {
+  background: linear-gradient(135deg, #133261 0%, #5294fc 35%, #60a5fa 100%);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(64, 135, 251, 0.5);
+}
+
+/* Monitor Image */
+.bento-monitor-wrapper {
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.bento-monitor-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 992px) {
+  .bento-tall-card {
+    min-height: 480px;
+  }
+
+  .bento-wide-card {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .bento-monitor-img {
+    height: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .why-choose-section {
+    padding: 4rem 0 5rem;
+  }
+
+  .bento-tall-card {
+    min-height: 420px;
+  }
+
+  .bento-website-card,
+  .bento-strategy-card {
+    min-height: 300px;
+  }
+
+  .bento-wide-card {
+    padding: 1.5rem;
+  }
+
+  .bento-wide-desc {
+    max-width: 100%;
+  }
+}
