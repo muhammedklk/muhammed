@@ -166,6 +166,27 @@
   transition: backdrop-filter 0.4s ease, height 0.4s ease;
 }
 
+/* .project-editorial-card:hover .project-editorial-blur-scrim {
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  height: 56%;
+} */
+
+/* Cinematic Ambient Dark Gradient Scrim */
+.project-editorial-scrim {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 62%;
+      background: linear-gradient(to top, rgba(255, 255, 255, 0.481) 0%, rgb(255 255 255 / 0%) 40%, rgb(255 255 255 / 12%) 75%, #ffffff00 100%);
+  pointer-events: none;
+  z-index: 2;
+  transition: background 0.4s ease;
+}
+
+
+
 /* Bottom-Left Overlay Content */
 .project-editorial-content {
   position: absolute;
