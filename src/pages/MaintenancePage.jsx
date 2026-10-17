@@ -1,11 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Hammer, Mail, ArrowRight, ShieldCheck, Lock, Sparkles, Instagram, Linkedin, Github } from 'lucide-react';
+import { Mail, ArrowRight, Lock, Linkedin, Github, Instagram } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 
 export default function MaintenancePage({ targetPage }) {
   const { maintenanceMode, personalInfo } = usePortfolio();
   const isSpecificPage = targetPage && targetPage !== 'Entire Portfolio';
+
+  // Simple, clean text resolution
+  const displayTitle = (() => {
+    if (maintenanceMode?.title && 
+        maintenanceMode.title !== 'Crafting Something Extraordinary.' && 
+        maintenanceMode.title !== 'Crafting Something Extraordinary') {
+      return maintenanceMode.title;
+    }
+    if (isSpecificPage) {
+      return `${targetPage} is Under Maintenance`;
+    }
+    return 'Site Under Maintenance';
+  })();
+
+  const displayMessage = (() => {
+    if (maintenanceMode?.message && 
+        !maintenanceMode.message.includes('extraordinary') && 
+        !maintenanceMode.message.includes('exciting new case study additions')) {
+      return maintenanceMode.message;
+    }
+    if (isSpecificPage) {
+      return `The ${targetPage.toLowerCase()} is temporarily offline for quick updates. Please check back shortly.`;
+    }
+    return 'We are currently performing scheduled updates and maintenance. We will be back online shortly.';
+  })();
 
   return (
     <div style={{
@@ -14,98 +39,85 @@ export default function MaintenancePage({ targetPage }) {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'radial-gradient(ellipse at 50% 20%, #172554 0%, #030712 70%)',
-      color: '#f8fafc',
-      fontFamily: "'Mona Sans', system-ui, sans-serif",
-      padding: '2rem 1.5rem',
+      background: '#f8fafc',
+      color: '#0f172a',
+      fontFamily: "'Mona Sans', system-ui, -apple-system, sans-serif",
+      padding: '2.5rem 1.5rem',
       textAlign: 'center',
-      position: 'relative',
-      overflow: 'hidden'
+      position: 'relative'
     }}>
-      {/* Background ambient glow circles */}
+      
+      {/* Light minimalist card */}
       <div style={{
-        position: 'absolute',
-        top: '15%',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        width: '500px',
-        height: '500px',
-        background: 'radial-gradient(circle, rgba(59, 130, 246, 0.18) 0%, transparent 70%)',
-        filter: 'blur(60px)',
-        pointerEvents: 'none'
-      }} />
-
-      <div style={{
-        maxWidth: '680px',
+        maxWidth: '560px',
         width: '100%',
-        background: 'rgba(15, 23, 42, 0.75)',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
-        backdropFilter: 'blur(24px)',
-        WebkitBackdropFilter: 'blur(24px)',
-        borderRadius: '24px',
-        padding: '3rem 2.2rem',
-        boxShadow: '0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-        position: 'relative',
-        zIndex: 1
+        background: '#ffffff',
+        border: '1px solid #e2e8f0',
+        borderRadius: '20px',
+        padding: '3rem 2.25rem 2.5rem',
+        boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
       }}>
-        {/* Top Badge */}
+        
+        {/* Simple Status Pill */}
         <div style={{
           display: 'inline-flex',
           alignItems: 'center',
-          gap: '0.6rem',
-          padding: '0.4rem 1rem',
+          gap: '0.5rem',
+          padding: '0.35rem 0.85rem',
           borderRadius: '9999px',
-          background: 'rgba(234, 179, 8, 0.12)',
-          border: '1px solid rgba(234, 179, 8, 0.35)',
-          color: '#fde047',
-          fontSize: '0.82rem',
+          background: '#fef3c7',
+          border: '1px solid #fde68a',
+          color: '#92400e',
+          fontSize: '0.78rem',
           fontWeight: 600,
-          marginBottom: '1.8rem',
-          letterSpacing: '0.04em'
+          letterSpacing: '0.03em',
+          marginBottom: '1.4rem'
         }}>
           <span style={{
-            width: '8px',
-            height: '8px',
+            width: '7px',
+            height: '7px',
             borderRadius: '50%',
-            background: '#eab308',
-            boxShadow: '0 0 10px #eab308',
-            animation: 'pulse 1.8s infinite'
+            background: '#d97706',
+            boxShadow: '0 0 0 2px rgba(217, 119, 6, 0.2)'
           }} />
-          <span>{isSpecificPage ? `${targetPage.toUpperCase()} UNDER MAINTENANCE` : 'SCHEDULED MAINTENANCE IN PROGRESS'}</span>
+          <span>{isSpecificPage ? `${targetPage.toUpperCase()} • MAINTENANCE` : 'MAINTENANCE IN PROGRESS'}</span>
         </div>
 
-        {/* Title */}
+        {/* Simple Clean Headline */}
         <h1 style={{
-          fontSize: 'clamp(2rem, 4vw, 2.8rem)',
-          fontWeight: 800,
-          color: '#ffffff',
-          lineHeight: 1.15,
-          letterSpacing: '-0.03em',
-          marginBottom: '1.2rem'
+          fontSize: 'clamp(1.75rem, 3.2vw, 2.25rem)',
+          fontWeight: 700,
+          color: '#0f172a',
+          lineHeight: 1.25,
+          letterSpacing: '-0.025em',
+          margin: '0 0 0.85rem 0'
         }}>
-          {maintenanceMode?.title || (isSpecificPage ? `${targetPage} Under Maintenance` : 'Crafting Something Extraordinary.')}
+          {displayTitle}
         </h1>
 
-        {/* Message */}
+        {/* Simple Description Text */}
         <p style={{
-          fontSize: '1.05rem',
-          color: '#94a3b8',
-          lineHeight: 1.65,
-          marginBottom: '2.4rem',
-          maxWidth: '540px',
-          margin: '0 auto 2.4rem auto'
+          fontSize: '0.98rem',
+          color: '#64748b',
+          lineHeight: 1.6,
+          margin: '0 0 2rem 0',
+          maxWidth: '440px'
         }}>
-          {maintenanceMode?.message || `Muhammed K's ${isSpecificPage ? targetPage.toLowerCase() : 'portfolio'} is currently undergoing scheduled updates and improvements. We will be live again shortly.`}
+          {displayMessage}
         </p>
 
-        {/* Action Buttons */}
+        {/* Clean Action Buttons */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '1rem',
+          gap: '0.75rem',
           flexWrap: 'wrap',
-          marginBottom: '2.5rem'
+          marginBottom: '2rem',
+          width: '100%'
         }}>
           {isSpecificPage && (
             <Link
@@ -113,40 +125,43 @@ export default function MaintenancePage({ targetPage }) {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.5rem',
-                background: 'rgba(255, 255, 255, 0.08)',
-                color: '#f8fafc',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                padding: '0.75rem 1.4rem',
-                borderRadius: '12px',
-                fontWeight: 500,
-                fontSize: '0.9rem',
-                textDecoration: 'none'
+                gap: '0.45rem',
+                background: '#ffffff',
+                color: '#0f172a',
+                border: '1px solid #cbd5e1',
+                padding: '0.65rem 1.25rem',
+                borderRadius: '10px',
+                fontWeight: 600,
+                fontSize: '0.88rem',
+                textDecoration: 'none',
+                transition: 'all 0.2s',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.04)'
               }}
             >
               <span>Back to Home</span>
-              <ArrowRight size={15} />
+              <ArrowRight size={14} />
             </Link>
           )}
+
           <a
-            href={`mailto:${personalInfo?.email || 'muhammedklkm@gmail.com'}`}
+            href={`mailto:${maintenanceMode?.contactEmail || personalInfo?.email || 'muhammedklkm@gmail.com'}`}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.55rem',
-              background: 'linear-gradient(135deg, #0e2447 0%, #4087fb 35%, #3b82f6 100%)',
+              gap: '0.45rem',
+              background: '#0f172a',
               color: '#ffffff',
-              padding: '0.75rem 1.6rem',
-              borderRadius: '12px',
+              padding: '0.65rem 1.35rem',
+              borderRadius: '10px',
               fontWeight: 600,
-              fontSize: '0.9rem',
+              fontSize: '0.88rem',
               textDecoration: 'none',
-              boxShadow: '0 8px 24px rgba(64, 135, 251, 0.35)',
-              transition: 'transform 0.2s ease'
+              transition: 'background 0.2s',
+              boxShadow: '0 2px 6px rgba(15, 23, 42, 0.12)'
             }}
           >
-            <Mail size={16} />
-            <span>Get in Touch Directly</span>
+            <Mail size={15} />
+            <span>Contact Muhammed</span>
           </a>
 
           <Link
@@ -154,44 +169,63 @@ export default function MaintenancePage({ targetPage }) {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.45rem',
-              background: 'rgba(255, 255, 255, 0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
-              color: '#e2e8f0',
-              padding: '0.75rem 1.4rem',
-              borderRadius: '12px',
+              gap: '0.35rem',
+              background: '#f1f5f9',
+              border: '1px solid #e2e8f0',
+              color: '#475569',
+              padding: '0.65rem 1rem',
+              borderRadius: '10px',
               fontWeight: 500,
-              fontSize: '0.9rem',
+              fontSize: '0.84rem',
               textDecoration: 'none'
             }}
           >
-            <Lock size={15} />
-            <span>Admin Portal</span>
+            <Lock size={13} />
+            <span>Admin</span>
           </Link>
         </div>
 
-        {/* Social Links */}
+        {/* Minimalist Social Icons */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '1.25rem',
-          paddingTop: '1.8rem',
-          borderTop: '1px solid rgba(255, 255, 255, 0.08)'
+          gap: '1rem',
+          paddingTop: '1.5rem',
+          borderTop: '1px solid #f1f5f9',
+          width: '100%'
         }}>
           {personalInfo?.socials?.linkedin && (
-            <a href={personalInfo.socials.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: '#94a3b8' }}>
-              <Linkedin size={18} />
+            <a 
+              href={personalInfo.socials.linkedin} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{ color: '#94a3b8', transition: 'color 0.2s' }}
+              title="LinkedIn"
+            >
+              <Linkedin size={17} />
             </a>
           )}
           {personalInfo?.socials?.github && (
-            <a href={personalInfo.socials.github} target="_blank" rel="noopener noreferrer" style={{ color: '#94a3b8' }}>
-              <Github size={18} />
+            <a 
+              href={personalInfo.socials.github} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{ color: '#94a3b8', transition: 'color 0.2s' }}
+              title="GitHub"
+            >
+              <Github size={17} />
             </a>
           )}
           {personalInfo?.socials?.instagram && (
-            <a href={personalInfo.socials.instagram} target="_blank" rel="noopener noreferrer" style={{ color: '#94a3b8' }}>
-              <Instagram size={18} />
+            <a 
+              href={personalInfo.socials.instagram} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{ color: '#94a3b8', transition: 'color 0.2s' }}
+              title="Instagram"
+            >
+              <Instagram size={17} />
             </a>
           )}
         </div>
@@ -200,12 +234,13 @@ export default function MaintenancePage({ targetPage }) {
 
       {/* Footer copyright */}
       <div style={{
-        marginTop: '2rem',
+        marginTop: '1.75rem',
         fontSize: '0.8rem',
-        color: '#64748b'
+        color: '#94a3b8'
       }}>
         © {new Date().getFullYear()} {personalInfo?.name || 'Muhammed K'}. All rights reserved.
       </div>
+
     </div>
   );
 }

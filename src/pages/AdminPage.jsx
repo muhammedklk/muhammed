@@ -2019,7 +2019,7 @@ export default function AdminPage() {
                     value={maintForm.title || ''}
                     onChange={(e) => setMaintForm({ ...maintForm, title: e.target.value })}
                     className="admin-input-light"
-                    placeholder="Crafting Something Extraordinary."
+                    placeholder="Site Under Maintenance"
                   />
                 </div>
 
@@ -2030,7 +2030,7 @@ export default function AdminPage() {
                     value={maintForm.message || ''}
                     onChange={(e) => setMaintForm({ ...maintForm, message: e.target.value })}
                     className="admin-textarea-light"
-                    placeholder="Portfolio is currently undergoing scheduled updates and improvements..."
+                    placeholder="We are currently performing scheduled updates and maintenance. We will be back online shortly."
                   />
                 </div>
 
