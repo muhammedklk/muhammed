@@ -44,6 +44,9 @@ export default function ProjectCard({ project }) {
             loading="lazy"
           />
 
+          {/* Frosted Glass Bottom Blur Layer */}
+          <div className="project-editorial-blur-scrim" />
+
           {/* Cinematic Vignette Bottom Gradient */}
           <div className="project-editorial-scrim" />
 
