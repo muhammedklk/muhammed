@@ -159,9 +159,7 @@
   height: 52%;
   backdrop-filter: blur(24px) saturate(150%);
   -webkit-backdrop-filter: blur(24px) saturate(150%);
-  -webkit-mask-image: linear-gradient(to top, rgb(255 255 255) 0%, rgb(255 255 255 / 92%) 40%, rgb(255 255 255 / 0%) 100%);
-    mask-image: linear-gradient(to top, #ffffffa8, #ffffff49 40%, #ffffff00);
-  pointer-events: none;
+  mask-image: linear-gradient(to top, #ffffff, #ffffffa3 40%, #fff0);
   z-index: 1;
   transition: backdrop-filter 0.4s ease, height 0.4s ease;
 }
