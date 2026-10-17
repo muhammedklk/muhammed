@@ -326,8 +326,19 @@ export default function HomePage() {
           <div className="services-header text-center">
             <span className="section-tag-editorial">{servSec.tag || '( SERVICES )'}</span>
             <h2 className="services-main-headline">
-              {(servSec.headline || 'Crafting Intuitive Products Across Every Dimension.').replace('Every Dimension', '')}
-              <span className="services-headline-accent">Every Dimension</span>.
+              {(() => {
+                const hl = servSec.headline || 'Crafting Intuitive Products Across Every Dimension.';
+                if (hl.includes('Every Dimension')) {
+                  const prefix = hl.replace(/\.?\s*Every Dimension\.?/i, '').trim();
+                  return (
+                    <>
+                      {prefix}{' '}
+                      <span className="services-headline-accent">Every Dimension</span>.
+                    </>
+                  );
+                }
+                return hl;
+              })()}
             </h2>
             <p className="services-main-desc">
               {servSec.subtitle || 'I create intuitive digital experiences through human-centered UI/UX design, modern web development, and front-end engineering solutions.'}
@@ -335,9 +346,37 @@ export default function HomePage() {
           </div>
 
           <div className="row g-4">
-            {(servSec.cards || []).map((card, idx) => {
+            {((servSec.cards && servSec.cards.length > 0) ? servSec.cards : [
+              {
+                number: "01",
+                theme: "theme-violet",
+                category: "Interface & Systems",
+                title: "UI/UX Design",
+                tags: ["Figma Systems", "User Research", "Interactive Prototypes", "Design Handoff"],
+                linkText: "EXPLORE DESIGN WORKS",
+                linkUrl: "/works"
+              },
+              {
+                number: "02",
+                theme: "theme-blue",
+                category: "Visual & Responsive",
+                title: "Web Design",
+                tags: ["Responsive Layouts", "Micro-Animations", "Design Tokens", "Brand Direction"],
+                linkText: "EXPLORE WEB PROJECTS",
+                linkUrl: "/works"
+              },
+              {
+                number: "03",
+                theme: "theme-emerald",
+                category: "Code & 3D Engineering",
+                title: "Frontend Development",
+                tags: ["React.js Apps", "Three.js / WebGL", "Modern CSS3", "Performance & SEO"],
+                linkText: "START A PROJECT",
+                linkUrl: "/contact"
+              }
+            ]).map((card, idx) => {
               const icons = [PenTool, Monitor, Code2];
-              const Icon = icons[idx] || PenTool;
+              const Icon = icons[idx % icons.length] || PenTool;
               return (
                 <div key={idx} className="col-lg-4 col-md-6 col-12">
                   <div className={`service-bento-card ${card.theme || 'theme-violet'}`}>
@@ -358,7 +397,7 @@ export default function HomePage() {
                     </div>
                     <div className="service-bento-footer">
                       <Link to={card.linkUrl || '/works'} className="service-bento-link">
-                        <span>{card.linkText}</span>
+                        <span>{card.linkText || 'EXPLORE'}</span>
                         <ArrowIcon size={14} />
                       </Link>
                     </div>

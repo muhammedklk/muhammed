@@ -185,10 +185,24 @@ async function seedInitialDataIfNeeded() {
         homeContent: defaultHomeContent
       });
       console.log('✅ Initial portfolio data successfully seeded into MongoDB Atlas!');
-    } else if (!doc.homeContent || !doc.homeContent.hero) {
-      doc.homeContent = defaultHomeContent;
-      await doc.save();
-      console.log('✅ Populated default homeContent in MongoDB Atlas!');
+    } else {
+      let modified = false;
+      if (!doc.homeContent || !doc.homeContent.hero) {
+        doc.homeContent = defaultHomeContent;
+        modified = true;
+      } else if (!doc.homeContent.servicesSection || !doc.homeContent.servicesSection.cards || doc.homeContent.servicesSection.cards.length === 0) {
+        if (!doc.homeContent.servicesSection) {
+          doc.homeContent.servicesSection = defaultHomeContent.servicesSection;
+        } else {
+          doc.homeContent.servicesSection.cards = defaultHomeContent.servicesSection.cards;
+        }
+        doc.markModified('homeContent');
+        modified = true;
+      }
+      if (modified) {
+        await doc.save();
+        console.log('✅ Updated default service cards in MongoDB Atlas!');
+      }
     }
   } catch (err) {
     console.error('Error during initial seeding:', err.message);
