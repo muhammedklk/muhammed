@@ -1152,3 +1152,232 @@
     padding: 1.25rem;
   }
 }
+
+/* ============================================================
+   iOS-STYLE TOGGLE SWITCHES & MAINTENANCE STYLES
+============================================================ */
+.admin-toggle-switch {
+  width: 48px;
+  height: 26px;
+  background: #cbd5e1;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 3px;
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.admin-toggle-switch:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.admin-toggle-switch.enabled {
+  background: #eab308;
+}
+
+.admin-toggle-switch.enabled-master {
+  background: #f59e0b;
+}
+
+.admin-toggle-knob {
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(0);
+}
+
+.admin-toggle-switch.enabled .admin-toggle-knob,
+.admin-toggle-switch.enabled-master .admin-toggle-knob {
+  transform: translateX(22px);
+}
+
+/* Sidebar Maintenance Box */
+.admin-sidebar-maintenance-box {
+  margin: 1rem 1rem 0.5rem 1rem;
+  padding: 0.85rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.admin-maint-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.admin-maint-label-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.admin-maint-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.admin-maint-pill {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.admin-maint-pill.live {
+  color: #4ade80;
+}
+
+.admin-maint-pill.active {
+  color: #fde047;
+}
+
+/* Per-Page Maintenance Cards Section */
+.admin-maint-pages-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.admin-maint-pages-header {
+  margin-bottom: 1.25rem;
+}
+
+.admin-maint-pages-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.25rem 0;
+}
+
+.admin-maint-pages-header p {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.admin-maint-pages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.1rem;
+}
+
+.admin-maint-page-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: all 0.2s ease;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.admin-maint-page-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.admin-maint-page-card.card-maintenance-active {
+  background: #fffdf5;
+  border-color: #fde68a;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.12);
+}
+
+.admin-maint-page-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.admin-maint-page-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-maint-page-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: #f1f5f9;
+  color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.admin-maint-page-card.card-maintenance-active .admin-maint-page-icon {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.admin-maint-page-meta h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.2rem 0;
+}
+
+.admin-maint-page-route {
+  font-size: 0.74rem;
+  color: #64748b;
+  font-family: monospace;
+  background: #f1f5f9;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.admin-maint-page-card.card-maintenance-active .admin-maint-page-route {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.admin-maint-page-desc {
+  font-size: 0.82rem;
+  color: #64748b;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.admin-maint-page-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.admin-maint-status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+}
+
+.admin-maint-status-badge.live {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.admin-maint-status-badge.under-maintenance {
+  background: #fef3c7;
+  color: #b45309;
+}
+

@@ -106,7 +106,14 @@ const PortfolioContentSchema = new mongoose.Schema({
     enabled: { type: Boolean, default: false },
     title: { type: String, default: 'Crafting Something Extraordinary' },
     message: { type: String, default: 'Portfolio is currently undergoing scheduled updates and improvements. We will be back shortly with exciting new case studies and designs.' },
-    contactEmail: { type: String, default: 'muhammedklkm@gmail.com' }
+    contactEmail: { type: String, default: 'muhammedklkm@gmail.com' },
+    pages: {
+      all: { type: Boolean, default: false },
+      home: { type: Boolean, default: false },
+      about: { type: Boolean, default: false },
+      works: { type: Boolean, default: false },
+      contact: { type: Boolean, default: false }
+    }
   },
   homeContent: {
     hero: {

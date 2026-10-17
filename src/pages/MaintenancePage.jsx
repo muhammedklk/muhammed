@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { Hammer, Mail, ArrowRight, ShieldCheck, Lock, Sparkles, Instagram, Linkedin, Github } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 
-export default function MaintenancePage() {
+export default function MaintenancePage({ targetPage }) {
   const { maintenanceMode, personalInfo } = usePortfolio();
+  const isSpecificPage = targetPage && targetPage !== 'Entire Portfolio';
 
   return (
     <div style={{
@@ -70,7 +71,7 @@ export default function MaintenancePage() {
             boxShadow: '0 0 10px #eab308',
             animation: 'pulse 1.8s infinite'
           }} />
-          <span>SCHEDULED MAINTENANCE IN PROGRESS</span>
+          <span>{isSpecificPage ? `${targetPage.toUpperCase()} UNDER MAINTENANCE` : 'SCHEDULED MAINTENANCE IN PROGRESS'}</span>
         </div>
 
         {/* Title */}
@@ -82,7 +83,7 @@ export default function MaintenancePage() {
           letterSpacing: '-0.03em',
           marginBottom: '1.2rem'
         }}>
-          {maintenanceMode?.title || 'Crafting Something Extraordinary.'}
+          {maintenanceMode?.title || (isSpecificPage ? `${targetPage} Under Maintenance` : 'Crafting Something Extraordinary.')}
         </h1>
 
         {/* Message */}
@@ -94,7 +95,7 @@ export default function MaintenancePage() {
           maxWidth: '540px',
           margin: '0 auto 2.4rem auto'
         }}>
-          {maintenanceMode?.message || 'Muhammed K\'s portfolio is currently undergoing scheduled updates and exciting new case study additions. We will be live again shortly.'}
+          {maintenanceMode?.message || `Muhammed K's ${isSpecificPage ? targetPage.toLowerCase() : 'portfolio'} is currently undergoing scheduled updates and improvements. We will be live again shortly.`}
         </p>
 
         {/* Action Buttons */}
@@ -106,6 +107,27 @@ export default function MaintenancePage() {
           flexWrap: 'wrap',
           marginBottom: '2.5rem'
         }}>
+          {isSpecificPage && (
+            <Link
+              to="/"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                background: 'rgba(255, 255, 255, 0.08)',
+                color: '#f8fafc',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                padding: '0.75rem 1.4rem',
+                borderRadius: '12px',
+                fontWeight: 500,
+                fontSize: '0.9rem',
+                textDecoration: 'none'
+              }}
+            >
+              <span>Back to Home</span>
+              <ArrowRight size={15} />
+            </Link>
+          )}
           <a
             href={`mailto:${personalInfo?.email || 'muhammedklkm@gmail.com'}`}
             style={{

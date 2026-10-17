@@ -52,13 +52,25 @@ function MainLayout() {
   const { maintenanceMode } = usePortfolio();
   const isAdmin = location.pathname.startsWith('/admin');
 
-  // If maintenance mode is enabled and visitor is not accessing /admin, show MaintenancePage
-  if (maintenanceMode?.enabled && !isAdmin) {
+  // Granular per-page & whole-site maintenance mode check
+  const activePageUnderMaintenance = (() => {
+    if (isAdmin || !maintenanceMode) return null;
+    if (maintenanceMode.enabled || maintenanceMode.pages?.all) return 'Entire Portfolio';
+    const path = location.pathname;
+    if (path === '/' && maintenanceMode.pages?.home) return 'Home Page';
+    if (path.startsWith('/about') && maintenanceMode.pages?.about) return 'About Page';
+    if (path.startsWith('/works') && maintenanceMode.pages?.works) return 'Works & Projects';
+    if (path.startsWith('/contact') && maintenanceMode.pages?.contact) return 'Contact Page';
+    return null;
+  })();
+
+  // If maintenance mode is active for this route and visitor is not accessing /admin, show MaintenancePage
+  if (activePageUnderMaintenance) {
     return (
       <Suspense fallback={<PageLoader />}>
         <Routes>
           <Route path="/admin" element={<AdminPage />} />
-          <Route path="*" element={<MaintenancePage />} />
+          <Route path="*" element={<MaintenancePage targetPage={activePageUnderMaintenance} />} />
         </Routes>
       </Suspense>
     );

@@ -409,13 +409,33 @@ app.put('/api/content/faqs', async (req, res) => {
   }
 });
 
+// GET Maintenance status (fast heartbeat endpoint for real-time auto-switch across devices)
+app.get('/api/content/maintenance-status', async (req, res) => {
+  try {
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    const doc = await PortfolioContent.findOne({ key: 'portfolio_main' }).select('maintenanceMode');
+    if (!doc || !doc.maintenanceMode) {
+      return res.json({ 
+        success: true, 
+        maintenanceMode: { 
+          enabled: false, 
+          pages: { all: false, home: false, about: false, works: false, contact: false } 
+        } 
+      });
+    }
+    res.json({ success: true, maintenanceMode: doc.maintenanceMode });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+});
+
 // UPDATE Maintenance Mode
 app.put('/api/content/maintenance', async (req, res) => {
   try {
     const updated = await PortfolioContent.findOneAndUpdate(
       { key: 'portfolio_main' },
       { $set: { maintenanceMode: req.body } },
-      { new: true, upsert: true }
+      { returnDocument: 'after', upsert: true }
     );
     res.json({ success: true, message: 'Maintenance mode updated successfully', data: updated.maintenanceMode });
   } catch (error) {

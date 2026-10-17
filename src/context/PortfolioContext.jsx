@@ -93,7 +93,14 @@ const defaultMaintenanceMode = {
   enabled: false,
   title: 'Crafting Something Extraordinary',
   message: 'Portfolio is currently undergoing scheduled updates and improvements. We will be back shortly with exciting new case studies and designs.',
-  contactEmail: 'muhammedklkm@gmail.com'
+  contactEmail: 'muhammedklkm@gmail.com',
+  pages: {
+    all: false,
+    home: false,
+    about: false,
+    works: false,
+    contact: false
+  }
 };
 
 const PortfolioContext = createContext(null);
@@ -198,6 +205,53 @@ export function PortfolioProvider({ children }) {
   useEffect(() => {
     refreshData();
   }, [refreshData]);
+
+  // Real-time automatic maintenance & live sync without page reload (across all devices & tabs)
+  useEffect(() => {
+    let isMounted = true;
+    const checkMaintenance = async () => {
+      try {
+        const res = await fetch('/api/content/maintenance-status', {
+          cache: 'no-store',
+          headers: { 'pragma': 'no-cache', 'cache-control': 'no-cache' }
+        });
+        if (!res.ok) return;
+        const json = await res.json();
+        if (json.success && json.maintenanceMode && isMounted) {
+          setMaintenanceMode(prev => {
+            const prevStr = JSON.stringify(prev);
+            const nextStr = JSON.stringify(json.maintenanceMode);
+            if (prevStr !== nextStr) {
+              try {
+                localStorage.setItem('portfolio_maintenance', nextStr);
+              } catch {}
+              return json.maintenanceMode;
+            }
+            return prev;
+          });
+        }
+      } catch (_) {}
+    };
+
+    // Fast 3-second heartbeat polling so any device in the world auto-switches screen
+    const interval = setInterval(checkMaintenance, 3000);
+
+    // Cross-tab instant sync via localStorage storage event
+    const handleStorage = (e) => {
+      if (e.key === 'portfolio_maintenance' && e.newValue && isMounted) {
+        try {
+          setMaintenanceMode(JSON.parse(e.newValue));
+        } catch {}
+      }
+    };
+    window.addEventListener('storage', handleStorage);
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+      window.removeEventListener('storage', handleStorage);
+    };
+  }, []);
 
   // Upload desktop image / file with automatic client compression & Base64 fallback for cross-device support
   const uploadMedia = async (file) => {
