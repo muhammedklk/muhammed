@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, ArrowRight, Lock, Linkedin, Github, Instagram } from 'lucide-react';
+import { Mail, ArrowRight, Linkedin, Github, Instagram } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 
 export default function MaintenancePage({ targetPage }) {
@@ -163,26 +163,6 @@ export default function MaintenancePage({ targetPage }) {
             <Mail size={15} />
             <span>Contact Muhammed</span>
           </a>
-
-          <Link
-            to="/admin"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.35rem',
-              background: '#f1f5f9',
-              border: '1px solid #e2e8f0',
-              color: '#475569',
-              padding: '0.65rem 1rem',
-              borderRadius: '10px',
-              fontWeight: 500,
-              fontSize: '0.84rem',
-              textDecoration: 'none'
-            }}
-          >
-            <Lock size={13} />
-            <span>Admin</span>
-          </Link>
         </div>
 
         {/* Minimalist Social Icons */}

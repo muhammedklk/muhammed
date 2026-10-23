@@ -29,9 +29,16 @@ import {
   Mail
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
+import AdminLoginPage, { isAdminAuthenticated, clearAdminAuth } from './AdminLoginPage';
 import './admin.css';
 
 export default function AdminPage() {
+  const [authed, setAuthed] = useState(isAdminAuthenticated);
+
+  if (!authed) {
+    return <AdminLoginPage onSuccess={() => setAuthed(true)} />;
+  }
+
   const {
     personalInfo,
     aboutContent,
@@ -412,6 +419,22 @@ export default function AdminPage() {
               <Eye size={15} />
               <span>Preview Site</span>
             </a>
+            <button
+              type="button"
+              onClick={() => {
+                clearAdminAuth();
+                setAuthed(false);
+              }}
+              className="admin-sidebar-btn-reset"
+              title="Logout from Admin"
+              style={{ color: '#ef4444' }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16 17 21 12 16 7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+              </svg>
+            </button>
             <button type="button" onClick={handleReset} className="admin-sidebar-btn-reset" title="Reset default data">
               <RefreshCw size={14} />
             </button>

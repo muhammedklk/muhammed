@@ -278,13 +278,18 @@
   border-bottom-color: #ef4444;
 }
 
-@media (max-width: 520px) {
+@media (max-width: 768px) {
   .simple-inline-row {
     flex-direction: column;
-    gap: 0;
+    align-items: stretch;
+    gap: 1.4rem;
   }
-  .simple-inline-field + .simple-inline-field {
-    margin-top: 1.4rem;
+  .simple-inline-field {
+    width: 100%;
+    flex: none;
+  }
+  .simple-inline-field .simple-field-input {
+    width: 100%;
   }
 }
 
