@@ -1,8 +1,9 @@
 /* ============================================================
-   Scroll Reveal Animations
-   Smooth upward reveal triggered when scrolling into view
+   Modern Portfolio Animations & Scroll Reveals
+   Awwwards & Modern Studio Level Interactions
    ============================================================ */
 
+/* ─── 1. Core Scroll Reveal Animations ─── */
 .reveal-up,
 .reveal-on-scroll {
   opacity: 0;
@@ -18,10 +19,41 @@
   transform: translateY(0);
 }
 
-/* Slightly smaller distance for badges, tags, buttons */
+/* ─── 2. Apple / Linear Style Blur Reveal ─── */
+.reveal-blur {
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.reveal-blur.is-revealed {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+/* ─── 3. Subtle Scale-Up Reveal for Cards & Images ─── */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.93) translateY(24px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-scale.is-revealed {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* ─── 4. Subtitle / Badge Subtle Reveal ─── */
 .reveal-subtle {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(18px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
@@ -32,7 +64,7 @@
   transform: translateY(0);
 }
 
-/* Stagger Delays */
+/* ─── 5. Stagger Delays ─── */
 .reveal-delay-1 { transition-delay: 0.1s !important; }
 .reveal-delay-2 { transition-delay: 0.2s !important; }
 .reveal-delay-3 { transition-delay: 0.3s !important; }
@@ -40,7 +72,7 @@
 .reveal-delay-5 { transition-delay: 0.5s !important; }
 .reveal-delay-6 { transition-delay: 0.6s !important; }
 
-/* Stagger Container — direct children animate in sequence */
+/* ─── 6. Stagger Container ─── */
 .reveal-stagger > * {
   opacity: 0;
   transform: translateY(32px);
@@ -63,14 +95,197 @@
 .reveal-stagger.is-revealed > *:nth-child(7) { transition-delay: 0.65s; }
 .reveal-stagger.is-revealed > *:nth-child(8) { transition-delay: 0.75s; }
 
-/* Respect user accessibility preferences */
+/* ─── 7. Interactive Cursor Spotlight on Cards ─── */
+.service-bento-card,
+.project-editorial-card,
+.about-matrix-card,
+.simple-form-card,
+.about-showcase-card,
+.spotlight-card {
+  position: relative;
+}
+
+.service-bento-card::before,
+.project-editorial-card::before,
+.about-matrix-card::before,
+.simple-form-card::before,
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    520px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(124, 92, 225, 0.13),
+    rgba(64, 135, 251, 0.06) 40%,
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.service-bento-card:hover::before,
+.project-editorial-card:hover::before,
+.about-matrix-card:hover::before,
+.simple-form-card:hover::before,
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* ─── 8. Animated Gradient Accent Headlines ─── */
+@keyframes textShimmerFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.services-headline-accent,
+.works-headline-accent,
+.gradient-text-animated {
+  background: linear-gradient(
+    135deg,
+    #7C5CE1 0%,
+    #4087fb 35%,
+    #ec4899 70%,
+    #7C5CE1 100%
+  ) !important;
+  background-size: 250% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: textShimmerFlow 6s ease-in-out infinite !important;
+  display: inline-block;
+}
+
+/* ─── 9. Ethereal Floating Ambient Mesh Orbs ─── */
+@keyframes floatMeshBlob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  33% {
+    transform: translate(25px, -28px) scale(1.08) rotate(3deg);
+  }
+  66% {
+    transform: translate(-20px, 22px) scale(0.95) rotate(-3deg);
+  }
+}
+
+.services-section::before {
+  animation: floatMeshBlob 16s ease-in-out infinite alternate !important;
+}
+
+.services-section::after {
+  animation: floatMeshBlob 20s ease-in-out infinite alternate !important;
+  animation-delay: -8s !important;
+}
+
+/* ─── 10. Radar Pulse Live Status Dot ─── */
+@keyframes radarGreenPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 9px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+.about-status-dot-green {
+  animation: radarGreenPulse 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite !important;
+}
+
+/* ─── 11. Modern Interactive Button Micro-Interactions ─── */
+.hero-talk-btn,
+.btn-talk-dark,
+.works-all-btn,
+.simple-submit-btn,
+.cs-view-site-pill-btn,
+.about-btn-resume,
+.about-btn-download,
+.about-btn-touch {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              background 0.3s ease !important;
+}
+
+.hero-talk-btn:hover,
+.btn-talk-dark:hover,
+.works-all-btn:hover,
+.cs-view-site-pill-btn:hover,
+.about-btn-resume:hover,
+.about-btn-download:hover,
+.about-btn-touch:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 28px -6px rgba(64, 135, 251, 0.28);
+}
+
+/* Spring compression feedback on click */
+.hero-talk-btn:active,
+.btn-talk-dark:active,
+.works-all-btn:active,
+.simple-submit-btn:active,
+.cs-view-site-pill-btn:active,
+.about-btn-resume:active,
+.about-btn-download:active,
+.about-btn-touch:active {
+  transform: scale(0.96) translateY(0) !important;
+  transition: transform 0.1s ease !important;
+}
+
+/* Arrow micro-bounce */
+.hero-talk-btn .hero-talk-arrow,
+.works-all-btn .works-btn-arrow,
+.btn-talk-dark svg,
+.cs-view-site-pill-btn svg {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.hero-talk-btn:hover .hero-talk-arrow,
+.works-all-btn:hover .works-btn-arrow,
+.btn-talk-dark:hover svg,
+.cs-view-site-pill-btn:hover svg {
+  transform: translate(3px, -3px) !important;
+}
+
+/* ─── 12. Pill Badges Interactive Hover ─── */
+.service-pill-btn {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.25s ease,
+              border-color 0.25s ease,
+              color 0.25s ease !important;
+}
+
+.service-pill-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* ─── 13. Respect User Reduced-Motion Preferences ─── */
 @media (prefers-reduced-motion: reduce) {
   .reveal-up,
   .reveal-on-scroll,
+  .reveal-blur,
+  .reveal-scale,
   .reveal-subtle,
   .reveal-stagger > * {
     opacity: 1 !important;
     transform: none !important;
+    filter: none !important;
     transition: none !important;
+  }
+  .services-section::before,
+  .services-section::after,
+  .about-status-dot-green,
+  .services-headline-accent,
+  .works-headline-accent {
+    animation: none !important;
   }
 }

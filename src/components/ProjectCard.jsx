@@ -32,7 +32,7 @@ export default function ProjectCard({ project }) {
     <div className="project-card-wrapper">
       <Link
         to={`/works/${project.slug}`}
-        className="project-editorial-card"
+        className="project-editorial-card spotlight-card"
         aria-label={`View case study: ${project.title}`}
       >
         {/* Full-Bleed Media Container */}

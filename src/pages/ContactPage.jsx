@@ -49,7 +49,7 @@ export default function ContactPage() {
           {/* ============================================================
               LEFT COLUMN: "Let's talk." & DIRECT CONTACT INFO
           ============================================================ */}
-          <div className="simple-contact-left reveal-up">
+          <div className="simple-contact-left reveal-blur">
             
             {/* 3D Chat Icon Badge */}
             <div className="simple-chat-badge" aria-hidden="true">

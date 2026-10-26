@@ -2,16 +2,16 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 /**
- * ScrollReveal Component
- * Automatically manages IntersectionObserver for all reveal-on-scroll elements.
- * Triggers smooth upward reveal animations as elements scroll into view from bottom to top.
+ * ScrollReveal & Modern Interaction Manager
+ * - Manages scroll-triggered upward, blur, scale, and stagger reveals
+ * - Controls interactive cursor spotlights on cards
  */
 export default function ScrollReveal() {
   const { pathname } = useLocation();
 
   useEffect(() => {
     const SELECTOR =
-      '.reveal-up, .reveal-on-scroll, .reveal-stagger, .reveal-subtle, [data-reveal]';
+      '.reveal-up, .reveal-on-scroll, .reveal-stagger, .reveal-subtle, .reveal-blur, .reveal-scale, [data-reveal]';
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -24,7 +24,7 @@ export default function ScrollReveal() {
       },
       {
         root: null,
-        rootMargin: '0px 0px -40px 0px', // triggers as element comes into view from bottom
+        rootMargin: '0px 0px -40px 0px',
         threshold: 0.1,
       }
     );
@@ -45,6 +45,23 @@ export default function ScrollReveal() {
         }
       });
     };
+
+    // Card interactive spotlight coordinate tracker
+    const handlePointerMove = (e) => {
+      const target = e.target;
+      const card = target.closest(
+        '.service-bento-card, .project-editorial-card, .about-matrix-card, .simple-form-card, .about-showcase-card, .spotlight-card'
+      );
+      if (!card) return;
+
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    };
+
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
 
     // Initial scan
     observeElements();
@@ -68,6 +85,7 @@ export default function ScrollReveal() {
       clearTimeout(t1);
       clearTimeout(t2);
       clearTimeout(t3);
+      window.removeEventListener('pointermove', handlePointerMove);
       observer.disconnect();
       mutationObserver.disconnect();
     };
@@ -77,12 +95,12 @@ export default function ScrollReveal() {
 }
 
 /**
- * Reusable Wrapper component for individual elements if needed in JSX:
- * <Reveal delay="1"><div>...</div></Reveal>
+ * Reusable Wrapper component for individual elements:
+ * <Reveal type="blur" delay="1"><div>...</div></Reveal>
  */
-export function Reveal({ children, delay, subtle, className = '', ...props }) {
+export function Reveal({ children, delay, type = 'up', subtle, className = '', ...props }) {
   const delayClass = delay ? `reveal-delay-${delay}` : '';
-  const typeClass = subtle ? 'reveal-subtle' : 'reveal-up';
+  const typeClass = subtle ? 'reveal-subtle' : `reveal-${type}`;
   return (
     <div className={`${typeClass} ${delayClass} ${className}`.trim()} {...props}>
       {children}

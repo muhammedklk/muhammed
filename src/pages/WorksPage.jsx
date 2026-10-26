@@ -17,7 +17,7 @@ export default function WorksPage() {
       {/* ── Page Header Section ── */}
       <section className="works-page-header" aria-label="Works Directory">
         <div className="container">
-          <div className="works-header-top reveal-up">
+          <div className="works-header-top reveal-blur">
 
             {/* Floating Icon Badge — like contact page chat badge */}
             <div className="works-icon-badge" aria-hidden="true">

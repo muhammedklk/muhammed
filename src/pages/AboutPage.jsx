@@ -56,7 +56,7 @@ export default function AboutPage() {
             </div>
 
             {/* Right: Narrative & Quick Info */}
-            <div className="about-info-col reveal-up reveal-delay-2">
+            <div className="about-info-col reveal-blur reveal-delay-1">
               
               {/* Eyebrow Pill */}
               <span className="section-tag-editorial">{aboutContent?.tag || '( ABOUT MY CRAFT )'}</span>
