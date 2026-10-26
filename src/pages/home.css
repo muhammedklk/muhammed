@@ -751,10 +751,6 @@
 
 /* Card Themes */
 /* Violet (UI/UX) */
-.service-bento-card.theme-violet::before {
-  background: linear-gradient(90deg, #7C5CE1, #b99aff);
-}
-
 .service-bento-card.theme-violet:hover {
   background: rgba(245, 240, 255, 0.72);
 }
@@ -775,10 +771,6 @@
 }
 
 /* Blue (Web Design) */
-.service-bento-card.theme-blue::before {
-  background: linear-gradient(90deg, #2563EB, #60A5FA);
-}
-
 .service-bento-card.theme-blue:hover {
   background: rgba(237, 243, 255, 0.72);
 }
@@ -799,10 +791,6 @@
 }
 
 /* Emerald (Frontend) */
-.service-bento-card.theme-emerald::before {
-  background: linear-gradient(90deg, #059669, #34D399);
-}
-
 .service-bento-card.theme-emerald:hover {
   background: rgba(236, 253, 245, 0.72);
 }
