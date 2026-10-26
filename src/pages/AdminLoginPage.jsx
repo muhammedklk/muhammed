@@ -3,7 +3,7 @@ import { ShieldCheck, Eye, EyeOff, Lock, AlertCircle } from 'lucide-react';
 
 // Simple session-based admin auth. Password is checked client-side for this portfolio.
 // The real protection is that the admin panel URL + password together act as a secret.
-const ADMIN_PASSWORD = 'muhammedk@admin2024';
+const ADMIN_PASSWORD = 'Muhammed#9656';
 const SESSION_KEY = 'portfolio_admin_auth';
 
 export function isAdminAuthenticated() {
