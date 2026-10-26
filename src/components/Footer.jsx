@@ -12,7 +12,7 @@ export default function Footer() {
     <footer className="theme-glow-footer" id="site-footer">
       <div className="container theme-glow-footer-container">
         {/* Top Invitation Section */}
-        <div className="footer-glow-top">
+        <div className="footer-glow-top reveal-up">
           <h2 className="footer-glow-heading">
             Have a project in mind? Let’s work together.
           </h2>
@@ -27,7 +27,7 @@ export default function Footer() {
         </div>
 
         {/* Middle Metadata & Socials Row */}
-        <div className="footer-glow-mid-row">
+        <div className="footer-glow-mid-row reveal-up reveal-delay-2">
           <div className="footer-glow-copyright" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
             <span>© {currentYear} {personalInfo?.name || 'Muhammed K'}. All rights reserved.</span>
             <Link 
@@ -95,7 +95,7 @@ export default function Footer() {
         </div>
 
         {/* Giant Bottom Wordmark inside the container on top of the Theme Color Bottom Glow */}
-        <div className="footer-glow-bottom-wordmark" aria-hidden="true">
+        <div className="footer-glow-bottom-wordmark reveal-up reveal-delay-3" aria-hidden="true">
           <svg 
             viewBox="0 0 1240 210" 
             className="footer-wordmark-svg"

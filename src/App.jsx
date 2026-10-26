@@ -6,6 +6,7 @@ import CustomCursor from './components/CustomCursor';
 import AIChatbot from './components/AIChatbot';
 import ScrollToTop from './components/ScrollToTop';
 import SmoothScroll from './components/SmoothScroll';
+import ScrollReveal from './components/ScrollReveal';
 
 import { PortfolioProvider, usePortfolio } from './context/PortfolioContext';
 
@@ -81,6 +82,7 @@ function MainLayout() {
       <CustomCursor />
       <AIChatbot />
       <SmoothScroll />
+      <ScrollReveal />
       <ScrollToTop />
       {!isAdmin && <Navbar />}
 

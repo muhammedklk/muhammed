@@ -49,7 +49,7 @@ export default function ContactPage() {
           {/* ============================================================
               LEFT COLUMN: "Let's talk." & DIRECT CONTACT INFO
           ============================================================ */}
-          <div className="simple-contact-left">
+          <div className="simple-contact-left reveal-up">
             
             {/* 3D Chat Icon Badge */}
             <div className="simple-chat-badge" aria-hidden="true">
@@ -171,7 +171,7 @@ export default function ContactPage() {
           {/* ============================================================
               RIGHT COLUMN: "Send a message" CARD
           ============================================================ */}
-          <div className="simple-contact-right">
+          <div className="simple-contact-right reveal-up reveal-delay-2">
             <div className="simple-form-card">
               <h2 className="simple-form-title">Send a message</h2>
 

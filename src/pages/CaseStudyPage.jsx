@@ -135,14 +135,14 @@ export default function CaseStudyPage() {
         {/* ============================================================
             1. BIG CENTERED HEADLINE
         ============================================================ */}
-        <header className="cs-editorial-header text-center">
+        <header className="cs-editorial-header text-center reveal-up">
           <h1 className="cs-hero-monumental-title">{displayTitle}</h1>
         </header>
 
         {/* ============================================================
             2. HERO PRIMARY STUDIO MOCKUP
         ============================================================ */}
-        <section className="cs-hero-mockup-frame">
+        <section className="cs-hero-mockup-frame reveal-up">
           <img
             src={media.hero}
             alt={`${project.title} Hero Display Mockup`}
@@ -154,7 +154,7 @@ export default function CaseStudyPage() {
         {/* ============================================================
             3. ACTION & METADATA BAR
         ============================================================ */}
-        <section className="cs-action-meta-bar">
+        <section className="cs-action-meta-bar reveal-up">
           <div className="cs-action-left">
             <Link
               to="/contact"
@@ -185,7 +185,7 @@ export default function CaseStudyPage() {
         {/* ============================================================
             4. TWO-COLUMN EDITORIAL OVERVIEW & CHALLENGE
         ============================================================ */}
-        <section className="cs-editorial-narrative-section">
+        <section className="cs-editorial-narrative-section reveal-up">
           <div className="row g-5">
             {/* Left Column: Overview */}
             <div className="col-lg-5 col-md-12">
@@ -221,7 +221,7 @@ export default function CaseStudyPage() {
         {/* ============================================================
             5. SECOND FULL-WIDTH STUDIO MOCKUP (LAPTOP ON DESK)
         ============================================================ */}
-        <section className="cs-fullwidth-mockup-frame">
+        <section className="cs-fullwidth-mockup-frame reveal-up">
           <img
             src={media.laptop}
             alt={`${project.title} Laptop Studio Presentation`}
@@ -233,7 +233,7 @@ export default function CaseStudyPage() {
         {/* ============================================================
             6. "DESIGNED FOR EVERY SCREEN" (RESPONSIVE DUAL MOBILE MOCKUPS)
         ============================================================ */}
-        <section className="cs-responsive-showcase-section text-center">
+        <section className="cs-responsive-showcase-section text-center reveal-up">
           <span className="section-tag-editorial">( DEVICE & EXPERIENCE )</span>
           <h2 className="cs-responsive-title">Designed For Every Screen.</h2>
 
@@ -264,7 +264,7 @@ export default function CaseStudyPage() {
         {/* ============================================================
             7. THIRD PERSPECTIVE STUDIO MOCKUP
         ============================================================ */}
-        <section className="cs-fullwidth-mockup-frame cs-mockup-last-frame">
+        <section className="cs-fullwidth-mockup-frame cs-mockup-last-frame reveal-up">
           <img
             src={media.perspective}
             alt={`${project.title} Workspace Setup Mockup`}
@@ -276,7 +276,7 @@ export default function CaseStudyPage() {
         {/* ============================================================
             8. PREVIOUS & NEXT PROJECT FOOTER NAVIGATION
         ============================================================ */}
-        <nav className="cs-prev-next-nav" aria-label="Adjacent Projects">
+        <nav className="cs-prev-next-nav reveal-up" aria-label="Adjacent Projects">
           <div className="cs-nav-link-item cs-nav-prev">
             <Link to={`/works/${prevProject.slug}`} className="cs-nav-anchor">
               <span className="cs-nav-direction">← PREVIOUS PROJECT</span>

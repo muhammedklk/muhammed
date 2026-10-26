@@ -1,6 +1,7 @@
 @import 'bootstrap/dist/css/bootstrap-grid.min.css';
 @import './styles/tokens.css';
 @import './styles/cursor.css';
+@import './styles/reveal.css';
 
 /* Container Width: Cap Bootstrap grid container at 1200px (instead of 1320px) */
 @media (min-width: 1200px) {

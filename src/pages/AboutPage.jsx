@@ -26,7 +26,7 @@ export default function AboutPage() {
           <div className="about-intro-grid">
             
             {/* Left: Portrait Card */}
-            <div className="about-photo-col">
+            <div className="about-photo-col reveal-up">
               <div className="about-photo-card">
                 
                 {/* Top-Left Pill Badge */}
@@ -56,7 +56,7 @@ export default function AboutPage() {
             </div>
 
             {/* Right: Narrative & Quick Info */}
-            <div className="about-info-col">
+            <div className="about-info-col reveal-up reveal-delay-2">
               
               {/* Eyebrow Pill */}
               <span className="section-tag-editorial">{aboutContent?.tag || '( ABOUT MY CRAFT )'}</span>
@@ -127,14 +127,14 @@ export default function AboutPage() {
         ============================================================ */}
         <section className="about-skills-matrix-section" aria-label="Skills & Expertise Matrix">
           
-          <div className="text-center mb-5">
+          <div className="text-center mb-5 reveal-up">
             <span className="section-tag-editorial">( TECHNICAL CAPABILITIES )</span>
             <h2 className="about-skills-main-title">
               Skills & Expertise Matrix.
             </h2>
           </div>
 
-          <div className="about-skills-cards-grid">
+          <div className="about-skills-cards-grid reveal-stagger">
             
             {/* Card 01: Design & UI/UX */}
             <div className="about-matrix-card">

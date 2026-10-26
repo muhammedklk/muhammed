@@ -242,7 +242,7 @@ export default function HomePage() {
               <div className="row align-items-end justify-content-between hero-bottom-row">
                 {/* Bottom-Left: Main Headline */}
                 <div className="col-lg-6 col-md-6 col-12 hero-pointer-enable">
-                  <div className="hero-left-col">
+                  <div className="hero-left-col reveal-up">
                     <h1 className="hero-main-title">
                       {(() => {
                         const raw = hero.headline || 'Design That Feels.\nExperiences That Resonate.';
@@ -272,7 +272,7 @@ export default function HomePage() {
 
                 {/* Bottom-Right: Side Statement + Service Pills */}
                 <div className="col-lg-5 col-md-6 col-12 hero-pointer-enable">
-                  <div className="hero-right-col">
+                  <div className="hero-right-col reveal-up reveal-delay-2">
                     <p className="hero-side-statement">
                       {hero.sideStatement || "Whether through intuitive user interfaces, responsive web systems, or clean front-end code, I craft digital products that people don't just use — they feel."}
                     </p>
@@ -296,7 +296,7 @@ export default function HomePage() {
       ============================ */}
       <section className="about-editorial-section" id="about-preview" aria-label="About Muhammed K">
         <div className="container">
-          <div className="about-editorial-wrap text-center">
+          <div className="about-editorial-wrap text-center reveal-up">
             <span className="about-editorial-eyebrow">{aboutSnip.tag || '( ABOUT )'}</span>
             <InlineImageStatement aboutSnippet={aboutSnip} />
             <div className="about-editorial-actions">
@@ -323,7 +323,7 @@ export default function HomePage() {
       ============================ */}
       <section className="services-section" id="services" aria-label="How Can I Assist You">
         <div className="container">
-          <div className="services-header text-center">
+          <div className="services-header text-center reveal-up">
             <span className="section-tag-editorial">{servSec.tag || '( SERVICES )'}</span>
             <h2 className="services-main-headline">
               {(() => {
@@ -345,7 +345,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="row g-4">
+          <div className="row g-4 reveal-stagger">
             {((servSec.cards && servSec.cards.length > 0) ? servSec.cards : [
               {
                 number: "01",
@@ -416,7 +416,7 @@ export default function HomePage() {
       ============================ */}
       <section className="featured-works-section" id="works-preview" aria-label="Selected Works">
         <div className="container">
-          <div className="row align-items-end works-header-row">
+          <div className="row align-items-end works-header-row reveal-up">
             <div className="col-lg-9 col-md-12">
               <span className="section-tag-editorial">{worksSec.tag || '( SELECTED WORKS )'}</span>
               <h2 className="works-headline">
@@ -436,7 +436,7 @@ export default function HomePage() {
           </div>
 
           {/* 2-Column Showcase Grid Matching Reference Design */}
-          <div className="row g-4 works-gallery-grid">
+          <div className="row g-4 works-gallery-grid reveal-stagger">
             {featuredProjects.map((project, idx) => (
               <div key={project.id} className="col-lg-6 col-12">
                 <ProjectCard project={project} index={idx} />
@@ -457,14 +457,14 @@ export default function HomePage() {
           <section className="faq-ref-section" id="faq" aria-label="Frequently asked questions">
             <div className="container">
               {/* Centered Header */}
-              <div className="faq-ref-header">
+              <div className="faq-ref-header reveal-up">
                 <span className="section-tag-editorial">{faqSec.tag || '( FAQ )'}</span>
                 <h2 className="faq-ref-headline">{faqSec.headline || 'Frequently Asked Questions.'}</h2>
                 <p className="faq-ref-sub">{faqSec.subtitle || 'Everything you need to know before kicking off a project together.'}</p>
               </div>
 
               {/* Accordion List — full-width, centered */}
-              <div className="faq-ref-list">
+              <div className="faq-ref-list reveal-stagger">
                 {faqItems.map(item => (
                   <FAQItem
                     key={item.id}

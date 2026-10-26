@@ -17,7 +17,7 @@ export default function WorksPage() {
       {/* ── Page Header Section ── */}
       <section className="works-page-header" aria-label="Works Directory">
         <div className="container">
-          <div className="works-header-top">
+          <div className="works-header-top reveal-up">
 
             {/* Floating Icon Badge — like contact page chat badge */}
             <div className="works-icon-badge" aria-hidden="true">
@@ -83,7 +83,7 @@ export default function WorksPage() {
         <div className="container">
           {viewMode === 'grid' ? (
             /* ── Balanced 2-Column Gallery Grid (All 8 Projects) ── */
-            <div className="row g-4 works-gallery-grid">
+            <div className="row g-4 works-gallery-grid reveal-stagger">
               {projects.map((project, idx) => (
                 <div key={project.id} className="col-lg-6 col-12">
                   <ProjectCard project={project} index={idx} />
