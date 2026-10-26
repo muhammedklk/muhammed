@@ -146,19 +146,48 @@ export default function AdminPage() {
   // Toggle Individual Page Maintenance Mode
   const handleTogglePageMaintenance = async (pageKey) => {
     const currentPages = maintForm.pages || { all: false, home: false, about: false, works: false, contact: false };
-    const newPageStatus = !currentPages[pageKey];
-    const updatedPages = { ...currentPages, [pageKey]: newPageStatus };
+    
+    let updated;
+    let newPageStatus;
 
-    let newEnabled = maintForm.enabled;
     if (pageKey === 'all') {
-      newEnabled = newPageStatus;
-    }
+      const isCurrentlyMaster = Boolean(maintForm.enabled || currentPages.all);
+      newPageStatus = !isCurrentlyMaster;
+      updated = {
+        ...maintForm,
+        enabled: newPageStatus,
+        pages: {
+          all: newPageStatus,
+          home: newPageStatus,
+          about: newPageStatus,
+          works: newPageStatus,
+          contact: newPageStatus
+        }
+      };
+    } else {
+      const isMasterOn = Boolean(maintForm.enabled || currentPages.all);
+      const isCurrentlyActive = isMasterOn ? true : Boolean(currentPages[pageKey]);
+      newPageStatus = !isCurrentlyActive;
 
-    const updated = {
-      ...maintForm,
-      enabled: newEnabled,
-      pages: updatedPages
-    };
+      // If master was on and we're disabling one page, unpack all others as true so only this page turns off
+      const basePages = isMasterOn
+        ? { home: true, about: true, works: true, contact: true }
+        : { ...currentPages };
+
+      const updatedPages = {
+        ...basePages,
+        [pageKey]: newPageStatus
+      };
+
+      const allFourOn = ['home', 'about', 'works', 'contact'].every(k => Boolean(updatedPages[k]));
+      updatedPages.all = allFourOn;
+
+      updated = {
+        ...maintForm,
+        enabled: allFourOn,
+        pages: updatedPages
+      };
+    }
 
     setMaintForm(updated);
     setIsSaving(true);
@@ -175,7 +204,7 @@ export default function AdminPage() {
       if (newPageStatus) {
         showToast(`⚠️ Maintenance Mode turned ON for ${pageNames[pageKey] || pageKey}!`, 'warning');
       } else {
-        showToast(`✅ Maintenance Mode turned OFF for ${pageNames[pageKey] || pageKey}!`, 'success');
+        showToast(`✅ Maintenance Mode turned OFF for ${pageNames[pageKey] || pageKey}! Page is LIVE.`, 'success');
       }
     } else {
       showToast('Failed to update maintenance mode', 'error');
@@ -371,6 +400,33 @@ export default function AdminPage() {
                 >
                   <span className="admin-toggle-knob" />
                 </button>
+              </div>
+
+              {/* Individual Page Quick Switches in Sidebar */}
+              <div className="admin-sidebar-page-maint-list">
+                {[
+                  { key: 'home', label: 'Home' },
+                  { key: 'about', label: 'About' },
+                  { key: 'works', label: 'Works' },
+                  { key: 'contact', label: 'Contact' }
+                ].map(p => {
+                  const isPageActive = isMasterOn || Boolean(maintForm.pages?.[p.key]);
+                  return (
+                    <div key={p.key} className="admin-sidebar-page-maint-item">
+                      <span className="admin-sidebar-page-name">{p.label} Page</span>
+                      <button
+                        type="button"
+                        role="switch"
+                        aria-checked={isPageActive}
+                        onClick={() => handleTogglePageMaintenance(p.key)}
+                        className={`admin-toggle-switch admin-toggle-switch-sm ${isPageActive ? 'enabled' : ''}`}
+                        title={`Toggle ${p.label} Page Maintenance`}
+                      >
+                        <span className="admin-toggle-knob" />
+                      </button>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           );
@@ -681,6 +737,34 @@ export default function AdminPage() {
                   <span>{isSaving ? 'Saving...' : 'Save Home Content'}</span>
                 </button>
               </div>
+
+              {/* Home Page Dedicated Maintenance Bar */}
+              {(() => {
+                const isMasterOn = Boolean(maintForm.enabled || maintForm.pages?.all);
+                const isHomeMaint = isMasterOn || Boolean(maintForm.pages?.home);
+                return (
+                  <div className={`admin-page-maint-strip ${isHomeMaint ? 'maint-active' : 'live'}`}>
+                    <div className="admin-maint-strip-left">
+                      <span className="admin-maint-strip-dot" />
+                      <span>
+                        {isMasterOn
+                          ? 'Home Page (/) is UNDER MAINTENANCE (Entire Site Maintenance Active)'
+                          : isHomeMaint
+                          ? 'Home Page (/) is UNDER MAINTENANCE. Visitors see the maintenance screen.'
+                          : 'Home Page (/) is LIVE to the public.'}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleTogglePageMaintenance('home')}
+                      className={`admin-strip-maint-btn ${isHomeMaint ? 'btn-live' : 'btn-maint'}`}
+                    >
+                      <Power size={13} />
+                      <span>{isHomeMaint ? 'Turn OFF Maintenance (Make Live)' : 'Put Home Under Maintenance'}</span>
+                    </button>
+                  </div>
+                );
+              })()}
 
               <div className="admin-form-grid-light">
 
@@ -1158,6 +1242,34 @@ export default function AdminPage() {
                 </button>
               </div>
 
+              {/* About Page Dedicated Maintenance Bar */}
+              {(() => {
+                const isMasterOn = Boolean(maintForm.enabled || maintForm.pages?.all);
+                const isAboutMaint = isMasterOn || Boolean(maintForm.pages?.about);
+                return (
+                  <div className={`admin-page-maint-strip ${isAboutMaint ? 'maint-active' : 'live'}`}>
+                    <div className="admin-maint-strip-left">
+                      <span className="admin-maint-strip-dot" />
+                      <span>
+                        {isMasterOn
+                          ? 'About Page (/about) is UNDER MAINTENANCE (Entire Site Maintenance Active)'
+                          : isAboutMaint
+                          ? 'About Page (/about) is UNDER MAINTENANCE. Visitors see the maintenance screen.'
+                          : 'About Page (/about) is LIVE to the public.'}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleTogglePageMaintenance('about')}
+                      className={`admin-strip-maint-btn ${isAboutMaint ? 'btn-live' : 'btn-maint'}`}
+                    >
+                      <Power size={13} />
+                      <span>{isAboutMaint ? 'Turn OFF Maintenance (Make Live)' : 'Put About Under Maintenance'}</span>
+                    </button>
+                  </div>
+                );
+              })()}
+
               <div className="admin-form-grid-light">
                 
                 {/* About Portrait Cutout */}
@@ -1569,6 +1681,34 @@ export default function AdminPage() {
                     </button>
                   </div>
 
+                  {/* Works & Projects Dedicated Maintenance Bar */}
+                  {(() => {
+                    const isMasterOn = Boolean(maintForm.enabled || maintForm.pages?.all);
+                    const isWorksMaint = isMasterOn || Boolean(maintForm.pages?.works);
+                    return (
+                      <div className={`admin-page-maint-strip ${isWorksMaint ? 'maint-active' : 'live'}`} style={{ marginTop: '1rem' }}>
+                        <div className="admin-maint-strip-left">
+                          <span className="admin-maint-strip-dot" />
+                          <span>
+                            {isMasterOn
+                              ? 'Works Page (/works) is UNDER MAINTENANCE (Entire Site Maintenance Active)'
+                              : isWorksMaint
+                              ? 'Works Page (/works) is UNDER MAINTENANCE. Visitors see the maintenance screen.'
+                              : 'Works Page (/works) is LIVE to the public.'}
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => handleTogglePageMaintenance('works')}
+                          className={`admin-strip-maint-btn ${isWorksMaint ? 'btn-live' : 'btn-maint'}`}
+                        >
+                          <Power size={13} />
+                          <span>{isWorksMaint ? 'Turn OFF Maintenance (Make Live)' : 'Put Works Under Maintenance'}</span>
+                        </button>
+                      </div>
+                    );
+                  })()}
+
                   <div className="admin-table-container-light">
                     <table className="admin-table-light">
                       <thead>
@@ -1883,154 +2023,219 @@ export default function AdminPage() {
                 {/* PER-PAGE MAINTENANCE TOGGLE CARDS */}
                 <div className="admin-maint-pages-section">
                   <div className="admin-maint-pages-header">
-                    <h3>Individual Page Maintenance Controls</h3>
-                    <p>Turn maintenance ON or OFF for each specific page independently. Connected devices auto-switch live without reload.</p>
+                    <div>
+                      <h3>Individual Page Maintenance Controls</h3>
+                      <p>Turn maintenance ON or OFF for each specific page independently. Connected devices auto-switch live without reload.</p>
+                    </div>
+                    <div className="admin-maint-quick-actions">
+                      <button
+                        type="button"
+                        onClick={() => handleTogglePageMaintenance('all')}
+                        className="admin-maint-quick-btn"
+                        title="Toggle all pages maintenance at once"
+                      >
+                        <Power size={13} />
+                        <span>{isMasterOn ? 'Make All Pages Live' : 'Put All Pages in Maintenance'}</span>
+                      </button>
+                    </div>
                   </div>
 
                   <div className="admin-maint-pages-grid">
                     {/* Home Page */}
-                    <div className={`admin-maint-page-card ${maintForm.pages?.home ? 'card-maintenance-active' : ''}`}>
-                      <div className="admin-maint-page-top">
-                        <div className="admin-maint-page-info">
-                          <div className="admin-maint-page-icon">
-                            <Home size={20} />
+                    {(() => {
+                      const isHomeMaint = isMasterOn || Boolean(maintForm.pages?.home);
+                      return (
+                        <div className={`admin-maint-page-card ${isHomeMaint ? 'card-maintenance-active' : ''}`}>
+                          <div className="admin-maint-page-top">
+                            <div className="admin-maint-page-info">
+                              <div className="admin-maint-page-icon">
+                                <Home size={20} />
+                              </div>
+                              <div className="admin-maint-page-meta">
+                                <h4>Home Page</h4>
+                                <span className="admin-maint-page-route">/ (Root)</span>
+                              </div>
+                            </div>
+                            <button
+                              type="button"
+                              role="switch"
+                              aria-checked={isHomeMaint}
+                              onClick={() => handleTogglePageMaintenance('home')}
+                              className={`admin-toggle-switch ${isHomeMaint ? 'enabled' : ''}`}
+                              title="Toggle Home page maintenance"
+                            >
+                              <span className="admin-toggle-knob" />
+                            </button>
                           </div>
-                          <div className="admin-maint-page-meta">
-                            <h4>Home Page</h4>
-                            <span className="admin-maint-page-route">/ (Root)</span>
+                          <p className="admin-maint-page-desc">
+                            Hero banner, about teaser, services showcase, featured projects & FAQs on the main landing page.
+                          </p>
+                          <div className="admin-maint-page-bottom">
+                            <span className={`admin-maint-status-badge ${isHomeMaint ? 'under-maintenance' : 'live'}`}>
+                              {isHomeMaint ? '⚠️ UNDER MAINTENANCE' : '● LIVE'}
+                            </span>
+                            <a href="/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: '#2563eb', textDecoration: 'none', fontWeight: 600 }}>
+                              Open Page ↗
+                            </a>
                           </div>
+                          <button
+                            type="button"
+                            onClick={() => handleTogglePageMaintenance('home')}
+                            className={`admin-page-maint-action-btn ${isHomeMaint ? 'btn-maint-on' : 'btn-maint-off'}`}
+                          >
+                            <Power size={14} />
+                            <span>{isHomeMaint ? 'Turn OFF Maintenance (Make Live)' : 'Put Home Page in Maintenance'}</span>
+                          </button>
                         </div>
-                        <button
-                          type="button"
-                          role="switch"
-                          aria-checked={Boolean(maintForm.pages?.home)}
-                          onClick={() => handleTogglePageMaintenance('home')}
-                          className={`admin-toggle-switch ${maintForm.pages?.home ? 'enabled' : ''}`}
-                          title="Toggle Home page maintenance"
-                        >
-                          <span className="admin-toggle-knob" />
-                        </button>
-                      </div>
-                      <p className="admin-maint-page-desc">
-                        Hero banner, about teaser, services showcase, featured projects & FAQs on the main landing page.
-                      </p>
-                      <div className="admin-maint-page-bottom">
-                        <span className={`admin-maint-status-badge ${maintForm.pages?.home ? 'under-maintenance' : 'live'}`}>
-                          {maintForm.pages?.home ? '⚠️ UNDER MAINTENANCE' : '● LIVE'}
-                        </span>
-                        <a href="/" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: '#2563eb', textDecoration: 'none', fontWeight: 600 }}>
-                          Open Page ↗
-                        </a>
-                      </div>
-                    </div>
+                      );
+                    })()}
 
                     {/* About Page */}
-                    <div className={`admin-maint-page-card ${maintForm.pages?.about ? 'card-maintenance-active' : ''}`}>
-                      <div className="admin-maint-page-top">
-                        <div className="admin-maint-page-info">
-                          <div className="admin-maint-page-icon">
-                            <User size={20} />
+                    {(() => {
+                      const isAboutMaint = isMasterOn || Boolean(maintForm.pages?.about);
+                      return (
+                        <div className={`admin-maint-page-card ${isAboutMaint ? 'card-maintenance-active' : ''}`}>
+                          <div className="admin-maint-page-top">
+                            <div className="admin-maint-page-info">
+                              <div className="admin-maint-page-icon">
+                                <User size={20} />
+                              </div>
+                              <div className="admin-maint-page-meta">
+                                <h4>About Page</h4>
+                                <span className="admin-maint-page-route">/about</span>
+                              </div>
+                            </div>
+                            <button
+                              type="button"
+                              role="switch"
+                              aria-checked={isAboutMaint}
+                              onClick={() => handleTogglePageMaintenance('about')}
+                              className={`admin-toggle-switch ${isAboutMaint ? 'enabled' : ''}`}
+                              title="Toggle About page maintenance"
+                            >
+                              <span className="admin-toggle-knob" />
+                            </button>
                           </div>
-                          <div className="admin-maint-page-meta">
-                            <h4>About Page</h4>
-                            <span className="admin-maint-page-route">/about</span>
+                          <p className="admin-maint-page-desc">
+                            Full story bio, philosophy, skill pill tags, background cards, and curriculum vitae download.
+                          </p>
+                          <div className="admin-maint-page-bottom">
+                            <span className={`admin-maint-status-badge ${isAboutMaint ? 'under-maintenance' : 'live'}`}>
+                              {isAboutMaint ? '⚠️ UNDER MAINTENANCE' : '● LIVE'}
+                            </span>
+                            <a href="/about" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: '#2563eb', textDecoration: 'none', fontWeight: 600 }}>
+                              Open Page ↗
+                            </a>
                           </div>
+                          <button
+                            type="button"
+                            onClick={() => handleTogglePageMaintenance('about')}
+                            className={`admin-page-maint-action-btn ${isAboutMaint ? 'btn-maint-on' : 'btn-maint-off'}`}
+                          >
+                            <Power size={14} />
+                            <span>{isAboutMaint ? 'Turn OFF Maintenance (Make Live)' : 'Put About Page in Maintenance'}</span>
+                          </button>
                         </div>
-                        <button
-                          type="button"
-                          role="switch"
-                          aria-checked={Boolean(maintForm.pages?.about)}
-                          onClick={() => handleTogglePageMaintenance('about')}
-                          className={`admin-toggle-switch ${maintForm.pages?.about ? 'enabled' : ''}`}
-                          title="Toggle About page maintenance"
-                        >
-                          <span className="admin-toggle-knob" />
-                        </button>
-                      </div>
-                      <p className="admin-maint-page-desc">
-                        Full story bio, philosophy, skill pill tags, background cards, and curriculum vitae download.
-                      </p>
-                      <div className="admin-maint-page-bottom">
-                        <span className={`admin-maint-status-badge ${maintForm.pages?.about ? 'under-maintenance' : 'live'}`}>
-                          {maintForm.pages?.about ? '⚠️ UNDER MAINTENANCE' : '● LIVE'}
-                        </span>
-                        <a href="/about" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: '#2563eb', textDecoration: 'none', fontWeight: 600 }}>
-                          Open Page ↗
-                        </a>
-                      </div>
-                    </div>
+                      );
+                    })()}
 
                     {/* Works Page */}
-                    <div className={`admin-maint-page-card ${maintForm.pages?.works ? 'card-maintenance-active' : ''}`}>
-                      <div className="admin-maint-page-top">
-                        <div className="admin-maint-page-info">
-                          <div className="admin-maint-page-icon">
-                            <Briefcase size={20} />
+                    {(() => {
+                      const isWorksMaint = isMasterOn || Boolean(maintForm.pages?.works);
+                      return (
+                        <div className={`admin-maint-page-card ${isWorksMaint ? 'card-maintenance-active' : ''}`}>
+                          <div className="admin-maint-page-top">
+                            <div className="admin-maint-page-info">
+                              <div className="admin-maint-page-icon">
+                                <Briefcase size={20} />
+                              </div>
+                              <div className="admin-maint-page-meta">
+                                <h4>Works & Projects</h4>
+                                <span className="admin-maint-page-route">/works</span>
+                              </div>
+                            </div>
+                            <button
+                              type="button"
+                              role="switch"
+                              aria-checked={isWorksMaint}
+                              onClick={() => handleTogglePageMaintenance('works')}
+                              className={`admin-toggle-switch ${isWorksMaint ? 'enabled' : ''}`}
+                              title="Toggle Works page maintenance"
+                            >
+                              <span className="admin-toggle-knob" />
+                            </button>
                           </div>
-                          <div className="admin-maint-page-meta">
-                            <h4>Works & Projects</h4>
-                            <span className="admin-maint-page-route">/works</span>
+                          <p className="admin-maint-page-desc">
+                            Complete portfolio gallery, category tabs, and all interactive case study deep dive pages.
+                          </p>
+                          <div className="admin-maint-page-bottom">
+                            <span className={`admin-maint-status-badge ${isWorksMaint ? 'under-maintenance' : 'live'}`}>
+                              {isWorksMaint ? '⚠️ UNDER MAINTENANCE' : '● LIVE'}
+                            </span>
+                            <a href="/works" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: '#2563eb', textDecoration: 'none', fontWeight: 600 }}>
+                              Open Page ↗
+                            </a>
                           </div>
+                          <button
+                            type="button"
+                            onClick={() => handleTogglePageMaintenance('works')}
+                            className={`admin-page-maint-action-btn ${isWorksMaint ? 'btn-maint-on' : 'btn-maint-off'}`}
+                          >
+                            <Power size={14} />
+                            <span>{isWorksMaint ? 'Turn OFF Maintenance (Make Live)' : 'Put Works Page in Maintenance'}</span>
+                          </button>
                         </div>
-                        <button
-                          type="button"
-                          role="switch"
-                          aria-checked={Boolean(maintForm.pages?.works)}
-                          onClick={() => handleTogglePageMaintenance('works')}
-                          className={`admin-toggle-switch ${maintForm.pages?.works ? 'enabled' : ''}`}
-                          title="Toggle Works page maintenance"
-                        >
-                          <span className="admin-toggle-knob" />
-                        </button>
-                      </div>
-                      <p className="admin-maint-page-desc">
-                        Complete portfolio gallery, category tabs, and all interactive case study deep dive pages.
-                      </p>
-                      <div className="admin-maint-page-bottom">
-                        <span className={`admin-maint-status-badge ${maintForm.pages?.works ? 'under-maintenance' : 'live'}`}>
-                          {maintForm.pages?.works ? '⚠️ UNDER MAINTENANCE' : '● LIVE'}
-                        </span>
-                        <a href="/works" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: '#2563eb', textDecoration: 'none', fontWeight: 600 }}>
-                          Open Page ↗
-                        </a>
-                      </div>
-                    </div>
+                      );
+                    })()}
 
                     {/* Contact Page */}
-                    <div className={`admin-maint-page-card ${maintForm.pages?.contact ? 'card-maintenance-active' : ''}`}>
-                      <div className="admin-maint-page-top">
-                        <div className="admin-maint-page-info">
-                          <div className="admin-maint-page-icon">
-                            <Mail size={20} />
+                    {(() => {
+                      const isContactMaint = isMasterOn || Boolean(maintForm.pages?.contact);
+                      return (
+                        <div className={`admin-maint-page-card ${isContactMaint ? 'card-maintenance-active' : ''}`}>
+                          <div className="admin-maint-page-top">
+                            <div className="admin-maint-page-info">
+                              <div className="admin-maint-page-icon">
+                                <Mail size={20} />
+                              </div>
+                              <div className="admin-maint-page-meta">
+                                <h4>Contact Page</h4>
+                                <span className="admin-maint-page-route">/contact</span>
+                              </div>
+                            </div>
+                            <button
+                              type="button"
+                              role="switch"
+                              aria-checked={isContactMaint}
+                              onClick={() => handleTogglePageMaintenance('contact')}
+                              className={`admin-toggle-switch ${isContactMaint ? 'enabled' : ''}`}
+                              title="Toggle Contact page maintenance"
+                            >
+                              <span className="admin-toggle-knob" />
+                            </button>
                           </div>
-                          <div className="admin-maint-page-meta">
-                            <h4>Contact Page</h4>
-                            <span className="admin-maint-page-route">/contact</span>
+                          <p className="admin-maint-page-desc">
+                            Interactive inquiry form, personal email links, and verified social media channels.
+                          </p>
+                          <div className="admin-maint-page-bottom">
+                            <span className={`admin-maint-status-badge ${isContactMaint ? 'under-maintenance' : 'live'}`}>
+                              {isContactMaint ? '⚠️ UNDER MAINTENANCE' : '● LIVE'}
+                            </span>
+                            <a href="/contact" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: '#2563eb', textDecoration: 'none', fontWeight: 600 }}>
+                              Open Page ↗
+                            </a>
                           </div>
+                          <button
+                            type="button"
+                            onClick={() => handleTogglePageMaintenance('contact')}
+                            className={`admin-page-maint-action-btn ${isContactMaint ? 'btn-maint-on' : 'btn-maint-off'}`}
+                          >
+                            <Power size={14} />
+                            <span>{isContactMaint ? 'Turn OFF Maintenance (Make Live)' : 'Put Contact Page in Maintenance'}</span>
+                          </button>
                         </div>
-                        <button
-                          type="button"
-                          role="switch"
-                          aria-checked={Boolean(maintForm.pages?.contact)}
-                          onClick={() => handleTogglePageMaintenance('contact')}
-                          className={`admin-toggle-switch ${maintForm.pages?.contact ? 'enabled' : ''}`}
-                          title="Toggle Contact page maintenance"
-                        >
-                          <span className="admin-toggle-knob" />
-                        </button>
-                      </div>
-                      <p className="admin-maint-page-desc">
-                        Interactive inquiry form, personal email links, and verified social media channels.
-                      </p>
-                      <div className="admin-maint-page-bottom">
-                        <span className={`admin-maint-status-badge ${maintForm.pages?.contact ? 'under-maintenance' : 'live'}`}>
-                          {maintForm.pages?.contact ? '⚠️ UNDER MAINTENANCE' : '● LIVE'}
-                        </span>
-                        <a href="/contact" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: '#2563eb', textDecoration: 'none', fontWeight: 600 }}>
-                          Open Page ↗
-                        </a>
-                      </div>
-                    </div>
+                      );
+                    })()}
                   </div>
                 </div>
 

@@ -1381,3 +1381,195 @@
   color: #b45309;
 }
 
+/* Per-page maintenance action buttons inside cards */
+.admin-page-maint-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.admin-page-maint-action-btn.btn-maint-on {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+.admin-page-maint-action-btn.btn-maint-on:hover {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+}
+
+.admin-page-maint-action-btn.btn-maint-off {
+  background: #f8fafc;
+  color: #334155;
+  border-color: #e2e8f0;
+}
+
+.admin-page-maint-action-btn.btn-maint-off:hover {
+  background: #fef3c7;
+  color: #b45309;
+  border-color: #fde68a;
+}
+
+/* Sidebar mini per-page toggles */
+.admin-sidebar-page-maint-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.65rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.admin-sidebar-page-maint-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.2rem 0;
+}
+
+.admin-sidebar-page-name {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.admin-toggle-switch.admin-toggle-switch-sm {
+  width: 32px;
+  height: 18px;
+}
+
+.admin-toggle-switch.admin-toggle-switch-sm .admin-toggle-knob {
+  width: 14px;
+  height: 14px;
+  left: 2px;
+  top: 2px;
+}
+
+.admin-toggle-switch.admin-toggle-switch-sm.enabled .admin-toggle-knob,
+.admin-toggle-switch.admin-toggle-switch-sm.enabled-master .admin-toggle-knob {
+  transform: translateX(14px);
+}
+
+/* Page Maintenance Banner Strip inside content tabs (Home, About, Works) */
+.admin-page-maint-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  flex-wrap: wrap;
+}
+
+.admin-page-maint-strip.live {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #166534;
+}
+
+.admin-page-maint-strip.maint-active {
+  background: #fffbeb;
+  border-color: #fde68a;
+  color: #92400e;
+}
+
+.admin-maint-strip-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.admin-maint-strip-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.admin-page-maint-strip.live .admin-maint-strip-dot {
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+}
+
+.admin-page-maint-strip.maint-active .admin-maint-strip-dot {
+  background: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25);
+}
+
+.admin-strip-maint-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.admin-strip-maint-btn.btn-live {
+  background: #22c55e;
+  color: #ffffff;
+  border-color: #16a34a;
+}
+
+.admin-strip-maint-btn.btn-live:hover {
+  background: #16a34a;
+}
+
+.admin-strip-maint-btn.btn-maint {
+  background: #ffffff;
+  color: #b45309;
+  border-color: #fde68a;
+}
+
+.admin-strip-maint-btn.btn-maint:hover {
+  background: #fef3c7;
+}
+
+.admin-maint-quick-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.admin-maint-quick-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  transition: all 0.15s ease;
+}
+
+.admin-maint-quick-btn:hover {
+  background: #e2e8f0;
+}
+
+
