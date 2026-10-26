@@ -307,19 +307,19 @@ export function PortfolioProvider({ children }) {
       }
     }
 
-    // Default upload for non-images (PDFs, etc.)
-    const formData = new FormData();
-    formData.append('file', file);
-    const res = await fetch('/api/upload', {
-      method: 'POST',
-      body: formData
-    });
-    if (!res.ok) {
-      const errText = await res.text();
-      throw new Error(`Upload failed: ${errText}`);
+    // For non-images (PDFs, docs, etc.) — convert to base64 data URL client-side
+    // This works without any backend server running
+    try {
+      const base64Url = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e) => resolve(e.target.result);
+        reader.onerror = reject;
+      });
+      return { success: true, url: base64Url, filename: file.name };
+    } catch (err) {
+      return { success: false, message: `Upload failed: ${err.message}` };
     }
-    const json = await res.json();
-    return json;
   };
 
   // Update Personal Info
