@@ -321,6 +321,14 @@ export default function AdminPage() {
     }
   };
 
+  const isMasterMaintActive = Boolean(maintForm.enabled || maintForm.pages?.all);
+  const isPartialMaintActive = Boolean(
+    maintForm.pages?.home || 
+    maintForm.pages?.about || 
+    maintForm.pages?.works || 
+    maintForm.pages?.contact
+  );
+
   const menuItems = [
     { id: 'general', label: 'Profile & Hero', icon: User },
     { id: 'home', label: 'Home Page Sections', icon: Layout },
@@ -328,7 +336,12 @@ export default function AdminPage() {
     { id: 'projects', label: 'Works & Projects', icon: Briefcase, count: projectsList?.length || 0 },
     { id: 'faqs', label: 'FAQs Management', icon: HelpCircle, count: faqsList?.length || 0 },
     { id: 'media', label: 'Desktop Media Uploader', icon: ImageIcon },
-    { id: 'maintenance', label: 'Maintenance Mode', icon: Hammer, badge: maintForm.enabled ? 'ACTIVE' : null }
+    { 
+      id: 'maintenance', 
+      label: 'Site Maintenance', 
+      icon: Hammer, 
+      badge: isMasterMaintActive ? 'ALL OFFLINE' : isPartialMaintActive ? 'PARTIAL' : null 
+    }
   ];
 
   return (
@@ -369,68 +382,6 @@ export default function AdminPage() {
             <X size={18} />
           </button>
         </div>
-
-        {/* Quick Maintenance Switch Widget in Sidebar */}
-        {(() => {
-          const isMasterOn = Boolean(maintForm.enabled || maintForm.pages?.all);
-          const hasPartial = Boolean(
-            maintForm.pages?.home || 
-            maintForm.pages?.about || 
-            maintForm.pages?.works || 
-            maintForm.pages?.contact
-          );
-          return (
-            <div className="admin-sidebar-maintenance-box">
-              <div className="admin-maint-status-row">
-                <div className="admin-maint-label-group">
-                  <span className="admin-maint-title">Site Maintenance</span>
-                  <span className={`admin-maint-pill ${(isMasterOn || hasPartial) ? 'active' : 'live'}`}>
-                    {isMasterOn ? '⚠️ ALL PAGES OFF' : hasPartial ? '⚠️ PARTIAL MAINT' : '● LIVE TO PUBLIC'}
-                  </span>
-                </div>
-
-                {/* iOS-Style Toggle Switch (Master) */}
-                <button
-                  type="button"
-                  role="switch"
-                  aria-checked={isMasterOn}
-                  onClick={handleToggleMaintenance}
-                  className={`admin-toggle-switch ${isMasterOn ? 'enabled-master' : hasPartial ? 'enabled' : ''}`}
-                  title={isMasterOn ? 'Turn OFF All Maintenance' : 'Turn ON Master Maintenance (All Pages)'}
-                >
-                  <span className="admin-toggle-knob" />
-                </button>
-              </div>
-
-              {/* Individual Page Quick Switches in Sidebar */}
-              <div className="admin-sidebar-page-maint-list">
-                {[
-                  { key: 'home', label: 'Home' },
-                  { key: 'about', label: 'About' },
-                  { key: 'works', label: 'Works' },
-                  { key: 'contact', label: 'Contact' }
-                ].map(p => {
-                  const isPageActive = isMasterOn || Boolean(maintForm.pages?.[p.key]);
-                  return (
-                    <div key={p.key} className="admin-sidebar-page-maint-item">
-                      <span className="admin-sidebar-page-name">{p.label} Page</span>
-                      <button
-                        type="button"
-                        role="switch"
-                        aria-checked={isPageActive}
-                        onClick={() => handleTogglePageMaintenance(p.key)}
-                        className={`admin-toggle-switch admin-toggle-switch-sm ${isPageActive ? 'enabled' : ''}`}
-                        title={`Toggle ${p.label} Page Maintenance`}
-                      >
-                        <span className="admin-toggle-knob" />
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })()}
 
         {/* Navigation Menu List */}
         <nav className="admin-sidebar-nav">
