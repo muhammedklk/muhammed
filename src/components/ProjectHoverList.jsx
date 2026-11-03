@@ -4,7 +4,7 @@ import { Sparkles } from 'lucide-react';
 import ArrowIcon from './ArrowIcon';
 import '../styles/project-hover-list.css';
 
-export default function ProjectHoverList({ projects }) {
+export default function ProjectHoverList({ projects, allowCaseStudy = false }) {
   const [activeProject, setActiveProject] = useState(null);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [targetPos, setTargetPos] = useState({ x: 0, y: 0 });
@@ -105,14 +105,8 @@ export default function ProjectHoverList({ projects }) {
           const indexNum = String(idx + 1).padStart(2, '0');
           const isCurrentActive = activeProject?.id === project.id;
 
-          return (
-            <Link
-              key={project.id}
-              to={`/works/${project.slug}`}
-              className={`project-list-row ${isCurrentActive ? 'row-active' : ''}`}
-              onMouseEnter={(e) => handleMouseEnter(project, e)}
-              aria-label={`View case study: ${project.title}`}
-            >
+          const rowInner = (
+            <>
               <div className="row-inner">
                 {/* Left: Index & Title */}
                 <div className="row-left">
@@ -136,9 +130,11 @@ export default function ProjectHoverList({ projects }) {
                   <span className="row-category-desktop">{project.category}</span>
                   <span className="row-year">{project.year || '2026'}</span>
 
-                  <span className="row-arrow-circle" aria-hidden="true">
-                    <ArrowIcon size={14} />
-                  </span>
+                  {allowCaseStudy && (
+                    <span className="row-arrow-circle" aria-hidden="true">
+                      <ArrowIcon size={14} />
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -151,7 +147,33 @@ export default function ProjectHoverList({ projects }) {
                   loading="lazy"
                 />
               </div>
-            </Link>
+            </>
+          );
+
+          if (allowCaseStudy) {
+            return (
+              <Link
+                key={project.id}
+                to={`/works/${project.slug}`}
+                className={`project-list-row ${isCurrentActive ? 'row-active' : ''}`}
+                onMouseEnter={(e) => handleMouseEnter(project, e)}
+                aria-label={`View case study: ${project.title}`}
+              >
+                {rowInner}
+              </Link>
+            );
+          }
+
+          return (
+            <div
+              key={project.id}
+              className={`project-list-row ${isCurrentActive ? 'row-active' : ''}`}
+              style={{ cursor: 'default' }}
+              onMouseEnter={(e) => handleMouseEnter(project, e)}
+              aria-label={project.title}
+            >
+              {rowInner}
+            </div>
           );
         })}
       </div>

@@ -109,7 +109,8 @@ const getProjectMedia = (project) => {
 };
 
 export default function CaseStudyPage() {
-  const { slug } = useParams();
+  // Case study pages temporarily hidden
+  return <Navigate to="/works" replace />;
   const { projects } = usePortfolio();
   const project = (projects || []).find((p) => p.slug === slug);
 

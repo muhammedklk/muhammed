@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import CustomCursor from './components/CustomCursor';
@@ -92,7 +92,8 @@ function MainLayout() {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/works" element={<WorksPage />} />
-            <Route path="/works/:slug" element={<CaseStudyPage />} />
+            {/* Case study pages temporarily hidden — redirects to works directory */}
+            <Route path="/works/:slug" element={<Navigate to="/works" replace />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="*" element={<NotFoundPage />} />
