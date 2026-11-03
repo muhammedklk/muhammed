@@ -301,70 +301,98 @@ export function PortfolioProvider({ children }) {
     };
   }, []);
 
-  // Upload desktop image / file with automatic client compression & Base64 fallback for cross-device support
+  // Upload desktop image / file with automatic client compression & server upload
   const uploadMedia = async (file) => {
-    if (file && file.type && file.type.startsWith('image/')) {
+    if (!file) return { success: false, message: 'No file provided' };
+
+    // 1. Try server upload first if available
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const serverRes = await fetch('/api/upload', { method: 'POST', body: formData });
+      if (serverRes.ok) {
+        const serverJson = await serverRes.json();
+        if (serverJson.success && serverJson.url) {
+          return { success: true, url: serverJson.url, filename: file.name };
+        }
+      }
+    } catch (_) {
+      // Server not reachable or error, continue to client fallback
+    }
+
+    // 2. Client-side compression for images
+    if (file.type && file.type.startsWith('image/')) {
       try {
-        const base64Url = await new Promise((resolve, reject) => {
+        const base64Url = await new Promise((resolve) => {
           const reader = new FileReader();
-          reader.readAsDataURL(file);
           reader.onload = (e) => {
+            const dataUrl = e.target.result;
             const img = new Image();
-            img.src = e.target.result;
+
+            // Attach event handlers BEFORE setting src
             img.onload = () => {
-              const canvas = document.createElement('canvas');
-              let width = img.width;
-              let height = img.height;
-              const maxDim = 1600;
-              if (width > maxDim || height > maxDim) {
-                if (width > height) {
-                  height = Math.round((height * maxDim) / width);
-                  width = maxDim;
-                } else {
-                  width = Math.round((width * maxDim) / height);
-                  height = maxDim;
+              try {
+                const canvas = document.createElement('canvas');
+                let width = img.naturalWidth || img.width || 800;
+                let height = img.naturalHeight || img.height || 600;
+                const maxDim = 1200; // Optimal size for crisp display and minimal memory
+
+                if (width > maxDim || height > maxDim) {
+                  if (width > height) {
+                    height = Math.round((height * maxDim) / width);
+                    width = maxDim;
+                  } else {
+                    width = Math.round((width * maxDim) / height);
+                    height = maxDim;
+                  }
                 }
+
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                if (ctx) {
+                  ctx.drawImage(img, 0, 0, width, height);
+                  const compressed = canvas.toDataURL('image/webp', 0.82);
+                  resolve(compressed || dataUrl);
+                } else {
+                  resolve(dataUrl);
+                }
+              } catch (canvasErr) {
+                console.warn('Canvas compression error:', canvasErr);
+                resolve(dataUrl);
               }
-              canvas.width = width;
-              canvas.height = height;
-              const ctx = canvas.getContext('2d');
-              ctx.drawImage(img, 0, 0, width, height);
-              const compressed = canvas.toDataURL('image/webp', 0.82);
-              resolve(compressed);
             };
-            img.onerror = () => resolve(e.target.result);
+
+            img.onerror = () => resolve(dataUrl);
+            img.src = dataUrl;
+
+            // Handle immediate cached completion
+            if (img.complete && img.naturalWidth !== 0) {
+              img.onload();
+            }
           };
-          reader.onerror = reject;
+
+          reader.onerror = () => resolve('');
+          reader.readAsDataURL(file);
         });
 
-        // Try server upload to get a public file URL if server is reachable
-        try {
-          const formData = new FormData();
-          formData.append('file', file);
-          const serverRes = await fetch('/api/upload', { method: 'POST', body: formData });
-          if (serverRes.ok) {
-            const serverJson = await serverRes.json();
-            // Return base64Url as primary for multi-device cross-platform reliability, or serverJson.url
-            return { success: true, url: base64Url, serverUrl: serverJson.url, filename: file.name };
-          }
-        } catch (_) {}
-
-        return { success: true, url: base64Url, filename: file.name };
+        if (base64Url) {
+          return { success: true, url: base64Url, filename: file.name };
+        }
       } catch (err) {
-        console.warn('Image processing fallback to server upload', err);
+        console.warn('Image processing fallback error:', err);
       }
     }
 
-    // For non-images (PDFs, docs, etc.) — convert to base64 data URL client-side
-    // This works without any backend server running
+    // 3. For non-images (PDFs, docs) — convert to raw data URL
     try {
-      const base64Url = await new Promise((resolve, reject) => {
+      const dataUrl = await new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.readAsDataURL(file);
         reader.onload = (e) => resolve(e.target.result);
         reader.onerror = reject;
+        reader.readAsDataURL(file);
       });
-      return { success: true, url: base64Url, filename: file.name };
+      return { success: true, url: dataUrl, filename: file.name };
     } catch (err) {
       return { success: false, message: `Upload failed: ${err.message}` };
     }
@@ -423,39 +451,47 @@ export function PortfolioProvider({ children }) {
 
   // Add a project
   const addProject = async (newProj) => {
+    const projWithId = {
+      ...newProj,
+      id: newProj.id || 'project-' + Date.now(),
+      slug: newProj.slug || (newProj.title ? newProj.title.toLowerCase().replace(/[^a-z0-9]/g, '-') : 'project-' + Date.now())
+    };
+
+    const next = [projWithId, ...projects];
+    setProjects(next);
+    try { localStorage.setItem('portfolio_projects', JSON.stringify(next)); } catch {}
+
     try {
       const res = await fetch('/api/content/projects', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newProj)
+        body: JSON.stringify(projWithId)
       });
       const json = await res.json();
       if (json.success && json.data) {
         setProjects(json.data);
         try { localStorage.setItem('portfolio_projects', JSON.stringify(json.data)); } catch {}
-      } else {
-        const next = [newProj, ...projects];
-        setProjects(next);
-        try { localStorage.setItem('portfolio_projects', JSON.stringify(next)); } catch {}
       }
       return json;
     } catch (e) {
       console.error('Add project error:', e);
-      const next = [newProj, ...projects];
-      setProjects(next);
-      try { localStorage.setItem('portfolio_projects', JSON.stringify(next)); } catch {}
       return { success: true, message: 'Saved locally' };
     }
   };
 
   // Update a single project
   const updateProject = async (id, updatedProj) => {
-    const nextProjects = projects.map(p => (p.id === id || p.slug === id) ? { ...p, ...updatedProj } : p);
+    const targetId = id || updatedProj?.id || updatedProj?.slug;
+    const nextProjects = projects.map(p => 
+      (p.id === targetId || p.slug === targetId || (updatedProj?.slug && p.slug === updatedProj.slug) || (p._id && p._id === targetId))
+        ? { ...p, ...updatedProj, id: p.id || targetId }
+        : p
+    );
     setProjects(nextProjects);
     try { localStorage.setItem('portfolio_projects', JSON.stringify(nextProjects)); } catch {}
 
     try {
-      const res = await fetch(`/api/content/projects/${id}`, {
+      const res = await fetch(`/api/content/projects/${targetId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedProj)

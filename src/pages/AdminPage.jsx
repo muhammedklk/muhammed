@@ -1737,9 +1737,10 @@ export default function AdminPage() {
                                   type="button"
                                   className="admin-btn-edit-light"
                                   onClick={() => {
-                                    setSelectedProjectId(proj.id || proj.slug);
+                                    const projId = proj.id || proj.slug || proj._id;
+                                    setSelectedProjectId(projId);
                                     setIsCreatingProject(false);
-                                    setProjectForm({ ...proj });
+                                    setProjectForm({ ...proj, id: projId });
                                   }}
                                 >
                                   Edit

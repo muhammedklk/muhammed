@@ -214,8 +214,12 @@ async function seedInitialDataIfNeeded() {
 // -------------------------------------------------------------
 
 // Upload File (Image from desktop or CV PDF)
-app.post('/api/upload', upload.single('file'), (req, res) => {
-  try {
+app.post('/api/upload', (req, res) => {
+  upload.single('file')(req, res, (err) => {
+    if (err) {
+      console.error('Multer Upload Error:', err);
+      return res.status(400).json({ success: false, message: err.message || 'File upload failed' });
+    }
     if (!req.file) {
       return res.status(400).json({ success: false, message: 'No file uploaded' });
     }
@@ -227,10 +231,7 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
       size: req.file.size,
       mimetype: req.file.mimetype
     });
-  } catch (error) {
-    console.error('Upload Error:', error);
-    res.status(500).json({ success: false, message: error.message });
-  }
+  });
 });
 
 // GET all portfolio data
