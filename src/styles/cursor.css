@@ -5,7 +5,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   /* Hide standard cursor only on non-text elements to preserve text selection usability */
-  a, button, [role="button"], .interactive, .pill-badge, .service-pill-btn, .project-card, .hero-canvas-container, .hero-canvas-container canvas {
+  a, button, [role="button"], .interactive, .pill-badge, .service-pill-btn, .project-card, .hero-canvas-container, .hero-canvas-container canvas, [data-cursor="view-website"], .has-live-link, .has-live-link * {
     cursor: none !important;
   }
 }
@@ -48,6 +48,11 @@
 
 .custom-cursor-dot.is-clicking {
   transform: translate(-50%, -50%) scale(0.6);
+}
+
+.custom-cursor-dot.is-hidden-for-badge {
+  opacity: 0 !important;
+  transform: translate(-50%, -50%) scale(0) !important;
 }
 
 /* 2. Smooth Fluid Trailing Ring */
@@ -95,6 +100,68 @@
   transform: translate(-50%, -50%) scale(0.78);
   border-color: #9f75ff;
   background: rgba(159, 117, 255, 0.22);
+}
+
+/* 3. Modern "VIEW WEBSITE" Interactive Cursor Badge */
+.cursor-view-website-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  opacity: 0;
+  transform: scale(0.5);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #ffffff;
+  font-family: var(--font-display, "Mona Sans", -apple-system, sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.15;
+  text-align: center;
+  user-select: none;
+}
+
+.cursor-view-sub {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.cursor-view-arrow {
+  color: #b99aff;
+  transition: transform 0.2s ease;
+}
+
+.custom-cursor-ring.is-view-website {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: rgba(14, 15, 20, 0.9);
+  border: 1.5px solid rgba(185, 154, 255, 0.65);
+  backdrop-filter: blur(16px) saturate(190%);
+  -webkit-backdrop-filter: blur(16px) saturate(190%);
+  box-shadow: 
+    0 14px 40px -6px rgba(0, 0, 0, 0.5),
+    0 0 28px rgba(124, 92, 225, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-cursor-ring.is-view-website .cursor-view-website-badge {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.custom-cursor-ring.is-view-website.is-clicking {
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+.custom-cursor-ring.is-view-website.is-clicking .cursor-view-arrow {
+  transform: translate(2px, -2px);
 }
 
 /* Hidden when outside window or on touch */

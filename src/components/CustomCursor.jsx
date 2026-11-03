@@ -19,6 +19,7 @@ export default function CustomCursor() {
   const isVisible = useRef(false);
   const isHover = useRef(false);
   const isCanvasHover = useRef(false);
+  const isLiveWebsite = useRef(false);
   const isClick = useRef(false);
 
   const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -48,12 +49,29 @@ export default function CustomCursor() {
 
       // Check interactive targets
       const target = e.target;
+
+      // 1. Check if hovering over project with live website link
+      const liveWebsiteEl = target.closest('[data-cursor="view-website"], .has-live-link');
+      const hoveringWebsite = !!liveWebsiteEl;
+
+      if (hoveringWebsite !== isLiveWebsite.current) {
+        isLiveWebsite.current = hoveringWebsite;
+        if (hoveringWebsite) {
+          ringEl.classList.add('is-view-website');
+          dot.classList.add('is-hidden-for-badge');
+        } else {
+          ringEl.classList.remove('is-view-website');
+          dot.classList.remove('is-hidden-for-badge');
+        }
+      }
+
+      // 2. Standard interactive targets (buttons, links, etc.)
       const interactiveEl = target.closest(
         'a, button, input, textarea, select, [role="button"], .interactive, .pill-badge, .service-pill-btn, .project-card, .btn-talk-dark, .btn-glass, .hero-talk-btn, .ref-contact-btn'
       );
       const isCanvas = target.closest('.hero-canvas-container canvas, .hero-canvas-container');
 
-      const hovering = !!interactiveEl;
+      const hovering = !!interactiveEl && !hoveringWebsite;
       if (hovering !== isHover.current) {
         isHover.current = hovering;
         if (hovering) {
@@ -114,8 +132,10 @@ export default function CustomCursor() {
         dot.style.transform = `translate3d(${mouse.current.x}px, ${mouse.current.y}px, 0) translate(-50%, -50%)`;
 
         // Ring follows with smooth damping lerp (0.16)
-        ring.current.x += (mouse.current.x - ring.current.x) * 0.16;
-        ring.current.y += (mouse.current.y - ring.current.y) * 0.16;
+        // Slightly snappier follower response when in view website badge mode
+        const factor = isLiveWebsite.current ? 0.22 : 0.16;
+        ring.current.x += (mouse.current.x - ring.current.x) * factor;
+        ring.current.y += (mouse.current.y - ring.current.y) * factor;
 
         ringEl.style.transform = `translate3d(${ring.current.x}px, ${ring.current.y}px, 0) translate(-50%, -50%)`;
       }
@@ -139,8 +159,29 @@ export default function CustomCursor() {
     <div className="custom-cursor-container" aria-hidden="true">
       {/* Precision Center Dot */}
       <div ref={dotRef} className="custom-cursor-dot custom-cursor-hidden" />
-      {/* Smooth Trailing Follower Ring */}
-      <div ref={ringRef} className="custom-cursor-ring custom-cursor-hidden" />
+      {/* Smooth Trailing Follower Ring with View Website Badge */}
+      <div ref={ringRef} className="custom-cursor-ring custom-cursor-hidden">
+        <div className="cursor-view-website-badge">
+          <span className="cursor-view-text">VIEW</span>
+          <span className="cursor-view-sub">
+            <span>WEBSITE</span>
+            <svg
+              className="cursor-view-arrow"
+              width="10"
+              height="10"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="7" y1="17" x2="17" y2="7"></line>
+              <polyline points="7 7 17 7 17 17"></polyline>
+            </svg>
+          </span>
+        </div>
+      </div>
     </div>
   );
 }

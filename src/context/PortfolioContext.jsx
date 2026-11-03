@@ -103,6 +103,50 @@ const defaultMaintenanceMode = {
   }
 };
 
+const LIVE_URLS_MAP = {
+  'ronarai-restaurant': 'https://ronaraiksa.com/',
+  'gemini-music-awards': 'https://geminimusicaward.com/',
+  'styleora-luxury-store': 'https://styleorashop.vercel.app/',
+  'nadvora-expeditions': 'https://nadvoratravel.vercel.app/'
+};
+
+const ORDERED_SLUGS = [
+  'ronarai-restaurant',
+  'gemini-music-awards',
+  'styleora-luxury-store',
+  'nadvora-expeditions'
+];
+
+function syncProjectsOrderAndUrls(projectList) {
+  if (!Array.isArray(projectList) || projectList.length === 0) return defaultProjects;
+  
+  const updatedList = projectList.map(p => {
+    const slug = p.slug || p.id;
+    if (LIVE_URLS_MAP[slug]) {
+      return { ...p, liveUrl: LIVE_URLS_MAP[slug] };
+    }
+    return p;
+  });
+
+  const topProjects = [];
+  ORDERED_SLUGS.forEach(slug => {
+    const found = updatedList.find(p => p.slug === slug || p.id === slug) ||
+                  defaultProjects.find(p => p.slug === slug || p.id === slug);
+    if (found && !topProjects.some(tp => (tp.slug || tp.id) === (found.slug || found.id))) {
+      topProjects.push(found);
+    }
+  });
+
+  const remaining = updatedList.filter(p => !ORDERED_SLUGS.includes(p.slug) && !ORDERED_SLUGS.includes(p.id));
+  const result = [...topProjects, ...remaining];
+
+  try {
+    localStorage.setItem('portfolio_projects', JSON.stringify(result));
+  } catch {}
+
+  return result;
+}
+
 const PortfolioContext = createContext(null);
 
 export function PortfolioProvider({ children }) {
@@ -124,7 +168,11 @@ export function PortfolioProvider({ children }) {
   const [projects, setProjects] = useState(() => {
     try {
       const saved = localStorage.getItem('portfolio_projects');
-      return saved ? JSON.parse(saved) : defaultProjects;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return syncProjectsOrderAndUrls(parsed);
+      }
+      return defaultProjects;
     } catch { return defaultProjects; }
   });
 
@@ -171,8 +219,8 @@ export function PortfolioProvider({ children }) {
           });
         }
         if (Array.isArray(json.data.projects) && json.data.projects.length > 0) {
-          setProjects(json.data.projects);
-          try { localStorage.setItem('portfolio_projects', JSON.stringify(json.data.projects)); } catch {}
+          const synced = syncProjectsOrderAndUrls(json.data.projects);
+          setProjects(synced);
         }
         if (Array.isArray(json.data.faqItems) && json.data.faqItems.length > 0) {
           setFaqItems(json.data.faqItems);

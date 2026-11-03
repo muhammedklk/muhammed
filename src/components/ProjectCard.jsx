@@ -59,7 +59,18 @@ export default function ProjectCard({ project, allowCaseStudy = false }) {
 
   return (
     <div className="project-card-wrapper">
-      {allowCaseStudy ? (
+      {project.liveUrl ? (
+        <a
+          href={project.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="project-editorial-card has-live-link"
+          data-cursor="view-website"
+          aria-label={`Visit live website: ${project.title}`}
+        >
+          {CardMedia}
+        </a>
+      ) : allowCaseStudy ? (
         <Link
           to={`/works/${project.slug}`}
           className="project-editorial-card"

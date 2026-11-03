@@ -1,61 +1,123 @@
 export const projects = [
   {
-    id: "green-track-logistics",
-    slug: "green-track-logistics",
-    title: "Green Track International Cargo",
-    shortTitle: "Logistics Website",
-    category: "Logistics",
-    tagline: "The most affordable and transparent way to ship cargo across international borders.",
+    id: "ronarai-restaurant",
+    slug: "ronarai-restaurant",
+    title: "Ronarai Authentic Saudi Cuisine",
+    shortTitle: "Restaurant Website",
+    category: "Food & Hospitality",
+    tagline: "An exquisite culinary journey celebrating authentic Saudi grills, heritage, and flavor.",
     year: "2026",
-    client: "Green Track Cargo Services",
-    role: "UI/UX Design & Front-End Architecture",
+    client: "Ronarai Restaurant Group (Saudi Arabia)",
+    role: "Full UI/UX Design & Front-End Development",
     duration: "4 Weeks",
     featured: true,
-    coverImage: "/assets/mockup-green-track.png",
-    deviceMockup: "monitor",
-    tags: ["UI/UX Design", "Figma", "Responsive Web", "Logistics UX"],
-    overview: "Green Track is a global cargo and freight forwarding solution engineered to streamline international shipping, multimodal cargo quotes, and real-time container tracking with an intuitive, trust-inspiring user experience.",
-    challenge: "Traditional logistics portals are cluttered with technical shipping jargon, fragmented rate calculators, and opaque tracking timelines. Users struggled to quickly estimate costs, choose optimal freight routes, or track live manifests.",
+    liveUrl: "https://ronaraiksa.com/",
+    coverImage: "/assets/mockup-advanced-leap.jpg",
+    deviceMockup: "laptop",
+    tags: ["Restaurant UX", "Figma to Code", "Responsive Web", "Menu Experience"],
+    overview: "Ronarai is a premier restaurant brand located in Saudi Arabia, celebrated for authentic Saudi grills, traditional marinades, and modern hospitality. Muhammed K designed the complete digital experience and built the responsive website.",
+    challenge: "The restaurant needed to capture the aromatic richness and warm hospitality of traditional Saudi grilling while catering to bilingual tech-savvy diners who expect rapid online table reservations and mobile menu viewing.",
     goals: [
-      "Simplify cargo quote calculation from a multi-step chore to a 3-step rapid flow.",
-      "Design an enterprise-grade responsive web interface conveying reliability and punctuality.",
-      "Integrate end-to-end milestone timeline tracking with clear status color coding.",
-      "Ensure fast page load speeds and seamless accessibility across desktop, tablet, and mobile screens."
+      "Design an appetitive, rich visual identity with bold crimson and warm amber accents.",
+      "Provide an interactive online menu with dietary indicators, pricing, and signature grill highlights.",
+      "Streamline reservation bookings for family gatherings and VIP dining rooms.",
+      "Deliver pixel-perfect, cross-browser responsive code ready for live deployment at ronaraiksa.com."
     ],
     designProcess: [
-      { step: "01", title: "Research & Benchmarking", desc: "Analyzed international cargo booking bottlenecks and competitive freight portals to identify key drop-off points." },
-      { step: "02", title: "Information Architecture", desc: "Restructured navigation into clear operational modules: Instant Quotes, Tracking, Fleet Services, and Customs Clearance." },
-      { step: "03", title: "Figma Prototyping", desc: "Created high-fidelity desktop and mobile layouts with accessible contrast, generous whitespace, and responsive cards." },
-      { step: "04", title: "Front-End Execution", desc: "Built reusable component architecture ensuring responsive breakpoints and fluid typography." }
+      { step: "01", title: "Cultural & Brand Research", desc: "Studied Saudi culinary traditions, family dining habits, and regional hospitality aesthetics." },
+      { step: "02", title: "Menu Architecture & Layout", desc: "Structured the digital menu into intuitive sections: Premium Grills, Appetizers, Traditional Platters, and Beverages." },
+      { step: "03", title: "Figma High-Fidelity Mockups", desc: "Created appetizing photography layouts with bold red hero banners and clear 'View Menu' calls to action." },
+      { step: "04", title: "Responsive Frontend Coding", desc: "Coded complete responsive front-end using HTML5, CSS3, JavaScript, and Bootstrap." }
     ],
     uxDecisions: [
-      { title: "Above-the-fold Quick Quote", desc: "Placed origin, destination, and package type inputs directly in the hero container to maximize immediate user engagement." },
-      { title: "Unified Tracking Pill", desc: "Integrated container tracking with real-time waypoint checkpoints and estimated delivery timestamps." },
-      { title: "Trust Markers & SLA Badges", desc: "Positioned customs compliance badges and guaranteed transit times near checkout triggers." }
+      { title: "Hero Flavor Immersion", desc: "Featured high-resolution hero shot of signature grills with prominent 'Authentic Saudi Taste' badge." },
+      { title: "Sticky Reservation Bar", desc: "Kept table booking and location details within single tap on mobile screens." },
+      { title: "Category Ribbons", desc: "Created horizontal scrollable category pills for rapid menu filtering without page reloads." }
     ],
     features: [
-      "Dynamic International Rate Estimator with weight & volume calculation",
-      "Interactive Shipment Milestones tracking timeline",
-      "Service Selector: Sea Freight, Air Express, and Rail Logistics",
-      "Client Portal login and documentation repository",
-      "Full mobile responsiveness with thumb-friendly touch targets"
+      "Interactive Digital Menu with appetizing photography and ingredient details",
+      "Instant Table & Banquet Reservation system with guest count selection",
+      "Bilingual-ready layout structure optimized for both LTR and RTL orientations",
+      "Interactive Google Maps directions and branch contact info",
+      "High performance on mobile smartphones for diners viewing on location"
     ],
     typography: {
       headline: "Outfit",
       body: "Plus Jakarta Sans",
-      spec: "Clean geometric sans-serif for numbers and headers with legible humanist body copy."
+      spec: "Bold, punchy titles that evoke modern warmth paired with clean menu item specifications."
     },
     colors: [
-      { name: "Forest Emerald", hex: "#0f4c3a" },
-      { name: "Cargo Teal", hex: "#0ea5e9" },
-      { name: "Pristine Off-White", hex: "#f8fafc" },
-      { name: "Slate Dark", hex: "#0f172a" },
-      { name: "Soft Muted Border", hex: "#e2e8f0" }
+      { name: "Royal Saudi Crimson", hex: "#9b111e" },
+      { name: "Golden Amber", hex: "#eab308" },
+      { name: "Warm Cream", hex: "#fef9f5" },
+      { name: "Charcoal Black", hex: "#1c1917" },
+      { name: "Pure White", hex: "#ffffff" }
     ],
     results: [
-      "42% increase in online cargo quote completion rate within first 60 days.",
-      "35% drop in customer support inquiry calls regarding package status.",
-      "Sub-second load times on 4G mobile networks across international nodes."
+      "Successfully launched live at ronaraiksa.com with glowing feedback from restaurant patrons.",
+      "Over 48% increase in direct weekday table reservations made via the website.",
+      "Mobile bounce rate decreased by 31% after introducing the streamlined digital menu."
+    ],
+    nextSlug: "gemini-music-awards"
+  },
+  {
+    id: "gemini-music-awards",
+    slug: "gemini-music-awards",
+    title: "Gemini National Music Talent Hunt 2026",
+    shortTitle: "Event Website",
+    category: "Entertainment & Events",
+    tagline: "An official gateway to the Gemini National Music Award Show — celebrating musical virtuosity.",
+    year: "2026",
+    client: "Gemini Film & Music Production House",
+    role: "Lead UI/UX Designer & Frontend Developer",
+    duration: "5 Weeks",
+    featured: true,
+    liveUrl: "https://geminimusicaward.com/",
+    coverImage: "/assets/mockup-gemini-music-award.jpg",
+    deviceMockup: "laptop",
+    tags: ["Event UX", "Music Awards", "Contestant Registration", "Figma to Code"],
+    overview: "Gemini National Music Talent Hunt 2026 is an entertainment spectacle and competitive talent audition platform created by Gemini Film & Music Production House. Muhammed K designed the user flow and developed the responsive platform.",
+    challenge: "The event required a grand, prestigious digital presence capable of handling thousands of online contestant audition registrations across 5 age categories, while clearly explaining complex competition guidelines and jury credentials.",
+    goals: [
+      "Create a cinematic, glamorous gold-and-black event aesthetic reflecting musical excellence.",
+      "Build a seamless multi-step audition registration portal supporting demo audio/video submissions.",
+      "Design dedicated sections for celebrity jury panels, mentors, cash prizes, and sponsors.",
+      "Deliver a high-concurrency responsive frontend deployed at geminimusicaward.com."
+    ],
+    designProcess: [
+      { step: "01", title: "Event Roadmap & Wireframing", desc: "Outlined the full digital ecosystem: Announcement phase, Audition phase, Voting phase, and Gala." },
+      { step: "02", title: "Audition Form UX Optimization", desc: "Segmented the registration form into 3 intuitive steps: Participant Details, Category Selection, and Media Upload." },
+      { step: "03", title: "Cinematic Visual Design", desc: "Crafted particle dust overlays, gold foil typography accents, and sleek dark card containers in Figma." },
+      { step: "04", title: "Frontend Implementation", desc: "Developed responsive pages using HTML5, CSS3, JavaScript, and deployed to production." }
+    ],
+    uxDecisions: [
+      { title: "Registrations Open Live Indicator", desc: "Created prominent glowing gold pill badge to highlight audition urgency and countdown." },
+      { title: "Dual Primary CTAs", desc: "Positioned 'Register Now' (primary gold) alongside 'View Rules' (secondary translucent) in the hero." },
+      { title: "Celebrity Jury Carousel", desc: "Designed profile cards with social links and discography highlights to build audition credibility." }
+    ],
+    features: [
+      "Multi-Category Audition Registration with audio/video demo link submission",
+      "Official Competition Rules & Eligibility guidelines accordion",
+      "Celebrity Jury & Mentor showcase with credential badges",
+      "Prize Pool & Trophy breakdown with sponsorship tiers",
+      "Live event timetable and regional audition city schedule"
+    ],
+    typography: {
+      headline: "Outfit & Syne",
+      body: "Plus Jakarta Sans",
+      spec: "Cinematic gold-accented typography evoking Hollywood & national gala awards glamour."
+    },
+    colors: [
+      { name: "Gala Gold", hex: "#f59e0b" },
+      { name: "Deep Velvet Black", hex: "#0a0a0c" },
+      { name: "Warm Champagne", hex: "#fef3c7" },
+      { name: "Smoky Charcoal", hex: "#1f2024" },
+      { name: "Pure White", hex: "#ffffff" }
+    ],
+    results: [
+      "Successfully processed over 4,200 contestant registrations in the first audition window.",
+      "Live at geminimusicaward.com with flawless uptime during high-traffic announcements.",
+      "Celebrated by production house executives and contestants for clean registration clarity."
     ],
     nextSlug: "styleora-luxury-store"
   },
@@ -71,6 +133,7 @@ export const projects = [
     role: "Lead UI/UX Designer & Prototyping",
     duration: "5 Weeks",
     featured: true,
+    liveUrl: "https://styleorashop.vercel.app/",
     coverImage: "/assets/mockup-styleora.jpg",
     deviceMockup: "laptop",
     tags: ["E-Commerce UX", "Figma Design System", "Luxury Retail", "Micro-Interactions"],
@@ -117,6 +180,127 @@ export const projects = [
       "22% higher Average Order Value (AOV) through context-aware bundle suggestions.",
       "Positive acclaim from international fashion press and brand stakeholders."
     ],
+    nextSlug: "nadvora-expeditions"
+  },
+  {
+    id: "nadvora-expeditions",
+    slug: "nadvora-expeditions",
+    title: "Nadvora Bespoke Expeditions",
+    shortTitle: "Travel Booking Website",
+    category: "Travel",
+    tagline: "Curating unlisted private residences and remote wilderness retreats across the globe.",
+    year: "2026",
+    client: "Nadvora Luxury Travel Co",
+    role: "Lead UI/UX Designer & Web Experience",
+    duration: "5 Weeks",
+    featured: true,
+    liveUrl: "https://nadvoratravel.vercel.app/",
+    coverImage: "/assets/mockup-nadvora-monitor.png",
+    deviceMockup: "monitor",
+    tags: ["Luxury Travel", "Web Design", "Editorial UX", "Immersive Visuals"],
+    overview: "Nadvora is a high-end travel booking platform dedicated to discerning voyagers seeking secluded sanctuaries, remote mountain chalets in the Swiss Alps, and private Kyoto machiya estates.",
+    challenge: "High-net-worth clients expect an ultra-refined, bespoke digital hospitality experience. Standard online travel agency layouts feel generic and lack the emotional resonance required for $10,000+ luxury itineraries.",
+    goals: [
+      "Convey timeless stillness, intimacy, and luxury through sweeping landscape art direction.",
+      "Design an exclusive 'Begin Journey' interactive inquiry portal that feels like a private concierge consultation.",
+      "Build tailored expedition preference filters based on tranquility, culinary immersion, and architectural heritage.",
+      "Maintain 60fps buttery scroll animations and glassmorphism interface panels."
+    ],
+    designProcess: [
+      { step: "01", title: "Brand Identity Alignment", desc: "Worked with luxury hospitality consultants to establish tone of voice, visual pacing, and typography." },
+      { step: "02", title: "Hero Atmosphere Conception", desc: "Engineered full-bleed natural landscape composition paired with elegant serif headings." },
+      { step: "03", title: "Concierge Flow Wireframes", desc: "Designed discreet, high-trust inquiry forms with interactive calendar availability." },
+      { step: "04", title: "Figma to Responsive Code", desc: "Built responsive prototypes optimized for high-density 4K displays down to smartphones." }
+    ],
+    uxDecisions: [
+      { title: "Floating Frosted Navigation", desc: "Designed an airy glass header with floating pill action 'Begin Journey' for constant conversion access." },
+      { title: "Curated Journal Integration", desc: "Wove authentic cultural journal essays into destination pages to build emotional connection." },
+      { title: "Private Expeditions Filter", desc: "Replaced rigid search dropdowns with intuitive, conversational prompt pills." }
+    ],
+    features: [
+      "Immersive Full-Bleed Sanctuary Galleries with ambient nature soundscapes",
+      "Private Residence Inquiry modal with encrypted concierge direct messaging",
+      "Interactive Curated Map with hidden gem geographic coordinates",
+      "Editorial Journal reader with seamless reading mode",
+      "Tailored Expedition Customizer tailored to guest preferences"
+    ],
+    typography: {
+      headline: "Outfit & Syne",
+      body: "Plus Jakarta Sans",
+      spec: "Refined editorial typography with generous line-height for peaceful reading rhythm."
+    },
+    colors: [
+      { name: "Deep Mountain Forest", hex: "#1e3a2f" },
+      { name: "Meadow Grass", hex: "#4ade80" },
+      { name: "Warm Sunlight", hex: "#fef08a" },
+      { name: "Pure Cloud White", hex: "#ffffff" },
+      { name: "Graphite Accent", hex: "#18181b" }
+    ],
+    results: [
+      "3.4x increase in high-ticket expedition booking inquiries compared to the previous site.",
+      "Average user engagement time reached 4 minutes and 15 seconds.",
+      "Feature showcase on top international UI/UX web design showcases."
+    ],
+    nextSlug: "green-track-logistics"
+  },
+  {
+    id: "green-track-logistics",
+    slug: "green-track-logistics",
+    title: "Green Track International Cargo",
+    shortTitle: "Logistics Website",
+    category: "Logistics",
+    tagline: "The most affordable and transparent way to ship cargo across international borders.",
+    year: "2026",
+    client: "Green Track Cargo Services",
+    role: "UI/UX Design & Front-End Architecture",
+    duration: "4 Weeks",
+    featured: false,
+    coverImage: "/assets/mockup-green-track.png",
+    deviceMockup: "monitor",
+    tags: ["UI/UX Design", "Figma", "Responsive Web", "Logistics UX"],
+    overview: "Green Track is a global cargo and freight forwarding solution engineered to streamline international shipping, multimodal cargo quotes, and real-time container tracking with an intuitive, trust-inspiring user experience.",
+    challenge: "Traditional logistics portals are cluttered with technical shipping jargon, fragmented rate calculators, and opaque tracking timelines. Users struggled to quickly estimate costs, choose optimal freight routes, or track live manifests.",
+    goals: [
+      "Simplify cargo quote calculation from a multi-step chore to a 3-step rapid flow.",
+      "Design an enterprise-grade responsive web interface conveying reliability and punctuality.",
+      "Integrate end-to-end milestone timeline tracking with clear status color coding.",
+      "Ensure fast page load speeds and seamless accessibility across desktop, tablet, and mobile screens."
+    ],
+    designProcess: [
+      { step: "01", title: "Research & Benchmarking", desc: "Analyzed international cargo booking bottlenecks and competitive freight portals to identify key drop-off points." },
+      { step: "02", title: "Information Architecture", desc: "Restructured navigation into clear operational modules: Instant Quotes, Tracking, Fleet Services, and Customs Clearance." },
+      { step: "03", title: "Figma Prototyping", desc: "Created high-fidelity desktop and mobile layouts with accessible contrast, generous whitespace, and responsive cards." },
+      { step: "04", title: "Front-End Execution", desc: "Built reusable component architecture ensuring responsive breakpoints and fluid typography." }
+    ],
+    uxDecisions: [
+      { title: "Above-the-fold Quick Quote", desc: "Placed origin, destination, and package type inputs directly in the hero container to maximize immediate user engagement." },
+      { title: "Unified Tracking Pill", desc: "Integrated container tracking with real-time waypoint checkpoints and estimated delivery timestamps." },
+      { title: "Trust Markers & SLA Badges", desc: "Positioned customs compliance badges and guaranteed transit times near checkout triggers." }
+    ],
+    features: [
+      "Dynamic International Rate Estimator with weight & volume calculation",
+      "Interactive Shipment Milestones tracking timeline",
+      "Service Selector: Sea Freight, Air Express, and Rail Logistics",
+      "Client Portal login and documentation repository",
+      "Full mobile responsiveness with thumb-friendly touch targets"
+    ],
+    typography: {
+      headline: "Outfit",
+      body: "Plus Jakarta Sans",
+      spec: "Clean geometric sans-serif for numbers and headers with legible humanist body copy."
+    },
+    colors: [
+      { name: "Forest Emerald", hex: "#0f4c3a" },
+      { name: "Cargo Teal", hex: "#0ea5e9" },
+      { name: "Pristine Off-White", hex: "#f8fafc" },
+      { name: "Slate Dark", hex: "#0f172a" },
+      { name: "Soft Muted Border", hex: "#e2e8f0" }
+    ],
+    results: [
+      "42% increase in online cargo quote completion rate within first 60 days.",
+      "35% drop in customer support inquiry calls regarding package status.",
+      "Sub-second load times on 4G mobile networks across international nodes."
+    ],
     nextSlug: "mahora-travel-app"
   },
   {
@@ -130,7 +314,7 @@ export const projects = [
     client: "Mahora Travel Group",
     role: "Mobile Product Designer (iOS & Android)",
     duration: "6 Weeks",
-    featured: true,
+    featured: false,
     coverImage: "/assets/mockup-mahora-mobile.png",
     deviceMockup: "mobile",
     tags: ["Mobile UX", "iOS Design Guidelines", "Micro-Interactions", "Travel Experience"],
@@ -190,7 +374,7 @@ export const projects = [
     client: "Duplex Solutions / Enterprise Clients",
     role: "Lead UI/UX Redesign & Frontend System",
     duration: "8 Weeks",
-    featured: true,
+    featured: false,
     coverImage: "/assets/mockup-erp.jpg",
     deviceMockup: "laptop",
     tags: ["Dashboard UX", "Enterprise Design", "Data Visualization", "Figma Components"],
@@ -297,186 +481,6 @@ export const projects = [
       "94% positive usability score in usability testing sessions.",
       "Scalable system deployed to over 120 live merchant stores within first quarter."
     ],
-    nextSlug: "nadvora-expeditions"
-  },
-  {
-    id: "nadvora-expeditions",
-    slug: "nadvora-expeditions",
-    title: "Nadvora Bespoke Expeditions",
-    shortTitle: "Travel Booking Website",
-    category: "Travel",
-    tagline: "Curating unlisted private residences and remote wilderness retreats across the globe.",
-    year: "2026",
-    client: "Nadvora Luxury Travel Co",
-    role: "Lead UI/UX Designer & Web Experience",
-    duration: "5 Weeks",
-    featured: true,
-    coverImage: "/assets/mockup-nadvora-monitor.png",
-    deviceMockup: "monitor",
-    tags: ["Luxury Travel", "Web Design", "Editorial UX", "Immersive Visuals"],
-    overview: "Nadvora is a high-end travel booking platform dedicated to discerning voyagers seeking secluded sanctuaries, remote mountain chalets in the Swiss Alps, and private Kyoto machiya estates.",
-    challenge: "High-net-worth clients expect an ultra-refined, bespoke digital hospitality experience. Standard online travel agency layouts feel generic and lack the emotional resonance required for $10,000+ luxury itineraries.",
-    goals: [
-      "Convey timeless stillness, intimacy, and luxury through sweeping landscape art direction.",
-      "Design an exclusive 'Begin Journey' interactive inquiry portal that feels like a private concierge consultation.",
-      "Build tailored expedition preference filters based on tranquility, culinary immersion, and architectural heritage.",
-      "Maintain 60fps buttery scroll animations and glassmorphism interface panels."
-    ],
-    designProcess: [
-      { step: "01", title: "Brand Identity Alignment", desc: "Worked with luxury hospitality consultants to establish tone of voice, visual pacing, and typography." },
-      { step: "02", title: "Hero Atmosphere Conception", desc: "Engineered full-bleed natural landscape composition paired with elegant serif headings." },
-      { step: "03", title: "Concierge Flow Wireframes", desc: "Designed discreet, high-trust inquiry forms with interactive calendar availability." },
-      { step: "04", title: "Figma to Responsive Code", desc: "Built responsive prototypes optimized for high-density 4K displays down to smartphones." }
-    ],
-    uxDecisions: [
-      { title: "Floating Frosted Navigation", desc: "Designed an airy glass header with floating pill action 'Begin Journey' for constant conversion access." },
-      { title: "Curated Journal Integration", desc: "Wove authentic cultural journal essays into destination pages to build emotional connection." },
-      { title: "Private Expeditions Filter", desc: "Replaced rigid search dropdowns with intuitive, conversational prompt pills." }
-    ],
-    features: [
-      "Immersive Full-Bleed Sanctuary Galleries with ambient nature soundscapes",
-      "Private Residence Inquiry modal with encrypted concierge direct messaging",
-      "Interactive Curated Map with hidden gem geographic coordinates",
-      "Editorial Journal reader with seamless reading mode",
-      "Tailored Expedition Customizer tailored to guest preferences"
-    ],
-    typography: {
-      headline: "Outfit & Syne",
-      body: "Plus Jakarta Sans",
-      spec: "Refined editorial typography with generous line-height for peaceful reading rhythm."
-    },
-    colors: [
-      { name: "Deep Mountain Forest", hex: "#1e3a2f" },
-      { name: "Meadow Grass", hex: "#4ade80" },
-      { name: "Warm Sunlight", hex: "#fef08a" },
-      { name: "Pure Cloud White", hex: "#ffffff" },
-      { name: "Graphite Accent", hex: "#18181b" }
-    ],
-    results: [
-      "3.4x increase in high-ticket expedition booking inquiries compared to the previous site.",
-      "Average user engagement time reached 4 minutes and 15 seconds.",
-      "Feature showcase on top international UI/UX web design showcases."
-    ],
     nextSlug: "ronarai-restaurant"
-  },
-  {
-    id: "ronarai-restaurant",
-    slug: "ronarai-restaurant",
-    title: "Ronarai Authentic Saudi Cuisine",
-    shortTitle: "Restaurant Website",
-    category: "Food & Hospitality",
-    tagline: "An exquisite culinary journey celebrating authentic Saudi grills, heritage, and flavor.",
-    year: "2026",
-    client: "Ronarai Restaurant Group (Saudi Arabia)",
-    role: "Full UI/UX Design & Front-End Development",
-    duration: "4 Weeks",
-    featured: true,
-    coverImage: "/assets/mockup-advanced-leap.jpg",
-    deviceMockup: "laptop",
-    tags: ["Restaurant UX", "Figma to Code", "Responsive Web", "Menu Experience"],
-    overview: "Ronarai is a premier restaurant brand located in Saudi Arabia, celebrated for authentic Saudi grills, traditional marinades, and modern hospitality. Muhammed K designed the complete digital experience and built the responsive website.",
-    challenge: "The restaurant needed to capture the aromatic richness and warm hospitality of traditional Saudi grilling while catering to bilingual tech-savvy diners who expect rapid online table reservations and mobile menu viewing.",
-    goals: [
-      "Design an appetitive, rich visual identity with bold crimson and warm amber accents.",
-      "Provide an interactive online menu with dietary indicators, pricing, and signature grill highlights.",
-      "Streamline reservation bookings for family gatherings and VIP dining rooms.",
-      "Deliver pixel-perfect, cross-browser responsive code ready for live deployment at ronaraiksa.com."
-    ],
-    designProcess: [
-      { step: "01", title: "Cultural & Brand Research", desc: "Studied Saudi culinary traditions, family dining habits, and regional hospitality aesthetics." },
-      { step: "02", title: "Menu Architecture & Layout", desc: "Structured the digital menu into intuitive sections: Premium Grills, Appetizers, Traditional Platters, and Beverages." },
-      { step: "03", title: "Figma High-Fidelity Mockups", desc: "Created appetizing photography layouts with bold red hero banners and clear 'View Menu' calls to action." },
-      { step: "04", title: "Responsive Frontend Coding", desc: "Coded complete responsive front-end using HTML5, CSS3, JavaScript, and Bootstrap." }
-    ],
-    uxDecisions: [
-      { title: "Hero Flavor Immersion", desc: "Featured high-resolution hero shot of signature grills with prominent 'Authentic Saudi Taste' badge." },
-      { title: "Sticky Reservation Bar", desc: "Kept table booking and location details within single tap on mobile screens." },
-      { title: "Category Ribbons", desc: "Created horizontal scrollable category pills for rapid menu filtering without page reloads." }
-    ],
-    features: [
-      "Interactive Digital Menu with appetizing photography and ingredient details",
-      "Instant Table & Banquet Reservation system with guest count selection",
-      "Bilingual-ready layout structure optimized for both LTR and RTL orientations",
-      "Interactive Google Maps directions and branch contact info",
-      "High performance on mobile smartphones for diners viewing on location"
-    ],
-    typography: {
-      headline: "Outfit",
-      body: "Plus Jakarta Sans",
-      spec: "Bold, punchy titles that evoke modern warmth paired with clean menu item specifications."
-    },
-    colors: [
-      { name: "Royal Saudi Crimson", hex: "#9b111e" },
-      { name: "Golden Amber", hex: "#eab308" },
-      { name: "Warm Cream", hex: "#fef9f5" },
-      { name: "Charcoal Black", hex: "#1c1917" },
-      { name: "Pure White", hex: "#ffffff" }
-    ],
-    results: [
-      "Successfully launched live at ronaraiksa.com with glowing feedback from restaurant patrons.",
-      "Over 48% increase in direct weekday table reservations made via the website.",
-      "Mobile bounce rate decreased by 31% after introducing the streamlined digital menu."
-    ],
-    nextSlug: "gemini-music-awards"
-  },
-  {
-    id: "gemini-music-awards",
-    slug: "gemini-music-awards",
-    title: "Gemini National Music Talent Hunt 2026",
-    shortTitle: "Event Website",
-    category: "Entertainment & Events",
-    tagline: "An official gateway to the Gemini National Music Award Show — celebrating musical virtuosity.",
-    year: "2026",
-    client: "Gemini Film & Music Production House",
-    role: "Lead UI/UX Designer & Frontend Developer",
-    duration: "5 Weeks",
-    featured: true,
-    coverImage: "/assets/mockup-gemini-music-award.jpg",
-    deviceMockup: "laptop",
-    tags: ["Event UX", "Music Awards", "Contestant Registration", "Figma to Code"],
-    overview: "Gemini National Music Talent Hunt 2026 is an entertainment spectacle and competitive talent audition platform created by Gemini Film & Music Production House. Muhammed K designed the user flow and developed the responsive platform.",
-    challenge: "The event required a grand, prestigious digital presence capable of handling thousands of online contestant audition registrations across 5 age categories, while clearly explaining complex competition guidelines and jury credentials.",
-    goals: [
-      "Create a cinematic, glamorous gold-and-black event aesthetic reflecting musical excellence.",
-      "Build a seamless multi-step audition registration portal supporting demo audio/video submissions.",
-      "Design dedicated sections for celebrity jury panels, mentors, cash prizes, and sponsors.",
-      "Deliver a high-concurrency responsive frontend deployed at geminimusicaward.com."
-    ],
-    designProcess: [
-      { step: "01", title: "Event Roadmap & Wireframing", desc: "Outlined the full digital ecosystem: Announcement phase, Audition phase, Voting phase, and Gala." },
-      { step: "02", title: "Audition Form UX Optimization", desc: "Segmented the registration form into 3 intuitive steps: Participant Details, Category Selection, and Media Upload." },
-      { step: "03", title: "Cinematic Visual Design", desc: "Crafted particle dust overlays, gold foil typography accents, and sleek dark card containers in Figma." },
-      { step: "04", title: "Frontend Implementation", desc: "Developed responsive pages using HTML5, CSS3, JavaScript, and deployed to production." }
-    ],
-    uxDecisions: [
-      { title: "Registrations Open Live Indicator", desc: "Created prominent glowing gold pill badge to highlight audition urgency and countdown." },
-      { title: "Dual Primary CTAs", desc: "Positioned 'Register Now' (primary gold) alongside 'View Rules' (secondary translucent) in the hero." },
-      { title: "Celebrity Jury Carousel", desc: "Designed profile cards with social links and discography highlights to build audition credibility." }
-    ],
-    features: [
-      "Multi-Category Audition Registration with audio/video demo link submission",
-      "Official Competition Rules & Eligibility guidelines accordion",
-      "Celebrity Jury & Mentor showcase with credential badges",
-      "Prize Pool & Trophy breakdown with sponsorship tiers",
-      "Live event timetable and regional audition city schedule"
-    ],
-    typography: {
-      headline: "Outfit & Syne",
-      body: "Plus Jakarta Sans",
-      spec: "Cinematic gold-accented typography evoking Hollywood & national gala awards glamour."
-    },
-    colors: [
-      { name: "Gala Gold", hex: "#f59e0b" },
-      { name: "Deep Velvet Black", hex: "#0a0a0c" },
-      { name: "Warm Champagne", hex: "#fef3c7" },
-      { name: "Smoky Charcoal", hex: "#1f2024" },
-      { name: "Pure White", hex: "#ffffff" }
-    ],
-    results: [
-      "Successfully processed over 4,200 contestant registrations in the first audition window.",
-      "Live at geminimusicaward.com with flawless uptime during high-traffic announcements.",
-      "Celebrated by production house executives and contestants for clean registration clarity."
-    ],
-    nextSlug: "green-track-logistics"
   }
 ];

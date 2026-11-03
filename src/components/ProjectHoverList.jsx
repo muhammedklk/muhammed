@@ -130,7 +130,7 @@ export default function ProjectHoverList({ projects, allowCaseStudy = false }) {
                   <span className="row-category-desktop">{project.category}</span>
                   <span className="row-year">{project.year || '2026'}</span>
 
-                  {allowCaseStudy && (
+                  {(project.liveUrl || allowCaseStudy) && (
                     <span className="row-arrow-circle" aria-hidden="true">
                       <ArrowIcon size={14} />
                     </span>
@@ -149,6 +149,23 @@ export default function ProjectHoverList({ projects, allowCaseStudy = false }) {
               </div>
             </>
           );
+
+          if (project.liveUrl) {
+            return (
+              <a
+                key={project.id}
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`project-list-row has-live-link ${isCurrentActive ? 'row-active' : ''}`}
+                data-cursor="view-website"
+                onMouseEnter={(e) => handleMouseEnter(project, e)}
+                aria-label={`Visit live website: ${project.title}`}
+              >
+                {rowInner}
+              </a>
+            );
+          }
 
           if (allowCaseStudy) {
             return (

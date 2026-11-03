@@ -131,6 +131,10 @@
   cursor: default;
 }
 
+.project-editorial-card.has-live-link {
+  cursor: none;
+}
+
 
 
 /* Full-Bleed Media Stage */
