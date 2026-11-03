@@ -159,7 +159,7 @@
   font-size: 195px;
   font-weight: 900;
   letter-spacing: -0.04em;
-  fill: #08080b; /* Deep black silhouette matching reference "NYRA" over the bottom glow */
+  fill: #ffffff; /* White wordmark */
   text-anchor: middle;
 }
 

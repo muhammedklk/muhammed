@@ -296,6 +296,10 @@
 /* Submit Button */
 .simple-submit-btn {
   width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
   background: linear-gradient(135deg, #0e2447 0%, #4087fb 35%, #3b82f6 100%);
   color: #ffffff;
   border-radius: 9999px;

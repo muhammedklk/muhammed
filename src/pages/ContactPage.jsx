@@ -33,12 +33,32 @@ export default function ContactPage() {
       return;
     }
 
-    // Opens WhatsApp with formatted message
-    const phone = "919656216086";
-    const phoneNote = formData.phone ? ` | 📞 ${formData.phone}` : '';
-    const text = `Hi Muhammed,\n\nMy name is *${formData.name}*\n📧 ${formData.email}${phoneNote}\n\nI want to discuss:\n${formData.message}`;
-    const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
-    window.open(whatsappUrl, '_blank');
+    // Formats and directly shares message to WhatsApp
+    const rawPhone = personalInfo?.phone || "919656216086";
+    const cleanPhone = rawPhone.replace(/[^0-9]/g, '') || "919656216086";
+    const targetPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+
+    const messageLines = [
+      `*Hi Muhammed, I'd like to discuss a project!* 👋`,
+      ``,
+      `👤 *Name:* ${formData.name.trim()}`,
+      `📧 *Email:* ${formData.email.trim()}`,
+      formData.phone.trim() ? `📞 *Phone:* ${formData.phone.trim()}` : null,
+      ``,
+      `💬 *Project Details:*`,
+      formData.message.trim(),
+      ``,
+      `──────────────────────────`,
+      `_Sent from portfolio contact form_`
+    ].filter(Boolean).join('\n');
+
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodeURIComponent(messageLines)}`;
+
+    // Direct launch to WhatsApp with fallback for pop-up blockers
+    const win = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    if (!win || win.closed || typeof win.closed === 'undefined') {
+      window.location.href = whatsappUrl;
+    }
   };
 
   return (
@@ -258,7 +278,8 @@ export default function ContactPage() {
                   className="simple-submit-btn"
                   id="simple-contact-submit"
                 >
-                  <span>SEND MESSAGE</span>
+                  <MessageCircle size={18} strokeWidth={2.4} />
+                  <span>SEND VIA WHATSAPP</span>
                 </button>
 
                 {/* WhatsApp Notice Note */}
