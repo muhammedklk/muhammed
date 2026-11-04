@@ -9,6 +9,7 @@ import {
   Zap 
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
+import TechMarquee from '../components/TechMarquee';
 import './about.css';
 
 export default function AboutPage() {
@@ -121,6 +122,10 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* Marquee Strip */}
+        <div className="my-5">
+          <TechMarquee />
+        </div>
 
         {/* ============================================================
             BOTTOM SECTION: SKILLS & EXPERTISE MATRIX

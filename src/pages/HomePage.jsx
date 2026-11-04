@@ -4,6 +4,7 @@ import { Sparkles, Palette, Code2, Globe, Download, MapPin, PenTool, Monitor, Me
 import ArrowIcon from '../components/ArrowIcon';
 import HeroThreeSphere from '../components/HeroThreeSphere';
 import ProjectCard from '../components/ProjectCard';
+import TechMarquee from '../components/TechMarquee';
 
 import { usePortfolio } from '../context/PortfolioContext';
 import '../styles/hero.css';
@@ -290,6 +291,10 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ============================
+          TECH STACK MARQUEE (Right to Left)
+      ============================ */}
+      <TechMarquee />
 
       {/* ============================
           ABOUT SECTION — SIMPLE EDITORIAL (Matches Reference)
