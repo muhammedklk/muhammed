@@ -14,7 +14,7 @@ export const personalInfo = {
   socials: {
     github: "https://github.com/muhammedklk",
     linkedin: "https://linkedin.com/in/kmuhammed",
-    instagram: "https://instagram.com/muhammedklk",
+    instagram: "https://www.instagram.com/___muhammedk/",
     portfolio: "https://muhammedfolio.vercel.app/",
     email: "mailto:muhammedklkm@gmail.com",
     phone: "tel:+919656216086"

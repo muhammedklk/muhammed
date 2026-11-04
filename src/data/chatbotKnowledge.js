@@ -16,7 +16,7 @@ export const CHATBOT_CONTEXT = {
   portfolio: "https://muhammedfolio.vercel.app",
   linkedin: "https://linkedin.com/in/kmuhammed",
   github: "https://github.com/muhammedklk",
-  instagram: "https://instagram.com/muhammedklk",
+  instagram: "https://www.instagram.com/___muhammedk/",
   cvPath: "/assets/muhammedk-cv.pdf",
 
   summary: `Creative and detail-oriented UI/UX Designer and Front-End Developer with hands-on experience in designing and developing responsive websites from Figma designs. Skilled in Figma, wireframing, prototyping, HTML5, CSS3, JavaScript, jQuery, and Bootstrap, with a strong understanding of responsive web design, modern UI layouts, and user-focused interfaces. Experienced in converting high-fidelity Figma designs into pixel-perfect, cross-browser compatible websites and collaborating with stakeholders across India and GCC countries (Saudi Arabia, UAE, Qatar).`,
@@ -143,7 +143,7 @@ export function getChatbotResponse(query) {
       `• 📍 **Location**: Malappuram, Kerala, India\n` +
       `• 💼 **LinkedIn**: [linkedin.com/in/kmuhammed](https://linkedin.com/in/kmuhammed)\n` +
       `• 🐙 **GitHub**: [github.com/muhammedklk](https://github.com/muhammedklk)\n` +
-      `• 📸 **Instagram**: [@muhammedklk](https://instagram.com/muhammedklk)\n` +
+      `• 📸 **Instagram**: [@___muhammedk](https://www.instagram.com/___muhammedk/)\n` +
       `• 🌐 **Portfolio**: [muhammedfolio.vercel.app](https://muhammedfolio.vercel.app)\n\n` +
       `He typically responds within a few hours!`;
   }

@@ -147,6 +147,16 @@ function syncProjectsOrderAndUrls(projectList) {
   return result;
 }
 
+function syncPersonalInfo(info) {
+  if (!info) return defaultPersonalInfo;
+  const clone = { ...defaultPersonalInfo, ...info };
+  clone.socials = { ...defaultPersonalInfo.socials, ...(info.socials || {}) };
+  if (!clone.socials.instagram || clone.socials.instagram.includes('muhammedklk')) {
+    clone.socials.instagram = "https://www.instagram.com/___muhammedk/";
+  }
+  return clone;
+}
+
 const PortfolioContext = createContext(null);
 
 export function PortfolioProvider({ children }) {
@@ -154,7 +164,7 @@ export function PortfolioProvider({ children }) {
   const [personalInfo, setPersonalInfo] = useState(() => {
     try {
       const saved = localStorage.getItem('portfolio_personal');
-      return saved ? JSON.parse(saved) : defaultPersonalInfo;
+      return saved ? syncPersonalInfo(JSON.parse(saved)) : defaultPersonalInfo;
     } catch { return defaultPersonalInfo; }
   });
 
@@ -208,8 +218,9 @@ export function PortfolioProvider({ children }) {
       const json = await res.json();
       if (json.success && json.data) {
         if (json.data.personalInfo) {
-          setPersonalInfo(json.data.personalInfo);
-          try { localStorage.setItem('portfolio_personal', JSON.stringify(json.data.personalInfo)); } catch {}
+          const syncedPersonal = syncPersonalInfo(json.data.personalInfo);
+          setPersonalInfo(syncedPersonal);
+          try { localStorage.setItem('portfolio_personal', JSON.stringify(syncedPersonal)); } catch {}
         }
         if (json.data.aboutContent && Object.keys(json.data.aboutContent).length > 0) {
           setAboutContent(prev => {

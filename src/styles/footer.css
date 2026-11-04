@@ -159,7 +159,8 @@
   font-size: 195px;
   font-weight: 900;
   letter-spacing: -0.04em;
-  fill: #ffffff; /* White wordmark */
+  fill: #ffffff !important;
+  color: #ffffff !important;
   text-anchor: middle;
 }
 

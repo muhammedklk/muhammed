@@ -107,6 +107,8 @@ export default function Footer() {
               y="180"
               textAnchor="middle"
               className="footer-wordmark-text"
+              fill="#ffffff"
+              style={{ fill: '#ffffff' }}
             >
               MUHAMMED
             </text>
