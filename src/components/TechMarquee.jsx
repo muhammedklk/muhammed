@@ -22,6 +22,7 @@ export const TECH_ITEMS = [
     icon: (
       <svg className="tech-icon-original" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect width="256" height="256" rx="52" fill="#001E36" />
+        <rect x="6" y="6" width="244" height="244" rx="46" stroke="#00C8FF" strokeWidth="8" fill="none" />
         <path d="M72 70h45.6c24 0 42 13 42 35.5s-18 35.5-42 35.5H94v47H72V70zm22 20v31h21c13 0 21-6 21-15.5s-8-15.5-21-15.5H94z" fill="#31A8FF" />
         <path d="M164 148c0-14 11.5-20.5 25.5-20.5 8.5 0 17 2.5 21 5.5l-5 14c-4-2.5-10-4-16-4-7 0-11 2.5-11 7 0 11 29 6 29 27 0 13-10 20.5-27 20.5-10 0-20-3.5-24-7.5l5.5-14c4 3 11.5 5.5 18.5 5.5 8 0 13-3 13-8.5 0-11.5-29-7-29-25.5z" fill="#31A8FF" />
       </svg>
@@ -31,15 +32,17 @@ export const TECH_ITEMS = [
     id: 'canva',
     name: 'Canva',
     icon: (
-      <svg className="tech-icon-original" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="tech-icon-original" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="canva-gradient-orig" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+          <linearGradient id="canva-real-grad" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#00C4CC" />
             <stop offset="100%" stopColor="#7D2AE8" />
           </linearGradient>
         </defs>
-        <path fill="url(#canva-gradient-orig)" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0z" />
-        <path fill="#FFFFFF" d="M6.962 7.68c.754 0 1.337.549 1.405 1.2.069.583-.171 1.097-.822 1.406-.343.171-.48.172-.549.069-.034-.069 0-.137.069-.206.617-.514.617-.926.548-1.508-.034-.378-.308-.618-.583-.618-1.2 0-2.914 2.674-2.674 4.629.103.754.549 1.646 1.509 1.646.308 0 .65-.103.96-.24.5-.264.799-.47 1.097-.8-.073-.885.704-2.046 1.851-2.046.515 0 .926.205.96.583.068.514-.377.582-.514.582s-.378-.034-.378-.17c-.034-.138.309-.07.275-.378-.035-.206-.24-.274-.446-.274-.72 0-1.131.994-1.029 1.611.035.275.172.549.447.549.205 0 .514-.31.617-.755.068-.308.343-.514.583-.514.102 0 .17.034.205.171v.138c-.034.137-.137.548-.102.651 0 .069.034.171.17.171.092 0 .436-.18.777-.459.117-.59.253-1.298.253-1.357.034-.24.137-.48.617-.48.103 0 .171.034.205.171v.138l-.136.617c.445-.583 1.097-.994 1.508-.994.172 0 .309.102.309.274 0 .103 0 .274-.069.446-.137.377-.309.96-.412 1.474 0 .137.035.274.207.274s.685-.206 1.096-.754l.007-.004c-.002-.068-.007-.134-.007-.202 0-.411.035-.754.104-.994.068-.274.411-.514.617-.514.103 0 .205.069.205.171 0 .035 0 .103-.034.137-.137.446-.24.857-.24 1.269 0 .24.034.582.102.788 0 .034.035.069.07.069.068 0 .548-.445.89-1.028-.308-.206-.48-.549-.48-.96 0-.72.446-1.097.858-1.097.343 0 .617.24.617.72 0 .308-.103.65-.274.96h.102a.77.77 0 0 0 .584-.24.3.3 0 0 1 .134-.117c.335-.425.83-.74 1.41-.74.48 0 .924.205.959.582.068.515-.378.618-.515.618l-.002-.002c-.138 0-.377-.035-.377-.172s.309-.068.274-.376c-.034-.206-.24-.275-.446-.275-.686 0-1.13.891-1.028 1.611.034.275.171.583.445.583.206 0 .515-.274.618-.686.034-.102.068-.205.103-.308.617.583 1.302.822 1.953.822 1.235 0 2.126-.995 2.126-2.504 0-2.057-1.406-4.63-3.6-4.63-.858 0-1.68.377-2.3 1.063-.789-.892-1.852-1.372-2.984-1.372-.891 0-1.783.309-2.469.96-.48-.686-1.303-1.132-2.229-1.132-1.028 0-2.091.583-2.606 1.475v-.892c0-.102-.068-.171-.171-.171z" />
+        <circle cx="100" cy="100" r="100" fill="url(#canva-real-grad)" />
+        {/* Authentic Canva Script 'C' */}
+        <path d="M125 58c-32 0-55 22-55 52 0 30 22 50 52 50 20 0 36-9 45-22l-14-11c-7 9-18 15-31 15-19 0-32-13-32-32 0-20 14-34 34-34 14 0 24 6 30 14l14-12c-11-13-27-20-43-20z" fill="#FFFFFF" />
+        <circle cx="138" cy="68" r="6" fill="#FFFFFF" />
       </svg>
     )
   },
@@ -72,7 +75,7 @@ export const TECH_ITEMS = [
     name: 'JavaScript',
     icon: (
       <svg className="tech-icon-original" viewBox="0 0 630 630" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="630" height="630" rx="36" fill="#F7DF1E" />
+        <rect width="630" height="630" rx="42" fill="#F7DF1E" />
         <path d="M360 480c0 40 25 65 65 65 30 0 50-15 50-40 0-25-15-35-45-45l-15-5c-60-20-95-50-95-110 0-65 50-110 125-110 50 0 90 20 115 65l-60 40c-15-25-30-35-55-35-30 0-45 15-45 35 0 25 15 35 45 45l15 5c65 25 95 55 95 115 0 70-55 115-135 115-70 0-115-35-135-85l75-50zm-155 55c0 40-20 60-55 60-35 0-55-20-65-45l65-40c5 10 10 15 20 15 10 0 15-5 15-15V240h80v295h-60z" fill="#000000" />
       </svg>
     )
@@ -83,7 +86,7 @@ export const TECH_ITEMS = [
     icon: (
       <svg className="tech-icon-original" viewBox="-11.5 -10.23174 23 20.46348" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="0" cy="0" r="2.05" fill="#61DAFB" />
-        <g stroke="#61DAFB" strokeWidth="1" fill="none">
+        <g stroke="#61DAFB" strokeWidth="1.1" fill="none">
           <ellipse rx="11" ry="4.2" />
           <ellipse rx="11" ry="4.2" transform="rotate(60)" />
           <ellipse rx="11" ry="4.2" transform="rotate(120)" />
@@ -144,13 +147,13 @@ export const TECH_ITEMS = [
     icon: (
       <svg className="tech-icon-original" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="gemini-official-grad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+          <linearGradient id="gemini-official-grad-real" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#1BA1E2" />
             <stop offset="50%" stopColor="#7C3AED" />
             <stop offset="100%" stopColor="#D946EF" />
           </linearGradient>
         </defs>
-        <path d="M12 0C12 6.627 6.627 12 0 12c6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12z" fill="url(#gemini-official-grad)" />
+        <path d="M12 0C12 6.627 6.627 12 0 12c6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12z" fill="url(#gemini-official-grad-real)" />
       </svg>
     )
   },
@@ -167,17 +170,17 @@ export const TECH_ITEMS = [
     id: 'antigravity',
     name: 'Antigravity',
     icon: (
-      <svg className="tech-icon-original" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="tech-icon-original" viewBox="0 0 113 113" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="ag-gradient-orig" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+          <linearGradient id="ag-real-gradient" x1="16" y1="18" x2="95" y2="95" gradientUnits="userSpaceOnUse">
             <stop offset="0%" stopColor="#4285F4" />
-            <stop offset="35%" stopColor="#34A853" />
+            <stop offset="30%" stopColor="#34A853" />
             <stop offset="70%" stopColor="#FBBC05" />
             <stop offset="100%" stopColor="#EA4335" />
           </linearGradient>
         </defs>
-        <path d="M12 2L2 20h20L12 2zm0 4.5l6.5 11.5h-13L12 6.5z" fill="url(#ag-gradient-orig)" />
-        <circle cx="12" cy="14" r="2.5" fill="#4285F4" />
+        {/* Exact official Google Antigravity logo path */}
+        <path d="M89.6992 93.695C94.3659 97.195 101.366 94.8617 94.9492 88.445C75.6992 69.7783 79.7825 18.445 55.8659 18.445C31.9492 18.445 36.0325 69.7783 16.7825 88.445C9.78251 95.445 17.3658 97.195 22.0325 93.695C40.1159 81.445 38.9492 59.8617 55.8659 59.8617C72.7825 59.8617 71.6159 81.445 89.6992 93.695Z" fill="url(#ag-real-gradient)" />
       </svg>
     )
   },
@@ -185,17 +188,20 @@ export const TECH_ITEMS = [
     id: 'stitch',
     name: 'Stitch',
     icon: (
-      <svg className="tech-icon-original" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="tech-icon-original" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="stitch-gradient-orig" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#F43F5E" />
-            <stop offset="50%" stopColor="#A855F7" />
-            <stop offset="100%" stopColor="#6366F1" />
+          <linearGradient id="stitch-labs-grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#8B5CF6" />
+            <stop offset="50%" stopColor="#EC4899" />
+            <stop offset="100%" stopColor="#F59E0B" />
           </linearGradient>
         </defs>
-        <rect width="24" height="24" rx="6" fill="url(#stitch-gradient-orig)" />
-        <path d="M7 7l10 10M17 7L7 17" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="3 3" />
-        <circle cx="12" cy="12" r="2.5" fill="#FFFFFF" />
+        <rect width="100" height="100" rx="26" fill="url(#stitch-labs-grad)" />
+        {/* Google Labs Stitch AI UI canvas motif */}
+        <rect x="22" y="22" width="56" height="56" rx="14" stroke="#FFFFFF" strokeWidth="5.5" strokeDasharray="9 5" fill="none" />
+        <circle cx="50" cy="50" r="7" fill="#FFFFFF" />
+        <circle cx="22" cy="22" r="4.5" fill="#FFFFFF" />
+        <circle cx="78" cy="78" r="4.5" fill="#FFFFFF" />
       </svg>
     )
   }
@@ -203,35 +209,51 @@ export const TECH_ITEMS = [
 
 export default function TechMarquee({ className = '' }) {
   return (
-    <section className={`tech-marquee-wrapper ${className}`} aria-label="Tools & Technologies Marquee">
-      {/* Edge gradient masks for seamless left-right fade */}
-      <div className="tech-marquee-fade tech-marquee-fade-left" aria-hidden="true" />
-      <div className="tech-marquee-fade tech-marquee-fade-right" aria-hidden="true" />
-
-      {/* Marquee Track Moving Right to Left */}
-      <div className="tech-marquee-track">
-        {/* Set 1 */}
-        <div className="tech-marquee-group" aria-hidden="false">
-          {TECH_ITEMS.map((item) => (
-            <div key={`set1-${item.id}`} className="tech-marquee-item">
-              <div className="tech-marquee-icon-box">
-                {item.icon}
-              </div>
-              <span className="tech-marquee-name">{item.name}</span>
-            </div>
-          ))}
+    <section className={`tech-toolkit-section ${className}`} aria-label="Technologies & AI Workflow">
+      <div className="container">
+        {/* Editorial Section Header */}
+        <div className="tech-toolkit-header text-center reveal-blur">
+          <span className="section-tag-editorial">( TOOLKIT & AI WORKFLOW )</span>
+          <h2 className="tech-toolkit-title">
+            Technologies & Intelligent Systems I Build With.
+          </h2>
+          <p className="tech-toolkit-subtitle">
+            A battle-tested blend of industry-standard design tools, robust frontend frameworks, and frontier AI models.
+          </p>
         </div>
+      </div>
 
-        {/* Set 2 (Duplicate for continuous loop) */}
-        <div className="tech-marquee-group" aria-hidden="true">
-          {TECH_ITEMS.map((item) => (
-            <div key={`set2-${item.id}`} className="tech-marquee-item">
-              <div className="tech-marquee-icon-box">
-                {item.icon}
+      {/* Marquee Pill Strip with Frosted Cards */}
+      <div className="tech-marquee-viewport">
+        {/* Fade masks */}
+        <div className="tech-marquee-fade tech-marquee-fade-left" aria-hidden="true" />
+        <div className="tech-marquee-fade tech-marquee-fade-right" aria-hidden="true" />
+
+        {/* Marquee Track Moving Right to Left */}
+        <div className="tech-marquee-track">
+          {/* Set 1 */}
+          <div className="tech-marquee-group" aria-hidden="false">
+            {TECH_ITEMS.map((item) => (
+              <div key={`set1-${item.id}`} className="tech-pill-card">
+                <div className="tech-pill-icon-box">
+                  {item.icon}
+                </div>
+                <span className="tech-pill-label">{item.name}</span>
               </div>
-              <span className="tech-marquee-name">{item.name}</span>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* Set 2 (Continuous Loop) */}
+          <div className="tech-marquee-group" aria-hidden="true">
+            {TECH_ITEMS.map((item) => (
+              <div key={`set2-${item.id}`} className="tech-pill-card">
+                <div className="tech-pill-icon-box">
+                  {item.icon}
+                </div>
+                <span className="tech-pill-label">{item.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

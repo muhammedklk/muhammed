@@ -1,42 +1,72 @@
 /* ============================================================
-   TECH MARQUEE — AUTHENTIC OFFICIAL LOGOS & RIGHT-TO-LEFT SCROLL
+   TECH TOOLKIT & MARQUEE SECTION — BESPOKE REDESIGN
    ============================================================ */
 
-.tech-marquee-wrapper {
+.tech-toolkit-section {
+  position: relative;
+  padding: 5rem 0 3.5rem;
+  background: var(--bg-surface, #FAFAFC);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+/* Header Area */
+.tech-toolkit-header {
+  margin-bottom: 3rem;
+}
+
+.tech-toolkit-headline,
+.tech-toolkit-title {
+  font-family: var(--font-sans, 'Mona Sans', system-ui, -apple-system, sans-serif);
+  font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text-primary, #0F172A);
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.tech-toolkit-subtitle {
+  font-family: var(--font-sans, 'Mona Sans', system-ui, -apple-system, sans-serif);
+  font-size: 1.02rem;
+  color: var(--text-muted, #64748B);
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Marquee Viewport */
+.tech-marquee-viewport {
   position: relative;
   width: 100%;
   overflow: hidden;
-  padding: 1.25rem 0;
-  background: var(--bg-surface, #FFFFFF);
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  display: flex;
-  align-items: center;
+  padding: 0.75rem 0;
   user-select: none;
-  z-index: 5;
 }
 
-/* Subtle fade at edges so items smoothly appear & disappear */
+/* Edge Fade Masks for Seamless Ingress/Egress */
 .tech-marquee-fade {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 100px;
-  z-index: 2;
+  width: 140px;
+  z-index: 3;
   pointer-events: none;
 }
 
 .tech-marquee-fade-left {
   left: 0;
-  background: linear-gradient(to right, var(--bg-surface, #FFFFFF) 15%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to right, var(--bg-surface, #FAFAFC) 20%, rgba(250, 250, 252, 0) 100%);
 }
 
 .tech-marquee-fade-right {
   right: 0;
-  background: linear-gradient(to left, var(--bg-surface, #FFFFFF) 15%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(to left, var(--bg-surface, #FAFAFC) 20%, rgba(250, 250, 252, 0) 100%);
 }
 
-/* Marquee track */
+/* Marquee Track */
 .tech-marquee-track {
   display: flex;
   width: max-content;
@@ -46,23 +76,23 @@
 }
 
 /* Pause scroll when hovered */
-.tech-marquee-wrapper:hover .tech-marquee-group {
+.tech-marquee-viewport:hover .tech-marquee-group {
   animation-play-state: paused;
 }
 
-/* Group container with continuous right-to-left scroll */
+/* Group Container with Continuous Right-to-Left Scroll */
 .tech-marquee-group {
   display: flex;
   align-items: center;
-  gap: 3.25rem;
-  padding-right: 3.25rem;
+  gap: 1.25rem;
+  padding-right: 1.25rem;
   flex-shrink: 0;
   will-change: transform;
-  animation: techMarqueeScrollLeft 36s linear infinite;
+  animation: techPillScrollLeft 36s linear infinite;
 }
 
-/* Keyframes: scroll towards the left (from right to left) */
-@keyframes techMarqueeScrollLeft {
+/* Keyframes: Right to Left */
+@keyframes techPillScrollLeft {
   0% {
     transform: translate3d(0, 0, 0);
   }
@@ -71,28 +101,43 @@
   }
 }
 
-/* Individual item containing original logo + name */
-.tech-marquee-item {
+/* Floating Tech Pill Badge Card */
+.tech-pill-card {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.85rem;
+  padding: 0.7rem 1.35rem;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
   cursor: pointer;
-  padding: 0.3rem 0.5rem;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease;
+  flex-shrink: 0;
 }
 
-.tech-marquee-item:hover {
-  transform: translateY(-1px);
+.tech-pill-card:hover {
+  transform: translateY(-3px) scale(1.02);
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
-/* Original Icon Box */
-.tech-marquee-icon-box {
-  width: 24px;
-  height: 24px;
+/* Original Vector Icon Box */
+.tech-pill-icon-box {
+  width: 26px;
+  height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.tech-pill-card:hover .tech-pill-icon-box {
+  transform: scale(1.12);
 }
 
 .tech-icon-original {
@@ -102,63 +147,97 @@
   object-fit: contain;
 }
 
-/* Tool / Technology Name matching user's reference */
-.tech-marquee-name {
+/* Label Typography */
+.tech-pill-label {
   font-family: var(--font-sans, 'Mona Sans', system-ui, -apple-system, sans-serif);
-  font-size: 0.98rem;
-  font-weight: 500;
-  color: #64748B;
-  letter-spacing: -0.01em;
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: #1E293B;
+  letter-spacing: -0.015em;
   white-space: nowrap;
   transition: color 0.2s ease;
 }
 
-.tech-marquee-item:hover .tech-marquee-name {
+.tech-pill-card:hover .tech-pill-label {
   color: #0F172A;
-  font-weight: 600;
 }
 
-/* Dark mode compatibility */
-[data-theme="dark"] .tech-marquee-wrapper {
+/* Dark Mode Theme */
+[data-theme="dark"] .tech-toolkit-section {
   background: #0B0E14;
   border-top-color: rgba(255, 255, 255, 0.06);
   border-bottom-color: rgba(255, 255, 255, 0.06);
 }
 
-[data-theme="dark"] .tech-marquee-fade-left {
-  background: linear-gradient(to right, #0B0E14 15%, rgba(11, 14, 20, 0) 100%);
+[data-theme="dark"] .tech-toolkit-headline,
+[data-theme="dark"] .tech-toolkit-title {
+  color: #F8FAFC;
 }
 
-[data-theme="dark"] .tech-marquee-fade-right {
-  background: linear-gradient(to left, #0B0E14 15%, rgba(11, 14, 20, 0) 100%);
-}
-
-[data-theme="dark"] .tech-marquee-name {
+[data-theme="dark"] .tech-toolkit-subtitle {
   color: #94A3B8;
 }
 
-[data-theme="dark"] .tech-marquee-item:hover .tech-marquee-name {
-  color: #F8FAFC;
+[data-theme="dark"] .tech-marquee-fade-left {
+  background: linear-gradient(to right, #0B0E14 20%, rgba(11, 14, 20, 0) 100%);
+}
+
+[data-theme="dark"] .tech-marquee-fade-right {
+  background: linear-gradient(to left, #0B0E14 20%, rgba(11, 14, 20, 0) 100%);
+}
+
+[data-theme="dark"] .tech-pill-card {
+  background: #141923;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .tech-pill-card:hover {
+  background: #1A2230;
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .tech-pill-label {
+  color: #E2E8F0;
+}
+
+[data-theme="dark"] .tech-pill-card:hover .tech-pill-label {
+  color: #FFFFFF;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .tech-marquee-wrapper {
-    padding: 1rem 0;
+  .tech-toolkit-section {
+    padding: 3.5rem 0 2.5rem;
+  }
+  .tech-toolkit-header {
+    margin-bottom: 2rem;
+  }
+  .tech-toolkit-headline,
+  .tech-toolkit-title {
+    font-size: 1.65rem;
+  }
+  .tech-toolkit-subtitle {
+    font-size: 0.92rem;
   }
   .tech-marquee-group {
-    gap: 2rem;
-    padding-right: 2rem;
-    animation-duration: 26s;
+    gap: 0.85rem;
+    padding-right: 0.85rem;
+    animation-duration: 28s;
   }
-  .tech-marquee-icon-box {
-    width: 21px;
-    height: 21px;
+  .tech-pill-card {
+    padding: 0.55rem 1.05rem;
+    gap: 0.65rem;
   }
-  .tech-marquee-name {
-    font-size: 0.9rem;
+  .tech-pill-icon-box {
+    width: 22px;
+    height: 22px;
+  }
+  .tech-pill-label {
+    font-size: 0.88rem;
   }
   .tech-marquee-fade {
-    width: 50px;
+    width: 60px;
   }
 }
