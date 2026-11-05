@@ -607,40 +607,9 @@
    ============================================================ */
 .services-section {
   padding: 8rem 0;
-  background: linear-gradient(
-    160deg,
-    rgba(245, 243, 255, 0.85) 0%,
-    rgba(237, 244, 255, 0.6) 45%,
-    rgba(240, 253, 247, 0.5) 100%
-  );
   border-top: 1px solid var(--border-subtle);
   position: relative;
   overflow: hidden;
-}
-
-/* Soft ambient blobs behind glass cards */
-.services-section::before {
-  content: '';
-  position: absolute;
-  top: -80px;
-  left: -100px;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(124, 92, 225, 0.10) 0%, transparent 65%);
-  pointer-events: none;
-}
-
-.services-section::after {
-  content: '';
-  position: absolute;
-  bottom: -100px;
-  right: -80px;
-  width: 450px;
-  height: 450px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.09) 0%, transparent 65%);
-  pointer-events: none;
 }
 
 .services-header {
