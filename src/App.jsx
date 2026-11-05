@@ -10,15 +10,16 @@ import ScrollReveal from './components/ScrollReveal';
 
 import { PortfolioProvider, usePortfolio } from './context/PortfolioContext';
 
-// Lazy-load pages for code splitting
-const HomePage = lazy(() => import('./pages/HomePage'));
-const AboutPage = lazy(() => import('./pages/AboutPage'));
-const WorksPage = lazy(() => import('./pages/WorksPage'));
-const CaseStudyPage = lazy(() => import('./pages/CaseStudyPage'));
-const ContactPage = lazy(() => import('./pages/ContactPage'));
+// Direct static imports for instant 0ms page transitions
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import WorksPage from './pages/WorksPage';
+import ContactPage from './pages/ContactPage';
+import MaintenancePage from './pages/MaintenancePage';
+import NotFoundPage from './pages/NotFoundPage';
+
+// Only heavy admin console is lazy-loaded
 const AdminPage = lazy(() => import('./pages/AdminPage'));
-const MaintenancePage = lazy(() => import('./pages/MaintenancePage'));
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function PageLoader() {
   return (

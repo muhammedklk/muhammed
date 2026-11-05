@@ -137,13 +137,21 @@ function InlineImageStatement({ aboutSnippet }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    let ticking = false;
     const handleScroll = () => {
-      const rect = el.getBoundingClientRect();
-      const windowH = window.innerHeight;
-      const start = windowH * 0.90;
-      const end = -windowH * 0.15;
-      const p = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
-      setProgress(p);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (!el) return;
+          const rect = el.getBoundingClientRect();
+          const windowH = window.innerHeight;
+          const start = windowH * 0.90;
+          const end = -windowH * 0.15;
+          const p = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
+          setProgress(p);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();

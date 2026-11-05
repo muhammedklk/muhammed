@@ -340,10 +340,15 @@ export default function HeroThreeSphere() {
     // ============================================================
     // ANIMATION LOOP (Gentle Float, Shimmer, & Momentum Physics)
     // ============================================================
-    let animationFrameId;
+    let animationFrameId = null;
+    let isVisibleOnScreen = true;
     let clock = new THREE.Clock();
 
     const animate = () => {
+      if (!isVisibleOnScreen) {
+        animationFrameId = null;
+        return;
+      }
       animationFrameId = requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
@@ -382,11 +387,23 @@ export default function HeroThreeSphere() {
       renderer.render(scene, camera);
     };
 
+    // Pause WebGL rendering when scrolled off-screen to save 100% CPU/GPU resources
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      isVisibleOnScreen = entry.isIntersecting;
+      if (isVisibleOnScreen && !animationFrameId) {
+        animate();
+      }
+    }, { threshold: 0.05 });
+    visibilityObserver.observe(container);
+
     animate();
 
     // Cleanup resources on unmount
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      visibilityObserver.disconnect();
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
       window.removeEventListener('resize', handleResize);
       domElement.removeEventListener('pointerdown', onPointerDown);
       domElement.removeEventListener('pointermove', onPointerMove);

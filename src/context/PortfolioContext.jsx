@@ -210,10 +210,13 @@ export function PortfolioProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [isServerConnected, setIsServerConnected] = useState(false);
 
-  // Fetch initial data from MongoDB API
+  // Fetch initial data from MongoDB API with quick timeout so offline/static loads instantly
   const refreshData = useCallback(async () => {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 600);
     try {
-      const res = await fetch('/api/content');
+      const res = await fetch('/api/content', { signal: controller.signal });
+      clearTimeout(timeoutId);
       if (!res.ok) throw new Error('API response not ok');
       const json = await res.json();
       if (json.success && json.data) {
@@ -254,7 +257,7 @@ export function PortfolioProvider({ children }) {
         setIsServerConnected(true);
       }
     } catch (err) {
-      console.warn('PortfolioContext: Server offline or proxy unavailable, using cached/static data.', err.message);
+      clearTimeout(timeoutId);
       setIsServerConnected(false);
     } finally {
       setLoading(false);
@@ -269,11 +272,15 @@ export function PortfolioProvider({ children }) {
   useEffect(() => {
     let isMounted = true;
     const checkMaintenance = async () => {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 600);
       try {
         const res = await fetch('/api/content/maintenance-status', {
+          signal: controller.signal,
           cache: 'no-store',
           headers: { 'pragma': 'no-cache', 'cache-control': 'no-cache' }
         });
+        clearTimeout(timeoutId);
         if (!res.ok) return;
         const json = await res.json();
         if (json.success && json.maintenanceMode && isMounted) {
@@ -289,11 +296,13 @@ export function PortfolioProvider({ children }) {
             return prev;
           });
         }
-      } catch (_) {}
+      } catch (_) {
+        clearTimeout(timeoutId);
+      }
     };
 
-    // Fast 3-second heartbeat polling so any device in the world auto-switches screen
-    const interval = setInterval(checkMaintenance, 3000);
+    // 15-second heartbeat polling to avoid blocking main thread when local server is offline
+    const interval = setInterval(checkMaintenance, 15000);
 
     // Cross-tab instant sync via localStorage storage event
     const handleStorage = (e) => {
