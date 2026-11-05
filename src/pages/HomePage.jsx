@@ -291,10 +291,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============================
-          TECH STACK MARQUEE (Right to Left)
-      ============================ */}
-      <TechMarquee />
 
       {/* ============================
           ABOUT SECTION — SIMPLE EDITORIAL (Matches Reference)
@@ -414,7 +410,10 @@ export default function HomePage() {
         </div>
       </section>
 
-
+      {/* ============================
+          TECH STACK MARQUEE (Right to Left)
+      ============================ */}
+      <TechMarquee />
 
       {/* ============================
           FEATURED WORKS — BESPOKE REDESIGN

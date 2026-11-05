@@ -1,212 +1,92 @@
 import React from 'react';
 import '../styles/tech-marquee.css';
 
-// 3D Model Icons for all requested technologies
+// 100% Authentic Official Brand Logos
 export const TECH_ITEMS = [
   {
     id: 'figma',
     name: 'Figma',
-    color: '#F24E1E',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="figma-depth" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="2" stdDeviation="1.5" floodColor="#000" floodOpacity="0.25" />
-          </filter>
-          <radialGradient id="fig-orange" cx="35%" cy="35%" r="65%">
-            <stop offset="0%" stopColor="#FF7D54" />
-            <stop offset="100%" stopColor="#E03A08" />
-          </radialGradient>
-          <radialGradient id="fig-coral" cx="35%" cy="35%" r="65%">
-            <stop offset="0%" stopColor="#FFA194" />
-            <stop offset="100%" stopColor="#F24E1E" />
-          </radialGradient>
-          <radialGradient id="fig-purple" cx="35%" cy="35%" r="65%">
-            <stop offset="0%" stopColor="#BE7BFF" />
-            <stop offset="100%" stopColor="#8A38F5" />
-          </radialGradient>
-          <radialGradient id="fig-blue" cx="35%" cy="35%" r="65%">
-            <stop offset="0%" stopColor="#54D5FF" />
-            <stop offset="100%" stopColor="#0599DE" />
-          </radialGradient>
-          <radialGradient id="fig-green" cx="35%" cy="35%" r="65%">
-            <stop offset="0%" stopColor="#3CE4A0" />
-            <stop offset="100%" stopColor="#05A665" />
-          </radialGradient>
-        </defs>
-        <g filter="url(#figma-depth)">
-          <path d="M19 0H9.5C4.25 0 0 4.25 0 9.5s4.25 9.5 9.5 9.5H19V0z" fill="url(#fig-orange)" />
-          <path d="M19 0h9.5C33.75 0 38 4.25 38 9.5S33.75 19 28.5 19H19V0z" fill="url(#fig-coral)" />
-          <path d="M0 28.5C0 23.25 4.25 19 9.5 19H19v19H9.5C4.25 38 0 33.75 0 28.5z" fill="url(#fig-purple)" />
-          <path d="M19 19h9.5c5.25 0 9.5 4.25 9.5 9.5s-4.25 9.5-9.5 9.5H19V19z" fill="url(#fig-blue)" />
-          <path d="M0 47.5C0 42.25 4.25 38 9.5 38H19v9.5c0 5.25-4.25 9.5-9.5 9.5S0 52.75 0 47.5z" fill="url(#fig-green)" />
-        </g>
+      <svg className="tech-icon-original" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE" />
+        <path d="M0 47.5a9.5 9.5 0 0 0 9.5 9.5 9.5 9.5 0 0 0 9.5-9.5V38H9.5A9.5 9.5 0 0 0 0 47.5z" fill="#0ACF83" />
+        <path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" fill="#FF7262" />
+        <path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E" />
+        <path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF" />
       </svg>
     )
   },
   {
     id: 'photoshop',
     name: 'Photoshop',
-    color: '#31A8FF',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="ps-bg" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#00284A" />
-            <stop offset="100%" stopColor="#001122" />
-          </linearGradient>
-          <linearGradient id="ps-border" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#00C8FF" />
-            <stop offset="100%" stopColor="#005A9E" />
-          </linearGradient>
-          <linearGradient id="ps-text" x1="12" y1="14" x2="36" y2="34" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#54D5FF" />
-            <stop offset="100%" stopColor="#0099FF" />
-          </linearGradient>
-          <filter id="ps-glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#0099FF" floodOpacity="0.4" />
-          </filter>
-        </defs>
-        <rect x="2" y="2" width="44" height="44" rx="10" fill="url(#ps-bg)" stroke="url(#ps-border)" strokeWidth="2.5" />
-        {/* Beveled glossy sheen */}
-        <path d="M3 12C3 7 7 3 12 3h24c5 0 9 4 9 9v4C33 18 15 20 3 24v-12z" fill="#FFFFFF" fillOpacity="0.08" />
-        <g filter="url(#ps-glow)">
-          {/* Letter P */}
-          <path d="M14 15h6.5c3.2 0 5.5 1.8 5.5 4.8 0 3-2.3 4.8-5.5 4.8H17.5v8.4H14V15zm3.5 3v6.6h3c1.6 0 2.8-.8 2.8-2.3 0-1.5-1.2-2.3-2.8-2.3h-3z" fill="url(#ps-text)" />
-          {/* Letter s */}
-          <path d="M29.5 25.4c0-1.4 1.1-2.2 2.7-2.2 1.6 0 2.7.7 2.8 2h-2.1c-.1-.4-.4-.6-.7-.6-.4 0-.6.2-.6.5 0 .4.3.5 1.1.7 1.8.4 2.7 1.2 2.7 2.6 0 1.6-1.3 2.5-3 2.5-1.8 0-3-.9-3.1-2.3h2.2c.1.5.5.8.9.8.4 0 .7-.2.7-.6 0-.4-.4-.6-1.2-.8-1.5-.4-2.5-1-2.5-2.6z" fill="url(#ps-text)" />
-        </g>
+      <svg className="tech-icon-original" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="256" height="256" rx="52" fill="#001E36" />
+        <path d="M72 70h45.6c24 0 42 13 42 35.5s-18 35.5-42 35.5H94v47H72V70zm22 20v31h21c13 0 21-6 21-15.5s-8-15.5-21-15.5H94z" fill="#31A8FF" />
+        <path d="M164 148c0-14 11.5-20.5 25.5-20.5 8.5 0 17 2.5 21 5.5l-5 14c-4-2.5-10-4-16-4-7 0-11 2.5-11 7 0 11 29 6 29 27 0 13-10 20.5-27 20.5-10 0-20-3.5-24-7.5l5.5-14c4 3 11.5 5.5 18.5 5.5 8 0 13-3 13-8.5 0-11.5-29-7-29-25.5z" fill="#31A8FF" />
       </svg>
     )
   },
   {
     id: 'canva',
     name: 'Canva',
-    color: '#00C4CC',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="tech-icon-original" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <radialGradient id="canva-grad" cx="25%" cy="25%" r="85%">
-            <stop offset="0%" stopColor="#00F5FF" />
-            <stop offset="45%" stopColor="#00C4CC" />
+          <linearGradient id="canva-gradient-orig" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#00C4CC" />
             <stop offset="100%" stopColor="#7D2AE8" />
-          </radialGradient>
-          <filter id="canva-depth" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="3" stdDeviation="2" floodColor="#7D2AE8" floodOpacity="0.35" />
-          </filter>
+          </linearGradient>
         </defs>
-        <circle cx="24" cy="24" r="22" fill="url(#canva-grad)" filter="url(#canva-depth)" />
-        {/* Gloss highlight */}
-        <ellipse cx="24" cy="11" rx="14" ry="5" fill="#FFFFFF" fillOpacity="0.22" />
-        {/* Stylized Canva 'C' */}
-        <path d="M33 21c-1.2-4.5-5.5-7.5-10.5-7.5-6.6 0-11.5 5.2-11.5 12s4.9 12 11.5 12c5.2 0 9.5-3.2 10.7-8h-4.3c-1 2.6-3.4 4.3-6.4 4.3-4.2 0-7.3-3.4-7.3-8.3s3.1-8.3 7.3-8.3c2.9 0 5.3 1.6 6.3 4H33z" fill="#FFFFFF" />
+        <path fill="url(#canva-gradient-orig)" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0z" />
+        <path fill="#FFFFFF" d="M6.962 7.68c.754 0 1.337.549 1.405 1.2.069.583-.171 1.097-.822 1.406-.343.171-.48.172-.549.069-.034-.069 0-.137.069-.206.617-.514.617-.926.548-1.508-.034-.378-.308-.618-.583-.618-1.2 0-2.914 2.674-2.674 4.629.103.754.549 1.646 1.509 1.646.308 0 .65-.103.96-.24.5-.264.799-.47 1.097-.8-.073-.885.704-2.046 1.851-2.046.515 0 .926.205.96.583.068.514-.377.582-.514.582s-.378-.034-.378-.17c-.034-.138.309-.07.275-.378-.035-.206-.24-.274-.446-.274-.72 0-1.131.994-1.029 1.611.035.275.172.549.447.549.205 0 .514-.31.617-.755.068-.308.343-.514.583-.514.102 0 .17.034.205.171v.138c-.034.137-.137.548-.102.651 0 .069.034.171.17.171.092 0 .436-.18.777-.459.117-.59.253-1.298.253-1.357.034-.24.137-.48.617-.48.103 0 .171.034.205.171v.138l-.136.617c.445-.583 1.097-.994 1.508-.994.172 0 .309.102.309.274 0 .103 0 .274-.069.446-.137.377-.309.96-.412 1.474 0 .137.035.274.207.274s.685-.206 1.096-.754l.007-.004c-.002-.068-.007-.134-.007-.202 0-.411.035-.754.104-.994.068-.274.411-.514.617-.514.103 0 .205.069.205.171 0 .035 0 .103-.034.137-.137.446-.24.857-.24 1.269 0 .24.034.582.102.788 0 .034.035.069.07.069.068 0 .548-.445.89-1.028-.308-.206-.48-.549-.48-.96 0-.72.446-1.097.858-1.097.343 0 .617.24.617.72 0 .308-.103.65-.274.96h.102a.77.77 0 0 0 .584-.24.3.3 0 0 1 .134-.117c.335-.425.83-.74 1.41-.74.48 0 .924.205.959.582.068.515-.378.618-.515.618l-.002-.002c-.138 0-.377-.035-.377-.172s.309-.068.274-.376c-.034-.206-.24-.275-.446-.275-.686 0-1.13.891-1.028 1.611.034.275.171.583.445.583.206 0 .515-.274.618-.686.034-.102.068-.205.103-.308.617.583 1.302.822 1.953.822 1.235 0 2.126-.995 2.126-2.504 0-2.057-1.406-4.63-3.6-4.63-.858 0-1.68.377-2.3 1.063-.789-.892-1.852-1.372-2.984-1.372-.891 0-1.783.309-2.469.96-.48-.686-1.303-1.132-2.229-1.132-1.028 0-2.091.583-2.606 1.475v-.892c0-.102-.068-.171-.171-.171z" />
       </svg>
     )
   },
   {
     id: 'html5',
     name: 'HTML5',
-    color: '#E44D26',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="html-depth" x="-15%" y="-15%" width="130%" height="130%">
-            <feDropShadow dx="0" dy="2.5" stdDeviation="1.8" floodColor="#E44D26" floodOpacity="0.35" />
-          </filter>
-          <linearGradient id="html-bevel" x1="0" y1="0" x2="0" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#FF6A3D" />
-            <stop offset="100%" stopColor="#D03813" />
-          </linearGradient>
-        </defs>
-        <g filter="url(#html-depth)">
-          {/* Base Shield */}
-          <path d="M7 3l3.6 40.5L24 48l13.4-4.5L41 3H7z" fill="url(#html-bevel)" />
-          {/* 3D Fold - Right Shaded Half */}
-          <path d="M24 6.5v37.8l10.8-3.6 3-34.2H24z" fill="#F16529" />
-          <path d="M24 6.5H10.2l3 34.2L24 44.3V6.5z" fill="#E44D26" />
-          {/* Number 5 Left */}
-          <path d="M24 14.5H13.6l.4 4.8H24v-4.8zm0 9.8H18.2l.4 4.9H24v-4.9zm0 8.6l-5.6-1.5-.4-4.3H14l.7 8.5 9.3 2.6V32.9z" fill="#EBEBEB" />
-          {/* Number 5 Right (Bright Highlight) */}
-          <path d="M24 14.5h10.4l-.4 4.8H24v-4.8zm0 9.8h5.3l-.5 5.5-4.8 1.3V35.9l9.3-2.6.9-10.8H24v1.8z" fill="#FFFFFF" />
-        </g>
+      <svg className="tech-icon-original" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M71 460L32 0h448l-39 460L256 512z" fill="#E44D26" />
+        <path d="M256 472l155-43 33-389H256v432z" fill="#F16529" />
+        <path d="M256 176v-64h-148l4 48 144 16zM116 224l5 56h135v-56H116zm10 112l3 32 127 35v-58l-82-22-3-31h-45z" fill="#EBEBEB" />
+        <path d="M256 112h148l-14 160H256v-56h90l6-48H256v-56zm0 168v56l82-22 8-94h54l-14 152-130 36v-128z" fill="#FFFFFF" />
       </svg>
     )
   },
   {
     id: 'css3',
     name: 'CSS3',
-    color: '#1572B6',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="css-depth" x="-15%" y="-15%" width="130%" height="130%">
-            <feDropShadow dx="0" dy="2.5" stdDeviation="1.8" floodColor="#1572B6" floodOpacity="0.35" />
-          </filter>
-          <linearGradient id="css-bevel" x1="0" y1="0" x2="0" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#2980B9" />
-            <stop offset="100%" stopColor="#0E5A93" />
-          </linearGradient>
-        </defs>
-        <g filter="url(#css-depth)">
-          <path d="M7 3l3.6 40.5L24 48l13.4-4.5L41 3H7z" fill="url(#css-bevel)" />
-          {/* 3D Fold */}
-          <path d="M24 6.5H10.2l3 34.2L24 44.3V6.5z" fill="#1572B6" />
-          <path d="M24 6.5v37.8l10.8-3.6 3-34.2H24z" fill="#33A9DC" />
-          {/* Number 3 Left */}
-          <path d="M24 14.5H13.6l.4 4.8H24v-4.8zm0 9.8H18.2l.4 4.9H24v-4.9zm0 8.6l-5.6-1.5-.4-4.3H14l.7 8.5 9.3 2.6V32.9z" fill="#EBEBEB" />
-          {/* Number 3 Right */}
-          <path d="M24 14.5h10.4l-1 11.2H24v-4.8h5.1l.3-3.6H24v-2.8zm0 9.8h5.3l-.5 5.5-4.8 1.3V35.9l9.3-2.6 1.1-13.8H24v4.8z" fill="#FFFFFF" />
-        </g>
+      <svg className="tech-icon-original" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M71 460L32 0h448l-39 460L256 512z" fill="#1572B6" />
+        <path d="M256 472l155-43 33-389H256v432z" fill="#33A9DC" />
+        <path d="M256 176v-64h-148l4 48 144 16zM116 224l5 56h135v-56H116zm10 112l3 32 127 35v-58l-82-22-3-31h-45z" fill="#EBEBEB" />
+        <path d="M256 112h148l-6 64H256v-64zm0 112h92l-8 96-84 23v-58l46-13 4-48H256v-60zm0 176l130-36 18-204H256v52h92l-4 48H256v140z" fill="#FFFFFF" />
       </svg>
     )
   },
   {
     id: 'javascript',
     name: 'JavaScript',
-    color: '#F7DF1E',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="js-tile" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#FFF268" />
-            <stop offset="100%" stopColor="#F5D000" />
-          </linearGradient>
-          <filter id="js-shadow" x="-15%" y="-15%" width="130%" height="130%">
-            <feDropShadow dx="0" dy="2.5" stdDeviation="2" floodColor="#C99E00" floodOpacity="0.4" />
-          </filter>
-        </defs>
-        <rect x="2" y="2" width="44" height="44" rx="8" fill="url(#js-tile)" filter="url(#js-shadow)" />
-        {/* Top glossy reflection */}
-        <path d="M3 10C3 6 6 3 10 3h28c4 0 7 3 7 7v6L3 22V10z" fill="#FFFFFF" fillOpacity="0.3" />
-        {/* Letters JS */}
-        <path d="M14 26.5l3.8 2.2c.8-1.5 1.7-2.3 3-2.3 1.3 0 2.2.8 2.2 2.6v9h4.5v-9.3c0-3.9-2.3-5.8-5.8-5.8-3.5 0-5.9 2-7.7 3.6zm17 0l3.8 2.2c1.2-1.8 2.8-2.6 4.8-2.6 2.3 0 3.7 1.1 3.7 2.7 0 1.7-1.3 2.4-3.5 3.3-3.4 1.4-5.4 2.8-5.4 6 0 3.5 2.7 5.7 6.6 5.7 3.5 0 5.8-1.8 7-4.4l-3.8-2.2c-.7 1.4-1.7 2.1-3.2 2.1-1.4 0-2.3-.8-2.3-2 0-1.2.9-1.8 2.9-2.6 3.8-1.6 6-3 6-6.6 0-3.6-2.7-5.5-6.3-5.5-3.8 0-6.7 1.8-8.3 3.9z" fill="#1A1A1A" />
+      <svg className="tech-icon-original" viewBox="0 0 630 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="630" height="630" rx="36" fill="#F7DF1E" />
+        <path d="M360 480c0 40 25 65 65 65 30 0 50-15 50-40 0-25-15-35-45-45l-15-5c-60-20-95-50-95-110 0-65 50-110 125-110 50 0 90 20 115 65l-60 40c-15-25-30-35-55-35-30 0-45 15-45 35 0 25 15 35 45 45l15 5c65 25 95 55 95 115 0 70-55 115-135 115-70 0-115-35-135-85l75-50zm-155 55c0 40-20 60-55 60-35 0-55-20-65-45l65-40c5 10 10 15 20 15 10 0 15-5 15-15V240h80v295h-60z" fill="#000000" />
       </svg>
     )
   },
   {
     id: 'reactjs',
     name: 'React',
-    color: '#61DAFB',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="react-core" cx="35%" cy="35%" r="65%">
-            <stop offset="0%" stopColor="#B3F5FF" />
-            <stop offset="50%" stopColor="#61DAFB" />
-            <stop offset="100%" stopColor="#0099CC" />
-          </radialGradient>
-          <filter id="react-glow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="1.5" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-        </defs>
-        {/* Central 3D sphere */}
-        <circle cx="24" cy="24" r="5" fill="url(#react-core)" filter="url(#react-glow)" />
-        {/* Orbital rings */}
-        <g stroke="#61DAFB" strokeWidth="2.2" fill="none" opacity="0.95">
-          <ellipse cx="24" cy="24" rx="20" ry="7.5" transform="rotate(0 24 24)" />
-          <ellipse cx="24" cy="24" rx="20" ry="7.5" transform="rotate(60 24 24)" />
-          <ellipse cx="24" cy="24" rx="20" ry="7.5" transform="rotate(120 24 24)" />
+      <svg className="tech-icon-original" viewBox="-11.5 -10.23174 23 20.46348" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="0" cy="0" r="2.05" fill="#61DAFB" />
+        <g stroke="#61DAFB" strokeWidth="1" fill="none">
+          <ellipse rx="11" ry="4.2" />
+          <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+          <ellipse rx="11" ry="4.2" transform="rotate(120)" />
         </g>
       </svg>
     )
@@ -214,239 +94,108 @@ export const TECH_ITEMS = [
   {
     id: 'bootstrap',
     name: 'Bootstrap',
-    color: '#7952B3',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="bs-pill" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#9065D0" />
-            <stop offset="100%" stopColor="#59287A" />
-          </linearGradient>
-          <filter id="bs-depth" x="-15%" y="-15%" width="130%" height="130%">
-            <feDropShadow dx="0" dy="2.5" stdDeviation="2" floodColor="#59287A" floodOpacity="0.4" />
-          </filter>
-        </defs>
-        <rect x="3" y="3" width="42" height="42" rx="10" fill="url(#bs-pill)" filter="url(#bs-depth)" />
-        {/* Top gloss */}
-        <path d="M4 12C4 7 7 4 12 4h24c5 0 8 3 8 8v4C32 18 16 20 4 24v-12z" fill="#FFFFFF" fillOpacity="0.18" />
-        {/* Distinctive Folded 3D 'B' */}
-        <path d="M16 13h10.5c3.8 0 6.5 1.8 6.5 4.8 0 2.2-1.4 3.7-3.4 4.3 2.6.6 4.4 2.3 4.4 5 0 3.5-3 5.9-7.5 5.9H16V13zm5.5 4.5v5.2h4.5c1.8 0 3-.9 3-2.6 0-1.7-1.2-2.6-3-2.6h-4.5zm0 9.2v5.8h5.2c2.1 0 3.4-1.1 3.4-2.9s-1.3-2.9-3.4-2.9h-5.2z" fill="#FFFFFF" />
+      <svg className="tech-icon-original" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M414 434c-28 28-66 46-121 46H137c-55 0-93-18-121-46S-3 368 0 313V199c-3-55 15-93 43-121S109 32 164 32h156c55 0 93 18 121 46s35 66 32 121v114c3 55-15 93-43 121z" fill="#7952B3" />
+        <path d="M192 144h78c38 0 62 18 62 48 0 22-14 37-34 43 26 6 44 23 44 50 0 35-30 59-72 59H192V144zm48 42v44h30c14 0 22-7 22-22s-8-22-22-22h-30zm0 76v50h36c16 0 26-8 26-25s-10-25-26-25h-36z" fill="#FFFFFF" />
       </svg>
     )
   },
   {
     id: 'gsap',
     name: 'GSAP',
-    color: '#88CE02',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="gsap-bg" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#1E293B" />
-            <stop offset="100%" stopColor="#0F172A" />
-          </linearGradient>
-          <linearGradient id="gsap-green" x1="10" y1="10" x2="38" y2="38" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#A3E635" />
-            <stop offset="50%" stopColor="#88CE02" />
-            <stop offset="100%" stopColor="#65A30D" />
-          </linearGradient>
-          <filter id="gsap-glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#88CE02" floodOpacity="0.45" />
-          </filter>
-        </defs>
-        <rect x="3" y="3" width="42" height="42" rx="10" fill="url(#gsap-bg)" stroke="#334155" strokeWidth="1.5" />
-        {/* GreenSock running icon mark */}
-        <g filter="url(#gsap-glow)">
-          <path d="M12 28l6-14h12l-4 8h8l-12 14 3-7h-8l-5-1z" fill="url(#gsap-green)" />
-        </g>
+      <svg className="tech-icon-original" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="24" height="24" rx="5" fill="#0AE448" />
+        <path fill="#000000" d="M9.83 7.59c.817.005 1.437.238 1.842.692c.383.431.567 1.054.547 1.85l-.014.061a.16.16 0 0 1-.148.095h-1.659a.2.2 0 0 1-.199-.195q.002-.634-.39-.71l-.12-.011c-.342 0-.564.211-.57.579c-.007.41.225.783.885 1.423c.868.816 1.217 1.539 1.2 2.493c-.027 1.544-1.077 2.543-2.673 2.543c-.815 0-1.438-.219-1.853-.649c-.42-.437-.612-1.078-.572-1.906a.17.17 0 0 1 .049-.112a.16.16 0 0 1 .112-.045h1.716a.2.2 0 0 1 .069.017a.17.17 0 0 1 .083.098q.008.03.002.06c-.019.298.034.521.151.645a.4.4 0 0 0 .311.121c.317 0 .503-.225.51-.615c.006-.337-.102-.634-.682-1.232c-.751-.734-1.424-1.492-1.403-2.684a2.48 2.48 0 0 1 .774-1.781c.514-.482 1.216-.737 2.032-.737m-5.783.028c.747-.006 1.334.224 1.742.685c.432.487.651 1.221.652 2.182a.16.16 0 0 1-.161.158H4.479a.13.13 0 0 1-.084-.036a.13.13 0 0 1-.035-.085c-.014-.623-.188-.946-.532-.984l-.071-.004c-.69.001-1.097.938-1.313 1.458a5.5 5.5 0 0 0-.426 2.301c.015.366.074.88.42 1.093c.308.189.747.064 1.013-.146c.265-.209.479-.571.569-.901q.02-.07.001-.098q-.01-.011-.032-.015l-.504-.004a.18.18 0 0 1-.129-.06a.1.1 0 0 1-.025-.05a.1.1 0 0 1 0-.056l.316-1.374a.18.18 0 0 1 .157-.134v-.003h3.035l.021.001c.079.01.135.084.134.164v.004l-.316 1.371c-.017.078-.095.135-.184.135h-.381a.064.064 0 0 0-.061.046c-.352 1.194-.829 2.016-1.458 2.509c-.536.42-1.195.616-2.077.616c-.792 0-1.326-.255-1.779-.758c-.598-.666-.845-1.754-.695-3.067c.27-2.463 1.546-4.948 4.004-4.948" />
       </svg>
     )
   },
   {
     id: 'git',
     name: 'Git',
-    color: '#F05032',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="git-bg" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#FF6B4E" />
-            <stop offset="100%" stopColor="#D9381E" />
-          </linearGradient>
-          <filter id="git-shadow" x="-15%" y="-15%" width="130%" height="130%">
-            <feDropShadow dx="0" dy="2.5" stdDeviation="2" floodColor="#D9381E" floodOpacity="0.4" />
-          </filter>
-        </defs>
-        <g filter="url(#git-shadow)">
-          {/* 3D Tilted Diamond */}
-          <rect x="7" y="7" width="34" height="34" rx="7" transform="rotate(45 24 24)" fill="url(#git-bg)" />
-          {/* Branch Lines & 3D Nodes */}
-          <path d="M17 24h10m0 0l5-5m-5 5v7" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" />
-          <circle cx="17" cy="24" r="3.2" fill="#FFFFFF" />
-          <circle cx="32" cy="19" r="3.2" fill="#FFFFFF" />
-          <circle cx="27" cy="31" r="3.2" fill="#FFFFFF" />
-        </g>
+      <svg className="tech-icon-original" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M250.7 114.7L141.3 5.3c-7-7-18.4-7-25.4 0l-25.2 25.2 32.1 32.1c7.6-2.6 16.4-.8 22.3 5.1 6 6 7.7 14.8 5.1 22.4l30.9 30.9c7.6-2.6 16.4-.8 22.4 5.1 8.5 8.5 8.5 22.3 0 30.8s-22.3 8.5-30.8 0c-6.2-6.2-7.8-15.4-4.8-23.2l-28.7-28.7v73.8c2.4 1.2 4.6 2.9 6.4 5 8.5 8.5 8.5 22.3 0 30.8s-22.3 8.5-30.8 0c-8.5-8.5-8.5-22.3 0-30.8 2.1-2.1 4.7-3.6 7.5-4.5v-75.1c-2.8-.9-5.4-2.4-7.5-4.5-6.2-6.2-7.8-15.3-4.9-23.1L74.8 62.5 5.3 132c-7 7-7 18.4 0 25.4l109.4 109.4c7 7 18.4 7 25.4 0l110.6-110.6c7.1-7 7.1-18.5 0-25.5z" fill="#F05032" />
       </svg>
     )
   },
   {
     id: 'github',
     name: 'GitHub',
-    color: '#24292F',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="gh-sphere" cx="35%" cy="30%" r="70%">
-            <stop offset="0%" stopColor="#3F4652" />
-            <stop offset="60%" stopColor="#1E232A" />
-            <stop offset="100%" stopColor="#0B0E14" />
-          </radialGradient>
-          <filter id="gh-depth" x="-15%" y="-15%" width="130%" height="130%">
-            <feDropShadow dx="0" dy="2.5" stdDeviation="2" floodColor="#000" floodOpacity="0.4" />
-          </filter>
-        </defs>
-        <circle cx="24" cy="24" r="21" fill="url(#gh-sphere)" filter="url(#gh-depth)" />
-        {/* Specular sheen ring */}
-        <circle cx="24" cy="24" r="20" stroke="#FFFFFF" strokeWidth="1" strokeOpacity="0.15" fill="none" />
-        {/* Official Octocat mark */}
-        <path fillRule="evenodd" clipRule="evenodd" d="M24 11C16.8 11 11 16.8 11 24c0 5.7 3.7 10.6 8.9 12.3.7.1.9-.3.9-.6v-2.3c-3.6.8-4.4-1.7-4.4-1.7-.6-1.5-1.4-1.9-1.4-1.9-1.2-.8.1-.8.1-.8 1.3.1 2 1.3 2 1.3 1.1 2 3 1.4 3.7 1.1.1-.8.4-1.4.8-1.7-2.9-.3-5.9-1.4-5.9-6.4 0-1.4.5-2.6 1.3-3.5-.1-.3-.6-1.7.1-3.5 0 0 1.1-.3 3.6 1.3 1-.3 2.1-.4 3.2-.4s2.2.1 3.2.4c2.5-1.7 3.6-1.3 3.6-1.3.7 1.8.3 3.1.1 3.5.8.9 1.3 2.1 1.3 3.5 0 5-3 6-5.9 6.4.5.4.9 1.2.9 2.4v3.5c0 .4.2.8.9.6C33.3 34.6 37 29.7 37 24c0-7.2-5.8-13-13-13z" fill="#FFFFFF" />
+      <svg className="tech-icon-original" viewBox="0 0 98 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fillRule="evenodd" clipRule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" fill="#24292F" />
       </svg>
     )
   },
   {
     id: 'gpt',
     name: 'ChatGPT',
-    color: '#10A37F',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="gpt-core" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#1BC99D" />
-            <stop offset="100%" stopColor="#0B795D" />
-          </linearGradient>
-          <filter id="gpt-glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="2.5" stdDeviation="2" floodColor="#10A37F" floodOpacity="0.45" />
-          </filter>
-        </defs>
-        <circle cx="24" cy="24" r="21" fill="url(#gpt-core)" filter="url(#gpt-glow)" />
-        {/* Top glossy dome */}
-        <ellipse cx="24" cy="12" rx="14" ry="5.5" fill="#FFFFFF" fillOpacity="0.22" />
-        {/* OpenAI Knot Rosette */}
-        <g stroke="#FFFFFF" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" fill="none">
-          <path d="M24 16v16m-7-12l14 8m-14 0l14-8" />
-          <path d="M20 14l8 14-4 7-8-14 4-7z" opacity="0.6" />
-          <path d="M28 14l-8 14 4 7 8-14-4-7z" opacity="0.6" />
-        </g>
+      <svg className="tech-icon-original" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#10A37F" d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 8.784a4.485 4.485 0 0 1 2.37-2.017V12.4a.761.761 0 0 0 .387.677l5.82 3.372-2.02 1.168a.088.088 0 0 1-.073.01L4.03 14.84A4.498 4.498 0 0 1 2.34 8.784zm16.597 3.855l-5.833-3.387L15.119 8.1a.088.088 0 0 1 .073-.01l4.792 2.768a4.5 4.5 0 0 1-.505 8.188v-5.659a.796.796 0 0 0-.542-.748zm2.718-3.013l-.142-.085-4.783-2.759a.771.771 0 0 0-.78 0L10.09 10.15V7.818a.08.08 0 0 1 .033-.062L14.96 4.95a4.5 4.5 0 0 1 6.696 4.616zm-11.758 4.09l-2.02-1.164a.08.08 0 0 1-.038-.057V6.93a4.5 4.5 0 0 1 7.37-3.454l-.142.08-4.778 2.758a.795.795 0 0 0-.392.681v6.729zm1.01-3.033l2.875-1.658 2.874 1.658v3.317l-2.874 1.659-2.875-1.659v-3.317z" />
       </svg>
     )
   },
   {
     id: 'gemini',
     name: 'Gemini',
-    color: '#7C3AED',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="tech-icon-original" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <radialGradient id="gemini-sparkle" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#FFFFFF" />
-            <stop offset="35%" stopColor="#60A5FA" />
-            <stop offset="70%" stopColor="#8B5CF6" />
-            <stop offset="100%" stopColor="#EC4899" />
-          </radialGradient>
-          <filter id="gemini-glow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="2.5" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
+          <linearGradient id="gemini-official-grad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#1BA1E2" />
+            <stop offset="50%" stopColor="#7C3AED" />
+            <stop offset="100%" stopColor="#D946EF" />
+          </linearGradient>
         </defs>
-        {/* Background glow disc */}
-        <circle cx="24" cy="24" r="20" fill="url(#gemini-sparkle)" opacity="0.15" />
-        {/* 4-Point Radiant Gemini Star */}
-        <path d="M24 4C24 15 15 24 4 24c11 0 20 9 20 20 0-11 9-20 20-20-11 0-20-9-20-20z" fill="url(#gemini-sparkle)" filter="url(#gemini-glow)" />
-        {/* Center brilliant core */}
-        <circle cx="24" cy="24" r="3.5" fill="#FFFFFF" />
+        <path d="M12 0C12 6.627 6.627 12 0 12c6.627 0 12 5.373 12 12 0-6.627 5.373-12 12-12-6.627 0-12-5.373-12-12z" fill="url(#gemini-official-grad)" />
       </svg>
     )
   },
   {
     id: 'claude',
     name: 'Claude',
-    color: '#D97706',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="claude-sun" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#F59E0B" />
-            <stop offset="100%" stopColor="#B45309" />
-          </linearGradient>
-          <filter id="claude-shadow" x="-15%" y="-15%" width="130%" height="130%">
-            <feDropShadow dx="0" dy="2.5" stdDeviation="2" floodColor="#B45309" floodOpacity="0.4" />
-          </filter>
-        </defs>
-        {/* Anthropic Claude Sunburst Asterisk */}
-        <g filter="url(#claude-shadow)" fill="url(#claude-sun)">
-          <path d="M22 6h4v36h-4z" />
-          <path d="M6 22h36v4H6z" />
-          <path d="M12.7 10l2.8-2.8 25.5 25.5-2.8 2.8z" />
-          <path d="M10 35.3l2.8 2.8 25.5-25.5-2.8-2.8z" />
-          <circle cx="24" cy="24" r="6" fill="#FDE68A" />
-        </g>
+      <svg className="tech-icon-original" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#D97757" d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z" />
       </svg>
     )
   },
   {
     id: 'antigravity',
     name: 'Antigravity',
-    color: '#3B82F6',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="tech-icon-original" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="ag-prism" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#38BDF8" />
-            <stop offset="50%" stopColor="#6366F1" />
-            <stop offset="100%" stopColor="#A855F7" />
+          <linearGradient id="ag-gradient-orig" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#4285F4" />
+            <stop offset="35%" stopColor="#34A853" />
+            <stop offset="70%" stopColor="#FBBC05" />
+            <stop offset="100%" stopColor="#EA4335" />
           </linearGradient>
-          <filter id="ag-depth" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="3" stdDeviation="2.5" floodColor="#6366F1" floodOpacity="0.4" />
-          </filter>
         </defs>
-        {/* Antigravity floating geometric prism & levitation rings */}
-        <g filter="url(#ag-depth)">
-          {/* Outer levitation ring */}
-          <ellipse cx="24" cy="36" rx="16" ry="6" stroke="url(#ag-prism)" strokeWidth="2.5" fill="none" opacity="0.6" />
-          {/* Floating Inverted Delta / Levitation Core */}
-          <path d="M24 7L38 31H10L24 7z" fill="url(#ag-prism)" />
-          {/* Faceted Light Face */}
-          <path d="M24 7v24H10L24 7z" fill="#FFFFFF" fillOpacity="0.25" />
-          <circle cx="24" cy="20" r="3" fill="#FFFFFF" />
-        </g>
+        <path d="M12 2L2 20h20L12 2zm0 4.5l6.5 11.5h-13L12 6.5z" fill="url(#ag-gradient-orig)" />
+        <circle cx="12" cy="14" r="2.5" fill="#4285F4" />
       </svg>
     )
   },
   {
     id: 'stitch',
     name: 'Stitch',
-    color: '#EC4899',
     icon: (
-      <svg className="tech-icon-3d" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="tech-icon-original" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="stitch-grad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#F472B6" />
-            <stop offset="50%" stopColor="#EC4899" />
-            <stop offset="100%" stopColor="#8B5CF6" />
+          <linearGradient id="stitch-gradient-orig" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#F43F5E" />
+            <stop offset="50%" stopColor="#A855F7" />
+            <stop offset="100%" stopColor="#6366F1" />
           </linearGradient>
-          <filter id="stitch-depth" x="-15%" y="-15%" width="130%" height="130%">
-            <feDropShadow dx="0" dy="2.5" stdDeviation="2" floodColor="#EC4899" floodOpacity="0.4" />
-          </filter>
         </defs>
-        {/* Google Stitch Design & Needle Icon */}
-        <g filter="url(#stitch-depth)">
-          <rect x="4" y="4" width="40" height="40" rx="12" fill="url(#stitch-grad)" />
-          {/* Gloss overlay */}
-          <path d="M5 14C5 9 9 5 14 5h20c5 0 9 4 9 9v2C32 18 16 20 5 22v-8z" fill="#FFFFFF" fillOpacity="0.2" />
-          {/* Stylized Cross Stitch / S vector */}
-          <path d="M16 16l16 16M32 16L16 32" stroke="#FFFFFF" strokeWidth="3.5" strokeLinecap="round" />
-          <circle cx="24" cy="24" r="4" fill="#FFFFFF" />
-        </g>
+        <rect width="24" height="24" rx="6" fill="url(#stitch-gradient-orig)" />
+        <path d="M7 7l10 10M17 7L7 17" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="3 3" />
+        <circle cx="12" cy="12" r="2.5" fill="#FFFFFF" />
       </svg>
     )
   }
@@ -464,7 +213,7 @@ export default function TechMarquee({ className = '' }) {
         {/* Set 1 */}
         <div className="tech-marquee-group" aria-hidden="false">
           {TECH_ITEMS.map((item) => (
-            <div key={`set1-${item.id}`} className="tech-marquee-item" style={{ '--accent-color': item.color }}>
+            <div key={`set1-${item.id}`} className="tech-marquee-item">
               <div className="tech-marquee-icon-box">
                 {item.icon}
               </div>
@@ -473,10 +222,10 @@ export default function TechMarquee({ className = '' }) {
           ))}
         </div>
 
-        {/* Set 2 (Exact duplicate for gapless infinite loop) */}
+        {/* Set 2 (Duplicate for continuous loop) */}
         <div className="tech-marquee-group" aria-hidden="true">
           {TECH_ITEMS.map((item) => (
-            <div key={`set2-${item.id}`} className="tech-marquee-item" style={{ '--accent-color': item.color }}>
+            <div key={`set2-${item.id}`} className="tech-marquee-item">
               <div className="tech-marquee-icon-box">
                 {item.icon}
               </div>
@@ -488,4 +237,3 @@ export default function TechMarquee({ className = '' }) {
     </section>
   );
 }
-
