@@ -121,12 +121,12 @@ export default function AboutPage() {
 
           </div>
         </section>
+      </div>
 
-        {/* Marquee Strip */}
-        <div className="my-5">
-          <TechMarquee />
-        </div>
+      {/* Marquee Strip — Full Bleed Edge to Edge */}
+      <TechMarquee className="about-tech-marquee" />
 
+      <div className="container">
         {/* ============================================================
             BOTTOM SECTION: SKILLS & EXPERTISE MATRIX
         ============================================================ */}
