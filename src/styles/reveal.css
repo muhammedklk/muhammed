@@ -230,7 +230,74 @@
   transform: translateY(-2px) scale(1.04);
 }
 
-/* ─── 13. Respect User Reduced-Motion Preferences ─── */
+/* ─── 13. Smart Modern Card Micro-Interactions & Hover Glow ─── */
+.service-bento-card,
+.project-editorial-card,
+.hero-craft-widget,
+.stat-card,
+.faq-ref-item {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              background 0.35s ease !important;
+}
+
+.service-bento-card:hover,
+.project-editorial-card:hover {
+  transform: translateY(-6px) scale(1.01) !important;
+  box-shadow: 
+    0 24px 50px -15px rgba(124, 92, 225, 0.16),
+    0 0 0 1px rgba(124, 92, 225, 0.18) !important;
+}
+
+/* Card image subtle zoom */
+.project-editorial-card .project-editorial-thumb {
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.5s ease !important;
+}
+
+.project-editorial-card:hover .project-editorial-thumb {
+  transform: scale(1.045) !important;
+}
+
+/* ─── 14. Modern Section Header Animations ─── */
+.section-tag-editorial,
+.about-editorial-eyebrow,
+.faq-ref-eyebrow,
+.works-eyebrow-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.section-tag-editorial:hover,
+.about-editorial-eyebrow:hover {
+  letter-spacing: 0.18em;
+  color: #7C5CE1 !important;
+}
+
+/* ─── 15. Smooth Shimmer Gradient for Titles ─── */
+.title-gradient,
+.hero-title-accent,
+.services-headline-accent,
+.works-headline-accent {
+  background: linear-gradient(
+    135deg,
+    #111827 0%,
+    #7C5CE1 35%,
+    #4087FB 70%,
+    #7C5CE1 100%
+  ) !important;
+  background-size: 250% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: textShimmerFlow 6s ease-in-out infinite !important;
+}
+
+/* ─── 16. Respect User Reduced-Motion Preferences ─── */
 @media (prefers-reduced-motion: reduce) {
   .reveal-up,
   .reveal-on-scroll,

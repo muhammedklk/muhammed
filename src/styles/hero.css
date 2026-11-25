@@ -1,125 +1,179 @@
 /* ============================================================
-   Hero Section Styles — Pixel-Perfect to Reference Screenshot
+   Hero Section Styles — Ultra-Clean Minimalist Editorial
    ============================================================ */
 
 .hero-wrapper {
   position: relative;
-  min-height: 100vh;
+  min-height: 85vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(ellipse 95% 85% at 50% 46%, #ffffff 0%, #f6f5f8 42%, #eae8ef 100%);
+  background: 
+    radial-gradient(ellipse 70% 55% at 50% 0%, rgba(124, 92, 225, 0.08) 0%, transparent 65%),
+    #fafafc;
   overflow: hidden;
-  padding: 0;
+  padding: 8.5rem 0 6rem;
 }
 
-/* Soft ambient glowing aura centered behind 3D sphere (#B99AFF -> #E6D9FF) with gentle breathing animation */
+/* Subtle architectural grid */
 .hero-wrapper::before {
   content: '';
   position: absolute;
-  top: 46%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 580px;
-  height: 580px;
-  background: radial-gradient(circle, rgba(185, 154, 255, 0.32) 0%, rgba(230, 217, 255, 0.14) 42%, transparent 70%);
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+  background-size: 56px 56px;
   pointer-events: none;
   z-index: 1;
-  animation: heroAuraBreath 7s ease-in-out infinite alternate;
+  mask-image: radial-gradient(ellipse 65% 60% at 50% 50%, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 60% at 50% 50%, black 40%, transparent 85%);
 }
 
-@keyframes heroAuraBreath {
-  0% {
-    transform: translate(-50%, -50%) scale(0.94);
-    opacity: 0.82;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1.06);
-    opacity: 1;
-  }
-}
-
-/* Studio stage */
 .hero-stage-card {
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 6.5rem 0 3.5rem;
+  z-index: 2;
 }
 
-/* 3D Sphere Canvas Layer in Center */
-.hero-canvas-container {
-  position: absolute;
-  inset: 0;
+.hero-simple-content {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 1. Tag / Badge */
+.hero-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.42rem 1rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  margin-bottom: 1.75rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hero-status-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.hero-status-dot-wrap {
+  position: relative;
+  width: 8px;
+  height: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
-  pointer-events: auto;
 }
 
-/* Hero Content Grid (Left & Right Bottom Panels) */
-.hero-content-grid {
-  position: relative;
-  z-index: 3;
-  width: 100%;
-  margin-top: auto;
-  pointer-events: none;
+.hero-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
 }
 
-.hero-bottom-row {
-  min-height: 55vh;
+.hero-status-ping {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.4);
+  animation: heroPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-.hero-pointer-enable {
-  pointer-events: auto;
+@keyframes heroPing {
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
 }
 
-/* ============================================================
-   Left Column: Headline, Description, LET'S TALK button
-   ============================================================ */
-.hero-left-col {
-  max-width: 540px;
-  padding-bottom: 0.5rem;
+.hero-status-text {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #1f2937;
+  letter-spacing: 0.02em;
 }
 
-.hero-main-title {
-  font-family: var(--font-display, "Mona Sans", sans-serif);
-  font-size: clamp(2rem, 3.4vw, 3.4rem);
+.hero-status-sep {
+  font-size: 0.65rem;
+  color: #7c5ce1;
+}
+
+.hero-status-loc {
+  font-size: 0.76rem;
   font-weight: 500;
-  color: #141414;
-  line-height: 1.18;
+  color: #6b7280;
+}
+
+/* 2. Main Heading */
+.hero-main-title {
+  font-family: var(--font-display, 'Poppins', sans-serif);
+  font-size: clamp(2rem, 4.3vw, 4.2rem);
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.16;
   letter-spacing: -0.035em;
-  margin-bottom: 1.25rem;
-  max-width: 540px;
+  margin-bottom: 1.5rem;
+  width: 100%;
 }
 
 .hero-main-title .title-line {
   display: block;
-  white-space: normal;
+  white-space: nowrap;
 }
 
-.hero-description {
-  font-size: 0.95rem;
-  color: #737380;
-  line-height: 1.65;
-  max-width: 440px;
-  margin-bottom: 2rem;
-  font-weight: 400;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+.hero-main-title .title-gradient {
+  background: linear-gradient(135deg, #5b36c9 0%, #7C5CE1 55%, #9D7BFC 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.rotating-word-container {
+  display: inline-block;
+  vertical-align: bottom;
+  position: relative;
   overflow: hidden;
+  line-height: 1.15;
+  padding-bottom: 0.04em;
 }
 
-/* Single Pill Button: LET'S TALK ↗ */
-.hero-cta-wrap {
+.rotating-word-text {
+  display: inline-block;
+  white-space: nowrap;
+  font-weight: 600;
+  text-shadow: 0 4px 20px rgba(124, 92, 225, 0.15);
+}
+
+/* 3. Small Paragraph / Subtitle */
+.hero-description {
+  font-size: 16px;
+  color: #4b5563;
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto 2.4rem;
+  font-weight: 400;
+}
+
+/* 4. Action Buttons */
+.hero-actions-group {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .hero-talk-btn {
@@ -129,25 +183,27 @@
   gap: 0.6rem;
   background: linear-gradient(135deg, #0e2447 0%, #4087fb 35%, #3b82f6 100%);
   color: #ffffff;
-  padding: 0.82rem 2.2rem;
+  padding: 0.92rem 2.4rem;
   border-radius: 9999px;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
-  border: 4px solid rgba(250, 250, 250, 0.878);
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.25);
 }
 
 .hero-talk-btn:hover {
   background: linear-gradient(135deg, #133261 0%, #5294fc 35%, #60a5fa 100%);
   color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(59, 130, 246, 0.35);
 }
 
 .hero-talk-arrow {
-  color: #ffffff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -158,104 +214,63 @@
   transform: translate(2px, -2px);
 }
 
-/* ============================================================
-   Right Column: Side Statement & Service Pills
-   ============================================================ */
-.hero-right-col {
-  max-width: 410px;
-  margin-left: auto;
-  padding-bottom: 0.5rem;
-}
-
-.hero-side-statement {
-  font-size: 0.95rem;
-  color: #737380;
-  line-height: 1.65;
-  margin-bottom: 1.5rem;
-  font-weight: 400;
-}
-
-.hero-side-statement strong {
-  color: #141414;
-  font-weight: 500;
-}
-
-/* Service Pills */
-.hero-service-pills {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  flex-wrap: wrap;
-}
-
-.service-pill-btn {
+.hero-secondary-btn {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.36rem 0.88rem;
+  gap: 0.55rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #1f2937;
+  padding: 0.92rem 2rem;
   border-radius: 9999px;
-  font-size: 0.68rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #555560;
-  background: rgba(255, 255, 255, 0.35);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  transition: all 0.22s ease;
-  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s ease;
 }
 
-.service-pill-btn:hover {
+.hero-secondary-btn:hover {
   background: #ffffff;
-  color: #111111;
-  border-color: #111111;
-  transform: translateY(-1px);
+  color: #111827;
+  border-color: #111827;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
 }
 
-.service-pill-btn.plus-btn {
-  width: 26px;
-  height: 26px;
-  padding: 0;
-  border-radius: 50%;
-  font-size: 0.85rem;
-}
-
-/* ============================================================
-   Responsive Adjustments
-   ============================================================ */
-@media (max-width: 991px) {
-  .hero-stage-card {
-    padding: 6rem 1.5rem 3rem;
-  }
-
-  .hero-bottom-row {
-    min-height: auto;
-    row-gap: 2.5rem;
-  }
-
-  .hero-canvas-container {
-    height: 480px;
-    top: 15%;
-  }
-
-  .hero-right-col {
-    margin-left: 0;
+@media (max-width: 768px) {
+  .hero-main-title {
+    font-size: clamp(1.6rem, 5.2vw, 2.5rem);
   }
 }
 
 @media (max-width: 576px) {
-  .hero-stage-card {
-    padding: 5.5rem 1rem 2.5rem;
+  .hero-wrapper {
+    padding: 6.5rem 0 3.5rem;
   }
-
   .hero-main-title {
-    font-size: 2.2rem;
+    font-size: clamp(1.35rem, 6.2vw, 1.95rem);
   }
+  .hero-description {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .hero-actions-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-talk-btn,
+  .hero-secondary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
 
-  .hero-talk-btn {
-    padding: 0.75rem 1.8rem;
-    font-size: 0.8rem;
+@media (max-width: 380px) {
+  .hero-main-title {
+    font-size: 1.25rem;
   }
 }

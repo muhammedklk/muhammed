@@ -20,7 +20,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Mona Sans", "Mona Sans Placeholder", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
 }
 
 html {
@@ -30,11 +30,11 @@ html {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-canvas);
   color: var(--text-primary);
-  font-family: "Mona Sans", "Mona Sans Placeholder", sans-serif !important;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 body {
-  font-family: "Mona Sans", "Mona Sans Placeholder", sans-serif !important;
+  font-family: 'Poppins', sans-serif !important;
   background-color: var(--bg-canvas);
   color: var(--text-primary);
   min-height: 100vh;
@@ -68,7 +68,7 @@ b, strong, th, button,
 .cs-narrative-eyebrow,
 .cs-responsive-eyebrow {
   display: inline-block !important;
-  font-family: var(--font-accent, "Mona Sans", sans-serif) !important;
+  font-family: var(--font-accent, 'Poppins', sans-serif) !important;
   font-size: 0.82rem !important;
   font-weight: 500 !important;
   letter-spacing: 0.16em !important;
@@ -100,7 +100,7 @@ b, strong, th, button,
 .about-skills-main-title,
 .cs-responsive-title,
 .section-title {
-  font-family: var(--font-display, "Mona Sans", sans-serif) !important;
+  font-family: var(--font-display, 'Poppins', sans-serif) !important;
   font-size: clamp(2.1rem, 3.8vw, 3.25rem) !important;
   font-weight: 500 !important;
   letter-spacing: -0.035em !important;

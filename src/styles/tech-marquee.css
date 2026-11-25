@@ -30,7 +30,7 @@
 
 .tech-toolkit-headline,
 .tech-toolkit-title {
-  font-family: var(--font-sans, 'Mona Sans', system-ui, -apple-system, sans-serif);
+  font-family: var(--font-sans, 'Poppins', sans-serif);
   font-size: clamp(1.85rem, 3.2vw, 2.5rem);
   font-weight: 700;
   color: var(--text-primary, #0F172A);
@@ -42,7 +42,7 @@
 }
 
 .tech-toolkit-subtitle {
-  font-family: var(--font-sans, 'Mona Sans', system-ui, -apple-system, sans-serif);
+  font-family: var(--font-sans, 'Poppins', sans-serif);
   font-size: 1.02rem;
   color: var(--text-muted, #64748B);
   max-width: 620px;
@@ -163,7 +163,7 @@
 
 /* Label Typography */
 .tech-pill-label {
-  font-family: var(--font-sans, 'Mona Sans', system-ui, -apple-system, sans-serif);
+  font-family: var(--font-sans, 'Poppins', sans-serif);
   font-size: 0.96rem;
   font-weight: 600;
   color: #1E293B;

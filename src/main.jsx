@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import Preloader from './components/Preloader.jsx';
-import '@fontsource/mona-sans';
 import './index.css';
 
 function Root() {

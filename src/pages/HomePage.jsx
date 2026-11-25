@@ -1,8 +1,8 @@
-import React, { Suspense, useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Palette, Code2, Globe, Download, MapPin, PenTool, Monitor, MessageCircle } from 'lucide-react';
 import ArrowIcon from '../components/ArrowIcon';
-import HeroThreeSphere from '../components/HeroThreeSphere';
 import ProjectCard from '../components/ProjectCard';
 import TechMarquee from '../components/TechMarquee';
 
@@ -217,6 +217,14 @@ function InlineImageStatement({ aboutSnippet }) {
   );
 }
 
+const DEFAULT_ROTATING_WORDS = [
+  'Resonate.',
+  'Inspire.',
+  'Convert.',
+  'Connect.',
+  'Elevate.',
+];
+
 export default function HomePage() {
   const { personalInfo, projects, faqItems, homeContent } = usePortfolio();
   const featuredList = (projects || []).filter(p => p.featured);
@@ -228,71 +236,75 @@ export default function HomePage() {
   const worksSec = homeContent?.worksSection || {};
   const faqSec = homeContent?.faqSection || {};
 
+  const [rotatingWordIndex, setRotatingWordIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setRotatingWordIndex((prev) => (prev + 1) % DEFAULT_ROTATING_WORDS.length);
+    }, 2600);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <>
       {/* SEO Meta Update via document.title */}
       {(() => { document.title = 'MUHAMMED K — UI/UX Designer & Front-End Developer Portfolio'; return null; })()}
 
       {/* ============================
-          HERO SECTION
+          HERO SECTION — ULTRA-CLEAN MINIMALIST EDITORIAL
       ============================ */}
       <section className="hero-wrapper" aria-label="Hero">
         <div className="hero-stage-card">
-          {/* Floating 3D Sphere — Center of Stage */}
-          <div className="hero-canvas-container">
-            <Suspense fallback={<div style={{ width: 340, height: 340 }} />}>
-              <HeroThreeSphere />
-            </Suspense>
-          </div>
+          <div className="container">
+            <div className="hero-simple-content reveal-blur">
+              {/* Tag / Badge */}
+              <div className="hero-status-pill">
+                <span className="hero-status-dot-wrap" aria-hidden="true">
+                  <span className="hero-status-dot" />
+                  <span className="hero-status-ping" />
+                </span>
+                <span className="hero-status-text">Available for select projects</span>
+                <span className="hero-status-sep" aria-hidden="true">✦</span>
+                <span className="hero-status-loc">Kerala, IN · Remote Worldwide</span>
+              </div>
 
-          {/* Content Grid: Left + Right panels */}
-          <div className="hero-content-grid">
-            <div className="container">
-              <div className="row align-items-end justify-content-between hero-bottom-row">
-                {/* Bottom-Left: Main Headline */}
-                <div className="col-lg-6 col-md-6 col-12 hero-pointer-enable">
-                  <div className="hero-left-col reveal-blur">
-                    <h1 className="hero-main-title">
-                      {(() => {
-                        const raw = hero.headline || 'Design That Feels.\nExperiences That Resonate.';
-                        let lines = raw.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
-                        if (lines.length <= 1 && raw.includes('. ')) {
-                          const parts = raw.split('. ');
-                          if (parts.length === 2) {
-                            lines = [parts[0] + '.', parts[1]];
-                          }
-                        }
-                        return lines.map((line, idx) => (
-                          <span key={idx} className="title-line">{line}</span>
-                        ));
-                      })()}
-                    </h1>
-                    <p className="hero-description">
-                      {hero.subtext || 'I blend human-centered design, modern front-end engineering, and aesthetic precision to create digital experiences that people connect with — seamlessly across every screen.'}
-                    </p>
-                    <div className="hero-cta-wrap">
-                      <Link to="/contact" className="hero-talk-btn" id="hero-cta-btn">
-                        <span>{hero.ctaText || "LET'S TALK"}</span>
-                        <ArrowIcon size={18} className="hero-talk-arrow" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+              {/* Main Heading */}
+              <h1 className="hero-main-title">
+                <span className="title-line">Design That Feels.</span>
+                <span className="title-line">
+                  Experiences That{' '}
+                  <span className="rotating-word-container">
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={rotatingWordIndex}
+                        className="title-gradient rotating-word-text"
+                        initial={{ opacity: 0, y: 22, filter: 'blur(3px)' }}
+                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                        exit={{ opacity: 0, y: -22, filter: 'blur(3px)' }}
+                        transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        {DEFAULT_ROTATING_WORDS[rotatingWordIndex]}
+                      </motion.span>
+                    </AnimatePresence>
+                  </span>
+                </span>
+              </h1>
 
-                {/* Bottom-Right: Side Statement + Service Pills */}
-                <div className="col-lg-5 col-md-6 col-12 hero-pointer-enable">
-                  <div className="hero-right-col reveal-up reveal-delay-2">
-                    <p className="hero-side-statement">
-                      {hero.sideStatement || "Whether through intuitive user interfaces, responsive web systems, or clean front-end code, I craft digital products that people don't just use — they feel."}
-                    </p>
-                    <div className="hero-service-pills">
-                      {(hero.pills || ['UI/UX', 'WEB DESIGN', 'FRONT-END DEV']).map((pill, i) => (
-                        <span key={i} className="service-pill-btn">{pill}</span>
-                      ))}
-                      <span className="service-pill-btn plus-btn">+</span>
-                    </div>
-                  </div>
-                </div>
+              {/* Small Paragraph / Subtitle */}
+              <p className="hero-description">
+                {hero.subtext || 'I blend human-centered design, modern front-end engineering, and aesthetic precision to create digital experiences that people connect with — seamlessly across every screen.'}
+              </p>
+
+              {/* Action Buttons */}
+              <div className="hero-actions-group">
+                <Link to="/contact" className="hero-talk-btn" id="hero-cta-btn">
+                  <span>{hero.ctaText || "LET'S TALK"}</span>
+                  <ArrowIcon size={18} className="hero-talk-arrow" />
+                </Link>
+                <a href="#works-preview" className="hero-secondary-btn">
+                  <span>EXPLORE WORKS</span>
+                  <ArrowIcon size={14} className="hero-talk-arrow" style={{ transform: 'rotate(90deg)' }} />
+                </a>
               </div>
             </div>
           </div>

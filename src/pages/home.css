@@ -60,7 +60,7 @@
    About Section — Clean Editorial (Matches Reference)
    ============================================================ */
 .about-editorial-section {
-  padding: 8.5rem 0 7.5rem;
+  padding: 7rem 0;
   background: var(--bg-canvas);
   position: relative;
   border-top: 1px solid var(--border-subtle);
@@ -91,7 +91,7 @@
 /* Matches the ( ABOUT ) style: parentheses, muted gray, spaced caps  */
 .section-tag-editorial {
   display: inline-block;
-  font-family: var(--font-accent, "Mona Sans", sans-serif);
+  font-family: var(--font-accent, 'Poppins', sans-serif);
   font-size: 0.82rem;
   font-weight: 500;
   letter-spacing: 0.16em;
@@ -101,19 +101,24 @@
 }
 
 
+h2.about-editorial-statement,
 .about-editorial-statement {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3.2vw, 3rem);
-  font-weight: 500;
-  line-height: 1.28;
-  letter-spacing: -0.035em;
+  font-size: clamp(1.35rem, 2.4vw, 2.15rem);
+  font-weight: 400 !important;
+  line-height: 1.42;
+  letter-spacing: -0.025em;
   /* color intentionally omitted — JS controls per-letter color for scroll animation */
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
   text-align: center;
   width: 100%;
   max-width: 100%;
   word-break: break-word;
   overflow-wrap: break-word;
+}
+
+.about-editorial-statement span {
+  font-weight: 400 !important;
 }
 
 .about-editorial-actions {
@@ -136,8 +141,8 @@
   position: relative;
   border-radius: 999px;
   overflow: hidden;
-  width: clamp(52px, 5.5vw, 80px);
-  height: clamp(34px, 3.6vw, 52px);
+  width: clamp(46px, 4.5vw, 66px);
+  height: clamp(28px, 3vw, 42px);
   border: 2.5px solid rgba(255, 255, 255, 0.92);
   box-shadow:
     0 4px 16px rgba(0, 0, 0, 0.12),
@@ -907,9 +912,9 @@
   }
 }
 
-/* Featured Works Section */
+/* Featured Works Section — Harmonized Spacing */
 .featured-works-section {
-  padding: 30px 0;
+  padding: 7rem 0;
 }
 
 /* FAQ Section */

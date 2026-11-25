@@ -42,7 +42,7 @@
 }
 
 .footer-glow-heading {
-  font-family: var(--font-display, "Mona Sans", -apple-system, sans-serif);
+  font-family: var(--font-display, 'Poppins', sans-serif);
   font-size: clamp(2rem, 3.8vw, 3rem);
   font-weight: 700;
   color: #ffffff;
@@ -155,7 +155,7 @@
 }
 
 .footer-wordmark-text {
-  font-family: var(--font-display, "Mona Sans", -apple-system, sans-serif);
+  font-family: var(--font-display, 'Poppins', sans-serif);
   font-size: 195px;
   font-weight: 900;
   letter-spacing: -0.04em;

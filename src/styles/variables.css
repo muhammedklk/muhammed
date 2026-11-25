@@ -27,8 +27,8 @@
   --color-text-inverse: #FFFFFF;
 
   /* Typography Scales */
-  --font-sans: "Mona Sans", "Mona Sans Placeholder", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: "Mona Sans", "Mona Sans Placeholder", sans-serif;
+  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Poppins', sans-serif;
 
   /* Shadows */
   --shadow-xs: 0 1px 2px rgba(18, 19, 22, 0.04);

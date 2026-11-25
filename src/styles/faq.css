@@ -7,7 +7,7 @@
    ========================================================================== */
 
 .faq-ref-section {
-  padding: 7rem 0 8rem;
+  padding: 7rem 0;
   background: var(--bg-canvas, #f6f6f8);
   position: relative;
 }

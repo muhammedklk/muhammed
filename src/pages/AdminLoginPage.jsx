@@ -64,7 +64,7 @@ export default function AdminLoginPage({ onSuccess }) {
         alignItems: 'center',
         justifyContent: 'center',
         background: '#f8fafc',
-        fontFamily: "'Mona Sans', system-ui, -apple-system, sans-serif",
+        fontFamily: "'Poppins', sans-serif",
         padding: '1.5rem',
       }}
     >

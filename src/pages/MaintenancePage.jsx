@@ -41,7 +41,7 @@ export default function MaintenancePage({ targetPage }) {
       justifyContent: 'center',
       background: '#f8fafc',
       color: '#0f172a',
-      fontFamily: "'Mona Sans', system-ui, -apple-system, sans-serif",
+      fontFamily: "'Poppins', sans-serif",
       padding: '2.5rem 1.5rem',
       textAlign: 'center',
       position: 'relative'

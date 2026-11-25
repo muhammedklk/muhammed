@@ -43,7 +43,7 @@
 }
 
 .simple-contact-title {
-  font-family: var(--font-display, "Mona Sans", sans-serif);
+  font-family: var(--font-display, 'Poppins', sans-serif);
   font-size: clamp(3.2rem, 5.8vw, 4.8rem);
   font-weight: 700;
   letter-spacing: -0.04em;
@@ -190,7 +190,7 @@
 }
 
 .simple-form-title {
-  font-family: var(--font-display, "Mona Sans", sans-serif);
+  font-family: var(--font-display, 'Poppins', sans-serif);
   font-size: 1.7rem;
   font-weight: 700;
   letter-spacing: -0.025em;
