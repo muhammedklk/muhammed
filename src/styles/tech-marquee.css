@@ -5,9 +5,13 @@
 .tech-toolkit-section {
   position: relative;
   padding: 5rem 0 3.5rem;
-  background: var(--bg-surface, #FAFAFC);
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: linear-gradient(
+    to bottom,
+    var(--bg-canvas, #f6f6f8) 0%,
+    var(--bg-surface, #ffffff) 18%,
+    var(--bg-surface, #ffffff) 82%,
+    var(--bg-canvas, #f6f6f8) 100%
+  );
   overflow: hidden;
 }
 
@@ -31,11 +35,11 @@
 .tech-toolkit-headline,
 .tech-toolkit-title {
   font-family: var(--font-sans, 'Poppins', sans-serif);
-  font-size: clamp(1.85rem, 3.2vw, 2.5rem);
-  font-weight: 700;
+  font-size: clamp(1.65rem, 2.7vw, 2.35rem);
+  font-weight: 400;
   color: var(--text-primary, #0F172A);
-  letter-spacing: -0.025em;
-  line-height: 1.25;
+  letter-spacing: -0.03em;
+  line-height: 1.24;
   margin: 0 auto 0.85rem auto;
   text-align: center;
   width: 100%;

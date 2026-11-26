@@ -89,7 +89,7 @@ const upload = multer({
 export const defaultHomeContent = {
   hero: {
     headline: "Design That Feels. Experiences That Resonate.",
-    subtext: "I blend human-centered design, modern front-end engineering, and aesthetic precision to create digital experiences that people connect with — seamlessly across every screen.",
+    subtext: "Crafting intuitive UI/UX designs and clean front-end experiences for modern digital products.",
     sideStatement: "Whether through intuitive user interfaces, responsive web systems, or clean front-end code, I craft digital products that people don't just use — they feel.",
     pills: ["UI/UX", "WEB DESIGN", "FRONT-END DEV"],
     ctaText: "LET'S TALK"

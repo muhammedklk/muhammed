@@ -43,11 +43,11 @@
 
 .footer-glow-heading {
   font-family: var(--font-display, 'Poppins', sans-serif);
-  font-size: clamp(2rem, 3.8vw, 3rem);
-  font-weight: 700;
+  font-size: clamp(1.65rem, 2.7vw, 2.35rem);
+  font-weight: 400;
   color: #ffffff;
   letter-spacing: -0.03em;
-  line-height: 1.18;
+  line-height: 1.22;
   margin: 0;
   max-width: 800px;
 }

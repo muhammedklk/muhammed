@@ -118,7 +118,7 @@ const PortfolioContentSchema = new mongoose.Schema({
   homeContent: {
     hero: {
       headline: { type: String, default: "Design That Feels. Experiences That Resonate." },
-      subtext: { type: String, default: "I blend human-centered design, modern front-end engineering, and aesthetic precision to create digital experiences that people connect with — seamlessly across every screen." },
+      subtext: { type: String, default: "Crafting intuitive UI/UX designs and clean front-end experiences for modern digital products." },
       sideStatement: { type: String, default: "Whether through intuitive user interfaces, responsive web systems, or clean front-end code, I craft digital products that people don't just use — they feel." },
       pills: [{ type: String, default: 'UI/UX' }],
       ctaText: { type: String, default: "LET'S TALK" }

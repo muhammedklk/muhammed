@@ -13,9 +13,13 @@
 /* Stats Section */
 .stats-section {
   padding: 4rem 0;
-  background: var(--bg-surface);
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
+  background: linear-gradient(
+    to bottom,
+    var(--bg-canvas) 0%,
+    var(--bg-surface) 18%,
+    var(--bg-surface) 82%,
+    var(--bg-canvas) 100%
+  );
 }
 
 .stat-card {
@@ -63,8 +67,6 @@
   padding: 7rem 0;
   background: var(--bg-canvas);
   position: relative;
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
 }
 
 .about-editorial-wrap {
@@ -612,7 +614,7 @@ h2.about-editorial-statement,
    ============================================================ */
 .services-section {
   padding: 8rem 0;
-  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-canvas);
   position: relative;
   overflow: hidden;
 }
@@ -920,8 +922,13 @@ h2.about-editorial-statement,
 /* FAQ Section */
 .faq-section {
   padding: 7rem 0;
-  background: var(--bg-surface);
-  border-top: 1px solid var(--border-subtle);
+  background: linear-gradient(
+    to bottom,
+    var(--bg-canvas) 0%,
+    var(--bg-surface) 16%,
+    var(--bg-surface) 84%,
+    var(--bg-canvas) 100%
+  );
 }
 
 .faq-list {

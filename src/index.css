@@ -44,17 +44,23 @@ body {
   font-weight: 400;
 }
 
-/* Strict font-weight clamp: max 500 across all elements */
-h1, h2, h3, h4, h5, h6,
+/* Strict font-weight clamp: max 500 across all elements (h2 lighter at 400) */
+h1, h3, h4, h5, h6,
 b, strong, th, button,
 .nav-brand-group, .nav-logo-text,
 .hero-headline, .hero-title,
 .footer-cta-title, .ref-footer-heading, .ref-block-title, .ref-giant-wordmark,
 .btn-talk-dark, .btn-glass, .btn-pill, .ref-contact-btn,
 .case-title, .project-card-title, .case-header-title,
-.section-title, .section-tag, .stat-number, .stat-label,
-[class*="title"], [class*="heading"], [class*="bold"], [class*="strong"] {
+.section-tag, .stat-number, .stat-label,
+[class*="title"]:not(h2):not(.section-title):not(.about-skills-main-title):not(.cs-responsive-title):not(.tech-toolkit-title),
+[class*="heading"]:not(h2):not(.footer-glow-heading),
+[class*="bold"], [class*="strong"] {
   font-weight: 500 !important;
+}
+
+h2 {
+  font-weight: 400 !important;
 }
 
 /* ─── Unified Editorial Section Tag Line (Matches ( ABOUT ) design) ─── */
@@ -101,10 +107,10 @@ b, strong, th, button,
 .cs-responsive-title,
 .section-title {
   font-family: var(--font-display, 'Poppins', sans-serif) !important;
-  font-size: clamp(2.1rem, 3.8vw, 3.25rem) !important;
-  font-weight: 500 !important;
-  letter-spacing: -0.035em !important;
-  line-height: 1.18 !important;
+  font-size: clamp(1.65rem, 2.7vw, 2.35rem) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.24 !important;
   color: var(--text-primary, #111216) !important;
   font-style: normal !important;
   margin-bottom: 0.95rem !important;
@@ -116,7 +122,7 @@ b, strong, th, button,
   color: inherit !important;
   font-style: normal !important;
   font-family: inherit !important;
-  font-weight: 500 !important;
+  font-weight: 400 !important;
 }
 
 /* ─── Unified Subtitle Description Across All Sections ─── */

@@ -3,7 +3,7 @@ export const personalInfo = {
   title: "UI/UX Designer & Front-End Developer",
   shortBio: "Crafting intuitive digital interfaces, scalable design systems, and responsive web experiences with precision, aesthetic sensitivity, and modern code.",
   tagline: "Design That Feels. Experiences That Resonate.",
-  heroSubtext: "I blend human-centered design, modern front-end engineering, and aesthetic precision to create digital experiences that people connect with — seamlessly across every screen.",
+  heroSubtext: "Crafting intuitive UI/UX designs and clean front-end experiences for modern digital products.",
   heroSideNote: "Whether through intuitive user interfaces, responsive web systems, or clean front-end code, I craft digital products that people don't just use — they feel.",
   email: "muhammedklkm@gmail.com",
   phone: "+91 9656216086",

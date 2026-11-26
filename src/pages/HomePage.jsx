@@ -263,9 +263,9 @@ export default function HomePage() {
                   <span className="hero-status-dot" />
                   <span className="hero-status-ping" />
                 </span>
-                <span className="hero-status-text">Available for select projects</span>
+                <span className="hero-status-text">UI/UX Designer</span>
                 <span className="hero-status-sep" aria-hidden="true">✦</span>
-                <span className="hero-status-loc">Kerala, IN · Remote Worldwide</span>
+                <span className="hero-status-loc">Front-End Developer</span>
               </div>
 
               {/* Main Heading */}
@@ -292,7 +292,9 @@ export default function HomePage() {
 
               {/* Small Paragraph / Subtitle */}
               <p className="hero-description">
-                {hero.subtext || 'I blend human-centered design, modern front-end engineering, and aesthetic precision to create digital experiences that people connect with — seamlessly across every screen.'}
+                {(hero.subtext && !hero.subtext.startsWith('I blend human-centered design'))
+                  ? hero.subtext
+                  : 'Crafting intuitive UI/UX designs and clean front-end experiences for modern digital products.'}
               </p>
 
               {/* Action Buttons */}
