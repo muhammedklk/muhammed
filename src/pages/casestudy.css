@@ -80,14 +80,14 @@
   margin-bottom: 4rem;
 }
 
-/* View Live Site Button — Muhammed's Website Signature Pill */
+/* View Live Site Button — Muhammed's Website Signature Button */
 .cs-view-site-pill-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.65rem 1.6rem;
-  border-radius: 9999px;
-  background: linear-gradient(135deg, #0e2447 0%, #4087fb 35%, #3b82f6 100%);
+  border-radius: 14px;
+  background: linear-gradient(180deg, #1b1b1b 0%, #090909 100%);
   color: #ffffff;
   font-family: var(--font-main, 'Poppins', sans-serif);
   font-size: 0.82rem;
@@ -95,13 +95,16 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
-  border: 3px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 8px 24px rgba(64, 135, 251, 0.28);
+  border: 3px solid #ffffff;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.16),
+    0 2px 6px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cs-view-site-pill-btn:hover {
-  background: linear-gradient(135deg, #133261 0%, #5294fc 35%, #60a5fa 100%);
+  background: linear-gradient(180deg, #272727 0%, #111111 100%);
   color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 12px 28px rgba(64, 135, 251, 0.4);

@@ -187,7 +187,7 @@
 .about-btn-download:hover,
 .about-btn-touch:hover {
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 12px 28px -6px rgba(64, 135, 251, 0.28);
+  box-shadow: 0 14px 30px -4px rgba(0, 0, 0, 0.22);
 }
 
 /* Spring compression feedback on click */

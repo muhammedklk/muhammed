@@ -1,45 +1,27 @@
 /* ============================================================
-   Hero Section Styles — Ultra-Clean Minimalist Editorial
+   Hero Section Styles — Clean Editorial with Floating Squircle Icons
    ============================================================ */
 
 .hero-wrapper {
   position: relative;
-  min-height: 85vh;
+  min-height: 94vh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: 
-    linear-gradient(to bottom, transparent 72%, var(--bg-canvas, #f6f6f8) 100%),
-    radial-gradient(ellipse 70% 55% at 50% 0%, rgba(124, 92, 225, 0.08) 0%, transparent 65%),
-    #fafafc;
+  background: #ffffff;
   overflow: hidden;
-  padding: 11rem 0 6rem;
-}
-
-/* Subtle architectural grid */
-.hero-wrapper::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-  background-size: 56px 56px;
-  pointer-events: none;
-  z-index: 1;
-  mask-image: radial-gradient(ellipse 65% 60% at 50% 50%, black 40%, transparent 85%);
-  -webkit-mask-image: radial-gradient(ellipse 65% 60% at 50% 50%, black 40%, transparent 85%);
+  padding: 12.5rem 0 6rem;
 }
 
 .hero-stage-card {
   position: relative;
   width: 100%;
-  z-index: 2;
+  z-index: 3;
 }
 
 .hero-simple-content {
-  max-width: 1100px;
+  max-width: 780px;
   width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -48,160 +30,156 @@
   align-items: center;
 }
 
-/* 1. Tag / Badge */
+/* 1. Top Pill Badge */
 .hero-status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.42rem 1rem;
+  gap: 0.65rem;
+  padding: 0.35rem 1.05rem 0.35rem 0.38rem;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.06),
+    0 1px 4px rgba(0, 0, 0, 0.03);
   margin-bottom: 1.75rem;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .hero-status-pill:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 }
 
-.hero-status-dot-wrap {
-  position: relative;
-  width: 8px;
-  height: 8px;
-  display: flex;
+.hero-status-icon-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #0d0d0d;
+  color: #ffffff;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
-.hero-status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #10b981;
+.hero-status-icon-circle svg {
+  animation: heroSettingsSpin 6s linear infinite;
 }
 
-.hero-status-ping {
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  background: rgba(16, 185, 129, 0.4);
-  animation: heroPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-@keyframes heroPing {
-  75%, 100% {
-    transform: scale(2.2);
-    opacity: 0;
+@keyframes heroSettingsSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 
 .hero-status-text {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #1f2937;
-  letter-spacing: 0.02em;
-}
-
-.hero-status-sep {
-  font-size: 0.65rem;
-  color: #7c5ce1;
-}
-
-.hero-status-loc {
-  font-size: 0.76rem;
+  font-size: 0.84rem;
   font-weight: 500;
-  color: #6b7280;
+  color: #111827;
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.2em;
+  white-space: pre;
+}
+
+.hero-status-name {
+  color: #1446ff;
+  font-weight: 600;
+  white-space: pre;
+}
+
+.hero-typing-cursor {
+  display: inline-block;
+  width: 1.5px;
+  height: 0.95em;
+  background-color: #1446ff;
+  margin-left: 2px;
+  border-radius: 1px;
+  animation: heroCursorBlink 0.85s steps(2, start) infinite;
+}
+
+@keyframes heroCursorBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 /* 2. Main Heading */
 .hero-main-title {
-  font-family: var(--font-display, 'Poppins', sans-serif);
-  font-size: clamp(2rem, 4.3vw, 4.2rem);
-  font-weight: 600;
-  color: #111827;
+  font-family: var(--font-display, 'Mona Sans', 'Poppins', sans-serif);
+  font-size: clamp(2.15rem, 4.2vw, 3.65rem);
+  font-weight: 400;
+  color: #0d0d0d;
   line-height: 1.16;
-  letter-spacing: -0.035em;
-  margin-bottom: 1.5rem;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.15rem;
   width: 100%;
 }
 
 .hero-main-title .title-line {
   display: block;
-  white-space: nowrap;
 }
 
-.hero-main-title .title-gradient {
-  background: linear-gradient(135deg, #5b36c9 0%, #7C5CE1 55%, #9D7BFC 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-}
-
-.rotating-word-container {
-  display: inline-block;
-  vertical-align: bottom;
-  position: relative;
-  overflow: hidden;
-  line-height: 1.15;
-  padding-bottom: 0.04em;
-}
-
-.rotating-word-text {
-  display: inline-block;
-  white-space: nowrap;
-  font-weight: 600;
-  text-shadow: 0 4px 20px rgba(124, 92, 225, 0.15);
-}
-
-/* 3. Small Paragraph / Subtitle */
-.hero-description {
-  font-size: 16px;
-  color: #4b5563;
-  line-height: 1.7;
-  max-width: 620px;
-  margin: 0 auto 2.4rem;
+.hero-title-accent {
+  color: #1446ff;
   font-weight: 400;
 }
 
-/* 4. Action Buttons */
+/* 3. Subtitle */
+.hero-description {
+  font-size: 14.5px;
+  color: #4b5563;
+  line-height: 1.55;
+  max-width: 390px;
+  margin: 0 auto 2rem;
+  font-weight: 400;
+}
+
+/* 4. Single Dark CTA Button */
 .hero-actions-group {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
 }
 
 .hero-talk-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  background: linear-gradient(135deg, #0e2447 0%, #4087fb 35%, #3b82f6 100%);
+  gap: 0.55rem;
+  background: linear-gradient(180deg, #1b1b1b 0%, #090909 100%);
   color: #ffffff;
-  padding: 0.92rem 2.4rem;
-  border-radius: 9999px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  padding: 0.85rem 1.65rem;
+  border-radius: 14px;
+  font-size: 0.86rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   text-decoration: none;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
-  border: 3px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.25);
+  border: 3px solid #ffffff;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.16),
+    0 2px 6px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
 .hero-talk-btn:hover {
-  background: linear-gradient(135deg, #133261 0%, #5294fc 35%, #60a5fa 100%);
+  background: linear-gradient(180deg, #272727 0%, #111111 100%);
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(59, 130, 246, 0.35);
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.22),
+    0 4px 10px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .hero-talk-arrow {
@@ -215,87 +193,136 @@
   transform: translate(2px, -2px);
 }
 
-.hero-secondary-btn {
-  display: inline-flex;
+/* 5. Floating Tilted Squircle Icons (Curved Arc Left & Right) */
+.hero-floating-icons {
+  position: absolute;
+  inset: 0;
+  max-width: 1220px;
+  margin: 0 auto;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-squircle {
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  border-radius: 18px;
+  display: flex;
   align-items: center;
-  gap: 0.55rem;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  color: #1f2937;
-  padding: 0.92rem 2rem;
-  border-radius: 9999px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.25s ease;
+  justify-content: center;
+  background: linear-gradient(145deg, #ffffff 0%, #eef1f7 100%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 14px 30px rgba(15, 23, 42, 0.09),
+    0 4px 10px rgba(15, 23, 42, 0.05),
+    inset 0 2px 3px rgba(255, 255, 255, 0.95);
+  pointer-events: auto;
+  transition: box-shadow 0.25s ease, filter 0.25s ease;
 }
 
-.hero-secondary-btn:hover {
-  background: #ffffff;
-  color: #111827;
-  border-color: #111827;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+.hero-squircle:hover {
+  box-shadow:
+    0 18px 36px rgba(20, 70, 255, 0.16),
+    0 6px 14px rgba(15, 23, 42, 0.08);
 }
 
-@media (max-width: 768px) {
+.hero-squircle--blue {
+  background: linear-gradient(145deg, #2d96ff 0%, #1474e6 100%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 14px 30px rgba(20, 116, 230, 0.28),
+    0 4px 10px rgba(20, 116, 230, 0.15),
+    inset 0 2px 3px rgba(255, 255, 255, 0.35);
+}
+
+/* Left Arc Positions */
+.hero-squircle--left-1 {
+  top: 28%;
+  left: 11%;
+}
+
+.hero-squircle--left-2 {
+  top: 48%;
+  left: 8%;
+}
+
+.hero-squircle--left-3 {
+  top: 68%;
+  left: 11%;
+}
+
+/* Right Arc Positions */
+.hero-squircle--right-1 {
+  top: 28%;
+  right: 11%;
+}
+
+.hero-squircle--right-2 {
+  top: 48%;
+  right: 8%;
+}
+
+.hero-squircle--right-3 {
+  top: 68%;
+  right: 11%;
+}
+
+.hero-squircle-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.hero-squircle-inner svg,
+.hero-squircle-inner .tech-icon-original {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+@media (max-width: 1199px) {
+  .hero-squircle--left-1 { left: 6%; }
+  .hero-squircle--left-2 { left: 3.5%; }
+  .hero-squircle--left-3 { left: 6%; }
+  .hero-squircle--right-1 { right: 6%; }
+  .hero-squircle--right-2 { right: 3.5%; }
+  .hero-squircle--right-3 { right: 6%; }
+}
+
+@media (max-width: 991px) {
+  .hero-squircle {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+  }
+  .hero-squircle svg {
+    width: 24px;
+    height: 24px;
+  }
+  .hero-squircle--left-1 { left: 3%; top: 26%; }
+  .hero-squircle--left-2 { left: 1.5%; top: 49%; }
+  .hero-squircle--left-3 { left: 3%; top: 71%; }
+  .hero-squircle--right-1 { right: 3%; top: 26%; }
+  .hero-squircle--right-2 { right: 1.5%; top: 49%; }
+  .hero-squircle--right-3 { right: 3%; top: 71%; }
+}
+
+@media (max-width: 767px) {
   .hero-wrapper {
-    min-height: 100vh;
-    min-height: 100svh;
-    padding: 7rem 0 3.5rem;
+    min-height: 86vh;
+    padding: 9.5rem 0 4.5rem;
+  }
+  .hero-floating-icons {
+    display: none;
   }
   .hero-main-title {
-    font-size: clamp(1.6rem, 5.2vw, 2.5rem);
-  }
-}
-
-@media (max-width: 576px) {
-  .hero-wrapper {
-    min-height: 100vh;
-    min-height: 100svh;
-    padding: 6.5rem 0 3rem;
-  }
-  .hero-status-pill {
-    padding: 0.38rem 0.85rem;
-    margin-bottom: 1.35rem;
-    gap: 0.45rem;
-  }
-  .hero-status-text,
-  .hero-status-loc {
-    font-size: 0.7rem;
-  }
-  .hero-main-title {
-    font-size: clamp(1.35rem, 6.2vw, 1.95rem);
-    margin-bottom: 1.15rem;
+    font-size: clamp(1.85rem, 7.5vw, 2.5rem);
   }
   .hero-description {
-    font-size: 15px;
-    line-height: 1.65;
-    margin-bottom: 1.75rem;
-  }
-  .hero-actions-group {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
-  }
-  .hero-talk-btn,
-  .hero-secondary-btn {
-    width: auto !important;
-    max-width: max-content !important;
-    flex: 0 0 auto !important;
-    justify-content: center;
-    padding: 0.8rem 1.45rem;
-    font-size: 0.78rem;
-  }
-}
-
-@media (max-width: 380px) {
-  .hero-main-title {
-    font-size: 1.25rem;
+    font-size: 14px;
+    padding: 0 0.75rem;
   }
 }

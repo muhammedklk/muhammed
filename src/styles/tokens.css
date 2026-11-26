@@ -1,7 +1,7 @@
 :root {
   /* Color Palette — Inspired by MDX Reference & Light Minimalism */
-  --bg-primary: #ededf0;
-  --bg-canvas: #f6f6f8;
+  --bg-primary: #ffffff;
+  --bg-canvas: #ffffff;
   --bg-surface: #ffffff;
   --bg-surface-alt: #f1f2f5;
   --bg-glass: rgba(255, 255, 255, 0.68);

@@ -300,9 +300,9 @@
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
-  background: linear-gradient(135deg, #0e2447 0%, #4087fb 35%, #3b82f6 100%);
+  background: linear-gradient(180deg, #1b1b1b 0%, #090909 100%);
   color: #ffffff;
-  border-radius: 9999px;
+  border-radius: 14px;
   padding: 1.05rem 2rem;
   font-size: 0.95rem;
   font-weight: 500;
@@ -310,11 +310,16 @@
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   margin-top: 0.6rem;
-  border: 4px solid rgba(250, 250, 250, 0.878);
+  border: 3px solid #ffffff;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.16),
+    0 2px 6px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
 .simple-submit-btn:hover {
-  background: linear-gradient(135deg, #133261 0%, #5294fc 35%, #60a5fa 100%);
+  background: linear-gradient(180deg, #272727 0%, #111111 100%);
+  color: #ffffff;
 }
 
 .simple-submit-btn:active {

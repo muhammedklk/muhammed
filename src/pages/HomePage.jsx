@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Palette, Code2, Globe, Download, MapPin, PenTool, Monitor, MessageCircle } from 'lucide-react';
+import { Sparkles, Palette, Code2, Globe, Download, MapPin, PenTool, Monitor, MessageCircle, Settings, ArrowUpRight } from 'lucide-react';
 import ArrowIcon from '../components/ArrowIcon';
 import ProjectCard from '../components/ProjectCard';
-import TechMarquee from '../components/TechMarquee';
+import TechMarquee, { TECH_ITEMS } from '../components/TechMarquee';
 
 import { usePortfolio } from '../context/PortfolioContext';
 import '../styles/hero.css';
@@ -225,6 +225,15 @@ const DEFAULT_ROTATING_WORDS = [
   'Elevate.',
 ];
 
+const HERO_TECH_BADGES = [
+  { id: 'figma', className: 'hero-squircle--left-1', rotate: -38, y: [0, -8, 0], duration: 5, delay: 0 },
+  { id: 'reactjs', className: 'hero-squircle--left-2', rotate: -34, y: [0, 8, 0], duration: 5.8, delay: 0.4 },
+  { id: 'bootstrap', className: 'hero-squircle--left-3', rotate: -42, y: [0, -7, 0], duration: 5.4, delay: 0.8 },
+  { id: 'html5', className: 'hero-squircle--right-1', rotate: 36, y: [0, -8, 0], duration: 5.2, delay: 0.2 },
+  { id: 'css3', className: 'hero-squircle--right-2', rotate: 38, y: [0, 9, 0], duration: 6, delay: 0.7 },
+  { id: 'javascript', className: 'hero-squircle--right-3', rotate: 40, y: [0, -7, 0], duration: 5.5, delay: 1.1 },
+];
+
 export default function HomePage() {
   const { personalInfo, projects, faqItems, homeContent } = usePortfolio();
   const featuredList = (projects || []).filter(p => p.featured);
@@ -237,6 +246,12 @@ export default function HomePage() {
   const faqSec = homeContent?.faqSection || {};
 
   const [rotatingWordIndex, setRotatingWordIndex] = useState(0);
+  const [typedCount, setTypedCount] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const GREETING_PREFIX = 'Hai, Iam ';
+  const GREETING_NAME = 'Muhammed K';
+  const FULL_GREETING = GREETING_PREFIX + GREETING_NAME;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -245,68 +260,99 @@ export default function HomePage() {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    let timeout;
+    if (!isDeleting && typedCount < FULL_GREETING.length) {
+      timeout = setTimeout(() => setTypedCount((c) => c + 1), 75);
+    } else if (!isDeleting && typedCount === FULL_GREETING.length) {
+      timeout = setTimeout(() => setIsDeleting(true), 2400);
+    } else if (isDeleting && typedCount > 0) {
+      timeout = setTimeout(() => setTypedCount((c) => c - 1), 40);
+    } else if (isDeleting && typedCount === 0) {
+      timeout = setTimeout(() => setIsDeleting(false), 400);
+    }
+    return () => clearTimeout(timeout);
+  }, [typedCount, isDeleting, FULL_GREETING.length]);
+
+  const typedPrefix = FULL_GREETING.slice(0, Math.min(typedCount, GREETING_PREFIX.length));
+  const typedName = typedCount > GREETING_PREFIX.length
+    ? FULL_GREETING.slice(GREETING_PREFIX.length, typedCount)
+    : '';
+
   return (
     <>
       {/* SEO Meta Update via document.title */}
       {(() => { document.title = 'MUHAMMED K — UI/UX Designer & Front-End Developer Portfolio'; return null; })()}
 
       {/* ============================
-          HERO SECTION — ULTRA-CLEAN MINIMALIST EDITORIAL
+          HERO SECTION — CLEAN EDITORIAL WITH FLOATING DESIGN & CODE ICONS
       ============================ */}
       <section className="hero-wrapper" aria-label="Hero">
+        {/* 6 Floating Tilted Squircle Official Brand Logos (3 Left, 3 Right) */}
+        <div className="hero-floating-icons" aria-hidden="true">
+          {HERO_TECH_BADGES.map((badge) => {
+            const tech = TECH_ITEMS.find((item) => item.id === badge.id);
+            if (!tech) return null;
+            return (
+              <motion.div
+                key={badge.id}
+                className={`hero-squircle ${badge.className}`}
+                initial={{ rotate: badge.rotate }}
+                animate={{ y: badge.y, rotate: badge.rotate }}
+                transition={{
+                  y: { duration: badge.duration, repeat: Infinity, ease: 'easeInOut', delay: badge.delay },
+                  rotate: { duration: 0 }
+                }}
+                title={tech.name}
+              >
+                <span
+                  className="hero-squircle-inner"
+                  style={{ transform: `rotate(${-badge.rotate}deg)` }}
+                >
+                  {tech.icon}
+                </span>
+              </motion.div>
+            );
+          })}
+        </div>
+
         <div className="hero-stage-card">
           <div className="container">
             <div className="hero-simple-content reveal-blur">
-              {/* Tag / Badge */}
-              <div className="hero-status-pill">
-                <span className="hero-status-dot-wrap" aria-hidden="true">
-                  <span className="hero-status-dot" />
-                  <span className="hero-status-ping" />
+              {/* Top Pill Badge */}
+              <div className="hero-status-pill" aria-label={FULL_GREETING}>
+                <span className="hero-status-icon-circle" aria-hidden="true">
+                  <Settings size={14} strokeWidth={2} />
                 </span>
-                <span className="hero-status-text">UI/UX Designer</span>
-                <span className="hero-status-sep" aria-hidden="true">✦</span>
-                <span className="hero-status-loc">Front-End Developer</span>
+                <span className="hero-status-text">
+                  <span>{typedPrefix}</span>
+                  <span className="hero-status-name">{typedName}</span>
+                  <span className="hero-typing-cursor" aria-hidden="true" />
+                </span>
               </div>
 
               {/* Main Heading */}
               <h1 className="hero-main-title">
-                <span className="title-line">Design That Feels.</span>
+                <span className="title-line">Creating bold visual</span>
+                <span className="title-line">narratives that inspire</span>
                 <span className="title-line">
-                  Experiences That{' '}
-                  <span className="rotating-word-container">
-                    <AnimatePresence mode="wait">
-                      <motion.span
-                        key={rotatingWordIndex}
-                        className="title-gradient rotating-word-text"
-                        initial={{ opacity: 0, y: 22, filter: 'blur(3px)' }}
-                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                        exit={{ opacity: 0, y: -22, filter: 'blur(3px)' }}
-                        transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                      >
-                        {DEFAULT_ROTATING_WORDS[rotatingWordIndex]}
-                      </motion.span>
-                    </AnimatePresence>
-                  </span>
+                  and <span className="hero-title-accent">engage.</span>
                 </span>
               </h1>
 
-              {/* Small Paragraph / Subtitle */}
+              {/* Subtitle */}
               <p className="hero-description">
                 {(hero.subtext && !hero.subtext.startsWith('I blend human-centered design'))
                   ? hero.subtext
-                  : 'Crafting intuitive UI/UX designs and clean front-end experiences for modern digital products.'}
+                  : 'Transforming ideas into intuitive interfaces that elevate brands and engage users.'}
               </p>
 
-              {/* Action Buttons */}
+              {/* Single Dark CTA Button */}
               <div className="hero-actions-group">
                 <Link to="/contact" className="hero-talk-btn" id="hero-cta-btn">
-                  <span>{hero.ctaText || "LET'S TALK"}</span>
-                  <ArrowIcon size={18} className="hero-talk-arrow" />
+                  <span>{hero.ctaText || "Let's Talk"}</span>
+                  <ArrowUpRight size={17} strokeWidth={2} className="hero-talk-arrow" />
                 </Link>
-                <a href="#works-preview" className="hero-secondary-btn">
-                  <span>EXPLORE WORKS</span>
-                  <ArrowIcon size={14} className="hero-talk-arrow" style={{ transform: 'rotate(90deg)' }} />
-                </a>
               </div>
             </div>
           </div>
