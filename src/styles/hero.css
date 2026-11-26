@@ -316,9 +316,10 @@
 
 @media (max-width: 767px) {
   .hero-wrapper {
-    min-height: 86vh;
-    padding: 7.5rem 0 3.5rem;
+    min-height: 100svh;
+    padding: 6.2rem 0 2.5rem;
     flex-direction: column;
+    justify-content: center;
   }
   .hero-floating-icons {
     display: contents;
