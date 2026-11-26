@@ -256,7 +256,7 @@
   font-weight: 600;
   text-decoration: none;
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 3px solid #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
   box-shadow:
     0 10px 24px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.14);
@@ -265,6 +265,7 @@
 .cta-primary-btn:hover {
   background: linear-gradient(180deg, #272727 0%, #111111 100%);
   color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.36);
   transform: translateY(-3px);
   box-shadow:
     0 14px 30px rgba(0, 0, 0, 0.38),
