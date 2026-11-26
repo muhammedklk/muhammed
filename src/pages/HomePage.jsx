@@ -234,6 +234,12 @@ const HERO_TECH_BADGES = [
   { id: 'javascript', className: 'hero-squircle--right-3', rotate: 40, y: [0, -7, 0], duration: 5.5, delay: 1.1 },
 ];
 
+const GREETING_PHRASES = [
+  { prefix: 'Hai, Iam ', highlight: 'Muhammed K' },
+  { prefix: 'Iam a ', highlight: 'UI/UX Designer' },
+  { prefix: 'Iam a ', highlight: 'Front-End Developer' },
+];
+
 export default function HomePage() {
   const { personalInfo, projects, faqItems, homeContent } = usePortfolio();
   const featuredList = (projects || []).filter(p => p.featured);
@@ -246,12 +252,12 @@ export default function HomePage() {
   const faqSec = homeContent?.faqSection || {};
 
   const [rotatingWordIndex, setRotatingWordIndex] = useState(0);
+  const [phraseIndex, setPhraseIndex] = useState(0);
   const [typedCount, setTypedCount] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const GREETING_PREFIX = 'Hai, Iam ';
-  const GREETING_NAME = 'Muhammed K';
-  const FULL_GREETING = GREETING_PREFIX + GREETING_NAME;
+  const currentPhrase = GREETING_PHRASES[phraseIndex];
+  const fullGreeting = currentPhrase.prefix + currentPhrase.highlight;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -262,21 +268,24 @@ export default function HomePage() {
 
   useEffect(() => {
     let timeout;
-    if (!isDeleting && typedCount < FULL_GREETING.length) {
-      timeout = setTimeout(() => setTypedCount((c) => c + 1), 75);
-    } else if (!isDeleting && typedCount === FULL_GREETING.length) {
-      timeout = setTimeout(() => setIsDeleting(true), 2400);
+    if (!isDeleting && typedCount < fullGreeting.length) {
+      timeout = setTimeout(() => setTypedCount((c) => c + 1), 70);
+    } else if (!isDeleting && typedCount === fullGreeting.length) {
+      timeout = setTimeout(() => setIsDeleting(true), 2000);
     } else if (isDeleting && typedCount > 0) {
-      timeout = setTimeout(() => setTypedCount((c) => c - 1), 40);
+      timeout = setTimeout(() => setTypedCount((c) => c - 1), 36);
     } else if (isDeleting && typedCount === 0) {
-      timeout = setTimeout(() => setIsDeleting(false), 400);
+      timeout = setTimeout(() => {
+        setIsDeleting(false);
+        setPhraseIndex((idx) => (idx + 1) % GREETING_PHRASES.length);
+      }, 300);
     }
     return () => clearTimeout(timeout);
-  }, [typedCount, isDeleting, FULL_GREETING.length]);
+  }, [typedCount, isDeleting, fullGreeting.length]);
 
-  const typedPrefix = FULL_GREETING.slice(0, Math.min(typedCount, GREETING_PREFIX.length));
-  const typedName = typedCount > GREETING_PREFIX.length
-    ? FULL_GREETING.slice(GREETING_PREFIX.length, typedCount)
+  const typedPrefix = fullGreeting.slice(0, Math.min(typedCount, currentPhrase.prefix.length));
+  const typedName = typedCount > currentPhrase.prefix.length
+    ? fullGreeting.slice(currentPhrase.prefix.length, typedCount)
     : '';
 
   return (
@@ -320,7 +329,7 @@ export default function HomePage() {
           <div className="container">
             <div className="hero-simple-content reveal-blur">
               {/* Top Pill Badge */}
-              <div className="hero-status-pill" aria-label={FULL_GREETING}>
+              <div className="hero-status-pill" aria-label={fullGreeting}>
                 <span className="hero-status-icon-circle" aria-hidden="true">
                   <Settings size={14} strokeWidth={2} />
                 </span>
