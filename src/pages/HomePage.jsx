@@ -299,30 +299,59 @@ export default function HomePage() {
       <section className="hero-wrapper" aria-label="Hero">
         {/* 6 Floating Tilted Squircle Official Brand Logos (3 Left, 3 Right) */}
         <div className="hero-floating-icons" aria-hidden="true">
-          {HERO_TECH_BADGES.map((badge) => {
-            const tech = TECH_ITEMS.find((item) => item.id === badge.id);
-            if (!tech) return null;
-            return (
-              <motion.div
-                key={badge.id}
-                className={`hero-squircle ${badge.className}`}
-                initial={{ rotate: badge.rotate }}
-                animate={{ y: badge.y, rotate: badge.rotate }}
-                transition={{
-                  y: { duration: badge.duration, repeat: Infinity, ease: 'easeInOut', delay: badge.delay },
-                  rotate: { duration: 0 }
-                }}
-                title={tech.name}
-              >
-                <span
-                  className="hero-squircle-inner"
-                  style={{ transform: `rotate(${-badge.rotate}deg)` }}
+          <div className="hero-floating-group hero-floating-group--left">
+            {HERO_TECH_BADGES.slice(0, 3).map((badge) => {
+              const tech = TECH_ITEMS.find((item) => item.id === badge.id);
+              if (!tech) return null;
+              return (
+                <motion.div
+                  key={badge.id}
+                  className={`hero-squircle ${badge.className}`}
+                  initial={{ rotate: badge.rotate }}
+                  animate={{ y: badge.y, rotate: badge.rotate }}
+                  transition={{
+                    y: { duration: badge.duration, repeat: Infinity, ease: 'easeInOut', delay: badge.delay },
+                    rotate: { duration: 0 }
+                  }}
+                  title={tech.name}
                 >
-                  {tech.icon}
-                </span>
-              </motion.div>
-            );
-          })}
+                  <span
+                    className="hero-squircle-inner"
+                    style={{ transform: `rotate(${-badge.rotate}deg)` }}
+                  >
+                    {tech.icon}
+                  </span>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <div className="hero-floating-group hero-floating-group--right">
+            {HERO_TECH_BADGES.slice(3, 6).map((badge) => {
+              const tech = TECH_ITEMS.find((item) => item.id === badge.id);
+              if (!tech) return null;
+              return (
+                <motion.div
+                  key={badge.id}
+                  className={`hero-squircle ${badge.className}`}
+                  initial={{ rotate: badge.rotate }}
+                  animate={{ y: badge.y, rotate: badge.rotate }}
+                  transition={{
+                    y: { duration: badge.duration, repeat: Infinity, ease: 'easeInOut', delay: badge.delay },
+                    rotate: { duration: 0 }
+                  }}
+                  title={tech.name}
+                >
+                  <span
+                    className="hero-squircle-inner"
+                    style={{ transform: `rotate(${-badge.rotate}deg)` }}
+                  >
+                    {tech.icon}
+                  </span>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
 
         <div className="hero-stage-card">

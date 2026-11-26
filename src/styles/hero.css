@@ -203,6 +203,10 @@
   z-index: 2;
 }
 
+.hero-floating-group {
+  display: contents;
+}
+
 .hero-squircle {
   position: absolute;
   width: 62px;
@@ -313,10 +317,48 @@
 @media (max-width: 767px) {
   .hero-wrapper {
     min-height: 86vh;
-    padding: 9.5rem 0 4.5rem;
+    padding: 7.5rem 0 3.5rem;
+    flex-direction: column;
   }
   .hero-floating-icons {
-    display: none;
+    display: contents;
+  }
+  .hero-floating-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.35rem;
+    width: 100%;
+    padding: 0 1rem;
+  }
+  .hero-floating-group--left {
+    order: 1;
+    margin-bottom: 1.75rem;
+  }
+  .hero-stage-card {
+    order: 2;
+  }
+  .hero-floating-group--right {
+    order: 3;
+    margin-top: 2rem;
+  }
+  .hero-squircle {
+    position: relative;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    width: 46px;
+    height: 46px;
+    border-radius: 13px;
+  }
+  .hero-squircle-inner {
+    width: 24px;
+    height: 24px;
+  }
+  .hero-squircle-inner svg,
+  .hero-squircle-inner .tech-icon-original {
+    width: 22px;
+    height: 22px;
   }
   .hero-main-title {
     font-size: clamp(1.85rem, 7.5vw, 2.5rem);
